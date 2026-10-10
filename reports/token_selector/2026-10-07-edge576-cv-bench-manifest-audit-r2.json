@@ -1,0 +1,73 @@
+{
+  "status": "EDGE576_MANIFEST_AUDIT_PASS",
+  "date": "2026-10-07",
+  "edge576": true,
+  "gpu_runs": 0,
+  "weights_loaded": false,
+  "processor_model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+  "processor_grid_verification_requested": true,
+  "manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+    "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+    "bytes": 3280730
+  },
+  "source_manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+    "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+  },
+  "summary": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+    "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b"
+  },
+  "auditor": "evaluation/audit_edge576_cv_bench_manifest.py",
+  "auditor_sha256": "a999fe0a48b962104b9991df1c62329789a2164f530fe977767dd95ddbad352b",
+  "contracts": {
+    "exact_record_count": true,
+    "unique_sample_ids": true,
+    "id_set_matches_frozen_full_manifest": true,
+    "frozen_labels_identical": true,
+    "record_sha256_recomputed": true,
+    "image_sha256_recomputed": true,
+    "original_dims_recomputed": true,
+    "g_formula_consistent": true,
+    "all_g_within_budget": true,
+    "processing_parameters_pinned": true,
+    "summary_matches_recomputation": true,
+    "processor_grid_reverified": true
+  },
+  "records_checked": 2638,
+  "image_hashes_checked": 2638,
+  "original_dims_checked": 2638,
+  "processor_grids_reverified": 2638,
+  "g_statistics": {
+    "sample_count": 2638,
+    "unique_sample_id_count": 2638,
+    "g_min": 64,
+    "g_max": 576,
+    "g_mean": 357.06633813495074,
+    "g_median": 300.0,
+    "g_p90": 576.0,
+    "g_p95": 576.0,
+    "g_count_at_budget": 400,
+    "g_histogram": {
+      "g_le_96": 143,
+      "g_97_256": 781,
+      "g_257_512": 706,
+      "g_513_576": 1008
+    },
+    "identity_bypass_count_g_le_96": 143,
+    "compressed_count_g_gt_96": 2495,
+    "source_counts": {
+      "ADE20K": 633,
+      "COCO": 805,
+      "Omni3D": 1200
+    },
+    "task_counts": {
+      "Count": 788,
+      "Depth": 600,
+      "Distance": 600,
+      "Relation": 650
+    }
+  },
+  "generated_at": "2026-10-07T15:15:04.260288+00:00"
+}

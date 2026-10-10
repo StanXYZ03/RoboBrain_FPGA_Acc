@@ -1,0 +1,640 @@
+{
+  "version": "2026-10-07-edge576-cvbench-three-arm-development-r3",
+  "revision": "r3",
+  "date": "2026-10-07",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "arm_status": "NOT_EXECUTED",
+  "executed": false,
+  "future_only": true,
+  "retroactive": false,
+  "gpu_runs": 0,
+  "purpose": "Final pre-execution revision of the edge deployment study: r3 keeps the r2 three-arm comparison (Dense@edge576, corrected integer L2@B1/K96, frozen existing conservative_l2_guarded_rerank_v2@B1/K96) byte-for-byte unchanged and adds the pins plus the explicit execution order for the newly added runner adapter and single-sample smoke execution layer.",
+  "measurement_class": "development",
+  "development_retest_statement": "This is a developmental re-test of the EXISTING, already frozen conservative_l2_guarded_rerank_v2 mechanism in a new edge576 runtime domain. No new mechanism is invented and no v2 hyper-parameter is tuned. The edge576 domain is a different input distribution from the native-resolution development run, so this is a new falsifiable test of the same frozen mechanism, not a re-scoring of the old result.",
+  "development_set_statement": "CV-Bench full2638 has been repeatedly observed and is a development set only; passing the gates permits one fresh untouched external benchmark confirmation, never a publication or deployment claim.",
+  "non_retroactive_statement": "The 2026-10-06 native-resolution conservative_l2_guarded_rerank_v2 DEVELOPMENT_STOP (output SHA 3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1) is frozen and is NOT modified, re-scored or re-adjudicated here; native-resolution results stay read-only.",
+  "supersedes": {
+    "path": "configs/2026-10-07-edge576-cvbench-three-arm-development-r2.preregistered.json",
+    "sha256": "8f265557bfb86998135b6985023e136d7f397eb8e06eb64551a97308cc958d09",
+    "report_json": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.json",
+    "report_json_sha256": "ab2d22659850ea9757563dc84522ef5b50502cb28a788bf9a9e8bb285661d95b",
+    "report_md": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.md",
+    "report_md_sha256": "a2254d205e80240d9cfe6f1b8a11126f452edbe98de441398091e95a3b5e2b27",
+    "generator": "scripts/preregister_edge576_cvbench_r2_20261007.py",
+    "generator_sha256": "43ecab62deeb0248b7e4fb698cdd6d37aeeb85dd75b507be2dcf2dcbd6ea8430",
+    "status": "PREEXECUTION_SUPERSEDED",
+    "never_executed": true,
+    "must_not_be_run": true,
+    "reason": "r2 did not pin the newly added adapter/smoke execution layer: evaluation/edge576_cvbench_runner_contract.py, evaluation/run_edge576_cvbench_three_arm.py, their focused test, the runner adaptation report JSON/MD, and the new independent single-sample smoke entry evaluation/run_edge576_cvbench_three_arm_smoke.py and its focused test. r2 was never executed, so superseding it costs no results; this is the only reason r2 is superseded.",
+    "superseded_evidence": "reports/token_selector/2026-10-07-edge576-cvbench-r2-preexecution-superseded.json"
+  },
+  "execution_order": [
+    {
+      "step": 1,
+      "id": "model_identity",
+      "description": "Verify the pinned model identity manifest and every declared model file (relative path + byte size + SHA256, including model.safetensors) before any CUDA, scorer or weight load.",
+      "fail_closed": true,
+      "executed": false
+    },
+    {
+      "step": 2,
+      "id": "three_arm_single_sample_smoke",
+      "description": "Run the independent single-sample smoke for dense_edge576, corrected_l2_integer_b1_k96 and v2_edge576_b1_k96 with evaluation/run_edge576_cvbench_three_arm_smoke.py; each invocation writes only its own file under artifacts/token_selector/2026-10-07-edge576-smoke and must save a complete record plus a smoke summary.",
+      "arms": [
+        "dense_edge576",
+        "corrected_l2_integer_b1_k96",
+        "v2_edge576_b1_k96"
+      ],
+      "sample_id": "1838",
+      "must_all_pass": true,
+      "blocks_full2638_until_pass": true,
+      "executed": false
+    },
+    {
+      "step": 3,
+      "id": "dense_edge576_full2638",
+      "arm": "dense_edge576",
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/dense_edge576_full2638.jsonl",
+      "executed": false
+    },
+    {
+      "step": 4,
+      "id": "corrected_l2_integer_b1_k96_full2638",
+      "arm": "corrected_l2_integer_b1_k96",
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/corrected_l2_integer_k96_full2638.jsonl",
+      "executed": false
+    },
+    {
+      "step": 5,
+      "id": "v2_edge576_b1_k96_full2638",
+      "arm": "v2_edge576_b1_k96",
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/v2_edge576_k96_full2638.jsonl",
+      "executed": false
+    },
+    {
+      "step": 6,
+      "id": "official_scoring_and_paired_bootstrap",
+      "description": "Score every completed arm with evaluation/cv_bench_metric_v2.py (explicit parsed_answer field, parse failures count as wrong) and run the task::source_dataset paired bootstrap (seed 20261007, 5000 repeats, 95%) before any external validation or hardware claim.",
+      "executed": false
+    }
+  ],
+  "smoke_contract": {
+    "entry": "evaluation/run_edge576_cvbench_three_arm_smoke.py",
+    "output_dir": "artifacts/token_selector/2026-10-07-edge576-smoke",
+    "output_pattern": "<arm>_<sample_id>.json",
+    "one_sample_per_invocation": true,
+    "writes_only_the_smoke_file": true,
+    "must_not_touch_full2638_outputs": true,
+    "full2638_outputs": [
+      "artifacts/token_selector/2026-10-07-edge576-cvbench/dense_edge576_full2638.jsonl",
+      "artifacts/token_selector/2026-10-07-edge576-cvbench/corrected_l2_integer_k96_full2638.jsonl",
+      "artifacts/token_selector/2026-10-07-edge576-cvbench/v2_edge576_k96_full2638.jsonl"
+    ],
+    "required_checks": [
+      "17 frozen dependency SHA256 pins",
+      "arm mechanism identity",
+      "--model identity (relative path + byte size + SHA256 incl. model.safetensors)",
+      "real multimodal warmup with max_new_tokens=1",
+      "actual processor image_grid_thw equals the edge576 manifest grid",
+      "complete normalised record plus smoke summary saved"
+    ],
+    "real_warmup": {
+      "max_new_tokens": 1,
+      "record_discarded": true,
+      "cuda_synchronize": true
+    },
+    "warmup_not_counted_in_record": true,
+    "actual_grid_assertion": true,
+    "selection_algorithm_copied": false,
+    "smoke_sample_id": "1838",
+    "smoke_sample_g": 576,
+    "smoke_sample_grid": [
+      1,
+      36,
+      64
+    ],
+    "default_smoke_dir_disjoint_from_full2638": true,
+    "commands": [
+      "python evaluation/run_edge576_cvbench_three_arm_smoke.py --arm dense_edge576 --sample-id 1838 --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-07-cv-bench-edge576-full2638.jsonl --output artifacts/token_selector/2026-10-07-edge576-smoke/dense_edge576_1838.json",
+      "python evaluation/run_edge576_cvbench_three_arm_smoke.py --arm corrected_l2_integer_b1_k96 --sample-id 1838 --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-07-cv-bench-edge576-full2638.jsonl --output artifacts/token_selector/2026-10-07-edge576-smoke/corrected_l2_integer_b1_k96_1838.json",
+      "python evaluation/run_edge576_cvbench_three_arm_smoke.py --arm v2_edge576_b1_k96 --sample-id 1838 --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-07-cv-bench-edge576-full2638.jsonl --output artifacts/token_selector/2026-10-07-edge576-smoke/v2_edge576_b1_k96_1838.json"
+    ]
+  },
+  "edge_runtime_domain": {
+    "keep_aspect_ratio": true,
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "budget_g": 576,
+    "patch_size": 16,
+    "merge_size": 2,
+    "merge_unit": 4,
+    "resize_factor": 32,
+    "g_definition": "full_llm_visual_tokens = (image_grid_thw[0]*image_grid_thw[1]*image_grid_thw[2]) // (spatial_merge_size**2)",
+    "identity_bypass_g_le": 96,
+    "compression_range": "96 < G <= 576",
+    "high_resolution_policy": "native dynamic resolution (up to G=3588) is retained only as a frozen stress test; it is not the edge promotion gate and its existing DEVELOPMENT_STOP is not rewritten."
+  },
+  "manifest_contract": {
+    "sample_count": 2638,
+    "unique_sample_id_count": 2638,
+    "all_g_within_budget": true,
+    "g_min": 64,
+    "g_max": 576,
+    "g_histogram": {
+      "g_le_96": 143,
+      "g_97_256": 781,
+      "g_257_512": 706,
+      "g_513_576": 1008
+    },
+    "labels_must_match_frozen_full_manifest": true,
+    "no_sample_may_be_deleted_for_size": true
+  },
+  "shared_arm_contract": {
+    "manifest": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+    "manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+    "prompt_source": "the edge576 manifest `prompt` field, byte-identical for all three arms",
+    "model": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "dtype": "bf16",
+    "attention_implementation": "sdpa",
+    "device": "cuda:0",
+    "do_sample": false,
+    "greedy": true,
+    "max_new_tokens": 16,
+    "processor": {
+      "min_pixels": 65536,
+      "max_pixels": 589824,
+      "keep_aspect_ratio": true,
+      "patch_size": 16,
+      "merge_size": 2
+    },
+    "grid_verification": "every arm must assert that its processor-produced image_grid_thw equals the value recorded in the edge576 manifest for that sample, otherwise it fails closed; native-resolution pixel budgets are forbidden for these arms"
+  },
+  "arms": {
+    "dense_edge576": {
+      "role": "quality denominator (Dense@edge576)",
+      "cutpoint": null,
+      "selector_budget": null,
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/dense_edge576_full2638.jsonl",
+      "output_sha256": null,
+      "status": "NOT_EXECUTED",
+      "edge576_processor_budget_required": true
+    },
+    "corrected_l2_integer_b1_k96": {
+      "role": "hardware-rule control (corrected integer L2 @ B1, K96)",
+      "cutpoint": "B1_after_vision_block_0",
+      "prune_after_layer": 0,
+      "selector_budget": {
+        "K": 96,
+        "region_grid": 3,
+        "local_candidate_cap": 16,
+        "identity_bypass_g_le": 96
+      },
+      "runner": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/corrected_l2_integer_k96_full2638.jsonl",
+      "output_sha256": null,
+      "status": "NOT_EXECUTED",
+      "edge576_processor_budget_required": true
+    },
+    "v2_edge576_b1_k96": {
+      "role": "frozen pre-registered candidate (existing conservative_l2_guarded_rerank_v2; no new mechanism)",
+      "mechanism_id": "conservative_l2_guarded_rerank_v2",
+      "mechanism_family": "conservative_l2_guarded_rerank",
+      "is_new_mechanism": false,
+      "status": "NOT_EXECUTED",
+      "cutpoint": "B1_after_vision_block_0",
+      "prune_after_layer": 0,
+      "selector_budget": {
+        "K": 96,
+        "region_grid": 3,
+        "local_candidate_cap": 16,
+        "max_swaps_S": 16,
+        "identity_bypass_g_le": 96
+      },
+      "runner": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+      "summariser": "evaluation/summarize_conservative_l2_guarded_rerank_full2638.py",
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/v2_edge576_k96_full2638.jsonl",
+      "output_sha256": null,
+      "edge576_processor_budget_required": true,
+      "reuses_native_resolution_v2_mechanism": true,
+      "native_resolution_v2_output_sha256": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1",
+      "native_resolution_result_not_rewritten": true,
+      "allowed_mechanism_scope": "the frozen conservative_l2_guarded_rerank_v2 mechanism only; no new mechanism, no v2 re-tuning on edge576, no G/source/task routing, no label/answer leakage"
+    }
+  },
+  "frozen_candidate_mechanism": {
+    "mechanism_id": "conservative_l2_guarded_rerank_v2",
+    "source_config": "configs/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.preregistered.json",
+    "source_config_sha256": "7499b6ea00939c58506e73b496c1c62bed08162dc8d6d535229f2ffa703e74eb",
+    "utility_formula": "semantic_q15 + corrected_l2_q15",
+    "legal_gain_formula": "semantic_gain - l2_loss = utility_added - utility_removed",
+    "context_pooling_basis": "corrected_integer_l2_norm_q15",
+    "anchors_frozen": true,
+    "every_replacement_is_same_region_one_for_one": true,
+    "max_swaps_S": 16,
+    "K_remains_exactly_96": true,
+    "real_group_count": 87,
+    "context_group_count": 9,
+    "no_labels_or_answer_tokens_or_gradients": true
+  },
+  "primary_metric": {
+    "name": "cv_bench_accuracy",
+    "module": "evaluation/cv_bench_metric_v2.py",
+    "module_sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+    "weighting": "((accuracy_ADE20K + accuracy_COCO) / 2 + accuracy_Omni3D) / 2",
+    "correct_key": "correct",
+    "parsed_answer_key": "parsed_answer",
+    "keys_must_be_distinct": true,
+    "never_infer_parsed_answer_key_from_correct_key": true,
+    "parse_failures_count_as_wrong": true,
+    "secondary_diagnostics_only": [
+      "unweighted_sample_accuracy",
+      "per_source_accuracy",
+      "per_task_accuracy"
+    ]
+  },
+  "success_gates": {
+    "official_cv_bench_accuracy": {
+      "metric": "cv_bench_accuracy",
+      "module": "evaluation/cv_bench_metric_v2.py",
+      "weighting": "((accuracy_ADE20K + accuracy_COCO) / 2 + accuracy_Omni3D) / 2",
+      "required": true
+    },
+    "quality_retention_vs_same_input_dense_edge576": {
+      "definition": "selector_cv_bench_accuracy / dense_edge576_cv_bench_accuracy",
+      "threshold": 0.9,
+      "comparison": ">=",
+      "note": "must never compare an edge selector against a native-resolution dense score"
+    },
+    "relative_to_corrected_integer_l2": {
+      "paired_bootstrap": {
+        "strata": "task::source_dataset",
+        "repeats": 5000,
+        "seed": 20261007,
+        "confidence": 0.95,
+        "lower_bound": ">=0"
+      },
+      "point_estimate": ">=0"
+    },
+    "layout_contract": {
+      "K": 96,
+      "real_slots": 87,
+      "context_slots": 9,
+      "identity_bypass_g_le": 96,
+      "applicable_if_layout_is_reused": true
+    },
+    "record_completeness": {
+      "definition": "exactly 2638 unique sample_id, each with one complete output record; completeness is about record presence, never about parse success",
+      "sample_count": 2638,
+      "unique_sample_id_count": 2638,
+      "all_2638_unique_complete_outputs": true,
+      "parsed_answer_may_be_null": true,
+      "parse_failures_count_as_wrong": true,
+      "requires_100_percent_parse": false,
+      "must_report": [
+        "parse_success_count",
+        "parse_failure_count",
+        "parse_success_rate",
+        "parse_failure_rate"
+      ]
+    },
+    "honest_parse_reporting": {
+      "source_field": "parsed_answer_key only",
+      "parsed_answer_may_be_null": true,
+      "parse_failures_count_as_wrong": true,
+      "must_report": [
+        "parse_success_count",
+        "parse_failure_count",
+        "parse_success_rate",
+        "parse_failure_rate"
+      ],
+      "requires_100_percent_parse": false,
+      "aliasing_correct_key_forbidden": true,
+      "note": "there is no 100% parse gate; parse failures are counted as wrong answers and reported separately"
+    },
+    "no_label_leakage": true
+  },
+  "model_identity": {
+    "default_model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "manifest_path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+    "weights_loaded_in_this_round": false,
+    "processor_audit_model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B"
+  },
+  "forbidden_claims": [
+    "full2638 is an untouched confirmation set",
+    "a development gate pass is a publication or deployment claim",
+    "an edge score may be compared to the frozen native-resolution dense score",
+    "the 2026-10-06 native-resolution DEVELOPMENT_STOP is rewritten",
+    "the edge576 v2 re-test retroactively changes the native-resolution v2 result",
+    "the r1 preregistration was executed or is executable",
+    "the r2 preregistration was executed or is executable (r2 was never executed)",
+    "the r2 layer pinned the new adapter/smoke execution layer"
+  ],
+  "next_allowed_action": "Follow the execution_order exactly: verify the model identity, run the three-arm single-sample smoke until all three pass, and only then run Dense full2638, corrected integer L2 full2638 and v2 full2638 to the pinned output paths; score with cv_bench_metric_v2 and the task::source_dataset paired bootstrap before any external validation or hardware claim.",
+  "runner_adaptation_entry": {
+    "dense": "evaluation/run_hf_shallow_block_pruning.py with --retentions 1.0 (the frozen producer of the dense reference shallow_r1000.jsonl), re-pointed to the edge576 manifest and processor budgets",
+    "corrected_l2_integer": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+    "v2_candidate": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+    "runner_contract": "evaluation/edge576_cvbench_runner_contract.py",
+    "three_arm_runner": "evaluation/run_edge576_cvbench_three_arm.py",
+    "smoke_entry": "evaluation/run_edge576_cvbench_three_arm_smoke.py",
+    "required_edge576_inputs": {
+      "manifest": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "min_pixels": 65536,
+      "max_pixels": 589824,
+      "assert_image_grid_thw_equals_manifest": true
+    },
+    "selection_algorithm_copied": false,
+    "status": "ADAPTER_AND_SMOKE_IMPLEMENTED_NO_MODEL_RUN"
+  },
+  "verification": {
+    "py_compile": [
+      "evaluation/run_edge576_cvbench_three_arm_smoke.py",
+      "evaluation/tests/test_run_edge576_cvbench_three_arm_smoke.py",
+      "scripts/preregister_edge576_cvbench_r3_20261007.py",
+      "evaluation/tests/test_edge576_cvbench_prereg_r3.py"
+    ],
+    "smoke_focused_tests": 31,
+    "prereg_r3_focused_tests": 20,
+    "pins_recomputed_on_disk": true,
+    "gpu_runs": 0,
+    "weights_loaded": false,
+    "model_loaded": false,
+    "network": false,
+    "training": false
+  },
+  "pins": {
+    "edge576_manifest": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+      "role": "edge576_manifest"
+    },
+    "edge576_summary": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+      "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b",
+      "role": "edge576_summary"
+    },
+    "source_full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "role": "frozen_full_manifest"
+    },
+    "builder": {
+      "path": "evaluation/build_edge576_cv_bench_manifest.py",
+      "sha256": "12258b15848e4a31ec96a5c80ff23ed80fe8a24cd536202ab93cffc28f72b48a",
+      "role": "edge576_builder"
+    },
+    "auditor": {
+      "path": "evaluation/audit_edge576_cv_bench_manifest.py",
+      "sha256": "a999fe0a48b962104b9991df1c62329789a2164f530fe977767dd95ddbad352b",
+      "role": "edge576_auditor_model_path_fixed"
+    },
+    "edge576_audit_r2_report": {
+      "path": "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit-r2.json",
+      "sha256": "34f1385fbe71aa7a947798614b71fe4da9e64ef56449d3b41ac6c52e7886469e",
+      "role": "edge576_reaudit_report"
+    },
+    "builder_test": {
+      "path": "evaluation/tests/test_build_edge576_cv_bench_manifest.py",
+      "sha256": "d7556f31054283b20a5d81e1f9c199566b35f91f4ae8b18a728b98323079e514",
+      "role": "edge576_builder_test"
+    },
+    "auditor_test": {
+      "path": "evaluation/tests/test_audit_edge576_cv_bench_manifest.py",
+      "sha256": "25d135908d39a1b4cef60e2b3942aafc3e2e2463e4c40833bcd1738b1e317a50",
+      "role": "edge576_auditor_test_model_path"
+    },
+    "prereg_test_r2": {
+      "path": "evaluation/tests/test_edge576_cvbench_prereg_r2.py",
+      "sha256": "94608ed8a7dcca3efb97f38f1d09dacdb97e7ef0743371d0cf08566a38838b42",
+      "role": "edge576_prereg_r2_test"
+    },
+    "prereg_generator_r2": {
+      "path": "scripts/preregister_edge576_cvbench_r2_20261007.py",
+      "sha256": "43ecab62deeb0248b7e4fb698cdd6d37aeeb85dd75b507be2dcf2dcbd6ea8430",
+      "role": "edge576_prereg_r2_generator"
+    },
+    "cv_bench_metric_v2": {
+      "path": "evaluation/cv_bench_metric_v2.py",
+      "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+      "role": "future_metric_v2"
+    },
+    "model_identity_manifest": {
+      "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+      "role": "model_identity"
+    },
+    "corrected_l2_runner": {
+      "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+      "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9",
+      "role": "corrected_l2_runner"
+    },
+    "corrected_l2_integer_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+      "role": "frozen_corrected_l2_control"
+    },
+    "dense_full_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+      "role": "frozen_native_dense_reference"
+    },
+    "v2_config": {
+      "path": "configs/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.preregistered.json",
+      "sha256": "7499b6ea00939c58506e73b496c1c62bed08162dc8d6d535229f2ffa703e74eb",
+      "role": "frozen_v2_preregistered_config"
+    },
+    "v2_mechanism_core": {
+      "path": "evaluation/conservative_l2_guarded_reranker.py",
+      "sha256": "9486771f020b65661d9485702ba6d0d9d7901d7119aea8cb13090799792e357b",
+      "role": "frozen_v2_mechanism_core"
+    },
+    "v2_integration": {
+      "path": "evaluation/hardware_regular_b1_guarded_rerank.py",
+      "sha256": "0eaab5edceaeccda95bfbeb43c6ed0c6e81f1f67cde072bb024b33bc93fc15d2",
+      "role": "frozen_v2_integration"
+    },
+    "v2_runner": {
+      "path": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+      "sha256": "834e5c8165e0cd52565c8a49c6a05bee17b2950afedfbe26a3ad6757c5bf2146",
+      "role": "frozen_v2_runner"
+    },
+    "v2_summarizer": {
+      "path": "evaluation/summarize_conservative_l2_guarded_rerank_full2638.py",
+      "sha256": "7da4e93da2ac76ded26ff94b319b9712d3887e8800bbd95107caa3b8b6ea14d7",
+      "role": "frozen_v2_summarizer"
+    },
+    "v2_test_mechanism": {
+      "path": "evaluation/tests/test_conservative_l2_guarded_reranker.py",
+      "sha256": "87f1e4c8cec698c61872e5f602f7ab34fe846d2a5abbc7e6c46af280448feedd",
+      "role": "frozen_v2_test_mechanism"
+    },
+    "v2_test_integration": {
+      "path": "evaluation/tests/test_hardware_regular_b1_guarded_rerank.py",
+      "sha256": "95786e9695d84ad37fddd701a4472941aad307472fdf479dc41593e4dd17625d",
+      "role": "frozen_v2_test_integration"
+    },
+    "v2_test_runner": {
+      "path": "evaluation/tests/test_run_hf_conservative_l2_guarded_rerank.py",
+      "sha256": "ea309b6d32e279bd1e8210c179da37df6d679d2ce329ead86094c8bed4d40898",
+      "role": "frozen_v2_test_runner"
+    },
+    "v2_test_summarizer": {
+      "path": "evaluation/tests/test_summarize_conservative_l2_guarded_rerank_full2638.py",
+      "sha256": "7e7446132f729175c8af9996b37a5d1a4d4efc23210e3091a5b88b28c6f1471c",
+      "role": "frozen_v2_test_summarizer"
+    },
+    "v2_projection_npz": {
+      "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz",
+      "sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff",
+      "role": "v2_checkpoint_projection_npz"
+    },
+    "v2_wv_int8": {
+      "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_int8_rowmajor.bin",
+      "sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b",
+      "role": "v2_checkpoint_wv_int8"
+    },
+    "v2_wv_per_tensor_scale": {
+      "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_per_tensor_scale_f32le.bin",
+      "sha256": "93585a3bd2d584a612b40d827f8d15f43c87acdc764d7e217d99df473428b13f",
+      "role": "v2_checkpoint_wv_scale"
+    },
+    "v2_native_arm_jsonl": {
+      "path": "artifacts/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638/conservative_l2_guarded_rerank_v2_k96_full2638.jsonl",
+      "sha256": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1",
+      "role": "frozen_native_v2_output"
+    },
+    "integer_token_selector_core": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+      "role": "integer_scoring_token_selector_core"
+    },
+    "integer_corrected_l2_core": {
+      "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+      "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585",
+      "role": "integer_corrected_l2_core"
+    },
+    "integer_b1_integration_core": {
+      "path": "evaluation/hardware_regular_b1_integration.py",
+      "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa",
+      "role": "integer_b1_integration_core"
+    },
+    "integer_current_selector_core": {
+      "path": "evaluation/current_selector_integer.py",
+      "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7",
+      "role": "integer_current_selector_core"
+    },
+    "integer_int8_numerical_audit": {
+      "path": "evaluation/selector_int8_numerical_audit.py",
+      "sha256": "4329e11616d2790218670b6b2b7252cec847c75a56778fcba871044428ea05dc",
+      "role": "integer_int8_numerical_audit"
+    },
+    "integer_scorer_audit": {
+      "path": "evaluation/selector_integer_scorer_audit.py",
+      "sha256": "3fcf91d28f670e7406a41028b02fcaaa4f7694abf8ba76210494cd05502b16a9",
+      "role": "integer_scorer_audit"
+    },
+    "v1_layout_rebuild_core": {
+      "path": "evaluation/conservative_l2_residual_reranker.py",
+      "sha256": "64b699757fa9ea04eb12438509b5679644a263eb4783139e50d945e196fb5bf4",
+      "role": "v1_layout_rebuild_core_reused_by_v2"
+    },
+    "evaluator": {
+      "path": "evaluation/build_cv_bench_pruning_report.py",
+      "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b",
+      "role": "official_cv_bench_evaluator"
+    },
+    "metrics": {
+      "path": "evaluation/metrics.py",
+      "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8",
+      "role": "metrics"
+    },
+    "r1_prereg_config": {
+      "path": "configs/2026-10-07-edge576-cvbench-three-arm-development.preregistered.json",
+      "sha256": "8958cbd6f61589217b73e983e0f57257f0cf9bc951c5adbd8506df5d6156b3f3",
+      "role": "superseded_r1_config"
+    },
+    "r1_prereg_report_json": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg.json",
+      "sha256": "c728c3125ffa5708abef0aa6d6fd050611ce8f864cd7bbbda3d85ad13b419afa",
+      "role": "superseded_r1_report"
+    },
+    "r1_preexecution_superseded_json": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-r1-preexecution-superseded.json",
+      "sha256": "3f8ddd643bd28a6f6bfc7cf305dfdf45530d39db80577f66175841d894283e47",
+      "role": "r1_preexecution_superseded_evidence"
+    },
+    "edge576_runner_contract": {
+      "path": "evaluation/edge576_cvbench_runner_contract.py",
+      "sha256": "fdea7df65556ef47c297a8082d9aa1238fcb645bdb1e5910d02f5453107590db",
+      "role": "edge576_runner_contract"
+    },
+    "edge576_runner": {
+      "path": "evaluation/run_edge576_cvbench_three_arm.py",
+      "sha256": "b1fb2ca1bc67af4355bfe6f0ce52725adf788f3339e77f5c6ea4188788e3eb85",
+      "role": "edge576_three_arm_runner_adapter"
+    },
+    "edge576_runner_test": {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm.py",
+      "sha256": "6d4f513568faccd005ded47e6b963d89b783194b84411b5c80d25fabf700fa55",
+      "role": "edge576_runner_adapter_test"
+    },
+    "runner_adaptation_report_json": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-three-arm-runner-adaptation.json",
+      "sha256": "485947b8f44801d8c74488d8e446fed9ea6079149f8b9c2a98482df5fb783784",
+      "role": "edge576_runner_adaptation_report_json"
+    },
+    "runner_adaptation_report_md": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-three-arm-runner-adaptation.md",
+      "sha256": "6e496348d9aef43ae89aaebfa8d20e83bb82bb95490a0effc5622b5fef7655fe",
+      "role": "edge576_runner_adaptation_report_md"
+    },
+    "smoke_entry": {
+      "path": "evaluation/run_edge576_cvbench_three_arm_smoke.py",
+      "sha256": "3c956d7ea9a64a52dc6affbec0c85ae032b44ce58197c8b166d89480dc2ec255",
+      "role": "edge576_single_sample_smoke_entry"
+    },
+    "smoke_test": {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm_smoke.py",
+      "sha256": "458a45101d8ca2a861b4a4d7f507e650402bee00e164e5991ea0ca1c508d1068",
+      "role": "edge576_single_sample_smoke_test"
+    },
+    "prereg_generator_r3": {
+      "path": "scripts/preregister_edge576_cvbench_r3_20261007.py",
+      "sha256": "03ed9f42862f90b664e7a9f3fdc8732690831669de48e00e0c2ace26d38f3eaa",
+      "role": "edge576_prereg_r3_generator"
+    },
+    "prereg_test_r3": {
+      "path": "evaluation/tests/test_edge576_cvbench_prereg_r3.py",
+      "sha256": "632f988a0f07f86ab697823e97d97f01e5791491ebb335541b8364440321713e",
+      "role": "edge576_prereg_r3_test"
+    },
+    "r2_prereg_config": {
+      "path": "configs/2026-10-07-edge576-cvbench-three-arm-development-r2.preregistered.json",
+      "sha256": "8f265557bfb86998135b6985023e136d7f397eb8e06eb64551a97308cc958d09",
+      "role": "superseded_r2_config"
+    },
+    "r2_prereg_report_json": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.json",
+      "sha256": "ab2d22659850ea9757563dc84522ef5b50502cb28a788bf9a9e8bb285661d95b",
+      "role": "superseded_r2_report_json"
+    },
+    "r2_prereg_report_md": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.md",
+      "sha256": "a2254d205e80240d9cfe6f1b8a11126f452edbe98de441398091e95a3b5e2b27",
+      "role": "superseded_r2_report_md"
+    },
+    "r2_preexecution_superseded_json": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-r2-preexecution-superseded.json",
+      "sha256": "ca853d6c5951be9792b87a6d2b734a581bc28551e6e0904ef29df5b8aed7bc37",
+      "role": "r2_preexecution_superseded_evidence"
+    },
+    "r2_preexecution_superseded_md": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-r2-preexecution-superseded.md",
+      "sha256": "f9593219aa383be7bdef2951edf70a75b0652e15f6e659e73af88c82e1b0e2a4",
+      "role": "r2_preexecution_superseded_evidence_md"
+    }
+  },
+  "generated_at": "2026-10-07T15:50:17.830199+00:00",
+  "generator": "scripts/preregister_edge576_cvbench_r3_20261007.py",
+  "generator_sha256": "03ed9f42862f90b664e7a9f3fdc8732690831669de48e00e0c2ace26d38f3eaa"
+}

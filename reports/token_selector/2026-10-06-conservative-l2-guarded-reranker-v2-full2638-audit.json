@@ -1,0 +1,791 @@
+{
+  "audit_decision": "AUDIT_PASS",
+  "audited_gpu_runs": 1,
+  "audited_samples": 2638,
+  "config": {
+    "executed": false,
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.preregistered.json",
+    "sha256_expected": "7499b6ea00939c58506e73b496c1c62bed08162dc8d6d535229f2ffa703e74eb",
+    "sha256_observed": "7499b6ea00939c58506e73b496c1c62bed08162dc8d6d535229f2ffa703e74eb",
+    "status": "PREREGISTERED_NOT_EXECUTED"
+  },
+  "contract_all_passed": true,
+  "contract_checks": {
+    "1_raw_sha_2638_unique_manifest_ids_and_record_hashes": {
+      "checks": {
+        "raw_ids_equal_manifest_no_missing_extra": {
+          "detail": {
+            "extra": [],
+            "missing": []
+          },
+          "passed": true
+        },
+        "raw_record_count_2638": {
+          "detail": {
+            "records": 2638
+          },
+          "passed": true
+        },
+        "raw_sha256_matches_claim": {
+          "detail": {
+            "expected": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1",
+            "observed": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1"
+          },
+          "passed": true
+        },
+        "raw_unique_sample_ids_2638": {
+          "detail": {
+            "unique": 2638
+          },
+          "passed": true
+        },
+        "reference_2638_unique_ids_corrected_l2_integer_jsonl": {
+          "detail": {
+            "rows": 2638,
+            "unique_ids": 2638
+          },
+          "passed": true
+        },
+        "reference_2638_unique_ids_dense_full_jsonl": {
+          "detail": {
+            "rows": 2638,
+            "unique_ids": 2638
+          },
+          "passed": true
+        },
+        "reference_2638_unique_ids_prompt_plus_corrected_l2_integer_jsonl": {
+          "detail": {
+            "rows": 2638,
+            "unique_ids": 2638
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "2_model_config_checkpoint_source_pins_and_leakage_flags": {
+      "checks": {
+        "all_nonnull_config_pins_byte_identical": {
+          "detail": {
+            "mismatched": [],
+            "null_pins": [
+              "new_arm_jsonl"
+            ],
+            "verified_count": 36
+          },
+          "passed": true
+        },
+        "arm_mechanism_identity": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "checkpoint_pins": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "config_preregistered_bytes_intact": {
+          "detail": {
+            "arm_sha256": null,
+            "executed": false,
+            "status": "PREREGISTERED_NOT_EXECUTED"
+          },
+          "passed": true
+        },
+        "config_sha256_matches_frozen": {
+          "detail": {
+            "expected": "7499b6ea00939c58506e73b496c1c62bed08162dc8d6d535229f2ffa703e74eb",
+            "observed": "7499b6ea00939c58506e73b496c1c62bed08162dc8d6d535229f2ffa703e74eb"
+          },
+          "passed": true
+        },
+        "fixed_budget_grid_formula_fields": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "frozen_flag_booleans": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "leakage_flags_all_false": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "manifest_pin_consistency": {
+          "detail": {
+            "manifest_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+          },
+          "passed": true
+        },
+        "manifest_sha256_pin": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "model_identity_metadata_only_disclosed": {
+          "detail": {
+            "note": "the frozen config carries no model-weight SHA pin; model identity is metadata-only (model_path/model_label) while the three checkpoint files (projection npz, Wv int8, Wv scale) are SHA-pinned"
+          },
+          "passed": true
+        },
+        "model_path_and_label_consistent": {
+          "detail": {
+            "label_consistent": true,
+            "model_label": "RoboBrain2.5-4B-BF16",
+            "model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+            "path_consistent": true
+          },
+          "passed": true
+        },
+        "model_path_exists_on_disk": {
+          "detail": {
+            "exists": true,
+            "model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B"
+          },
+          "passed": true
+        },
+        "no_acceleration_claim": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "null_pin_is_only_the_new_arm": {
+          "detail": {
+            "null_pins": [
+              "new_arm_jsonl"
+            ]
+          },
+          "passed": true
+        },
+        "record_sha256_recomputes": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "record_task_matches_manifest": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "reference_pin_corrected_l2_integer_jsonl": {
+          "detail": {
+            "expected": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+            "inputs_sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+            "observed": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f"
+          },
+          "passed": true
+        },
+        "reference_pin_dense_full_jsonl": {
+          "detail": {
+            "expected": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+            "inputs_sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+            "observed": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+          },
+          "passed": true
+        },
+        "reference_pin_prompt_plus_corrected_l2_integer_jsonl": {
+          "detail": {
+            "expected": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa",
+            "inputs_sha256": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa",
+            "observed": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa"
+          },
+          "passed": true
+        },
+        "run_metadata_pins": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "run_mode_full2638": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "timing_alias_identity": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "3_identity_bypass_contract_and_exact_k96_87_real_9_context": {
+      "checks": {
+        "bypass_exact_contract": {
+          "detail": {
+            "checked": 143,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "compressed_exact_k96_87_real_9_context": {
+          "detail": {
+            "checked": 2495,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "grid_and_merge_unit": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "observed_record_shape": {
+          "detail": {
+            "bypass_count": 143,
+            "bypass_expected": 143,
+            "compressed_count": 2495,
+            "compressed_expected": 2495
+          },
+          "passed": true
+        },
+        "region_id_matches_frozen_grid_map": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "selected_indices_ascending_unique_in_range": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "valid_flags_all_true": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "4_anchors_frozen_same_region_swaps_counts_and_nonempty_context": {
+      "checks": {
+        "anchors_frozen_one_per_region": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "nonempty_context_invariant": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "per_region_real_counts_preserved": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "same_region_one_for_one": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "swap_audit_reconstructs_reranked_real": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "5_swap_gain_identities_and_deterministic_array_hashes": {
+      "checks": {
+        "audit_array_hashes_are_hex64": {
+          "detail": {
+            "checked": 2495,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "baseline_selected_real_sha256": {
+          "detail": {
+            "checked": 2495,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "block_input_shapes_metadata": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "bypass_audit_arrays_empty_and_hashes_null": {
+          "detail": {
+            "checked": 143,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "bypass_combined_hash_null": {
+          "detail": {
+            "checked": 143,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "combined_scores_hash_and_length": {
+          "detail": {
+            "checked": 2495,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "legal_gain_identity_and_positive": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "no_reused_or_overlapping_groups": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "recomputable_record_hashes": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "reranked_selected_real_sha256": {
+          "detail": {
+            "checked": 2495,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "selected_patch_indices_derive_from_groups": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "swap_array_lengths_match_count": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        },
+        "swap_count_within_S": {
+          "detail": {
+            "checked": 2638,
+            "failed": 0,
+            "failed_ids": []
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "6_frozen_official_primary_metric_all_four_arms": {
+      "checks": {
+        "corrected_l2_integer_cv_bench_accuracy_matches_claim": {
+          "detail": {
+            "claimed": 0.7668517264725796,
+            "observed": 0.7668517264725796
+          },
+          "passed": true
+        },
+        "dense_cv_bench_accuracy_matches_claim": {
+          "detail": {
+            "claimed": 0.8727298774444869,
+            "observed": 0.8727298774444869
+          },
+          "passed": true
+        },
+        "four_arms_parsed_with_frozen_parse_choice": {
+          "detail": {
+            "corrected_l2_integer": 2638,
+            "dense": 2638,
+            "new": 2638,
+            "prompt_plus_corrected_l2_integer": 2638
+          },
+          "passed": true
+        },
+        "frozen_primary_metric_identifier": {
+          "detail": {
+            "identifier": "score(...)[\"cv_bench_accuracy\"]",
+            "implementation": "evaluation.build_cv_bench_pruning_report.score"
+          },
+          "passed": true
+        },
+        "new_cv_bench_accuracy_matches_claim": {
+          "detail": {
+            "claimed": 0.7837404943432142,
+            "observed": 0.7837404943432142
+          },
+          "passed": true
+        },
+        "prompt_plus_corrected_l2_integer_cv_bench_accuracy_matches_claim": {
+          "detail": {
+            "claimed": 0.7773617325561999,
+            "observed": 0.7773617325561999
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "7_stratified_paired_bootstrap_5000_seed_20261006_and_90pct_dense_floor": {
+      "checks": {
+        "bootstrap_seed_and_repeats_frozen": {
+          "detail": {
+            "repeats": 5000,
+            "seed": 20261006
+          },
+          "passed": true
+        },
+        "ci_matches_claim": {
+          "detail": {
+            "claimed": [
+              0.006157592750679508,
+              0.0271543129924543
+            ],
+            "observed": [
+              0.006157592750679508,
+              0.0271543129924543
+            ]
+          },
+          "passed": true
+        },
+        "delta_point_estimate_matches_claim": {
+          "detail": {
+            "claimed": 0.016888767870634647,
+            "observed": 0.016888767870634647
+          },
+          "passed": true
+        },
+        "floor_equals_90pct_dense": {
+          "detail": {
+            "dense": 0.8727298774444869,
+            "expected": 0.7854568897000382,
+            "floor": 0.7854568897000382
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "8_decision_gates_recomputed_development_stop": {
+      "checks": {
+        "decision_remains_development_stop": {
+          "detail": {
+            "outcome": "DEVELOPMENT_STOP"
+          },
+          "passed": true
+        },
+        "only_failed_gate_is_score_at_least_90pct_dense": {
+          "detail": {
+            "failed_gates": [
+              "score_at_least_90pct_dense"
+            ]
+          },
+          "passed": true
+        },
+        "score_gate_value": {
+          "detail": {
+            "floor": 0.7854568897000382,
+            "shortfall": 0.0017163953568239965,
+            "v2": 0.7837404943432142
+          },
+          "passed": true
+        }
+      },
+      "passed": true
+    }
+  },
+  "cpu_only": true,
+  "date": "2026-10-06",
+  "development_decision": {
+    "failed_gates": [
+      "score_at_least_90pct_dense"
+    ],
+    "gates": {
+      "all_2638_complete_parseable": true,
+      "exact_k96_layout_contract": true,
+      "no_forbidden_leakage": true,
+      "paired_ci_lower_nonnegative": true,
+      "score_at_least_90pct_dense": false
+    },
+    "outcome": "DEVELOPMENT_STOP",
+    "reason": "failed gates: score_at_least_90pct_dense"
+  },
+  "failed_checks": [],
+  "findings": [
+    {
+      "decision_impact": "none on the outcome: the score_at_least_90pct_dense gate independently fails, so the decision is DEVELOPMENT_STOP either way",
+      "id": "parse_gate_implementation_defect",
+      "severity": "implementation_defect_not_artifact",
+      "summary": "the frozen gate all_2638_complete_parseable is computed from score(...)['parse_success_rate'], which is identically 1.0 for the summariser's arm rows because the 'correct' key has no '_correct' substring to rewrite to '_answer'; honest parse_choice shows real failures in every arm",
+      "true_parse_failures": {
+        "corrected_l2_integer": 42,
+        "dense": 40,
+        "new": 43,
+        "prompt_plus_corrected_l2_integer": 42
+      }
+    },
+    {
+      "id": "model_weight_sha_pin_absent",
+      "severity": "informational",
+      "summary": "the frozen config SHA-pins the three checkpoint files but not the model weights; model identity is metadata-only (model_path/model_label)"
+    }
+  ],
+  "frozen_inputs": {
+    "mismatched_pins": [],
+    "null_pins": [
+      "new_arm_jsonl"
+    ],
+    "verified_count": 36,
+    "verified_pins": [
+      "b1_integration",
+      "checkpoint_projection_npz",
+      "checkpoint_wv_int8",
+      "checkpoint_wv_per_tensor_scale",
+      "corrected_l2_core",
+      "corrected_l2_float_jsonl",
+      "corrected_l2_full2638_config",
+      "corrected_l2_full2638_report_json",
+      "corrected_l2_integer_jsonl",
+      "corrected_l2_runner",
+      "current_selector_integer",
+      "dense_full_jsonl",
+      "evaluation_protocol",
+      "evaluator",
+      "full_manifest",
+      "metrics",
+      "old_current_integer_full_jsonl",
+      "prompt_plus_corrected_l2_integer_jsonl",
+      "selector_int8_numerical_audit",
+      "selector_integer_scorer_audit",
+      "token_selector",
+      "v1_preexecution_stop_json",
+      "v1_preexecution_stop_md",
+      "v1_residual_config",
+      "v1_residual_integration",
+      "v1_residual_mechanism_core",
+      "v1_residual_runner",
+      "v1_residual_summarizer",
+      "v2_integration",
+      "v2_mechanism_core",
+      "v2_runner",
+      "v2_summarizer",
+      "v2_test_integration",
+      "v2_test_mechanism",
+      "v2_test_runner",
+      "v2_test_summarizer"
+    ]
+  },
+  "full_manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+    "records": 2638,
+    "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+    "unique_sample_ids": 2638
+  },
+  "generated_at": "2026-10-05T17:15:30.185566+00:00",
+  "gpu_runs": 0,
+  "layout": {
+    "bypass_count": 143,
+    "compressed_count": 2495,
+    "compressed_zero_swap": 0,
+    "swap_histogram": {
+      "0": 143,
+      "10": 9,
+      "11": 11,
+      "12": 10,
+      "13": 18,
+      "14": 17,
+      "15": 11,
+      "16": 2406,
+      "6": 1,
+      "7": 2,
+      "8": 5,
+      "9": 5
+    }
+  },
+  "limitations": [
+    "full2638 has been repeatedly observed and is development evidence only; it is not an untouched confirmation set.",
+    "This audit is CPU-only and read-only: no model weights were loaded, no GPU was used, no network, no training and no dependency installation; gpu_runs=0.",
+    "The Selector path is a software bridge; no FPGA latency, board deployment or acceleration claim is made.",
+    "No paper-accuracy or external-validation claim is made; the DEVELOPMENT_STOP outcome grants no external-validation permission for v2.",
+    "Do not tune v2 after observing full2638. The postmortem is diagnostic/development-only and must not be used to select a v3 rule.",
+    "v1 remains permanently PREEXECUTION_DESIGN_STOP and was neither run nor patched."
+  ],
+  "model_runs": 0,
+  "network_used": false,
+  "paired_bootstrap": {
+    "ci_level": 0.95,
+    "delta_ci95": [
+      0.006157592750679508,
+      0.0271543129924543
+    ],
+    "delta_point_estimate": 0.016888767870634647,
+    "floor": 0.7854568897000382,
+    "per_repeat_shortfall": 8.581976784119982,
+    "repeats": 5000,
+    "retained_dense_fraction": 0.8980333028567213,
+    "seed": 20261006,
+    "shortfall_absolute": 0.0017163953568239965,
+    "shortfall_relative_to_dense": 0.0019666971432786475,
+    "shortfall_relative_to_floor": 0.002185219048087386,
+    "strata": "task::source_dataset"
+  },
+  "postmortem": {
+    "is_a_gate": false,
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-postmortem.json",
+    "marker": "DIAGNOSTIC_DEVELOPMENT_ONLY",
+    "md": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-postmortem.md"
+  },
+  "raw_full2638": {
+    "extra_ids": [],
+    "missing_ids": [],
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638/conservative_l2_guarded_rerank_v2_k96_full2638.jsonl",
+    "records": 2638,
+    "sha256_claimed": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1",
+    "sha256_match": true,
+    "sha256_observed": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1",
+    "unique_sample_ids": 2638
+  },
+  "read_only": true,
+  "report": "2026-10-06-conservative-l2-guarded-reranker-v2-full2638-audit",
+  "scores": {
+    "corrected_l2_integer": {
+      "accuracy_2d": 0.6937034529451591,
+      "accuracy_3d": 0.84,
+      "cv_bench_accuracy": 0.7668517264725796,
+      "parse_success_rate": 1.0,
+      "sample_count": 2638,
+      "unweighted_sample_accuracy": 0.7634571645185747
+    },
+    "dense": {
+      "accuracy_2d": 0.7987930882223073,
+      "accuracy_3d": 0.9466666666666667,
+      "cv_bench_accuracy": 0.8727298774444869,
+      "parse_success_rate": 1.0,
+      "sample_count": 2638,
+      "unweighted_sample_accuracy": 0.868081880212282
+    },
+    "new": {
+      "accuracy_2d": 0.7041476553530953,
+      "accuracy_3d": 0.8633333333333333,
+      "cv_bench_accuracy": 0.7837404943432142,
+      "parse_success_rate": 1.0,
+      "sample_count": 2638,
+      "unweighted_sample_accuracy": 0.78013646702047
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "accuracy_2d": 0.7022234651123997,
+      "accuracy_3d": 0.8525,
+      "cv_bench_accuracy": 0.7773617325561999,
+      "parse_success_rate": 1.0,
+      "sample_count": 2638,
+      "unweighted_sample_accuracy": 0.7733131159969674
+    }
+  },
+  "training": false,
+  "true_parse": {
+    "corrected_l2_integer": {
+      "failures": 42,
+      "parse_rate": 0.9840788476118272
+    },
+    "dense": {
+      "failures": 40,
+      "parse_rate": 0.9848369977255497
+    },
+    "new": {
+      "failures": 43,
+      "parse_rate": 0.9836997725549659
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "failures": 42,
+      "parse_rate": 0.9840788476118272
+    }
+  }
+}

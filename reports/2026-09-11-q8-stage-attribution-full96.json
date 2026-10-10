@@ -1,0 +1,66 @@
+{
+  "format": "q8-stage-attribution-v1",
+  "status": "ATTRIBUTION_COMPLETE_EXPANDED_DIAGNOSTIC",
+  "selection_bias_warning": null,
+  "sample_count": 192,
+  "classifications": {
+    "NO_LONGER_PRIMARY_FAILURE": 129,
+    "TOKEN_SET_OR_SHARED_COMPACTION_SUPPORTED": 48,
+    "EARLY_PRUNING_SUPPORTED": 15
+  },
+  "task_summary": {
+    "grounding": {
+      "n": 96,
+      "q8a_exact_stock_rate": 0.11458333333333333,
+      "q8b_exact_stock_rate": 0.052083333333333336,
+      "q8a_primary_mean": 0.8333333333333334,
+      "q8b_primary_mean": 0.875,
+      "stock_primary_mean": 0.8645833333333334,
+      "q8a_error_delta_mean_present": -0.05104789261491847,
+      "q8b_error_delta_mean_present": -0.015226414500685105
+    },
+    "pointing": {
+      "n": 96,
+      "q8a_exact_stock_rate": 0.125,
+      "q8b_exact_stock_rate": 0.0625,
+      "q8a_primary_mean": 0.5520833333333334,
+      "q8b_primary_mean": 0.5104166666666666,
+      "stock_primary_mean": 0.6458333333333334,
+      "q8a_error_delta_mean_present": 0.0108536472634798,
+      "q8b_error_delta_mean_present": 0.022568013622660116
+    }
+  },
+  "q8b_minus_q8a_paired": {
+    "pointing_pck_0_1": {
+      "n": 96,
+      "mean_delta": -0.041666666666666664,
+      "ci95_low": -0.10416666666666667,
+      "ci95_high": 0.020833333333333332,
+      "effect_vs_zero": "UNCERTAIN"
+    },
+    "pointing_pck_0_2": {
+      "n": 96,
+      "mean_delta": 0.03125,
+      "ci95_low": -0.020833333333333332,
+      "ci95_high": 0.08333333333333333,
+      "effect_vs_zero": "UNCERTAIN"
+    },
+    "grounding_acc_0_5": {
+      "n": 96,
+      "mean_delta": 0.041666666666666664,
+      "ci95_low": 0.0,
+      "ci95_high": 0.09375,
+      "effect_vs_zero": "UNCERTAIN"
+    },
+    "grounding_iou_mean": {
+      "n": 96,
+      "mean_delta": 0.03582147811423337,
+      "ci95_low": 0.012165026216927772,
+      "ci95_high": 0.06381343921374784,
+      "effect_vs_zero": "Q8B_HIGHER"
+    }
+  },
+  "manifest_sha256": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+  "q8b_raw_sha256": "13ee9fe4d268c606450ead82025eb0ff337feac515b4ee4a57fb9d70bf53b24f",
+  "q8a_raw_sha256": "f1a490855dd8260b57229916fa787d56e47c2550a29b5e8086dc8b186b7b3fd5"
+}

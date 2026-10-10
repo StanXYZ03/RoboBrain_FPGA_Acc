@@ -1,0 +1,19 @@
+{
+  "canonical_workspace": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102",
+  "hashes": {
+    "evaluation/shallow_block_pruning.py": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a",
+    "evaluation/run_hf_shallow_block_pruning.py": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9",
+    "evaluation/prepare_cv_bench_screening.py": "ccfc7ca001087d5c3daf2fc3796743d391998d9362e6b3d3d11c85cf37d74464",
+    "evaluation/build_cv_bench_pruning_report.py": "c24e09e37d1edaffada5912fac291a4ed71edf175f55aaa69c84e615026dd0d1",
+    "configs/cv_bench_l2_0875_full2638.lock.json": "1a23533b6e520e4c81994996c1032f364178086111a9e04b7873ec4ff4eb4bba",
+    "datasets/cv_bench_full2638.jsonl": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+    "reports/cv_bench/cv_bench_bf16_full2638.json": "fa5bdcc93f8f0fa5d2ae6886c46b7ec56fa186e2e7f5ad4ba44ce89695405d4f",
+    "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+    "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r0875.jsonl": "a8934259370f0279f05c5a6378fe542115172fee2b5004e335ae313ed7f285e8",
+    "reports/cv_bench/2026-09-16-cv-bench-l2-0875-full2638.json": "b41ff8b36de4c79800c236708500adc826f18321ded0ee29c5cb10acac16070b"
+  },
+  "csv_rows": {
+    "reports/cv_bench/cv_bench_bf16_full2638.csv": 2638,
+    "reports/cv_bench/2026-09-16-cv-bench-l2-0875-full2638.csv": 2638
+  }
+}

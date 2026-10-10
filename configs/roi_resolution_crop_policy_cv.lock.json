@@ -1,0 +1,26 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-14",
+  "evidence_level": "revealed development cross-validation conditional on an oracle ROI",
+  "objective": "Test whether cheap ROI-local texture and request geometry can predict the preferred 384/512 encoding scale once an upstream region proposal is available.",
+  "features": [
+    "task prompt category",
+    "ROI crop width, height, aspect ratio and pixel count",
+    "ROI request position and area fraction",
+    "64x64 ROI RGB, luminance, histogram, gradient, edge and pooled-grid statistics"
+  ],
+  "model": {
+    "type": "ridge regression on continuous utility gain",
+    "ridge_alpha": 10.0,
+    "decision_threshold": 0.0,
+    "cross_validation": "5-fold grouped by COCO image ID",
+    "seed": 20260914
+  },
+  "gate": {
+    "action_balanced_accuracy_min": 0.55,
+    "mean_final_visual_token_ratio_max": 0.5,
+    "primary_noninferiority_margin": -0.02,
+    "noninferiority_rule": "paired 95% bootstrap lower bound must be at or above the margin"
+  },
+  "mandatory_boundary": "The current crop is generated from ground truth. Passing only supports a scale controller conditional on a correct ROI; it does not validate region localization."
+}

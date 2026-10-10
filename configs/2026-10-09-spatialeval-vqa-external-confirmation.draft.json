@@ -1,0 +1,52 @@
+{
+  "status": "DRAFT_NOT_PREREGISTERED",
+  "must_not_run": true,
+  "purpose": "Untouched external confirmation candidate for the frozen edge576 Dense/corrected-L2/v2 comparison.",
+  "dataset": {
+    "id": "MilaWang/SpatialEval",
+    "config": "vqa",
+    "split": "test",
+    "expected_samples_from_official_card": 4635,
+    "venue": "NeurIPS 2024",
+    "official_metric": "exact match",
+    "license_status": "NOT_EXPLICITLY_STATED_IN_THE_OFFICIAL_DATASET_CARD_OR_REPOSITORY_AS_CHECKED_2026-10-09",
+    "parquet_path": null,
+    "parquet_sha256": null,
+    "manifest_path": null,
+    "manifest_sha256": null
+  },
+  "candidate_runtime": {
+    "image_domain": "edge576",
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "arms": [
+      "dense_edge576",
+      "corrected_integer_l2_b1_k96",
+      "conservative_l2_guarded_rerank_v2_b1_k96"
+    ],
+    "prompt": null,
+    "answer_parser": null,
+    "max_new_tokens": null
+  },
+  "candidate_decision_rules": {
+    "v2_relative_to_same_input_dense_minimum": 0.9,
+    "v2_minus_l2_paired_bootstrap_95pct_ci_lower_minimum": 0.0,
+    "bootstrap_seed": null,
+    "bootstrap_repetitions": null
+  },
+  "model_identity_sha256": null,
+  "code_sha256": null,
+  "output_sha256": null,
+  "execution": {
+    "gpu_runs": 0,
+    "weights_loaded": false,
+    "dataset_downloaded": false,
+    "labels_observed": false
+  },
+  "promotion_blockers": [
+    "Confirm the dataset usage license with the authors or an authoritative license file.",
+    "Acquire enough disk space and restore network access, then pin the local parquet SHA256.",
+    "Audit the real VQA schema and official evaluator before freezing prompt/parser/expected-answer mapping.",
+    "Pin every producer, metric, model and manifest artifact before changing status to PREREGISTERED_NOT_EXECUTED."
+  ]
+}

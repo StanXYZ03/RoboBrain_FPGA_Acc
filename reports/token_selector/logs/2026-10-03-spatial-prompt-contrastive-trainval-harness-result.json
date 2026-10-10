@@ -1,0 +1,140 @@
+{
+  "status": "PROMPT_CONTRASTIVE_STUDENT_NOT_ESTABLISHED",
+  "decision": "PROMPT_CONTRASTIVE_STUDENT_NOT_ESTABLISHED",
+  "prereg_sha256": "12d0aa9f856692fdd0da8e4d93783ef540ca9cadc38c9e4ee704ba903dd1dbbd",
+  "prereg_report_sha256": "5513f89ca327fe992923f7f3e7fc6612fb506d74f1e3d1ec3e65748dd6f1816b",
+  "harness_prompt_sha256": "d02fb7c94b633c22949e96bbae1315fd98a89258eede83e5ec3b0643888967c7",
+  "hashes_unchanged": {
+    "config_sha256": true,
+    "index_sha256": true,
+    "manifest_sha256": true,
+    "lock_sha256": true,
+    "spatial_audit_json_sha256": true,
+    "spatial_audit_script_sha256": true,
+    "hardware_config_sha256": true,
+    "hardware_code_sha256": true,
+    "existing_spatial_trainer_sha256": true,
+    "pair_loss_audit_sha256": true,
+    "distillation_code_sha256": true,
+    "identifiability_code_sha256": true,
+    "reduction_code_sha256": true,
+    "semantic_control_sha256": true,
+    "prereg_config": true,
+    "prereg_report": true,
+    "harness_prompt": true
+  },
+  "source_sha256": {
+    "trainer": "51fd7ad6f83fda94900ebc2ae86378aaaf5e6e63c2eca416a27f13a47dfd9a94",
+    "existing_spatial_trainer_readonly": "1308e8a0f18cfb047aa56ab4e8fa40423ebd127f22df309361b3916eee389fd2"
+  },
+  "arms": [
+    "A_SPATIAL_KL_CONTROL",
+    "B_SPATIAL_KL_CONTRASTIVE"
+  ],
+  "seeds": [
+    20261003,
+    20261004,
+    20261005
+  ],
+  "train_records": 318,
+  "val_records": 76,
+  "val_images": 38,
+  "test_npz_opened": [],
+  "test_npz_hashed_count": 0,
+  "opened_only_train_val_npz": true,
+  "best_epochs": {
+    "A_SPATIAL_KL_CONTROL": [
+      27,
+      5,
+      4
+    ],
+    "B_SPATIAL_KL_CONTRASTIVE": [
+      3,
+      5,
+      4
+    ]
+  },
+  "selection_metrics": {
+    "A_SPATIAL_KL_CONTROL": [
+      "val_base",
+      "val_base",
+      "val_base"
+    ],
+    "B_SPATIAL_KL_CONTRASTIVE": [
+      "val_total",
+      "val_total",
+      "val_total"
+    ]
+  },
+  "primary_values": {
+    "P1_B_minus_A_correct_minus_same_spearman": {
+      "mean": 0.0068236319007388795,
+      "ci_low": -0.0026651776344797746,
+      "ci_high": 0.01636439242319573,
+      "cohens_dz": 0.2200435313146807,
+      "p_value_two_sided": 0.18968103189681032,
+      "holm_adjusted_p": 0.3361663833616638,
+      "positive_seed_count": 2,
+      "seed_count": 3
+    },
+    "P2_B_minus_A_correct_minus_same_ndcg_full": {
+      "mean": 0.011873446044841944,
+      "ci_low": 0.0034613477913955784,
+      "ci_high": 0.021408194515718546,
+      "cohens_dz": 0.41139999376625414,
+      "p_value_two_sided": 0.012998700129987,
+      "holm_adjusted_p": 0.038996100389961,
+      "positive_seed_count": 3,
+      "seed_count": 3
+    },
+    "P3_B_correct_minus_same_spearman": {
+      "mean": 0.014950205673215037,
+      "ci_low": -0.0052070843275972825,
+      "ci_high": 0.034627385652873224,
+      "cohens_dz": 0.23319448985229982,
+      "p_value_two_sided": 0.1680831916808319,
+      "holm_adjusted_p": 0.3361663833616638,
+      "positive_seed_count": 3,
+      "seed_count": 3
+    },
+    "P4_B_correct_minus_same_ndcg_full": {
+      "mean": 0.052582204577616684,
+      "ci_low": 0.023012178477869197,
+      "ci_high": 0.08326990306325265,
+      "cohens_dz": 0.5517560445201894,
+      "p_value_two_sided": 0.0011998800119988001,
+      "holm_adjusted_p": 0.0047995200479952005,
+      "positive_seed_count": 3,
+      "seed_count": 3
+    },
+    "P5_B_selector_minus_L2_anchor_mass_k48": {
+      "mean": 0.226936375552842,
+      "ci_low": 0.12046393875595293,
+      "ci_high": 0.33539126931900465,
+      "cohens_dz": 0.6760179649704754,
+      "p_value_two_sided": 0.00039996000399960006,
+      "holm_adjusted_p": 0.001999800019998,
+      "positive_seed_count": 3,
+      "seed_count": 3
+    }
+  },
+  "gates": {
+    "G1_correct_alignment_non_inferiority": true,
+    "G2_prompt_discrimination_gain": false,
+    "G3_prompt_discrimination_absolute": false,
+    "G4_deployed_K48_utility": true,
+    "G5_collapse_removed": true,
+    "G6_validation_learning": true,
+    "G7_hardware_contract": true
+  },
+  "runtime_seconds": 326.8864095211029,
+  "peak_rss_mib": 2290.078125,
+  "limitations": [
+    "development validation only: the val split was already used during development; this is not final accuracy",
+    "internal train/val sanity only; not CV-Bench task accuracy",
+    "no hardware synthesis, latency or speedup claim",
+    "no 4B model load, no feature re-extraction, no raw image read",
+    "the internal test split was never resolved, hashed, opened or evaluated",
+    "the prior spatial-student report's G3-style sign defect is only referenced historically; this experiment computes P5 as selector minus baseline"
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_IMMUTABLE",
+  "date": "2026-10-04",
+  "report_stem": "2026-10-04-b1-l2-vs-integer-screening100",
+  "diagnostic_only": true,
+  "diagnostic_scope": "FIXED 100-SAMPLE CV-BENCH SCREENING. This is a diagnostic attribution experiment and is explicitly NOT a formal full2638 CV-Bench conclusion. No formal accuracy, promotion, acceleration or hardware claim may be derived from it.",
+  "round_scope": "CPU-only summariser, preregistration and tests. No GPU run, no board run, no training, no hyper-parameter tuning, no dependency installation. The L2 screening100 raw JSONL is produced later by the host GPU runner exactly as pinned below; it did not exist when this file was written.",
+  "diagnostic_question": "On the fixed screening100 sample, is the current integer Selector's shortfall against dense primarily a ranker/scoring defect or primarily a consequence of pruning too early at boundary B1 (after vision block 0)?",
+  "fixed_configuration": {
+    "manifest": "datasets/cv_bench_screening100.jsonl",
+    "sample_count": 100,
+    "budget_K": 96,
+    "boundary": "B1 = after vision block 0",
+    "region_grid": 3,
+    "local_candidate_cap": 16,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "max_new_tokens": 16,
+    "score_modes": {
+      "dense": "frozen custom dense (unpruned) path",
+      "current_integer": "current integer selector (selector_integer_scorer_audit.integer_chain + accepted compact hardware-regular selection contract)",
+      "l2": "run_hf_hardware_regular_b1.py --score-mode l2 (min-max normalised B1 group-mean L2)"
+    }
+  },
+  "primary_metric": {
+    "identifier": "score(...)[\"cv_bench_accuracy\"]",
+    "definition": "Official CV-Bench combined score returned by the frozen scorer evaluation.build_cv_bench_pruning_report.score: ((accuracy_ADE20K + accuracy_COCO)/2 + accuracy_Omni3D)/2.",
+    "rule": "This is the ONE and ONLY primary metric for every arm (dense, current integer, L2) and for every paired bootstrap comparison. It is never replaced by any other accuracy."
+  },
+  "unweighted_metric": {
+    "identifier": "unweighted_sample_accuracy",
+    "underlying_field": "score(...)[\"accuracy\"]",
+    "definition": "Plain unweighted mean over the 100 screening samples.",
+    "rule": "Secondary diagnostic only. It must never be called the CV-Bench primary score and must never drive the decision rule."
+  },
+  "forbidden_primary_metrics": ["pointing", "grounding", "ndcg", "retained_mass"],
+  "arms": {
+    "dense": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+      "rows": 2638,
+      "subset_rule": "restricted to the 100 sample_id values of datasets/cv_bench_screening100.jsonl, preserving manifest order",
+      "role": "unpruned custom-dense reference for both the L2 and current-integer arms",
+      "note": "This is the same frozen custom dense JSONL that the formal current-Selector quality report names as dense_jsonl."
+    },
+    "current_integer": {
+      "path": "artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k96.jsonl",
+      "sha256": "b8976a5befdde7ae84cae925d14e37b2f5dd4e4d60b30eb4bdd879b18b87241d",
+      "rows": 2638,
+      "subset_rule": "restricted to the 100 sample_id values of datasets/cv_bench_screening100.jsonl, preserving manifest order",
+      "role": "current integer Selector at K=96 (B1/block 0)",
+      "expected_record_fields": ["sample_id", "score_mode", "requested_budget", "image_grid_thw", "full_patch_tokens", "full_llm_visual_tokens", "output_text"]
+    },
+    "l2": {
+      "path": "artifacts/token_selector/2026-10-04-b1-l2-diagnostic/b1_l2_k96_screening100.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED_AFTER_PREREGISTRATION",
+      "rows": 100,
+      "role": "L2 scorer on the identical B1/block-0 cut point, K=96, screening100",
+      "runner": "evaluation/run_hf_hardware_regular_b1.py",
+      "runner_sha256": "8e18b6bfe993f05c5916c5871df57b6c14ba70e3d0bb8a288c0edebc52370611",
+      "generation_command": "python evaluation/run_hf_hardware_regular_b1.py --model <frozen BF16 RoboBrain2.5-4B> --model-label <label> --manifest datasets/cv_bench_screening100.jsonl --output artifacts/token_selector/2026-10-04-b1-l2-diagnostic/b1_l2_k96_screening100.jsonl --score-mode l2 --budget 96 --region-grid 3 --local-candidate-cap 16 --dtype bf16 --device cuda:0",
+      "required_record_fields": ["sample_id", "score_mode", "requested_budget", "image_grid_thw", "full_patch_tokens", "full_llm_visual_tokens", "output_text"],
+      "required_score_mode": "l2",
+      "required_requested_budget": 96,
+      "must_be_produced_by_pinned_runner": true
+    }
+  },
+  "dataset_pins": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+      "records": 100,
+      "unique_sample_ids": 100
+    },
+    "screening_image_dir": "datasets/cv_bench_screening100_images",
+    "screening_image_count": 100,
+    "screening_image_total_bytes": 14738161,
+    "screening_image_aggregate_sha256": "1c84b1758abe84f359337231de725f737850aff7bdcae1c3c5c28b877e25a0a9",
+    "screening_image_aggregate_rule": "sha256 over sorted lines '<filename> <sha256(file)>'",
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "records": 2638
+    }
+  },
+  "validation_requirements": {
+    "sample_id_identity": "The screening manifest, the dense full2638 subset, the current-selector_k96 full2638 subset and the L2 screening100 input must all select exactly the same 100 sample_id values.",
+    "no_duplicates": "Each of the four inputs must contain no duplicate sample_id.",
+    "l2_score_mode": "Every L2 record must have score_mode == \"l2\".",
+    "l2_requested_budget": "Every L2 record must have requested_budget == 96.",
+    "input_grid_consistency": "For every sample_id, the L2 record's (image_grid_thw, full_patch_tokens, full_llm_visual_tokens) must equal the current integer record's tuple. A mismatch invalidates the comparison and the summariser must fail closed.",
+    "fail_closed": "If any required input file is missing, or any of the checks above fails, the summariser must raise and must NOT write a report."
+  },
+  "bootstrap": {
+    "method": "paired bootstrap, stratified by task::source_dataset",
+    "helper": "evaluation.build_cv_bench_pruning_report.paired_bootstrap_delta",
+    "seed": 20261004,
+    "repeats": 5000,
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "comparisons": [
+      "l2_minus_current",
+      "l2_minus_dense",
+      "current_minus_dense"
+    ],
+    "ci_level": 0.95
+  },
+  "decision_rule": {
+    "uses": "95% CI of score(...)[\"cv_bench_accuracy\"] (l2_minus_current), plus each arm's relative retention vs dense (arm cv_bench_accuracy / dense cv_bench_accuracy)",
+    "thresholds": {
+      "ranker_defect_ci_lower": 0.02,
+      "b1_premature_ci_upper": 0.02,
+      "min_relative_retention": 0.92
+    },
+    "ordered_rules": [
+      {
+        "outcome": "RANKER_DEFECT_PRIMARY",
+        "condition": "l2_minus_current 95% CI lower bound > 0.02",
+        "meaning": "排序器缺陷为主要因素：L2 scorer 在同一 B1 切点上显著优于 current integer selector 超过 0.02。"
+      },
+      {
+        "outcome": "B1_PREMATURE_PRUNING_PRIMARY",
+        "condition": "l2_minus_current 95% CI upper bound <= 0.02 AND L2 relative retention vs dense < 0.92 AND current relative retention vs dense < 0.92",
+        "meaning": "B1过早裁剪为主要因素：在同一切点上 L2 与 current 都没有显著优于对方超过 0.02，且两者相对 dense 都低于 0.92。"
+      },
+      {
+        "outcome": "MIXED_INCONCLUSIVE",
+        "condition": "otherwise",
+        "meaning": "mixed/inconclusive：证据不足以把主因单独归给排序器或 B1 过早裁剪。"
+      }
+    ]
+  },
+  "inputs_sha256": {
+    "evaluation/build_cv_bench_pruning_report.py": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b",
+    "evaluation/hardware_regular_b1_integration.py": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa",
+    "evaluation/hardware_regular_token_selector.py": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+    "evaluation/metrics.py": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8",
+    "evaluation/run_hf_hardware_regular_b1.py": "8e18b6bfe993f05c5916c5871df57b6c14ba70e3d0bb8a288c0edebc52370611",
+    "evaluation/run_hf_shallow_block_pruning.py": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9",
+    "evaluation/run_hf_token_reduction.py": "28e9870d17c9f1b63389e55d09f92118291ad15adb3c3c33c99686a973df5c8e",
+    "evaluation/token_reduction.py": "6af9b507fb4a612b4013937150d6a7a59c8cf76d7e310c427b7fdb918f9a77b8",
+    "configs/evaluation_protocol.json": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643",
+    "configs/current_selector_cvbench_20261004.preregistered.json": "f49f86b01c17c00bf58edbb5061103c5f4a781362d301a3c4b38aedb16d09864",
+    "reports/cv_bench/2026-10-04-current-selector-cvbench.json": "d4ee60fe777cf0b6b075467c72acc1d2aec9ee2eb9cd7537523c5b7fe6344311"
+  },
+  "report_paths": {
+    "json": "reports/cv_bench/2026-10-04-b1-l2-vs-integer-screening100.json",
+    "md": "reports/cv_bench/2026-10-04-b1-l2-vs-integer-screening100.md"
+  },
+  "explicit_non_formal_statement": "This diagnostic runs on a fixed stratified 100-sample screening set. Its result is an attribution signal only and is NOT a formal full2638 CV-Bench conclusion; it must not be quoted as the official CV-Bench accuracy of any approach, and it does not authorise promotion, RTL work or hardware claims.",
+  "limitations": [
+    "Screening100 is a diagnostic subset, not the formal 2638-sample CV-Bench benchmark.",
+    "The Selector path is software only; no FPGA/board result and no latency/acceleration claim is made.",
+    "L2 and current integer share the B1 cut point but differ in scoring; dense uses the frozen custom dense path (a different preprocessing vintage), so dense is only a reference, not an exactly matched input grid.",
+    "Only score(...)[\"cv_bench_accuracy\"] drives the decision; unweighted_sample_accuracy is descriptive.",
+    "Validation was already used in development; internal test remains sealed."
+  ]
+}

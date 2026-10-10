@@ -1,0 +1,35 @@
+{
+  "format": "l2-residual-selector-blind-lock-v1",
+  "date": "2026-08-26",
+  "status": "LOCKED_BEFORE_FIRST_BLIND_INFERENCE",
+  "configuration_lock": "reports/2026-08-25-l2-residual-selector.lock.json",
+  "configuration_lock_sha256": "f4fcbfa1284081b02861023bae897cf59015b5b2f0defb564e78824e18f3b53a",
+  "blind_manifest": "datasets/dac_spatial_l2res_blind.jsonl",
+  "blind_manifest_sha256": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+  "images": 96,
+  "records": 192,
+  "tasks": {
+    "grounding": 96,
+    "pointing": 96
+  },
+  "selection_seed": 20260829,
+  "max_per_category": 4,
+  "max_image_side": 512,
+  "excluded_unique_images": 224,
+  "overlap": {
+    "datasets/dac_spatial_eval_smoke.jsonl": 0,
+    "datasets/dac_spatial_eval_expanded.jsonl": 0,
+    "datasets/dac_spatial_selector_validation.jsonl": 0
+  },
+  "image_decode_audit": {
+    "valid": 96,
+    "invalid": 0
+  },
+  "run_order": [
+    "full@1.000",
+    "L2+anchor@0.875",
+    "frozen L2+residual(lambda=2)@0.875"
+  ],
+  "policy": "run each configuration once; do not tune selector, retention, loss, or threshold after observing blind metrics; any failed gate remains a negative result",
+  "pl_status": "HOLD_UNTIL_BLIND_GATE_PASS"
+}

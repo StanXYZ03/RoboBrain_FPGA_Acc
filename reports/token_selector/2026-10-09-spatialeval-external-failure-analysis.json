@@ -1,0 +1,125 @@
+{
+  "status": "CURRENT_K96_SELECTOR_REJECTED_BY_EXTERNAL_CONFIRMATION",
+  "scope": "SpatialEval VQA primary synthetic tasks only (4500 records)",
+  "source_summary": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-09-spatialeval-three-arm-summary.json",
+  "source_summary_sha256": "214b7827209e7ba3f519ae93defdbc6ace39d89019a5a2e3abb82ad6a383bca4",
+  "raw_outputs": {
+    "dense_edge576": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-09-spatialeval-vqa-three-arm/dense_edge576_test4500.jsonl",
+      "sha256": "469754afbf0a7314e7179d8d49846637783743795a5a49d1341d1103e344370c",
+      "records": 4500
+    },
+    "corrected_l2_integer_b1_k96": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-09-spatialeval-vqa-three-arm/corrected_l2_integer_k96_test4500.jsonl",
+      "sha256": "51c1e486d92966537f6ece1cd3e9b166cadc63a434621a021bbf1fa0d99c74fe",
+      "records": 4500
+    },
+    "v2_edge576_b1_k96": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-09-spatialeval-vqa-three-arm/v2_edge576_k96_test4500.jsonl",
+      "sha256": "6ac4b7e1b0264e39498ca3217c5690a85a3edb97d4d1f8536b92698aa2dd458e",
+      "records": 4500
+    }
+  },
+  "quality": {
+    "official_compatible_project_equal_task_macro": {
+      "dense_edge576": 0.5837777777777777,
+      "corrected_l2_integer_b1_k96": 0.4391111111111112,
+      "v2_edge576_b1_k96": 0.4344444444444444
+    },
+    "v2_minus_dense_absolute": -0.14933333333333332,
+    "v2_over_dense": 0.7441948991244766,
+    "v2_minus_l2_absolute": -0.004666666666666763,
+    "v2_minus_l2_ci95": [
+      -0.013777777777777778,
+      0.0044444444444444444
+    ],
+    "v2_vs_l2_paired_contingency": {
+      "mazenav": {
+        "left_only_correct": 12,
+        "right_only_correct": 26,
+        "both_correct": 327,
+        "both_wrong": 1135
+      },
+      "all": {
+        "left_only_correct": 213,
+        "right_only_correct": 234,
+        "both_correct": 1742,
+        "both_wrong": 2311
+      },
+      "spatialgrid": {
+        "left_only_correct": 96,
+        "right_only_correct": 105,
+        "both_correct": 620,
+        "both_wrong": 679
+      },
+      "spatialmap": {
+        "left_only_correct": 105,
+        "right_only_correct": 103,
+        "both_correct": 795,
+        "both_wrong": 497
+      }
+    }
+  },
+  "token_budget": {
+    "dense_mean_visual_tokens": 468.98,
+    "l2_mean_selected_tokens": 96.0,
+    "v2_mean_selected_tokens": 96.0,
+    "v2_aggregate_retention": 0.20469956074885923,
+    "v2_aggregate_reduction": 0.7953004392511408,
+    "fixed_k": 96,
+    "input_g_values": [
+      256,
+      550,
+      552,
+      576
+    ]
+  },
+  "latency": {
+    "dense_elapsed_mean_ms": 1426.782255774726,
+    "v2_elapsed_mean_ms": 1472.9595773793342,
+    "measured_dense_over_v2_speed_ratio": 0.968649973621974,
+    "measured_v2_change_vs_dense": 0.03236465930082266,
+    "dense_decode_mean_ms": 1220.916569908142,
+    "dense_decode_fraction_of_elapsed": 0.8557133122217018,
+    "amdahl_zero_all_non_decode_max_speedup": 1.168615686723027,
+    "dense_prefill_mean_ms": 80.77959727562799,
+    "v2_prefill_mean_ms": 37.84394642808702,
+    "prefill_speedup": 2.1345447528610544,
+    "prefill_time_saved_ms": 42.93565084754097,
+    "v2_selector_cpu_roundtrip_mean_ms": 81.06751885968778,
+    "optimistic_v2_elapsed_if_cpu_selector_were_zero_ms": 1391.8920585196463,
+    "optimistic_dense_over_v2_speedup_if_cpu_selector_were_zero": 1.025066740658171,
+    "output_token_counts": {
+      "dense_edge576": {
+        "mean": 62.092,
+        "minimum": 18,
+        "maximum": 64,
+        "at_max_new_tokens_64_count": 4231,
+        "at_max_new_tokens_64_rate": 0.9402222222222222
+      },
+      "corrected_l2_integer_b1_k96": {
+        "mean": 62.715333333333334,
+        "minimum": 20,
+        "maximum": 64,
+        "at_max_new_tokens_64_count": 4295,
+        "at_max_new_tokens_64_rate": 0.9544444444444444
+      },
+      "v2_edge576_b1_k96": {
+        "mean": 62.79533333333333,
+        "minimum": 20,
+        "maximum": 64,
+        "at_max_new_tokens_64_count": 4310,
+        "at_max_new_tokens_64_rate": 0.9577777777777777
+      }
+    },
+    "benchmark_prompt_boundary": "Most samples hit the 64-token cap because the frozen official prompt requests reasoning. Decode dominance is valid for this benchmark configuration but must not be generalized to coordinate-only or action-code outputs without a separate matched experiment.",
+    "warning": "The zero-selector figure is an optimistic software subtraction, not an FPGA prediction; it omits real transfer, synchronization, and PL execution costs."
+  },
+  "decision": {
+    "external_gate_pass": false,
+    "continue_current_k96_v2_as_primary_method": false,
+    "spatialeval_test_may_be_used_for_retuning": false,
+    "reason": "The frozen v2 arm retained only 74.42% of Dense quality and did not beat the matched L2 baseline; Decode dominates latency, so visual-token selection alone cannot meet the 333 ms system target.",
+    "next_research_direction": "Return to development data for an adaptive spatial-relation-preserving budget and pair it with structured short decoding or a non-autoregressive action head. Reserve a different untouched benchmark for the next external confirmation."
+  }
+}

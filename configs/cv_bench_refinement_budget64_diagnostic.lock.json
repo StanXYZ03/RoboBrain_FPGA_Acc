@@ -1,0 +1,21 @@
+{
+  "status": "DIAGNOSTIC_LOCKED_BEFORE_NEW_INFERENCE",
+  "purpose": "Post-hoc output-format/budget attribution, not a new pruning algorithm or original preregistered quality result",
+  "trigger": "16-token two-image run: 399 parse failures, 400 cap hits; raw replies show explanations before selected option",
+  "model": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+  "max_new_tokens": 64,
+  "methods": ["dense", "global256", "cosine_global_roi"],
+  "full_manifest": "datasets/cv_bench_full2638_budget64_diagnostic.jsonl",
+  "performance_manifest": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+  "full_expected_records": 7914,
+  "full_accuracy_repeats": 1,
+  "performance_expected_records": 900,
+  "performance_repeats": 3,
+  "warmup": 1,
+  "unchanged": ["original question", "choices", "image bytes and paths", "frozen parser", "scout policy", "resize", "crop provenance text", "model weights", "dtype BF16", "do_sample=False"],
+  "no_failure_only_rescue": true,
+  "no_parser_changes": true,
+  "sealed_data_access": false,
+  "board_access": false,
+  "execute_after_gpu_audit": true
+}

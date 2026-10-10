@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-04",
+  "status": "ENGINEERING_FIX_BEFORE_FORMAL_RUN",
+  "preregistration_unchanged": true,
+  "algorithm_changed": false,
+  "evaluation_standard_changed": false,
+  "operating_points_changed": false,
+  "fixes": [
+    {
+      "issue": "identity bypass incorrectly required integer scorer bounds",
+      "resolution": "bounds are required only when the integer scorer executes"
+    },
+    {
+      "issue": "bash driver stored module invocation as one executable string",
+      "resolution": "runner and summarizer commands use bash arrays"
+    }
+  ],
+  "code_sha256_before": {
+    "evaluation/run_hf_current_selector_cvbench.py": "5870e8477dcbccd52c572e8c5c03d6991e426e97522286709cdeea01a5f2bfc2",
+    "evaluation/tests/test_current_selector_cvbench.py": "8d875117f0d7829cc54dc078cdf614ac9e16c8f833b8fa58fe1ec2369d1d9939",
+    "scripts/run_current_selector_cvbench.sh": "da1f8523dbbf4af118664b623ddb95297e107190c2e0ad7f54dabfd5c86c386b"
+  },
+  "code_sha256_after": {
+    "evaluation/run_hf_current_selector_cvbench.py": "0098faf3af47b648d54489b9a08e92c47859ee2b3735292b3f2f291324f01d2d",
+    "evaluation/tests/test_current_selector_cvbench.py": "6c403a8c85de14b2065dadced3e2e62a11528496c88ac934d0b1acdb01549439",
+    "scripts/run_current_selector_cvbench.sh": "3eefbb08542cf2263f4efe3d9c3485b796223d1c3a382c104d3eea2150bcd411"
+  },
+  "tests": {
+    "focused_passed": 19,
+    "full_passed": 734,
+    "full_failed": 0,
+    "full_seconds": 45.251,
+    "log": "reports/token_selector/logs/2026-10-04-current-selector-cvbench/full-tests-after-smoke-fix-host.log",
+    "log_sha256": "ff6866c9816c9bf0735f412ba75eb29858f29ec3fd770dd2e4696b3578592973"
+  }
+}

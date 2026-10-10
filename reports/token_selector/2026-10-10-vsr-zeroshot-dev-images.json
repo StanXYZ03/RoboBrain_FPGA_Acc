@@ -1,0 +1,17 @@
+{
+  "status": "VSR_ZEROSHOT_DEV_IMAGES_COMPLETE",
+  "requirements": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-zeroshot-b27a0af0/development_image_requirements.jsonl",
+  "requirements_sha256": "6032022a9042ec6a74cecaedcfda0dd8593db57c266f920a97605dacd3e98d4b",
+  "output_dir": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-zeroshot-b27a0af0/dev_images",
+  "output_manifest": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-zeroshot-b27a0af0/dev_images_manifest.jsonl",
+  "output_manifest_sha256": "10ec0f015baaea250245d69c0ea21aa539f6579f4534f993a37f9ad54e902fae",
+  "expected": 227,
+  "materialized": 227,
+  "total_bytes": 36652212,
+  "materialization_counts": {
+    "downloaded_official_url": 222,
+    "resume": 5
+  },
+  "failures": [],
+  "test_metadata_opened": false
+}

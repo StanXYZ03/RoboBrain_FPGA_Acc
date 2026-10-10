@@ -1,0 +1,194 @@
+{
+  "schema": "prompt_projection_shared_gpu_run_v1",
+  "date": "2026-09-28",
+  "decision": "PROMPT_PROJECTION_EXTRACTION_DONE / TRAINING_DONE_VAL_SELECTED / VAL_CORRECT_BEATS_SHUFFLED_FALSE / TEST_EVALUATED_ONCE / INTERNAL_SANITY_ONLY_NOT_CV_BENCH_ACCURACY",
+  "gpu_policy": {
+    "name": "actually-runnable-first shared GPU",
+    "authorization": "user explicitly directed to use the GPU whenever it can actually run, sharing with other users' CUDA processes",
+    "preflight_rule": "free_memory >= 14336 MiB and 5 s average utilization < 80%",
+    "post_load_rule": "free_memory >= 4096 MiB after model load, else release the model and stop",
+    "non_owner_processes_block": false,
+    "other_users_processes": "read-only nvidia-smi/ps only; never killed, paused or modified",
+    "legacy_default": "without --allow-shared-gpu the extractor keeps the strict exclusive-owner gate unchanged",
+    "superseded_reports": [
+      "reports/token_selector/2026-09-28-prompt-projection-newpolicy-gate.json",
+      "reports/token_selector/2026-09-28-prompt-feature-extraction.json"
+    ]
+  },
+  "gpu_audits": {
+    "device": {
+      "name": "NVIDIA RTX A6000",
+      "driver_version": "580.178.04",
+      "cuda_version": "13.0",
+      "memory_total_mib": 46068
+    },
+    "preflight": {
+      "status": "PASS",
+      "allow_shared_gpu": true,
+      "min_free_mib": 14336,
+      "max_util_pct": 80.0,
+      "memory_free_mib": 22317,
+      "util_samples_percent": [0, 0, 0, 0, 0],
+      "util_avg_percent": 0.0,
+      "non_owner_compute_processes": [
+        {"pid": 16507, "user": "seey6", "used_memory_mib": 23038, "process_name": "python"}
+      ]
+    },
+    "after_model_load": {
+      "status": "OK",
+      "memory_free_mib": 10227,
+      "min_free_mib": 4096,
+      "passed": true,
+      "torch_cuda_memory_allocated_mib": 8465.7,
+      "torch_cuda_peak_allocated_mib": 9207.6
+    },
+    "after_extraction": {
+      "status": "OK",
+      "memory_free_mib": 12752,
+      "utilization_percent": 20,
+      "gpu_extract_seconds": 91.58424930801266,
+      "records_written": 472,
+      "vision_forwards": 236,
+      "prompt_embeddings": 472,
+      "torch_cuda_peak_allocated_mib": 8552.6,
+      "torch_cuda_peak_reserved_mib": 9248.0
+    },
+    "timing": {
+      "cuda_synchronize": "called before and after the extraction loop",
+      "gpu_extract_seconds": 91.58424930801266,
+      "note": "the 91.6 s includes 236 image loads, 236 vision forwards and 472 prompt embeddings"
+    }
+  },
+  "data_integrity": {
+    "manifest": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "manifest_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "manifest_sha256_matches_config_pin": true,
+    "lock_sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+    "validate_manifest_only": {
+      "status": "PASS",
+      "gpu_used": false,
+      "model_loaded": false
+    },
+    "records": 472,
+    "unique_images": 236,
+    "tasks": {"grounding": 236, "pointing": 236},
+    "split_rule": "strict sha256(salt|seed|source_image_sha256) grouping; every prompt of one image stays in one split",
+    "split_counts": {
+      "train": {"records": 318, "images": 159},
+      "val": {"records": 76, "images": 38},
+      "test": {"records": 78, "images": 39}
+    },
+    "cross_split_image_overlap": {"train_val": 0, "train_test": 0, "val_test": 0},
+    "cv_bench_training_leakage": "none (frozen corpus excludes all CV-Bench COCO ids / eval image hashes / sample_ids)"
+  },
+  "extractor_change": {
+    "path": "evaluation/extract_prompt_projection_features.py",
+    "old_sha256": "cac52d49033263c0bc7c1afdc0ef3c58ffdda27e1e9a883ad1fcc205ddf2eb70",
+    "new_sha256": "ccfd0ea8a9dfa7e3df423c3a2b7d9af036042d011871970e8fb2534e7c2ecf69",
+    "additive_flags": ["--allow-shared-gpu", "--min-free-mib", "--max-util-pct"],
+    "default_behavior_unchanged": true,
+    "device_fix": "production _vision_capture/_prompt_embeddings now materialise the block-0 capture on the host (values/dtypes unchanged) so save_feature_cache can call np.asarray; the shared CPU-tested core was not modified",
+    "semantics": "features, split, algorithm and training hyperparameters unchanged",
+    "config_path": "configs/prompt_projection_distillation.json",
+    "config_old_sha256": "0b03f8f56422f5efdc34561b0cbce40b98510ff0ede88942854849307108ef99",
+    "config_new_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "provenance": "reports/token_selector/2026-09-28-prompt-projection-shared-gpu-provenance.json"
+  },
+  "extraction": {
+    "model": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B (offline, local_files_only)",
+    "index": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "index_bytes": 326962,
+    "index_order": "exactly manifest order",
+    "npz_count": 472,
+    "npz_total_bytes": 364136400,
+    "vision_forwards": 236,
+    "prompt_embeddings": 472,
+    "image_reuse": "one dense vision forward per unique image; both prompts reuse the same image-derived capture",
+    "schema_only": "group_mean float16 [G,1024]; prompt_embeddings float16 [T,2560]; teacher_scores/normalized/soft_target float32 [G]; meta_* scalars",
+    "forbidden_payload_absent": ["merged_embeddings", "block0_patches", "deepstack"],
+    "all_config_hash_match_new_config": true
+  },
+  "training": {
+    "config": "configs/prompt_projection_distillation.json",
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "weights_npz": "artifacts/token_selector/prompt_projection_WtWv.npz",
+    "weights_sha256": "ece4a9162da653e50e9192677f61761b02b8ef3739430200c7fe15914c67cdb3",
+    "file_sha256": "132a6d9fcd35ee94f6cb6c60f1c05c5b3ca2a669f56e7777e29a65a676f79d0c",
+    "shapes": {"Wt": [128, 2560], "Wv": [128, 1024]},
+    "epochs_configured": 30,
+    "best_epoch": 0,
+    "best_val_listwise_kl": 0.025188995137996406,
+    "train_loss_first_last": [0.025643, 0.014819],
+    "loss_decreased": true,
+    "selection": "val only; test not used for selection",
+    "test_evaluated_once_after_freeze": true,
+    "deterministic_recheck": {
+      "env": "CUBLAS_WORKSPACE_CONFIG=:4096:8",
+      "weights_sha256": "ece4a9162da653e50e9192677f61761b02b8ef3739430200c7fe15914c67cdb3",
+      "matches_first_run": true
+    },
+    "report": "reports/token_selector/2026-09-28-prompt-projection-training.json",
+    "metrics_csv": "reports/token_selector/2026-09-28-prompt-projection-training-metrics.csv",
+    "promotion_gate": {
+      "status": "EVALUATED",
+      "student_beats_l2": true,
+      "correct_beats_shuffled": false,
+      "primary_metrics": ["spearman", "ndcg_full"]
+    },
+    "val_metrics": {
+      "student_correct": {"pearson": 0.073063, "spearman": 0.056475, "ndcg_full": 0.849942},
+      "l2_baseline": {"pearson": 0.025148, "spearman": 0.030037, "ndcg_full": 0.841224},
+      "student_shuffled_prompt": {"pearson": 0.078146, "spearman": 0.062980, "ndcg_full": 0.850959},
+      "correct_minus_shuffled": {"pearson": -0.005084, "spearman": -0.006505, "ndcg_full": -0.001017}
+    },
+    "test_metrics": {
+      "student_correct": {"pearson": 0.067288, "spearman": 0.053558, "ndcg_full": 0.849306},
+      "l2_baseline": {"pearson": 0.034337, "spearman": 0.012508, "ndcg_full": 0.842508},
+      "student_shuffled_prompt": {"pearson": 0.064445, "spearman": 0.051879, "ndcg_full": 0.848761},
+      "correct_minus_shuffled": {"pearson": 0.002843, "spearman": 0.001679, "ndcg_full": 0.000546}
+    },
+    "k_metrics_test_student_correct": {
+      "48": {"topk_recall": 0.225694, "jaccard": 0.130544, "saliency_mass_retained": 0.281383, "ndcg": 0.531885},
+      "64": {"topk_recall": 0.292869, "jaccard": 0.175455, "saliency_mass_retained": 0.353726, "ndcg": 0.561481},
+      "96": {"topk_recall": 0.418002, "jaccard": 0.271616, "saliency_mass_retained": 0.495739, "ndcg": 0.616529}
+    }
+  },
+  "controls": {
+    "l2_baseline": "student beats L2 on val pearson/spearman/ndcg_full",
+    "shuffled_prompt": "on val the correct prompt does not beat the cyclic shuffled control (negative paired delta on every primary metric)",
+    "interpretation": "the val-selected checkpoint is epoch 0; later epochs reduce train KL but increase val KL, so the exported projection carries little prompt-specific signal at the frozen checkpoint",
+    "not_a_cv_bench_task_accuracy": true
+  },
+  "tests": {
+    "focused": {"command": "python -m unittest evaluation.tests.test_prompt_projection_clean_inductive evaluation.tests.test_prompt_projection_distillation evaluation.tests.test_prompt_projection_feature_reuse evaluation.tests.test_metrics", "result": "Ran 68 tests OK"},
+    "full": {"command": "python -m unittest discover -s evaluation/tests", "result": "Ran 305 tests OK"},
+    "new_gate_tests": "SharedGpuGateTests (5 tests): opt-in pass with non-owner, low-memory block, high-util block, legacy default still blocks, runtime snapshot parse",
+    "log_focused": "reports/token_selector/logs/2026-09-28-prompt-projection-focused-tests-shared-gpu.log",
+    "log_full": "reports/token_selector/logs/2026-09-28-prompt-projection-full-regression-shared-gpu.log"
+  },
+  "limitations": [
+    "internal sanity check only; not a CV-Bench task accuracy and not comparable to Count/Relation/Depth/Distance",
+    "prompt text distribution of the clean corpus (grounding/pointing) differs from the CV-Bench question templates",
+    "best val checkpoint is epoch 0, so the exported Wt/Wv are only one epoch past the deterministic init; the formal correct-prompt-above-shuffled promotion criterion FAILS on val",
+    "test metrics are reported after a single evaluation of the frozen checkpoint but the method did not pass the val promotion gate, so no promotion is claimed",
+    "GPU was shared with another user's context; wall-clock seconds depend on that sharing and are not a speedup claim",
+    "peak memory is torch.cuda peak for this process only"
+  ],
+  "files_changed": [
+    "evaluation/extract_prompt_projection_features.py",
+    "configs/prompt_projection_distillation.json",
+    "evaluation/tests/test_prompt_projection_distillation.py",
+    "reports/token_selector/2026-09-28-prompt-projection-newpolicy-gate.md",
+    "reports/token_selector/2026-09-28-prompt-feature-extraction.md",
+    "reports/token_selector/2026-09-28-prompt-projection-shared-gpu-provenance.json",
+    "reports/token_selector/2026-09-28-prompt-projection-shared-gpu-run.json",
+    "reports/token_selector/2026-09-28-prompt-projection-shared-gpu-run.md",
+    "reports/token_selector/2026-09-28-prompt-projection-training.json",
+    "reports/token_selector/2026-09-28-prompt-projection-training-metrics.csv",
+    "artifacts/token_selector/prompt_projection_features/index.jsonl",
+    "artifacts/token_selector/prompt_projection_WtWv.npz",
+    "CURRENT_STATUS.md"
+  ],
+  "next_gate": "Decide the protocol for the epoch-0/val-failure result: either (a) freeze it as a negative internal result and stop, or (b) with explicit PI authorization revisit only the optimization schedule (learning-rate warmup / early-stopping metric / init scale) without touching the data, split, features or evaluation contract, then re-run training and report the val gate again."
+}

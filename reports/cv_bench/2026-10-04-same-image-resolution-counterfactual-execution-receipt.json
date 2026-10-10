@@ -1,0 +1,249 @@
+{
+  "schema_version": "1.0",
+  "executed_at": "2026-10-04",
+  "updated_at": "2026-10-05",
+  "status": "RESOLUTION_DEPENDENT_PROMPT_GAIN_NOT_CONFIRMED",
+  "design": "2026-10-04-same-image-resolution-counterfactual",
+  "objective": "Pre-register a same-image dual-processor-pixel-budget counterfactual that varies G within a single ADE20K image, freeze 100 stratified samples, and require an authoritative processor-only G-separation dry run before any model run.",
+  "execution": {
+    "cpu_only": false,
+    "read_only": false,
+    "gpu_used": true,
+    "model_loaded": true,
+    "model_runs": 4,
+    "network_used": false,
+    "training": false,
+    "frozen_inputs_modified": false,
+    "existing_reports_modified": false,
+    "evaluation_protocol_modified": false,
+    "processor_loaded": true,
+    "processor_only_cpu": true,
+    "model_weights_loaded": true,
+    "summarizer_ready": true,
+    "gpu_arm_files_present": true,
+    "note_zh": "权威 processor dry run 先在 CPU 完成；随后在单张 A6000 上以本地 RoboBrain2.5-4B、BF16/SDPA、greedy、max_new_tokens=16 串行完成两臂×low/high 共 4 个真实模型运行，每臂 100 条。全程离线、无训练，未修改预注册预算/阈值/样本/评价规则或四个 raw JSONL。"
+  },
+  "motivation": {
+    "gate_source_confounding_report": {
+      "path": "reports/cv_bench/2026-10-04-gate-source-confounding.json",
+      "sha256": "17adb2c74c6c4de367a33da099512669c04235ad18824d293efa8a1499a49a6d",
+      "conclusion": "SOURCE_CONFOUNDING_NOT_RESOLVED"
+    },
+    "formal_outcome_unchanged": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638"
+  },
+  "frozen_samples": {
+    "source_dataset": "ADE20K Validation Set",
+    "selected_count": 100,
+    "reserve_count": 533,
+    "strata": [
+      "G<=512::Count::integer_correct",
+      "G<=512::Count::integer_wrong",
+      "G<=512::Relation::integer_correct",
+      "G<=512::Relation::integer_wrong",
+      "G>512::Count::integer_correct",
+      "G>512::Count::integer_wrong",
+      "G>512::Relation::integer_correct",
+      "G>512::Relation::integer_wrong"
+    ],
+    "selection_seed": 20261004,
+    "manifest": {
+      "path": "datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100.jsonl",
+      "sha256": "c53c7b7dd733b11f55edc85ba65745d72951d31f456c7403ec21e91b0031d4c5",
+      "count": 100
+    },
+    "reserve": {
+      "path": "datasets/2026-10-04-same-image-resolution-counterfactual-ade20k-reserve.jsonl",
+      "sha256": "b6d9333b575a1391782d3fa03d82e37822848d02ddeddca76d500d0926e5005c",
+      "count": 533
+    },
+    "selection_report": {
+      "path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual-selection.json",
+      "sha256": "710e0ea83de25ed6eb7140ba6fef10664a3483572959f7daa8be702426b6c89e"
+    }
+  },
+  "processor_pixel_budgets": {
+    "low": {"min_pixels": 65536, "max_pixels": 524288, "expected_G_max": 512},
+    "high": {"min_pixels": 525312, "max_pixels": 16777216, "expected_G_min": 513}
+  },
+  "gate_separation": {
+    "authoritative_mode": "processor",
+    "dry_run_required_before_model": true,
+    "processor_dry_run_executed": true,
+    "processor_dry_run": {
+      "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python evaluation/verify_same_image_resolution_gate_separation.py --mode processor --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+      "report": {
+        "path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual-gate-separation.json",
+        "sha256": "2d2abe2db0079b3238b109c91ba020194a9e6bb4e04d9fcaee89c7161217021e",
+        "mode": "processor",
+        "authoritative": true,
+        "model_was_run": false,
+        "generated_at": "2026-10-04T22:42:34.097500+08:00"
+      },
+      "separated": 100,
+      "rejected": 0,
+      "replaced": 0,
+      "unresolved": 0,
+      "resolved": true,
+      "frozen_count": 100,
+      "accepted_count": 100,
+      "G_low_min": 64,
+      "G_low_max": 504,
+      "G_high_min": 520,
+      "G_high_max": 3588,
+      "all_G_low_le_512": true,
+      "all_G_high_gt_512": true,
+      "contract_checks_all_ok": true,
+      "final_manifest": {
+        "path": "datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100-separated.jsonl",
+        "sha256": "c53c7b7dd733b11f55edc85ba65745d72951d31f456c7403ec21e91b0031d4c5",
+        "count": 100,
+        "sha_matches_preregistered_manifest": true,
+        "note_zh": "100/100 分离，零替换，因此 separated manifest 与预注册 manifest 逐字节一致（同为 c53c7b7d…d4c5）。"
+      },
+      "note_zh": "处理权威分离门：100/100 每张图 G_low<=512 且 G_high>512，无拒绝/替换/未解；仅加载 processor。"
+    },
+    "analytic_prediction": {
+      "path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual-gate-separation-prediction.json",
+      "sha256": "46dd2335952d3cfdcaa2770a37afbeec6e33f9fb4ef7f6d80c2e63ab3df3d86d",
+      "authoritative": false,
+      "separated": 100,
+      "rejected": 0,
+      "replaced": 0,
+      "unresolved": 0,
+      "note": "analytic smart_resize prediction only; the smart_resize formula was verified against all 633 recorded ADE20K G values (633/633 exact)"
+    },
+    "separation_rule": "accepted iff G_low <= 512 and G_high > 512",
+    "replacement_rule": "next unused same-stratum reserve candidate in ascending selection_rank whose own two budgets separate; exhausted reserve -> unresolved and fail closed",
+    "reserve_exhausted_strata": ["G>512::Relation::integer_wrong"]
+  },
+  "arms": ["corrected_l2_integer", "prompt_plus_corrected_l2_integer"],
+  "frozen_forward": {
+    "cutpoint": "B1_after_vision_block_0",
+    "prune_after_layer": 0,
+    "budget": 96,
+    "region_grid": 3,
+    "local_candidate_cap": 16,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "max_new_tokens": 16,
+    "checkpoint_sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff",
+    "wv_sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b",
+    "wv_scale_sha256": "93585a3bd2d584a612b40d827f8d15f43c87acdc764d7e217d99df473428b13f",
+    "deployment_seed": 20261003
+  },
+  "comparison": {
+    "primary_estimand": "mean_i [ (Prompt_correct - Integer_correct)_high - (Prompt_correct - Integer_correct)_low ]",
+    "primary_metric": "unweighted per-sample paired difference",
+    "bootstrap": {"seed": 20261004, "repeats": 5000, "ci_level": 0.95, "stratified_by": "original_stratum"},
+    "decision_rule": {
+      "RESOLUTION_DEPENDENT_PROMPT_GAIN_CONFIRMED": "CI lower bound > 0",
+      "RESOLUTION_DEPENDENT_PROMPT_GAIN_NOT_CONFIRMED": "otherwise"
+    }
+  },
+  "model_experiment": {
+    "platform": "NVIDIA RTX A6000",
+    "model": "RoboBrain2.5-4B-BF16",
+    "attention_implementation": "sdpa",
+    "run_count": 4,
+    "records_per_run": 100,
+    "raw_files": {
+      "corrected_l2_integer::low": {"path": "artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/corrected_l2_integer_low.jsonl", "sha256": "83588ffa368c2f41939cf2cbaabc1145fafb4c8b890ba86686dee8ace71865bb"},
+      "corrected_l2_integer::high": {"path": "artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/corrected_l2_integer_high.jsonl", "sha256": "eb99fbd56387c23c1d0f67355b51085f4b38c3e5c18cacf8e176836b26330293"},
+      "prompt_plus_corrected_l2_integer::low": {"path": "artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/prompt_plus_corrected_l2_integer_low.jsonl", "sha256": "7e806097e38d5d13cd3740535bd804b4fa9bbf90e88b759cfe0c16b8a54f695e"},
+      "prompt_plus_corrected_l2_integer::high": {"path": "artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/prompt_plus_corrected_l2_integer_high.jsonl", "sha256": "25fa904763cb8d9d173d3edbef81ae715f206fc82512a723ca700fad330ecfeb"}
+    }
+  },
+  "result": {
+    "decision": "RESOLUTION_DEPENDENT_PROMPT_GAIN_NOT_CONFIRMED",
+    "primary_point_estimate": -0.07,
+    "primary_ci95": [-0.20, 0.06],
+    "low": {"integer_accuracy": 0.56, "prompt_accuracy": 0.62, "integer_parse_rate": 0.99, "prompt_parse_rate": 0.99, "wrong_to_right": 16, "right_to_wrong": 10, "net": 6},
+    "high": {"integer_accuracy": 0.53, "prompt_accuracy": 0.52, "integer_parse_rate": 0.98, "prompt_parse_rate": 1.0, "wrong_to_right": 11, "right_to_wrong": 12, "net": -1},
+    "interpretation_zh": "同图仅改变 processor pixel budget 后，Prompt 相对 integer 的增益在 low 档为 +0.06、high 档为 -0.01，预注册交互效应为 -0.07，95% CI [-0.20,+0.06]。因此不能确认 Prompt 增益随 G>512 增强；先前 full2638 的 G 门控收益更可能受数据源/内容相关性影响，不能作为因果机制或主要创新主张。"
+  },
+  "artifacts": {
+    "selection_script": {"path": "evaluation/select_ade20k_resolution_counterfactual_samples.py", "sha256": "55f97eb7e2cee726cec09e002d1d2ebae49bec4c06bad2e82918ffc2f4a1acec"},
+    "selection_tests": {"path": "evaluation/tests/test_select_ade20k_resolution_counterfactual_samples.py", "sha256": "6a986618f0b985a840c87801310c60e37880f2f8cc401bee486d5cbb4077781c", "test_count": 10},
+    "verify_script": {"path": "evaluation/verify_same_image_resolution_gate_separation.py", "sha256": "31184dcaf631934ef5b98b6edad8845fb2833fb7cf7214361fc339e41a0ad815"},
+    "verify_tests": {"path": "evaluation/tests/test_verify_same_image_resolution_gate_separation.py", "sha256": "3fa69ce28611226b42dd03bf294b4cdd347a4ba2dda9395a30efc599db42d209", "test_count": 16},
+    "runner_scaffold": {"path": "evaluation/run_hf_same_image_resolution_counterfactual.py", "sha256": "3d4ed7a4d9c219c973b98d99acaf1478f3e55aad39d427e0894ca5816f8e7042"},
+    "runner_tests": {"path": "evaluation/tests/test_run_hf_same_image_resolution_counterfactual.py", "sha256": "8cd9fbb31e9d9b0f48844899991392d9483aea701d21574366d918ef914f87bc", "test_count": 15},
+    "summarizer": {"path": "evaluation/summarize_same_image_resolution_counterfactual.py", "sha256": "8184a51cebfd708d875cfa2e9d6f2919d4f9135257f2a1f1f8c4ba64b67d0042"},
+    "summarizer_tests": {"path": "evaluation/tests/test_summarize_same_image_resolution_counterfactual.py", "sha256": "a31c8bac63b3be66b677e1cad4cce4f622cd23fe167a3e74a2d8267182069199", "test_count": 50},
+    "formal_report_json": {"path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual.json", "sha256": "f8c4fe0125d2d47dabdd51401cc6236ad2deec9a908795a5e43384a1c512f541"},
+    "formal_report_csv": {"path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual.csv", "sha256": "dce436b5f2e85272e5d001345cd70a68bac3ba8c01c99aaaf321296140031ead"},
+    "formal_report_md": {"path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual.md", "sha256": "d2260ad3b7cf30960366340abb4c2ca3559f0b8da648b4f1c813092f07651af4"},
+    "gate_source_confounding_tests": {"path": "evaluation/tests/test_analyze_gate_source_confounding.py", "sha256": "292146c696c69b927c6f7425d552641c8128ebca3ccd00c1cf1dfeb8344eebc2", "test_count": 26},
+    "processor_dry_run_report": {"path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual-gate-separation.json", "sha256": "2d2abe2db0079b3238b109c91ba020194a9e6bb4e04d9fcaee89c7161217021e"},
+    "preregistered_config": {"path": "configs/2026-10-04-same-image-resolution-counterfactual.preregistered.json", "sha256": "ae1ba23936896f9c7b836164e092ec941af17c05611bf6c0368b71e913857f83"},
+    "plan_md": {"path": "reports/cv_bench/2026-10-04-same-image-resolution-counterfactual-plan.md", "sha256": "070116216840065274624defe8337b1fae14fc894fc4b9e8a270cc2c514b52d8"}
+  },
+  "tests": {
+    "focused_four_groups": {
+      "count": 67,
+      "status": "OK",
+      "breakdown": [
+        {"module": "evaluation.tests.test_analyze_gate_source_confounding", "ran": 26, "status": "OK"},
+        {"module": "evaluation.tests.test_select_ade20k_resolution_counterfactual_samples", "ran": 10, "status": "OK"},
+        {"module": "evaluation.tests.test_verify_same_image_resolution_gate_separation", "ran": 16, "status": "OK"},
+        {"module": "evaluation.tests.test_run_hf_same_image_resolution_counterfactual", "ran": 15, "status": "OK"}
+      ],
+      "command": "python -m unittest evaluation.tests.<module>"
+    },
+    "summarizer_module": {
+      "module": "evaluation.tests.test_summarize_same_image_resolution_counterfactual",
+      "ran": 50,
+      "status": "OK",
+      "note_zh": "原 48 项聚焦测试基础上增加 2 项真实 runner schema 回归：raw 可省略由 manifest 权威提供的 source/source_dataset；若未来 raw 可选字段存在但与 manifest 不一致则 fail closed。共 50 OK。"
+    },
+    "same_image_pairing_contract_patch": {
+      "date": "2026-10-04",
+      "scope": "minimal fail-closed patch only",
+      "change_zh": "validate() 的 same-image pairing 检查新增跨臂合同：同一 sample、同一 pixel budget 下 integer 与 prompt 两臂的 image_grid_thw 必须逐元素完全一致，且两臂 full_llm_visual_tokens 必须相等；同一臂 low/high grid 必须不同。任一违规抛 InputContractError、退出码 2、不写任何报告。",
+      "new_helper": "evaluation.summarize_same_image_resolution_counterfactual.verify_same_image_pairing",
+      "regression_tests": [
+        "test_same_budget_cross_arm_grid_contamination_fails_closed",
+        "test_low_high_unchanged_grid_fails_closed",
+        "test_same_budget_cross_arm_token_mismatch_fails_closed"
+      ],
+      "untouched_zh": "未改 config / gate report / manifest / runner / 任何冻结输入；未跑 GPU、未加载模型权重。",
+      "note_zh": "low/high grid 未变化的分支在完整 validator 中因 per-record G 门（low G<=512 且 high G>512）与 grid 对齐约束而不可达，故该回归测试直接调用 verify_same_image_pairing，并重算 record_sha256 以证明失败来自配对合同而非哈希。"
+    },
+    "summarizer_related": {
+      "count": 183,
+      "status": "OK",
+      "command": "python -m unittest evaluation.tests.test_analyze_gate_source_confounding evaluation.tests.test_select_ade20k_resolution_counterfactual_samples evaluation.tests.test_verify_same_image_resolution_gate_separation evaluation.tests.test_run_hf_same_image_resolution_counterfactual evaluation.tests.test_summarize_same_image_resolution_counterfactual evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_full2638 evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_screening100 evaluation.tests.test_cv_bench_report"
+    },
+    "full_evaluation_tests_after_summarizer": {
+      "count": 1532,
+      "status": "OK",
+      "note_zh": "本次实测：python -m unittest discover -s evaluation/tests → 1532 OK（基线 1482 + 50）。"
+    },
+    "py_compile": {
+      "status": "OK",
+      "files": [
+        "evaluation/verify_same_image_resolution_gate_separation.py",
+        "evaluation/select_ade20k_resolution_counterfactual_samples.py",
+        "evaluation/run_hf_same_image_resolution_counterfactual.py",
+        "evaluation/analyze_gate_source_confounding.py",
+        "evaluation/run_hf_token_reduction.py"
+      ]
+    },
+    "full_evaluation_tests": {"count": 1482, "status": "OK", "note_zh": "上一条里程碑记录；本次未重跑，因为本次未修改任何测试或被测注册代码。"},
+    "note_zh": "本次实测四组聚焦测试 26+10+16+15=67 OK。此前 receipt 中 selection/verify/runner 的 test_count（13/17/11）与实际 unittest 收集数（10/16/15）不符；三者总数 41 不变，本次已更正为实测值。"
+  },
+  "next_commands": {
+    "note_zh": "四条 GPU 模型实验与正式汇总均已完成。以下命令保留为离线可复现入口；下一研究动作不应继续围绕 G>512 门控调参，而应根据本反事实否定结果重新选择机制。",
+    "gpu_arm_runs_executed": true,
+    "commands": [
+      "python evaluation/run_hf_same_image_resolution_counterfactual.py --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100-separated.jsonl --arm corrected_l2_integer --pixel-budget low --output artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/corrected_l2_integer_low.jsonl",
+      "python evaluation/run_hf_same_image_resolution_counterfactual.py --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100-separated.jsonl --arm corrected_l2_integer --pixel-budget high --output artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/corrected_l2_integer_high.jsonl",
+      "python evaluation/run_hf_same_image_resolution_counterfactual.py --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100-separated.jsonl --arm prompt_plus_corrected_l2_integer --pixel-budget low --output artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/prompt_plus_corrected_l2_integer_low.jsonl",
+      "python evaluation/run_hf_same_image_resolution_counterfactual.py --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100-separated.jsonl --arm prompt_plus_corrected_l2_integer --pixel-budget high --output artifacts/token_selector/2026-10-04-same-image-resolution-counterfactual/prompt_plus_corrected_l2_integer_high.jsonl",
+      "python evaluation/summarize_same_image_resolution_counterfactual.py"
+    ]
+  },
+  "interpretation_zh": "processor 分离门与四条真实 A6000 模型臂均已完成。主估计量 -0.07，95% CI [-0.20,+0.06]，结论 RESOLUTION_DEPENDENT_PROMPT_GAIN_NOT_CONFIRMED；低档 Prompt 净修正 +6，高档净修正 -1，方向与原 G>512 门控假设相反。该实验是机制反事实，不是时延、能耗或 FPGA 加速结果；正式 full2638 结论 PROMPT_GAIN_NOT_CONFIRMED_FULL2638 不变。"
+}

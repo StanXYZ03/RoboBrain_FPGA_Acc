@@ -1,0 +1,64 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-15",
+  "objective": "Test whether a low-resolution task-conditioned scout can propose one continuous rectangular ROI without consuming ground-truth geometry at inference time.",
+  "evidence_level": "revealed development grouped cross-validation; calibration and test splits remain sealed",
+  "dataset": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "manifest_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+    "unique_images": 192,
+    "task_records": 384,
+    "fold_group": "COCO image ID",
+    "folds": 5,
+    "seed": 20260915,
+    "calibration_access": false,
+    "test_access": false
+  },
+  "scout": {
+    "input": "original full image resized to long edge 256",
+    "completed_vision_blocks": 6,
+    "deepstack_layer_zero_based": 5,
+    "projection_dim": 8,
+    "projection_seed": 20260915,
+    "text_relevance": "maximum cosine similarity from each projected visual group to non-image prompt token embeddings",
+    "model_weights_frozen": true,
+    "generation_calls": 0
+  },
+  "candidates": {
+    "cosine_fixed_box": {
+      "heatmap": "3x3 mean-smoothed text-relevance map",
+      "center": "maximum heatmap cell center",
+      "box_width_1000": 600,
+      "box_height_1000": 600
+    },
+    "ridge_heatmap_scale": {
+      "heatmap_head": "shared weighted ridge regression over per-cell projected features, text relevance, coordinates and task indicator",
+      "heatmap_target": "anisotropic Gaussian centered on the labeled box with sigma equal to max(half box extent, one cell extent)",
+      "scale_head": "ridge regression on pooled scout features predicts log box width and height",
+      "ridge_alpha": 10.0,
+      "heatmap_smoothing": "3x3 mean",
+      "center": "maximum predicted heatmap cell center",
+      "scale_multiplier": 2.0,
+      "predicted_extent_clip_1000": [200, 1000]
+    }
+  },
+  "roi_encoding": {
+    "long_edge": 384,
+    "allow_upscale": true,
+    "patch_size": 16,
+    "spatial_merge_size": 2,
+    "processor_min_pixels": 1024
+  },
+  "gate": {
+    "applied_per_task": true,
+    "target_center_recall_min": 0.95,
+    "mean_target_box_coverage_min": 0.85,
+    "mean_final_roi_visual_token_ratio_max": 0.50,
+    "mean_cumulative_vision_macs_ratio_max": 0.60,
+    "candidate_pass_requires_all_tasks_and_all_thresholds": true
+  },
+  "post_gate_action": {
+    "pass": "Run one out-of-fold predicted-ROI BF16 VLM quality evaluation against Dense.",
+    "fail": "Stop the current rectangular ROI controller branch without accessing calibration or test data. Do not tune scout depth, projection, ridge alpha, box size, scale multiplier or thresholds on this development set."
+  }
+}

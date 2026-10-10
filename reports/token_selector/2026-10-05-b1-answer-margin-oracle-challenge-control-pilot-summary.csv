@@ -1,0 +1,25 @@
+sample_id,task,source,source_dataset,cell,stratum,ground_truth,dense_answer,dense_correct,control_answer,control_correct,oracle_answer,oracle_correct,oracle_parse_ok,oracle_margin,transition
+229,Count,ADE20K,ADE20K Validation Set,ADE20K x Count,challenge,A,A,True,D,False,A,True,True,4.25,W->R
+290,Count,ADE20K,ADE20K Validation Set,ADE20K x Count,challenge,E,E,True,B,False,E,True,True,0.375,W->R
+305,Count,ADE20K,ADE20K Validation Set,ADE20K x Count,control,C,C,True,C,True,C,True,True,2.25,unchanged_correct
+334,Count,ADE20K,ADE20K Validation Set,ADE20K x Count,control,C,C,True,C,True,E,False,True,1.25,R->W
+425,Relation,ADE20K,ADE20K Validation Set,ADE20K x Relation,challenge,A,A,True,B,False,B,False,True,0.25,unchanged_wrong
+519,Relation,ADE20K,ADE20K Validation Set,ADE20K x Relation,challenge,A,A,True,B,False,A,True,True,2.5,W->R
+439,Relation,ADE20K,ADE20K Validation Set,ADE20K x Relation,control,A,A,True,A,True,A,True,True,2.125,unchanged_correct
+471,Relation,ADE20K,ADE20K Validation Set,ADE20K x Relation,control,A,A,True,A,True,B,False,True,0.5,R->W
+748,Count,COCO,COCO 2017 Validation Set,COCO x Count,challenge,B,B,True,D,False,B,True,True,0.5,W->R
+969,Count,COCO,COCO 2017 Validation Set,COCO x Count,challenge,C,C,True,B,False,B,False,True,7.5,unchanged_wrong
+636,Count,COCO,COCO 2017 Validation Set,COCO x Count,control,B,B,True,B,True,B,True,True,5.875,unchanged_correct
+719,Count,COCO,COCO 2017 Validation Set,COCO x Count,control,C,C,True,C,True,C,True,True,6.5,unchanged_correct
+1221,Relation,COCO,COCO 2017 Validation Set,COCO x Relation,challenge,A,A,True,B,False,A,True,True,0.25,W->R
+1406,Relation,COCO,COCO 2017 Validation Set,COCO x Relation,challenge,B,B,True,A,False,B,True,True,3.5,W->R
+1234,Relation,COCO,COCO 2017 Validation Set,COCO x Relation,control,B,B,True,B,True,B,True,True,5.625,unchanged_correct
+1328,Relation,COCO,COCO 2017 Validation Set,COCO x Relation,control,A,A,True,A,True,A,True,True,3.75,unchanged_correct
+1701,Depth,Omni3D,Omni3D_SUNRGBD,Omni3D x Depth,challenge,A,A,True,B,False,A,True,True,3.625,W->R
+1814,Depth,Omni3D,Omni3D_SUNRGBD,Omni3D x Depth,challenge,B,B,True,A,False,B,True,True,5.375,W->R
+1908,Depth,Omni3D,Omni3D_nuScenes,Omni3D x Depth,control,A,A,True,A,True,A,True,True,6.5,unchanged_correct
+1932,Depth,Omni3D,Omni3D_nuScenes,Omni3D x Depth,control,A,A,True,A,True,A,True,True,3.5,unchanged_correct
+2108,Distance,Omni3D,Omni3D_Hypersim,Omni3D x Distance,challenge,A,A,True,B,False,A,True,True,3.25,W->R
+2178,Distance,Omni3D,Omni3D_Hypersim,Omni3D x Distance,challenge,B,B,True,A,False,B,True,True,4.75,W->R
+2518,Distance,Omni3D,Omni3D_nuScenes,Omni3D x Distance,control,A,A,True,A,True,B,False,True,3.625,R->W
+2566,Distance,Omni3D,Omni3D_nuScenes,Omni3D x Distance,control,A,A,True,A,True,A,True,True,4.5,unchanged_correct

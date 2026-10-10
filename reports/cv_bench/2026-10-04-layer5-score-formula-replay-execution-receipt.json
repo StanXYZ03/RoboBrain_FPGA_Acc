@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "executed_at": "2026-10-04T17:05:50+08:00",
+  "status": "EXECUTED_AND_REPORTED",
+  "preregistration": {
+    "path": "configs/2026-10-04-layer5-score-formula-replay.preregistered.json",
+    "sha256": "4cfcb6f62ec6c4e6eee7375e958b491cfb0f16e9c5216ae0960feb0b3baee5f4"
+  },
+  "raw_replay": {
+    "path": "artifacts/token_selector/2026-10-04-layer5-score-formula-replay/layer5_score_formula_replay_screening100.jsonl",
+    "sha256": "6a8b13dada86d52fa3e1c709c8e9c337fcf802efdd8dbd9465384c06eea81aca",
+    "records": 100
+  },
+  "reports": {
+    "json": {
+      "path": "reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.json",
+      "sha256": "26c6303b26ef039712ee5af9e2650260de957266c7440823759eefc9d4a45784"
+    },
+    "csv": {
+      "path": "reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.csv",
+      "sha256": "42f9428b9d0425f03540be9891f18ff32f1bfa66a7f2e6e0d89a444bb26b3f53"
+    },
+    "markdown": {
+      "path": "reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.md",
+      "sha256": "93709f62590cb0b911ea3b48653627ce591f14f73cdce6434cc3c7cd41d5c2b1"
+    }
+  },
+  "decision": "L2_AGGREGATION_DIFFERENCE_FULLY_EXPLAINS_INDEX_SET",
+  "candidate_reference_exact_matches": 100,
+  "expected_samples": 100,
+  "control_recomputed_frozen_exact_matches": 100,
+  "candidate_reference_jaccard_mean": 1.0,
+  "candidate_reference_jaccard_min": 1.0,
+  "control_reference_jaccard_mean": 0.6033505368853482,
+  "control_reference_jaccard_min": 0.3333333333333333,
+  "scope": "Fixed screening100 causal diagnostic; vision-only, no LLM decode; not a full-2638 result and not an FPGA-deployable configuration."
+}

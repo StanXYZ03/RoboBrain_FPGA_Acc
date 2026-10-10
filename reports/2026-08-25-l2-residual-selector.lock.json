@@ -1,0 +1,56 @@
+{
+  "format": "l2-residual-selector-freeze-v1",
+  "date": "2026-08-25",
+  "status": "FROZEN_BEFORE_NEW_BLIND_MANIFEST",
+  "configuration": {
+    "selector": "l2_residual_quota",
+    "variant": "lambda_2",
+    "retention": 0.875,
+    "prune_after_layer": 5,
+    "region_grid": 3,
+    "feature_channels": [
+      "residual",
+      "energy",
+      "text_relevance",
+      "x",
+      "y"
+    ],
+    "score": "normalize_per_image(exact_group_l2) + residual_mlp(features)",
+    "residual_head": "Linear(5,16)-ReLU-Linear(16,1)",
+    "parameters": 113,
+    "macs_per_group": 96,
+    "training_correction_penalty": 2.0
+  },
+  "selection_rule": "first increasingly conservative candidate that passes the preregistered development accuracy gate; lambda_2 passed, so lambda_4 was not tested on model outputs",
+  "development_manifest": "datasets/dac_spatial_selector_calibration.jsonl",
+  "development_manifest_sha256": "a1aa8c241c085dff9ec9e02762cfcd5b4993d57e4179d63c6d8c8efeb9b726e3",
+  "parent_manifest": "datasets/dac_spatial_eval_expanded.jsonl",
+  "parent_manifest_sha256": "b00b5b335c693855a312a1c5b45419201599f9bf4392e65ce70a0bcc199da24c",
+  "artifact": "evaluation/results/l2_residual_selector_development.pt",
+  "artifact_sha256": "d9e4cc4e5f603fc8d5150db614ce143a043b05b3e6ae9f01d8ec6d48d7a9267f",
+  "training_summary": "evaluation/results/l2_residual_selector_development_summary.json",
+  "training_summary_sha256": "8f7805db5723872e0df3dfe09aa461d0d4bc60be4c19554a38c3ec9e92593693",
+  "development_prediction": "evaluation/results/l2_residual_selector_calibration/l2res_lambda_2_r0875.jsonl",
+  "development_prediction_sha256": "013298dc9c3cb95af2f8e63baf96703a64c32797696e0c6cddebb9b1e0383f31",
+  "development_metrics": {
+    "full": {
+      "pck_0_1": 0.625,
+      "pck_0_2": 0.8125,
+      "iou_mean": 0.7908225002376345,
+      "acc_0_5": 0.84375
+    },
+    "l2_at_0_875": {
+      "pck_0_1": 0.625,
+      "pck_0_2": 0.8125,
+      "iou_mean": 0.7976135920848815,
+      "acc_0_5": 0.84375
+    },
+    "frozen_at_0_875": {
+      "pck_0_1": 0.625,
+      "pck_0_2": 0.875,
+      "iou_mean": 0.7922168921974323,
+      "acc_0_5": 0.875
+    }
+  },
+  "blind_policy": "create a new 96-image manifest excluding smoke, development, and prior residual-selector validation images; run full, L2@0.875, and frozen selector once; do not tune after results"
+}

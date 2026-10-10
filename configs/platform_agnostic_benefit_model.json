@@ -1,0 +1,25 @@
+{
+  "format": "platform-agnostic-benefit-model-config-v1",
+  "source": "BF16 development-oracle stage timings; sensitivity inputs, not target-platform measurements",
+  "retentions": [0.75],
+  "cut_points": ["patch_embedding", "vision_block_1", "vision_block_3", "deepstack_layer_5", "post_merger"],
+  "link_profiles": [
+    {"name": "ethernet_1g", "gbps": 1.0, "efficiency": 0.8, "fixed_one_way_ms": 0.0, "fixed_round_trip_ms": 0.0},
+    {"name": "ethernet_2p5g", "gbps": 2.5, "efficiency": 0.8, "fixed_one_way_ms": 0.0, "fixed_round_trip_ms": 0.0},
+    {"name": "ethernet_10g", "gbps": 10.0, "efficiency": 0.8, "fixed_one_way_ms": 0.0, "fixed_round_trip_ms": 0.0},
+    {"name": "pcie_like_40g", "gbps": 40.0, "efficiency": 0.8, "fixed_one_way_ms": 0.0, "fixed_round_trip_ms": 0.0}
+  ],
+  "accelerator_prefix_speedups": [1.0, 2.0, 4.0, 8.0],
+  "power_sensitivity_w": {
+    "host_compute": 30.0,
+    "accelerator_compute": 5.0,
+    "link_active_total": 3.0
+  },
+  "overlap": "none",
+  "notes": [
+    "Zero fixed latency is a serialization lower bound and is deliberately optimistic.",
+    "Power values are sensitivity assumptions, not A6000, ZCU102 or future-platform measurements.",
+    "Only measured visual-prefix block time is assigned to the accelerator; preprocessing and vision_other remain on the host.",
+    "Decode and postprocessing are excluded because these paths are unchanged by visual-token selection."
+  ]
+}

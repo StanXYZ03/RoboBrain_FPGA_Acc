@@ -1,0 +1,248 @@
+{
+  "date": "2026-08-25",
+  "status": "BLIND_VALIDATION_COMPLETE / SELECTOR_GATE_FAIL / PL_HOLD",
+  "manifest": "datasets/dac_spatial_selector_validation.jsonl",
+  "manifest_sha256": "a3bc8ddf79a2e18c67e0d2b7816151951f26f39f1ff4de1d0c5977a725a3337c",
+  "tuning_lock": "reports/2026-08-25-selector-tuning.lock.json",
+  "tuning_lock_sha256": "c20af5bfe806df93efe5ba49c2ca6f3f27f17b1acb9c92167aa56632edfc0c57",
+  "inference_count": 576,
+  "frozen_configuration": {
+    "retention": 0.75,
+    "prune_after_layer": 5,
+    "region_grid": 3,
+    "energy_weight": 0.0
+  },
+  "gate": {
+    "blind_manifest_integrity_pass": true,
+    "frozen_configuration_audit_pass": true,
+    "strict_dominance_vs_l2": false,
+    "statistically_resolved_gain_vs_l2": false,
+    "accuracy_gate_vs_full": false,
+    "pl_integration_pass": false,
+    "decision": "STOP_PURE_RESIDUAL_SELECTOR",
+    "reason": "开发集四指标同时改善未在盲集复现；相对 L2 仅 Mean IoU 点估计略升，PCK@0.1 与 Acc@0.5 各下降 1/96，所有成对 95% CI 均跨 0"
+  },
+  "delta_frozen_vs_l2": {
+    "pck_0_1": -0.01041666666666663,
+    "pck_0_2": 0.0,
+    "iou_mean": 0.004071883779991015,
+    "acc_0_5": -0.01041666666666663
+  },
+  "delta_frozen_vs_full": {
+    "pck_0_1": -0.04166666666666663,
+    "pck_0_2": -0.05208333333333337,
+    "iou_mean": -0.02665290757678329,
+    "acc_0_5": -0.01041666666666663
+  },
+  "paired_bootstrap_frozen_vs_l2": {
+    "pointing": {
+      "pck_0_1": {
+        "mean_delta": -0.010416666666666666,
+        "ci95_low": -0.09375,
+        "ci95_high": 0.07291666666666667,
+        "paired_samples": 96,
+        "iterations": 10000
+      },
+      "pck_0_2": {
+        "mean_delta": 0.0,
+        "ci95_low": -0.07291666666666667,
+        "ci95_high": 0.07291666666666667,
+        "paired_samples": 96,
+        "iterations": 10000
+      }
+    },
+    "grounding": {
+      "iou_mean": {
+        "mean_delta": 0.004071883779990962,
+        "ci95_low": -0.01874772065970465,
+        "ci95_high": 0.02670585030651695,
+        "paired_samples": 96,
+        "iterations": 10000
+      },
+      "acc_0_5": {
+        "mean_delta": -0.010416666666666666,
+        "ci95_low": -0.052083333333333336,
+        "ci95_high": 0.03125,
+        "paired_samples": 96,
+        "iterations": 10000
+      }
+    }
+  },
+  "paired_bootstrap_frozen_vs_full": {
+    "pointing": {
+      "pck_0_1": {
+        "mean_delta": -0.041666666666666664,
+        "ci95_low": -0.10416666666666667,
+        "ci95_high": 0.020833333333333332,
+        "paired_samples": 96,
+        "iterations": 10000
+      },
+      "pck_0_2": {
+        "mean_delta": -0.052083333333333336,
+        "ci95_low": -0.10416666666666667,
+        "ci95_high": 0.0,
+        "paired_samples": 96,
+        "iterations": 10000
+      }
+    },
+    "grounding": {
+      "iou_mean": {
+        "mean_delta": -0.026652907576783142,
+        "ci95_low": -0.04943390652470555,
+        "ci95_high": -0.004443994525605503,
+        "paired_samples": 96,
+        "iterations": 10000
+      },
+      "acc_0_5": {
+        "mean_delta": -0.010416666666666666,
+        "ci95_low": -0.03125,
+        "ci95_high": 0.0,
+        "paired_samples": 96,
+        "iterations": 10000
+      }
+    }
+  },
+  "results": [
+    {
+      "label": "full@1.000",
+      "path": "evaluation/results/selector_blind_validation/shallow_r1000.jsonl",
+      "sha256": "729b6763620ee5bd73daf41b8f1a1c7b83634319788d804b971fd36ef546ff60",
+      "prediction_count": 192,
+      "actual_token_retention": 1.0,
+      "encoder_compute_retention": 1.0,
+      "llm_prefill_compute_retention": 1.0,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.020263936042785646,
+        "llm_prefill_seconds": 0.03718451118469238,
+        "decoder_seconds": 0.3122653770446777,
+        "elapsed_seconds": 0.391340501504601
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1694.078,
+        "speedup": 1.0005501517639683,
+        "hz": 0.0005902915922407351
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 1.0271613430005953,
+            "latency_seconds_median": 1.1407168220030144,
+            "latency_seconds_p95": 1.247167105000699,
+            "iou_mean": 0.8062589075961374,
+            "acc_0_5": 0.875,
+            "center_error_1000_mean": 41.09293531833207
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.29245002810436443,
+            "latency_seconds_median": 0.29128317700815387,
+            "latency_seconds_p95": 0.3120194380026078,
+            "point_error_1000_mean": 81.91729244458294,
+            "point_nme_image_diag_mean": 0.057924272984006125,
+            "point_nme_bbox_diag_mean": 0.1325309455511904,
+            "pck_0_1": 0.59375,
+            "pck_0_2": 0.8333333333333334
+          }
+        }
+      }
+    },
+    {
+      "label": "L2+anchor@0.750",
+      "path": "evaluation/results/selector_blind_validation/shallow_r0750.jsonl",
+      "sha256": "41ff8443bf0976391d82becf51050ecc1c5ed52278bc7da88dca12ac232991fc",
+      "prediction_count": 192,
+      "actual_token_retention": 0.75,
+      "encoder_compute_retention": 0.7972514775959126,
+      "llm_prefill_compute_retention": 0.7471993580372466,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.015714816093444824,
+        "llm_prefill_seconds": 0.029312512397766114,
+        "decoder_seconds": 0.32544297504425046,
+        "elapsed_seconds": 0.39438899450033205
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1313.6757773872778,
+        "speedup": 1.2902803181551723,
+        "hz": 0.0007612228353550553
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5251416901871077,
+            "latency_seconds_median": 0.5286957365024136,
+            "latency_seconds_p95": 0.561041003005812,
+            "iou_mean": 0.7755341162393631,
+            "acc_0_5": 0.875,
+            "center_error_1000_mean": 45.12904068111937
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2881675489481192,
+            "latency_seconds_median": 0.28722446550091263,
+            "latency_seconds_p95": 0.29732057701039594,
+            "point_error_1000_mean": 86.76706347911924,
+            "point_nme_image_diag_mean": 0.061353578969728845,
+            "point_nme_bbox_diag_mean": 0.14333014707310168,
+            "pck_0_1": 0.5625,
+            "pck_0_2": 0.78125
+          }
+        }
+      }
+    },
+    {
+      "label": "frozen residual+quota@0.750",
+      "path": "evaluation/results/selector_blind_validation/residual_r0750.jsonl",
+      "sha256": "5bb832ba7fc0edfb8472bee1c046c5e167f124f8c3af832eaf0eac6bd9ea0d0a",
+      "prediction_count": 192,
+      "actual_token_retention": 0.75,
+      "encoder_compute_retention": 0.7972514775959126,
+      "llm_prefill_compute_retention": 0.7471993580372466,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.017108415603637697,
+        "llm_prefill_seconds": 0.029249456405639647,
+        "decoder_seconds": 0.31269451236724854,
+        "elapsed_seconds": 0.38449312999728136
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1313.6757773872778,
+        "speedup": 1.2902803181551723,
+        "hz": 0.0007612228353550553
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5303765875314639,
+            "latency_seconds_median": 0.5349678799902904,
+            "latency_seconds_p95": 0.5686267090059118,
+            "iou_mean": 0.7796060000193541,
+            "acc_0_5": 0.8645833333333334,
+            "center_error_1000_mean": 40.92026588037763
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2924233729063417,
+            "latency_seconds_median": 0.2918302715042955,
+            "latency_seconds_p95": 0.3270031400024891,
+            "point_error_1000_mean": 87.52583152145309,
+            "point_nme_image_diag_mean": 0.06189010899781075,
+            "point_nme_bbox_diag_mean": 0.1443518613248675,
+            "pck_0_1": 0.5520833333333334,
+            "pck_0_2": 0.78125
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,476 @@
+{
+  "report": "2026-10-09-spatialeval-vqa-schema-audit",
+  "title": "SpatialEval VQA test4635 schema / official scoring-semantics audit (CPU-only)",
+  "status": "SCHEMA_AUDIT_PASS",
+  "audit_scope": {
+    "cpu_only": true,
+    "network_used": false,
+    "gpu_used": false,
+    "model_loaded": false,
+    "inference_runs": 0,
+    "training_runs": 0,
+    "three_arm_predictions_seen": false,
+    "three_arm_scores_seen": false,
+    "writes_allowed": [
+      "reports/token_selector/2026-10-09-spatialeval-vqa-schema-audit.json",
+      "reports/token_selector/2026-10-09-spatialeval-vqa-schema-audit.md"
+    ],
+    "other_files_modified": false,
+    "per_record_prompt_or_answer_printed": false,
+    "aggregate_statistics_only": true
+  },
+  "unique_conclusion": "SCHEMA_AUDIT_PASS: the frozen SpatialEval VQA test4635 manifest and the official d82ba382 evaluator/inference semantics were re-verified CPU-only (SHA256, 4635 unique IDs, 2318+2317 parquet split, four tasks x question_id structure, three oracle fields, and the official per-task substring-containment scoring). The set may be frozen as an external confirmation set not used for Selector tuning. However, the official evaluation.py defines only per-task Acc = correct/line_count (no total-score formula in the artifact), compares str(oracle_answer).lower() as a substring of the parsed answer rather than by equality, evaluates only files named m-*_w_reason.jsonl, and has no spatialreal handler (an unassigned/stale model_answer is reused), so the task subset, score aggregation, and parser port must be explicitly frozen before any official confirmation claim. The existing evaluation/spatialeval_metric.py is a draft exact-match metric and must never be called an official reproduction.",
+  "inputs": [
+    {
+      "role": "manifest",
+      "path": "datasets/external/2026-10-09-spatialeval-vqa-test4635.reference.jsonl",
+      "expected_sha256": "03649b9c2bae7e43cc72555b744396eb8205785e7df80c5a73a6ae1e455f4050",
+      "observed_sha256": "03649b9c2bae7e43cc72555b744396eb8205785e7df80c5a73a6ae1e455f4050",
+      "sha256_match": true,
+      "bytes": 5282303
+    },
+    {
+      "role": "manifest_summary",
+      "path": "datasets/external/2026-10-09-spatialeval-vqa-test4635.reference.summary.json",
+      "sha256": null,
+      "note": "Read for cross-check; summary declares row_count=4635, unique_id_count=4635, split=test, status=MANIFEST_BUILT_OFFLINE, and two source parquet row counts 2318+2317."
+    },
+    {
+      "role": "official_evaluator",
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/evaluation.py",
+      "expected_sha256": "88d2a1b35abe02d9c517a513e8b1a5f442b61837b6cd742b1ec1fa23c6ccd952",
+      "observed_sha256": "88d2a1b35abe02d9c517a513e8b1a5f442b61837b6cd742b1ec1fa23c6ccd952",
+      "sha256_match": true
+    },
+    {
+      "role": "official_inference",
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_vlm.py",
+      "expected_sha256": "0a69b4cd14707001c6975ab9ae9113a90df2ce2cd73119bceabe99cfddb39337",
+      "observed_sha256": "0a69b4cd14707001c6975ab9ae9113a90df2ce2cd73119bceabe99cfddb39337",
+      "sha256_match": true
+    },
+    {
+      "role": "official_inference_configs",
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_configs.py",
+      "expected_sha256": "79d9c59a8a45be78e18206bde8f6fc13c35827a208ffee99155b29efbbe44972",
+      "observed_sha256": "79d9c59a8a45be78e18206bde8f6fc13c35827a208ffee99155b29efbbe44972",
+      "sha256_match": true
+    }
+  ],
+  "official_provenance": {
+    "commit": "d82ba382805265f205693cb83a30c4866ea6c35b",
+    "artifacts_dir": "artifacts/provenance/spatialeval-official-d82ba382/"
+  },
+  "manifest_verification": {
+    "row_count": 4635,
+    "line_count": 4635,
+    "unique_sample_id_count": 4635,
+    "duplicate_sample_id_count": 0,
+    "unique_record_sha256_count": 4635,
+    "unique_text_count": 3325,
+    "distinct_image_sha256_count": 1594,
+    "summary_row_count_matches": true,
+    "summary_unique_id_count_matches": true,
+    "parquet_split": [
+      {
+        "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00000-of-00002.parquet",
+        "sha256": "624aad413e7eb5dbd4e234ac2a36945b9be2280a9d1c8972c1f2fc886b27b897",
+        "row_count": 2318
+      },
+      {
+        "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00001-of-00002.parquet",
+        "sha256": "b9301e70fd79ec1f828ad04100bb6b546a76bcdf15bae71b9aded77b98d27add",
+        "row_count": 2317
+      }
+    ],
+    "parquet_split_total": 4635,
+    "parquet_split_matches_summary": true,
+    "source_parquet_row_index_unique": true,
+    "record_sha256_recompute_match": 4635,
+    "record_sha256_recompute_total": 4635,
+    "record_sha256_scheme": "sha256(json.dumps(record_without_record_sha256, sort_keys=True, ensure_ascii=False, separators=(',',':')))",
+    "frozen_id_set_sha256": "4ea00a8828375aa3609533b139ece88e5fcff2da91a794f1481a04abb29ca26f",
+    "frozen_id_set_sha256_scheme": "sha256 of '\\n'.join(sorted(sample_id))",
+    "frozen_record_sha256_chain_sha256": "68ab8b6e994d4d21aef256852ec082e74e6bd0fb1e89b1f071438c384da782d8",
+    "frozen_record_sha256_chain_scheme": "sha256 of concatenated record_sha256 values in file order"
+  },
+  "id_structure": {
+    "sample_id_fields": ["task", "mode", "source_index_or_sample_key", "question_id"],
+    "sample_id_template": "<task>.vqa.<int>[|sa_<int>].<question_id>",
+    "dot_part_count_distribution": { "4": 4635 },
+    "mode_component_values": { "vqa": 4635 },
+    "official_task_extraction": "task = id.split('.')[0]",
+    "official_question_id_extraction": "question_id = int(id.split('.')[-1])",
+    "index_component_templates": {
+      "<int>": 4500,
+      "sa_<int>": 135
+    }
+  },
+  "task_question_id": {
+    "task_counts": {
+      "spatialmap": 1500,
+      "mazenav": 1500,
+      "spatialgrid": 1500,
+      "spatialreal": 135
+    },
+    "task_count": 4,
+    "question_id_counts": {
+      "0": 1635,
+      "1": 1500,
+      "2": 1500
+    },
+    "crosstab_task_x_question_id": {
+      "spatialmap": { "0": 500, "1": 500, "2": 500 },
+      "mazenav": { "0": 500, "1": 500, "2": 500 },
+      "spatialgrid": { "0": 500, "1": 500, "2": 500 },
+      "spatialreal": { "0": 135 }
+    },
+    "question_type_semantics_from_official_evaluator": {
+      "spatialmap": {
+        "0": "direction multiple-choice; oracle_answer is a compass direction",
+        "1": "object-name/person-location multiple-choice; oracle_answer is a free-text entity",
+        "2": "count from options; oracle_answer is an integer string"
+      },
+      "mazenav": {
+        "0": "right-turn count; oracle_answer is an integer string",
+        "1": "total-turn count; oracle_answer is an integer string",
+        "2": "binary Yes/No; option letter maps A=Yes (333), B=No (167); official evaluator treats qid==2 as binary"
+      },
+      "spatialgrid": {
+        "0": "block-count; oracle_answer is an integer string",
+        "1": "animal identification; oracle_answer is one of 5 animals",
+        "2": "animal identification; oracle_answer is one of 5 animals"
+      },
+      "spatialreal": {
+        "0": "real-image spatial QA; oracle_answer is free text or count-like; NOT handled by official evaluation.py"
+      }
+    }
+  },
+  "oracle_fields": {
+    "oracle_answer": {
+      "type_distribution": { "str": 4635 },
+      "null_count": 0,
+      "empty_string_count": 0,
+      "strip_clean_rate": 1.0,
+      "all_lowercase_rate": 0.6541531823085222,
+      "ends_with_period_count": 3,
+      "distinct_value_count": 308,
+      "value_class_counts": { "integer_string": 2015, "free_text": 2620 },
+      "value_class_by_task": {
+        "spatialmap": { "integer_string": 500, "free_text": 1000 },
+        "mazenav": { "integer_string": 1000, "free_text": 500 },
+        "spatialgrid": { "integer_string": 500, "free_text": 1000 },
+        "spatialreal": { "integer_string": 15, "free_text": 120 }
+      },
+      "distinct_value_count_by_task": {
+        "spatialmap": 220,
+        "mazenav": 8,
+        "spatialgrid": 16,
+        "spatialreal": 79
+      },
+      "token_length_distribution": {
+        "1": 4078,
+        "2": 367,
+        "3": 138,
+        "4": 20,
+        "5": 10,
+        "6": 11,
+        "7": 3,
+        "8": 2,
+        "9": 2,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1
+      }
+    },
+    "oracle_option": {
+      "type_distribution": { "str": 4635 },
+      "null_count": 0,
+      "distinct_values": ["A", "B", "C", "D"],
+      "matches_^[A-D]$": 4635,
+      "format_ok_rate": 1.0,
+      "distribution_overall": { "A": 1326, "B": 1235, "C": 1046, "D": 1028 },
+      "distribution_by_task_qid": {
+        "spatialmap": { "0": { "A": 130, "B": 128, "C": 115, "D": 127 }, "1": { "A": 125, "B": 123, "C": 133, "D": 119 }, "2": { "A": 121, "B": 127, "C": 121, "D": 131 } },
+        "mazenav": { "0": { "A": 114, "B": 136, "C": 136, "D": 114 }, "1": { "A": 109, "B": 133, "C": 124, "D": 134 }, "2": { "A": 333, "B": 167 } },
+        "spatialgrid": { "0": { "A": 112, "B": 141, "C": 129, "D": 118 }, "1": { "A": 137, "B": 121, "C": 118, "D": 124 }, "2": { "A": 112, "B": 130, "C": 123, "D": 135 } },
+        "spatialreal": { "0": { "A": 33, "B": 29, "C": 47, "D": 26 } }
+      }
+    },
+    "oracle_full_answer": {
+      "type_distribution": { "str": 4635 },
+      "null_count": 0,
+      "empty_string_count": 0,
+      "matches_^[A-D]\\._plus_text": 4635,
+      "exact_formula_full_equals_option_dot_space_answer": 4635,
+      "exact_formula_rate": 1.0,
+      "canonical_line_is_exact_prompt_line": 3466,
+      "canonical_line_is_prefix_of_prompt_option_line": 1169,
+      "not_found_as_option_line": 0
+    },
+    "relations": {
+      "oracle_full_answer_equals_option_plus_dot_space_plus_answer": true,
+      "four_option_items": 4135,
+      "four_option_items_option_text_equals_oracle_answer": 3133,
+      "four_option_items_option_text_contains_oracle_answer_as_substring": 1002,
+      "four_option_items_option_text_equals_rate": 0.7576783555018138,
+      "single_option_items": 500,
+      "single_option_items_task_question_id": "mazenav.2",
+      "oracle_answer_appears_somewhere_in_text": 4635
+    },
+    "official_comparison_field": "oracle_answer (NOT oracle_option, NOT oracle_full_answer)",
+    "official_normalization": "lowercase via str(oracle_answer).lower(); no punctuation stripping on the reference side"
+  },
+  "text": {
+    "type_distribution": { "str": 4635 },
+    "contains_available_options_header": 4635,
+    "ends_with_question_mark": 0,
+    "char_length": {
+      "min": 139,
+      "mean": 566.98,
+      "median": 430,
+      "p90": 1071,
+      "p99": 1071,
+      "max": 1071
+    },
+    "word_length": {
+      "min": 26,
+      "mean": 97.01,
+      "median": 71,
+      "max": 192
+    },
+    "char_length_by_task": {
+      "spatialmap": { "min": 287, "median": 342, "max": 386 },
+      "mazenav": { "min": 788, "median": 1071, "max": 1071 },
+      "spatialgrid": { "min": 346, "median": 431, "max": 462 },
+      "spatialreal": { "min": 139, "median": 180, "max": 401 }
+    },
+    "option_line_count_distribution": {
+      "4": 4135,
+      "1": 500
+    },
+    "four_option_letter_order_A_B_C_D": 4135,
+    "option_format": {
+      "four_option_template": "\\nA. <text>\\nB. <text>\\nC. <text>\\nD. <text>",
+      "binary_template": "one option-letter line plus binary Yes/No mapping A=Yes, B=No",
+      "single_option_items": "mazenav question_id 2 only"
+    },
+    "tail_char_distribution": {
+      ".": 4500,
+      "\\n": 135
+    },
+    "text_is_frozen_verbatim_source": true
+  },
+  "image": {
+    "image_storage": { "parquet_embedded_or_local": 4635 },
+    "image_bytes_in_manifest": false,
+    "width": { "min": 512, "median": 1168, "max": 3757 },
+    "height": { "min": 512, "median": 1168, "max": 2463 },
+    "distinct_width_height_pairs": 67,
+    "orientation": { "square": 4434, "landscape": 180, "portrait": 21 },
+    "top_dimensions": {
+      "1168x1168": 1500,
+      "512x512": 1500,
+      "1281x1281": 1434,
+      "2250x1500": 53,
+      "1500x2250": 10,
+      "1310x1281": 9,
+      "1288x1281": 9,
+      "2000x1500": 7,
+      "1500x2000": 5
+    },
+    "dimensions_by_task": {
+      "mazenav": { "distinct": 1, "dominant": "1168x1168" },
+      "spatialgrid": { "distinct": 1, "dominant": "512x512" },
+      "spatialmap": { "distinct": 19, "dominant": "1281x1281" },
+      "spatialreal": { "distinct": 46, "dominant": "2250x1500" }
+    },
+    "distinct_image_sha256_count": 1594
+  },
+  "official_evaluator_semantics": {
+    "artifact": "artifacts/provenance/spatialeval-official-d82ba382/evaluation.py",
+    "sha256": "88d2a1b35abe02d9c517a513e8b1a5f442b61837b6cd742b1ec1fa23c6ccd952",
+    "entry_point": "evaluate_model_accuracy(model_output_path, eval_summary_path, model_name)",
+    "task_extraction": "task = data['id'].split('.')[0]",
+    "question_id_extraction": "question_id = int(data['id'].split('.')[-1])",
+    "dispatched_fields": {
+      "model_answer_source": "data['answer'] only (parsed by task/question_id heuristics)",
+      "reference_source": "data['oracle_answer']",
+      "unused_for_scoring": ["oracle_option", "oracle_full_answer"]
+    },
+    "comparison_operator": "eval_result = int(str(data['oracle_answer']).lower() in str(model_answer).lower())",
+    "comparison_is_substring_containment_not_equality": true,
+    "comparison_direction": "oracle_answer is the needle, parsed model answer is the haystack",
+    "per_task_accuracy_formula": "correct_answers / line_count",
+    "line_count_semantics": "every JSONL output line increments line_count before parsing; ValueError-skipped records still count in the denominator",
+    "total_score_formula_in_artifact": null,
+    "total_score_notes": "evaluation.py only emits a per-task CSV of accuracy per model; it contains no cross-task total. Any 'overall' number must be defined by the caller before pre-registration and cannot be described as the official total.",
+    "filename_contract": {
+      "prefix": "m-",
+      "suffix": "_w_reason.jsonl",
+      "extract_model_name": "filename[len('m-'):-len('_w_reason.jsonl')]",
+      "consequence": "outputs not named m-*_w_reason.jsonl are silently skipped by main()"
+    },
+    "task_handlers_present": ["spatialmap", "mazenav", "spatialgrid"],
+    "task_handlers_missing": ["spatialreal"],
+    "spatialreal_bug": {
+      "description": "For task == 'spatialreal' no branch assigns model_answer, so the local variable is unbound on the first row (NameError) or silently reuses the previous row's model_answer on later rows, producing stale-answer scoring.",
+      "severity": "high",
+      "mitigation": "freeze either a task subset excluding spatialreal, or a corrected/ported handler with focused tests, and record it in pre-registration"
+    },
+    "model_specific_parser_branches": {
+      "spatialmap": ["question_id 0: option/direction regex", "question_id 1: entity-name heuristics + brand-specific claude/geminiv/gpt4o patterns", "question_id 2: numeric extraction"],
+      "mazenav": ["question_id 2: binary yes/no", "else: numeric turn extraction"],
+      "spatialgrid": ["question_id >= 1: first animal mention", "question_id 0: numeric block count"]
+    },
+    "known_substring_inflation": {
+      "numeric_oracle_answers": 14,
+      "numeric_pairs_where_one_is_substring_of_another": 7,
+      "all_oracle_answer_ordered_proper_substring_pairs": 73,
+      "example_pattern": "oracle_answer '0' contained in a parsed answer like '10' would score correct"
+    },
+    "test_prompt_leakage": "inference output stores the full 'prompt'; the evaluator only parses 'answer', but any frozen artifact must not leak reference labels into parsing"
+  },
+  "official_inference_semantics": {
+    "artifact": "artifacts/provenance/spatialeval-official-d82ba382/inference_vlm.py",
+    "sha256": "0a69b4cd14707001c6975ab9ae9113a90df2ce2cd73119bceabe99cfddb39337",
+    "config_artifact": "artifacts/provenance/spatialeval-official-d82ba382/inference_configs.py",
+    "config_sha256": "79d9c59a8a45be78e18206bde8f6fc13c35827a208ffee99155b29efbbe44972",
+    "w_reason": {
+      "flag": "--w_reason",
+      "effect": "appends 'First, provide a concise answer in one sentence. Then, elaborate on the reasoning behind your answer in a detailed, step-by-step explanation.'",
+      "bunny_vqa_template": "USER: <image>\\n{text}\\n{same reason sentence} ASSISTANT:",
+      "other_model_template": "{item['text']}\\n{same reason sentence}",
+      "evaluator_requirement": "official evaluation.py only scores m-*_w_reason.jsonl, so w_reason=True is the path coupled to the shipped parser"
+    },
+    "completion_flag": "--completion appends 'Answer:' instead; not the path recognized by the shipped evaluator filename contract",
+    "reason_parser_coupling": "model-specific regexes for claude/geminiv/gpt4o extract short answers from reasoned outputs",
+    "sampling_and_generation": {
+      "cli_defaults_in_config": {
+        "temperature": 0.2,
+        "top_p": 0.9,
+        "repetition_penalty": 1.0,
+        "max_new_tokens": 1024
+      },
+      "per_model_actual_calls": {
+        "bunny_hf": "generate(max_new_tokens=args.max_new_tokens, use_cache=True) with no explicit do_sample/temperature/top_p -> greedy decoding; CLI temperature/top_p ignored",
+        "qwen_vl": "model.chat(...) with no explicit generation kwargs -> model default sampling",
+        "cogvlm": "generate(max_length=2048, do_sample=False) -> greedy; max_new_tokens ignored",
+        "instructblip": "generate(do_sample=False, num_beams=5, max_new_tokens, top_p=0.9, repetition_penalty=1.5, length_penalty=1.0, temperature=1)",
+        "llava_or_merged_bunny": "model.generate(prompt, image, args.temperature) -> sampling depends on wrapper"
+      },
+      "conclusion": "there is no single uniform official sampling config across model backends; generation parameters must be frozen per chosen backend"
+    },
+    "question_grouping": "inference groups dataset items by question_id and optionally caps with --first_k per question type",
+    "output_record_fields": ["id", "answer", "oracle_answer", "oracle_option", "oracle_full_answer", "prompt", "image"],
+    "device_default": "cuda (device arg); this audit used none"
+  },
+  "existing_metric_disclaimer": {
+    "path": "evaluation/spatialeval_metric.py",
+    "internal_name": "draft_answer_only_exact_match_not_official_parser",
+    "classification": "DRAFT_NOT_PREREGISTERED_NOT_OFFICIAL",
+    "reason": "It performs answer-only exact match after a custom normalization; it does not implement the official model-specific heuristic parsers, the w_reason extraction branches, or the official substring-containment comparison.",
+    "rule": "It must never be cited, labeled, or reported as an official SpatialEval reproduction or as the official evaluator."
+  },
+  "label_materialization_and_blind_test": {
+    "labels_materialized_programmatically": true,
+    "materialization": "oracle_answer/oracle_option/oracle_full_answer were materialized from the official parquet by the offline manifest builder and are frozen in the manifest; this audit inspected them only in aggregate.",
+    "labels_observed_in_this_audit": true,
+    "three_arm_predictions_observed": false,
+    "three_arm_scores_observed": false,
+    "gpu_runs": 0,
+    "model_loaded": false,
+    "interpretation": "Because labels have been materialized and inspected, this is NOT a label-blind test. Because no three-arm predictions or scores have been produced or observed, it remains an external confirmation set not used for Selector tuning; it must not be reused for algorithm design or hyperparameter selection.",
+    "draft_config_note": "configs/2026-10-09-spatialeval-vqa-external-confirmation.draft.json still records labels_observed=false; after this audit that field should be updated to true in the pre-registered successor (the draft itself must not be edited by this audit)."
+  },
+  "preregistration_frozen_fields": {
+    "note": "Fields that MUST be pinned before the draft can become PREREGISTERED_NOT_EXECUTED. This audit freezes no config and runs nothing.",
+    "dataset_identity": [
+      "HF id MilaWang/SpatialEval",
+      "config vqa",
+      "split test",
+      "row_count 4635",
+      "license_status (still NOT_EXPLICITLY_STATED; license must be resolved or explicitly accepted before distribution)"
+    ],
+    "source_provenance": [
+      "source_parquet_paths and sha256 (624aad... row_count 2318; b9301e... row_count 2317)",
+      "parquet byte sizes",
+      "manifest path, bytes 5282303, sha256 03649b9c..., line_count 4635"
+    ],
+    "manifest_schema_and_integrity": [
+      "exact field schema",
+      "unique sample_id set hash 4ea00a88...",
+      "record_sha256 scheme and chain hash 68ab8b6e...",
+      "unique_id_count 4635",
+      "text / oracle_* exact frozen values"
+    ],
+    "official_code": [
+      "evaluation.py sha256 88d2a1b3...",
+      "inference_vlm.py sha256 0a69b4cd...",
+      "inference_configs.py sha256 79d9c59a...",
+      "official commit d82ba382805265f205693cb83a30c4866ea6c35b",
+      "explicit declaration that evaluation/spatialeval_metric.py is NOT the official parser"
+    ],
+    "task_and_score_semantics": [
+      "task set and question_id mapping (per-task x qid counts as audited)",
+      "decision on spatialreal: exclude, or pin corrected handler + tests",
+      "reference field = oracle_answer",
+      "comparison = substring containment (documented as official) OR a separately named corrected metric",
+      "per-task Acc = correct/line_count",
+      "explicit cross-task aggregation rule (none exists in evaluation.py; must be defined and named)",
+      "evaluator input filename contract m-*_w_reason.jsonl"
+    ],
+    "arms_and_runtime": [
+      "three arms: dense_edge576 / corrected_integer_l2_b1_k96 / conservative_l2_guarded_rerank_v2_b1_k96",
+      "mechanism ids and selector checkpoint/config hashes",
+      "K and G policy, retention, prune_after_layer/style parameters",
+      "model identity (RoboBrain2.5-4B path, byte counts, model.safetensors SHA256, provenance file SHA)",
+      "processor pixel bounds min_pixels=65536 / max_pixels=589824 and per-sample image_grid_thw assertions",
+      "prompt bytes including w_reason/completion suffix",
+      "per-backend generation params (do_sample, temperature, top_p, repetition_penalty, num_beams, max_new_tokens)",
+      "how parquet-embedded image bytes are materialized and hash-pinned (manifest stores only image_sha256/width/height)"
+    ],
+    "statistics_and_decision_rules": [
+      "bootstrap seed and repetition count",
+      "stratification key (e.g. task::question_id)",
+      "decision rules v2/dense >= 0.9 and v2-l2 95% CI lower >= 0.0",
+      "resume/dedup key sample_id, append-only outputs, output and eval_summary paths",
+      "no-tuning declaration and labels_observed=true"
+    ]
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "info",
+      "summary": "All four fixed input SHA256 values match; manifest has 4635 lines, 4635 unique sample_id, and the summary's 2318+2317 parquet split with both parquet SHA256 values; all 4635 record_sha256 recompute under the compact sorted-key JSON scheme."
+    },
+    {
+      "id": "F2",
+      "severity": "info",
+      "summary": "Four tasks: spatialmap 1500, mazenav 1500, spatialgrid 1500, spatialreal 135. question_id {0:1635, 1:1500, 2:1500}; mazenav qid2 is binary (A=Yes 333, B=No 167) with a single option-letter line, all other task/qid groups have 4 ordered A-D options."
+    },
+    {
+      "id": "F3",
+      "severity": "high",
+      "summary": "Official evaluation.py compares str(oracle_answer).lower() by substring containment in the parsed answer (not equality), scores per-task Acc = correct/line_count with no total-score formula, and only reads m-*_w_reason.jsonl inputs. No spatialreal handler exists, so spatialreal rows silently reuse the previous row's model_answer (or raise NameError on the first row)."
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "summary": "oracle_full_answer is exactly '<option>. <answer>' for all 4635 rows, but it is only an exact prompt line for 3466 rows; for 1169 rows it is a prefix of the actual option line (the option text contains the answer as a substring). Official scoring ignores oracle_option/oracle_full_answer and uses oracle_answer only."
+    },
+    {
+      "id": "F5",
+      "severity": "medium",
+      "summary": "Existing evaluation/spatialeval_metric.py is a draft exact-match metric, not the official parser, and must never be called an official reproduction; label fields were programmatically materialized and aggregated here with no three-arm predictions/scores observed, making this an external confirmation set not used for Selector tuning but not a label-blind test."
+    }
+  ],
+  "limitations": [
+    "Image bytes are not stored in the manifest (image_storage=parquet_embedded_or_local); only image_sha256/width/height were audited. Any image-based re-materialization must re-pin the parquet SHA256.",
+    "Only the three provenance artifacts were read; the official repository's utils/format_filename, dataset loader, and any external overall-score aggregation were not available and could not be audited.",
+    "The spatialreal handler gap is a source-reading finding, not an executed failure, because no inference was run.",
+    "The license status remains NOT_EXPLICITLY_STATED; this audit does not resolve licensing or distribution rights.",
+    "No model, GPU, network, or inference was used; this report only validates schema and official scoring semantics."
+  ]
+}

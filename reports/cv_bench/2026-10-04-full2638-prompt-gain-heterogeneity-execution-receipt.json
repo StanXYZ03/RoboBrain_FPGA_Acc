@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "executed_at": "2026-10-04T18:41:03.597596+08:00",
+  "status": "EXECUTED_AND_REPORTED",
+  "objective": "Post-hoc, CPU-only, read-only diagnostic explaining the frozen formal result PROMPT_GAIN_NOT_CONFIRMED_FULL2638 without changing the experiment or inventing a new primary metric.",
+  "formal_outcome": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638",
+  "formal_conclusion_unchanged": true,
+  "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+  "diagnostic_only": true,
+  "inputs": {
+    "formal_report": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.json",
+      "sha256": "53ec2ee10fde7b31b08a840263bd26409e35781ed25b89b20166ea90e84af6ea"
+    },
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+      "records": 2638
+    },
+    "prompt_plus_corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa",
+      "records": 2638
+    }
+  },
+  "pins_verified": true,
+  "artifacts": {
+    "script": {
+      "path": "evaluation/analyze_full2638_prompt_gain_heterogeneity.py",
+      "sha256": "fb41d9370b32032c7738556d73693daeaa026deb9f7730241c2c9c85c61dc547"
+    },
+    "tests": {
+      "path": "evaluation/tests/test_analyze_full2638_prompt_gain_heterogeneity.py",
+      "sha256": "219f4eaa63f18456368dbd499731fb6318c93f085e9ec65938a9603ab7914b95"
+    },
+    "report_json": {
+      "path": "reports/cv_bench/2026-10-04-full2638-prompt-gain-heterogeneity.json",
+      "sha256": "7a01380bcc357358d8d76cf3fae3138074ab7499d0a5ca3be249931ba2e59670"
+    },
+    "report_csv": {
+      "path": "reports/cv_bench/2026-10-04-full2638-prompt-gain-heterogeneity.csv",
+      "sha256": "eb3cc9bc2d3de78649a296eff76a2e51a6cbeeb671e49ed7141d6cfd15ff40b4"
+    },
+    "report_md": {
+      "path": "reports/cv_bench/2026-10-04-full2638-prompt-gain-heterogeneity.md",
+      "sha256": "548ee0dc20af8f690cfc27d6b67f014dbc12033ee2312bc6d1593f8e51dcffe8"
+    }
+  },
+  "tests": {
+    "focused_new": {
+      "module": "evaluation.tests.test_analyze_full2638_prompt_gain_heterogeneity",
+      "count": 30,
+      "result": "OK"
+    },
+    "relevant_existing": {
+      "modules": [
+        "evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_full2638",
+        "evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_screening100",
+        "evaluation.tests.test_cv_bench_report",
+        "evaluation.tests.test_hardware_regular_b1_corrected_l2",
+        "evaluation.tests.test_run_hf_hardware_regular_b1_corrected_l2"
+      ],
+      "count": 102,
+      "result": "OK"
+    },
+    "combined_focused_plus_relevant": {
+      "count": 132,
+      "result": "OK"
+    },
+    "full_evaluation_suite": {
+      "command": "python -m unittest discover -s evaluation/tests",
+      "count": 1376,
+      "result": "OK"
+    }
+  },
+  "commands": [
+    "python -m py_compile evaluation/analyze_full2638_prompt_gain_heterogeneity.py",
+    "python -m unittest evaluation.tests.test_analyze_full2638_prompt_gain_heterogeneity",
+    "python -m unittest <five relevant existing modules>",
+    "python -m unittest discover -s evaluation/tests",
+    "python evaluation/analyze_full2638_prompt_gain_heterogeneity.py"
+  ],
+  "key_findings": {
+    "overall_n": 2638,
+    "wrong_to_right": 220,
+    "right_to_wrong": 194,
+    "unchanged_right": 1820,
+    "unchanged_wrong": 404,
+    "net_corrections": 26,
+    "official_cv_bench_accuracy_delta": 0.010510006083620294,
+    "official_delta_ci95": [
+      -0.005430244424165731,
+      0.025699187051700934
+    ],
+    "unweighted_paired_delta": 0.009855951478392688,
+    "identity_bypass_transitions_zero": true,
+    "selection_index_overlap_non_bypass": {
+      "n": 2495,
+      "exact_match_count": 0,
+      "exact_match_rate": 0.0,
+      "jaccard_mean": 0.28525682578056183,
+      "jaccard_min": 0.043478260869565216
+    },
+    "net_gain_is_small_residual_of_opposing_flows": true,
+    "gross_churn": 414,
+    "largest_positive_source_dataset": {
+      "stratum": "Omni3D_Hypersim",
+      "net_corrections": 25
+    },
+    "largest_negative_source_dataset": {
+      "stratum": "Omni3D_SUNRGBD",
+      "net_corrections": -22
+    },
+    "strata_with_bootstrap_ci_entirely_below_zero": [
+      {
+        "stratum": "Omni3D_SUNRGBD",
+        "grouping_scope": "source_dataset",
+        "n": 400,
+        "unweighted_paired_delta": -0.05500000000000005,
+        "bootstrap_ci95_unweighted_paired_delta": [
+          -0.0825,
+          -0.0275
+        ]
+      }
+    ]
+  },
+  "bootstrap": {
+    "seed": 20261004,
+    "repeats": 5000,
+    "level": 0.95,
+    "gate": false
+  },
+  "scope": "Frozen full2638 CV-Bench outputs re-analysed post-hoc on CPU; every subgroup, bootstrap CI and overlap number is exploratory and is not a formal gate.",
+  "limitations": [
+    "The formal conclusion PROMPT_GAIN_NOT_CONFIRMED_FULL2638 is unchanged; every subgroup number here is post-hoc and exploratory.",
+    "The official cv_bench_accuracy requires all three sources and is undefined inside single-source task/source strata; those stratum CIs use unweighted sample accuracy and are not a gate.",
+    "No GPU, model, board, network or training is used; this is a pure CPU read-only re-analysis of frozen outputs.",
+    "The raw JSONL real_group_count is the post-selection real-slot count; the requested pre-selector bins use full_llm_visual_tokens."
+  ]
+}

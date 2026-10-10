@@ -1,0 +1,601 @@
+{
+  "artifacts": {
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "0b03f8f56422f5efdc34561b0cbce40b98510ff0ede88942854849307108ef99"
+    },
+    "distillation_contract": {
+      "path": "evaluation/prompt_projection_distillation.py",
+      "sha256": "93a607e41c8ba03543e9b1bd1f228466ad8e0925da8781a6aa659e73e28cc727"
+    },
+    "extractor": {
+      "path": "evaluation/extract_prompt_projection_features.py",
+      "sha256": "18e0e48f4d6e87bef9ca6a3871052a1668db2b9c4902cee122d3c382ecce3fb5"
+    },
+    "manifest_builder": {
+      "path": "evaluation/prompt_projection_clean_inductive.py",
+      "sha256": "d80186b664823f2abf6799b4037d5ad3382b375efdf5a5e5f30efe237356a4c9"
+    },
+    "previous_audit_json": {
+      "path": "reports/token_selector/2026-09-28-prompt-distillation-data-provenance-audit.json",
+      "sha256": "0bf0ed2d3bda6530d63fcf120b2d41722d5f8127899220fedfdf3a6eaee8d8ba"
+    },
+    "previous_audit_md": {
+      "path": "reports/token_selector/2026-09-28-prompt-distillation-data-provenance-audit.md",
+      "sha256": "3a6f37e7a725adf4c4b7ad1c94de28886b0fc8397c2355e3dea5b83265c42f9e"
+    },
+    "test_clean_inductive": {
+      "path": "evaluation/tests/test_prompt_projection_clean_inductive.py",
+      "sha256": "5f20a4be3ddc5f421b1cf916e66e51e41a890e448a76d7299b9dcb137a08e162"
+    },
+    "test_prompt_projection_distillation": {
+      "path": "evaluation/tests/test_prompt_projection_distillation.py",
+      "sha256": "1b96daea36173abb3de6df2c69ded17f235f1847657e06727a1bf2392893bca0"
+    }
+  },
+  "commands": [
+    "python evaluation/prompt_projection_clean_inductive.py build",
+    "python evaluation/prompt_projection_clean_inductive.py validate --json-out /tmp/ppclean_validate_final.json",
+    "python evaluation/extract_prompt_projection_features.py --manifest datasets/prompt_projection_clean_inductive_v1.jsonl --config configs/prompt_projection_distillation.json --validate-manifest-only",
+    "python -m unittest evaluation.tests.test_prompt_projection_clean_inductive evaluation.tests.test_prompt_projection_distillation evaluation.tests.test_hardware_regular_token_selector evaluation.tests.test_metrics",
+    "python -m unittest evaluation.tests.test_hardware_regular_b1_integration"
+  ],
+  "config_pin": {
+    "matches_manifest": true,
+    "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+  },
+  "cvbench": {
+    "coco_image_ids": 805,
+    "coco_image_ids_sha256": "821ea2b3a959232a24aee381bec04e01846c06319a741fafdd32bfa5b22bcfe4",
+    "excluded_image_ids": [
+      8277,
+      10977,
+      49810,
+      50326,
+      53505,
+      68833,
+      72852,
+      85576,
+      90108,
+      96493,
+      104803,
+      138819,
+      139260,
+      139684,
+      140076,
+      148620,
+      155154,
+      156924,
+      160556,
+      172617,
+      175443,
+      179392,
+      187243,
+      202339,
+      213086,
+      216419,
+      228144,
+      229659,
+      231527,
+      236914,
+      255401,
+      257169,
+      279145,
+      287667,
+      295809,
+      326970,
+      345361,
+      364297,
+      378099,
+      384850,
+      385719,
+      397354,
+      436617,
+      458255,
+      468233,
+      482436,
+      521509,
+      539883,
+      552775,
+      555972,
+      567886,
+      578922
+    ],
+    "excluded_image_ids_sha256": "2bea4ed0f38841f779ba8e9d8b76a1bfa4f154a1e0deba14176f8c3f068e5d79",
+    "formal_eval_images": {
+      "sha256_digest": "4656feb8d6b0e5da341834e3a40c942e731cf248feaa0d530deae569187b5d90",
+      "unique_image_sha256": 2573
+    },
+    "formal_manifests": [
+      {
+        "id": "full2638_16tok",
+        "path": "datasets/cv_bench_full2638.jsonl",
+        "records": 2638,
+        "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+      },
+      {
+        "id": "screening100_16tok",
+        "path": "datasets/cv_bench_screening100.jsonl",
+        "records": 100,
+        "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+      },
+      {
+        "id": "full2638_64tok",
+        "path": "datasets/cv_bench_full2638_budget64_diagnostic.jsonl",
+        "records": 2638,
+        "sha256": "a82813547444a5ab89dd7c9d3a0d1483e01a937fcf1d90f7c06e7faf0221f8a6"
+      },
+      {
+        "id": "screening100_64tok",
+        "path": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+        "records": 100,
+        "sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668"
+      }
+    ],
+    "parquet": [
+      {
+        "path": "datasets/CV-Bench/test_2d.parquet",
+        "sha256": "33196034ef4bf3265cae4a7ff5c4071b2ff1cc21123e8e285c6a91393897ecbc"
+      },
+      {
+        "path": "datasets/CV-Bench/test_3d.parquet",
+        "sha256": "ef91fe8b5392eb2a16e318ca68fa02449d45ba1e152afece12a0a526e9fbbc25"
+      }
+    ],
+    "retained_image_ids": [
+      802,
+      1425,
+      2592,
+      3934,
+      11511,
+      19742,
+      19786,
+      23034,
+      25394,
+      25603,
+      29397,
+      31050,
+      32038,
+      34760,
+      35326,
+      38678,
+      40083,
+      41872,
+      50380,
+      51008,
+      52413,
+      52996,
+      56127,
+      56350,
+      57238,
+      60347,
+      60363,
+      66523,
+      66706,
+      67896,
+      68078,
+      71938,
+      73946,
+      77396,
+      78170,
+      78426,
+      80413,
+      80932,
+      82696,
+      94326,
+      97337,
+      107226,
+      109976,
+      112997,
+      113589,
+      115885,
+      122046,
+      124659,
+      127660,
+      135410,
+      135670,
+      136600,
+      137294,
+      141821,
+      150224,
+      155051,
+      156278,
+      156372,
+      157390,
+      157601,
+      157767,
+      159458,
+      161642,
+      164637,
+      166478,
+      166918,
+      167240,
+      167353,
+      167572,
+      168458,
+      168883,
+      168974,
+      170099,
+      170595,
+      170893,
+      171740,
+      171757,
+      174123,
+      180101,
+      180878,
+      181753,
+      181816,
+      182155,
+      186449,
+      189752,
+      192047,
+      192871,
+      193494,
+      196754,
+      197796,
+      201426,
+      202001,
+      203488,
+      206027,
+      206218,
+      215259,
+      223789,
+      224675,
+      227044,
+      229311,
+      231237,
+      231339,
+      233238,
+      234413,
+      237517,
+      237984,
+      238410,
+      242287,
+      243344,
+      246968,
+      249129,
+      251537,
+      252776,
+      262682,
+      262938,
+      263463,
+      263796,
+      265518,
+      268378,
+      268831,
+      272416,
+      276055,
+      277020,
+      282046,
+      283412,
+      284623,
+      284991,
+      286907,
+      288762,
+      289343,
+      289992,
+      290771,
+      291634,
+      292082,
+      296231,
+      297084,
+      301421,
+      301718,
+      302760,
+      306139,
+      306700,
+      310072,
+      310980,
+      316015,
+      316666,
+      319935,
+      321214,
+      322844,
+      334483,
+      336209,
+      340015,
+      345356,
+      349152,
+      349184,
+      351589,
+      353096,
+      355240,
+      357567,
+      357978,
+      359219,
+      361238,
+      362434,
+      363461,
+      363840,
+      366199,
+      368212,
+      370208,
+      371529,
+      371749,
+      375078,
+      379332,
+      383337,
+      385997,
+      403565,
+      405249,
+      405970,
+      407825,
+      411938,
+      415238,
+      415741,
+      416745,
+      419974,
+      425226,
+      428280,
+      430056,
+      437392,
+      437898,
+      441247,
+      450488,
+      451571,
+      452784,
+      456143,
+      456662,
+      463842,
+      465822,
+      467176,
+      468245,
+      471893,
+      473118,
+      474854,
+      478136,
+      480122,
+      482978,
+      483531,
+      486479,
+      488166,
+      492878,
+      497599,
+      499313,
+      500464,
+      501523,
+      505169,
+      508312,
+      517056,
+      526197,
+      530146,
+      530975,
+      532690,
+      532761,
+      536947,
+      537270,
+      542423,
+      546219,
+      547816,
+      551304,
+      555005,
+      559707,
+      559956,
+      560312,
+      561465,
+      565853,
+      565877,
+      568195,
+      569059,
+      569700,
+      578545
+    ],
+    "retained_image_ids_sha256": "3af2dd92741979da9a7592876feb6cc80b74dca05c2ce834d61f6f3971adbb90"
+  },
+  "date": "2026-09-28",
+  "extractor_validate_manifest_only": {
+    "gpu_used": false,
+    "manifest_exists": true,
+    "manifest_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "manifest_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "mode": "validate_manifest_only",
+    "model_loaded": false,
+    "path_matches": true,
+    "pinned_absolute_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "pinned_manifest_exists": true,
+    "pinned_path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "pinned_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "sha256_matches": true,
+    "status": "PASS"
+  },
+  "gpu_used": false,
+  "inference_run": false,
+  "lock": {
+    "path": "datasets/prompt_projection_clean_inductive_v1.lock.json",
+    "prompt_distribution_matches_cvbench": false,
+    "schema": "prompt-projection-clean-inductive-lock-v1",
+    "sealed_test_used": false,
+    "sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+    "strict_inductive": true
+  },
+  "manifest": {
+    "bytes": 639668,
+    "image_set_sha256": "ca8f8a6ac13c98d661d989c531b3427ce29438a01d9f0e4434eb097501a0bb6b",
+    "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "records": 472,
+    "sample_id_prefix": "ppclean-v1",
+    "sample_id_scheme": "ppclean-v1-<coco_image_id:012d>-<coco_annotation_id>-<task>; source_sample_id preserved for traceability",
+    "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "tasks": {
+      "grounding": 236,
+      "pointing": 236
+    },
+    "total_image_bytes": 35054288,
+    "unique_images": 236
+  },
+  "model_loaded": false,
+  "network_used": false,
+  "next_gate": {
+    "blocked_actions": "do not run the previously documented cv_bench_screening100_budget64_diagnostic.jsonl extraction; the extractor now fails closed against that command",
+    "decision_required": "after the GPU ownership/free-memory gate passes, extract features strictly from datasets/prompt_projection_clean_inductive_v1.jsonl, then train and freeze Wt/Wv before a single formal CV-Bench evaluation",
+    "gate": "GPU_GATED_CLEAN_EXTRACTION"
+  },
+  "overlap_gates": {
+    "config_pin": {
+      "matches_manifest": true,
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "present": true,
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+    },
+    "construction_script": {
+      "passed": true
+    },
+    "cvbench_coco_ids": {
+      "passed": true
+    },
+    "cvbench_parquet": {
+      "passed": true,
+      "rows": [
+        {
+          "actual_sha256": "33196034ef4bf3265cae4a7ff5c4071b2ff1cc21123e8e285c6a91393897ecbc",
+          "passed": true,
+          "path": "datasets/CV-Bench/test_2d.parquet",
+          "sha256": "33196034ef4bf3265cae4a7ff5c4071b2ff1cc21123e8e285c6a91393897ecbc"
+        },
+        {
+          "actual_sha256": "ef91fe8b5392eb2a16e318ca68fa02449d45ba1e152afece12a0a526e9fbbc25",
+          "passed": true,
+          "path": "datasets/CV-Bench/test_3d.parquet",
+          "sha256": "ef91fe8b5392eb2a16e318ca68fa02449d45ba1e152afece12a0a526e9fbbc25"
+        }
+      ]
+    },
+    "formal_cvbench_manifests": {
+      "passed": true,
+      "rows": [
+        {
+          "actual_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+          "id": "full2638_16tok",
+          "passed": true,
+          "path": "datasets/cv_bench_full2638.jsonl",
+          "records": 2638,
+          "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+        },
+        {
+          "actual_sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+          "id": "screening100_16tok",
+          "passed": true,
+          "path": "datasets/cv_bench_screening100.jsonl",
+          "records": 100,
+          "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+        },
+        {
+          "actual_sha256": "a82813547444a5ab89dd7c9d3a0d1483e01a937fcf1d90f7c06e7faf0221f8a6",
+          "id": "full2638_64tok",
+          "passed": true,
+          "path": "datasets/cv_bench_full2638_budget64_diagnostic.jsonl",
+          "records": 2638,
+          "sha256": "a82813547444a5ab89dd7c9d3a0d1483e01a937fcf1d90f7c06e7faf0221f8a6"
+        },
+        {
+          "actual_sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668",
+          "id": "screening100_64tok",
+          "passed": true,
+          "path": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+          "records": 100,
+          "sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668"
+        }
+      ]
+    },
+    "images_present_and_frozen": {
+      "passed": true
+    },
+    "manifest_sha256": {
+      "passed": true
+    },
+    "record_counts": {
+      "passed": true
+    },
+    "same_image_same_split": {
+      "passed": true
+    },
+    "source_manifests": {
+      "passed": true,
+      "rows": [
+        {
+          "actual_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+          "passed": true,
+          "path": "datasets/visual_refinement_20260912_development.jsonl",
+          "records_excluded": 66,
+          "records_in": 384,
+          "records_kept": 318,
+          "sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae"
+        },
+        {
+          "actual_sha256": "d7746bf21061dfb70cb779bbf7aa6b006f15e41c3f465501d07ad5c6c8d88247",
+          "passed": true,
+          "path": "datasets/visual_refinement_20260912_calibration.jsonl",
+          "records_excluded": 38,
+          "records_in": 192,
+          "records_kept": 154,
+          "sha256": "d7746bf21061dfb70cb779bbf7aa6b006f15e41c3f465501d07ad5c6c8d88247"
+        }
+      ]
+    },
+    "task_counts": {
+      "passed": true
+    },
+    "zero_cvbench_coco_overlap": {
+      "passed": true
+    },
+    "zero_formal_eval_image_sha_overlap": {
+      "passed": true
+    },
+    "zero_formal_sample_id_overlap": {
+      "passed": true
+    }
+  },
+  "schema": "prompt-projection-clean-inductive-report-v1",
+  "sources": [
+    {
+      "path": "datasets/visual_refinement_20260912_development.jsonl",
+      "records_excluded": 66,
+      "records_in": 384,
+      "records_kept": 318,
+      "sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae"
+    },
+    {
+      "path": "datasets/visual_refinement_20260912_calibration.jsonl",
+      "records_excluded": 38,
+      "records_in": 192,
+      "records_kept": 154,
+      "sha256": "d7746bf21061dfb70cb779bbf7aa6b006f15e41c3f465501d07ad5c6c8d88247"
+    }
+  ],
+  "split_preview": {
+    "test": {
+      "images": 39,
+      "records": 78
+    },
+    "train": {
+      "images": 159,
+      "records": 318
+    },
+    "val": {
+      "images": 38,
+      "records": 76
+    }
+  },
+  "status": "CLEAN_INDUCTIVE_MANIFEST_FROZEN / VALIDATION_PASS / GPU_NOT_USED",
+  "tests": {
+    "py_compile": "PASS (5 files)",
+    "unittest": {
+      "evaluation.tests.test_hardware_regular_b1_integration": "19/19 OK",
+      "evaluation.tests.test_hardware_regular_token_selector": "OK (within 76-test run)",
+      "evaluation.tests.test_metrics": "OK (within 76-test run)",
+      "evaluation.tests.test_prompt_projection_clean_inductive": "11/11 OK",
+      "evaluation.tests.test_prompt_projection_distillation": "37/37 OK"
+    },
+    "validate_manifest_only": "PASS"
+  },
+  "training_run": false,
+  "warnings": [
+    "grounding/pointing prompt text distribution differs from the CV-Bench Count/Relation/Depth/Distance tasks; distribution equality is NOT claimed",
+    "the internal test split is a sanity check only and never a headline CV-Bench generalisation number",
+    "COCO identity is matched by coco_image_id; image SHA256 differs across resolutions and must not be used as the COCO identity",
+    "sealed visual_refinement_20260912_test.jsonl is never read by this builder",
+    "no GPU, model load, inference, training, download or network access was performed in this round",
+    "the extraction/training/evaluation itself is still NOT run; this round only freezes and validates the clean input corpus"
+  ]
+}

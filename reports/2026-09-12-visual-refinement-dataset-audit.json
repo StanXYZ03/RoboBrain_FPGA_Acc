@@ -1,0 +1,54 @@
+{
+  "status": "BLOCKED_NEEDS_ADDITIONAL_ORIGINAL_IMAGES",
+  "policy": "all historical COCO image IDs are excluded; resized copies do not count as new original-resolution images",
+  "requested_split_images": {
+    "development": 192,
+    "calibration": 96,
+    "test": 512,
+    "total": 800
+  },
+  "counts": {
+    "annotation_images": 5000,
+    "eligible_annotation_images": 1456,
+    "historically_used_unique_images": 432,
+    "local_original_images": 240,
+    "local_unused_original_images": 0,
+    "eligible_unused_annotation_images": 1024,
+    "local_eligible_unused_original_images": 0,
+    "additional_originals_required_at_least": 800
+  },
+  "manifest_record_counts": {
+    "datasets/dac_cutpoint_oracle_dev.jsonl": 32,
+    "datasets/dac_spatial_eval_expanded.jsonl": 192,
+    "datasets/dac_spatial_eval_smoke.jsonl": 64,
+    "datasets/dac_spatial_l2res_blind.jsonl": 192,
+    "datasets/dac_spatial_selector_calibration.jsonl": 64,
+    "datasets/dac_spatial_selector_validation.jsonl": 192,
+    "datasets/dac_spatial_task_routing_test.jsonl": 192,
+    "datasets/q8a_r0875_failure_attribution_20260911.jsonl": 62,
+    "datasets/q8b_r0875_failure_attribution_20260911.jsonl": 63
+  },
+  "missing_local_candidate_example_ids": [
+    632,
+    776,
+    802,
+    1268,
+    1296,
+    1425,
+    1503,
+    1993,
+    2592,
+    3156,
+    3845,
+    3934,
+    4795,
+    5503,
+    6763,
+    7574,
+    7818,
+    8277,
+    9590,
+    10092
+  ],
+  "output_manifests_created": false
+}

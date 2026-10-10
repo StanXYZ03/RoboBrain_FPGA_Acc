@@ -1,0 +1,96 @@
+{
+  "status": "VSR_METADATA_AUDIT_PASS_IMAGES_INCOMPLETE",
+  "official_commit": "b27a0af0ee1462d2b6b92c8c83e869d9254a241a",
+  "files": {
+    "train": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-random-b27a0af0/splits/random/train.jsonl",
+      "bytes": 2362151,
+      "sha256": "8b725a8621f2d0f94745f1fefdcf3ff8a7eb96fd358676296ff9c9a4ff463c6e",
+      "lines": 7680
+    },
+    "dev": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-random-b27a0af0/splits/random/dev.jsonl",
+      "bytes": 338049,
+      "sha256": "90de24b811597a913310d043758f1119a1ba9ebf1b1ca8f1e27c4907f01980d4",
+      "lines": 1097
+    },
+    "test": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-random-b27a0af0/splits/random/test.jsonl",
+      "bytes": 674712,
+      "sha256": "8ade82a0b93ac9dc1e53f6cf1f11e9d5536776a3715102b6b4d27d4f81d551cc",
+      "lines": 2195
+    }
+  },
+  "test_split_policy": {
+    "json_parsed": false,
+    "labels_captions_relations_inspected": false,
+    "only_hash_bytes_and_line_count_checked": true
+  },
+  "development_splits": {
+    "train": {
+      "records": 7680,
+      "unique_images": 4968,
+      "relations": 64,
+      "label_counts": {
+        "0": 3804,
+        "1": 3876
+      },
+      "source_record_counts": {
+        "train2017": 7386,
+        "val2017": 294
+      }
+    },
+    "dev": {
+      "records": 1097,
+      "unique_images": 1017,
+      "relations": 60,
+      "label_counts": {
+        "0": 533,
+        "1": 564
+      },
+      "source_record_counts": {
+        "train2017": 1067,
+        "val2017": 30
+      }
+    },
+    "train_dev_unique_image_overlap": 558
+  },
+  "local_cache": {
+    "root": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/coco2017",
+    "files_scanned": 1667,
+    "coverage": {
+      "train": {
+        "unique_images": 4968,
+        "cached_unique_images": 115,
+        "missing_unique_images": 4853,
+        "coverage_rate": 0.023148148148148147,
+        "missing_by_source": {
+          "train2017": 4758,
+          "val2017": 95
+        }
+      },
+      "dev": {
+        "unique_images": 1017,
+        "cached_unique_images": 20,
+        "missing_unique_images": 997,
+        "coverage_rate": 0.01966568338249754,
+        "missing_by_source": {
+          "train2017": 988,
+          "val2017": 9
+        }
+      }
+    }
+  },
+  "image_requirements_manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-random-b27a0af0/development_image_requirements.jsonl",
+    "sha256": "baa03bd3f771c1e7c9d7c9c1531521c8ae03500d3f76333ba468b51d6035e690",
+    "unique_images": 5427,
+    "cached_unique_images": 120,
+    "missing_unique_images": 5307
+  },
+  "decision": {
+    "gpu_run_ready": false,
+    "reason": "Only about two percent of required train/dev COCO images are cached.",
+    "next_safe_action": "Download only the 997 missing dev images first, after explicit traffic approval."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "format": "q8b-expanded-paired-diagnostic-lock-v1",
+  "created_before_inference": true,
+  "dataset_role": "expanded_diagnostic_not_blind_validation",
+  "manifest": "datasets/dac_spatial_l2res_blind.jsonl",
+  "manifest_sha256": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+  "prior_use_disclosure": "All 96 images were revealed and used by the earlier L2/residual study. Q8-B outputs have not been measured on this set, but this is not a new blind test.",
+  "sample_design": {
+    "unique_images": 96,
+    "grounding_records": 96,
+    "pointing_records": 96,
+    "paired_modes_per_record": ["stock", "q8b_oracle0875"]
+  },
+  "model_executable_sha256": "e0e8b34088e96ed3b632519d2c9d5d0ad9ca070183f1448f3a24405aa6531ec4",
+  "retention": 0.875,
+  "selector": "geometric oracle using ground-truth bounding box",
+  "deployable": false,
+  "statistics": {
+    "unit": "paired sample",
+    "bootstrap_seed": 20260911,
+    "bootstrap_replicates": 10000,
+    "confidence_interval": "paired percentile bootstrap 95%",
+    "primary_metrics": ["pointing_pck_0_1", "pointing_pck_0_2", "grounding_iou_mean", "grounding_acc_0_5"],
+    "noninferiority_margins_compact_minus_stock": {
+      "pointing_pck_0_1": -0.05,
+      "pointing_pck_0_2": -0.05,
+      "grounding_iou_mean": -0.03,
+      "grounding_acc_0_5": -0.03
+    },
+    "decision": "PASS only if every primary metric's 95% CI lower bound is at or above its margin; DEGRADATION if any CI upper bound is below its margin; otherwise INCONCLUSIVE"
+  },
+  "diagnosis_trigger": "Run paired failure attribution when the overall result is not PASS.",
+  "limitations": [
+    "The selector reads ground-truth boxes and cannot be deployed.",
+    "The dataset was used in prior work and cannot support a new blind-test claim.",
+    "Process wall time includes model loading and is not a latency benchmark."
+  ]
+}

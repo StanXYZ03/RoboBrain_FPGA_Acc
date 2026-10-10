@@ -1,0 +1,403 @@
+{
+  "date": "2026-08-25",
+  "scope": "32 Pointing + 32 Grounding smoke set; no-ground-truth selection",
+  "manifest": "datasets/dac_spatial_eval_smoke.jsonl",
+  "manifest_sha256": "73ac09cd720e7adddfaf5203d4e18eb392e869fa57a59e75154b4ae5b42a494e",
+  "inference_count": 256,
+  "hybrid": {
+    "label": "scout-refine task hybrid",
+    "path": "evaluation/results/scout_refine_full/task_profile_hybrid.jsonl",
+    "sha256": "5027f3c03157b6e60ca1fb30fcb5adc9657c34e755d4380b9cbd34e6a6029954",
+    "prediction_count": 64,
+    "actual_token_retention": 0.3493751014445707,
+    "encoder_compute_retention": 0.31743797513032274,
+    "llm_prefill_compute_retention": 0.34494577692768175,
+    "selector_parse_rate": 1.0,
+    "metrics": {
+      "sample_count": 64,
+      "tasks": {
+        "grounding": {
+          "sample_count": 32,
+          "parse_rate": 1.0,
+          "latency_seconds_mean": 1.0346761230011907,
+          "latency_seconds_median": 1.049890583002707,
+          "latency_seconds_p95": 1.081276107011945,
+          "iou_mean": 0.6790132814912607,
+          "acc_0_5": 0.78125,
+          "center_error_1000_mean": 58.64839118184557
+        },
+        "pointing": {
+          "sample_count": 32,
+          "parse_rate": 1.0,
+          "latency_seconds_mean": 0.5741292502807482,
+          "latency_seconds_median": 0.5699619169972721,
+          "latency_seconds_p95": 0.6044695299933665,
+          "point_error_1000_mean": 117.129509347151,
+          "point_nme_image_diag_mean": 0.08282307033642357,
+          "point_nme_bbox_diag_mean": 0.21641307360752499,
+          "pck_0_1": 0.5,
+          "pck_0_2": 0.75
+        }
+      }
+    }
+  },
+  "hybrid_delta_vs_full": {
+    "pck_0_1": -0.0625,
+    "pck_0_2": -0.03125,
+    "iou_mean": -0.13002458556945418,
+    "acc_0_5": -0.125
+  },
+  "hybrid_delta_vs_uniform_r0500": {
+    "token_retention": -0.10996591462424932,
+    "pck_0_1": 0.03125,
+    "pck_0_2": -0.03125,
+    "iou_mean": -0.0624928026895184,
+    "acc_0_5": -0.0625
+  },
+  "gate": {
+    "accuracy_gate_pass": false,
+    "pl_integration_gate_pass": false,
+    "reason": "hybrid is a useful Pareto point but loses grounding accuracy and doubles sequential passes"
+  },
+  "zcu102_first_order_projection": {
+    "seconds_per_image": 675.5637264497706,
+    "speedup_vs_1695_01_seconds": 2.5090305083543103,
+    "hz": 0.001480245254219332,
+    "assumption": "visual stages scale with MAC proxy; fixed text/decode cost paid twice; selector overhead otherwise zero"
+  },
+  "results": [
+    {
+      "label": "uniform@1.0",
+      "path": "evaluation/results/token_reduction_full/uniform_r1000.jsonl",
+      "sha256": "214f91631d9e8e7225bd6d26f251f167493382b24403dc286a09a2a8a3111a81",
+      "prediction_count": 64,
+      "actual_token_retention": 1.0,
+      "encoder_compute_retention": 1.0,
+      "llm_prefill_compute_retention": 1.0,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.525424559219573,
+            "latency_seconds_median": 0.5332911869991221,
+            "latency_seconds_p95": 0.5671414710086538,
+            "iou_mean": 0.8090378670607149,
+            "acc_0_5": 0.90625,
+            "center_error_1000_mean": 31.40443299915868
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2957873619666316,
+            "latency_seconds_median": 0.29339401749894023,
+            "latency_seconds_p95": 0.3112275819876231,
+            "point_error_1000_mean": 76.39734312230553,
+            "point_nme_image_diag_mean": 0.05402107938641769,
+            "point_nme_bbox_diag_mean": 0.12237221702437978,
+            "pck_0_1": 0.5625,
+            "pck_0_2": 0.78125
+          }
+        }
+      }
+    },
+    {
+      "label": "uniform@0.25",
+      "path": "evaluation/results/token_reduction_full/uniform_r0250.jsonl",
+      "sha256": "26c5caec79e554bdde38c3a2695c87db00218f6fcdb2e9e13eb6a78a227db8b2",
+      "prediction_count": 64,
+      "actual_token_retention": 0.2389222528810258,
+      "encoder_compute_retention": 0.21800072142646895,
+      "llm_prefill_compute_retention": 0.23602066895983279,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5155289172494122,
+            "latency_seconds_median": 0.5270693234997452,
+            "latency_seconds_p95": 0.5522918479982764,
+            "iou_mean": 0.6274108994978423,
+            "acc_0_5": 0.6875,
+            "center_error_1000_mean": 69.4273117499156
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2860026302519145,
+            "latency_seconds_median": 0.2860091465045116,
+            "latency_seconds_p95": 0.2932191640138626,
+            "point_error_1000_mean": 106.68208416185925,
+            "point_nme_image_diag_mean": 0.07543562514196465,
+            "point_nme_bbox_diag_mean": 0.20490195832987435,
+            "pck_0_1": 0.34375,
+            "pck_0_2": 0.6875
+          }
+        }
+      }
+    },
+    {
+      "label": "uniform@0.50",
+      "path": "evaluation/results/token_reduction_full/uniform_r0500.jsonl",
+      "sha256": "b25130ce204b1333f576175debdd98965fc760867fb8ae35e2558d850e95c610",
+      "prediction_count": 64,
+      "actual_token_retention": 0.45934101606882,
+      "encoder_compute_retention": 0.4308278859465694,
+      "llm_prefill_compute_retention": 0.4553865617744339,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5158358458434122,
+            "latency_seconds_median": 0.5298610600002576,
+            "latency_seconds_p95": 0.5593203930038726,
+            "iou_mean": 0.7415060841807791,
+            "acc_0_5": 0.84375,
+            "center_error_1000_mean": 56.15570080644001
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2910913265009185,
+            "latency_seconds_median": 0.29160704749665456,
+            "latency_seconds_p95": 0.2986371559964027,
+            "point_error_1000_mean": 85.59371218925884,
+            "point_nme_image_diag_mean": 0.06052389431595457,
+            "point_nme_bbox_diag_mean": 0.15941267361785208,
+            "pck_0_1": 0.46875,
+            "pck_0_2": 0.78125
+          }
+        }
+      }
+    },
+    {
+      "label": "oracle@0.25",
+      "path": "evaluation/results/token_reduction_full/oracle_crop_r0250.jsonl",
+      "sha256": "8773e00df0cb61066748d61a45d60efcc939207c0c3422bb2fda0f4fa75ffce1",
+      "prediction_count": 64,
+      "actual_token_retention": 0.24622626197045935,
+      "encoder_compute_retention": 0.224909422093279,
+      "llm_prefill_compute_retention": 0.24326985316393288,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5092922280318817,
+            "latency_seconds_median": 0.5197325214976445,
+            "latency_seconds_p95": 0.5486164550093235,
+            "iou_mean": 0.7545169222307078,
+            "acc_0_5": 0.875,
+            "center_error_1000_mean": 37.40190030050182
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.28325301818904336,
+            "latency_seconds_median": 0.2836920715053566,
+            "latency_seconds_p95": 0.28717325600155164,
+            "point_error_1000_mean": 75.14703436009482,
+            "point_nme_image_diag_mean": 0.05313697758208154,
+            "point_nme_bbox_diag_mean": 0.12078157876734125,
+            "pck_0_1": 0.53125,
+            "pck_0_2": 0.8125
+          }
+        }
+      }
+    },
+    {
+      "label": "scout-refine low/tight",
+      "path": "evaluation/results/scout_refine_full/scout_r0125_refine_r0125_tight.jsonl",
+      "sha256": "b1f5c062b2dcec8312b9a36558ecaae3f7688ce5480173f1318ee01acb1c0ee0",
+      "prediction_count": 64,
+      "actual_token_retention": 0.20865119298815127,
+      "encoder_compute_retention": 0.18711104032071044,
+      "llm_prefill_compute_retention": 0.2056638131791901,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 1.0376580023444149,
+            "latency_seconds_median": 1.0550478274963098,
+            "latency_seconds_p95": 1.077753527002642,
+            "iou_mean": 0.5912442022662487,
+            "acc_0_5": 0.65625,
+            "center_error_1000_mean": 69.19896279980698
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5744526425937693,
+            "latency_seconds_median": 0.5711785245075589,
+            "latency_seconds_p95": 0.606382981990464,
+            "point_error_1000_mean": 120.93583457721031,
+            "point_nme_image_diag_mean": 0.08551454871799996,
+            "point_nme_bbox_diag_mean": 0.22172885434951756,
+            "pck_0_1": 0.34375,
+            "pck_0_2": 0.625
+          }
+        }
+      }
+    },
+    {
+      "label": "scout-refine low/wide",
+      "path": "evaluation/results/scout_refine_full/scout_r0125_refine_r0125_wide.jsonl",
+      "sha256": "797610800892e7842e8a1dfb533aa8f31cc5fa00f53fc3da4d9dc84c1e5d28a6",
+      "prediction_count": 64,
+      "actual_token_retention": 0.20199642915111182,
+      "encoder_compute_retention": 0.18105266572127832,
+      "llm_prefill_compute_retention": 0.19909176190200187,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 1.0347035656254775,
+            "latency_seconds_median": 1.0544394490061677,
+            "latency_seconds_p95": 1.083834108998417,
+            "iou_mean": 0.496674683253172,
+            "acc_0_5": 0.625,
+            "center_error_1000_mean": 96.23377387120789
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.572067748781592,
+            "latency_seconds_median": 0.5692350614990573,
+            "latency_seconds_p95": 0.6039204919943586,
+            "point_error_1000_mean": 147.63892036388128,
+            "point_nme_image_diag_mean": 0.10439648175636111,
+            "point_nme_bbox_diag_mean": 0.29832681120898,
+            "pck_0_1": 0.375,
+            "pck_0_2": 0.59375
+          }
+        }
+      }
+    },
+    {
+      "label": "scout-refine high/tight",
+      "path": "evaluation/results/scout_refine_full/scout_r0125_refine_r0250_tight.jsonl",
+      "sha256": "b17534f480c9898eb0a751881cd8656b9285190bbd1347b54b32234d340a0138",
+      "prediction_count": 64,
+      "actual_token_retention": 0.3575718227560461,
+      "encoder_compute_retention": 0.3251691935755094,
+      "llm_prefill_compute_retention": 0.35307793816452654,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 1.0343068874408345,
+            "latency_seconds_median": 1.0547841884981608,
+            "latency_seconds_p95": 1.0852919110038783,
+            "iou_mean": 0.6094591918487989,
+            "acc_0_5": 0.6875,
+            "center_error_1000_mean": 64.7254629873549
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5741292502807482,
+            "latency_seconds_median": 0.5699619169972721,
+            "latency_seconds_p95": 0.6044695299933665,
+            "point_error_1000_mean": 117.129509347151,
+            "point_nme_image_diag_mean": 0.08282307033642357,
+            "point_nme_bbox_diag_mean": 0.21641307360752499,
+            "pck_0_1": 0.5,
+            "pck_0_2": 0.75
+          }
+        }
+      }
+    },
+    {
+      "label": "scout-refine high/wide",
+      "path": "evaluation/results/scout_refine_full/scout_r0125_refine_r0250_wide.jsonl",
+      "sha256": "3a2e59db7b598896d47cc782f6b45cc1973ef48af05ab449130426b5b96da8cf",
+      "prediction_count": 64,
+      "actual_token_retention": 0.33533517286154846,
+      "encoder_compute_retention": 0.3042865238975088,
+      "llm_prefill_compute_retention": 0.3310290702798849,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 1.0346761230011907,
+            "latency_seconds_median": 1.049890583002707,
+            "latency_seconds_p95": 1.081276107011945,
+            "iou_mean": 0.6790132814912607,
+            "acc_0_5": 0.78125,
+            "center_error_1000_mean": 58.64839118184557
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5700104151565029,
+            "latency_seconds_median": 0.5692390359836281,
+            "latency_seconds_p95": 0.6016092089994345,
+            "point_error_1000_mean": 88.33553169431828,
+            "point_nme_image_diag_mean": 0.06246265348077165,
+            "point_nme_bbox_diag_mean": 0.14483619717947907,
+            "pck_0_1": 0.46875,
+            "pck_0_2": 0.71875
+          }
+        }
+      }
+    },
+    {
+      "label": "scout-refine task hybrid",
+      "path": "evaluation/results/scout_refine_full/task_profile_hybrid.jsonl",
+      "sha256": "5027f3c03157b6e60ca1fb30fcb5adc9657c34e755d4380b9cbd34e6a6029954",
+      "prediction_count": 64,
+      "actual_token_retention": 0.3493751014445707,
+      "encoder_compute_retention": 0.31743797513032274,
+      "llm_prefill_compute_retention": 0.34494577692768175,
+      "selector_parse_rate": 1.0,
+      "metrics": {
+        "sample_count": 64,
+        "tasks": {
+          "grounding": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 1.0346761230011907,
+            "latency_seconds_median": 1.049890583002707,
+            "latency_seconds_p95": 1.081276107011945,
+            "iou_mean": 0.6790132814912607,
+            "acc_0_5": 0.78125,
+            "center_error_1000_mean": 58.64839118184557
+          },
+          "pointing": {
+            "sample_count": 32,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5741292502807482,
+            "latency_seconds_median": 0.5699619169972721,
+            "latency_seconds_p95": 0.6044695299933665,
+            "point_error_1000_mean": 117.129509347151,
+            "point_nme_image_diag_mean": 0.08282307033642357,
+            "point_nme_bbox_diag_mean": 0.21641307360752499,
+            "pck_0_1": 0.5,
+            "pck_0_2": 0.75
+          }
+        }
+      }
+    }
+  ]
+}

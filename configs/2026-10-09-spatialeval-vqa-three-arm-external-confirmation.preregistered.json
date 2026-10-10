@@ -1,0 +1,269 @@
+{
+  "version": "2026-10-09-spatialeval-vqa-three-arm-external-confirmation-v1",
+  "date": "2026-10-09",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "executed": false,
+  "gpu_runs": 0,
+  "purpose": "One-shot external confirmation of the frozen edge576 Dense/corrected-L2/v2 comparison on a public spatial-reasoning VQA benchmark not used to tune the Selector.",
+  "data_disclosure": {
+    "labels_observed": true,
+    "label_blind": false,
+    "not_label_blind_reason": "Oracle labels were programmatically materialized and aggregate-audited before execution.",
+    "not_used_for_selector_tuning": true,
+    "future_selector_tuning_on_this_split_forbidden": true
+  },
+  "dataset": {
+    "id": "MilaWang/SpatialEval",
+    "config": "vqa",
+    "split": "test",
+    "venue": "NeurIPS 2024",
+    "official_commit": "d82ba382805265f205693cb83a30c4866ea6c35b",
+    "primary_tasks": [
+      "spatialmap",
+      "mazenav",
+      "spatialgrid"
+    ],
+    "primary_sample_count": 4500,
+    "task_sample_count": 1500,
+    "task_question_id_sample_count": 500,
+    "spatialreal": {
+      "sample_count": 135,
+      "primary_gate": false,
+      "status": "SEPARATE_EXPLORATORY_DIAGNOSTIC_NOT_EXECUTED",
+      "reason": "The pinned official evaluator has no spatialreal parser and can silently reuse a stale parsed answer."
+    },
+    "license_status": "NOT_EXPLICITLY_STATED_IN_THE_OFFICIAL_DATASET_CARD_OR_REPOSITORY_AS_CHECKED_2026-10-09",
+    "distribution_statement": "The local dataset cache is for research evaluation and is not bundled for redistribution."
+  },
+  "prompt_contract": {
+    "mode": "VQA_vision_only",
+    "base": "dataset text field",
+    "suffix": "First, provide a concise answer in one sentence. Then, elaborate on the reasoning behind your answer in a detailed, step-by-step explanation.",
+    "suffix_source": "official SpatialEval paper and inference_vlm.py w_reason path"
+  },
+  "runtime_contract": {
+    "model": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "model_type": "Qwen3VLForConditionalGeneration",
+    "offline": true,
+    "dtype": "bf16",
+    "attention_implementation": "sdpa",
+    "do_sample": false,
+    "decoding": "greedy_argmax",
+    "max_new_tokens": 64,
+    "warmup_per_arm": 1,
+    "warmup_max_new_tokens": 1,
+    "cuda_synchronize_required": true,
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "image_domain_name": "edge576",
+    "image_cache": "/tmp/zhaoxiangyu-spatialeval-vqa/images",
+    "materialized_sample_count": 4500,
+    "materialized_unique_image_count": 1459,
+    "materialized_cache_size_observed": "196M"
+  },
+  "selector_contract": {
+    "cutpoint": "B1_after_vision_block_0",
+    "K": 96,
+    "region_grid": 3,
+    "local_candidate_cap": 16,
+    "max_swaps": 16,
+    "identity_bypass_g_le": 96,
+    "uses_labels": false,
+    "uses_answer_tokens": false,
+    "uses_gradients": false,
+    "selector_mechanisms_frozen_before_external_scores": true
+  },
+  "arms": {
+    "dense_edge576": {
+      "role": "same-input dense reference",
+      "mechanism_id": "dense_edge576",
+      "output": "artifacts/token_selector/2026-10-09-spatialeval-vqa-three-arm/dense_edge576_test4500.jsonl",
+      "status": "NOT_EXECUTED"
+    },
+    "corrected_l2_integer_b1_k96": {
+      "role": "hardware-regular corrected integer L2 control",
+      "mechanism_id": "corrected_l2_integer",
+      "output": "artifacts/token_selector/2026-10-09-spatialeval-vqa-three-arm/corrected_l2_integer_k96_test4500.jsonl",
+      "status": "NOT_EXECUTED"
+    },
+    "v2_edge576_b1_k96": {
+      "role": "frozen candidate",
+      "mechanism_id": "conservative_l2_guarded_rerank_v2",
+      "output": "artifacts/token_selector/2026-10-09-spatialeval-vqa-three-arm/v2_edge576_k96_test4500.jsonl",
+      "status": "NOT_EXECUTED"
+    }
+  },
+  "metric_contract": {
+    "primary_per_record": "official repository parser followed by int(str(oracle_answer).lower() in str(parsed_answer).lower())",
+    "parse_failure": "count_as_wrong",
+    "official_reports": "per-task accuracy only",
+    "official_cross_task_total_exists": false,
+    "project_primary_aggregate": "equal-task macro accuracy across spatialmap, mazenav, spatialgrid",
+    "project_micro_reported": true,
+    "project_aggregate_is_official_total": false,
+    "strict_equal_secondary_diagnostic": "strip+lower exact equality after the same official parser",
+    "per_task_results": "reported_without_gates"
+  },
+  "success_gates": {
+    "v2_relative_to_same_input_dense_equal_task_macro_minimum": 0.9,
+    "v2_minus_l2_paired_bootstrap_95pct_ci_lower_minimum": 0.0,
+    "bootstrap": {
+      "stratification": "task::question_id",
+      "seed": 20261009,
+      "repetitions": 5000,
+      "confidence": 0.95,
+      "percentile_method": "linear interpolation over sorted bootstrap replicates"
+    },
+    "all_must_pass": true,
+    "per_task_gate": null
+  },
+  "report_outputs": {
+    "json": "reports/token_selector/2026-10-09-spatialeval-three-arm-summary.json",
+    "csv": "reports/token_selector/2026-10-09-spatialeval-three-arm-summary.csv",
+    "markdown": "reports/token_selector/2026-10-09-spatialeval-three-arm-summary.md"
+  },
+  "forbidden_claims": [
+    "Do not call the project macro/micro an official SpatialEval total score.",
+    "Do not call this evaluation label-blind.",
+    "Do not include Spatial-Real in the primary gate.",
+    "Do not tune the Selector or thresholds after observing these outputs.",
+    "Do not claim FPGA or Jetson acceleration from A6000 software timing.",
+    "Do not claim board-level results before actual ZCU102/Jetson measurement."
+  ],
+  "pins": {
+    "parquet_shard_0": {
+      "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00000-of-00002.parquet",
+      "sha256": "624aad413e7eb5dbd4e234ac2a36945b9be2280a9d1c8972c1f2fc886b27b897",
+      "bytes": 76143378,
+      "rows": 2318
+    },
+    "parquet_shard_1": {
+      "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00001-of-00002.parquet",
+      "sha256": "b9301e70fd79ec1f828ad04100bb6b546a76bcdf15bae71b9aded77b98d27add",
+      "bytes": 635994517,
+      "rows": 2317
+    },
+    "reference_manifest": {
+      "path": "datasets/external/2026-10-09-spatialeval-vqa-test4635.reference.jsonl",
+      "sha256": "03649b9c2bae7e43cc72555b744396eb8205785e7df80c5a73a6ae1e455f4050",
+      "bytes": 5282303
+    },
+    "reference_summary": {
+      "path": "datasets/external/2026-10-09-spatialeval-vqa-test4635.reference.summary.json",
+      "sha256": "20178378d56511321e60117181158ee1c5447d6e0287cfcea470cef6276fb7cf",
+      "bytes": 743
+    },
+    "official_evaluator": {
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/evaluation.py",
+      "sha256": "88d2a1b35abe02d9c517a513e8b1a5f442b61837b6cd742b1ec1fa23c6ccd952",
+      "bytes": 14742
+    },
+    "official_inference": {
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_vlm.py",
+      "sha256": "0a69b4cd14707001c6975ab9ae9113a90df2ce2cd73119bceabe99cfddb39337",
+      "bytes": 15691
+    },
+    "official_inference_config": {
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_configs.py",
+      "sha256": "79d9c59a8a45be78e18206bde8f6fc13c35827a208ffee99155b29efbbe44972",
+      "bytes": 2903
+    },
+    "manifest_builder": {
+      "path": "evaluation/build_spatialeval_vqa_manifest.py",
+      "sha256": "1edfd08946c161c2db77f2671c2acac7633f27b9a499d577ca42a19000d4a6f4"
+    },
+    "external_contract": {
+      "path": "evaluation/spatialeval_external_contract.py",
+      "sha256": "09c2329a8ea445d035de63d007ab3ab3b60a6ea2b8eb775899b43d302a70ca15"
+    },
+    "external_runner": {
+      "path": "evaluation/run_spatialeval_three_arm.py",
+      "sha256": "a5d85481623721372e1447a597c0131c5faecc51b6befa7dc684980fbbc11bc5"
+    },
+    "official_compatible_metric": {
+      "path": "evaluation/spatialeval_official_compatible_metric.py",
+      "sha256": "b5e2f07b1b5a0f8e5fc608c901e0016ecd7fb481f4ad04c77da8579d09f8ee41"
+    },
+    "external_summarizer": {
+      "path": "evaluation/summarize_spatialeval_three_arm.py",
+      "sha256": "6e3dfd0e1b3d91a87f795dd09c5c13f57673452f5127ebde957ed26e0e674c34"
+    },
+    "edge_runner_adapter": {
+      "path": "evaluation/run_edge576_cvbench_three_arm.py",
+      "sha256": "5e6b408746c9f5410b3a893ff3269ecc596596b9a346ef1188b5a75dbb60a83a"
+    },
+    "edge_runner_contract": {
+      "path": "evaluation/edge576_cvbench_runner_contract.py",
+      "sha256": "36f7c2e44a974350ddb3863871788ea14de3b901eca2ee6817e1e5cde8a83813"
+    },
+    "dense_runner": {
+      "path": "evaluation/run_hf_shallow_block_pruning.py",
+      "sha256": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9"
+    },
+    "dense_core": {
+      "path": "evaluation/shallow_block_pruning.py",
+      "sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a"
+    },
+    "shared_image_processor_helpers": {
+      "path": "evaluation/run_hf_token_reduction.py",
+      "sha256": "28e9870d17c9f1b63389e55d09f92118291ad15adb3c3c33c99686a973df5c8e"
+    },
+    "corrected_l2_runner": {
+      "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+      "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9"
+    },
+    "corrected_l2_core": {
+      "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+      "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585"
+    },
+    "b1_integration": {
+      "path": "evaluation/hardware_regular_b1_integration.py",
+      "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa"
+    },
+    "hardware_regular_selector": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "integer_selector": {
+      "path": "evaluation/current_selector_integer.py",
+      "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7"
+    },
+    "v2_runner": {
+      "path": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+      "sha256": "834e5c8165e0cd52565c8a49c6a05bee17b2950afedfbe26a3ad6757c5bf2146"
+    },
+    "v2_core": {
+      "path": "evaluation/conservative_l2_guarded_reranker.py",
+      "sha256": "9486771f020b65661d9485702ba6d0d9d7901d7119aea8cb13090799792e357b"
+    },
+    "v2_integration": {
+      "path": "evaluation/hardware_regular_b1_guarded_rerank.py",
+      "sha256": "0eaab5edceaeccda95bfbeb43c6ed0c6e81f1f67cde072bb024b33bc93fc15d2"
+    },
+    "v1_b1_rebuild": {
+      "path": "evaluation/hardware_regular_b1_residual_rerank.py",
+      "sha256": "fc9c130a11fc11605398b8177f2f2f2d13126aa270f95f5ae14ad7867a555026"
+    },
+    "v1_layout_rebuild": {
+      "path": "evaluation/conservative_l2_residual_reranker.py",
+      "sha256": "64b699757fa9ea04eb12438509b5679644a263eb4783139e50d945e196fb5bf4"
+    },
+    "v1_checkpoint_loader": {
+      "path": "evaluation/run_hf_conservative_l2_residual_rerank.py",
+      "sha256": "ffd41f46c776eabc441c7d90b957c3f664f3510f3d21ce797415fbd70c27cb1c"
+    },
+    "selector_projection": {
+      "path": "artifacts/token_selector/prompt_projection_WtWv.npz",
+      "sha256": "132a6d9fcd35ee94f6cb6c60f1c05c5b3ca2a669f56e7777e29a65a676f79d0c"
+    },
+    "model_identity_manifest": {
+      "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+      "bytes": 2777
+    },
+    "development_r4_preregistration": {
+      "path": "configs/2026-10-07-edge576-cvbench-three-arm-development-r4.preregistered.json",
+      "sha256": "4f11d47981fd6c04c07608eba8b7e85e27e035bcb8d2d459a7ebc8a8c4b682c5"
+    }
+  }
+}

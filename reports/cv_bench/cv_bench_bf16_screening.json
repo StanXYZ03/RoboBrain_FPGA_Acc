@@ -1,0 +1,4046 @@
+{
+  "metadata": {
+    "generated_at": "2026-09-16T14:25:15.788055+08:00",
+    "model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "dataset_dir": "/home/zhaoxiangyu/RoboBrain2.5/fpga_accel/datasets/CV-Bench",
+    "gpu": "NVIDIA RTX A6000",
+    "torch": "2.5.1+cu124",
+    "pyarrow": "25.0.1",
+    "seed": 20260916,
+    "warmup": 5,
+    "max_new_tokens": 16,
+    "model_load_seconds_excluded": 5.697721702978015,
+    "sampling": "fixed stratified by task and source_dataset"
+  },
+  "score": {
+    "sample_count": 100,
+    "parse_success_rate": 1.0,
+    "accuracy": 0.9,
+    "source_accuracy": {
+      "ADE20K": 0.85,
+      "COCO": 0.85,
+      "Omni3D": 0.9333333333333333
+    },
+    "task_accuracy": {
+      "Count": 0.75,
+      "Depth": 0.9666666666666667,
+      "Distance": 0.9,
+      "Relation": 0.95
+    },
+    "accuracy_2d": 0.85,
+    "accuracy_3d": 0.9333333333333333,
+    "cv_bench_accuracy": 0.8916666666666666,
+    "cv_bench_accuracy_ci95": [
+      0.8291666666666666,
+      0.9458333333333333
+    ]
+  },
+  "timing": {
+    "image_decode_ms": {
+      "mean": 2.822874856647104,
+      "median": 2.075957483612001,
+      "min": 0.4735700786113739,
+      "max": 15.403026016429067,
+      "std": 2.421869547707024,
+      "p95": 5.035600159317255
+    },
+    "processor_ms": {
+      "mean": 11.800145818851888,
+      "median": 5.607163533568382,
+      "min": 1.1950698681175709,
+      "max": 85.90345596894622,
+      "std": 14.620099098888575,
+      "p95": 28.73557200655341
+    },
+    "host_to_device_ms": {
+      "mean": 10.028605854604393,
+      "median": 5.741644999943674,
+      "min": 0.8205310441553593,
+      "max": 52.78368294239044,
+      "std": 9.515658515271053,
+      "p95": 20.1286100782454
+    },
+    "generation_ms": {
+      "mean": 223.91716428333893,
+      "median": 161.72301943879575,
+      "min": 101.0280039627105,
+      "max": 862.6848391722888,
+      "std": 139.84329090106084,
+      "p95": 348.10602106153965
+    },
+    "postprocess_ms": {
+      "mean": 0.07267583161592484,
+      "median": 0.07075653411448002,
+      "min": 0.05751405842602253,
+      "max": 0.11038314551115036,
+      "std": 0.00877175989549952,
+      "p95": 0.08757016621530056
+    },
+    "end_to_end_ms": {
+      "mean": 248.92786557087675,
+      "median": 171.6449655359611,
+      "min": 104.49984692968428,
+      "max": 1007.254617055878,
+      "std": 165.92296098502362,
+      "p95": 398.39075203053653
+    },
+    "merged_vision_token_estimate": {
+      "mean": 724.14,
+      "median": 391.0,
+      "min": 64.0,
+      "max": 3588.0,
+      "std": 692.1652897125283,
+      "p95": 1400.0
+    }
+  },
+  "records": [
+    {
+      "idx": 21,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_130.png",
+      "prompt": "How many blinds are in the image? Select from the following choices.\n(A) 0\n(B) 1\n(C) 2\n(D) 3",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) 1",
+      "output_token_count": 5,
+      "input_token_count": 1243,
+      "original_width": 1280,
+      "original_height": 960,
+      "image_grid_thw": [
+        [
+          1,
+          60,
+          80
+        ]
+      ],
+      "raw_vision_patch_count": 4800,
+      "merged_vision_token_estimate": 1200,
+      "image_decode_ms": 3.568394109606743,
+      "processor_ms": 15.769095160067081,
+      "host_to_device_ms": 19.171586027368903,
+      "generation_ms": 316.9056789483875,
+      "postprocess_ms": 0.07279706187546253,
+      "end_to_end_ms": 355.7550220284611,
+      "peak_gpu_memory_mb": 8794.5810546875
+    },
+    {
+      "idx": 55,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_185.png",
+      "prompt": "How many windows are in the image? Select from the following choices.\n(A) 0\n(B) 2\n(C) 3\n(D) 1",
+      "choices": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "D",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(D) 1",
+      "output_token_count": 5,
+      "input_token_count": 151,
+      "original_width": 300,
+      "original_height": 400,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          18
+        ]
+      ],
+      "raw_vision_patch_count": 432,
+      "merged_vision_token_estimate": 108,
+      "image_decode_ms": 0.5268319509923458,
+      "processor_ms": 2.079827943816781,
+      "host_to_device_ms": 0.9683768730610609,
+      "generation_ms": 131.84837205335498,
+      "postprocess_ms": 0.06958702579140663,
+      "end_to_end_ms": 135.69665397517383,
+      "peak_gpu_memory_mb": 8511.17333984375
+    },
+    {
+      "idx": 81,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_25.png",
+      "prompt": "How many steps are in the image? Select from the following choices.\n(A) 1\n(B) 3\n(C) 2\n(D) 0",
+      "choices": [
+        "1",
+        "3",
+        "2",
+        "0"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "D",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(D) 0",
+      "output_token_count": 5,
+      "input_token_count": 235,
+      "original_width": 500,
+      "original_height": 375,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          32
+        ]
+      ],
+      "raw_vision_patch_count": 768,
+      "merged_vision_token_estimate": 192,
+      "image_decode_ms": 0.7901671342551708,
+      "processor_ms": 2.435883041471243,
+      "host_to_device_ms": 2.210767939686775,
+      "generation_ms": 134.85591695643961,
+      "postprocess_ms": 0.06862077862024307,
+      "end_to_end_ms": 140.58667491190135,
+      "peak_gpu_memory_mb": 8534.21923828125
+    },
+    {
+      "idx": 123,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_35.png",
+      "prompt": "How many pictures are in the image? Select from the following choices.\n(A) 0\n(B) 5\n(C) 2\n(D) 1\n(E) 3\n(F) 4",
+      "choices": [
+        "0",
+        "5",
+        "2",
+        "1",
+        "3",
+        "4"
+      ],
+      "ground_truth": "E",
+      "parsed_answer": "E",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(E) 3",
+      "output_token_count": 5,
+      "input_token_count": 821,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.328312024474144,
+      "processor_ms": 9.75226704031229,
+      "host_to_device_ms": 12.670479016378522,
+      "generation_ms": 241.6557150427252,
+      "postprocess_ms": 0.06370991468429565,
+      "end_to_end_ms": 266.74914895556867,
+      "peak_gpu_memory_mb": 8712.490234375
+    },
+    {
+      "idx": 189,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_48.png",
+      "prompt": "How many sconces are in the image? Select from the following choices.\n(A) 4\n(B) 1\n(C) 3\n(D) 0\n(E) 2",
+      "choices": [
+        "4",
+        "1",
+        "3",
+        "0",
+        "2"
+      ],
+      "ground_truth": "E",
+      "parsed_answer": "E",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(E) 2",
+      "output_token_count": 5,
+      "input_token_count": 3638,
+      "original_width": 2200,
+      "original_height": 1650,
+      "image_grid_thw": [
+        [
+          1,
+          104,
+          138
+        ]
+      ],
+      "raw_vision_patch_count": 14352,
+      "merged_vision_token_estimate": 3588,
+      "image_decode_ms": 15.403026016429067,
+      "processor_ms": 85.90345596894622,
+      "host_to_device_ms": 44.00212806649506,
+      "generation_ms": 861.6090689320117,
+      "postprocess_ms": 0.07668905891478062,
+      "end_to_end_ms": 1007.254617055878,
+      "peak_gpu_memory_mb": 9417.185546875
+    },
+    {
+      "idx": 195,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_487.png",
+      "prompt": "How many stones are in the image? Select from the following choices.\n(A) 2\n(B) 0\n(C) 1\n(D) 3\n(E) 4",
+      "choices": [
+        "2",
+        "0",
+        "1",
+        "3",
+        "4"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "C",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(C) 1",
+      "output_token_count": 5,
+      "input_token_count": 112,
+      "original_width": 250,
+      "original_height": 250,
+      "image_grid_thw": [
+        [
+          1,
+          16,
+          16
+        ]
+      ],
+      "raw_vision_patch_count": 256,
+      "merged_vision_token_estimate": 64,
+      "image_decode_ms": 0.4735700786113739,
+      "processor_ms": 1.53064401820302,
+      "host_to_device_ms": 0.8205310441553593,
+      "generation_ms": 126.40857510268688,
+      "postprocess_ms": 0.06499490700662136,
+      "end_to_end_ms": 131.9432631134987,
+      "peak_gpu_memory_mb": 8501.26513671875
+    },
+    {
+      "idx": 258,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_59.png",
+      "prompt": "How many mirrors are in the image? Select from the following choices.\n(A) 1\n(B) 0\n(C) 2\n(D) 3",
+      "choices": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) 1",
+      "output_token_count": 5,
+      "input_token_count": 3115,
+      "original_width": 2048,
+      "original_height": 1536,
+      "image_grid_thw": [
+        [
+          1,
+          96,
+          128
+        ]
+      ],
+      "raw_vision_patch_count": 12288,
+      "merged_vision_token_estimate": 3072,
+      "image_decode_ms": 12.386985821649432,
+      "processor_ms": 54.36835088767111,
+      "host_to_device_ms": 40.072465082630515,
+      "generation_ms": 721.1444359272718,
+      "postprocess_ms": 0.0740948598831892,
+      "end_to_end_ms": 828.3110288903117,
+      "peak_gpu_memory_mb": 9280.7509765625
+    },
+    {
+      "idx": 302,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_650.png",
+      "prompt": "How many posters are in the image? Select from the following choices.\n(A) 3\n(B) 1\n(C) 2\n(D) 0",
+      "choices": [
+        "3",
+        "1",
+        "2",
+        "0"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) 1",
+      "output_token_count": 5,
+      "input_token_count": 457,
+      "original_width": 750,
+      "original_height": 563,
+      "image_grid_thw": [
+        [
+          1,
+          36,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1656,
+      "merged_vision_token_estimate": 414,
+      "image_decode_ms": 1.2952820397913456,
+      "processor_ms": 5.743020912632346,
+      "host_to_device_ms": 4.513727966696024,
+      "generation_ms": 173.68973209522665,
+      "postprocess_ms": 0.06225192919373512,
+      "end_to_end_ms": 185.55763084441423,
+      "peak_gpu_memory_mb": 8591.15576171875
+    },
+    {
+      "idx": 329,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_87.png",
+      "prompt": "How many telephones are in the image? Select from the following choices.\n(A) 2\n(B) 3\n(C) 0\n(D) 1",
+      "choices": [
+        "2",
+        "3",
+        "0",
+        "1"
+      ],
+      "ground_truth": "D",
+      "parsed_answer": "D",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(D) 1",
+      "output_token_count": 5,
+      "input_token_count": 188,
+      "original_width": 400,
+      "original_height": 400,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          24
+        ]
+      ],
+      "raw_vision_patch_count": 576,
+      "merged_vision_token_estimate": 144,
+      "image_decode_ms": 0.74396887794137,
+      "processor_ms": 2.2445491049438715,
+      "host_to_device_ms": 1.6588650178164244,
+      "generation_ms": 132.1262449491769,
+      "postprocess_ms": 0.06251921877264977,
+      "end_to_end_ms": 137.04650499857962,
+      "peak_gpu_memory_mb": 8522.8837890625
+    },
+    {
+      "idx": 339,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/count/ade20k_96.png",
+      "prompt": "How many radios are in the image? Select from the following choices.\n(A) 0\n(B) 1\n(C) 2\n(D) 3",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) 1",
+      "output_token_count": 5,
+      "input_token_count": 3631,
+      "original_width": 2200,
+      "original_height": 1650,
+      "image_grid_thw": [
+        [
+          1,
+          104,
+          138
+        ]
+      ],
+      "raw_vision_patch_count": 14352,
+      "merged_vision_token_estimate": 3588,
+      "image_decode_ms": 11.418579844757915,
+      "processor_ms": 77.27571786381304,
+      "host_to_device_ms": 52.78368294239044,
+      "generation_ms": 862.6848391722888,
+      "postprocess_ms": 0.0678368378430605,
+      "end_to_end_ms": 1004.4830208644271,
+      "peak_gpu_memory_mb": 9415.6845703125
+    },
+    {
+      "idx": 346,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_105.png",
+      "prompt": "Considering the relative positions of the wall (annotated by the red box) and the coffee table in the image provided, where is the wall (annotated by the red box) located with respect to the coffee table? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) right",
+      "output_token_count": 4,
+      "input_token_count": 247,
+      "original_width": 493,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 720,
+      "merged_vision_token_estimate": 180,
+      "image_decode_ms": 0.6602969951927662,
+      "processor_ms": 4.789886064827442,
+      "host_to_device_ms": 3.976181847974658,
+      "generation_ms": 119.47215092368424,
+      "postprocess_ms": 0.06588897667825222,
+      "end_to_end_ms": 129.19831601902843,
+      "peak_gpu_memory_mb": 8536.28759765625
+    },
+    {
+      "idx": 371,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_145.png",
+      "prompt": "Considering the relative positions of the outlet (annotated by the red box) and the desk organizer in the image provided, where is the outlet (annotated by the red box) located with respect to the desk organizer? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) below",
+      "output_token_count": 4,
+      "input_token_count": 247,
+      "original_width": 492,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 720,
+      "merged_vision_token_estimate": 180,
+      "image_decode_ms": 0.7731630466878414,
+      "processor_ms": 2.4185958318412304,
+      "host_to_device_ms": 3.195069031789899,
+      "generation_ms": 113.22486097924411,
+      "postprocess_ms": 0.06868806667625904,
+      "end_to_end_ms": 119.87980781123042,
+      "peak_gpu_memory_mb": 8536.28759765625
+    },
+    {
+      "idx": 402,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_192.png",
+      "prompt": "Considering the relative positions of the beam and the curtain in the image provided, where is the beam located with respect to the curtain? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) above",
+      "output_token_count": 4,
+      "input_token_count": 2733,
+      "original_width": 1960,
+      "original_height": 1416,
+      "image_grid_thw": [
+        [
+          1,
+          88,
+          122
+        ]
+      ],
+      "raw_vision_patch_count": 10736,
+      "merged_vision_token_estimate": 2684,
+      "image_decode_ms": 9.87877300940454,
+      "processor_ms": 63.29855998046696,
+      "host_to_device_ms": 38.12645701691508,
+      "generation_ms": 609.6749601420015,
+      "postprocess_ms": 0.07887999527156353,
+      "end_to_end_ms": 721.3175699580461,
+      "peak_gpu_memory_mb": 9180.6083984375
+    },
+    {
+      "idx": 426,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_248.png",
+      "prompt": "Considering the relative positions of the mountain (annotated by the red box) and the grass in the image provided, where is the mountain (annotated by the red box) located with respect to the grass? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) above",
+      "output_token_count": 4,
+      "input_token_count": 225,
+      "original_width": 496,
+      "original_height": 332,
+      "image_grid_thw": [
+        [
+          1,
+          20,
+          32
+        ]
+      ],
+      "raw_vision_patch_count": 640,
+      "merged_vision_token_estimate": 160,
+      "image_decode_ms": 0.7407111115753651,
+      "processor_ms": 2.370940987020731,
+      "host_to_device_ms": 2.1718409843742847,
+      "generation_ms": 115.0878279004246,
+      "postprocess_ms": 0.06536208093166351,
+      "end_to_end_ms": 120.65510894171894,
+      "peak_gpu_memory_mb": 8531.076171875
+    },
+    {
+      "idx": 427,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_25.png",
+      "prompt": "Considering the relative positions of the wall (annotated by the red box) and the person in the image provided, where is the wall (annotated by the red box) located with respect to the person? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) below",
+      "output_token_count": 4,
+      "input_token_count": 209,
+      "original_width": 496,
+      "original_height": 276,
+      "image_grid_thw": [
+        [
+          1,
+          18,
+          32
+        ]
+      ],
+      "raw_vision_patch_count": 576,
+      "merged_vision_token_estimate": 144,
+      "image_decode_ms": 0.6514689885079861,
+      "processor_ms": 2.0577500108629465,
+      "host_to_device_ms": 1.8889149650931358,
+      "generation_ms": 110.6947329826653,
+      "postprocess_ms": 0.07675099186599255,
+      "end_to_end_ms": 115.57921092025936,
+      "peak_gpu_memory_mb": 8527.89306640625
+    },
+    {
+      "idx": 523,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_47.png",
+      "prompt": "Considering the relative positions of the sink and the bathtub in the image provided, where is the sink located with respect to the bathtub? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) above",
+      "output_token_count": 4,
+      "input_token_count": 113,
+      "original_width": 256,
+      "original_height": 256,
+      "image_grid_thw": [
+        [
+          1,
+          16,
+          16
+        ]
+      ],
+      "raw_vision_patch_count": 256,
+      "merged_vision_token_estimate": 64,
+      "image_decode_ms": 0.5231702234596014,
+      "processor_ms": 1.1950698681175709,
+      "host_to_device_ms": 1.504848012700677,
+      "generation_ms": 101.0280039627105,
+      "postprocess_ms": 0.05751405842602253,
+      "end_to_end_ms": 104.49984692968428,
+      "peak_gpu_memory_mb": 8501.46337890625
+    },
+    {
+      "idx": 531,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_480.png",
+      "prompt": "Considering the relative positions of the buildings (annotated by the red box) and the vending machine in the image provided, where is the buildings (annotated by the red box) located with respect to the vending machine? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) left",
+      "output_token_count": 4,
+      "input_token_count": 247,
+      "original_width": 492,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 720,
+      "merged_vision_token_estimate": 180,
+      "image_decode_ms": 0.761162955313921,
+      "processor_ms": 2.296860096976161,
+      "host_to_device_ms": 1.9469140097498894,
+      "generation_ms": 113.12305787578225,
+      "postprocess_ms": 0.06644194945693016,
+      "end_to_end_ms": 118.4103349223733,
+      "peak_gpu_memory_mb": 8536.28759765625
+    },
+    {
+      "idx": 535,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_486.png",
+      "prompt": "Considering the relative positions of the field (annotated by the red box) and the mountain in the image provided, where is the field (annotated by the red box) located with respect to the mountain? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) right",
+      "output_token_count": 4,
+      "input_token_count": 209,
+      "original_width": 369,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          24
+        ]
+      ],
+      "raw_vision_patch_count": 576,
+      "merged_vision_token_estimate": 144,
+      "image_decode_ms": 0.6827500183135271,
+      "processor_ms": 2.095326082780957,
+      "host_to_device_ms": 2.4666120298206806,
+      "generation_ms": 108.03494905121624,
+      "postprocess_ms": 0.059420010074973106,
+      "end_to_end_ms": 113.54421079158783,
+      "peak_gpu_memory_mb": 8527.89306640625
+    },
+    {
+      "idx": 539,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_490.png",
+      "prompt": "Considering the relative positions of the steps and the plants in the image provided, where is the steps located with respect to the plants? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) below",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.1598431523889303,
+      "processor_ms": 9.939742973074317,
+      "host_to_device_ms": 10.344631969928741,
+      "generation_ms": 217.18547702766955,
+      "postprocess_ms": 0.0681199599057436,
+      "end_to_end_ms": 240.9993859473616,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 587,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::ADE20K Validation Set",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "filename": "img/2D/relation/ade20k_599.png",
+      "prompt": "Considering the relative positions of the car (annotated by the red box) and the street number in the image provided, where is the car (annotated by the red box) located with respect to the street number? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) right",
+      "output_token_count": 4,
+      "input_token_count": 247,
+      "original_width": 492,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 720,
+      "merged_vision_token_estimate": 180,
+      "image_decode_ms": 0.8009020239114761,
+      "processor_ms": 2.8397999703884125,
+      "host_to_device_ms": 3.957401029765606,
+      "generation_ms": 115.74273812584579,
+      "postprocess_ms": 0.07455702871084213,
+      "end_to_end_ms": 123.62350290641189,
+      "peak_gpu_memory_mb": 8536.28759765625
+    },
+    {
+      "idx": 757,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_256.png",
+      "prompt": "How many tennis rackets are in the image? Select from the following choices.\n(A) 3\n(B) 2\n(C) 1\n(D) 0",
+      "choices": [
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      "ground_truth": "C",
+      "parsed_answer": "C",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(C) 1",
+      "output_token_count": 5,
+      "input_token_count": 345,
+      "original_width": 480,
+      "original_height": 640,
+      "image_grid_thw": [
+        [
+          1,
+          40,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 1200,
+      "merged_vision_token_estimate": 300,
+      "image_decode_ms": 1.663195202127099,
+      "processor_ms": 3.1014811247587204,
+      "host_to_device_ms": 3.723433008417487,
+      "generation_ms": 159.5208088401705,
+      "postprocess_ms": 0.06422982551157475,
+      "end_to_end_ms": 168.3019041083753,
+      "peak_gpu_memory_mb": 8565.2685546875
+    },
+    {
+      "idx": 857,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_361.png",
+      "prompt": "How many oranges are in the image? Select from the following choices.\n(A) 4\n(B) 0\n(C) 1\n(D) 2\n(E) 3",
+      "choices": [
+        "4",
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "D",
+      "parsed_answer": "D",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(D) 2",
+      "output_token_count": 5,
+      "input_token_count": 240,
+      "original_width": 500,
+      "original_height": 375,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          32
+        ]
+      ],
+      "raw_vision_patch_count": 768,
+      "merged_vision_token_estimate": 192,
+      "image_decode_ms": 1.5991679392755032,
+      "processor_ms": 2.6590118650346994,
+      "host_to_device_ms": 2.1470480132848024,
+      "generation_ms": 134.72071010619402,
+      "postprocess_ms": 0.06256788037717342,
+      "end_to_end_ms": 141.42530411481857,
+      "peak_gpu_memory_mb": 8535.17822265625
+    },
+    {
+      "idx": 889,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_40.png",
+      "prompt": "How many bottles are in the image? Select from the following choices.\n(A) 4\n(B) 1\n(C) 2\n(D) 3\n(E) 0",
+      "choices": [
+        "4",
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "ground_truth": "C",
+      "parsed_answer": "D",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(D) 3",
+      "output_token_count": 5,
+      "input_token_count": 348,
+      "original_width": 640,
+      "original_height": 480,
+      "image_grid_thw": [
+        [
+          1,
+          30,
+          40
+        ]
+      ],
+      "raw_vision_patch_count": 1200,
+      "merged_vision_token_estimate": 300,
+      "image_decode_ms": 2.065106062218547,
+      "processor_ms": 2.877474995329976,
+      "host_to_device_ms": 4.232564941048622,
+      "generation_ms": 157.98277501016855,
+      "postprocess_ms": 0.06358698010444641,
+      "end_to_end_ms": 167.47593600302935,
+      "peak_gpu_memory_mb": 8565.8583984375
+    },
+    {
+      "idx": 906,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_420.png",
+      "prompt": "How many bicycles are in the image? Select from the following choices.\n(A) 0\n(B) 2\n(C) 3\n(D) 1",
+      "choices": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "ground_truth": "D",
+      "parsed_answer": "D",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(D) 1",
+      "output_token_count": 5,
+      "input_token_count": 303,
+      "original_width": 426,
+      "original_height": 640,
+      "image_grid_thw": [
+        [
+          1,
+          40,
+          26
+        ]
+      ],
+      "raw_vision_patch_count": 1040,
+      "merged_vision_token_estimate": 260,
+      "image_decode_ms": 2.1518110297620296,
+      "processor_ms": 3.4380410797894,
+      "host_to_device_ms": 4.140814067795873,
+      "generation_ms": 155.12259188108146,
+      "postprocess_ms": 0.07025105878710747,
+      "end_to_end_ms": 165.17360298894346,
+      "peak_gpu_memory_mb": 8553.439453125
+    },
+    {
+      "idx": 920,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_435.png",
+      "prompt": "How many stop signs are in the image? Select from the following choices.\n(A) 3\n(B) 2\n(C) 0\n(D) 1",
+      "choices": [
+        "3",
+        "2",
+        "0",
+        "1"
+      ],
+      "ground_truth": "D",
+      "parsed_answer": "D",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(D) 1",
+      "output_token_count": 5,
+      "input_token_count": 324,
+      "original_width": 640,
+      "original_height": 432,
+      "image_grid_thw": [
+        [
+          1,
+          28,
+          40
+        ]
+      ],
+      "raw_vision_patch_count": 1120,
+      "merged_vision_token_estimate": 280,
+      "image_decode_ms": 1.807795837521553,
+      "processor_ms": 3.554927883669734,
+      "host_to_device_ms": 3.165452042594552,
+      "generation_ms": 159.28892884403467,
+      "postprocess_ms": 0.08719507604837418,
+      "end_to_end_ms": 168.16086880862713,
+      "peak_gpu_memory_mb": 8559.24853515625
+    },
+    {
+      "idx": 926,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_440.png",
+      "prompt": "How many skateboards are in the image? Select from the following choices.\n(A) 2\n(B) 0\n(C) 1\n(D) 3",
+      "choices": [
+        "2",
+        "0",
+        "1",
+        "3"
+      ],
+      "ground_truth": "C",
+      "parsed_answer": "C",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(C) 1",
+      "output_token_count": 5,
+      "input_token_count": 304,
+      "original_width": 640,
+      "original_height": 426,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          40
+        ]
+      ],
+      "raw_vision_patch_count": 1040,
+      "merged_vision_token_estimate": 260,
+      "image_decode_ms": 1.4676288701593876,
+      "processor_ms": 3.286070888862014,
+      "host_to_device_ms": 3.63785307854414,
+      "generation_ms": 154.67042801901698,
+      "postprocess_ms": 0.06414693780243397,
+      "end_to_end_ms": 163.37575111538172,
+      "peak_gpu_memory_mb": 8553.650390625
+    },
+    {
+      "idx": 941,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_458.png",
+      "prompt": "How many birds are in the image? Select from the following choices.\n(A) 2\n(B) 1\n(C) 0\n(D) 3",
+      "choices": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) 1",
+      "output_token_count": 5,
+      "input_token_count": 303,
+      "original_width": 640,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          40
+        ]
+      ],
+      "raw_vision_patch_count": 1040,
+      "merged_vision_token_estimate": 260,
+      "image_decode_ms": 2.7316759806126356,
+      "processor_ms": 3.372439183294773,
+      "host_to_device_ms": 5.468840012326837,
+      "generation_ms": 154.4413948431611,
+      "postprocess_ms": 0.06927293725311756,
+      "end_to_end_ms": 166.33125999942422,
+      "peak_gpu_memory_mb": 8553.439453125
+    },
+    {
+      "idx": 946,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_465.png",
+      "prompt": "How many teddy bears are in the image? Select from the following choices.\n(A) 5\n(B) 6\n(C) 7\n(D) 0\n(E) 4\n(F) 3",
+      "choices": [
+        "5",
+        "6",
+        "7",
+        "0",
+        "4",
+        "3"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "E",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(E) 4",
+      "output_token_count": 5,
+      "input_token_count": 315,
+      "original_width": 425,
+      "original_height": 640,
+      "image_grid_thw": [
+        [
+          1,
+          40,
+          26
+        ]
+      ],
+      "raw_vision_patch_count": 1040,
+      "merged_vision_token_estimate": 260,
+      "image_decode_ms": 2.0513839554041624,
+      "processor_ms": 3.3282849472016096,
+      "host_to_device_ms": 2.894395962357521,
+      "generation_ms": 155.664507066831,
+      "postprocess_ms": 0.06660888902842999,
+      "end_to_end_ms": 164.26986502483487,
+      "peak_gpu_memory_mb": 8557.82421875
+    },
+    {
+      "idx": 971,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_499.png",
+      "prompt": "How many suitcases are in the image? Select from the following choices.\n(A) 1\n(B) 3\n(C) 2\n(D) 0",
+      "choices": [
+        "1",
+        "3",
+        "2",
+        "0"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) 1",
+      "output_token_count": 5,
+      "input_token_count": 405,
+      "original_width": 612,
+      "original_height": 612,
+      "image_grid_thw": [
+        [
+          1,
+          38,
+          38
+        ]
+      ],
+      "raw_vision_patch_count": 1444,
+      "merged_vision_token_estimate": 361,
+      "image_decode_ms": 1.8578681629151106,
+      "processor_ms": 4.82382788322866,
+      "host_to_device_ms": 4.045724170282483,
+      "generation_ms": 163.925230037421,
+      "postprocess_ms": 0.06952602416276932,
+      "end_to_end_ms": 174.98802696354687,
+      "peak_gpu_memory_mb": 8578.298828125
+    },
+    {
+      "idx": 1009,
+      "type": "2D",
+      "task": "Count",
+      "stratum": "Count::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/count/coco_551.png",
+      "prompt": "How many motorcycles are in the image? Select from the following choices.\n(A) 2\n(B) 3\n(C) 1\n(D) 0",
+      "choices": [
+        "2",
+        "3",
+        "1",
+        "0"
+      ],
+      "ground_truth": "C",
+      "parsed_answer": "C",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(C) 1",
+      "output_token_count": 5,
+      "input_token_count": 303,
+      "original_width": 640,
+      "original_height": 403,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          40
+        ]
+      ],
+      "raw_vision_patch_count": 1040,
+      "merged_vision_token_estimate": 260,
+      "image_decode_ms": 2.010790864005685,
+      "processor_ms": 3.2364209182560444,
+      "host_to_device_ms": 2.1623100619763136,
+      "generation_ms": 157.42982411757112,
+      "postprocess_ms": 0.07600802928209305,
+      "end_to_end_ms": 165.1575060095638,
+      "peak_gpu_memory_mb": 8553.439453125
+    },
+    {
+      "idx": 1155,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_197.png",
+      "prompt": "Considering the relative positions of the tennis racket and the handbag in the image provided, where is the tennis racket located with respect to the handbag? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) left",
+      "output_token_count": 4,
+      "input_token_count": 353,
+      "original_width": 480,
+      "original_height": 640,
+      "image_grid_thw": [
+        [
+          1,
+          40,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 1200,
+      "merged_vision_token_estimate": 300,
+      "image_decode_ms": 1.967795193195343,
+      "processor_ms": 2.959328005090356,
+      "host_to_device_ms": 3.299860982224345,
+      "generation_ms": 136.87175000086427,
+      "postprocess_ms": 0.07147295400500298,
+      "end_to_end_ms": 145.41632100008428,
+      "peak_gpu_memory_mb": 8566.8427734375
+    },
+    {
+      "idx": 1180,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_233.png",
+      "prompt": "Considering the relative positions of the carrot (annotated by the red box) and the chair in the image provided, where is the carrot (annotated by the red box) located with respect to the chair? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(B) below",
+      "output_token_count": 4,
+      "input_token_count": 245,
+      "original_width": 492,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 720,
+      "merged_vision_token_estimate": 180,
+      "image_decode_ms": 0.9102069307118654,
+      "processor_ms": 2.588822040706873,
+      "host_to_device_ms": 2.079523866996169,
+      "generation_ms": 114.82946900650859,
+      "postprocess_ms": 0.06575882434844971,
+      "end_to_end_ms": 120.69437000900507,
+      "peak_gpu_memory_mb": 8535.90380859375
+    },
+    {
+      "idx": 1275,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_39.png",
+      "prompt": "Considering the relative positions of the person and the dog in the image provided, where is the person located with respect to the dog? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) left",
+      "output_token_count": 4,
+      "input_token_count": 369,
+      "original_width": 640,
+      "original_height": 508,
+      "image_grid_thw": [
+        [
+          1,
+          32,
+          40
+        ]
+      ],
+      "raw_vision_patch_count": 1280,
+      "merged_vision_token_estimate": 320,
+      "image_decode_ms": 2.086808905005455,
+      "processor_ms": 3.6498589906841516,
+      "host_to_device_ms": 6.60499301739037,
+      "generation_ms": 136.03632687591016,
+      "postprocess_ms": 0.0692959874868393,
+      "end_to_end_ms": 148.70795304886997,
+      "peak_gpu_memory_mb": 8570.99169921875
+    },
+    {
+      "idx": 1302,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_433.png",
+      "prompt": "Considering the relative positions of the bird (annotated by the red box) and the boat in the image provided, where is the bird (annotated by the red box) located with respect to the boat? Select from the following choices.\n(A) above\n(B) below",
+      "choices": [
+        "above",
+        "below"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) above",
+      "output_token_count": 4,
+      "input_token_count": 241,
+      "original_width": 496,
+      "original_height": 364,
+      "image_grid_thw": [
+        [
+          1,
+          22,
+          32
+        ]
+      ],
+      "raw_vision_patch_count": 704,
+      "merged_vision_token_estimate": 176,
+      "image_decode_ms": 0.8552910294383764,
+      "processor_ms": 2.5349410716444254,
+      "host_to_device_ms": 2.6205340400338173,
+      "generation_ms": 116.07686011120677,
+      "postprocess_ms": 0.08467887528240681,
+      "end_to_end_ms": 122.394944075495,
+      "peak_gpu_memory_mb": 8534.03662109375
+    },
+    {
+      "idx": 1303,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_434.png",
+      "prompt": "Considering the relative positions of the umbrella (annotated by the red box) and the bird in the image provided, where is the umbrella (annotated by the red box) located with respect to the bird? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) left",
+      "output_token_count": 4,
+      "input_token_count": 225,
+      "original_width": 496,
+      "original_height": 332,
+      "image_grid_thw": [
+        [
+          1,
+          20,
+          32
+        ]
+      ],
+      "raw_vision_patch_count": 640,
+      "merged_vision_token_estimate": 160,
+      "image_decode_ms": 0.8013839833438396,
+      "processor_ms": 2.2472350392490625,
+      "host_to_device_ms": 1.789798028767109,
+      "generation_ms": 110.11571995913982,
+      "postprocess_ms": 0.08387304842472076,
+      "end_to_end_ms": 115.24891806766391,
+      "peak_gpu_memory_mb": 8531.076171875
+    },
+    {
+      "idx": 1308,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_443.png",
+      "prompt": "Considering the relative positions of the book (annotated by the red box) and the cat in the image provided, where is the book (annotated by the red box) located with respect to the cat? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) right",
+      "output_token_count": 4,
+      "input_token_count": 245,
+      "original_width": 494,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 720,
+      "merged_vision_token_estimate": 180,
+      "image_decode_ms": 0.8186409249901772,
+      "processor_ms": 2.4507720954716206,
+      "host_to_device_ms": 3.8327290676534176,
+      "generation_ms": 112.62927716597915,
+      "postprocess_ms": 0.07127691060304642,
+      "end_to_end_ms": 120.03758200444281,
+      "peak_gpu_memory_mb": 8535.90380859375
+    },
+    {
+      "idx": 1314,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_452.png",
+      "prompt": "Considering the relative positions of the person (annotated by the red box) and the tennis racket in the image provided, where is the person (annotated by the red box) located with respect to the tennis racket? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) right",
+      "output_token_count": 4,
+      "input_token_count": 175,
+      "original_width": 277,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          18
+        ]
+      ],
+      "raw_vision_patch_count": 432,
+      "merged_vision_token_estimate": 108,
+      "image_decode_ms": 0.5703871138393879,
+      "processor_ms": 1.8891978543251753,
+      "host_to_device_ms": 2.424023114144802,
+      "generation_ms": 106.81524104438722,
+      "postprocess_ms": 0.08191191591322422,
+      "end_to_end_ms": 112.0077280793339,
+      "peak_gpu_memory_mb": 8518.6240234375
+    },
+    {
+      "idx": 1357,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_519.png",
+      "prompt": "Considering the relative positions of the bottle (annotated by the red box) and the refrigerator in the image provided, where is the bottle (annotated by the red box) located with respect to the refrigerator? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) left",
+      "output_token_count": 4,
+      "input_token_count": 245,
+      "original_width": 492,
+      "original_height": 369,
+      "image_grid_thw": [
+        [
+          1,
+          24,
+          30
+        ]
+      ],
+      "raw_vision_patch_count": 720,
+      "merged_vision_token_estimate": 180,
+      "image_decode_ms": 0.8048000745475292,
+      "processor_ms": 2.371438080444932,
+      "host_to_device_ms": 1.9714359659701586,
+      "generation_ms": 112.94287792406976,
+      "postprocess_ms": 0.0691490713506937,
+      "end_to_end_ms": 118.36367100477219,
+      "peak_gpu_memory_mb": 8535.90380859375
+    },
+    {
+      "idx": 1401,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_587.png",
+      "prompt": "Considering the relative positions of the person and the kite in the image provided, where is the person located with respect to the kite? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) right",
+      "output_token_count": 4,
+      "input_token_count": 241,
+      "original_width": 375,
+      "original_height": 500,
+      "image_grid_thw": [
+        [
+          1,
+          32,
+          24
+        ]
+      ],
+      "raw_vision_patch_count": 768,
+      "merged_vision_token_estimate": 192,
+      "image_decode_ms": 1.6666091978549957,
+      "processor_ms": 2.4476940743625164,
+      "host_to_device_ms": 2.1391480695456266,
+      "generation_ms": 113.70363994501531,
+      "postprocess_ms": 0.0606318935751915,
+      "end_to_end_ms": 120.2311881352216,
+      "peak_gpu_memory_mb": 8535.37060546875
+    },
+    {
+      "idx": 1413,
+      "type": "2D",
+      "task": "Relation",
+      "stratum": "Relation::COCO 2017 Validation Set",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "filename": "img/2D/relation/coco_64.png",
+      "prompt": "Considering the relative positions of the refrigerator and the backpack in the image provided, where is the refrigerator located with respect to the backpack? Select from the following choices.\n(A) left\n(B) right",
+      "choices": [
+        "left",
+        "right"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) right",
+      "output_token_count": 4,
+      "input_token_count": 309,
+      "original_width": 640,
+      "original_height": 426,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          40
+        ]
+      ],
+      "raw_vision_patch_count": 1040,
+      "merged_vision_token_estimate": 260,
+      "image_decode_ms": 1.6605309210717678,
+      "processor_ms": 3.2008890993893147,
+      "host_to_device_ms": 3.17608704790473,
+      "generation_ms": 136.20597519911826,
+      "postprocess_ms": 0.062496867030858994,
+      "end_to_end_ms": 144.5391708984971,
+      "peak_gpu_memory_mb": 8556.6728515625
+    },
+    {
+      "idx": 1482,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_44.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the lamp (highlighted by a red box) or the counter (highlighted by a blue box)?\n(A) lamp\n(B) counter",
+      "choices": [
+        "lamp",
+        "counter"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) lamp",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.7377409860491753,
+      "processor_ms": 9.78541700169444,
+      "host_to_device_ms": 9.744629031047225,
+      "generation_ms": 217.66254398971796,
+      "postprocess_ms": 0.11038314551115036,
+      "end_to_end_ms": 240.32947700470686,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1501,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_63.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the bookcase (highlighted by a red box) or the table (highlighted by a blue box)?\n(A) bookcase\n(B) table",
+      "choices": [
+        "bookcase",
+        "table"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(A) bookcase",
+      "output_token_count": 5,
+      "input_token_count": 819,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.028466831892729,
+      "processor_ms": 10.24888502433896,
+      "host_to_device_ms": 10.393914999440312,
+      "generation_ms": 247.66009207814932,
+      "postprocess_ms": 0.07746717892587185,
+      "end_to_end_ms": 271.6914580669254,
+      "peak_gpu_memory_mb": 8698.98828125
+    },
+    {
+      "idx": 1506,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_68.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the television (highlighted by a red box) or the lamp (highlighted by a blue box)?\n(A) television\n(B) lamp",
+      "choices": [
+        "television",
+        "lamp"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) lamp",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.67185496725142,
+      "processor_ms": 10.08945400826633,
+      "host_to_device_ms": 12.819824973121285,
+      "generation_ms": 220.19044705666602,
+      "postprocess_ms": 0.06642495281994343,
+      "end_to_end_ms": 247.11458501406014,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1543,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_105.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the refrigerator (highlighted by a red box) or the lamp (highlighted by a blue box)?\n(A) refrigerator\n(B) lamp",
+      "choices": [
+        "refrigerator",
+        "lamp"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) lamp",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.7864589355885983,
+      "processor_ms": 10.125492932274938,
+      "host_to_device_ms": 10.151959955692291,
+      "generation_ms": 221.84291202574968,
+      "postprocess_ms": 0.07039890624582767,
+      "end_to_end_ms": 245.25491101667285,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1544,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_106.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the books (highlighted by a red box) or the bookcase (highlighted by a blue box)?\n(A) books\n(B) bookcase",
+      "choices": [
+        "books",
+        "bookcase"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) books",
+      "output_token_count": 4,
+      "input_token_count": 819,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.3154089469462633,
+      "processor_ms": 10.359416017308831,
+      "host_to_device_ms": 14.403511071577668,
+      "generation_ms": 219.58150109276175,
+      "postprocess_ms": 0.07840991020202637,
+      "end_to_end_ms": 248.0329219251871,
+      "peak_gpu_memory_mb": 8698.98828125
+    },
+    {
+      "idx": 1549,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_111.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the pillow (highlighted by a red box) or the television (highlighted by a blue box)?\n(A) pillow\n(B) television",
+      "choices": [
+        "pillow",
+        "television"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) pillow",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.722193021327257,
+      "processor_ms": 10.099214967340231,
+      "host_to_device_ms": 11.323868064209819,
+      "generation_ms": 221.6135219205171,
+      "postprocess_ms": 0.06823218427598476,
+      "end_to_end_ms": 246.12838285975158,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1554,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_116.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the lamp (highlighted by a red box) or the television (highlighted by a blue box)?\n(A) lamp\n(B) television",
+      "choices": [
+        "lamp",
+        "television"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) lamp",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.6980921868234873,
+      "processor_ms": 10.030098026618361,
+      "host_to_device_ms": 10.329692158848047,
+      "generation_ms": 225.0600322149694,
+      "postprocess_ms": 0.0724338460713625,
+      "end_to_end_ms": 249.4706700090319,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1573,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_135.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the pillow (highlighted by a red box) or the mirror (highlighted by a blue box)?\n(A) pillow\n(B) mirror",
+      "choices": [
+        "pillow",
+        "mirror"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) mirror",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.865337999537587,
+      "processor_ms": 10.125036118552089,
+      "host_to_device_ms": 14.404131099581718,
+      "generation_ms": 219.98168621212244,
+      "postprocess_ms": 0.07410603575408459,
+      "end_to_end_ms": 247.7270090021193,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1576,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_138.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the sofa (highlighted by a red box) or the door (highlighted by a blue box)?\n(A) sofa\n(B) door",
+      "choices": [
+        "sofa",
+        "door"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) door",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.5475460570305586,
+      "processor_ms": 10.096821933984756,
+      "host_to_device_ms": 10.583569062873721,
+      "generation_ms": 222.082237014547,
+      "postprocess_ms": 0.089969951659441,
+      "end_to_end_ms": 245.6806399859488,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1601,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/depth/omni3d_hypersim_163.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the sofa (highlighted by a red box) or the counter (highlighted by a blue box)?\n(A) sofa\n(B) counter",
+      "choices": [
+        "sofa",
+        "counter"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) sofa",
+      "output_token_count": 4,
+      "input_token_count": 817,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.8729611076414585,
+      "processor_ms": 9.9569340236485,
+      "host_to_device_ms": 11.658897157758474,
+      "generation_ms": 220.84414982236922,
+      "postprocess_ms": 0.07114792242646217,
+      "end_to_end_ms": 245.68758299574256,
+      "peak_gpu_memory_mb": 8698.8134765625
+    },
+    {
+      "idx": 1649,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_11.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the bin (highlighted by a red box) or the refrigerator (highlighted by a blue box)?\n(A) bin\n(B) refrigerator",
+      "choices": [
+        "bin",
+        "refrigerator"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) bin",
+      "output_token_count": 4,
+      "input_token_count": 440,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.660055946558714,
+      "processor_ms": 5.64752402715385,
+      "host_to_device_ms": 4.3020599987357855,
+      "generation_ms": 151.62916691042483,
+      "postprocess_ms": 0.0646570697426796,
+      "end_to_end_ms": 163.5463039856404,
+      "peak_gpu_memory_mb": 8586.0419921875
+    },
+    {
+      "idx": 1670,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_32.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the box (highlighted by a red box) or the chair (highlighted by a blue box)?\n(A) box\n(B) chair",
+      "choices": [
+        "box",
+        "chair"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) chair",
+      "output_token_count": 4,
+      "input_token_count": 301,
+      "original_width": 591,
+      "original_height": 441,
+      "image_grid_thw": [
+        [
+          1,
+          28,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 1008,
+      "merged_vision_token_estimate": 252,
+      "image_decode_ms": 1.2818349059671164,
+      "processor_ms": 3.4785920288413763,
+      "host_to_device_ms": 2.7924031019210815,
+      "generation_ms": 132.29563692584634,
+      "postprocess_ms": 0.06431899964809418,
+      "end_to_end_ms": 140.15327906236053,
+      "peak_gpu_memory_mb": 8552.892578125
+    },
+    {
+      "idx": 1684,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_46.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the towel (highlighted by a red box) or the faucet (highlighted by a blue box)?\n(A) towel\n(B) faucet",
+      "choices": [
+        "towel",
+        "faucet"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) faucet",
+      "output_token_count": 4,
+      "input_token_count": 283,
+      "original_width": 561,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 936,
+      "merged_vision_token_estimate": 234,
+      "image_decode_ms": 1.1333099100738764,
+      "processor_ms": 3.2079031225293875,
+      "host_to_device_ms": 2.6508800219744444,
+      "generation_ms": 133.50904383696616,
+      "postprocess_ms": 0.06323517300188541,
+      "end_to_end_ms": 140.7942739315331,
+      "peak_gpu_memory_mb": 8548.05712890625
+    },
+    {
+      "idx": 1714,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_76.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the lamp (highlighted by a red box) or the chair (highlighted by a blue box)?\n(A) lamp\n(B) chair",
+      "choices": [
+        "lamp",
+        "chair"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) chair",
+      "output_token_count": 4,
+      "input_token_count": 440,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.7312290146946907,
+      "processor_ms": 5.3616000805050135,
+      "host_to_device_ms": 6.886632181704044,
+      "generation_ms": 145.1413668692112,
+      "postprocess_ms": 0.07341103628277779,
+      "end_to_end_ms": 159.4540469814092,
+      "peak_gpu_memory_mb": 8586.0419921875
+    },
+    {
+      "idx": 1741,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_103.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the picture (highlighted by a blue box)?\n(A) table\n(B) picture",
+      "choices": [
+        "table",
+        "picture"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) table",
+      "output_token_count": 4,
+      "input_token_count": 283,
+      "original_width": 561,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 936,
+      "merged_vision_token_estimate": 234,
+      "image_decode_ms": 1.1430769227445126,
+      "processor_ms": 3.3129879739135504,
+      "host_to_device_ms": 2.6279320009052753,
+      "generation_ms": 131.27340096980333,
+      "postprocess_ms": 0.0776899978518486,
+      "end_to_end_ms": 138.70000396855175,
+      "peak_gpu_memory_mb": 8548.05712890625
+    },
+    {
+      "idx": 1759,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_121.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the keyboard (highlighted by a red box) or the chair (highlighted by a blue box)?\n(A) keyboard\n(B) chair",
+      "choices": [
+        "keyboard",
+        "chair"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) keyboard",
+      "output_token_count": 4,
+      "input_token_count": 440,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.6762639861553907,
+      "processor_ms": 5.326606100425124,
+      "host_to_device_ms": 4.253579070791602,
+      "generation_ms": 147.37663813866675,
+      "postprocess_ms": 0.0657730270177126,
+      "end_to_end_ms": 158.96219690330327,
+      "peak_gpu_memory_mb": 8586.0419921875
+    },
+    {
+      "idx": 1762,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_124.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the pillow (highlighted by a blue box)?\n(A) table\n(B) pillow",
+      "choices": [
+        "table",
+        "pillow"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) pillow",
+      "output_token_count": 4,
+      "input_token_count": 301,
+      "original_width": 591,
+      "original_height": 441,
+      "image_grid_thw": [
+        [
+          1,
+          28,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 1008,
+      "merged_vision_token_estimate": 252,
+      "image_decode_ms": 1.166346948593855,
+      "processor_ms": 3.5262717865407467,
+      "host_to_device_ms": 2.858154010027647,
+      "generation_ms": 132.772961165756,
+      "postprocess_ms": 0.071320915594697,
+      "end_to_end_ms": 140.6305229756981,
+      "peak_gpu_memory_mb": 8552.892578125
+    },
+    {
+      "idx": 1790,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_152.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the picture (highlighted by a red box) or the keyboard (highlighted by a blue box)?\n(A) picture\n(B) keyboard",
+      "choices": [
+        "picture",
+        "keyboard"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) keyboard",
+      "output_token_count": 4,
+      "input_token_count": 283,
+      "original_width": 561,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 936,
+      "merged_vision_token_estimate": 234,
+      "image_decode_ms": 1.2219538912177086,
+      "processor_ms": 3.1606319826096296,
+      "host_to_device_ms": 2.620251849293709,
+      "generation_ms": 130.77288400381804,
+      "postprocess_ms": 0.07092207670211792,
+      "end_to_end_ms": 138.07917502708733,
+      "peak_gpu_memory_mb": 8548.05712890625
+    },
+    {
+      "idx": 1812,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_174.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the dresser (highlighted by a red box) or the lamp (highlighted by a blue box)?\n(A) dresser\n(B) lamp",
+      "choices": [
+        "dresser",
+        "lamp"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) lamp",
+      "output_token_count": 4,
+      "input_token_count": 440,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.7278899904340506,
+      "processor_ms": 5.333506036549807,
+      "host_to_device_ms": 4.2560959700495005,
+      "generation_ms": 145.00938588753343,
+      "postprocess_ms": 0.07256888784468174,
+      "end_to_end_ms": 156.68449294753373,
+      "peak_gpu_memory_mb": 8586.0419921875
+    },
+    {
+      "idx": 1829,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/depth/omni3d_sunrgbd_191.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the chair (highlighted by a blue box)?\n(A) table\n(B) chair",
+      "choices": [
+        "table",
+        "chair"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) chair",
+      "output_token_count": 4,
+      "input_token_count": 440,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.6134351026266813,
+      "processor_ms": 5.415044026449323,
+      "host_to_device_ms": 4.316606093198061,
+      "generation_ms": 149.72607395611703,
+      "postprocess_ms": 0.07077609188854694,
+      "end_to_end_ms": 161.4105619955808,
+      "peak_gpu_memory_mb": 8586.0419921875
+    },
+    {
+      "idx": 1844,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_6.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the truck (highlighted by a red box) or the pedestrian (highlighted by a blue box)?\n(A) truck\n(B) pedestrian",
+      "choices": [
+        "truck",
+        "pedestrian"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) truck",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.97276009991765,
+      "processor_ms": 22.766093024984002,
+      "host_to_device_ms": 20.074979169294238,
+      "generation_ms": 334.5330241136253,
+      "postprocess_ms": 0.07080100476741791,
+      "end_to_end_ms": 382.7190031297505,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1845,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_7.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the car (highlighted by a red box) or the motorcycle (highlighted by a blue box)?\n(A) car\n(B) motorcycle",
+      "choices": [
+        "car",
+        "motorcycle"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) motorcycle",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 5.0279858987778425,
+      "processor_ms": 22.372933104634285,
+      "host_to_device_ms": 19.948027096688747,
+      "generation_ms": 340.35126096569,
+      "postprocess_ms": 0.07297098636627197,
+      "end_to_end_ms": 388.06697307154536,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1850,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_12.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the motorcycle (highlighted by a red box) or the pedestrian (highlighted by a blue box)?\n(A) motorcycle\n(B) pedestrian",
+      "choices": [
+        "motorcycle",
+        "pedestrian"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) pedestrian",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.7736698761582375,
+      "processor_ms": 22.402575006708503,
+      "host_to_device_ms": 16.202808124944568,
+      "generation_ms": 340.2327289804816,
+      "postprocess_ms": 0.06690085865557194,
+      "end_to_end_ms": 383.9694478083402,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1857,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_19.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the truck (highlighted by a red box) or the pedestrian (highlighted by a blue box)?\n(A) truck\n(B) pedestrian",
+      "choices": [
+        "truck",
+        "pedestrian"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) pedestrian",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 5.210505798459053,
+      "processor_ms": 22.41409500129521,
+      "host_to_device_ms": 19.27326084114611,
+      "generation_ms": 337.33298000879586,
+      "postprocess_ms": 0.07892888970673084,
+      "end_to_end_ms": 384.59950289689004,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1886,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_48.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the trailer (highlighted by a red box) or the bus (highlighted by a blue box)?\n(A) trailer\n(B) bus",
+      "choices": [
+        "trailer",
+        "bus"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) trailer",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.813844803720713,
+      "processor_ms": 23.041874170303345,
+      "host_to_device_ms": 19.221343100070953,
+      "generation_ms": 335.5215759947896,
+      "postprocess_ms": 0.07429788820445538,
+      "end_to_end_ms": 382.97207513824105,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1921,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_83.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the car (highlighted by a red box) or the bus (highlighted by a blue box)?\n(A) car\n(B) bus",
+      "choices": [
+        "car",
+        "bus"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) car",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.443559097126126,
+      "processor_ms": 27.732206974178553,
+      "host_to_device_ms": 17.754792934283614,
+      "generation_ms": 340.7827061600983,
+      "postprocess_ms": 0.07848185487091541,
+      "end_to_end_ms": 391.0805890336633,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1931,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_93.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the bus (highlighted by a red box) or the truck (highlighted by a blue box)?\n(A) bus\n(B) truck",
+      "choices": [
+        "bus",
+        "truck"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) truck",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.628916038200259,
+      "processor_ms": 22.39327784627676,
+      "host_to_device_ms": 18.65093596279621,
+      "generation_ms": 340.18422896042466,
+      "postprocess_ms": 0.07230392657220364,
+      "end_to_end_ms": 386.21743908151984,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1960,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_122.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the bus (highlighted by a red box) or the pedestrian (highlighted by a blue box)?\n(A) bus\n(B) pedestrian",
+      "choices": [
+        "bus",
+        "pedestrian"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) pedestrian",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.680673824623227,
+      "processor_ms": 24.519552942365408,
+      "host_to_device_ms": 19.96983983553946,
+      "generation_ms": 338.2365850266069,
+      "postprocess_ms": 0.06775185465812683,
+      "end_to_end_ms": 387.757551856339,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 1973,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_135.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the traffic cone (highlighted by a red box) or the trailer (highlighted by a blue box)?\n(A) traffic cone\n(B) trailer",
+      "choices": [
+        "traffic cone",
+        "trailer"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) traffic cone",
+      "output_token_count": 5,
+      "input_token_count": 1451,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.351693205535412,
+      "processor_ms": 29.62935483083129,
+      "host_to_device_ms": 20.13648604042828,
+      "generation_ms": 359.4675208441913,
+      "postprocess_ms": 0.06629596464335918,
+      "end_to_end_ms": 413.93904900178313,
+      "peak_gpu_memory_mb": 8849.6611328125
+    },
+    {
+      "idx": 2020,
+      "type": "3D",
+      "task": "Depth",
+      "stratum": "Depth::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/depth/omni3d_nuscenes_182.jpg",
+      "prompt": "Which object is closer to the camera taking this photo, the car (highlighted by a red box) or the truck (highlighted by a blue box)?\n(A) car\n(B) truck",
+      "choices": [
+        "car",
+        "truck"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) truck",
+      "output_token_count": 4,
+      "input_token_count": 1449,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.59788111038506,
+      "processor_ms": 27.725904947146773,
+      "host_to_device_ms": 18.509561894461513,
+      "generation_ms": 335.1440979167819,
+      "postprocess_ms": 0.07986719720065594,
+      "end_to_end_ms": 386.33875199593604,
+      "peak_gpu_memory_mb": 8849.46435546875
+    },
+    {
+      "idx": 2050,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_12.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the door (highlighted by a blue box) or the bookcase (highlighted by a green box)?\n(A) door\n(B) bookcase",
+      "choices": [
+        "door",
+        "bookcase"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) bookcase",
+      "output_token_count": 5,
+      "input_token_count": 835,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.524204785004258,
+      "processor_ms": 9.360619122162461,
+      "host_to_device_ms": 9.887577034533024,
+      "generation_ms": 247.03691015020013,
+      "postprocess_ms": 0.07503898814320564,
+      "end_to_end_ms": 269.220702117309,
+      "peak_gpu_memory_mb": 8703.65087890625
+    },
+    {
+      "idx": 2104,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_66.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the pillow (highlighted by a red box), the table (highlighted by a blue box) or the lamp (highlighted by a green box)?\n(A) table\n(B) lamp",
+      "choices": [
+        "table",
+        "lamp"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) table",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.5798871647566557,
+      "processor_ms": 9.331699926406145,
+      "host_to_device_ms": 14.173889067023993,
+      "generation_ms": 221.98941698297858,
+      "postprocess_ms": 0.07053697481751442,
+      "end_to_end_ms": 248.4268608968705,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2115,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_77.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the sofa (highlighted by a red box), the table (highlighted by a blue box) or the shelves (highlighted by a green box)?\n(A) table\n(B) shelves",
+      "choices": [
+        "table",
+        "shelves"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) table",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.2585759181529284,
+      "processor_ms": 10.040807072073221,
+      "host_to_device_ms": 10.652255965396762,
+      "generation_ms": 223.72595104388893,
+      "postprocess_ms": 0.06958493031561375,
+      "end_to_end_ms": 248.04603192023933,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2142,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_104.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the towel (highlighted by a red box), the mirror (highlighted by a blue box) or the television (highlighted by a green box)?\n(A) mirror\n(B) television",
+      "choices": [
+        "mirror",
+        "television"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) mirror",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 2.567935036495328,
+      "processor_ms": 10.276546003296971,
+      "host_to_device_ms": 14.079519780352712,
+      "generation_ms": 225.58441292494535,
+      "postprocess_ms": 0.06490200757980347,
+      "end_to_end_ms": 252.8451371472329,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2152,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_114.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the door (highlighted by a blue box) or the lamp (highlighted by a green box)?\n(A) door\n(B) lamp",
+      "choices": [
+        "door",
+        "lamp"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) lamp",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.151167882606387,
+      "processor_ms": 10.080668842419982,
+      "host_to_device_ms": 10.352646000683308,
+      "generation_ms": 223.57423300854862,
+      "postprocess_ms": 0.06887293420732021,
+      "end_to_end_ms": 247.52687104046345,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2160,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_122.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the table (highlighted by a blue box) or the television (highlighted by a green box)?\n(A) table\n(B) television",
+      "choices": [
+        "table",
+        "television"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) table",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.4697880037128925,
+      "processor_ms": 10.087172966450453,
+      "host_to_device_ms": 14.425324043259025,
+      "generation_ms": 222.5762950256467,
+      "postprocess_ms": 0.06809993647038937,
+      "end_to_end_ms": 250.91004092246294,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2174,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_136.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the table (highlighted by a red box), the lamp (highlighted by a blue box) or the television (highlighted by a green box)?\n(A) lamp\n(B) television",
+      "choices": [
+        "lamp",
+        "television"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) lamp",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.2910110894590616,
+      "processor_ms": 10.089884046465158,
+      "host_to_device_ms": 10.465546045452356,
+      "generation_ms": 225.08968506008387,
+      "postprocess_ms": 0.08755596354603767,
+      "end_to_end_ms": 249.30505314841866,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2188,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_150.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the lamp (highlighted by a red box), the table (highlighted by a blue box) or the door (highlighted by a green box)?\n(A) table\n(B) door",
+      "choices": [
+        "table",
+        "door"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) table",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.2761460170149803,
+      "processor_ms": 10.037759086117148,
+      "host_to_device_ms": 14.664634829387069,
+      "generation_ms": 223.16599101759493,
+      "postprocess_ms": 0.06992998532950878,
+      "end_to_end_ms": 251.50223611854017,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2193,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_155.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the table (highlighted by a red box), the books (highlighted by a blue box) or the chair (highlighted by a green box)?\n(A) books\n(B) chair",
+      "choices": [
+        "books",
+        "chair"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) books",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.4176839981228113,
+      "processor_ms": 10.037377942353487,
+      "host_to_device_ms": 10.31324197538197,
+      "generation_ms": 225.0003181397915,
+      "postprocess_ms": 0.07343105971813202,
+      "end_to_end_ms": 249.12691791541874,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2217,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_Hypersim",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "filename": "img/3D/distance/omni3d_hypersim_179.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the lamp (highlighted by a blue box) or the door (highlighted by a green box)?\n(A) lamp\n(B) door",
+      "choices": [
+        "lamp",
+        "door"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) lamp",
+      "output_token_count": 4,
+      "input_token_count": 833,
+      "original_width": 1024,
+      "original_height": 768,
+      "image_grid_thw": [
+        [
+          1,
+          48,
+          64
+        ]
+      ],
+      "raw_vision_patch_count": 3072,
+      "merged_vision_token_estimate": 768,
+      "image_decode_ms": 3.2550061587244272,
+      "processor_ms": 10.092701995745301,
+      "host_to_device_ms": 14.380792854353786,
+      "generation_ms": 224.4303619954735,
+      "postprocess_ms": 0.0687579158693552,
+      "end_to_end_ms": 252.52248882316053,
+      "peak_gpu_memory_mb": 8703.46826171875
+    },
+    {
+      "idx": 2251,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_13.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the night stand (highlighted by a red box), the lamp (highlighted by a blue box) or the bed (highlighted by a green box)?\n(A) lamp\n(B) bed",
+      "choices": [
+        "lamp",
+        "bed"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) bed",
+      "output_token_count": 4,
+      "input_token_count": 457,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.7224701587110758,
+      "processor_ms": 5.661922972649336,
+      "host_to_device_ms": 6.014449987560511,
+      "generation_ms": 152.85206586122513,
+      "postprocess_ms": 0.06919889710843563,
+      "end_to_end_ms": 166.5891099255532,
+      "peak_gpu_memory_mb": 8589.72216796875
+    },
+    {
+      "idx": 2267,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_29.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the tray (highlighted by a red box), the box (highlighted by a blue box) or the chair (highlighted by a green box)?\n(A) box\n(B) chair",
+      "choices": [
+        "box",
+        "chair"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) chair",
+      "output_token_count": 4,
+      "input_token_count": 299,
+      "original_width": 561,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 936,
+      "merged_vision_token_estimate": 234,
+      "image_decode_ms": 1.144113950431347,
+      "processor_ms": 3.3445069566369057,
+      "host_to_device_ms": 2.608990063890815,
+      "generation_ms": 130.59540395624936,
+      "postprocess_ms": 0.07297308184206486,
+      "end_to_end_ms": 137.99831992946565,
+      "peak_gpu_memory_mb": 8551.3623046875
+    },
+    {
+      "idx": 2269,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_31.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the chair (highlighted by a red box), the tray (highlighted by a blue box) or the box (highlighted by a green box)?\n(A) tray\n(B) box",
+      "choices": [
+        "tray",
+        "box"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) tray",
+      "output_token_count": 4,
+      "input_token_count": 299,
+      "original_width": 561,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 936,
+      "merged_vision_token_estimate": 234,
+      "image_decode_ms": 1.1621678713709116,
+      "processor_ms": 3.2288949005305767,
+      "host_to_device_ms": 3.4509149845689535,
+      "generation_ms": 134.28747514262795,
+      "postprocess_ms": 0.06758421659469604,
+      "end_to_end_ms": 142.4362810794264,
+      "peak_gpu_memory_mb": 8551.3623046875
+    },
+    {
+      "idx": 2293,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_55.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the monitor (highlighted by a red box), the keyboard (highlighted by a blue box) or the chair (highlighted by a green box)?\n(A) keyboard\n(B) chair",
+      "choices": [
+        "keyboard",
+        "chair"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) keyboard",
+      "output_token_count": 4,
+      "input_token_count": 456,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.5824860893189907,
+      "processor_ms": 5.295278038829565,
+      "host_to_device_ms": 4.307110793888569,
+      "generation_ms": 145.9523879457265,
+      "postprocess_ms": 0.07594586350023746,
+      "end_to_end_ms": 157.47542586177588,
+      "peak_gpu_memory_mb": 8589.50537109375
+    },
+    {
+      "idx": 2309,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_71.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the lamp (highlighted by a red box), the chair (highlighted by a blue box) or the night stand (highlighted by a green box)?\n(A) chair\n(B) night stand",
+      "choices": [
+        "chair",
+        "night stand"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) night stand",
+      "output_token_count": 5,
+      "input_token_count": 458,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.5085609629750252,
+      "processor_ms": 5.463266978040338,
+      "host_to_device_ms": 4.304688889533281,
+      "generation_ms": 170.04736908711493,
+      "postprocess_ms": 0.09390199556946754,
+      "end_to_end_ms": 181.69447989203036,
+      "peak_gpu_memory_mb": 8589.93798828125
+    },
+    {
+      "idx": 2385,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_147.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the mouse (highlighted by a red box), the chair (highlighted by a blue box) or the keyboard (highlighted by a green box)?\n(A) chair\n(B) keyboard",
+      "choices": [
+        "chair",
+        "keyboard"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) keyboard",
+      "output_token_count": 4,
+      "input_token_count": 456,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.8084058538079262,
+      "processor_ms": 5.403961054980755,
+      "host_to_device_ms": 4.398561082780361,
+      "generation_ms": 148.65561807528138,
+      "postprocess_ms": 0.08176802657544613,
+      "end_to_end_ms": 160.61535105109215,
+      "peak_gpu_memory_mb": 8589.50537109375
+    },
+    {
+      "idx": 2386,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_148.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the monitor (highlighted by a red box), the mouse (highlighted by a blue box) or the chair (highlighted by a green box)?\n(A) mouse\n(B) chair",
+      "choices": [
+        "mouse",
+        "chair"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) mouse",
+      "output_token_count": 4,
+      "input_token_count": 456,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.7141848802566528,
+      "processor_ms": 5.475236102938652,
+      "host_to_device_ms": 4.30490099824965,
+      "generation_ms": 151.0159969329834,
+      "postprocess_ms": 0.07400196045637131,
+      "end_to_end_ms": 162.84974291920662,
+      "peak_gpu_memory_mb": 8589.50537109375
+    },
+    {
+      "idx": 2394,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_156.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the box (highlighted by a red box), the monitor (highlighted by a blue box) or the chair (highlighted by a green box)?\n(A) monitor\n(B) chair",
+      "choices": [
+        "monitor",
+        "chair"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) chair",
+      "output_token_count": 4,
+      "input_token_count": 299,
+      "original_width": 561,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 936,
+      "merged_vision_token_estimate": 234,
+      "image_decode_ms": 1.1209750082343817,
+      "processor_ms": 3.3515531104058027,
+      "host_to_device_ms": 2.652292139828205,
+      "generation_ms": 131.26956997439265,
+      "postprocess_ms": 0.07570185698568821,
+      "end_to_end_ms": 138.70960799977183,
+      "peak_gpu_memory_mb": 8551.3623046875
+    },
+    {
+      "idx": 2397,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_159.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the desk (highlighted by a red box), the table (highlighted by a blue box) or the monitor (highlighted by a green box)?\n(A) table\n(B) monitor",
+      "choices": [
+        "table",
+        "monitor"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) monitor",
+      "output_token_count": 4,
+      "input_token_count": 456,
+      "original_width": 730,
+      "original_height": 530,
+      "image_grid_thw": [
+        [
+          1,
+          34,
+          46
+        ]
+      ],
+      "raw_vision_patch_count": 1564,
+      "merged_vision_token_estimate": 391,
+      "image_decode_ms": 1.7274769488722086,
+      "processor_ms": 5.566803039982915,
+      "host_to_device_ms": 3.8082499522715807,
+      "generation_ms": 153.11056887730956,
+      "postprocess_ms": 0.07030111737549305,
+      "end_to_end_ms": 164.55495008267462,
+      "peak_gpu_memory_mb": 8589.50537109375
+    },
+    {
+      "idx": 2430,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_SUNRGBD",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "filename": "img/3D/distance/omni3d_sunrgbd_192.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the table (highlighted by a red box), the sofa (highlighted by a blue box) or the chair (highlighted by a green box)?\n(A) sofa\n(B) chair",
+      "choices": [
+        "sofa",
+        "chair"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) sofa",
+      "output_token_count": 4,
+      "input_token_count": 299,
+      "original_width": 561,
+      "original_height": 427,
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          36
+        ]
+      ],
+      "raw_vision_patch_count": 936,
+      "merged_vision_token_estimate": 234,
+      "image_decode_ms": 1.2589560355991125,
+      "processor_ms": 3.2948539592325687,
+      "host_to_device_ms": 2.558628795668483,
+      "generation_ms": 134.5176340546459,
+      "postprocess_ms": 0.0707369763404131,
+      "end_to_end_ms": 141.95431000553071,
+      "peak_gpu_memory_mb": 8551.3623046875
+    },
+    {
+      "idx": 2442,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_4.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the bus (highlighted by a red box), the truck (highlighted by a blue box) or the trailer (highlighted by a green box)?\n(A) truck\n(B) trailer",
+      "choices": [
+        "truck",
+        "trailer"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) truck",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.573597107082605,
+      "processor_ms": 22.971394006162882,
+      "host_to_device_ms": 17.400083830580115,
+      "generation_ms": 347.3569091875106,
+      "postprocess_ms": 0.07578195072710514,
+      "end_to_end_ms": 392.6674460526556,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2457,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_19.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the motorcycle (highlighted by a red box), the bus (highlighted by a blue box) or the car (highlighted by a green box)?\n(A) bus\n(B) car",
+      "choices": [
+        "bus",
+        "car"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(A) bus",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.9557979218661785,
+      "processor_ms": 22.8155548684299,
+      "host_to_device_ms": 20.1286100782454,
+      "generation_ms": 344.82625708915293,
+      "postprocess_ms": 0.10035000741481781,
+      "end_to_end_ms": 393.12977995723486,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2462,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_24.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the car (highlighted by a red box), the bus (highlighted by a blue box) or the trailer (highlighted by a green box)?\n(A) bus\n(B) trailer",
+      "choices": [
+        "bus",
+        "trailer"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) trailer",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.510901868343353,
+      "processor_ms": 22.773609962314367,
+      "host_to_device_ms": 19.063935847952962,
+      "generation_ms": 343.9034700859338,
+      "postprocess_ms": 0.08577294647693634,
+      "end_to_end_ms": 390.655955998227,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2471,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_33.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the trailer (highlighted by a red box), the bus (highlighted by a blue box) or the truck (highlighted by a green box)?\n(A) bus\n(B) truck",
+      "choices": [
+        "bus",
+        "truck"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) truck",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.698944045230746,
+      "processor_ms": 28.73557200655341,
+      "host_to_device_ms": 18.591964151710272,
+      "generation_ms": 346.0065689869225,
+      "postprocess_ms": 0.06676395423710346,
+      "end_to_end_ms": 398.39075203053653,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2494,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_56.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the motorcycle (highlighted by a red box), the pedestrian (highlighted by a blue box) or the truck (highlighted by a green box)?\n(A) pedestrian\n(B) truck",
+      "choices": [
+        "pedestrian",
+        "truck"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) pedestrian",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.551628837361932,
+      "processor_ms": 23.626874899491668,
+      "host_to_device_ms": 19.50106304138899,
+      "generation_ms": 348.10602106153965,
+      "postprocess_ms": 0.0813901424407959,
+      "end_to_end_ms": 396.18238317780197,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2525,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_87.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the pedestrian (highlighted by a red box), the motorcycle (highlighted by a blue box) or the bus (highlighted by a green box)?\n(A) motorcycle\n(B) bus",
+      "choices": [
+        "motorcycle",
+        "bus"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) motorcycle",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.359225044026971,
+      "processor_ms": 22.7081801276654,
+      "host_to_device_ms": 17.967722844332457,
+      "generation_ms": 347.19243412837386,
+      "postprocess_ms": 0.06909482181072235,
+      "end_to_end_ms": 392.5883690826595,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2564,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_126.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the pedestrian (highlighted by a red box), the bus (highlighted by a blue box) or the truck (highlighted by a green box)?\n(A) bus\n(B) truck",
+      "choices": [
+        "bus",
+        "truck"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(B) truck",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.534041043370962,
+      "processor_ms": 22.73191185668111,
+      "host_to_device_ms": 14.239173149690032,
+      "generation_ms": 346.95213311351836,
+      "postprocess_ms": 0.09494018740952015,
+      "end_to_end_ms": 388.8533229473978,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2580,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_142.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the truck (highlighted by a red box), the trailer (highlighted by a blue box) or the barrier (highlighted by a green box)?\n(A) trailer\n(B) barrier",
+      "choices": [
+        "trailer",
+        "barrier"
+      ],
+      "ground_truth": "B",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(A) trailer",
+      "output_token_count": 4,
+      "input_token_count": 1465,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.149559885263443,
+      "processor_ms": 22.786879912018776,
+      "host_to_device_ms": 19.260005094110966,
+      "generation_ms": 345.7608041353524,
+      "postprocess_ms": 0.07189903408288956,
+      "end_to_end_ms": 392.31869811192155,
+      "peak_gpu_memory_mb": 8853.646484375
+    },
+    {
+      "idx": 2609,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_171.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the traffic cone (highlighted by a red box), the barrier (highlighted by a blue box) or the car (highlighted by a green box)?\n(A) barrier\n(B) car",
+      "choices": [
+        "barrier",
+        "car"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "A",
+      "parse_success": true,
+      "correct": true,
+      "output_text": "(A) barrier",
+      "output_token_count": 4,
+      "input_token_count": 1466,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 4.157800925895572,
+      "processor_ms": 22.595748072490096,
+      "host_to_device_ms": 18.70701787993312,
+      "generation_ms": 346.23717912472785,
+      "postprocess_ms": 0.08428283035755157,
+      "end_to_end_ms": 392.0977108646184,
+      "peak_gpu_memory_mb": 8853.73046875
+    },
+    {
+      "idx": 2634,
+      "type": "3D",
+      "task": "Distance",
+      "stratum": "Distance::Omni3D_nuScenes",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "filename": "img/3D/distance/omni3d_nuscenes_196.jpg",
+      "prompt": "Estimate the real-world distances between objects in this image. Which object is closer to the pedestrian (highlighted by a red box), the traffic cone (highlighted by a blue box) or the bus (highlighted by a green box)?\n(A) traffic cone\n(B) bus",
+      "choices": [
+        "traffic cone",
+        "bus"
+      ],
+      "ground_truth": "A",
+      "parsed_answer": "B",
+      "parse_success": true,
+      "correct": false,
+      "output_text": "(B) bus",
+      "output_token_count": 4,
+      "input_token_count": 1467,
+      "original_width": 1600,
+      "original_height": 900,
+      "image_grid_thw": [
+        [
+          1,
+          56,
+          100
+        ]
+      ],
+      "raw_vision_patch_count": 5600,
+      "merged_vision_token_estimate": 1400,
+      "image_decode_ms": 5.035600159317255,
+      "processor_ms": 22.6385360583663,
+      "host_to_device_ms": 19.068117951974273,
+      "generation_ms": 347.8929209522903,
+      "postprocess_ms": 0.08757016621530056,
+      "end_to_end_ms": 395.0066091492772,
+      "peak_gpu_memory_mb": 8853.8154296875
+    }
+  ]
+}

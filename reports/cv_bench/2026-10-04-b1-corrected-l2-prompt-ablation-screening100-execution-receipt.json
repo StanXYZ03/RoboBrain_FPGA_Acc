@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "executed_at": "2026-10-04T17:29:11+08:00",
+  "status": "EXECUTED_AND_REPORTED",
+  "preregistration": {
+    "path": "configs/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.preregistered.json",
+    "sha256_at_execution": "80f2db140cc1997ced73f939d40a0b5c172993a73a64ab75d10ea46d5a563319"
+  },
+  "raw_outputs": {
+    "corrected_l2_float": "c9b25550ebf579844779067289d7a63140afefbad7ed8f3d44b5ca518b002ba3",
+    "corrected_l2_integer": "313beb877ceeaf0cbbdf025ff36e306c52ccf8a174cce84fd0532f32c01e6a7d",
+    "prompt_plus_corrected_l2_integer": "fbaf08e5ba69a5ff604ab56c28a2d1cf778f0d24e83561d017b836abf5667b70"
+  },
+  "reports": {
+    "json": "abe35625c8af4bebe68e60eadc9856ae92c8ae9b4075aace5f54850d7ea693a9",
+    "csv": "fcc42a1c673f619b908e1cb6140f72b6b93c6a84a5828dfa1c9df7946c3add85",
+    "markdown": "5661c957739ce291f0682537d2036b23bd7226d7f0d75eb2cf69cb29b4de7a89"
+  },
+  "decision": "CORRECTED_PROMPT_SELECTOR_SCREENING_PASS",
+  "scores": {
+    "corrected_l2_float": 0.7333333333333334,
+    "corrected_l2_integer": 0.7333333333333334,
+    "prompt_plus_corrected_l2_integer": 0.8208333333333333,
+    "dense_descriptive": 0.8916666666666666
+  },
+  "paired_deltas": {
+    "integer_minus_float": {
+      "point": 0.0,
+      "ci95": [0.0, 0.0]
+    },
+    "prompt_minus_integer_l2": {
+      "point": 0.0875,
+      "ci95": [0.0166666666666666, 0.1625]
+    }
+  },
+  "scope": "Fixed screening100 diagnostic; software selector timing is not an FPGA acceleration result."
+}

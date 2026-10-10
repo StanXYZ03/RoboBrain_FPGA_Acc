@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-07",
+  "name": "2026-10-07-cv-bench-edge576-full2638",
+  "edge576": true,
+  "budget_g": 576,
+  "source_manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+    "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+  },
+  "manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+    "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+    "bytes": 3280730,
+    "line_count": 2638
+  },
+  "sample_count": 2638,
+  "unique_sample_id_count": 2638,
+  "all_g_within_budget": true,
+  "g_min": 64,
+  "g_max": 576,
+  "g_mean": 357.06633813495074,
+  "g_median": 300.0,
+  "g_p90": 576.0,
+  "g_p95": 576.0,
+  "g_count_at_budget": 400,
+  "g_histogram": {
+    "g_le_96": 143,
+    "g_97_256": 781,
+    "g_257_512": 706,
+    "g_513_576": 1008
+  },
+  "identity_bypass_count_g_le_96": 143,
+  "compressed_count_g_gt_96": 2495,
+  "source_counts": {
+    "ADE20K": 633,
+    "COCO": 805,
+    "Omni3D": 1200
+  },
+  "task_counts": {
+    "Count": 788,
+    "Depth": 600,
+    "Distance": 600,
+    "Relation": 650
+  },
+  "processing_parameters": {
+    "model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "patch_size": 16,
+    "merge_size": 2,
+    "merge_unit": 4,
+    "resize_factor": 32,
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "keep_aspect_ratio": true,
+    "g_definition": "full_llm_visual_tokens = (image_grid_thw[0]*image_grid_thw[1]*image_grid_thw[2]) // (spatial_merge_size**2)",
+    "g_budget_rule": "full_llm_visual_tokens <= 576"
+  },
+  "model_identity_manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/provenance/robobrain25-4b-model-identity.json",
+    "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+  },
+  "builder": "evaluation/build_edge576_cv_bench_manifest.py",
+  "builder_sha256": "12258b15848e4a31ec96a5c80ff23ed80fe8a24cd536202ab93cffc28f72b48a",
+  "gpu_runs": 0,
+  "weights_loaded": false,
+  "generated_at": "2026-10-07T15:06:13.648059+00:00"
+}

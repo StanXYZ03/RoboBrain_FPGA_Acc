@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0",
+  "report_stem": "2026-10-03-operational-prompt-utility-diagnostic",
+  "status": "OPERATIONAL_PROMPT_UTILITY_NOT_ESTABLISHED",
+  "decision": {
+    "decision": "OPERATIONAL_PROMPT_UTILITY_NOT_ESTABLISHED",
+    "primary_holm_family_all_pass": true,
+    "auxiliary_gates_all_pass": false,
+    "supported": false,
+    "rule": "supported iff P1, P2 and S1-S4 all pass"
+  },
+  "P1": {
+    "mean": 0.13790802027986424,
+    "ci_low": 0.07296440350864655,
+    "ci_high": 0.20580134567873934,
+    "cohens_dz": 0.6503230616003213,
+    "raw_p_value": 0.00039996000399960006,
+    "holm_adjusted_p": 0.0007999200079992001,
+    "positive_seed_count": 3,
+    "seed_means": {
+      "20261003": 0.10529006656094742,
+      "20261004": 0.1146203160238211,
+      "20261005": 0.17803631325037333
+    },
+    "pass": true
+  },
+  "P2": {
+    "mean": 0.08596217161745943,
+    "ci_low": 0.035535334387947266,
+    "ci_high": 0.136800984354009,
+    "cohens_dz": 0.5247209577054234,
+    "raw_p_value": 0.0017998200179982,
+    "holm_adjusted_p": 0.0017998200179982,
+    "positive_seed_count": 3,
+    "seed_means": {
+      "20261003": 0.05264011090850834,
+      "20261004": 0.07395092163614977,
+      "20261005": 0.11319743029975227
+    },
+    "pass": true
+  },
+  "S1": {
+    "pass": false,
+    "grounding_mean": -0.0019252304813808796,
+    "pointing_mean": 0.2877651809180278
+  },
+  "S2": {
+    "pass": true,
+    "mean": 0.05281094218280773
+  },
+  "S3": {
+    "pass": true,
+    "mean": 0.24601759836970738,
+    "threshold": 0.95
+  },
+  "S4": {
+    "pass": true,
+    "prior_gates_all_pass": true,
+    "pins_unchanged": true,
+    "identity_consistent": true
+  },
+  "task_k48": {
+    "grounding": {
+      "B_correct_minus_wrong_gap_mass_mean": -0.0019252304813808796,
+      "B_correct_minus_wrong_gap_ndcg_mean": -0.01483606701455521,
+      "B_correct_wrong_jaccard_mean": 0.24601759836970738
+    },
+    "pointing": {
+      "B_correct_minus_wrong_gap_mass_mean": 0.2877651809180278,
+      "B_correct_minus_wrong_gap_ndcg_mean": 0.1259249416593184,
+      "B_correct_wrong_jaccard_mean": 0.24601759836970738
+    }
+  },
+  "budget_summary": {
+    "k48": {
+      "B_correct_minus_wrong_gap_mass": {
+        "n_images": 38,
+        "mean": 0.13790802027986424,
+        "median": 0.08466202360928154,
+        "ci_low": 0.07296440350864655,
+        "ci_high": 0.20580134567873934,
+        "cohens_dz": 0.6503230616003213,
+        "p_value_two_sided": 0.00039996000399960006,
+        "better": 28,
+        "equal": 1,
+        "worse": 9
+      },
+      "A_correct_minus_wrong_gap_mass": {
+        "n_images": 38,
+        "mean": 0.051945848662404794,
+        "median": 0.013785188635041905,
+        "ci_low": 0.017448126814102793,
+        "ci_high": 0.08955861334701214,
+        "cohens_dz": 0.4499872501865909,
+        "p_value_two_sided": 0.0057994200579942,
+        "better": 24,
+        "equal": 3,
+        "worse": 11
+      }
+    },
+    "k64": {
+      "B_correct_minus_wrong_gap_mass": {
+        "n_images": 38,
+        "mean": 0.13379637165949534,
+        "median": 0.07405633420616745,
+        "ci_low": 0.06833320257637418,
+        "ci_high": 0.19892231708814437,
+        "cohens_dz": 0.6502061565401982,
+        "p_value_two_sided": 0.00039996000399960006,
+        "better": 27,
+        "equal": 0,
+        "worse": 11
+      },
+      "A_correct_minus_wrong_gap_mass": {
+        "n_images": 38,
+        "mean": 0.05413351349743794,
+        "median": 0.01490088747576404,
+        "ci_low": 0.020404979793422533,
+        "ci_high": 0.09164737687436066,
+        "cohens_dz": 0.4649318007317558,
+        "p_value_two_sided": 0.004399560043995601,
+        "better": 26,
+        "equal": 2,
+        "worse": 10
+      }
+    },
+    "k96": {
+      "B_correct_minus_wrong_gap_mass": {
+        "n_images": 38,
+        "mean": 0.1175204599114728,
+        "median": 0.06131269075746739,
+        "ci_low": 0.04354743084439203,
+        "ci_high": 0.19338273383776258,
+        "cohens_dz": 0.5130863640206382,
+        "p_value_two_sided": 0.0028997100289971,
+        "better": 25,
+        "equal": 0,
+        "worse": 13
+      },
+      "A_correct_minus_wrong_gap_mass": {
+        "n_images": 38,
+        "mean": 0.016056984756265345,
+        "median": 0.006362214356536919,
+        "ci_low": -0.01296641010451491,
+        "ci_high": 0.047061791194510115,
+        "cohens_dz": 0.16768718605192579,
+        "p_value_two_sided": 0.31326867313268675,
+        "better": 21,
+        "equal": 1,
+        "worse": 16
+      }
+    }
+  },
+  "k48_jaccard": {
+    "n_images": 38,
+    "mean": 0.24601759836970738,
+    "median": 0.23076923076923078,
+    "ci_low": 0.2196415651850603,
+    "ci_high": 0.27370483473644763,
+    "cohens_dz": 2.7520366957764346,
+    "p_value_two_sided": 9.999000099990002e-05,
+    "better": 38,
+    "equal": 0,
+    "worse": 0
+  },
+  "isolation": {
+    "opened_npz_count": 76,
+    "opened_only_val_npz": true,
+    "test_npz_opened": [],
+    "train_npz_opened": [],
+    "test_npz_resolved_hashed_or_opened": false,
+    "internal_test_report_files_parsed": false,
+    "prior_report_json_parsed_for_gate_reference_only": true,
+    "restricted_val_report_parsed_note": "the prior contrastive report JSON is byte-hashed by the pins and additionally read only for the S4 G1/G4/G5/G7 gate booleans; its validation statistics are never used as a metric source",
+    "restricted_val_samples_csv_or_json_parsed_as_metric_source": false
+  },
+  "provenance": {
+    "prereg_config_unchanged": true,
+    "prereg_report_unchanged": true,
+    "pins_unchanged": true,
+    "val_npz_aggregate_matches_prereg": true
+  },
+  "limitations": [
+    "Exploratory diagnostic on already-used validation; not a final accuracy conclusion.",
+    "No internal test NPZ was resolved, hashed, opened, parsed or scored.",
+    "The val split was already used during development; this is not final or CV-Bench accuracy.",
+    "No hardware synthesis, latency or speedup claim.",
+    "The prior contrastive decision PROMPT_CONTRASTIVE_STUDENT_NOT_ESTABLISHED is unchanged; this diagnostic only adds exploratory evidence.",
+    "The prior report JSON is parsed only for the S4 gate booleans; its statistics and val-samples CSV are never metric sources.",
+    "Per-image statistics treat the 38 images as independent units.",
+    "The selector chain is descriptive; passing P1/P2 does not by itself establish task accuracy or promotion."
+  ],
+  "next_decision": "operational prompt utility not established; do not promote; a fresh preregistration may test a different prompt-supervision signal",
+  "files": {
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json",
+    "md": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.md",
+    "csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic-records.csv",
+    "json_sha256": "6980fda97a44d3390e0c1eefef464ad8c0b1b03cdbf3fb8f6708567493378b9f",
+    "md_sha256": "2bda32214845619afe7845d1b7d9a7cb330c04b061470366f92a22a53853a1d7",
+    "csv_sha256": "8fe570a5b9706dbeaa04919416691a1fda6fb45ef55361f8707232beaf3f6cf4"
+  }
+}

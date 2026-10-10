@@ -1,0 +1,12 @@
+{
+  "reason": "Full-run sampling metadata inherited wording from the screening evaluator; raw records are preserved unchanged.",
+  "baseline_json": "reports/cv_bench/cv_bench_bf16_full2638.json",
+  "baseline_json_sha256": "fa5bdcc93f8f0fa5d2ae6886c46b7ec56fa186e2e7f5ad4ba44ce89695405d4f",
+  "lock_file": "configs/cv_bench_l2_0875_full2638.lock.json",
+  "lock_file_sha256": "1a23533b6e520e4c81994996c1032f364178086111a9e04b7873ec4ff4eb4bba",
+  "field": "baseline metadata.sampling and lock sampling",
+  "original_value": "fixed stratified by task and source_dataset",
+  "correct_value": "All 2638 official test rows, sorted by global idx; no sampling",
+  "sample_ids": "Every global idx from 0 through 2637 exactly once",
+  "impact": "Wording only. Image IDs, prompts, ground truth, model outputs, scores, and timing records are unchanged."
+}

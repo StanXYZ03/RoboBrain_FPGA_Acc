@@ -1,0 +1,4268 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-03",
+  "task": "Fuse the accepted integer Selector scorer and packed v4 token selector into one on-chip HLS top",
+  "decision": "INTEGER_SELECTOR_PIPELINE_HLS_PASS",
+  "scope": {
+    "cpu_only": true,
+    "gpu": false,
+    "network": false,
+    "training": false,
+    "parameter_search": false,
+    "model_load": false,
+    "cosim": false,
+    "export_ip": false,
+    "implementation": false,
+    "bitstream": false,
+    "board_access": false,
+    "raw_images": false,
+    "internal_test_data": false,
+    "csynth_design_only": true,
+    "tool": "Vitis HLS 2023.2",
+    "part": "xczu9eg-ffvb1156-2-e",
+    "clock_ns": 5.0,
+    "uncertainty_ns": 1.35
+  },
+  "contract": {
+    "top": "integer_selector_pipeline",
+    "score_q": "local on-chip uint16 buffer[G]; NOT a top-level port and never DDR",
+    "inputs": [
+      "tokens_q [G*256] 128-bit packed INT8 words",
+      "group_mean_q [G*64] 128-bit packed INT8 words",
+      "wv_q [8192] 128-bit packed INT8 words",
+      "query_q [8] 128-bit packed INT8 words"
+    ],
+    "outputs": "accepted selector 5 segments: out_tokens + group_index + source_type + region_id + valid, plus scale_out/output_count/real_count/context_count",
+    "status_codes": {
+      "0": "OK",
+      "1": "ERR_NULL",
+      "2": "ERR_GROUP_COUNT (== scorer ERR_GROUP_COUNT == selector ERR_GROUP_LIMIT)",
+      "3": "ERR_GRID",
+      "4": "ERR_BUDGET",
+      "5": "ERR_INSUFFICIENT",
+      "6": "ERR_CANDIDATE_POOL",
+      "7": "ERR_INTERNAL",
+      "8": "ERR_LOCAL_CAP"
+    },
+    "m_axi_bundles": [
+      "gmem_in_gm",
+      "gmem_in_query",
+      "gmem_in_tokens",
+      "gmem_in_wv",
+      "gmem_out_group",
+      "gmem_out_region",
+      "gmem_out_source",
+      "gmem_out_tokens",
+      "gmem_out_valid"
+    ],
+    "score_bundles_absent": true,
+    "reuse": "the two accepted translation units are #include'd into the wrapper; is_scorer_core<> (anonymous namespace) is called directly and token_selector_core_packed is called directly; no second copy of the maths"
+  },
+  "golden": {
+    "scorer_entry": "evaluation.selector_integer_scorer_audit.integer_chain",
+    "selector_entry": "evaluation.hardware_regular_selector_fixedpoint.select_fixedpoint",
+    "scorer_sha256": "3fcf91d28f670e7406a41028b02fcaaa4f7694abf8ba76210494cd05502b16a9",
+    "selector_sha256": "23e8d825d7966719774726c8debcdf3f8c6c33bab49a3fdcc231d7ec8d489e71"
+  },
+  "wv": {
+    "source_path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_int8_rowmajor.bin",
+    "source_sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b",
+    "copied_file": "wv_q.bin",
+    "copied_sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b",
+    "scale_path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_per_tensor_scale_f32le.bin",
+    "scale_sha256": "93585a3bd2d584a612b40d827f8d15f43c87acdc764d7e217d99df473428b13f",
+    "note": "reused by SHA, never retrained; scale is a positive common factor and is omitted"
+  },
+  "fixtures": {
+    "dir": "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures",
+    "scenes": {
+      "real_grounding_correct": {
+        "family": "real",
+        "task": "grounding",
+        "role": "correct",
+        "source_npz": "artifacts/token_selector/selector_integer_scorer_audit/20261003/fixture_grounding.npz",
+        "score_matches_accepted_npz": true,
+        "tokens_source": "xorshift64* (accepted NPZ has no raw tokens)",
+        "file": "scene_real_grounding_correct.bin",
+        "bytes": 1331392,
+        "sha256": "e550c5b7f5c441f24b41396b81d5d356c2b86e62c810fb82e3ef1ef983e0156c",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "tokens_fnv1a64": 3063893404624018148,
+        "group_mean_fnv1a64": 16590175152866361977,
+        "query_fnv1a64": 18311047047245246823
+      },
+      "real_grounding_wrong": {
+        "family": "real",
+        "task": "grounding",
+        "role": "wrong",
+        "source_npz": "artifacts/token_selector/selector_integer_scorer_audit/20261003/fixture_grounding.npz",
+        "score_matches_accepted_npz": true,
+        "tokens_source": "xorshift64* (accepted NPZ has no raw tokens)",
+        "file": "scene_real_grounding_wrong.bin",
+        "bytes": 1331392,
+        "sha256": "25e45429d9e1d176d10d0d1e93f628042dd29194c3ae66a984fca4ae841ed39d",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "tokens_fnv1a64": 3063893404624018148,
+        "group_mean_fnv1a64": 16590175152866361977,
+        "query_fnv1a64": 6829219299852290397
+      },
+      "real_pointing_correct": {
+        "family": "real",
+        "task": "pointing",
+        "role": "correct",
+        "source_npz": "artifacts/token_selector/selector_integer_scorer_audit/20261003/fixture_pointing.npz",
+        "score_matches_accepted_npz": true,
+        "tokens_source": "xorshift64* (accepted NPZ has no raw tokens)",
+        "file": "scene_real_pointing_correct.bin",
+        "bytes": 1331392,
+        "sha256": "f95a9ea7cf5e350605bca4ac020e9d70b688208266d89a72d5693904c98e9181",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "tokens_fnv1a64": 1522065201754420179,
+        "group_mean_fnv1a64": 16590175152866361977,
+        "query_fnv1a64": 6829219299852290397
+      },
+      "real_pointing_wrong": {
+        "family": "real",
+        "task": "pointing",
+        "role": "wrong",
+        "source_npz": "artifacts/token_selector/selector_integer_scorer_audit/20261003/fixture_pointing.npz",
+        "score_matches_accepted_npz": true,
+        "tokens_source": "xorshift64* (accepted NPZ has no raw tokens)",
+        "file": "scene_real_pointing_wrong.bin",
+        "bytes": 1331392,
+        "sha256": "5c71f1ddc9ded24a9642b4f578c1bba61d8b223c8ea676dafe2e5eebde60d096",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "tokens_fnv1a64": 1522065201754420179,
+        "group_mean_fnv1a64": 16590175152866361977,
+        "query_fnv1a64": 18311047047245246823
+      },
+      "synth_g80": {
+        "family": "synthetic",
+        "mode": "random",
+        "generator": "xorshift64*",
+        "generator_seed": 20263004,
+        "file": "scene_synth_g80.bin",
+        "bytes": 409792,
+        "sha256": "a73fabbc485ed91279b65985474c7bdcab6f214e3f7d22f2e84f504c3b1e1662",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "tokens_fnv1a64": 14942151854027635396,
+        "group_mean_fnv1a64": 3404078847266129285,
+        "query_fnv1a64": 608171622991238368
+      },
+      "synth_g400": {
+        "family": "synthetic",
+        "mode": "random",
+        "generator": "xorshift64*",
+        "generator_seed": 20263005,
+        "file": "scene_synth_g400.bin",
+        "bytes": 2048192,
+        "sha256": "3201f1fadb04160474ea920af8e82e2ab311da90fd0fa050f367741aa0495b9f",
+        "group_count": 400,
+        "grid": [
+          20,
+          20
+        ],
+        "tokens_fnv1a64": 11014655973939862542,
+        "group_mean_fnv1a64": 17591927283937336666,
+        "query_fnv1a64": 16762138655246236168
+      },
+      "identity_g16": {
+        "family": "synthetic",
+        "mode": "random",
+        "generator": "xorshift64*",
+        "generator_seed": 20263006,
+        "file": "scene_identity_g16.bin",
+        "bytes": 82112,
+        "sha256": "65eda767fb30a1f5d35fe69065790744b1a89403cfba1ed368970f4ace4c59b3",
+        "group_count": 16,
+        "grid": [
+          4,
+          4
+        ],
+        "tokens_fnv1a64": 4877774263129224850,
+        "group_mean_fnv1a64": 1975484710081659521,
+        "query_fnv1a64": 9007971490818536760
+      },
+      "identity_g9": {
+        "family": "synthetic",
+        "mode": "random",
+        "generator": "xorshift64*",
+        "generator_seed": 20263007,
+        "file": "scene_identity_g9.bin",
+        "bytes": 46272,
+        "sha256": "49da82151ed629ab70b34541c2acb77825d44107bffdc6106df8ac7bf606f012",
+        "group_count": 9,
+        "grid": [
+          3,
+          3
+        ],
+        "tokens_fnv1a64": 14636506605987851851,
+        "group_mean_fnv1a64": 1463462060886689916,
+        "query_fnv1a64": 12705874794136086151
+      },
+      "zero_g128": {
+        "family": "synthetic",
+        "mode": "zero",
+        "generator": "xorshift64*",
+        "generator_seed": 20263008,
+        "file": "scene_zero_g128.bin",
+        "bytes": 655552,
+        "sha256": "7306421a7d3567a40b8cbb1317a7efee94043c282a399b6a7beef2a8d5685f40",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "tokens_fnv1a64": 14756890989403075106,
+        "group_mean_fnv1a64": 14360650764463514405,
+        "query_fnv1a64": 16440259423577582436
+      },
+      "all_equal_g128": {
+        "family": "synthetic",
+        "mode": "all_equal",
+        "generator": "xorshift64*",
+        "generator_seed": 20263009,
+        "file": "scene_all_equal_g128.bin",
+        "bytes": 655552,
+        "sha256": "2d1e8c7dc90ce9d3c7a5dfad88630d77ffa67e2f082fc22d3304a1124064684e",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "tokens_fnv1a64": 7607278707374759346,
+        "group_mean_fnv1a64": 18252089753978282789,
+        "query_fnv1a64": 4928321316557793769
+      },
+      "empty_2x25": {
+        "family": "synthetic",
+        "mode": "random",
+        "generator": "xorshift64*",
+        "generator_seed": 20263010,
+        "file": "scene_empty_2x25.bin",
+        "bytes": 256192,
+        "sha256": "2de8b7aae53aa544013e8f8d180232ae471ad76a3eaeb45f826a5842561bb3f8",
+        "group_count": 50,
+        "grid": [
+          2,
+          25
+        ],
+        "tokens_fnv1a64": 10626801965152981336,
+        "group_mean_fnv1a64": 8081819261381231354,
+        "query_fnv1a64": 8539663569721683175
+      }
+    },
+    "cases": {
+      "real_grounding_correct_K48_cap16": {
+        "case": "real_grounding_correct_K48_cap16",
+        "scene": "real_grounding_correct",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 27024,
+        "score_q_min": 2952,
+        "file": "real_grounding_correct_K48_cap16.exp.bin",
+        "bytes": 197448,
+        "sha256": "0a8ddafc8c2060bd00d88b97d0f49babb4d5c6b83f040b94a986c1f554d3a4f5"
+      },
+      "real_grounding_correct_K64_cap16": {
+        "case": "real_grounding_correct_K64_cap16",
+        "scene": "real_grounding_correct",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "score_q_max": 27024,
+        "score_q_min": 2952,
+        "file": "real_grounding_correct_K64_cap16.exp.bin",
+        "bytes": 263064,
+        "sha256": "5bab6b67f02584c9b22044aad2940f8e94ad9919af9d58d6757fd13fd26982aa"
+      },
+      "real_grounding_correct_K96_cap16": {
+        "case": "real_grounding_correct_K96_cap16",
+        "scene": "real_grounding_correct",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 96,
+        "real_count": 87,
+        "context_count": 9,
+        "score_q_max": 27024,
+        "score_q_min": 2952,
+        "file": "real_grounding_correct_K96_cap16.exp.bin",
+        "bytes": 394296,
+        "sha256": "1e84f8bc3b76f0070b1dcd1f1343031e81cc05e342d2dc6f3453b5adac7a49de"
+      },
+      "real_pointing_correct_K48_cap16": {
+        "case": "real_pointing_correct_K48_cap16",
+        "scene": "real_pointing_correct",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 25759,
+        "score_q_min": 3312,
+        "file": "real_pointing_correct_K48_cap16.exp.bin",
+        "bytes": 197448,
+        "sha256": "1f868d572bd15a3142f246c432a3278611226e64e9436649fcc1ace1ea69a758"
+      },
+      "real_pointing_correct_K64_cap16": {
+        "case": "real_pointing_correct_K64_cap16",
+        "scene": "real_pointing_correct",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "score_q_max": 25759,
+        "score_q_min": 3312,
+        "file": "real_pointing_correct_K64_cap16.exp.bin",
+        "bytes": 263064,
+        "sha256": "3e8505f68158c3b660f27c27f39fd2178b1911d9ed5083147a72fb9b39fc35ca"
+      },
+      "real_pointing_correct_K96_cap16": {
+        "case": "real_pointing_correct_K96_cap16",
+        "scene": "real_pointing_correct",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 96,
+        "real_count": 87,
+        "context_count": 9,
+        "score_q_max": 25759,
+        "score_q_min": 3312,
+        "file": "real_pointing_correct_K96_cap16.exp.bin",
+        "bytes": 394296,
+        "sha256": "161c4ea3348bbb5607e8d6b6ff742fdd886e2e5c3a58db422d4d57bd262a4144"
+      },
+      "real_grounding_wrong_K48_cap16": {
+        "case": "real_grounding_wrong_K48_cap16",
+        "scene": "real_grounding_wrong",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 25759,
+        "score_q_min": 3312,
+        "file": "real_grounding_wrong_K48_cap16.exp.bin",
+        "bytes": 197448,
+        "sha256": "2c84c54a83e2774eb351cb65346de107ebd3785bf5307454b3f55526d8795757"
+      },
+      "real_pointing_wrong_K48_cap16": {
+        "case": "real_pointing_wrong_K48_cap16",
+        "scene": "real_pointing_wrong",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 27024,
+        "score_q_min": 2952,
+        "file": "real_pointing_wrong_K48_cap16.exp.bin",
+        "bytes": 197448,
+        "sha256": "cbfca2dd627bde206ac4c10571e8feb5548a057aac324f24fd6e893485e025cc"
+      },
+      "synth_g80_K48_cap16": {
+        "case": "synth_g80_K48_cap16",
+        "scene": "synth_g80",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 22628,
+        "score_q_min": 4380,
+        "file": "synth_g80_K48_cap16.exp.bin",
+        "bytes": 197088,
+        "sha256": "e8b68b99cf467e3cf5a0d177268b91e4046a905fefd6f518c8e940a442958aa3"
+      },
+      "synth_g400_K48_cap16": {
+        "case": "synth_g400_K48_cap16",
+        "scene": "synth_g400",
+        "group_count": 400,
+        "grid": [
+          20,
+          20
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 27727,
+        "score_q_min": 3508,
+        "file": "synth_g400_K48_cap16.exp.bin",
+        "bytes": 197728,
+        "sha256": "2c6b37489b06424a5f0fc9396b678cc2cdb689c898ca2a4481f6e0d11158b003"
+      },
+      "zero_g128_K48_cap16": {
+        "case": "zero_g128_K48_cap16",
+        "scene": "zero_g128",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 0,
+        "score_q_min": 0,
+        "file": "zero_g128_K48_cap16.exp.bin",
+        "bytes": 197184,
+        "sha256": "11ad094308c2460247025d1dc7aa3c3b0ebdfa500b4e2df04c7eb91d8cb07aff"
+      },
+      "all_equal_g128_K48_cap16": {
+        "case": "all_equal_g128_K48_cap16",
+        "scene": "all_equal_g128",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "score_q_max": 0,
+        "score_q_min": 0,
+        "file": "all_equal_g128_K48_cap16.exp.bin",
+        "bytes": 197184,
+        "sha256": "a013d90d4086c2c05eec4ceba0401e3803356e0f5287b421a6013ef815e3e567"
+      },
+      "synth_g80_K64_cap16": {
+        "case": "synth_g80_K64_cap16",
+        "scene": "synth_g80",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "score_q_max": 22628,
+        "score_q_min": 4380,
+        "file": "synth_g80_K64_cap16.exp.bin",
+        "bytes": 262704,
+        "sha256": "b20e2174d3293342e3b0a9d8427f3a4a7f879881079b269f21ca402986121c18"
+      },
+      "synth_g400_K64_cap16": {
+        "case": "synth_g400_K64_cap16",
+        "scene": "synth_g400",
+        "group_count": 400,
+        "grid": [
+          20,
+          20
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "score_q_max": 27727,
+        "score_q_min": 3508,
+        "file": "synth_g400_K64_cap16.exp.bin",
+        "bytes": 263344,
+        "sha256": "cbd3e532dfc86ad18a2558368b02ea967d5d8b6564cdc7fa141f33698369d561"
+      },
+      "zero_g128_K64_cap16": {
+        "case": "zero_g128_K64_cap16",
+        "scene": "zero_g128",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "score_q_max": 0,
+        "score_q_min": 0,
+        "file": "zero_g128_K64_cap16.exp.bin",
+        "bytes": 262800,
+        "sha256": "6d063923f240e594c24025a10910b64b493900d047cdcdaeda39b00a86ed5fd1"
+      },
+      "all_equal_g128_K64_cap16": {
+        "case": "all_equal_g128_K64_cap16",
+        "scene": "all_equal_g128",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "score_q_max": 0,
+        "score_q_min": 0,
+        "file": "all_equal_g128_K64_cap16.exp.bin",
+        "bytes": 262800,
+        "sha256": "a634ce8fa57ffaafcae515c982a2db365869d2740468f2e035e0591973f1809a"
+      },
+      "synth_g80_K96_cap16": {
+        "case": "synth_g80_K96_cap16",
+        "scene": "synth_g80",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 80,
+        "real_count": 80,
+        "context_count": 0,
+        "score_q_max": 22628,
+        "score_q_min": 4380,
+        "file": "synth_g80_K96_cap16.exp.bin",
+        "bytes": 328320,
+        "sha256": "960b083a38de6f38e7760ffaf9ff45fe7edd5d59bbc344501be7e939c61e9539"
+      },
+      "synth_g400_K96_cap16": {
+        "case": "synth_g400_K96_cap16",
+        "scene": "synth_g400",
+        "group_count": 400,
+        "grid": [
+          20,
+          20
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 96,
+        "real_count": 87,
+        "context_count": 9,
+        "score_q_max": 27727,
+        "score_q_min": 3508,
+        "file": "synth_g400_K96_cap16.exp.bin",
+        "bytes": 394576,
+        "sha256": "e58c697beb51b6a1eaa3ea508ddf1bb37e9c32af5d73907abccfb820b658a4bd"
+      },
+      "zero_g128_K96_cap16": {
+        "case": "zero_g128_K96_cap16",
+        "scene": "zero_g128",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 96,
+        "real_count": 87,
+        "context_count": 9,
+        "score_q_max": 0,
+        "score_q_min": 0,
+        "file": "zero_g128_K96_cap16.exp.bin",
+        "bytes": 394032,
+        "sha256": "7ef7fd0204ceb9e962ee412d3e4eb9b2dad0d3b49d3c6f8e036edd21682ff4c1"
+      },
+      "all_equal_g128_K96_cap16": {
+        "case": "all_equal_g128_K96_cap16",
+        "scene": "all_equal_g128",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 96,
+        "real_count": 87,
+        "context_count": 9,
+        "score_q_max": 0,
+        "score_q_min": 0,
+        "file": "all_equal_g128_K96_cap16.exp.bin",
+        "bytes": 394032,
+        "sha256": "08f5ee3227d58d87465597a7f0b70b82719c7cb6efaa6604e30794c57c5b5c8f"
+      },
+      "identity_g16_K48_cap16": {
+        "case": "identity_g16_K48_cap16",
+        "scene": "identity_g16",
+        "group_count": 16,
+        "grid": [
+          4,
+          4
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 16,
+        "real_count": 16,
+        "context_count": 0,
+        "score_q_max": 30402,
+        "score_q_min": 7544,
+        "file": "identity_g16_K48_cap16.exp.bin",
+        "bytes": 65728,
+        "sha256": "4ae9bb8820abbae4c1a30cb1f8547dbfcfd68538affe2c9663dc02265ba49727"
+      },
+      "identity_g9_K96_cap16": {
+        "case": "identity_g9_K96_cap16",
+        "scene": "identity_g9",
+        "group_count": 9,
+        "grid": [
+          3,
+          3
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 9,
+        "real_count": 9,
+        "context_count": 0,
+        "score_q_max": 30460,
+        "score_q_min": 3000,
+        "file": "identity_g9_K96_cap16.exp.bin",
+        "bytes": 37007,
+        "sha256": "c99b638e5ef7ee678165741cb88aed72d89c3c970d36bad740ef1d5e5046c33f"
+      },
+      "empty_2x25_K48_cap16": {
+        "case": "empty_2x25_K48_cap16",
+        "scene": "empty_2x25",
+        "group_count": 50,
+        "grid": [
+          2,
+          25
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 42,
+        "context_count": 6,
+        "score_q_max": 28071,
+        "score_q_min": 1347,
+        "file": "empty_2x25_K48_cap16.exp.bin",
+        "bytes": 197028,
+        "sha256": "01e901182347930be41aae754a69ed607440b64c9bd84cdc7934712dabc3903b"
+      }
+    },
+    "coverage": {
+      "budgets": [
+        48,
+        64,
+        96
+      ],
+      "group_counts": [
+        9,
+        16,
+        50,
+        80,
+        128,
+        260,
+        400
+      ],
+      "grids": [
+        [
+          2,
+          25
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          13,
+          20
+        ],
+        [
+          20,
+          20
+        ]
+      ]
+    }
+  },
+  "verification": {
+    "python": {
+      "tests_run": 7,
+      "ok": true,
+      "log": "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/01_python_fixtures.log"
+    },
+    "gpp": {
+      "cases": 23,
+      "passed": 383,
+      "failed": 0,
+      "result": "PASS",
+      "log": "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/02_gpp_test.log"
+    },
+    "asan_ubsan": {
+      "cases": 23,
+      "passed": 383,
+      "failed": 0,
+      "result": "PASS",
+      "log": "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/03_asan_ubsan.log"
+    },
+    "hls_csim": {
+      "cases": 23,
+      "passed": 383,
+      "failed": 0,
+      "csim_errors": 0,
+      "result": "PASS",
+      "log": "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/04_hls_csim.log"
+    }
+  },
+  "csynth": {
+    "top": "integer_selector_pipeline",
+    "part": "xczu9eg-ffvb1156-2-e",
+    "clock_target_ns": 5.0,
+    "clock_uncertainty_ns": 1.35,
+    "effective_budget_ns": 3.65,
+    "estimated_clock_ns": 3.65,
+    "estimated_fmax_mhz": 273.97,
+    "timing_slack_ns": 0.0,
+    "reported_latency_cycles": {
+      "best": 1.0,
+      "average": null,
+      "worst": 9312990.0
+    },
+    "reported_latency_ms_at_200mhz": 46.565,
+    "scorer_phase": {
+      "wv_load_cycles": 65539.0,
+      "pass1_cycles_per_group": 1440.0,
+      "pass2_cycles_per_group": 402.0,
+      "per_group_cycles": 1842.0
+    },
+    "resources_used": {
+      "BRAM_18K": 328,
+      "DSP": 212,
+      "FF": 50206,
+      "LUT": 90891,
+      "URAM": 0
+    },
+    "resources_available": {
+      "BRAM_18K": 1824,
+      "DSP": 2520,
+      "FF": 548160,
+      "LUT": 274080,
+      "URAM": 0
+    },
+    "resource_utilization_percent": {
+      "BRAM_18K": 17.98,
+      "DSP": 8.41,
+      "FF": 9.16,
+      "LUT": 33.16,
+      "URAM": 0.0
+    },
+    "console": {
+      "error_count": 0,
+      "warning_count": 142,
+      "estimated_fmax_mhz": 273.97,
+      "timing_warning_200_871": false,
+      "critical_path_warning_200_1016": false,
+      "loop_constraint_warning_200_790": true,
+      "ii_warning_200_885": 5,
+      "ii_warning_200_878": 2,
+      "all_loop_constraints_met": false
+    },
+    "critical_path": {
+      "warning_200_1016": false,
+      "note": "no timing violation -> the tool reports no violating critical path; estimated period == effective budget 3.650 ns (slack 0.000), so the limiting path is the effective clock budget itself"
+    },
+    "interface": {
+      "m_axi_bundles": [
+        "gmem_in_gm",
+        "gmem_in_query",
+        "gmem_in_tokens",
+        "gmem_in_wv",
+        "gmem_out_group",
+        "gmem_out_region",
+        "gmem_out_source",
+        "gmem_out_tokens",
+        "gmem_out_valid"
+      ],
+      "port_names": [
+        "m_axi_gmem_in_gm_ARADDR",
+        "m_axi_gmem_in_gm_ARBURST",
+        "m_axi_gmem_in_gm_ARCACHE",
+        "m_axi_gmem_in_gm_ARID",
+        "m_axi_gmem_in_gm_ARLEN",
+        "m_axi_gmem_in_gm_ARLOCK",
+        "m_axi_gmem_in_gm_ARPROT",
+        "m_axi_gmem_in_gm_ARQOS",
+        "m_axi_gmem_in_gm_ARREADY",
+        "m_axi_gmem_in_gm_ARREGION",
+        "m_axi_gmem_in_gm_ARSIZE",
+        "m_axi_gmem_in_gm_ARUSER",
+        "m_axi_gmem_in_gm_ARVALID",
+        "m_axi_gmem_in_gm_AWADDR",
+        "m_axi_gmem_in_gm_AWBURST",
+        "m_axi_gmem_in_gm_AWCACHE",
+        "m_axi_gmem_in_gm_AWID",
+        "m_axi_gmem_in_gm_AWLEN",
+        "m_axi_gmem_in_gm_AWLOCK",
+        "m_axi_gmem_in_gm_AWPROT",
+        "m_axi_gmem_in_gm_AWQOS",
+        "m_axi_gmem_in_gm_AWREADY",
+        "m_axi_gmem_in_gm_AWREGION",
+        "m_axi_gmem_in_gm_AWSIZE",
+        "m_axi_gmem_in_gm_AWUSER",
+        "m_axi_gmem_in_gm_AWVALID",
+        "m_axi_gmem_in_gm_BID",
+        "m_axi_gmem_in_gm_BREADY",
+        "m_axi_gmem_in_gm_BRESP",
+        "m_axi_gmem_in_gm_BUSER",
+        "m_axi_gmem_in_gm_BVALID",
+        "m_axi_gmem_in_gm_RDATA",
+        "m_axi_gmem_in_gm_RID",
+        "m_axi_gmem_in_gm_RLAST",
+        "m_axi_gmem_in_gm_RREADY",
+        "m_axi_gmem_in_gm_RRESP",
+        "m_axi_gmem_in_gm_RUSER",
+        "m_axi_gmem_in_gm_RVALID",
+        "m_axi_gmem_in_gm_WDATA",
+        "m_axi_gmem_in_gm_WID",
+        "m_axi_gmem_in_gm_WLAST",
+        "m_axi_gmem_in_gm_WREADY",
+        "m_axi_gmem_in_gm_WSTRB",
+        "m_axi_gmem_in_gm_WUSER",
+        "m_axi_gmem_in_gm_WVALID",
+        "m_axi_gmem_in_query_ARADDR",
+        "m_axi_gmem_in_query_ARBURST",
+        "m_axi_gmem_in_query_ARCACHE",
+        "m_axi_gmem_in_query_ARID",
+        "m_axi_gmem_in_query_ARLEN",
+        "m_axi_gmem_in_query_ARLOCK",
+        "m_axi_gmem_in_query_ARPROT",
+        "m_axi_gmem_in_query_ARQOS",
+        "m_axi_gmem_in_query_ARREADY",
+        "m_axi_gmem_in_query_ARREGION",
+        "m_axi_gmem_in_query_ARSIZE",
+        "m_axi_gmem_in_query_ARUSER",
+        "m_axi_gmem_in_query_ARVALID",
+        "m_axi_gmem_in_query_AWADDR",
+        "m_axi_gmem_in_query_AWBURST",
+        "m_axi_gmem_in_query_AWCACHE",
+        "m_axi_gmem_in_query_AWID",
+        "m_axi_gmem_in_query_AWLEN",
+        "m_axi_gmem_in_query_AWLOCK",
+        "m_axi_gmem_in_query_AWPROT",
+        "m_axi_gmem_in_query_AWQOS",
+        "m_axi_gmem_in_query_AWREADY",
+        "m_axi_gmem_in_query_AWREGION",
+        "m_axi_gmem_in_query_AWSIZE",
+        "m_axi_gmem_in_query_AWUSER",
+        "m_axi_gmem_in_query_AWVALID",
+        "m_axi_gmem_in_query_BID",
+        "m_axi_gmem_in_query_BREADY",
+        "m_axi_gmem_in_query_BRESP",
+        "m_axi_gmem_in_query_BUSER",
+        "m_axi_gmem_in_query_BVALID",
+        "m_axi_gmem_in_query_RDATA",
+        "m_axi_gmem_in_query_RID",
+        "m_axi_gmem_in_query_RLAST",
+        "m_axi_gmem_in_query_RREADY",
+        "m_axi_gmem_in_query_RRESP",
+        "m_axi_gmem_in_query_RUSER",
+        "m_axi_gmem_in_query_RVALID",
+        "m_axi_gmem_in_query_WDATA",
+        "m_axi_gmem_in_query_WID",
+        "m_axi_gmem_in_query_WLAST",
+        "m_axi_gmem_in_query_WREADY",
+        "m_axi_gmem_in_query_WSTRB",
+        "m_axi_gmem_in_query_WUSER",
+        "m_axi_gmem_in_query_WVALID",
+        "m_axi_gmem_in_tokens_ARADDR",
+        "m_axi_gmem_in_tokens_ARBURST",
+        "m_axi_gmem_in_tokens_ARCACHE",
+        "m_axi_gmem_in_tokens_ARID",
+        "m_axi_gmem_in_tokens_ARLEN",
+        "m_axi_gmem_in_tokens_ARLOCK",
+        "m_axi_gmem_in_tokens_ARPROT",
+        "m_axi_gmem_in_tokens_ARQOS",
+        "m_axi_gmem_in_tokens_ARREADY",
+        "m_axi_gmem_in_tokens_ARREGION",
+        "m_axi_gmem_in_tokens_ARSIZE",
+        "m_axi_gmem_in_tokens_ARUSER",
+        "m_axi_gmem_in_tokens_ARVALID",
+        "m_axi_gmem_in_tokens_AWADDR",
+        "m_axi_gmem_in_tokens_AWBURST",
+        "m_axi_gmem_in_tokens_AWCACHE",
+        "m_axi_gmem_in_tokens_AWID",
+        "m_axi_gmem_in_tokens_AWLEN",
+        "m_axi_gmem_in_tokens_AWLOCK",
+        "m_axi_gmem_in_tokens_AWPROT",
+        "m_axi_gmem_in_tokens_AWQOS",
+        "m_axi_gmem_in_tokens_AWREADY",
+        "m_axi_gmem_in_tokens_AWREGION",
+        "m_axi_gmem_in_tokens_AWSIZE",
+        "m_axi_gmem_in_tokens_AWUSER",
+        "m_axi_gmem_in_tokens_AWVALID",
+        "m_axi_gmem_in_tokens_BID",
+        "m_axi_gmem_in_tokens_BREADY",
+        "m_axi_gmem_in_tokens_BRESP",
+        "m_axi_gmem_in_tokens_BUSER",
+        "m_axi_gmem_in_tokens_BVALID",
+        "m_axi_gmem_in_tokens_RDATA",
+        "m_axi_gmem_in_tokens_RID",
+        "m_axi_gmem_in_tokens_RLAST",
+        "m_axi_gmem_in_tokens_RREADY",
+        "m_axi_gmem_in_tokens_RRESP",
+        "m_axi_gmem_in_tokens_RUSER",
+        "m_axi_gmem_in_tokens_RVALID",
+        "m_axi_gmem_in_tokens_WDATA",
+        "m_axi_gmem_in_tokens_WID",
+        "m_axi_gmem_in_tokens_WLAST",
+        "m_axi_gmem_in_tokens_WREADY",
+        "m_axi_gmem_in_tokens_WSTRB",
+        "m_axi_gmem_in_tokens_WUSER",
+        "m_axi_gmem_in_tokens_WVALID",
+        "m_axi_gmem_in_wv_ARADDR",
+        "m_axi_gmem_in_wv_ARBURST",
+        "m_axi_gmem_in_wv_ARCACHE",
+        "m_axi_gmem_in_wv_ARID",
+        "m_axi_gmem_in_wv_ARLEN",
+        "m_axi_gmem_in_wv_ARLOCK",
+        "m_axi_gmem_in_wv_ARPROT",
+        "m_axi_gmem_in_wv_ARQOS",
+        "m_axi_gmem_in_wv_ARREADY",
+        "m_axi_gmem_in_wv_ARREGION",
+        "m_axi_gmem_in_wv_ARSIZE",
+        "m_axi_gmem_in_wv_ARUSER",
+        "m_axi_gmem_in_wv_ARVALID",
+        "m_axi_gmem_in_wv_AWADDR",
+        "m_axi_gmem_in_wv_AWBURST",
+        "m_axi_gmem_in_wv_AWCACHE",
+        "m_axi_gmem_in_wv_AWID",
+        "m_axi_gmem_in_wv_AWLEN",
+        "m_axi_gmem_in_wv_AWLOCK",
+        "m_axi_gmem_in_wv_AWPROT",
+        "m_axi_gmem_in_wv_AWQOS",
+        "m_axi_gmem_in_wv_AWREADY",
+        "m_axi_gmem_in_wv_AWREGION",
+        "m_axi_gmem_in_wv_AWSIZE",
+        "m_axi_gmem_in_wv_AWUSER",
+        "m_axi_gmem_in_wv_AWVALID",
+        "m_axi_gmem_in_wv_BID",
+        "m_axi_gmem_in_wv_BREADY",
+        "m_axi_gmem_in_wv_BRESP",
+        "m_axi_gmem_in_wv_BUSER",
+        "m_axi_gmem_in_wv_BVALID",
+        "m_axi_gmem_in_wv_RDATA",
+        "m_axi_gmem_in_wv_RID",
+        "m_axi_gmem_in_wv_RLAST",
+        "m_axi_gmem_in_wv_RREADY",
+        "m_axi_gmem_in_wv_RRESP",
+        "m_axi_gmem_in_wv_RUSER",
+        "m_axi_gmem_in_wv_RVALID",
+        "m_axi_gmem_in_wv_WDATA",
+        "m_axi_gmem_in_wv_WID",
+        "m_axi_gmem_in_wv_WLAST",
+        "m_axi_gmem_in_wv_WREADY",
+        "m_axi_gmem_in_wv_WSTRB",
+        "m_axi_gmem_in_wv_WUSER",
+        "m_axi_gmem_in_wv_WVALID",
+        "m_axi_gmem_out_group_ARADDR",
+        "m_axi_gmem_out_group_ARBURST",
+        "m_axi_gmem_out_group_ARCACHE",
+        "m_axi_gmem_out_group_ARID",
+        "m_axi_gmem_out_group_ARLEN",
+        "m_axi_gmem_out_group_ARLOCK",
+        "m_axi_gmem_out_group_ARPROT",
+        "m_axi_gmem_out_group_ARQOS",
+        "m_axi_gmem_out_group_ARREADY",
+        "m_axi_gmem_out_group_ARREGION",
+        "m_axi_gmem_out_group_ARSIZE",
+        "m_axi_gmem_out_group_ARUSER",
+        "m_axi_gmem_out_group_ARVALID",
+        "m_axi_gmem_out_group_AWADDR",
+        "m_axi_gmem_out_group_AWBURST",
+        "m_axi_gmem_out_group_AWCACHE",
+        "m_axi_gmem_out_group_AWID",
+        "m_axi_gmem_out_group_AWLEN",
+        "m_axi_gmem_out_group_AWLOCK",
+        "m_axi_gmem_out_group_AWPROT",
+        "m_axi_gmem_out_group_AWQOS",
+        "m_axi_gmem_out_group_AWREADY",
+        "m_axi_gmem_out_group_AWREGION",
+        "m_axi_gmem_out_group_AWSIZE",
+        "m_axi_gmem_out_group_AWUSER",
+        "m_axi_gmem_out_group_AWVALID",
+        "m_axi_gmem_out_group_BID",
+        "m_axi_gmem_out_group_BREADY",
+        "m_axi_gmem_out_group_BRESP",
+        "m_axi_gmem_out_group_BUSER",
+        "m_axi_gmem_out_group_BVALID",
+        "m_axi_gmem_out_group_RDATA",
+        "m_axi_gmem_out_group_RID",
+        "m_axi_gmem_out_group_RLAST",
+        "m_axi_gmem_out_group_RREADY",
+        "m_axi_gmem_out_group_RRESP",
+        "m_axi_gmem_out_group_RUSER",
+        "m_axi_gmem_out_group_RVALID",
+        "m_axi_gmem_out_group_WDATA",
+        "m_axi_gmem_out_group_WID",
+        "m_axi_gmem_out_group_WLAST",
+        "m_axi_gmem_out_group_WREADY",
+        "m_axi_gmem_out_group_WSTRB",
+        "m_axi_gmem_out_group_WUSER",
+        "m_axi_gmem_out_group_WVALID",
+        "m_axi_gmem_out_region_ARADDR",
+        "m_axi_gmem_out_region_ARBURST",
+        "m_axi_gmem_out_region_ARCACHE",
+        "m_axi_gmem_out_region_ARID",
+        "m_axi_gmem_out_region_ARLEN",
+        "m_axi_gmem_out_region_ARLOCK",
+        "m_axi_gmem_out_region_ARPROT",
+        "m_axi_gmem_out_region_ARQOS",
+        "m_axi_gmem_out_region_ARREADY",
+        "m_axi_gmem_out_region_ARREGION",
+        "m_axi_gmem_out_region_ARSIZE",
+        "m_axi_gmem_out_region_ARUSER",
+        "m_axi_gmem_out_region_ARVALID",
+        "m_axi_gmem_out_region_AWADDR",
+        "m_axi_gmem_out_region_AWBURST",
+        "m_axi_gmem_out_region_AWCACHE",
+        "m_axi_gmem_out_region_AWID",
+        "m_axi_gmem_out_region_AWLEN",
+        "m_axi_gmem_out_region_AWLOCK",
+        "m_axi_gmem_out_region_AWPROT",
+        "m_axi_gmem_out_region_AWQOS",
+        "m_axi_gmem_out_region_AWREADY",
+        "m_axi_gmem_out_region_AWREGION",
+        "m_axi_gmem_out_region_AWSIZE",
+        "m_axi_gmem_out_region_AWUSER",
+        "m_axi_gmem_out_region_AWVALID",
+        "m_axi_gmem_out_region_BID",
+        "m_axi_gmem_out_region_BREADY",
+        "m_axi_gmem_out_region_BRESP",
+        "m_axi_gmem_out_region_BUSER",
+        "m_axi_gmem_out_region_BVALID",
+        "m_axi_gmem_out_region_RDATA",
+        "m_axi_gmem_out_region_RID",
+        "m_axi_gmem_out_region_RLAST",
+        "m_axi_gmem_out_region_RREADY",
+        "m_axi_gmem_out_region_RRESP",
+        "m_axi_gmem_out_region_RUSER",
+        "m_axi_gmem_out_region_RVALID",
+        "m_axi_gmem_out_region_WDATA",
+        "m_axi_gmem_out_region_WID",
+        "m_axi_gmem_out_region_WLAST",
+        "m_axi_gmem_out_region_WREADY",
+        "m_axi_gmem_out_region_WSTRB",
+        "m_axi_gmem_out_region_WUSER",
+        "m_axi_gmem_out_region_WVALID",
+        "m_axi_gmem_out_source_ARADDR",
+        "m_axi_gmem_out_source_ARBURST",
+        "m_axi_gmem_out_source_ARCACHE",
+        "m_axi_gmem_out_source_ARID",
+        "m_axi_gmem_out_source_ARLEN",
+        "m_axi_gmem_out_source_ARLOCK",
+        "m_axi_gmem_out_source_ARPROT",
+        "m_axi_gmem_out_source_ARQOS",
+        "m_axi_gmem_out_source_ARREADY",
+        "m_axi_gmem_out_source_ARREGION",
+        "m_axi_gmem_out_source_ARSIZE",
+        "m_axi_gmem_out_source_ARUSER",
+        "m_axi_gmem_out_source_ARVALID",
+        "m_axi_gmem_out_source_AWADDR",
+        "m_axi_gmem_out_source_AWBURST",
+        "m_axi_gmem_out_source_AWCACHE",
+        "m_axi_gmem_out_source_AWID",
+        "m_axi_gmem_out_source_AWLEN",
+        "m_axi_gmem_out_source_AWLOCK",
+        "m_axi_gmem_out_source_AWPROT",
+        "m_axi_gmem_out_source_AWQOS",
+        "m_axi_gmem_out_source_AWREADY",
+        "m_axi_gmem_out_source_AWREGION",
+        "m_axi_gmem_out_source_AWSIZE",
+        "m_axi_gmem_out_source_AWUSER",
+        "m_axi_gmem_out_source_AWVALID",
+        "m_axi_gmem_out_source_BID",
+        "m_axi_gmem_out_source_BREADY",
+        "m_axi_gmem_out_source_BRESP",
+        "m_axi_gmem_out_source_BUSER",
+        "m_axi_gmem_out_source_BVALID",
+        "m_axi_gmem_out_source_RDATA",
+        "m_axi_gmem_out_source_RID",
+        "m_axi_gmem_out_source_RLAST",
+        "m_axi_gmem_out_source_RREADY",
+        "m_axi_gmem_out_source_RRESP",
+        "m_axi_gmem_out_source_RUSER",
+        "m_axi_gmem_out_source_RVALID",
+        "m_axi_gmem_out_source_WDATA",
+        "m_axi_gmem_out_source_WID",
+        "m_axi_gmem_out_source_WLAST",
+        "m_axi_gmem_out_source_WREADY",
+        "m_axi_gmem_out_source_WSTRB",
+        "m_axi_gmem_out_source_WUSER",
+        "m_axi_gmem_out_source_WVALID",
+        "m_axi_gmem_out_tokens_ARADDR",
+        "m_axi_gmem_out_tokens_ARBURST",
+        "m_axi_gmem_out_tokens_ARCACHE",
+        "m_axi_gmem_out_tokens_ARID",
+        "m_axi_gmem_out_tokens_ARLEN",
+        "m_axi_gmem_out_tokens_ARLOCK",
+        "m_axi_gmem_out_tokens_ARPROT",
+        "m_axi_gmem_out_tokens_ARQOS",
+        "m_axi_gmem_out_tokens_ARREADY",
+        "m_axi_gmem_out_tokens_ARREGION",
+        "m_axi_gmem_out_tokens_ARSIZE",
+        "m_axi_gmem_out_tokens_ARUSER",
+        "m_axi_gmem_out_tokens_ARVALID",
+        "m_axi_gmem_out_tokens_AWADDR",
+        "m_axi_gmem_out_tokens_AWBURST",
+        "m_axi_gmem_out_tokens_AWCACHE",
+        "m_axi_gmem_out_tokens_AWID",
+        "m_axi_gmem_out_tokens_AWLEN",
+        "m_axi_gmem_out_tokens_AWLOCK",
+        "m_axi_gmem_out_tokens_AWPROT",
+        "m_axi_gmem_out_tokens_AWQOS",
+        "m_axi_gmem_out_tokens_AWREADY",
+        "m_axi_gmem_out_tokens_AWREGION",
+        "m_axi_gmem_out_tokens_AWSIZE",
+        "m_axi_gmem_out_tokens_AWUSER",
+        "m_axi_gmem_out_tokens_AWVALID",
+        "m_axi_gmem_out_tokens_BID",
+        "m_axi_gmem_out_tokens_BREADY",
+        "m_axi_gmem_out_tokens_BRESP",
+        "m_axi_gmem_out_tokens_BUSER",
+        "m_axi_gmem_out_tokens_BVALID",
+        "m_axi_gmem_out_tokens_RDATA",
+        "m_axi_gmem_out_tokens_RID",
+        "m_axi_gmem_out_tokens_RLAST",
+        "m_axi_gmem_out_tokens_RREADY",
+        "m_axi_gmem_out_tokens_RRESP",
+        "m_axi_gmem_out_tokens_RUSER",
+        "m_axi_gmem_out_tokens_RVALID",
+        "m_axi_gmem_out_tokens_WDATA",
+        "m_axi_gmem_out_tokens_WID",
+        "m_axi_gmem_out_tokens_WLAST",
+        "m_axi_gmem_out_tokens_WREADY",
+        "m_axi_gmem_out_tokens_WSTRB",
+        "m_axi_gmem_out_tokens_WUSER",
+        "m_axi_gmem_out_tokens_WVALID",
+        "m_axi_gmem_out_valid_ARADDR",
+        "m_axi_gmem_out_valid_ARBURST",
+        "m_axi_gmem_out_valid_ARCACHE",
+        "m_axi_gmem_out_valid_ARID",
+        "m_axi_gmem_out_valid_ARLEN",
+        "m_axi_gmem_out_valid_ARLOCK",
+        "m_axi_gmem_out_valid_ARPROT",
+        "m_axi_gmem_out_valid_ARQOS",
+        "m_axi_gmem_out_valid_ARREADY",
+        "m_axi_gmem_out_valid_ARREGION",
+        "m_axi_gmem_out_valid_ARSIZE",
+        "m_axi_gmem_out_valid_ARUSER",
+        "m_axi_gmem_out_valid_ARVALID",
+        "m_axi_gmem_out_valid_AWADDR",
+        "m_axi_gmem_out_valid_AWBURST",
+        "m_axi_gmem_out_valid_AWCACHE",
+        "m_axi_gmem_out_valid_AWID",
+        "m_axi_gmem_out_valid_AWLEN",
+        "m_axi_gmem_out_valid_AWLOCK",
+        "m_axi_gmem_out_valid_AWPROT",
+        "m_axi_gmem_out_valid_AWQOS",
+        "m_axi_gmem_out_valid_AWREADY",
+        "m_axi_gmem_out_valid_AWREGION",
+        "m_axi_gmem_out_valid_AWSIZE",
+        "m_axi_gmem_out_valid_AWUSER",
+        "m_axi_gmem_out_valid_AWVALID",
+        "m_axi_gmem_out_valid_BID",
+        "m_axi_gmem_out_valid_BREADY",
+        "m_axi_gmem_out_valid_BRESP",
+        "m_axi_gmem_out_valid_BUSER",
+        "m_axi_gmem_out_valid_BVALID",
+        "m_axi_gmem_out_valid_RDATA",
+        "m_axi_gmem_out_valid_RID",
+        "m_axi_gmem_out_valid_RLAST",
+        "m_axi_gmem_out_valid_RREADY",
+        "m_axi_gmem_out_valid_RRESP",
+        "m_axi_gmem_out_valid_RUSER",
+        "m_axi_gmem_out_valid_RVALID",
+        "m_axi_gmem_out_valid_WDATA",
+        "m_axi_gmem_out_valid_WID",
+        "m_axi_gmem_out_valid_WLAST",
+        "m_axi_gmem_out_valid_WREADY",
+        "m_axi_gmem_out_valid_WSTRB",
+        "m_axi_gmem_out_valid_WUSER",
+        "m_axi_gmem_out_valid_WVALID",
+        "s_axi_control_ARADDR",
+        "s_axi_control_ARREADY",
+        "s_axi_control_ARVALID",
+        "s_axi_control_AWADDR",
+        "s_axi_control_AWREADY",
+        "s_axi_control_AWVALID",
+        "s_axi_control_BREADY",
+        "s_axi_control_BRESP",
+        "s_axi_control_BVALID",
+        "s_axi_control_RDATA",
+        "s_axi_control_RREADY",
+        "s_axi_control_RRESP",
+        "s_axi_control_RVALID",
+        "s_axi_control_WDATA",
+        "s_axi_control_WREADY",
+        "s_axi_control_WSTRB",
+        "s_axi_control_WVALID",
+        "s_axi_control_r_ARADDR",
+        "s_axi_control_r_ARREADY",
+        "s_axi_control_r_ARVALID",
+        "s_axi_control_r_AWADDR",
+        "s_axi_control_r_AWREADY",
+        "s_axi_control_r_AWVALID",
+        "s_axi_control_r_BREADY",
+        "s_axi_control_r_BRESP",
+        "s_axi_control_r_BVALID",
+        "s_axi_control_r_RDATA",
+        "s_axi_control_r_RREADY",
+        "s_axi_control_r_RRESP",
+        "s_axi_control_r_RVALID",
+        "s_axi_control_r_WDATA",
+        "s_axi_control_r_WREADY",
+        "s_axi_control_r_WSTRB",
+        "s_axi_control_r_WVALID"
+      ],
+      "score_ports": []
+    },
+    "scorer_loops": [
+      {
+        "loop": "VITIS_LOOP_164_5",
+        "latency_min_cycles": 1238.0,
+        "latency_max_cycles": 5898240.0,
+        "iteration_latency": "1238 ~ 1440",
+        "iteration_latency_max": 1440.0,
+        "trip_count": "1 ~ 4096",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_250_12",
+        "latency_min_cycles": 138.0,
+        "latency_max_cycles": 1646592.0,
+        "iteration_latency": "138 ~ 402",
+        "iteration_latency_max": 402.0,
+        "trip_count": "1 ~ 4096",
+        "pipelined": "no"
+      }
+    ],
+    "selector_pipelines": {
+      "grp_p_anonymous_namespace_is_scorer_core_false_s_fu_1688": 7610382,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_66_1_fu_1703": 6,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_66_11_fu_1714": 6,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_985_8_fu_1725": 11,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_944_5_fu_1767": 45,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_969_7_fu_1798": 259,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1013_9_fu_1808": 4098,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1040_12_VITIS_LOOP_1042_13_fu_1814": 1855,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1074_14_fu_1837": 145,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1079_15_fu_1843": 11,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1089_17_fu_1867": 145,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1107_18_fu_1877": 98,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1116_20_fu_1883": 99,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1132_21_fu_1892": 4098,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1137_22_fu_1898": 98,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_127_1_fu_1906": 4099,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_103_1_fu_1916": 515,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_109_2_fu_1925": 514,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_151_1_fu_1931": 533,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_175_2_fu_1941": 535,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1166_24_fu_1954": 98,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1176_26_fu_1960": 100,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1196_27_fu_1973": 98,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1212_29_fu_1984": 259,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_1227_31_fu_1994": 293,
+      "grp_integer_selector_pipeline_Pipeline_VITIS_LOOP_127_12_fu_2003": 4099,
+      "grp_ts_pool_context_packed_fu_2013": 140653
+    },
+    "selector_loops": [
+      {
+        "loop": "VITIS_LOOP_939_2",
+        "latency_min_cycles": 69.0,
+        "latency_max_cycles": 20526.0,
+        "iteration_latency": "23 ~ 6842",
+        "iteration_latency_max": 6842.0,
+        "trip_count": "3",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_940_3_VITIS_LOOP_942_4",
+        "latency_min_cycles": 18.0,
+        "latency_max_cycles": 6837.0,
+        "iteration_latency": "6 ~ 53",
+        "iteration_latency_max": 53.0,
+        "trip_count": "3 ~ 129",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_962_6",
+        "latency_min_cycles": 275.0,
+        "latency_max_cycles": 26401.0,
+        "iteration_latency": "275",
+        "iteration_latency_max": 275.0,
+        "trip_count": "1 ~ 96",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1020_10",
+        "latency_min_cycles": 0.0,
+        "latency_max_cycles": 251190.0,
+        "iteration_latency": "37 ~ 27910",
+        "iteration_latency_max": 27910.0,
+        "trip_count": "0 ~ 9",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1036_11",
+        "latency_min_cycles": 9.0,
+        "latency_max_cycles": 27869.0,
+        "iteration_latency": "10 ~ 1858",
+        "iteration_latency_max": 1858.0,
+        "trip_count": "0 ~ 15",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1084_16",
+        "latency_min_cycles": 5.0,
+        "latency_max_cycles": 14303.0,
+        "iteration_latency": "6 ~ 149",
+        "iteration_latency_max": 149.0,
+        "trip_count": "0 ~ 96",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1112_19",
+        "latency_min_cycles": 8.0,
+        "latency_max_cycles": 9888.0,
+        "iteration_latency": "8 ~ 103",
+        "iteration_latency_max": 103.0,
+        "trip_count": "1 ~ 96",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1143_23",
+        "latency_min_cycles": 0.0,
+        "latency_max_cycles": 55883.0,
+        "iteration_latency": "67 ~ 6209",
+        "iteration_latency_max": 6209.0,
+        "trip_count": "0 ~ 9",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1170_25",
+        "latency_min_cycles": 8.0,
+        "latency_max_cycles": 9888.0,
+        "iteration_latency": "8 ~ 103",
+        "iteration_latency_max": 103.0,
+        "trip_count": "1 ~ 96",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1207_28",
+        "latency_min_cycles": 5.0,
+        "latency_max_cycles": 26688.0,
+        "iteration_latency": "5 ~ 278",
+        "iteration_latency_max": 278.0,
+        "trip_count": "1 ~ 96",
+        "pipelined": "no"
+      },
+      {
+        "loop": "VITIS_LOOP_1223_30",
+        "latency_min_cycles": 0.0,
+        "latency_max_cycles": 1305459.0,
+        "iteration_latency": "8826 ~ 145051",
+        "iteration_latency_max": 145051.0,
+        "trip_count": "0 ~ 9",
+        "pipelined": "no"
+      }
+    ],
+    "context_pooling_loops": []
+  },
+  "derived_latency_model": {
+    "kind": "formula estimate, not a measurement",
+    "constants": {
+      "c_anchor": 5.5,
+      "c_scan": 4.0,
+      "c_pool": 1.4,
+      "c_identity_per_group": 260.0,
+      "fixed_bookkeeping": 60000.0,
+      "local_candidate_cap": 16,
+      "scorer_per_group": 1842.0
+    },
+    "configs": {
+      "G80_K48": {
+        "group_count": 80,
+        "budget": 48,
+        "grid": [
+          8,
+          10
+        ],
+        "scorer_cycles": 212899.0,
+        "selector_cycles_estimate": 103444.8,
+        "total_cycles_estimate": 316343.8,
+        "ms_at_200mhz": 1.5817
+      },
+      "G80_K64": {
+        "group_count": 80,
+        "budget": 64,
+        "grid": [
+          8,
+          10
+        ],
+        "scorer_cycles": 212899.0,
+        "selector_cycles_estimate": 111636.8,
+        "total_cycles_estimate": 324535.8,
+        "ms_at_200mhz": 1.6227
+      },
+      "G80_K96": {
+        "group_count": 80,
+        "budget": 96,
+        "grid": [
+          8,
+          10
+        ],
+        "scorer_cycles": 212899.0,
+        "selector_cycles_estimate": 80800.0,
+        "total_cycles_estimate": 293699.0,
+        "ms_at_200mhz": 1.4685
+      },
+      "G260_K48": {
+        "group_count": 260,
+        "budget": 48,
+        "grid": [
+          13,
+          20
+        ],
+        "scorer_cycles": 544459.0,
+        "selector_cycles_estimate": 183234.8,
+        "total_cycles_estimate": 727693.8,
+        "ms_at_200mhz": 3.6385
+      },
+      "G260_K64": {
+        "group_count": 260,
+        "budget": 64,
+        "grid": [
+          13,
+          20
+        ],
+        "scorer_cycles": 544459.0,
+        "selector_cycles_estimate": 191426.8,
+        "total_cycles_estimate": 735885.8,
+        "ms_at_200mhz": 3.6794
+      },
+      "G260_K96": {
+        "group_count": 260,
+        "budget": 96,
+        "grid": [
+          13,
+          20
+        ],
+        "scorer_cycles": 544459.0,
+        "selector_cycles_estimate": 210882.8,
+        "total_cycles_estimate": 755341.8,
+        "ms_at_200mhz": 3.7767
+      },
+      "G400_K48": {
+        "group_count": 400,
+        "budget": 48,
+        "grid": [
+          20,
+          20
+        ],
+        "scorer_cycles": 802339.0,
+        "selector_cycles_estimate": 243140.8,
+        "total_cycles_estimate": 1045479.8,
+        "ms_at_200mhz": 5.2274
+      },
+      "G400_K64": {
+        "group_count": 400,
+        "budget": 64,
+        "grid": [
+          20,
+          20
+        ],
+        "scorer_cycles": 802339.0,
+        "selector_cycles_estimate": 251332.8,
+        "total_cycles_estimate": 1053671.8,
+        "ms_at_200mhz": 5.2684
+      },
+      "G400_K96": {
+        "group_count": 400,
+        "budget": 96,
+        "grid": [
+          20,
+          20
+        ],
+        "scorer_cycles": 802339.0,
+        "selector_cycles_estimate": 270788.8,
+        "total_cycles_estimate": 1073127.8,
+        "ms_at_200mhz": 5.3656
+      }
+    },
+    "validation_at_max_bounds": {
+      "scorer_cycles": 7610371.0,
+      "selector_cycles_estimate": 1852307.2,
+      "total_cycles_estimate": 9462678.2,
+      "tool_reported_worst_cycles": 9312990.0,
+      "model_vs_tool_ratio": 1.0161,
+      "note": "G=4096, K=96, local_cap=16, 64x64 grid (compile-time bounds)"
+    }
+  },
+  "derived_latency_200mhz": {
+    "G80_K48": {
+      "group_count": 80,
+      "budget": 48,
+      "grid": [
+        8,
+        10
+      ],
+      "scorer_cycles": 212899.0,
+      "selector_cycles_estimate": 103444.8,
+      "total_cycles_estimate": 316343.8,
+      "ms_at_200mhz": 1.5817
+    },
+    "G80_K64": {
+      "group_count": 80,
+      "budget": 64,
+      "grid": [
+        8,
+        10
+      ],
+      "scorer_cycles": 212899.0,
+      "selector_cycles_estimate": 111636.8,
+      "total_cycles_estimate": 324535.8,
+      "ms_at_200mhz": 1.6227
+    },
+    "G80_K96": {
+      "group_count": 80,
+      "budget": 96,
+      "grid": [
+        8,
+        10
+      ],
+      "scorer_cycles": 212899.0,
+      "selector_cycles_estimate": 80800.0,
+      "total_cycles_estimate": 293699.0,
+      "ms_at_200mhz": 1.4685
+    },
+    "G260_K48": {
+      "group_count": 260,
+      "budget": 48,
+      "grid": [
+        13,
+        20
+      ],
+      "scorer_cycles": 544459.0,
+      "selector_cycles_estimate": 183234.8,
+      "total_cycles_estimate": 727693.8,
+      "ms_at_200mhz": 3.6385
+    },
+    "G260_K64": {
+      "group_count": 260,
+      "budget": 64,
+      "grid": [
+        13,
+        20
+      ],
+      "scorer_cycles": 544459.0,
+      "selector_cycles_estimate": 191426.8,
+      "total_cycles_estimate": 735885.8,
+      "ms_at_200mhz": 3.6794
+    },
+    "G260_K96": {
+      "group_count": 260,
+      "budget": 96,
+      "grid": [
+        13,
+        20
+      ],
+      "scorer_cycles": 544459.0,
+      "selector_cycles_estimate": 210882.8,
+      "total_cycles_estimate": 755341.8,
+      "ms_at_200mhz": 3.7767
+    },
+    "G400_K48": {
+      "group_count": 400,
+      "budget": 48,
+      "grid": [
+        20,
+        20
+      ],
+      "scorer_cycles": 802339.0,
+      "selector_cycles_estimate": 243140.8,
+      "total_cycles_estimate": 1045479.8,
+      "ms_at_200mhz": 5.2274
+    },
+    "G400_K64": {
+      "group_count": 400,
+      "budget": 64,
+      "grid": [
+        20,
+        20
+      ],
+      "scorer_cycles": 802339.0,
+      "selector_cycles_estimate": 251332.8,
+      "total_cycles_estimate": 1053671.8,
+      "ms_at_200mhz": 5.2684
+    },
+    "G400_K96": {
+      "group_count": 400,
+      "budget": 96,
+      "grid": [
+        20,
+        20
+      ],
+      "scorer_cycles": 802339.0,
+      "selector_cycles_estimate": 270788.8,
+      "total_cycles_estimate": 1073127.8,
+      "ms_at_200mhz": 5.3656
+    }
+  },
+  "transfer_audit": {
+    "scope": "model estimate, not a measurement",
+    "transport_time_basis": "fixed_budget_arena_bytes",
+    "layout_authority": {
+      "module": "evaluation.hardware_regular_token_selector",
+      "functions": [
+        "fpga_transfer_layout",
+        "describe_fpga_layout"
+      ],
+      "note": "fixed arena values and the 5 segment offsets/sizes are produced live by the frozen contract; no second offset algorithm is kept in this module"
+    },
+    "assumptions": {
+      "gbe_line_rate_mbytes_per_s": 125.0,
+      "gbe_effective_mbytes_per_s_central": 110.0,
+      "gbe_effective_mbytes_per_s_low": 90.0,
+      "gbe_effective_mbytes_per_s_high": 118.0,
+      "local_ddr_bytes_per_s": 6000000000.0,
+      "wv_bytes": 131072,
+      "layout_alignment": 64
+    },
+    "wv_resident_one_time_bytes": 131072,
+    "not_counted_as_external": [
+      "on-chip score_q (local buffer, never DDR)"
+    ],
+    "configs": {
+      "G80_K48_cold": {
+        "group_count": 80,
+        "budget": 48,
+        "output_group_count": 48,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 327680,
+          "group_mean_q": 81920,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 540800
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 48,
+          "selected_tokens": 196608,
+          "group_index": 96,
+          "source_type": 48,
+          "region_id": 48,
+          "valid": 48,
+          "metadata": 240,
+          "logical_payload_bytes": 196848,
+          "fixed_budget_arena_bytes": 196928,
+          "fixed_budget_arena": {
+            "budget": 48,
+            "alignment": 64,
+            "total_bytes": 196928,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 196608,
+                "offset": 0,
+                "size": 196608
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 48,
+                "offset": 196608,
+                "size": 96
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196736,
+                "size": 48
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196800,
+                "size": 48
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196864,
+                "size": 48
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 160,
+          "score_q_bytes_read": 160,
+          "total": 320
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 320,
+          "ideal_time_us_at_6gbs": 0.05333333333333334
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 81920,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 4916.363636363636,
+            "low_bandwidth_us": 6008.888888888889,
+            "high_bandwidth_us": 4583.050847457627
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 1790.2545454545455,
+            "low_bandwidth_us": 2188.088888888889,
+            "high_bandwidth_us": 1668.8813559322034
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 1789.5272727272727,
+            "low_bandwidth_us": 2187.2,
+            "high_bandwidth_us": 1668.2033898305085,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 90.13333333333334,
+          "fpga_to_jetson_local_ddr_6gbs_us": 32.82133333333333,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 32.808,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.05333333333333334
+        }
+      },
+      "G80_K48_resident": {
+        "group_count": 80,
+        "budget": 48,
+        "output_group_count": 48,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 327680,
+          "group_mean_q": 81920,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 409728
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 48,
+          "selected_tokens": 196608,
+          "group_index": 96,
+          "source_type": 48,
+          "region_id": 48,
+          "valid": 48,
+          "metadata": 240,
+          "logical_payload_bytes": 196848,
+          "fixed_budget_arena_bytes": 196928,
+          "fixed_budget_arena": {
+            "budget": 48,
+            "alignment": 64,
+            "total_bytes": 196928,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 196608,
+                "offset": 0,
+                "size": 196608
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 48,
+                "offset": 196608,
+                "size": 96
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196736,
+                "size": 48
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196800,
+                "size": 48
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196864,
+                "size": 48
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 160,
+          "score_q_bytes_read": 160,
+          "total": 320
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 320,
+          "ideal_time_us_at_6gbs": 0.05333333333333334
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 81920,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 3724.7999999999997,
+            "low_bandwidth_us": 4552.533333333333,
+            "high_bandwidth_us": 3472.271186440678
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 1790.2545454545455,
+            "low_bandwidth_us": 2188.088888888889,
+            "high_bandwidth_us": 1668.8813559322034
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 1789.5272727272727,
+            "low_bandwidth_us": 2187.2,
+            "high_bandwidth_us": 1668.2033898305085,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 68.288,
+          "fpga_to_jetson_local_ddr_6gbs_us": 32.82133333333333,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 32.808,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.05333333333333334
+        }
+      },
+      "G80_K64_cold": {
+        "group_count": 80,
+        "budget": 64,
+        "output_group_count": 64,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 327680,
+          "group_mean_q": 81920,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 540800
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 64,
+          "selected_tokens": 262144,
+          "group_index": 128,
+          "source_type": 64,
+          "region_id": 64,
+          "valid": 64,
+          "metadata": 320,
+          "logical_payload_bytes": 262464,
+          "fixed_budget_arena_bytes": 262464,
+          "fixed_budget_arena": {
+            "budget": 64,
+            "alignment": 64,
+            "total_bytes": 262464,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 262144,
+                "offset": 0,
+                "size": 262144
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 64,
+                "offset": 262144,
+                "size": 128
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262272,
+                "size": 64
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262336,
+                "size": 64
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262400,
+                "size": 64
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 160,
+          "score_q_bytes_read": 160,
+          "total": 320
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 320,
+          "ideal_time_us_at_6gbs": 0.05333333333333334
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 81920,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 4916.363636363636,
+            "low_bandwidth_us": 6008.888888888889,
+            "high_bandwidth_us": 4583.050847457627
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 90.13333333333334,
+          "fpga_to_jetson_local_ddr_6gbs_us": 43.744,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 43.744,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.05333333333333334
+        }
+      },
+      "G80_K64_resident": {
+        "group_count": 80,
+        "budget": 64,
+        "output_group_count": 64,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 327680,
+          "group_mean_q": 81920,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 409728
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 64,
+          "selected_tokens": 262144,
+          "group_index": 128,
+          "source_type": 64,
+          "region_id": 64,
+          "valid": 64,
+          "metadata": 320,
+          "logical_payload_bytes": 262464,
+          "fixed_budget_arena_bytes": 262464,
+          "fixed_budget_arena": {
+            "budget": 64,
+            "alignment": 64,
+            "total_bytes": 262464,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 262144,
+                "offset": 0,
+                "size": 262144
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 64,
+                "offset": 262144,
+                "size": 128
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262272,
+                "size": 64
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262336,
+                "size": 64
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262400,
+                "size": 64
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 160,
+          "score_q_bytes_read": 160,
+          "total": 320
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 320,
+          "ideal_time_us_at_6gbs": 0.05333333333333334
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 81920,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 3724.7999999999997,
+            "low_bandwidth_us": 4552.533333333333,
+            "high_bandwidth_us": 3472.271186440678
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 68.288,
+          "fpga_to_jetson_local_ddr_6gbs_us": 43.744,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 43.744,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.05333333333333334
+        }
+      },
+      "G80_K96_cold": {
+        "group_count": 80,
+        "budget": 96,
+        "output_group_count": 80,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 327680,
+          "group_mean_q": 81920,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 540800
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 80,
+          "selected_tokens": 327680,
+          "group_index": 160,
+          "source_type": 80,
+          "region_id": 80,
+          "valid": 80,
+          "metadata": 400,
+          "logical_payload_bytes": 328080,
+          "fixed_budget_arena_bytes": 393792,
+          "fixed_budget_arena": {
+            "budget": 96,
+            "alignment": 64,
+            "total_bytes": 393792,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 393216,
+                "offset": 0,
+                "size": 393216
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 96,
+                "offset": 393216,
+                "size": 192
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393408,
+                "size": 96
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393536,
+                "size": 96
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393664,
+                "size": 96
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 160,
+          "score_q_bytes_read": 160,
+          "total": 320
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 320,
+          "ideal_time_us_at_6gbs": 0.05333333333333334
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 81920,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 4916.363636363636,
+            "low_bandwidth_us": 6008.888888888889,
+            "high_bandwidth_us": 4583.050847457627
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 3579.927272727273,
+            "low_bandwidth_us": 4375.466666666667,
+            "high_bandwidth_us": 3337.220338983051
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2982.545454545455,
+            "low_bandwidth_us": 3645.3333333333335,
+            "high_bandwidth_us": 2780.3389830508477,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 90.13333333333334,
+          "fpga_to_jetson_local_ddr_6gbs_us": 65.63199999999999,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 54.68,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.05333333333333334
+        }
+      },
+      "G80_K96_resident": {
+        "group_count": 80,
+        "budget": 96,
+        "output_group_count": 80,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 327680,
+          "group_mean_q": 81920,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 409728
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 80,
+          "selected_tokens": 327680,
+          "group_index": 160,
+          "source_type": 80,
+          "region_id": 80,
+          "valid": 80,
+          "metadata": 400,
+          "logical_payload_bytes": 328080,
+          "fixed_budget_arena_bytes": 393792,
+          "fixed_budget_arena": {
+            "budget": 96,
+            "alignment": 64,
+            "total_bytes": 393792,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 393216,
+                "offset": 0,
+                "size": 393216
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 96,
+                "offset": 393216,
+                "size": 192
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393408,
+                "size": 96
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393536,
+                "size": 96
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393664,
+                "size": 96
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 160,
+          "score_q_bytes_read": 160,
+          "total": 320
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 320,
+          "ideal_time_us_at_6gbs": 0.05333333333333334
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 81920,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 3724.7999999999997,
+            "low_bandwidth_us": 4552.533333333333,
+            "high_bandwidth_us": 3472.271186440678
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 3579.927272727273,
+            "low_bandwidth_us": 4375.466666666667,
+            "high_bandwidth_us": 3337.220338983051
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2982.545454545455,
+            "low_bandwidth_us": 3645.3333333333335,
+            "high_bandwidth_us": 2780.3389830508477,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 68.288,
+          "fpga_to_jetson_local_ddr_6gbs_us": 65.63199999999999,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 54.68,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.05333333333333334
+        }
+      },
+      "G260_K48_cold": {
+        "group_count": 260,
+        "budget": 48,
+        "output_group_count": 48,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1064960,
+          "group_mean_q": 266240,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 1462400
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 48,
+          "selected_tokens": 196608,
+          "group_index": 96,
+          "source_type": 48,
+          "region_id": 48,
+          "valid": 48,
+          "metadata": 240,
+          "logical_payload_bytes": 196848,
+          "fixed_budget_arena_bytes": 196928,
+          "fixed_budget_arena": {
+            "budget": 48,
+            "alignment": 64,
+            "total_bytes": 196928,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 196608,
+                "offset": 0,
+                "size": 196608
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 48,
+                "offset": 196608,
+                "size": 96
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196736,
+                "size": 48
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196800,
+                "size": 48
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196864,
+                "size": 48
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 520,
+          "score_q_bytes_read": 520,
+          "total": 1040
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1040,
+          "ideal_time_us_at_6gbs": 0.1733333333333333
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 266240,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 13294.545454545454,
+            "low_bandwidth_us": 16248.888888888889,
+            "high_bandwidth_us": 12393.220338983052
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 1790.2545454545455,
+            "low_bandwidth_us": 2188.088888888889,
+            "high_bandwidth_us": 1668.8813559322034
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 1789.5272727272727,
+            "low_bandwidth_us": 2187.2,
+            "high_bandwidth_us": 1668.2033898305085,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 243.73333333333335,
+          "fpga_to_jetson_local_ddr_6gbs_us": 32.82133333333333,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 32.808,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.1733333333333333
+        }
+      },
+      "G260_K48_resident": {
+        "group_count": 260,
+        "budget": 48,
+        "output_group_count": 48,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1064960,
+          "group_mean_q": 266240,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 1331328
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 48,
+          "selected_tokens": 196608,
+          "group_index": 96,
+          "source_type": 48,
+          "region_id": 48,
+          "valid": 48,
+          "metadata": 240,
+          "logical_payload_bytes": 196848,
+          "fixed_budget_arena_bytes": 196928,
+          "fixed_budget_arena": {
+            "budget": 48,
+            "alignment": 64,
+            "total_bytes": 196928,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 196608,
+                "offset": 0,
+                "size": 196608
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 48,
+                "offset": 196608,
+                "size": 96
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196736,
+                "size": 48
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196800,
+                "size": 48
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196864,
+                "size": 48
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 520,
+          "score_q_bytes_read": 520,
+          "total": 1040
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1040,
+          "ideal_time_us_at_6gbs": 0.1733333333333333
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 266240,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 12102.981818181817,
+            "low_bandwidth_us": 14792.533333333333,
+            "high_bandwidth_us": 11282.4406779661
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 1790.2545454545455,
+            "low_bandwidth_us": 2188.088888888889,
+            "high_bandwidth_us": 1668.8813559322034
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 1789.5272727272727,
+            "low_bandwidth_us": 2187.2,
+            "high_bandwidth_us": 1668.2033898305085,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 221.888,
+          "fpga_to_jetson_local_ddr_6gbs_us": 32.82133333333333,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 32.808,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.1733333333333333
+        }
+      },
+      "G260_K64_cold": {
+        "group_count": 260,
+        "budget": 64,
+        "output_group_count": 64,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1064960,
+          "group_mean_q": 266240,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 1462400
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 64,
+          "selected_tokens": 262144,
+          "group_index": 128,
+          "source_type": 64,
+          "region_id": 64,
+          "valid": 64,
+          "metadata": 320,
+          "logical_payload_bytes": 262464,
+          "fixed_budget_arena_bytes": 262464,
+          "fixed_budget_arena": {
+            "budget": 64,
+            "alignment": 64,
+            "total_bytes": 262464,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 262144,
+                "offset": 0,
+                "size": 262144
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 64,
+                "offset": 262144,
+                "size": 128
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262272,
+                "size": 64
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262336,
+                "size": 64
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262400,
+                "size": 64
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 520,
+          "score_q_bytes_read": 520,
+          "total": 1040
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1040,
+          "ideal_time_us_at_6gbs": 0.1733333333333333
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 266240,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 13294.545454545454,
+            "low_bandwidth_us": 16248.888888888889,
+            "high_bandwidth_us": 12393.220338983052
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 243.73333333333335,
+          "fpga_to_jetson_local_ddr_6gbs_us": 43.744,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 43.744,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.1733333333333333
+        }
+      },
+      "G260_K64_resident": {
+        "group_count": 260,
+        "budget": 64,
+        "output_group_count": 64,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1064960,
+          "group_mean_q": 266240,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 1331328
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 64,
+          "selected_tokens": 262144,
+          "group_index": 128,
+          "source_type": 64,
+          "region_id": 64,
+          "valid": 64,
+          "metadata": 320,
+          "logical_payload_bytes": 262464,
+          "fixed_budget_arena_bytes": 262464,
+          "fixed_budget_arena": {
+            "budget": 64,
+            "alignment": 64,
+            "total_bytes": 262464,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 262144,
+                "offset": 0,
+                "size": 262144
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 64,
+                "offset": 262144,
+                "size": 128
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262272,
+                "size": 64
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262336,
+                "size": 64
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262400,
+                "size": 64
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 520,
+          "score_q_bytes_read": 520,
+          "total": 1040
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1040,
+          "ideal_time_us_at_6gbs": 0.1733333333333333
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 266240,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 12102.981818181817,
+            "low_bandwidth_us": 14792.533333333333,
+            "high_bandwidth_us": 11282.4406779661
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 221.888,
+          "fpga_to_jetson_local_ddr_6gbs_us": 43.744,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 43.744,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.1733333333333333
+        }
+      },
+      "G260_K96_cold": {
+        "group_count": 260,
+        "budget": 96,
+        "output_group_count": 96,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1064960,
+          "group_mean_q": 266240,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 1462400
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 96,
+          "selected_tokens": 393216,
+          "group_index": 192,
+          "source_type": 96,
+          "region_id": 96,
+          "valid": 96,
+          "metadata": 480,
+          "logical_payload_bytes": 393696,
+          "fixed_budget_arena_bytes": 393792,
+          "fixed_budget_arena": {
+            "budget": 96,
+            "alignment": 64,
+            "total_bytes": 393792,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 393216,
+                "offset": 0,
+                "size": 393216
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 96,
+                "offset": 393216,
+                "size": 192
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393408,
+                "size": 96
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393536,
+                "size": 96
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393664,
+                "size": 96
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 520,
+          "score_q_bytes_read": 520,
+          "total": 1040
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1040,
+          "ideal_time_us_at_6gbs": 0.1733333333333333
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 266240,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 13294.545454545454,
+            "low_bandwidth_us": 16248.888888888889,
+            "high_bandwidth_us": 12393.220338983052
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 3579.927272727273,
+            "low_bandwidth_us": 4375.466666666667,
+            "high_bandwidth_us": 3337.220338983051
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 3579.0545454545454,
+            "low_bandwidth_us": 4374.4,
+            "high_bandwidth_us": 3336.406779661017,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 243.73333333333335,
+          "fpga_to_jetson_local_ddr_6gbs_us": 65.63199999999999,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 65.616,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.1733333333333333
+        }
+      },
+      "G260_K96_resident": {
+        "group_count": 260,
+        "budget": 96,
+        "output_group_count": 96,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1064960,
+          "group_mean_q": 266240,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 1331328
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 96,
+          "selected_tokens": 393216,
+          "group_index": 192,
+          "source_type": 96,
+          "region_id": 96,
+          "valid": 96,
+          "metadata": 480,
+          "logical_payload_bytes": 393696,
+          "fixed_budget_arena_bytes": 393792,
+          "fixed_budget_arena": {
+            "budget": 96,
+            "alignment": 64,
+            "total_bytes": 393792,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 393216,
+                "offset": 0,
+                "size": 393216
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 96,
+                "offset": 393216,
+                "size": 192
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393408,
+                "size": 96
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393536,
+                "size": 96
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393664,
+                "size": 96
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 520,
+          "score_q_bytes_read": 520,
+          "total": 1040
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1040,
+          "ideal_time_us_at_6gbs": 0.1733333333333333
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 266240,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 12102.981818181817,
+            "low_bandwidth_us": 14792.533333333333,
+            "high_bandwidth_us": 11282.4406779661
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 3579.927272727273,
+            "low_bandwidth_us": 4375.466666666667,
+            "high_bandwidth_us": 3337.220338983051
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 3579.0545454545454,
+            "low_bandwidth_us": 4374.4,
+            "high_bandwidth_us": 3336.406779661017,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 221.888,
+          "fpga_to_jetson_local_ddr_6gbs_us": 65.63199999999999,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 65.616,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.1733333333333333
+        }
+      },
+      "G400_K48_cold": {
+        "group_count": 400,
+        "budget": 48,
+        "output_group_count": 48,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1638400,
+          "group_mean_q": 409600,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 2179200
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 48,
+          "selected_tokens": 196608,
+          "group_index": 96,
+          "source_type": 48,
+          "region_id": 48,
+          "valid": 48,
+          "metadata": 240,
+          "logical_payload_bytes": 196848,
+          "fixed_budget_arena_bytes": 196928,
+          "fixed_budget_arena": {
+            "budget": 48,
+            "alignment": 64,
+            "total_bytes": 196928,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 196608,
+                "offset": 0,
+                "size": 196608
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 48,
+                "offset": 196608,
+                "size": 96
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196736,
+                "size": 48
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196800,
+                "size": 48
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196864,
+                "size": 48
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 800,
+          "score_q_bytes_read": 800,
+          "total": 1600
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1600,
+          "ideal_time_us_at_6gbs": 0.26666666666666666
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 409600,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 19810.909090909092,
+            "low_bandwidth_us": 24213.333333333332,
+            "high_bandwidth_us": 18467.796610169495
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 1790.2545454545455,
+            "low_bandwidth_us": 2188.088888888889,
+            "high_bandwidth_us": 1668.8813559322034
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 1789.5272727272727,
+            "low_bandwidth_us": 2187.2,
+            "high_bandwidth_us": 1668.2033898305085,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 363.2,
+          "fpga_to_jetson_local_ddr_6gbs_us": 32.82133333333333,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 32.808,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.26666666666666666
+        }
+      },
+      "G400_K48_resident": {
+        "group_count": 400,
+        "budget": 48,
+        "output_group_count": 48,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1638400,
+          "group_mean_q": 409600,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 2048128
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 48,
+          "selected_tokens": 196608,
+          "group_index": 96,
+          "source_type": 48,
+          "region_id": 48,
+          "valid": 48,
+          "metadata": 240,
+          "logical_payload_bytes": 196848,
+          "fixed_budget_arena_bytes": 196928,
+          "fixed_budget_arena": {
+            "budget": 48,
+            "alignment": 64,
+            "total_bytes": 196928,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 196608,
+                "offset": 0,
+                "size": 196608
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 48,
+                "offset": 196608,
+                "size": 96
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196736,
+                "size": 48
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196800,
+                "size": 48
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 48,
+                "offset": 196864,
+                "size": 48
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 800,
+          "score_q_bytes_read": 800,
+          "total": 1600
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1600,
+          "ideal_time_us_at_6gbs": 0.26666666666666666
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 409600,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 18619.345454545455,
+            "low_bandwidth_us": 22756.977777777778,
+            "high_bandwidth_us": 17357.01694915254
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 1790.2545454545455,
+            "low_bandwidth_us": 2188.088888888889,
+            "high_bandwidth_us": 1668.8813559322034
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 1789.5272727272727,
+            "low_bandwidth_us": 2187.2,
+            "high_bandwidth_us": 1668.2033898305085,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 341.3546666666667,
+          "fpga_to_jetson_local_ddr_6gbs_us": 32.82133333333333,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 32.808,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.26666666666666666
+        }
+      },
+      "G400_K64_cold": {
+        "group_count": 400,
+        "budget": 64,
+        "output_group_count": 64,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1638400,
+          "group_mean_q": 409600,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 2179200
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 64,
+          "selected_tokens": 262144,
+          "group_index": 128,
+          "source_type": 64,
+          "region_id": 64,
+          "valid": 64,
+          "metadata": 320,
+          "logical_payload_bytes": 262464,
+          "fixed_budget_arena_bytes": 262464,
+          "fixed_budget_arena": {
+            "budget": 64,
+            "alignment": 64,
+            "total_bytes": 262464,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 262144,
+                "offset": 0,
+                "size": 262144
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 64,
+                "offset": 262144,
+                "size": 128
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262272,
+                "size": 64
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262336,
+                "size": 64
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262400,
+                "size": 64
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 800,
+          "score_q_bytes_read": 800,
+          "total": 1600
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1600,
+          "ideal_time_us_at_6gbs": 0.26666666666666666
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 409600,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 19810.909090909092,
+            "low_bandwidth_us": 24213.333333333332,
+            "high_bandwidth_us": 18467.796610169495
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 363.2,
+          "fpga_to_jetson_local_ddr_6gbs_us": 43.744,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 43.744,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.26666666666666666
+        }
+      },
+      "G400_K64_resident": {
+        "group_count": 400,
+        "budget": 64,
+        "output_group_count": 64,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1638400,
+          "group_mean_q": 409600,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 2048128
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 64,
+          "selected_tokens": 262144,
+          "group_index": 128,
+          "source_type": 64,
+          "region_id": 64,
+          "valid": 64,
+          "metadata": 320,
+          "logical_payload_bytes": 262464,
+          "fixed_budget_arena_bytes": 262464,
+          "fixed_budget_arena": {
+            "budget": 64,
+            "alignment": 64,
+            "total_bytes": 262464,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 262144,
+                "offset": 0,
+                "size": 262144
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 64,
+                "offset": 262144,
+                "size": 128
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262272,
+                "size": 64
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262336,
+                "size": 64
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 64,
+                "offset": 262400,
+                "size": 64
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 800,
+          "score_q_bytes_read": 800,
+          "total": 1600
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1600,
+          "ideal_time_us_at_6gbs": 0.26666666666666666
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 409600,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 18619.345454545455,
+            "low_bandwidth_us": 22756.977777777778,
+            "high_bandwidth_us": 17357.01694915254
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 2386.0363636363636,
+            "low_bandwidth_us": 2916.2666666666664,
+            "high_bandwidth_us": 2224.271186440678,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 341.3546666666667,
+          "fpga_to_jetson_local_ddr_6gbs_us": 43.744,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 43.744,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.26666666666666666
+        }
+      },
+      "G400_K96_cold": {
+        "group_count": 400,
+        "budget": 96,
+        "output_group_count": 96,
+        "wv_resident": false,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1638400,
+          "group_mean_q": 409600,
+          "query_q": 128,
+          "wv_q": 131072,
+          "total": 2179200
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 96,
+          "selected_tokens": 393216,
+          "group_index": 192,
+          "source_type": 96,
+          "region_id": 96,
+          "valid": 96,
+          "metadata": 480,
+          "logical_payload_bytes": 393696,
+          "fixed_budget_arena_bytes": 393792,
+          "fixed_budget_arena": {
+            "budget": 96,
+            "alignment": 64,
+            "total_bytes": 393792,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 393216,
+                "offset": 0,
+                "size": 393216
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 96,
+                "offset": 393216,
+                "size": 192
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393408,
+                "size": 96
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393536,
+                "size": 96
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393664,
+                "size": 96
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 800,
+          "score_q_bytes_read": 800,
+          "total": 1600
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1600,
+          "ideal_time_us_at_6gbs": 0.26666666666666666
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 409600,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 19810.909090909092,
+            "low_bandwidth_us": 24213.333333333332,
+            "high_bandwidth_us": 18467.796610169495
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 3579.927272727273,
+            "low_bandwidth_us": 4375.466666666667,
+            "high_bandwidth_us": 3337.220338983051
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 3579.0545454545454,
+            "low_bandwidth_us": 4374.4,
+            "high_bandwidth_us": 3336.406779661017,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 363.2,
+          "fpga_to_jetson_local_ddr_6gbs_us": 65.63199999999999,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 65.616,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.26666666666666666
+        }
+      },
+      "G400_K96_resident": {
+        "group_count": 400,
+        "budget": 96,
+        "output_group_count": 96,
+        "wv_resident": true,
+        "layout_authority": "evaluation.hardware_regular_token_selector.fpga_transfer_layout",
+        "jetson_to_fpga": {
+          "tokens_q": 1638400,
+          "group_mean_q": 409600,
+          "query_q": 128,
+          "wv_q": 0,
+          "total": 2048128
+        },
+        "fpga_to_jetson": {
+          "output_group_count": 96,
+          "selected_tokens": 393216,
+          "group_index": 192,
+          "source_type": 96,
+          "region_id": 96,
+          "valid": 96,
+          "metadata": 480,
+          "logical_payload_bytes": 393696,
+          "fixed_budget_arena_bytes": 393792,
+          "fixed_budget_arena": {
+            "budget": 96,
+            "alignment": 64,
+            "total_bytes": 393792,
+            "segment_count": 5,
+            "segments": [
+              {
+                "name": "tokens_int8",
+                "dtype": "int8",
+                "element_bytes": 1,
+                "element_count": 393216,
+                "offset": 0,
+                "size": 393216
+              },
+              {
+                "name": "group_index_uint16",
+                "dtype": "uint16",
+                "element_bytes": 2,
+                "element_count": 96,
+                "offset": 393216,
+                "size": 192
+              },
+              {
+                "name": "source_type_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393408,
+                "size": 96
+              },
+              {
+                "name": "region_id_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393536,
+                "size": 96
+              },
+              {
+                "name": "valid_uint8",
+                "dtype": "uint8",
+                "element_bytes": 1,
+                "element_count": 96,
+                "offset": 393664,
+                "size": 96
+              }
+            ]
+          }
+        },
+        "baseline_score_q_ddr_round_trip": {
+          "score_q_bytes_written": 800,
+          "score_q_bytes_read": 800,
+          "total": 1600
+        },
+        "on_chip_fusion_saving": {
+          "ddr_bytes": 1600,
+          "ideal_time_us_at_6gbs": 0.26666666666666666
+        },
+        "future_group_mean_reconstruction_saving": {
+          "jetson_to_fpga_bytes": 409600,
+          "note": "potential only; the top keeps group_mean_q as a separate input and the accepted group-mean quantisation contract is unchanged this round"
+        },
+        "times": {
+          "jetson_to_fpga_1gbe": {
+            "central_us": 18619.345454545455,
+            "low_bandwidth_us": 22756.977777777778,
+            "high_bandwidth_us": 17357.01694915254
+          },
+          "fpga_to_jetson_1gbe_arena": {
+            "central_us": 3579.927272727273,
+            "low_bandwidth_us": 4375.466666666667,
+            "high_bandwidth_us": 3337.220338983051
+          },
+          "fpga_to_jetson_1gbe_payload_scatter_gather_lower_bound": {
+            "central_us": 3579.0545454545454,
+            "low_bandwidth_us": 4374.4,
+            "high_bandwidth_us": 3336.406779661017,
+            "basis": "logical_payload_bytes",
+            "note": "lower bound only: assumes the host gathers just the output_count valid groups; it is not a substitute for the fixed-budget arena accounting"
+          },
+          "jetson_to_fpga_local_ddr_6gbs_us": 341.3546666666667,
+          "fpga_to_jetson_local_ddr_6gbs_us": 65.63199999999999,
+          "fpga_to_jetson_payload_local_ddr_6gbs_lower_bound_us": 65.616,
+          "baseline_score_q_ddr_round_trip_6gbs_us": 0.26666666666666666
+        }
+      }
+    }
+  },
+  "transfer_audit_correction": {
+    "status": "CODEX_REVIEW_CORRECTION_APPLIED",
+    "review_finding": "The FPGA -> Jetson total applied one trailing 64 B align_up to selected_tokens + metadata instead of the frozen 5-segment per-offset alignment, so K=48/K=96 output bytes and the network/DDR times derived from them were underestimated.",
+    "fix": "tools/transfer_audit.py::image_bytes now calls the frozen evaluation.hardware_regular_token_selector.fpga_transfer_layout(budget)/describe_fpga_layout(budget) live; fixed_budget_arena_bytes is authoritative and every reported network/DDR FPGA -> Jetson time is based on it.",
+    "deprecated_fields": [
+      "fpga_to_jetson.total (old single-align value; no longer produced)"
+    ],
+    "authoritative_fields": [
+      "fpga_to_jetson.logical_payload_bytes",
+      "fpga_to_jetson.fixed_budget_arena_bytes",
+      "fpga_to_jetson.fixed_budget_arena.segments",
+      "times.fpga_to_jetson_1gbe_arena"
+    ],
+    "decision_unchanged": true,
+    "hls_functional_timing_resource_unchanged": true,
+    "old_transfer_numbers_void": true,
+    "identity_bypass_note": "G=80/K=96 reports output_count=80 (logical payload) and the fixed arena of the runtime budget K=96 separately.",
+    "focused_test_log": {
+      "path": "reports/token_selector/logs/2026-10-03-integer-selector-pipeline-transfer-correction-focused-tests.log",
+      "available": true,
+      "sha256": "8ca71328833e292ad3acaf55fd213e8bd14fb5f2a2e18931e1fed4e22bdda64a",
+      "tests_run": 14,
+      "ok": true
+    },
+    "configs": {
+      "G80_K48_cold": {
+        "group_count": 80,
+        "budget": 48,
+        "wv_resident": false,
+        "output_group_count": 48,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 196864,
+        "corrected_logical_payload_bytes": 196848,
+        "corrected_fixed_budget_arena_bytes": 196928,
+        "fixed_budget_arena_budget": 48,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 1789.6727272727273,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 1790.2545454545455
+      },
+      "G80_K48_resident": {
+        "group_count": 80,
+        "budget": 48,
+        "wv_resident": true,
+        "output_group_count": 48,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 196864,
+        "corrected_logical_payload_bytes": 196848,
+        "corrected_fixed_budget_arena_bytes": 196928,
+        "fixed_budget_arena_budget": 48,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 1789.6727272727273,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 1790.2545454545455
+      },
+      "G80_K64_cold": {
+        "group_count": 80,
+        "budget": 64,
+        "wv_resident": false,
+        "output_group_count": 64,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 262464,
+        "corrected_logical_payload_bytes": 262464,
+        "corrected_fixed_budget_arena_bytes": 262464,
+        "fixed_budget_arena_budget": 64,
+        "underestimate_bytes": 0,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2386.0363636363636,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 2386.0363636363636
+      },
+      "G80_K64_resident": {
+        "group_count": 80,
+        "budget": 64,
+        "wv_resident": true,
+        "output_group_count": 64,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 262464,
+        "corrected_logical_payload_bytes": 262464,
+        "corrected_fixed_budget_arena_bytes": 262464,
+        "fixed_budget_arena_budget": 64,
+        "underestimate_bytes": 0,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2386.0363636363636,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 2386.0363636363636
+      },
+      "G80_K96_cold": {
+        "group_count": 80,
+        "budget": 96,
+        "wv_resident": false,
+        "output_group_count": 80,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 328128,
+        "corrected_logical_payload_bytes": 328080,
+        "corrected_fixed_budget_arena_bytes": 393792,
+        "fixed_budget_arena_budget": 96,
+        "underestimate_bytes": 65664,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2982.981818181818,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 3579.927272727273
+      },
+      "G80_K96_resident": {
+        "group_count": 80,
+        "budget": 96,
+        "wv_resident": true,
+        "output_group_count": 80,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 328128,
+        "corrected_logical_payload_bytes": 328080,
+        "corrected_fixed_budget_arena_bytes": 393792,
+        "fixed_budget_arena_budget": 96,
+        "underestimate_bytes": 65664,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2982.981818181818,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 3579.927272727273
+      },
+      "G260_K48_cold": {
+        "group_count": 260,
+        "budget": 48,
+        "wv_resident": false,
+        "output_group_count": 48,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 196864,
+        "corrected_logical_payload_bytes": 196848,
+        "corrected_fixed_budget_arena_bytes": 196928,
+        "fixed_budget_arena_budget": 48,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 1789.6727272727273,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 1790.2545454545455
+      },
+      "G260_K48_resident": {
+        "group_count": 260,
+        "budget": 48,
+        "wv_resident": true,
+        "output_group_count": 48,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 196864,
+        "corrected_logical_payload_bytes": 196848,
+        "corrected_fixed_budget_arena_bytes": 196928,
+        "fixed_budget_arena_budget": 48,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 1789.6727272727273,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 1790.2545454545455
+      },
+      "G260_K64_cold": {
+        "group_count": 260,
+        "budget": 64,
+        "wv_resident": false,
+        "output_group_count": 64,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 262464,
+        "corrected_logical_payload_bytes": 262464,
+        "corrected_fixed_budget_arena_bytes": 262464,
+        "fixed_budget_arena_budget": 64,
+        "underestimate_bytes": 0,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2386.0363636363636,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 2386.0363636363636
+      },
+      "G260_K64_resident": {
+        "group_count": 260,
+        "budget": 64,
+        "wv_resident": true,
+        "output_group_count": 64,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 262464,
+        "corrected_logical_payload_bytes": 262464,
+        "corrected_fixed_budget_arena_bytes": 262464,
+        "fixed_budget_arena_budget": 64,
+        "underestimate_bytes": 0,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2386.0363636363636,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 2386.0363636363636
+      },
+      "G260_K96_cold": {
+        "group_count": 260,
+        "budget": 96,
+        "wv_resident": false,
+        "output_group_count": 96,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 393728,
+        "corrected_logical_payload_bytes": 393696,
+        "corrected_fixed_budget_arena_bytes": 393792,
+        "fixed_budget_arena_budget": 96,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 3579.3454545454547,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 3579.927272727273
+      },
+      "G260_K96_resident": {
+        "group_count": 260,
+        "budget": 96,
+        "wv_resident": true,
+        "output_group_count": 96,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 393728,
+        "corrected_logical_payload_bytes": 393696,
+        "corrected_fixed_budget_arena_bytes": 393792,
+        "fixed_budget_arena_budget": 96,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 3579.3454545454547,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 3579.927272727273
+      },
+      "G400_K48_cold": {
+        "group_count": 400,
+        "budget": 48,
+        "wv_resident": false,
+        "output_group_count": 48,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 196864,
+        "corrected_logical_payload_bytes": 196848,
+        "corrected_fixed_budget_arena_bytes": 196928,
+        "fixed_budget_arena_budget": 48,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 1789.6727272727273,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 1790.2545454545455
+      },
+      "G400_K48_resident": {
+        "group_count": 400,
+        "budget": 48,
+        "wv_resident": true,
+        "output_group_count": 48,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 196864,
+        "corrected_logical_payload_bytes": 196848,
+        "corrected_fixed_budget_arena_bytes": 196928,
+        "fixed_budget_arena_budget": 48,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 1789.6727272727273,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 1790.2545454545455
+      },
+      "G400_K64_cold": {
+        "group_count": 400,
+        "budget": 64,
+        "wv_resident": false,
+        "output_group_count": 64,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 262464,
+        "corrected_logical_payload_bytes": 262464,
+        "corrected_fixed_budget_arena_bytes": 262464,
+        "fixed_budget_arena_budget": 64,
+        "underestimate_bytes": 0,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2386.0363636363636,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 2386.0363636363636
+      },
+      "G400_K64_resident": {
+        "group_count": 400,
+        "budget": 64,
+        "wv_resident": true,
+        "output_group_count": 64,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 262464,
+        "corrected_logical_payload_bytes": 262464,
+        "corrected_fixed_budget_arena_bytes": 262464,
+        "fixed_budget_arena_budget": 64,
+        "underestimate_bytes": 0,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 2386.0363636363636,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 2386.0363636363636
+      },
+      "G400_K96_cold": {
+        "group_count": 400,
+        "budget": 96,
+        "wv_resident": false,
+        "output_group_count": 96,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 393728,
+        "corrected_logical_payload_bytes": 393696,
+        "corrected_fixed_budget_arena_bytes": 393792,
+        "fixed_budget_arena_budget": 96,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 3579.3454545454547,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 3579.927272727273
+      },
+      "G400_K96_resident": {
+        "group_count": 400,
+        "budget": 96,
+        "wv_resident": true,
+        "output_group_count": 96,
+        "deprecated_pre_correction_fpga_to_jetson_bytes": 393728,
+        "corrected_logical_payload_bytes": 393696,
+        "corrected_fixed_budget_arena_bytes": 393792,
+        "fixed_budget_arena_budget": 96,
+        "underestimate_bytes": 64,
+        "deprecated_fpga_to_jetson_1gbe_central_us": 3579.3454545454547,
+        "corrected_fpga_to_jetson_1gbe_arena_central_us": 3579.927272727273
+      }
+    }
+  },
+  "frozen_asset_sha256_check": {
+    "baseline_path": "reports/token_selector/logs/2026-10-03-integer-selector-pipeline-transfer-correction-frozen-assets-baseline.json",
+    "baseline_sha256": "c98afddbedea583ef550b85539a48846e8e118d12655cba78a6a7e72d14e9a90",
+    "all_must_be_unchanged_groups_ok": true,
+    "groups": {
+      "pipeline_hls_frozen": {
+        "mode": "must_be_unchanged",
+        "file_count": 8,
+        "unchanged": 8,
+        "changed": [],
+        "missing": [],
+        "ok": true
+      },
+      "scorer_core": {
+        "mode": "must_be_unchanged",
+        "file_count": 14,
+        "unchanged": 14,
+        "changed": [],
+        "missing": [],
+        "ok": true
+      },
+      "token_selector_core": {
+        "mode": "must_be_unchanged",
+        "file_count": 13,
+        "unchanged": 13,
+        "changed": [],
+        "missing": [],
+        "ok": true
+      },
+      "pipeline_fixtures": {
+        "mode": "must_be_unchanged",
+        "file_count": 38,
+        "unchanged": 38,
+        "changed": [],
+        "missing": [],
+        "ok": true
+      },
+      "pipeline_csynth": {
+        "mode": "must_be_unchanged",
+        "file_count": 96,
+        "unchanged": 96,
+        "changed": [],
+        "missing": [],
+        "ok": true
+      },
+      "pipeline_artifact_logs": {
+        "mode": "must_be_unchanged",
+        "file_count": 4,
+        "unchanged": 4,
+        "changed": [],
+        "missing": [],
+        "ok": true
+      },
+      "original_pipeline_harness_result": {
+        "mode": "must_be_unchanged",
+        "file_count": 1,
+        "unchanged": 1,
+        "changed": [],
+        "missing": [],
+        "ok": true
+      },
+      "pipeline_tools_tests_readme": {
+        "mode": "may_change",
+        "file_count": 4,
+        "unchanged": 0,
+        "changed": [
+          "fpga_accel/integer_selector_pipeline_hls/tools/transfer_audit.py",
+          "fpga_accel/integer_selector_pipeline_hls/tools/build_report.py",
+          "fpga_accel/integer_selector_pipeline_hls/tests/test_integer_selector_pipeline_hls.py",
+          "fpga_accel/integer_selector_pipeline_hls/README.md"
+        ],
+        "missing": [],
+        "ok": true
+      }
+    }
+  },
+  "gate_checks": {
+    "csynth": {
+      "zero_errors": true,
+      "timing_met": true,
+      "estimated_period_le_3p650": true,
+      "all_resources_under_50_percent": true,
+      "no_external_score_port": true,
+      "derived_g400_k96_finite": true,
+      "derived_g400_k96_le_6m_cycles": true,
+      "derived_g400_k96_le_30ms": true,
+      "csynth_pass": true
+    },
+    "frozen_gates": {
+      "estimated_period_le_3p650_ns": true,
+      "all_resources_under_50_percent": true,
+      "derived_g400_k96_le_6000000_cycles": true,
+      "functional_gates_pass": true
+    },
+    "pass": true
+  },
+  "bottleneck": null,
+  "limitations": [
+    "csynth_design only: not C/RTL cosimulation, not place-and-route, not a bitstream, not a board measurement; timing/latency/resource numbers are synthesis estimates and the per-configuration cycle counts are formula-derived.",
+    "The on-chip fusion removes the intermediate score_q FPGA-DDR round trip; it does not remove the Jetson <-> FPGA round trip of the inputs/outputs.",
+    "The transfer audit is a model with an explicit bandwidth assumption and a sensitivity band; it is not a measured link throughput.",
+    "group_mean_q is still a separate input; reconstructing it from tokens_q in the PL is only quantified as a future saving and the accepted group-mean quantisation contract is unchanged this round.",
+    "The derived model is conservative (1.6% above the tool's worst case at the maximum compile-time bounds) but is still an estimate, not a measurement.",
+    "Codex review correction (2026-10-03): the first transfer audit used a single trailing align_up for FPGA -> Jetson and underestimated K=48/K=96. The deprecated transfer totals/times are void; only fixed_budget_arena_bytes / logical_payload_bytes and the arena-based times are authoritative. The HLS functional/timing/resource evidence is untouched and the decision is unchanged."
+  ],
+  "files": {
+    "fpga_accel/integer_selector_pipeline_hls/Makefile": "df9339bf78cf635e79dd68cb725768bbdc39dbd72180e5145b9299f5c2b4328b",
+    "fpga_accel/integer_selector_pipeline_hls/README.md": "878ed5963c5ce07ec9387dd89cf8ab90b69d8324408c6a241272ad7cd848799d",
+    "fpga_accel/integer_selector_pipeline_hls/include/integer_selector_pipeline.h": "f3496454efc57c591c95f16ad42f6158c66d7df3ce93691446bf9b0ff4e7b725",
+    "fpga_accel/integer_selector_pipeline_hls/scripts/run_csim.tcl": "b8c18b9fb4ee2104a7890db9f57d49b5427589edc9173387f3a5ddb2ea7dea6c",
+    "fpga_accel/integer_selector_pipeline_hls/scripts/run_csynth.tcl": "4af56843d6f66b268df27ab5ebb74de68582ded3a6ddc53b14daf286a1a248c5",
+    "fpga_accel/integer_selector_pipeline_hls/scripts/run_stage.sh": "3a1717096b8b2fba4e1fce9b85334e2625ff9fc61f018fe572e2148b5123fc34",
+    "fpga_accel/integer_selector_pipeline_hls/scripts/summarize_csynth.py": "eba57b947a99ec13718ee8579701785aa0aaf458cddae93ef77b4425335758da",
+    "fpga_accel/integer_selector_pipeline_hls/src/integer_selector_pipeline.cpp": "bf75cd4427d3ff288bba5c3fcae6a22b64598eb2ed8d227bbf4c06e89c731cdb",
+    "fpga_accel/integer_selector_pipeline_hls/tb/tb_integer_selector_pipeline.cpp": "1c31c8f3c6ec31a398b756a71776922617d85cd1d87748160873e66c2af15a0b",
+    "fpga_accel/integer_selector_pipeline_hls/tests/test_integer_selector_pipeline_hls.py": "7f4e19f339b0d37553e6cd74eb16afca176f641c055715c019871ec2334074c2",
+    "fpga_accel/integer_selector_pipeline_hls/tools/build_report.py": "17ad978262927473c4d892c4e9f0cb85af6c09ce0878cfe495170577de2c8526",
+    "fpga_accel/integer_selector_pipeline_hls/tools/fixture_format.md": "78e848cfe523ac8e2db4c2e8aec09185ac0e8652f328e6e691de820b5163aebb",
+    "fpga_accel/integer_selector_pipeline_hls/tools/generate_fixtures.py": "701b54c102c992a1376978588d0c112126ea3bf24ea4cc70febbe13b2683c63b",
+    "fpga_accel/integer_selector_pipeline_hls/tools/transfer_audit.py": "d6218b5456629bdc33e0964dd22446e9ea035bb3f6345dc17564cf2faf27302a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/FORMAT.md": "78e848cfe523ac8e2db4c2e8aec09185ac0e8652f328e6e691de820b5163aebb",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/all_equal_g128_K48_cap16.exp.bin": "a013d90d4086c2c05eec4ceba0401e3803356e0f5287b421a6013ef815e3e567",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/all_equal_g128_K64_cap16.exp.bin": "a634ce8fa57ffaafcae515c982a2db365869d2740468f2e035e0591973f1809a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/all_equal_g128_K96_cap16.exp.bin": "08f5ee3227d58d87465597a7f0b70b82719c7cb6efaa6604e30794c57c5b5c8f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/empty_2x25_K48_cap16.exp.bin": "01e901182347930be41aae754a69ed607440b64c9bd84cdc7934712dabc3903b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/identity_g16_K48_cap16.exp.bin": "4ae9bb8820abbae4c1a30cb1f8547dbfcfd68538affe2c9663dc02265ba49727",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/identity_g9_K96_cap16.exp.bin": "c99b638e5ef7ee678165741cb88aed72d89c3c970d36bad740ef1d5e5046c33f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/manifest.json": "db4debe3c8dee5e925af869abbb29a42f36e8e413474b5f14a2f94ce0a8785dd",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/manifest.txt": "1aaaa8ab3af84776e944b11b34e2081a402b5829b8ce5c348babafac1d68f037",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_grounding_correct_K48_cap16.exp.bin": "0a8ddafc8c2060bd00d88b97d0f49babb4d5c6b83f040b94a986c1f554d3a4f5",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_grounding_correct_K64_cap16.exp.bin": "5bab6b67f02584c9b22044aad2940f8e94ad9919af9d58d6757fd13fd26982aa",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_grounding_correct_K96_cap16.exp.bin": "1e84f8bc3b76f0070b1dcd1f1343031e81cc05e342d2dc6f3453b5adac7a49de",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_grounding_wrong_K48_cap16.exp.bin": "2c84c54a83e2774eb351cb65346de107ebd3785bf5307454b3f55526d8795757",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_pointing_correct_K48_cap16.exp.bin": "1f868d572bd15a3142f246c432a3278611226e64e9436649fcc1ace1ea69a758",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_pointing_correct_K64_cap16.exp.bin": "3e8505f68158c3b660f27c27f39fd2178b1911d9ed5083147a72fb9b39fc35ca",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_pointing_correct_K96_cap16.exp.bin": "161c4ea3348bbb5607e8d6b6ff742fdd886e2e5c3a58db422d4d57bd262a4144",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/real_pointing_wrong_K48_cap16.exp.bin": "cbfca2dd627bde206ac4c10571e8feb5548a057aac324f24fd6e893485e025cc",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_all_equal_g128.bin": "2d1e8c7dc90ce9d3c7a5dfad88630d77ffa67e2f082fc22d3304a1124064684e",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_empty_2x25.bin": "2de8b7aae53aa544013e8f8d180232ae471ad76a3eaeb45f826a5842561bb3f8",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_identity_g16.bin": "65eda767fb30a1f5d35fe69065790744b1a89403cfba1ed368970f4ace4c59b3",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_identity_g9.bin": "49da82151ed629ab70b34541c2acb77825d44107bffdc6106df8ac7bf606f012",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_real_grounding_correct.bin": "e550c5b7f5c441f24b41396b81d5d356c2b86e62c810fb82e3ef1ef983e0156c",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_real_grounding_wrong.bin": "25e45429d9e1d176d10d0d1e93f628042dd29194c3ae66a984fca4ae841ed39d",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_real_pointing_correct.bin": "f95a9ea7cf5e350605bca4ac020e9d70b688208266d89a72d5693904c98e9181",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_real_pointing_wrong.bin": "5c71f1ddc9ded24a9642b4f578c1bba61d8b223c8ea676dafe2e5eebde60d096",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_synth_g400.bin": "3201f1fadb04160474ea920af8e82e2ab311da90fd0fa050f367741aa0495b9f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_synth_g80.bin": "a73fabbc485ed91279b65985474c7bdcab6f214e3f7d22f2e84f504c3b1e1662",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/scene_zero_g128.bin": "7306421a7d3567a40b8cbb1317a7efee94043c282a399b6a7beef2a8d5685f40",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/synth_g400_K48_cap16.exp.bin": "2c6b37489b06424a5f0fc9396b678cc2cdb689c898ca2a4481f6e0d11158b003",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/synth_g400_K64_cap16.exp.bin": "cbd3e532dfc86ad18a2558368b02ea967d5d8b6564cdc7fa141f33698369d561",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/synth_g400_K96_cap16.exp.bin": "e58c697beb51b6a1eaa3ea508ddf1bb37e9c32af5d73907abccfb820b658a4bd",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/synth_g80_K48_cap16.exp.bin": "e8b68b99cf467e3cf5a0d177268b91e4046a905fefd6f518c8e940a442958aa3",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/synth_g80_K64_cap16.exp.bin": "b20e2174d3293342e3b0a9d8427f3a4a7f879881079b269f21ca402986121c18",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/synth_g80_K96_cap16.exp.bin": "960b083a38de6f38e7760ffaf9ff45fe7edd5d59bbc344501be7e939c61e9539",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/wv_q.bin": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/zero_g128_K48_cap16.exp.bin": "11ad094308c2460247025d1dc7aa3c3b0ebdfa500b4e2df04c7eb91d8cb07aff",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/zero_g128_K64_cap16.exp.bin": "6d063923f240e594c24025a10910b64b493900d047cdcdaeda39b00a86ed5fd1",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/fixtures/zero_g128_K96_cap16.exp.bin": "7ef7fd0204ceb9e962ee412d3e4eb9b2dad0d3b49d3c6f8e036edd21682ff4c1",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/console.log": "291153151b0732e4e3545bc7b2de24887e707808728bf58e5763f35846d2d382",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/csynth.rpt": "789fdb6b2a13f6531f3023bd4c71f0538e499298f3444c39ca9622eb1692dadf",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/csynth.xml": "d85079ca9db447a0a7c96f17528377c1354284505a04e25724869bb1eeef97e0",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/csynth_design_size.rpt": "e11fe0076e7ef7690caf829ef074aa98f09562a5777da1eaa33f0db354b3b228",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/csynth_design_size.xml": "94e9dba8f6d1496aa17f76ae481565306e17c24aa5cb9e7d3f183927929d228f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1013_9_csynth.rpt": "bb756a44abe1b0c1be124f6a49759fb054d63e0669e65c18501896397766d22f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1013_9_csynth.xml": "571e9d7bc009ac1a1c762ee5dc85c7158eecfc3d1d33d00c7762a45d9d24cea5",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_103_1_csynth.rpt": "375d1f2bcb1fb851d48a302c559c4859dcf286b3f5db21ae5a7859ed8b1ea5f5",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_103_1_csynth.xml": "24668f50b9fab39e2f187b6c38318041663e5eca20f9109b0ae51534628459ff",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1040_12_VITIS_LOOP_1042_13_csynth.rpt": "1269c83dcf17e68f32433849742670f88c7a79e6e5a686fa8c13679e65e598e3",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1040_12_VITIS_LOOP_1042_13_csynth.xml": "07d2b977363f1585a925bc0a1f6c9e1ec5c328f41e82f6e3f7879c11a285df1b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1074_14_csynth.rpt": "0e4e9bd928aa3505c2d2aee2f4c87083eaeb6e7deff6733d974a4aaa055e5705",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1074_14_csynth.xml": "58aeadccc43e2f569ce76f5873cb672d1e55ec529b7c305c51f5614ae0d3794f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1079_15_csynth.rpt": "3b3b1df63f74545bcd360c24ddbebb94401c460dbcc22980538a65f638928e18",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1079_15_csynth.xml": "2c93e59015bb4aea7743cec62fd1096555927600222dc4bd06d56bfbe28e176d",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1089_17_csynth.rpt": "09d665a5b6adf10df656cf81c4d49803fe6b10f66b3ac4c0c8ced5b52bfb0490",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1089_17_csynth.xml": "f9c35a750ae868a0057b9ddb99a02d16d02f3c2047c4a1215aa08c3774f124a7",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_109_2_csynth.rpt": "d034ff7dc9d7ef46598f0bf48ccc1d1d4d996b49b293f96e486dcdf7cf07acc8",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_109_2_csynth.xml": "551e4f284904a3fec03c24a2ad03a049f109a47989572922f3316d1351c906f7",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1107_18_csynth.rpt": "5d18f7c5f57b77ef06f40694c554c6cbb86e23a963e44c318c60d9057b08cce7",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1107_18_csynth.xml": "86862d4ab64b4de8692915fde1da0d95a49341e75e7fa4ab2cb2894c4eb2c639",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1116_20_csynth.rpt": "60a335b38466a608f00bbbb65c9f1c0f6b77ef3bc8d1477218a9d076332a1b9b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1116_20_csynth.xml": "b5df3e1289e888cc0b74bd439abc1c121112674a4f9f302e78f6f91c0e911456",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1132_21_csynth.rpt": "084d9e8a1f8291ef70f96c1d1fe5e0cbc14290c6e4600e183939a1e155723079",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1132_21_csynth.xml": "621cb5a20086c28146afdc4181bad44395ed886791b0ce986213e548f83fec90",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1137_22_csynth.rpt": "5b538c322801035d1a8ccbb0a4832a47d6f0e2b66f47502b896a1a1c512da19d",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1137_22_csynth.xml": "416ab9bd409755a77572d6d8dc3670961b9de25730baea33215bffa326843882",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1166_24_csynth.rpt": "2d1bca0f4b36dfc1927bff9b77b7c61f2ef16aa2c2f587800540dd81ee7c7b4e",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1166_24_csynth.xml": "aed2b25761bc16d387a9af51b03c96b5d5298a3ebf7f1e095e9bda0cbbe2f8ae",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1176_26_csynth.rpt": "b93d9bc1c025c3921461c268cf2299dab3aa656af8cac2e76e5bec5548fba117",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1176_26_csynth.xml": "8c4fa337803e169de5972aeb1d3b3832c3d60909b47175d78ac0054024bed8e3",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1196_27_csynth.rpt": "1d01a1446a23eb7244a779254b3f158882b6a51dd7d1ad480bf7a18f00d02abf",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1196_27_csynth.xml": "70cd8991b3bfbb72d944e088720ec2adc2eacce70bdbb7bcd0dc0addac2722b4",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1212_29_csynth.rpt": "1c215896b1e73c238edd33f9222a393938e2336cca5574f5c4604b46f03c0e0d",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1212_29_csynth.xml": "fed54799c017b208814d87134f4b355c5d463b74e45d972cf64fd96dad47b398",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1227_31_csynth.rpt": "751202559d91510bbee217d799a4c337916f04645fda77e4c0915fa20787ad6c",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_1227_31_csynth.xml": "8053eefb3d0ade27dcbd326bfc0b23009e932594f19be3dd59ebd9f17deb748f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_127_12_csynth.rpt": "4fde0003f738278b48685ad4fee2b0a408de9c56e3ae8fda29d20447d48a522b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_127_12_csynth.xml": "37005af87059f7a2eeef77461a7af05f75defa963e3413df518f1cdc2448261c",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_127_1_csynth.rpt": "77099baf2f06fde5151c0b8d9d194be7e2871f69c39cef59e7a2a17de121c2ab",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_127_1_csynth.xml": "fd336afe268181194b31b5120b86ad660e2fae8b643c86779c7a9fa72f41aad5",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_151_1_csynth.rpt": "4c8f0eb56877a247756ee6aa642ab5046b79930b9031dc5a16e88f23efcbb5f0",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_151_1_csynth.xml": "2675a0c711ecdcd9e35be05d6af65552ffc98dab33617cfc41c9f073a2d5c882",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_175_2_csynth.rpt": "0afae099603a5075a4f18835d265a4f75cec6a947544d160312b97a9f541a9ee",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_175_2_csynth.xml": "275da97c047773a5e6fb67f33d1c9dd1b617a23593269c50d9eb98855a499727",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_66_11_csynth.rpt": "4725809b83088b4e65759e1b621924043a6bff4af227a320e233b0ad6194ad83",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_66_11_csynth.xml": "e3a9690dd7c9451e4b4b8eda52e21d067ede96c3456403f5bcbf1c58e80e4d63",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_66_1_csynth.rpt": "b97c6e291bba96040624dbdc7302c675f6932e8f2fc53b6accc81d0c7a2c4892",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_66_1_csynth.xml": "45841cd7d6682ee317192f56984bd475f4d31030733450924f8de6238646b92e",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_944_5_csynth.rpt": "4f6e5d74a87f7c5ac6196a1b98b9048e85668b1921f251b3089f4844caab7298",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_944_5_csynth.xml": "dd5f32f1b62a5faaeb61a7928765794c9329ad75cb06f1980f900421d743604a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_969_7_csynth.rpt": "ad4bda47f78af081e5078fe436dc1cea31d91d19b3b5409752131851025ae85b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_969_7_csynth.xml": "8a5ade1f60e38c17598a155c38727d51a54bc1a4f53abc31fbe3360f45d757e3",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_985_8_csynth.rpt": "7f84bddd544828b3c8f6816d3c721807953bbed2e5e78237690e64c2ff171c50",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_Pipeline_VITIS_LOOP_985_8_csynth.xml": "4ce52d5b96ca3ddcd44f9695d3f10cfe1ee2d4654629ad8379c9b160f6b73a39",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_csynth.rpt": "9c73e75de4273d28e48f9986c870cb9916c21df73405d1c2d242dbb5810894e7",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/integer_selector_pipeline_csynth.xml": "f6cb15233f0924e19c55041dae0f941bfff2ab5387aed5a90e2ec7b07cb2b595",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_136_1_csynth.rpt": "889a92e7e28cc835de9c71d7d5844057a8b650c6acfd241ec0f0caa8bb5956e6",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_136_1_csynth.xml": "7c3f0e1097c58d29216fa9e7636f66a44e85fb33c82e0bfab6b56b7f6d12f1d7",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_148_3_csynth.rpt": "45633166b80b484cdd7f5d3f3a19ccdd175dc0ddeaaee75f1feea51f6c66bf7f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_148_3_csynth.xml": "1d79131ab75a837d13145d9e52578df95f382335426241ba7c4230d9b1ead8f3",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_168_6_csynth.rpt": "45299f3420027e734bbfc016c826a38e3047dd50488430dc5c59ef373e16cc93",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_168_6_csynth.xml": "f4299b7224125a9bf801db99724499551a408cea5015382b8578f39672c9dee9",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_188_9_csynth.rpt": "c36f180e50eee17aa269bf3e44fc1028b389c619ca4d944eb5b0d231f0a210c8",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_188_9_csynth.xml": "8cba59cdd015b005abb45d5ff4c8332f4e1a47bbdcba4af8f436b14f37355ab8",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_201_11_csynth.rpt": "211e1d11e1ae5bccf0401f48209006882a99f3fc16206e09fed612f63877b6ab",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_201_11_csynth.xml": "573c1474016c3a8e5b6b948d0568f1769dd9645c2f6cbabb5ce9868d3503cf3e",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_59_13_csynth.rpt": "f2a1a80d220de2120b9a1b0cf09a0c706c8755f9d273e9f833e3c1199f351a76",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_59_13_csynth.xml": "840de9958b6639b27b91ae8d9a5e296efb3e31e8d5ce5481f8710be3fb61628a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_59_1_csynth.rpt": "58e60c4a0bfbd2f7a49b6f12bd26b3bb8394bca16d7700b8515646e2a5d454fa",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_59_1_csynth.xml": "c587b48ad17c2f8e69ff30d2f087542f0d32bf1d6518f789ff77c71c1a80e766",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_14_csynth.rpt": "5cbedb7716e5a06fbd7a6d70f11913af0c6828144a3b3bda2ea4cbbf311446af",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_14_csynth.xml": "8c7951cdd26bef2d48ae2d8ec9c3bd9325f54417d41c6f08a927cc76f528711e",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_15_csynth.rpt": "1b445b8133d379c412a87478036467de82be36fad3bb3175d1b0f2fffd0bde8a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_15_csynth.xml": "4a9cec8365ab96258efd5737a051c01b74d424897e6f2f93373a2ecdaf5783a6",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_16_csynth.rpt": "118ad6b736e1a30ecd62b7c2cd1f5ee60e84cb8664d33066c1fc78ef81fb594a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_16_csynth.xml": "2a61d3962795e16821392de838bf36e71d2b0685c3e794f56c49ccd74a2b2725",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_1_csynth.rpt": "bc507aefcb5fddf9f263b94eef37fa5100e51e0448e780a4d32be94896eceab1",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_Pipeline_VITIS_LOOP_78_1_csynth.xml": "6fe229dbdc41347edf6fe7043897c404056f51081cce698914f57b55b82cdc47",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_s_csynth.rpt": "4fd102d7e758f1516255e932e74869584b4947c01565f877d8320619930c7873",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/p_anonymous_namespace_is_scorer_core_false_s_csynth.xml": "4563c01264ed04c811a6726eeb1b744213b7c217e6635e483e4a50c739f8ee1d",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/summary.json": "f2bd188b032d85e7f28c1b1238f2b7a029df3ff1c0201ed13907845371e88fe5",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_103_1_csynth.rpt": "05c600437a6cebc774a3d9a089fcb350f4459e05ee47c31ab404125a24ba2093",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_103_1_csynth.xml": "f3f748349f1489fcc9a3cf5e149ff9920f0dacbc1ffa17df32678b1b26060c2f",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_109_2_csynth.rpt": "fa174d4cb6130081909728dce9bc7c19f648bdb573a522578a3d17704d605e93",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_109_2_csynth.xml": "dc6fa3e37b5a4431720cb3ba1c8f76a6e736c374f2edf6d4e51a2dafe9675a93",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_272_1_csynth.rpt": "dbaee674b04aaa585b6c1c0d0fdca05ab26613fbf8554940b75c433c1125dc1b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_272_1_csynth.xml": "e98c0a9a9de6c70d5e56446e9707df88329287dd2baa7f3ab2820dd1d1047655",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_276_2_VITIS_LOOP_281_3_csynth.rpt": "3f9018f2800cda05e50f5a4ffe762069c180849dd2c17b4074b771b35caf85fc",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_276_2_VITIS_LOOP_281_3_csynth.xml": "4b27b45c99228fecfd982e9e84da83ccf93e460bb1e9e315341b2fbc7d82339b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_315_4_csynth.rpt": "4c0ba98d4e75714f8b6eb2a51f00f03a8de88746cc8fd2717ecc6801a2b5868b",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_315_4_csynth.xml": "0e7395818cf7592f7ef7abeb9e47c891157b9c285e17cb2a4b62e79f9c8a03e2",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_320_5_csynth.rpt": "a2e603aed9480d39d62e80694bbc594ee3689b517ef2aef8549cdd1ae8249115",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_Pipeline_VITIS_LOOP_320_5_csynth.xml": "971595b8be138b84f18b287d6fd90fed95dbf136bbab83a174aaa3682933ee1e",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_csynth.rpt": "2cd7bc92274a226aced4d2b81a08e9da200528a5bb5912a6d5fbebd170a9f5f5",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/ts_pool_context_packed_csynth.xml": "1080d282a155f3a235a6cd92ab56eace367968086a6ae78224c196dab9b3e95a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/01_python_fixtures.log": "d757dc32fd0ea686e88f37b2bd8e5c533be74b695672c5cca0ffdecf7e222a64",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/02_gpp_test.log": "a80acc21aedd3a972b60b06acb8bc51af7f733b5b03be4c6fd2434ab131df67a",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/03_asan_ubsan.log": "1fe1cdbffc15b7aaf5d3b0580a933af177a3b520827fa8f1010895bbeb46e223",
+    "artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/logs/04_hls_csim.log": "c58b97374ded4a7a92f22aac832668df6b08b90012642db9535faafd9b2db1b2"
+  },
+  "reproduction": [
+    "cd fpga_accel/integer_selector_pipeline_hls",
+    "make python_test",
+    "make test",
+    "make asan_run",
+    "make csim",
+    "make csynth",
+    "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python scripts/summarize_csynth.py --report-dir ../../artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth --console-log ../../artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/console.log --out ../../artifacts/token_selector/2026-10-03-integer-selector-pipeline-hls/csynth/summary.json",
+    "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python tools/build_report.py"
+  ],
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-03-integer-selector-pipeline-transfer-correction-harness-prompt.md",
+    "sha256": "ff8af13c8a3115511afc7fac750a4e185f6327777f25163e81a6ef59d34b9114",
+    "role": "bounded correction of the pipeline transfer-layout accounting"
+  },
+  "report_markdown": {
+    "path": "reports/token_selector/2026-10-03-integer-selector-pipeline-hls.md",
+    "sha256": "11f7b80fc8d15b0acdfe3f8ab7ad214d85b9e6de7e1d3f619631731fa78372c7"
+  }
+}

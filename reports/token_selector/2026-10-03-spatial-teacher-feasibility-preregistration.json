@@ -1,0 +1,97 @@
+{
+  "status": "PREREGISTERED_TRAIN_ONLY_ZERO_UPDATE",
+  "schema_version": "1.0-preregistered",
+  "report_stem": "2026-10-03-spatial-teacher-feasibility-preregistration",
+  "date": "2026-10-03",
+  "seed": 20261003,
+  "self_sha256_embedded": false,
+  "self_sha256_note": "This preregistration JSON deliberately does NOT embed its own SHA256 to avoid a self-reference paradox. The external SHA256 is recorded by the run report and the harness result JSON.",
+  "preregistered_before_metrics": "This file is written before any new per-sample or aggregate spatial-target audit metric is computed.",
+  "config_preregistration": {
+    "path": "configs/spatial_teacher_feasibility.preregistered.json",
+    "sha256": "bfa1963597993ea9e3482735f16b2d430638ac3bf8e0682b5078f4e112974490",
+    "frozen_contract_authority": true
+  },
+  "frozen_inputs": {
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b"
+    },
+    "index": {
+      "path": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+      "sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26"
+    },
+    "clean_manifest": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+    },
+    "clean_manifest_lock": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.lock.json",
+      "sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105"
+    },
+    "teacher_pair_signal": {
+      "path": "reports/token_selector/2026-10-02-teacher-pair-signal-train-only.json",
+      "sha256": "09dbce65f33ae7cfffd778816228ae02863af95f318efe2e6510cb95304d52dd"
+    },
+    "hardware_regular_config": {
+      "path": "configs/hardware_regular_token_selector.json",
+      "sha256": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142"
+    }
+  },
+  "frozen_spatial_targets": {
+    "grounding_area_target": "for each cell, exact intersection area with bbox_1000 clipped to [0,1000]; divide by total intersection area so mass sums to 1; hard-fail invalid or zero-area boxes",
+    "pointing_bilinear_target": "u=x*W/1000-0.5, v=y*H/1000-0.5; clamp to [0,W-1]x[0,H-1]; distribute mass to the up to four neighboring grid centers with separable bilinear weights; combine duplicate boundary indices; normalize to sum 1; no Gaussian, no bandwidth parameter",
+    "no_blending": true,
+    "no_tuning": true
+  },
+  "split_rule": {
+    "source": "evaluation.prompt_projection_distillation.split_sample_ids",
+    "seed": 20260927,
+    "ratios": {"train": 0.7, "val": 0.15, "test": 0.15},
+    "salt": "prompt_projection_distillation_2026_09_27",
+    "group_by": "source_image_sha256",
+    "train_only": true,
+    "expected_train_records": 318,
+    "expected_train_images": 159,
+    "val_test_action": "never resolved, hashed, opened or scored"
+  },
+  "metrics": {
+    "independent_unit": "image",
+    "semantic_teacher_comparator": "cached teacher_soft_target only",
+    "same_image_task_separation": ["js_nats", "symmetric_kl_nats", "tv", "argmax_different_fraction", "topk_jaccard_overlap_disagreement_at_48_64_96_with_keff_min_k_g"],
+    "paired_differences_spatial_minus_semantic": ["js_nats", "tv", "k48_disagreement", "k64_disagreement", "k96_disagreement"],
+    "semantic_spatial_compatibility": "Spearman and full NDCG (K=G, relevance=teacher_soft_target) between each spatial target and the cached semantic teacher target, per task and overall",
+    "l2_baseline": "evaluation.prompt_projection_distillation.l2_baseline_scores on cached group_mean",
+    "anchor_baseline": "evaluation.hardware_regular_token_selector.select_real_groups exactly, with L2 saliency as the ranking score; NOT_COMPUTED if the module cannot be imported",
+    "hardware_regular_budgets": [48, 64, 96]
+  },
+  "statistics": {
+    "bootstrap_resamples": 2000,
+    "permutation_resamples": 10000,
+    "ci_level": 0.95,
+    "seed": 20261003,
+    "sign_flip": "two-sided paired sign-flip permutation",
+    "effect_size": "Cohen dz",
+    "multiple_comparison_policy": "single pre-registered family (JS and TV); raw two-sided p-values; no Holm correction invented",
+    "implementation": "evaluation.prompt_identifiability_diagnostic.paired_effect"
+  },
+  "decision_labels": {
+    "SPATIAL_SUPERVISION_SIGNAL_PRESENT": "all integrity checks pass AND 95% bootstrap CI lower bound of spatial-semantic is greater than zero for BOTH JS and TV; top-K results are descriptive only and cannot override this rule",
+    "SPATIAL_SUPERVISION_SIGNAL_NOT_ESTABLISHED": "otherwise, when integrity passes",
+    "BLOCKED_DATA_CONTRACT": "joins, geometry, grid or isolation contracts fail",
+    "learnability_caveat": "even when signal is present, learnability and downstream task accuracy remain untested"
+  },
+  "prohibitions": [
+    "no optimizer, no training, no parameter update, no new Wt/Wv, no checkpoint",
+    "no 4B model load, no inference, no GPU, no network, no package installation",
+    "no reading, resolving, hashing or scoring of val/test NPZ files",
+    "no CV-Bench evaluation",
+    "no reading of raw image bytes, model weights, keys, proxy files or credentials",
+    "no blending of the spatial targets with the semantic teacher",
+    "no formula tuning after seeing metrics",
+    "no multiple-candidate search, no Holm correction invented",
+    "no claim that a student can learn the target, no claim that downstream accuracy improves, no FPGA speedup claim"
+  ],
+  "immutability_rule": "All six pinned inputs and this preregistration pair are byte-for-byte unchanged before and after the audit run; the run report records the pre-run and post-run SHA256 of every pinned input.",
+  "authorization": "DeepSeek Harness may process necessary code, metrics and derived data via api.deepseek.com; raw images, 4B weights, keys, proxy config and credentials are never read, uploaded or printed."
+}

@@ -1,0 +1,1851 @@
+{
+  "audit_scope": {
+    "date": "2026-09-28",
+    "gpu_used": false,
+    "inference_run": false,
+    "model_loaded": false,
+    "read_only": true,
+    "source_config_data_modified": false,
+    "split_fabricated": false
+  },
+  "candidate_status_update": {
+    "candidate_a": "AVAILABLE_LOCALLY_VERIFIED -> MATERIALIZED_AS_CLEAN_INDUCTIVE_V1 (strict_inductive=true, validation PASS)",
+    "candidate_b": "unchanged: IMAGES_VERIFIED_NO_EXISTING_PROMPT_MANIFEST",
+    "date": "2026-09-28",
+    "next_gate": "GPU_GATED_CLEAN_EXTRACTION"
+  },
+  "data_sources": {
+    "cache_state": {
+      "WtWv_exists": false,
+      "dir_exists": false,
+      "index_exists": false,
+      "npz_count": 0
+    },
+    "feature_extraction_source": {
+      "config_extraction_keys": [
+        "cache_dir",
+        "index",
+        "npz_schema",
+        "capture",
+        "gpu_gate"
+      ],
+      "config_pins_manifest": false,
+      "documented_command_evidence": "reports/token_selector/2026-09-27-prompt-projection-distillation.md section 11",
+      "documented_command_limit_per_task": 4,
+      "documented_command_manifest": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+      "note": "The extractor requires --manifest; the config does not pin one. The only recorded plan draws the distillation corpus from the formal 64-token CV-Bench pilot100 manifest."
+    },
+    "formal_cv_bench_eval_sources": {
+      "64token_diagnostic_full": "datasets/cv_bench_full2638_budget64_diagnostic.jsonl",
+      "64token_diagnostic_pilot100": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+      "lock_configs": [
+        "configs/cv_bench_l2_0875_full2638.lock.json",
+        "configs/cv_bench_l2_0875_screening100.lock.json",
+        "configs/cv_bench_l2_sweep_full2638.lock.json",
+        "configs/cv_bench_refinement_20260916.lock.json",
+        "configs/cv_bench_refinement_budget64_diagnostic.lock.json"
+      ],
+      "preregistered_16token_full": "datasets/cv_bench_full2638.jsonl",
+      "preregistered_16token_performance": "datasets/cv_bench_screening100.jsonl"
+    },
+    "frozen_source_hashes": {
+      "configs/prompt_projection_distillation.json": "6c46c28216378f22a91d6e3e31da045dce8144f0bd13bc5ade15f617eb3c7bca",
+      "evaluation/extract_prompt_projection_features.py": "aeaf2049bfab91e819d7d31fb771034f368746de2c8684bd37d00e1eff21781c",
+      "evaluation/prompt_projection_distillation.py": "21c6bec09af608a13789a40822095052bbd35b0006b1b490715055e98cf6196f",
+      "evaluation/train_prompt_projection.py": "f34a7865f815299f812c9e4d95d311a509ee9d7394f38a2cf9b07de0a3648983"
+    },
+    "internal_split_key": {
+      "assignment": "sha256(salt|seed|source_image_sha256) -> [0,1) with cumulative 0.70/0.15/0.15 thresholds",
+      "enforced": [
+        "same image hash never crosses splits",
+        "missing/empty hash is a hard error",
+        "internal train/val/test pairwise disjoint"
+      ],
+      "group_by": "source_image_sha256",
+      "not_enforced": "disjointness of the whole internal pool from any external evaluation set",
+      "salt": "prompt_projection_distillation_2026_09_27",
+      "seed": 20260927
+    },
+    "source_hashes_match_frozen_spec": true
+  },
+  "diagnostics": {
+    "parquet_cross_check": "canonical datasets/CV-Bench/test_{2d,3d}.parquet SHA256 match the screening lock dataset_files",
+    "tooling": "read-only python with evaluation.prompt_projection_distillation.assign_split; hashes streamed"
+  },
+  "files_changed": [
+    "reports/token_selector/2026-09-28-prompt-distillation-data-provenance-audit.md",
+    "reports/token_selector/2026-09-28-prompt-distillation-data-provenance-audit.json",
+    "CURRENT_STATUS.md (append top entry)",
+    "/tmp/robobrain_harness_result.json"
+  ],
+  "leakage_assessment": {
+    "compliant_path": "Fit Wt/Wv only on images/prompts outside every formal CV-Bench manifest, freeze the projection, then run the single final CV-Bench evaluation once.",
+    "contamination_observed": false,
+    "contamination_prospective": true,
+    "input_and_prompt_leakage": "yes if CV-Bench images/prompts are used: Wt/Wv would be fit to the evaluation inputs, and the config selects the best epoch on a val split that is itself part of the formal eval set.",
+    "label_leakage": "none: the extractor/trainer never read the ground-truth answers or choices; the teacher target is a model-derived saliency soft-target.",
+    "reason_observed_false": "No extraction cache, no index and no Wt/Wv exist (artifacts/token_selector/prompt_projection_features absent; no prompt_projection_WtWv.npz). No training or selection has run.",
+    "reason_prospective_true": "The only documented extraction command uses the formal 64-token CV-Bench pilot100 manifest. Replaying the config split on that source puts every train/val/test image in the formal CV-Bench set (limit-4 subset: 11/11 train, 2/2 val, 3/3 test images overlap pilot100; no-limit: 69/69 train, 15/15 val, 16/16 test). Any CV-Bench manifest as source gives 100% image overlap.",
+    "transductive_vs_inductive": {
+      "internal_split_claim": "The config's internal train/val/test disjointness only prevents self-leakage within the distillation pool; it does not establish external independence from CV-Bench.",
+      "strict_inductive": "VIOLATED by the documented plan: the projection's train and val images/prompts must be disjoint from every formal CV-Bench eval image/prompt. They are not.",
+      "transductive_unlabeled": "The teacher uses unlabeled dense-model saliency, so a transductive protocol could in principle reuse eval inputs, but then (a) no eval image may influence epoch/hyperparameter selection, (b) the result must be reported as transductive and cannot be the headline inductive number, and (c) the internal 'test' split is no longer an independent generalization estimate. This requires explicit PI authorization and is not what the config/report claims."
+    },
+    "verdict": "LEAKAGE_RISK"
+  },
+  "local_clean_candidates": {
+    "candidates": [
+      {
+        "aggregate_image_set_sha256": "ca8f8a6ac13c98d661d989c531b3427ce29438a01d9f0e4434eb097501a0bb6b",
+        "base_unique_images": 288,
+        "caveat": "grounding/pointing prompt distribution differs from CV-Bench Count/Relation/Depth/Distance; internal test split stays an internal sanity check, never a headline CV-Bench number.",
+        "clean_records": 472,
+        "clean_unique_images": 236,
+        "cross_checked_disjoint_from": [
+          "cv_bench_full2638 COCO subset (805 ids)",
+          "historical dac COCO manifests",
+          "visual_refinement_test (sealed, excluded)"
+        ],
+        "excluded_vs_cvbench_full2638_coco": 52,
+        "id": "visual_refinement_dev_cal_minus_cvbench_coco",
+        "identity_key": "coco_image_id",
+        "image_dir": "datasets/coco2017/visual_refinement_original",
+        "image_files_verified": 236,
+        "manifests": [
+          "datasets/visual_refinement_20260912_development.jsonl",
+          "datasets/visual_refinement_20260912_calibration.jsonl"
+        ],
+        "materialization": {
+          "date": "2026-09-28",
+          "lock": {
+            "path": "datasets/prompt_projection_clean_inductive_v1.lock.json",
+            "sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+            "strict_inductive": true
+          },
+          "manifest": {
+            "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+            "records": 472,
+            "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+            "unique_images": 236
+          },
+          "note": "the 236-image / 472-record corpus is now frozen and validated; feature extraction/training remain GPU-gated and were NOT run",
+          "overlap_gates": "PASS (zero CV-Bench COCO id, zero formal eval image SHA, zero formal sample_id)",
+          "render": "runs on CPU only; no model/GPU/network; sealed test never read",
+          "report": {
+            "json": "reports/token_selector/2026-09-28-prompt-distillation-clean-manifest.json",
+            "path": "reports/token_selector/2026-09-28-prompt-distillation-clean-manifest.md"
+          }
+        },
+        "per_image_sha256": {
+          "107226": {
+            "bytes": 95574,
+            "file": "datasets/coco2017/visual_refinement_original/000000107226.jpg",
+            "sha256": "285a3dfd666d35fb60eb63b9dd46b7b49aae4fcafe194f51d7e4b446abdab725"
+          },
+          "109976": {
+            "bytes": 96675,
+            "file": "datasets/coco2017/visual_refinement_original/000000109976.jpg",
+            "sha256": "cacf3729edd11a3f6f3d0c6f6b9f94479583892c877ae7d0ad03cd1b6c7c4231"
+          },
+          "112997": {
+            "bytes": 109107,
+            "file": "datasets/coco2017/visual_refinement_original/000000112997.jpg",
+            "sha256": "10db7db622e57864b8c1fbc9aeb974ad0d93310fff611791a7c4fd73e03ae55b"
+          },
+          "113589": {
+            "bytes": 111348,
+            "file": "datasets/coco2017/visual_refinement_original/000000113589.jpg",
+            "sha256": "2bc5297bd8190417fa623f0140e05fd59e60e8a452796e26af4524b92d6e8ce5"
+          },
+          "11511": {
+            "bytes": 188164,
+            "file": "datasets/coco2017/visual_refinement_original/000000011511.jpg",
+            "sha256": "4e24ed1528891621658ff01d23e8a74735cd18720d41f7fd2264044497ad2a0e"
+          },
+          "115885": {
+            "bytes": 101976,
+            "file": "datasets/coco2017/visual_refinement_original/000000115885.jpg",
+            "sha256": "01729a02c9c7e68299f550b7743f31ab841a061c70808c43ef916ecf03d81c12"
+          },
+          "122046": {
+            "bytes": 227293,
+            "file": "datasets/coco2017/visual_refinement_original/000000122046.jpg",
+            "sha256": "4bd45688ba9e814bcb787e71c389f971aa4b99ad2ff621361054d880ce4a7947"
+          },
+          "124659": {
+            "bytes": 194223,
+            "file": "datasets/coco2017/visual_refinement_original/000000124659.jpg",
+            "sha256": "b22d1dcef9e38af51c21a13438095e72102f2ce72f7c6f3a581b39b84fe9454f"
+          },
+          "127660": {
+            "bytes": 147915,
+            "file": "datasets/coco2017/visual_refinement_original/000000127660.jpg",
+            "sha256": "13db68fbe96c079cc211cfdc9399c65a01bb66f8494087df76013084c72749ee"
+          },
+          "135410": {
+            "bytes": 141815,
+            "file": "datasets/coco2017/visual_refinement_original/000000135410.jpg",
+            "sha256": "603013773e6bca16d1e4af56e76b38b3f7510c62d41e6089072905419ef4373f"
+          },
+          "135670": {
+            "bytes": 116338,
+            "file": "datasets/coco2017/visual_refinement_original/000000135670.jpg",
+            "sha256": "8f3eea478483e5b94935fe4e20da629a3631b28895899bccb5acc0fba5286060"
+          },
+          "136600": {
+            "bytes": 150290,
+            "file": "datasets/coco2017/visual_refinement_original/000000136600.jpg",
+            "sha256": "d60884afbf97caa7f0a3a6ae37eb8b25ae61be3abffc25192622980f177afcc1"
+          },
+          "137294": {
+            "bytes": 180478,
+            "file": "datasets/coco2017/visual_refinement_original/000000137294.jpg",
+            "sha256": "40e40a3a7f9cb4d86b40ac6cc4a2eff59cee0d5d0434c573393e9ba16780c4b0"
+          },
+          "141821": {
+            "bytes": 226812,
+            "file": "datasets/coco2017/visual_refinement_original/000000141821.jpg",
+            "sha256": "f17f03224e399c8bcdbbf847ff5ee107bd55e64bfbf185a1443d82816edcd5be"
+          },
+          "1425": {
+            "bytes": 111309,
+            "file": "datasets/coco2017/visual_refinement_original/000000001425.jpg",
+            "sha256": "71a37c25cdf944cf0a88b66d00a66cf899a88bd55c7ac80fcf1c76329d617e6c"
+          },
+          "150224": {
+            "bytes": 71131,
+            "file": "datasets/coco2017/visual_refinement_original/000000150224.jpg",
+            "sha256": "fba9c21e16adb27446e532e7ec8f6cc9b0065fc45c8e688a66fed7a3808d3b8f"
+          },
+          "155051": {
+            "bytes": 56546,
+            "file": "datasets/coco2017/visual_refinement_original/000000155051.jpg",
+            "sha256": "32a972ffddab1471501143c307e1e98f647db46cc83c43a16fcd8efc40dabc22"
+          },
+          "156278": {
+            "bytes": 160050,
+            "file": "datasets/coco2017/visual_refinement_original/000000156278.jpg",
+            "sha256": "7d3fdff1cdf4fe345c57ea392793a18bf485ab1fd5fdfc53d4d185855f2ae382"
+          },
+          "156372": {
+            "bytes": 77037,
+            "file": "datasets/coco2017/visual_refinement_original/000000156372.jpg",
+            "sha256": "5887ff80959fe25959656a14f1fee592570852718ea3f37d8f6fae86b3f05fa9"
+          },
+          "157390": {
+            "bytes": 168514,
+            "file": "datasets/coco2017/visual_refinement_original/000000157390.jpg",
+            "sha256": "1be6a1f486ec13e5092986a181e7051a23b4c1fa1ec004c0dd3b46c29bc35abe"
+          },
+          "157601": {
+            "bytes": 121430,
+            "file": "datasets/coco2017/visual_refinement_original/000000157601.jpg",
+            "sha256": "c6bebe830e7a12afdb30c9fe497cf8d37c705a730d1bc02cd6efef9743cd067c"
+          },
+          "157767": {
+            "bytes": 188320,
+            "file": "datasets/coco2017/visual_refinement_original/000000157767.jpg",
+            "sha256": "36925d12db108fe211a82557068ccf0baaaa5e30ac2bdcade60c74eb6e33cf64"
+          },
+          "159458": {
+            "bytes": 222248,
+            "file": "datasets/coco2017/visual_refinement_original/000000159458.jpg",
+            "sha256": "04b7ce54c0d1ec0a231fe79e542b08b0cc973273f3a91ae479be546825ce4a95"
+          },
+          "161642": {
+            "bytes": 157994,
+            "file": "datasets/coco2017/visual_refinement_original/000000161642.jpg",
+            "sha256": "f42e2e6ab755f03080aba6f52303a076da6e0338be2b1d155fd2c7429b8e65e6"
+          },
+          "164637": {
+            "bytes": 221661,
+            "file": "datasets/coco2017/visual_refinement_original/000000164637.jpg",
+            "sha256": "1af537bdea2244639f521394ac2c505102055d174ca482432c54423e181dcd7f"
+          },
+          "166478": {
+            "bytes": 81612,
+            "file": "datasets/coco2017/visual_refinement_original/000000166478.jpg",
+            "sha256": "fd8bc7068c29415b1b343de153a1f77491f55f2ac5aaa3994a3ffa884c08d884"
+          },
+          "166918": {
+            "bytes": 219406,
+            "file": "datasets/coco2017/visual_refinement_original/000000166918.jpg",
+            "sha256": "a7f8457580a2bb8635ca7acd1b2061ea7977a84418e5e8441a77ba1f861d7e22"
+          },
+          "167240": {
+            "bytes": 150173,
+            "file": "datasets/coco2017/visual_refinement_original/000000167240.jpg",
+            "sha256": "91454081895eea6698362d6494abe9dd6edc433b208a7d53d18eeedf73ac3d80"
+          },
+          "167353": {
+            "bytes": 153975,
+            "file": "datasets/coco2017/visual_refinement_original/000000167353.jpg",
+            "sha256": "8e6737773e7548e3fc299c7dc5e255b5997c0b05e08423f016b277719e8232a0"
+          },
+          "167572": {
+            "bytes": 222591,
+            "file": "datasets/coco2017/visual_refinement_original/000000167572.jpg",
+            "sha256": "985b318c5c52111da4903ff3d504d415b84251eaad8d4d129840e8c612aa74a4"
+          },
+          "168458": {
+            "bytes": 174687,
+            "file": "datasets/coco2017/visual_refinement_original/000000168458.jpg",
+            "sha256": "9d79b9739c0ebb2089e3475b9a664ebd982a1b6ed2d93739590a5bbc1f5bbd5e"
+          },
+          "168883": {
+            "bytes": 156569,
+            "file": "datasets/coco2017/visual_refinement_original/000000168883.jpg",
+            "sha256": "f3247a56b457942d6a1237338f64949f410361471634b5610f348dfbc6641be6"
+          },
+          "168974": {
+            "bytes": 103888,
+            "file": "datasets/coco2017/visual_refinement_original/000000168974.jpg",
+            "sha256": "e994ae206640b01c19f9eb73c9f9231e73057fb09292bb152de9a884bd1837a7"
+          },
+          "170099": {
+            "bytes": 130431,
+            "file": "datasets/coco2017/visual_refinement_original/000000170099.jpg",
+            "sha256": "f2a5b87c4a5249e6b7c27fac24fb1e2994ebe22fe2a2f205f33893965c64b2b9"
+          },
+          "170595": {
+            "bytes": 112367,
+            "file": "datasets/coco2017/visual_refinement_original/000000170595.jpg",
+            "sha256": "24508eb66f7b84a119908f7bf874f31afbe4a4abdbe008a07259899f7a49fbee"
+          },
+          "170893": {
+            "bytes": 57192,
+            "file": "datasets/coco2017/visual_refinement_original/000000170893.jpg",
+            "sha256": "bf061e23b14d2fda9ade5fa12ebb39da559b2b3aca7637c21205be46f2ac8114"
+          },
+          "171740": {
+            "bytes": 195767,
+            "file": "datasets/coco2017/visual_refinement_original/000000171740.jpg",
+            "sha256": "c40e1b4cfeb630f49af0513dfa0992d90d05a83235caf85c5670b5d7d6c3282c"
+          },
+          "171757": {
+            "bytes": 118728,
+            "file": "datasets/coco2017/visual_refinement_original/000000171757.jpg",
+            "sha256": "2b1f3289118def85d351803e8afce0429c2deaa6e5bc290e3ca8eb50cacd3edd"
+          },
+          "174123": {
+            "bytes": 196830,
+            "file": "datasets/coco2017/visual_refinement_original/000000174123.jpg",
+            "sha256": "c1538f7d64831b48c106b8729113ce6dd356abd8fccc09adafa1f756f9384ee7"
+          },
+          "180101": {
+            "bytes": 230323,
+            "file": "datasets/coco2017/visual_refinement_original/000000180101.jpg",
+            "sha256": "079670676d766b9e53cc1e35c1d90ad1ae6f80849498912153c9fa7001a0c934"
+          },
+          "180878": {
+            "bytes": 123696,
+            "file": "datasets/coco2017/visual_refinement_original/000000180878.jpg",
+            "sha256": "d3af8ca1590f81e3163c258119db48367ff1de3166a39c2f931f0327d0cee6a0"
+          },
+          "181753": {
+            "bytes": 175376,
+            "file": "datasets/coco2017/visual_refinement_original/000000181753.jpg",
+            "sha256": "e7debab72c9e61eb1b6ccf74824f79c34d23c0c98c41dc143b037ab1fdcfeb24"
+          },
+          "181816": {
+            "bytes": 209768,
+            "file": "datasets/coco2017/visual_refinement_original/000000181816.jpg",
+            "sha256": "fd7fe9e831b97c31d2996209d4eb152558e46d752089d3a2b1b5e0cb21f343fe"
+          },
+          "182155": {
+            "bytes": 87400,
+            "file": "datasets/coco2017/visual_refinement_original/000000182155.jpg",
+            "sha256": "ee4e53370c734634f607e55baa72e97ec771302fc3b899f42ac96a7c872f68f3"
+          },
+          "186449": {
+            "bytes": 146468,
+            "file": "datasets/coco2017/visual_refinement_original/000000186449.jpg",
+            "sha256": "a804534058df3729a9bedffa2fa16d4dcd0133a2556b45c8e98e225ee9626c33"
+          },
+          "189752": {
+            "bytes": 143725,
+            "file": "datasets/coco2017/visual_refinement_original/000000189752.jpg",
+            "sha256": "35d70fad532034414841ed06a4cd628964752a56b56faff95c92d4e13af11bf1"
+          },
+          "192047": {
+            "bytes": 57364,
+            "file": "datasets/coco2017/visual_refinement_original/000000192047.jpg",
+            "sha256": "5a6aa56f666d828f867dd28c46d4bbc651fa2876d85dad46a0460e4e4ab36a62"
+          },
+          "192871": {
+            "bytes": 82014,
+            "file": "datasets/coco2017/visual_refinement_original/000000192871.jpg",
+            "sha256": "3b01c2d37f4e03a559a45270a5b06b290823bf71bc713c615a01300e899375a7"
+          },
+          "193494": {
+            "bytes": 146038,
+            "file": "datasets/coco2017/visual_refinement_original/000000193494.jpg",
+            "sha256": "637ebcafdf7016bd3c5d279a62717d1141b5c13f5dc5bdbf04b05adc661fb745"
+          },
+          "196754": {
+            "bytes": 158005,
+            "file": "datasets/coco2017/visual_refinement_original/000000196754.jpg",
+            "sha256": "15234c0a7d167f219c517b09cd91f86fc30542f68772d953aabf9908637644d0"
+          },
+          "19742": {
+            "bytes": 91344,
+            "file": "datasets/coco2017/visual_refinement_original/000000019742.jpg",
+            "sha256": "6ccc37eeba5118114222f8de61228e95cf6c28fb631c9e759fcdcd450061337a"
+          },
+          "197796": {
+            "bytes": 176742,
+            "file": "datasets/coco2017/visual_refinement_original/000000197796.jpg",
+            "sha256": "f1a1103e0b5eb80b57ff82d5381352c74f3354d7b1bbac8b45eaba0de7f38e08"
+          },
+          "19786": {
+            "bytes": 79278,
+            "file": "datasets/coco2017/visual_refinement_original/000000019786.jpg",
+            "sha256": "109307de9a894df50386a58dec9347e6c280ee024f426933e2e34bfd57478960"
+          },
+          "201426": {
+            "bytes": 177904,
+            "file": "datasets/coco2017/visual_refinement_original/000000201426.jpg",
+            "sha256": "23327e9d0dc7433da034938e9535f30724d1ccadb3ba80f6684bed529f6ecd6c"
+          },
+          "202001": {
+            "bytes": 191805,
+            "file": "datasets/coco2017/visual_refinement_original/000000202001.jpg",
+            "sha256": "589af779eb55d7b7c4a08ad21875193e86b8bf2bb16f6ef7772db7656a3fe873"
+          },
+          "203488": {
+            "bytes": 154692,
+            "file": "datasets/coco2017/visual_refinement_original/000000203488.jpg",
+            "sha256": "28a0a02064f31577ac111b8ce6949f3d049cbe8b3d04cdd86ed4a286c07eac03"
+          },
+          "206027": {
+            "bytes": 171512,
+            "file": "datasets/coco2017/visual_refinement_original/000000206027.jpg",
+            "sha256": "2d02a9fe14338778b9b755b92da237f6972e070cc4b1b0f9c0ce4e6923b2a855"
+          },
+          "206218": {
+            "bytes": 164395,
+            "file": "datasets/coco2017/visual_refinement_original/000000206218.jpg",
+            "sha256": "74426999cd1b58aac06353d2afac10c9e6a8c3bbfeb05abfd3386801c47c035d"
+          },
+          "215259": {
+            "bytes": 79924,
+            "file": "datasets/coco2017/visual_refinement_original/000000215259.jpg",
+            "sha256": "4681f712406ecb952b74606dc1bc597d81019f209843ca806ae3c188be700afe"
+          },
+          "223789": {
+            "bytes": 71809,
+            "file": "datasets/coco2017/visual_refinement_original/000000223789.jpg",
+            "sha256": "41841d3779a3caafc02c4e815904313d71a2864be1b54513a58be4a146bdf7aa"
+          },
+          "224675": {
+            "bytes": 70496,
+            "file": "datasets/coco2017/visual_refinement_original/000000224675.jpg",
+            "sha256": "45ab6d1c49e081bede2f1e84365bb756c1f165c022b3b24f0338e0eaf971ee66"
+          },
+          "227044": {
+            "bytes": 91908,
+            "file": "datasets/coco2017/visual_refinement_original/000000227044.jpg",
+            "sha256": "dcc81cb0aa32b7cd672fc08dd42d04a51f9a1c63bc06c55829f6459216dc146c"
+          },
+          "229311": {
+            "bytes": 108246,
+            "file": "datasets/coco2017/visual_refinement_original/000000229311.jpg",
+            "sha256": "da6dbe6397f27fff82246528f526f7f58dffedf64384b9b2d9241ffa4872bedf"
+          },
+          "23034": {
+            "bytes": 250952,
+            "file": "datasets/coco2017/visual_refinement_original/000000023034.jpg",
+            "sha256": "2a571a9358b1d8096bad1d317fa81c179d1137feae2b6688881e9b286f0b7c1f"
+          },
+          "231237": {
+            "bytes": 106563,
+            "file": "datasets/coco2017/visual_refinement_original/000000231237.jpg",
+            "sha256": "2d0e8b59bee673296d4ed71dea5345565b79cf73c0b56a20e09165850c9509df"
+          },
+          "231339": {
+            "bytes": 121429,
+            "file": "datasets/coco2017/visual_refinement_original/000000231339.jpg",
+            "sha256": "c1512cc65ba365778c4064c2f22798db1fccd96f127aeff2cdc0bb09ed1e6dc7"
+          },
+          "233238": {
+            "bytes": 214363,
+            "file": "datasets/coco2017/visual_refinement_original/000000233238.jpg",
+            "sha256": "9dad732209b83cc953be6f35a092b0692569f0f6682565178b6581dd6bb7ca81"
+          },
+          "234413": {
+            "bytes": 202344,
+            "file": "datasets/coco2017/visual_refinement_original/000000234413.jpg",
+            "sha256": "7e6408c5a240b6680703c2439d9a31eb23083bf46f10a4195d7abd857de9452b"
+          },
+          "237517": {
+            "bytes": 238285,
+            "file": "datasets/coco2017/visual_refinement_original/000000237517.jpg",
+            "sha256": "5957b55666219c9181b00c4fe31c802cc2d33225f976d47656ef92f5f50f788a"
+          },
+          "237984": {
+            "bytes": 170816,
+            "file": "datasets/coco2017/visual_refinement_original/000000237984.jpg",
+            "sha256": "c3a80936a675c227a2123812479ee54db05d1524e6b1219fa88dcc8211f9aaa1"
+          },
+          "238410": {
+            "bytes": 168411,
+            "file": "datasets/coco2017/visual_refinement_original/000000238410.jpg",
+            "sha256": "980b3adbde3e49f6cc92f0611ea9ef8dde633715a7d9041bafa8048fb61c24de"
+          },
+          "242287": {
+            "bytes": 149378,
+            "file": "datasets/coco2017/visual_refinement_original/000000242287.jpg",
+            "sha256": "28926e1727c30c84dc8be5537cd607817dd39f44c40a03c822779135755d2d23"
+          },
+          "243344": {
+            "bytes": 180471,
+            "file": "datasets/coco2017/visual_refinement_original/000000243344.jpg",
+            "sha256": "4c42a89dc3e48343fe5800aa3711548466b9c295976b958c047e6cb5a4eb374b"
+          },
+          "246968": {
+            "bytes": 175692,
+            "file": "datasets/coco2017/visual_refinement_original/000000246968.jpg",
+            "sha256": "5f7990e5edb8b8ab72faeef5ad6391976b24c2ab14d1c05d178fba70fadfd435"
+          },
+          "249129": {
+            "bytes": 183960,
+            "file": "datasets/coco2017/visual_refinement_original/000000249129.jpg",
+            "sha256": "ee3e96944723de59d8741e68c65e0395fec5841a03286563bf005f43a131a786"
+          },
+          "251537": {
+            "bytes": 244549,
+            "file": "datasets/coco2017/visual_refinement_original/000000251537.jpg",
+            "sha256": "3d7655f8f3306f7f442ae0ca8e2107138ba4d9c7332774aa3a8a98dc64ea8973"
+          },
+          "252776": {
+            "bytes": 123164,
+            "file": "datasets/coco2017/visual_refinement_original/000000252776.jpg",
+            "sha256": "366caa11d1a8ba573acc9bc13048221e7edb02933f5057e0bd26397f4d10f0e8"
+          },
+          "25394": {
+            "bytes": 118322,
+            "file": "datasets/coco2017/visual_refinement_original/000000025394.jpg",
+            "sha256": "f13f54a3cbe28140004425b1b010c51bd5be0e4c4da1d4b1e382e3e0b426e316"
+          },
+          "25603": {
+            "bytes": 216824,
+            "file": "datasets/coco2017/visual_refinement_original/000000025603.jpg",
+            "sha256": "f75a5898681ea62ef547b8c002e8e0eec00c50aa6b995334ab967798cff6e6dc"
+          },
+          "2592": {
+            "bytes": 103017,
+            "file": "datasets/coco2017/visual_refinement_original/000000002592.jpg",
+            "sha256": "ffa3d472d44184b1f48878f7b097189723e57a24f36c44c29e4bc561110fbf41"
+          },
+          "262682": {
+            "bytes": 115392,
+            "file": "datasets/coco2017/visual_refinement_original/000000262682.jpg",
+            "sha256": "40e469d78ea8f94bdb8d8ed4c04351b49e46593e2c7b6db0433a72e6b1b2bd2f"
+          },
+          "262938": {
+            "bytes": 188195,
+            "file": "datasets/coco2017/visual_refinement_original/000000262938.jpg",
+            "sha256": "ce78e1690b2b47515d3d1e36f149faee2cb032efcebc130a8f38c5489545958e"
+          },
+          "263463": {
+            "bytes": 153926,
+            "file": "datasets/coco2017/visual_refinement_original/000000263463.jpg",
+            "sha256": "0f712edce4e14d4b04548a148a36cbb69954c7c001da7406b704d299c91e6eaa"
+          },
+          "263796": {
+            "bytes": 276910,
+            "file": "datasets/coco2017/visual_refinement_original/000000263796.jpg",
+            "sha256": "b21ad33c378d82789710784e7082538f1795699fdb555bf9dd4ac9444b6d0cc7"
+          },
+          "265518": {
+            "bytes": 222823,
+            "file": "datasets/coco2017/visual_refinement_original/000000265518.jpg",
+            "sha256": "65effd9cbf440739c171ef3b55b310fe9111b2d91c4edaa91a668c1d2046ab7a"
+          },
+          "268378": {
+            "bytes": 175174,
+            "file": "datasets/coco2017/visual_refinement_original/000000268378.jpg",
+            "sha256": "c8d28db19ef226195811e86b5c41ab6635d16c8e9d375a1d4fb841fcb038b68a"
+          },
+          "268831": {
+            "bytes": 10518,
+            "file": "datasets/coco2017/visual_refinement_original/000000268831.jpg",
+            "sha256": "9ce8de9e425c7d148d0384b982813aa089e8c23c6d08a7e393be5619abdb4a8b"
+          },
+          "272416": {
+            "bytes": 131304,
+            "file": "datasets/coco2017/visual_refinement_original/000000272416.jpg",
+            "sha256": "470da67abdaa4170851fafc4b0bb0f84bac36a164040a84544d3c599d61eb5db"
+          },
+          "276055": {
+            "bytes": 148305,
+            "file": "datasets/coco2017/visual_refinement_original/000000276055.jpg",
+            "sha256": "e5ccfb9ce6af7dcdb972a85127b646f066a84de1a8d17f1bc3d24a63b1c18f1a"
+          },
+          "277020": {
+            "bytes": 96698,
+            "file": "datasets/coco2017/visual_refinement_original/000000277020.jpg",
+            "sha256": "791eb6de6cf059c67b2b7809cd5132b3708ed39d36a1f67c55714a91391b3cfc"
+          },
+          "282046": {
+            "bytes": 62749,
+            "file": "datasets/coco2017/visual_refinement_original/000000282046.jpg",
+            "sha256": "e5d58d919749594cc6e6a79df4c7ff4d7b8218eacf1a117111bfa66c7490d9e1"
+          },
+          "283412": {
+            "bytes": 147789,
+            "file": "datasets/coco2017/visual_refinement_original/000000283412.jpg",
+            "sha256": "ecff06907a7898f62175cdebf1108b752e085d9b53a4806869c6b4df508d6602"
+          },
+          "284623": {
+            "bytes": 118455,
+            "file": "datasets/coco2017/visual_refinement_original/000000284623.jpg",
+            "sha256": "b7d443c3ac4cd71881259a33c8d85aa8dc2036de7a70de6d05b25a5aaec51698"
+          },
+          "284991": {
+            "bytes": 138370,
+            "file": "datasets/coco2017/visual_refinement_original/000000284991.jpg",
+            "sha256": "916e3eab5929c2ec0ebc9971f98ce5fa5b5cc44af1036b5104e093f53f48c46a"
+          },
+          "286907": {
+            "bytes": 95622,
+            "file": "datasets/coco2017/visual_refinement_original/000000286907.jpg",
+            "sha256": "14650c5b58412fb29f21eaeaedabd489e1137b7af48476a83e395df52038e879"
+          },
+          "288762": {
+            "bytes": 156598,
+            "file": "datasets/coco2017/visual_refinement_original/000000288762.jpg",
+            "sha256": "bfbff0617f67c1873a04bea40363431dcc53ad95f2c38470ed8a9f1aef98e52b"
+          },
+          "289343": {
+            "bytes": 170295,
+            "file": "datasets/coco2017/visual_refinement_original/000000289343.jpg",
+            "sha256": "3e55a91ce9257d70771eac2380332a743cb17f2220aee0c070d2d46204931e56"
+          },
+          "289992": {
+            "bytes": 55434,
+            "file": "datasets/coco2017/visual_refinement_original/000000289992.jpg",
+            "sha256": "a21ee4cb511ba86586c9164e36453356cddbddc271ce59185a04a40e0101ee4d"
+          },
+          "290771": {
+            "bytes": 256017,
+            "file": "datasets/coco2017/visual_refinement_original/000000290771.jpg",
+            "sha256": "7d7f83ad4594d4ccf7b2c10ffcfe063cd84cbda30713368b594ae31aa4992b6d"
+          },
+          "291634": {
+            "bytes": 214665,
+            "file": "datasets/coco2017/visual_refinement_original/000000291634.jpg",
+            "sha256": "6ae78cd80b51f27f47479e0fb46603270c6fa874ce71bf0bac79ba00c377804f"
+          },
+          "292082": {
+            "bytes": 191921,
+            "file": "datasets/coco2017/visual_refinement_original/000000292082.jpg",
+            "sha256": "c819976fc2e5cf477bbf8e647896646607c5f332ccd22862c909678fe75e8ed7"
+          },
+          "29397": {
+            "bytes": 202420,
+            "file": "datasets/coco2017/visual_refinement_original/000000029397.jpg",
+            "sha256": "4185e741b14c3e6e2b9da920217a988d08cb89dfc41d377c3aeb4f1e41d8c2f3"
+          },
+          "296231": {
+            "bytes": 133093,
+            "file": "datasets/coco2017/visual_refinement_original/000000296231.jpg",
+            "sha256": "d12578761560a8d7317210b5f5223da39d1f4be8ebd6caa0871f852242f6f9f7"
+          },
+          "297084": {
+            "bytes": 208657,
+            "file": "datasets/coco2017/visual_refinement_original/000000297084.jpg",
+            "sha256": "9e812fd1861d9bc51048321fec481961b40f37c55f04350d6704a7446944d16d"
+          },
+          "301421": {
+            "bytes": 82481,
+            "file": "datasets/coco2017/visual_refinement_original/000000301421.jpg",
+            "sha256": "a68205cde5ae859ac50c6cb563a0a3e5f7d780f28625afddeb8db153c7dcbb71"
+          },
+          "301718": {
+            "bytes": 187495,
+            "file": "datasets/coco2017/visual_refinement_original/000000301718.jpg",
+            "sha256": "54a5a90b270b5ae95672c8ed2947867efabe7acf977d89c985cd1e909a58b1be"
+          },
+          "302760": {
+            "bytes": 106680,
+            "file": "datasets/coco2017/visual_refinement_original/000000302760.jpg",
+            "sha256": "833d0c79e697c11d7079b7afeabdb5342f8ebe9bf8926ecd88c0b7903c42652a"
+          },
+          "306139": {
+            "bytes": 153453,
+            "file": "datasets/coco2017/visual_refinement_original/000000306139.jpg",
+            "sha256": "42a07a3348e24d370e2b1191eb52126de536b726051ff03a508b79c4d4e90308"
+          },
+          "306700": {
+            "bytes": 114401,
+            "file": "datasets/coco2017/visual_refinement_original/000000306700.jpg",
+            "sha256": "fef4b11772866cead39c370965226ec2638ac0533c89a8be32f02919c48cf148"
+          },
+          "310072": {
+            "bytes": 210572,
+            "file": "datasets/coco2017/visual_refinement_original/000000310072.jpg",
+            "sha256": "0404d2aa95236840dcc75a43f8cad1f4b03d382c72e86aaff751cb142f18a8e7"
+          },
+          "31050": {
+            "bytes": 213146,
+            "file": "datasets/coco2017/visual_refinement_original/000000031050.jpg",
+            "sha256": "6b16283fc0f115b7c14288a8e7949ccfedc10440842a5de7064f9c58c4c7fba7"
+          },
+          "310980": {
+            "bytes": 122977,
+            "file": "datasets/coco2017/visual_refinement_original/000000310980.jpg",
+            "sha256": "d049616f3b49d973d8f1f002fcf87a44b976d2bc4ca4a053211598b1d2232a42"
+          },
+          "316015": {
+            "bytes": 155691,
+            "file": "datasets/coco2017/visual_refinement_original/000000316015.jpg",
+            "sha256": "c7fec132440e63917a4346a16d5f48cd280f0f497d221b1a54c545a398a8aba9"
+          },
+          "316666": {
+            "bytes": 123374,
+            "file": "datasets/coco2017/visual_refinement_original/000000316666.jpg",
+            "sha256": "9435bba3fd0dd221b88cb8d712996a91c7f0a9be6ffc349eb03835720029b084"
+          },
+          "319935": {
+            "bytes": 96552,
+            "file": "datasets/coco2017/visual_refinement_original/000000319935.jpg",
+            "sha256": "dbc7d9ef1f9e15c8fdc67eeefbb74091b6d489af385bb85137e918e3d1b7e6f8"
+          },
+          "32038": {
+            "bytes": 90323,
+            "file": "datasets/coco2017/visual_refinement_original/000000032038.jpg",
+            "sha256": "5afb15a7ca2105d97e1f3a095dcbb1bdbe92232b1aaad9b7ab3bca63ee8adc3d"
+          },
+          "321214": {
+            "bytes": 135242,
+            "file": "datasets/coco2017/visual_refinement_original/000000321214.jpg",
+            "sha256": "5b4d5e12a578b4407a3724c83a8950c5f00b36763bdefdc535363818d057ae9e"
+          },
+          "322844": {
+            "bytes": 249456,
+            "file": "datasets/coco2017/visual_refinement_original/000000322844.jpg",
+            "sha256": "ed66e04795ad9b134edfc18ef77963494d9ecf47ffbdfd37c8fe1334e3df727e"
+          },
+          "334483": {
+            "bytes": 238187,
+            "file": "datasets/coco2017/visual_refinement_original/000000334483.jpg",
+            "sha256": "25b008f452e77d8618bb1cfb9380eb3c7d2dd43fe5c92c5cbcd949b3d4f9ce4b"
+          },
+          "336209": {
+            "bytes": 112268,
+            "file": "datasets/coco2017/visual_refinement_original/000000336209.jpg",
+            "sha256": "8d15da4c86f55473e74dbae34ad2a94f067aab9eaf56bea037ccee3a6f0814ef"
+          },
+          "340015": {
+            "bytes": 184369,
+            "file": "datasets/coco2017/visual_refinement_original/000000340015.jpg",
+            "sha256": "2a74b82fdadd4b1b934f21a1d812a3aa83e898b653cbd04535d7486d079b4d8f"
+          },
+          "345356": {
+            "bytes": 99465,
+            "file": "datasets/coco2017/visual_refinement_original/000000345356.jpg",
+            "sha256": "6747504c0e3c993e6bf493a19bbd343e65685b2bfcd656302f1d5ab828c2a109"
+          },
+          "34760": {
+            "bytes": 151438,
+            "file": "datasets/coco2017/visual_refinement_original/000000034760.jpg",
+            "sha256": "0fd67be645460db96f578a810d5d59b84ec4ca8f7ee905a1b538b8591211a1a9"
+          },
+          "349152": {
+            "bytes": 97953,
+            "file": "datasets/coco2017/visual_refinement_original/000000349152.jpg",
+            "sha256": "4d1ce98e4032d847a6d7fe07cdc4add0a2b4ff9563a4695083559d7e7bf7fe1d"
+          },
+          "349184": {
+            "bytes": 133073,
+            "file": "datasets/coco2017/visual_refinement_original/000000349184.jpg",
+            "sha256": "4bb0d5850695a09964d7f111ba8bf70233fd4798332aae8add1648ef736a1de3"
+          },
+          "351589": {
+            "bytes": 178446,
+            "file": "datasets/coco2017/visual_refinement_original/000000351589.jpg",
+            "sha256": "d96a7b416f6c12a6c6f9f3405c7ac9a04ec3b231700248148aa808fc30bd0972"
+          },
+          "353096": {
+            "bytes": 109933,
+            "file": "datasets/coco2017/visual_refinement_original/000000353096.jpg",
+            "sha256": "2f6773ef40aa8e53717b809410d2f1be66ac9230dbcefe27cf8c6d1b4cb541a5"
+          },
+          "35326": {
+            "bytes": 125225,
+            "file": "datasets/coco2017/visual_refinement_original/000000035326.jpg",
+            "sha256": "585b9ab944861e297b49d352117de3ab59a5c3bd55f3a298bdf91b7a3a544678"
+          },
+          "355240": {
+            "bytes": 91660,
+            "file": "datasets/coco2017/visual_refinement_original/000000355240.jpg",
+            "sha256": "f1608dd630b71c7195f9dae41b85afebf2dbb856e32951746b1caf47b54971d0"
+          },
+          "357567": {
+            "bytes": 118859,
+            "file": "datasets/coco2017/visual_refinement_original/000000357567.jpg",
+            "sha256": "a3ef4377e4e197497a39d30eeeca7ae759b96003f5546c23aec913f7ab251557"
+          },
+          "357978": {
+            "bytes": 113227,
+            "file": "datasets/coco2017/visual_refinement_original/000000357978.jpg",
+            "sha256": "c391980744da1a5364eae79358f00c68be4b0429dca5980162d1adbd5d440d34"
+          },
+          "359219": {
+            "bytes": 273576,
+            "file": "datasets/coco2017/visual_refinement_original/000000359219.jpg",
+            "sha256": "621420fd7414fed8900286441c019ea1c8fd7ba9a6793b7139096baee01ca319"
+          },
+          "361238": {
+            "bytes": 189106,
+            "file": "datasets/coco2017/visual_refinement_original/000000361238.jpg",
+            "sha256": "d353d745084e986af44b6bb9b2fc4cbf5f412ed913294ffc774ec3d83e49f87d"
+          },
+          "362434": {
+            "bytes": 131020,
+            "file": "datasets/coco2017/visual_refinement_original/000000362434.jpg",
+            "sha256": "13ec6259276d140b0fb45d955cf497cfe59be9a8ae17a76330b24541069f9cab"
+          },
+          "363461": {
+            "bytes": 196182,
+            "file": "datasets/coco2017/visual_refinement_original/000000363461.jpg",
+            "sha256": "0d41b0b09df6077778df7c39231ce37ecfc7c30273c55c70926fab0a88515eb8"
+          },
+          "363840": {
+            "bytes": 127894,
+            "file": "datasets/coco2017/visual_refinement_original/000000363840.jpg",
+            "sha256": "231e12c229c2f84c186085b320a6a8dcaa3d4763bbd09940204121379a5b3e11"
+          },
+          "366199": {
+            "bytes": 152947,
+            "file": "datasets/coco2017/visual_refinement_original/000000366199.jpg",
+            "sha256": "c72cd72547cde741effa8e956631e74b25fa6200944ffb9649866a1335a7ba8b"
+          },
+          "368212": {
+            "bytes": 213670,
+            "file": "datasets/coco2017/visual_refinement_original/000000368212.jpg",
+            "sha256": "3f39f80efab771fb3810973df268b456634fd3495c26778e278968753cd20ecf"
+          },
+          "370208": {
+            "bytes": 160279,
+            "file": "datasets/coco2017/visual_refinement_original/000000370208.jpg",
+            "sha256": "074ac425cb005165a87fdcea693f1a229ffb1020c6e8b363acfc9a25c02bcb9b"
+          },
+          "371529": {
+            "bytes": 234250,
+            "file": "datasets/coco2017/visual_refinement_original/000000371529.jpg",
+            "sha256": "1db0c839e7060314fa73cefcf19d616a4ced1e295b1b6f891c61f122fb448484"
+          },
+          "371749": {
+            "bytes": 104493,
+            "file": "datasets/coco2017/visual_refinement_original/000000371749.jpg",
+            "sha256": "212be10f05ea75bbc3bd754f38cc23a7a3998d2050818fc0cefdbd1cfcf308d3"
+          },
+          "375078": {
+            "bytes": 57476,
+            "file": "datasets/coco2017/visual_refinement_original/000000375078.jpg",
+            "sha256": "4ab97edd8cf0dda29be673c6337ab8bff9c4423d50ffde9236ff60a137ebf691"
+          },
+          "379332": {
+            "bytes": 84965,
+            "file": "datasets/coco2017/visual_refinement_original/000000379332.jpg",
+            "sha256": "eab9ed90546885ebe2cda057aae0580ce7acce02d3eb7f9e60d01df56882f22f"
+          },
+          "383337": {
+            "bytes": 141999,
+            "file": "datasets/coco2017/visual_refinement_original/000000383337.jpg",
+            "sha256": "c76dfdb296725a9260eb9855a1aede9df5d6dd177ad9cfde06458728f9f22607"
+          },
+          "385997": {
+            "bytes": 109991,
+            "file": "datasets/coco2017/visual_refinement_original/000000385997.jpg",
+            "sha256": "e35bd1a93a4eebfce3829761c06d9621f3c36a5a5ac424cdcc6b83af86a673a8"
+          },
+          "38678": {
+            "bytes": 184997,
+            "file": "datasets/coco2017/visual_refinement_original/000000038678.jpg",
+            "sha256": "7e3bf523b3a2baa280716e31687874a031a51219767b20965a62cc7bd1f299a6"
+          },
+          "3934": {
+            "bytes": 138201,
+            "file": "datasets/coco2017/visual_refinement_original/000000003934.jpg",
+            "sha256": "c7b1180c75a332e8768a4ca76b1fe8b3e3e073e2b925d94f43fa5439535d5dcf"
+          },
+          "40083": {
+            "bytes": 104152,
+            "file": "datasets/coco2017/visual_refinement_original/000000040083.jpg",
+            "sha256": "89b9c3771c9428e0e25134cde9bc0a962318a477d267ef47f8e1872526207da7"
+          },
+          "403565": {
+            "bytes": 202794,
+            "file": "datasets/coco2017/visual_refinement_original/000000403565.jpg",
+            "sha256": "7728a697d1e46e038de2baebdd0c18bb8aa8646ff67ded3ea2c5621654c88e62"
+          },
+          "405249": {
+            "bytes": 159889,
+            "file": "datasets/coco2017/visual_refinement_original/000000405249.jpg",
+            "sha256": "d1b492f8eed8461c76419a3eadeeafdec4c8a48b2b42abda1b3a38a079f37b45"
+          },
+          "405970": {
+            "bytes": 131526,
+            "file": "datasets/coco2017/visual_refinement_original/000000405970.jpg",
+            "sha256": "83ee42dd5c6fe66fc77ecb8f8889eda6aa4e11d06503f2a8b20948ea8eb8fe30"
+          },
+          "407825": {
+            "bytes": 139349,
+            "file": "datasets/coco2017/visual_refinement_original/000000407825.jpg",
+            "sha256": "0871a7c6e308afd0675688a556254bec9652d9ffe5be9f991b4030817e714f50"
+          },
+          "411938": {
+            "bytes": 263449,
+            "file": "datasets/coco2017/visual_refinement_original/000000411938.jpg",
+            "sha256": "8d5a4b2e84e045a974113175429619a0a0118f6f0b95124d53057c733f4ff8d1"
+          },
+          "415238": {
+            "bytes": 137700,
+            "file": "datasets/coco2017/visual_refinement_original/000000415238.jpg",
+            "sha256": "d35dac662f828ab1b671f9acafaea3f1cc1992e231811806119fe3a063896471"
+          },
+          "415741": {
+            "bytes": 110241,
+            "file": "datasets/coco2017/visual_refinement_original/000000415741.jpg",
+            "sha256": "f3dc76875460b05e6d348a4867e3e44bad554f819f2e4cf25b9b66615d72302c"
+          },
+          "416745": {
+            "bytes": 119731,
+            "file": "datasets/coco2017/visual_refinement_original/000000416745.jpg",
+            "sha256": "ed85f4f684f7cd0a93a04e71a2a383a7679f6a4386a27c367a8ec7abea281ff2"
+          },
+          "41872": {
+            "bytes": 95660,
+            "file": "datasets/coco2017/visual_refinement_original/000000041872.jpg",
+            "sha256": "9ef41d1689519ff9d93fcd59fdd4ab43e9ba205f76b23fc1aeaf4f2d5cc5337e"
+          },
+          "419974": {
+            "bytes": 130169,
+            "file": "datasets/coco2017/visual_refinement_original/000000419974.jpg",
+            "sha256": "eff82e4b2a14a39e1f76d1ef1f4dc986866d985f679367e45c8c071a1f4078cf"
+          },
+          "425226": {
+            "bytes": 204232,
+            "file": "datasets/coco2017/visual_refinement_original/000000425226.jpg",
+            "sha256": "feadc69a8190787088fda0ac12971d91badc93dbe06057645050fdbec1ce6911"
+          },
+          "428280": {
+            "bytes": 177854,
+            "file": "datasets/coco2017/visual_refinement_original/000000428280.jpg",
+            "sha256": "e1fe3a66ec23e9b0e7400e44ad69912499fdacdbd955454acb9ec9675883b022"
+          },
+          "430056": {
+            "bytes": 100912,
+            "file": "datasets/coco2017/visual_refinement_original/000000430056.jpg",
+            "sha256": "9753b0001fe8bf21bcb0271569e438188fcc2112f80e9efbf1cbce51fa8e7d7f"
+          },
+          "437392": {
+            "bytes": 116845,
+            "file": "datasets/coco2017/visual_refinement_original/000000437392.jpg",
+            "sha256": "6c481f084e4dcabcd55a57993235b48ff82243d80dc094c5b2b02cb5ab5c38f7"
+          },
+          "437898": {
+            "bytes": 158580,
+            "file": "datasets/coco2017/visual_refinement_original/000000437898.jpg",
+            "sha256": "80a69fe0b425618642c322b5d6144af30d6f93f79acb20f6f9585141d5fed90c"
+          },
+          "441247": {
+            "bytes": 155114,
+            "file": "datasets/coco2017/visual_refinement_original/000000441247.jpg",
+            "sha256": "f9303a120fb7c70fd6fb5ef1020fb6a356066dbd5390788a0a449b7fda559f59"
+          },
+          "450488": {
+            "bytes": 79281,
+            "file": "datasets/coco2017/visual_refinement_original/000000450488.jpg",
+            "sha256": "614c9d0e6ef853584b20402da353bc46a949d16c224bd2e3b7758fa4a3a068b2"
+          },
+          "451571": {
+            "bytes": 292613,
+            "file": "datasets/coco2017/visual_refinement_original/000000451571.jpg",
+            "sha256": "501c4119054a0ee3110f260afa17f205289de089b9747d18a81b61348b512712"
+          },
+          "452784": {
+            "bytes": 106068,
+            "file": "datasets/coco2017/visual_refinement_original/000000452784.jpg",
+            "sha256": "1112fba959efa3f56affb54cff3f1127856b812838d98dbe3c67cca1b8e37407"
+          },
+          "456143": {
+            "bytes": 176780,
+            "file": "datasets/coco2017/visual_refinement_original/000000456143.jpg",
+            "sha256": "2ff984111cee996af51c27ac6dc02355132f46aef27ea8b2755f30c42e846195"
+          },
+          "456662": {
+            "bytes": 136483,
+            "file": "datasets/coco2017/visual_refinement_original/000000456662.jpg",
+            "sha256": "cdb82b8c3f89414690a37d7da08139706aa491feb57b4307222e540cc7cd9ace"
+          },
+          "463842": {
+            "bytes": 107964,
+            "file": "datasets/coco2017/visual_refinement_original/000000463842.jpg",
+            "sha256": "7e534102e2fa1c5436cd8f2a162509d77c0f37c0fbd0de6cad7a9c22ba0a7cc9"
+          },
+          "465822": {
+            "bytes": 111704,
+            "file": "datasets/coco2017/visual_refinement_original/000000465822.jpg",
+            "sha256": "f90159f0241e3358ef8eed729247385f2e682eb48e803ddad9134f41b9d558f3"
+          },
+          "467176": {
+            "bytes": 74751,
+            "file": "datasets/coco2017/visual_refinement_original/000000467176.jpg",
+            "sha256": "533fd5d3b52305fee0f1e96b258b41de137ec1de465ee5c0c3afaa599c6c8567"
+          },
+          "468245": {
+            "bytes": 136722,
+            "file": "datasets/coco2017/visual_refinement_original/000000468245.jpg",
+            "sha256": "96812ce020f5063704b1ca0ff2d6bb319e54e1a957bd04f4db9ec9dbd75e2c42"
+          },
+          "471893": {
+            "bytes": 115827,
+            "file": "datasets/coco2017/visual_refinement_original/000000471893.jpg",
+            "sha256": "f4b79e42684ce540e4b9fb94982d7bc8659de9e79924aa176a6d72c201053651"
+          },
+          "473118": {
+            "bytes": 104099,
+            "file": "datasets/coco2017/visual_refinement_original/000000473118.jpg",
+            "sha256": "5130687691f283ac3dd2e1cb5ab643c8a084230c8a9c99ba1d5c1219ec31fabb"
+          },
+          "474854": {
+            "bytes": 97433,
+            "file": "datasets/coco2017/visual_refinement_original/000000474854.jpg",
+            "sha256": "0e66a2748ad65ccd3cb04e5163b77def18ae135109bfe19935ff7d3183eba7b4"
+          },
+          "478136": {
+            "bytes": 156149,
+            "file": "datasets/coco2017/visual_refinement_original/000000478136.jpg",
+            "sha256": "526077bd0069192c70bd094935f99c2715acf3507cafde02ee050744e9d54a6e"
+          },
+          "480122": {
+            "bytes": 246280,
+            "file": "datasets/coco2017/visual_refinement_original/000000480122.jpg",
+            "sha256": "59388d47e3ddcabe229718019086d04ad7ef4ef15b38e69c71348191cbaf0b6f"
+          },
+          "482978": {
+            "bytes": 142787,
+            "file": "datasets/coco2017/visual_refinement_original/000000482978.jpg",
+            "sha256": "8b2fffff5d2b7d19b9533c2c55c57dee2f919fc2f5af15ba2a1f39b59f98d238"
+          },
+          "483531": {
+            "bytes": 124629,
+            "file": "datasets/coco2017/visual_refinement_original/000000483531.jpg",
+            "sha256": "8430390899e94fae7e04abfbc2e2fbada74c8762f0fa7040e7ecf0c5b0706719"
+          },
+          "486479": {
+            "bytes": 119526,
+            "file": "datasets/coco2017/visual_refinement_original/000000486479.jpg",
+            "sha256": "9f3bf68815b9d35646131e84d97ed6d20fd9de4d343cded54a8f726e4c167de7"
+          },
+          "488166": {
+            "bytes": 178764,
+            "file": "datasets/coco2017/visual_refinement_original/000000488166.jpg",
+            "sha256": "117f8b9f05251e3b3ebc3bd6acf0d099686c6592024f5dc04827cd1defc6cc85"
+          },
+          "492878": {
+            "bytes": 271783,
+            "file": "datasets/coco2017/visual_refinement_original/000000492878.jpg",
+            "sha256": "cd77b71fa218eea179e9a94733b0b6c353617952198f20fdd63ab47b88ba7792"
+          },
+          "497599": {
+            "bytes": 159995,
+            "file": "datasets/coco2017/visual_refinement_original/000000497599.jpg",
+            "sha256": "4bde154898740c69f124650678a4476fdcd29a6095cdb8d467c614c49d40407c"
+          },
+          "499313": {
+            "bytes": 213090,
+            "file": "datasets/coco2017/visual_refinement_original/000000499313.jpg",
+            "sha256": "b5100ccec30bfc57efb6c8fce4c1510de8b824dfede37c1396e3f3f6a6d74d13"
+          },
+          "500464": {
+            "bytes": 170317,
+            "file": "datasets/coco2017/visual_refinement_original/000000500464.jpg",
+            "sha256": "f4714db3b155caf93afa783e108381c036c759c39c2836880dece65dd020cafe"
+          },
+          "501523": {
+            "bytes": 106547,
+            "file": "datasets/coco2017/visual_refinement_original/000000501523.jpg",
+            "sha256": "4607dff7471059b8243710e1eac998a4e0899d414d903dfcfa103a252339e99f"
+          },
+          "50380": {
+            "bytes": 162940,
+            "file": "datasets/coco2017/visual_refinement_original/000000050380.jpg",
+            "sha256": "df1d17f3f65d75e67dc90f14c701fa65c097c8ac0a2e0d1b7bd226018fc57722"
+          },
+          "505169": {
+            "bytes": 189576,
+            "file": "datasets/coco2017/visual_refinement_original/000000505169.jpg",
+            "sha256": "63995873dd957d6d78a9fcfe0fa952af931af1b4268e37d242e68be1f964e478"
+          },
+          "508312": {
+            "bytes": 91714,
+            "file": "datasets/coco2017/visual_refinement_original/000000508312.jpg",
+            "sha256": "c4925590bbbe293539fdbbd4f02586b2780e9e117cacc26811e61aea41b8d454"
+          },
+          "51008": {
+            "bytes": 123130,
+            "file": "datasets/coco2017/visual_refinement_original/000000051008.jpg",
+            "sha256": "cd615d2609c7ea6fa5c9c132fa8efd924477a05f0333470cf496117b7513fc3e"
+          },
+          "517056": {
+            "bytes": 164974,
+            "file": "datasets/coco2017/visual_refinement_original/000000517056.jpg",
+            "sha256": "6a6b5e10a1bb90c1a322cc39088a2e7174f30935e8fd4a9d6b0f9392ac2351e7"
+          },
+          "52413": {
+            "bytes": 104132,
+            "file": "datasets/coco2017/visual_refinement_original/000000052413.jpg",
+            "sha256": "d32a2e65c67dd31a5f9783ba6749782e3e617043234cebe3b57cfca264c80f81"
+          },
+          "526197": {
+            "bytes": 148905,
+            "file": "datasets/coco2017/visual_refinement_original/000000526197.jpg",
+            "sha256": "84364c2e645d5806ea5b924c1444bc37d54b7d31d02f0e42d8f4a524044df3f3"
+          },
+          "52996": {
+            "bytes": 125305,
+            "file": "datasets/coco2017/visual_refinement_original/000000052996.jpg",
+            "sha256": "0be041c42db05b3e7a7074e5fc857a7b5d616697504048f751ea5025e856f406"
+          },
+          "530146": {
+            "bytes": 290565,
+            "file": "datasets/coco2017/visual_refinement_original/000000530146.jpg",
+            "sha256": "31e0b9ff5ec4bffbe2948acaa40d3b048284d729d1179c60ed1fce41f87b7370"
+          },
+          "530975": {
+            "bytes": 142832,
+            "file": "datasets/coco2017/visual_refinement_original/000000530975.jpg",
+            "sha256": "5643aadb0049998a1f1e2a418af7be084c40d5ff5ac7eadf17b38cb5c61c0117"
+          },
+          "532690": {
+            "bytes": 110520,
+            "file": "datasets/coco2017/visual_refinement_original/000000532690.jpg",
+            "sha256": "351e9f13f945d031fb6a17669b91c0fddffaaf92b057bd1b25ef094e763e4a27"
+          },
+          "532761": {
+            "bytes": 165530,
+            "file": "datasets/coco2017/visual_refinement_original/000000532761.jpg",
+            "sha256": "a11ec29e6543dcb6a453e87782b37b13e45edf374d9ebfe5080ee70dd174abae"
+          },
+          "536947": {
+            "bytes": 119855,
+            "file": "datasets/coco2017/visual_refinement_original/000000536947.jpg",
+            "sha256": "863c183efd6435f09cd7a8e29e3ef6a54549b50bfa06eb1a51f6240bb6f32c68"
+          },
+          "537270": {
+            "bytes": 109013,
+            "file": "datasets/coco2017/visual_refinement_original/000000537270.jpg",
+            "sha256": "82072a4304dd9f8cd22887e60c0b1b910d75175a74ba504e5de82e370f94d0ca"
+          },
+          "542423": {
+            "bytes": 221234,
+            "file": "datasets/coco2017/visual_refinement_original/000000542423.jpg",
+            "sha256": "d741aa1df43eb6907db785a7a3ac80fd63ec7595183d3c4a4a94795fad7bd6e5"
+          },
+          "546219": {
+            "bytes": 220256,
+            "file": "datasets/coco2017/visual_refinement_original/000000546219.jpg",
+            "sha256": "209d0fc903230a816f60e2279594d263ae62ff6d3219b961c877ea369926941a"
+          },
+          "547816": {
+            "bytes": 168947,
+            "file": "datasets/coco2017/visual_refinement_original/000000547816.jpg",
+            "sha256": "12a5454d970b0a2330d3ab53018b977b90d717d60ca71c36778ed5aa7310d3c2"
+          },
+          "551304": {
+            "bytes": 160713,
+            "file": "datasets/coco2017/visual_refinement_original/000000551304.jpg",
+            "sha256": "ea9ba651ef58aa6901a9cffcf2c86768809d38ea0537ad20625d5b4508486b88"
+          },
+          "555005": {
+            "bytes": 127290,
+            "file": "datasets/coco2017/visual_refinement_original/000000555005.jpg",
+            "sha256": "fafc9091969e90cbabdb665d34d7df7ecd68847076900f82413c5c4014965962"
+          },
+          "559707": {
+            "bytes": 207825,
+            "file": "datasets/coco2017/visual_refinement_original/000000559707.jpg",
+            "sha256": "50ae104992c88d5356fa5087bd62c51904134cb6ffa507e4c503024c75efe403"
+          },
+          "559956": {
+            "bytes": 239735,
+            "file": "datasets/coco2017/visual_refinement_original/000000559956.jpg",
+            "sha256": "6ab5c1accd150f89bbadf27485c48c15a39088e3f6619a523cb0b6499e460d6d"
+          },
+          "560312": {
+            "bytes": 75824,
+            "file": "datasets/coco2017/visual_refinement_original/000000560312.jpg",
+            "sha256": "cfe37e2cabeb42f4a3c6d20e7b9c3a50882193729550ea58bd8bac3133a10906"
+          },
+          "56127": {
+            "bytes": 262721,
+            "file": "datasets/coco2017/visual_refinement_original/000000056127.jpg",
+            "sha256": "14c77b33e28f12794669c699498bed38dbe6f34a43868152d806529e97288196"
+          },
+          "561465": {
+            "bytes": 160763,
+            "file": "datasets/coco2017/visual_refinement_original/000000561465.jpg",
+            "sha256": "dc285d0ff02e63228acda4253dcd30a68be74462132aaea83faa52fac29fca02"
+          },
+          "56350": {
+            "bytes": 139726,
+            "file": "datasets/coco2017/visual_refinement_original/000000056350.jpg",
+            "sha256": "811d5c94c05837766da90281d5a0ac773725f2dbb9009743906f686cea4e89e4"
+          },
+          "565853": {
+            "bytes": 64923,
+            "file": "datasets/coco2017/visual_refinement_original/000000565853.jpg",
+            "sha256": "11678df931f6177def53ed0d1802b2317b3db309392ac7d8433d578c1484814b"
+          },
+          "565877": {
+            "bytes": 70698,
+            "file": "datasets/coco2017/visual_refinement_original/000000565877.jpg",
+            "sha256": "41aec1d4be65badd8942877c66456dcaf834bb6d6b54b4668ad7f5652039d666"
+          },
+          "568195": {
+            "bytes": 170852,
+            "file": "datasets/coco2017/visual_refinement_original/000000568195.jpg",
+            "sha256": "0e450a0aa61fb54b7534463e14708b886ae60b7fdb0133587ac30629a3c85ff0"
+          },
+          "569059": {
+            "bytes": 110801,
+            "file": "datasets/coco2017/visual_refinement_original/000000569059.jpg",
+            "sha256": "5661c5ae1159ca10ffd08be135101da91d7e8c2da0208d6e846b462d677424d8"
+          },
+          "569700": {
+            "bytes": 96890,
+            "file": "datasets/coco2017/visual_refinement_original/000000569700.jpg",
+            "sha256": "b69d94da5fe85e565822f50722969eb83f999af1e044a26a1fb533eff0ce8616"
+          },
+          "57238": {
+            "bytes": 75807,
+            "file": "datasets/coco2017/visual_refinement_original/000000057238.jpg",
+            "sha256": "4735eb080d60531c2e529111bda9b47d5b98309df86242441d27feb5e7faa879"
+          },
+          "578545": {
+            "bytes": 189338,
+            "file": "datasets/coco2017/visual_refinement_original/000000578545.jpg",
+            "sha256": "3b1e4dc0f5d15f4d74b3d2926e15d80e996a7e6fb4302808bbf7ba84213e0d2e"
+          },
+          "60347": {
+            "bytes": 374154,
+            "file": "datasets/coco2017/visual_refinement_original/000000060347.jpg",
+            "sha256": "18e94efcf2eefc061ee834216fce0c436f5f2efe08269f2499cf6b5c628b342d"
+          },
+          "60363": {
+            "bytes": 137568,
+            "file": "datasets/coco2017/visual_refinement_original/000000060363.jpg",
+            "sha256": "f0c260ac44dfd4199719e0e00c92600ab0eea655fcdc9084c9e929943ee10dc7"
+          },
+          "66523": {
+            "bytes": 93376,
+            "file": "datasets/coco2017/visual_refinement_original/000000066523.jpg",
+            "sha256": "49adf223db2be0c58fd0fcd78f8ba77c004b2a4d9ee399e1788f5257d21c1063"
+          },
+          "66706": {
+            "bytes": 197846,
+            "file": "datasets/coco2017/visual_refinement_original/000000066706.jpg",
+            "sha256": "c4e4712f58e6206b4510ec2845af46fdd30501efdb5752b7d33dd935b773d38a"
+          },
+          "67896": {
+            "bytes": 257260,
+            "file": "datasets/coco2017/visual_refinement_original/000000067896.jpg",
+            "sha256": "41dd62010a54964537df22befdf97aab83979ffc406c89909f8eac8075841497"
+          },
+          "68078": {
+            "bytes": 79556,
+            "file": "datasets/coco2017/visual_refinement_original/000000068078.jpg",
+            "sha256": "e7ea1e161b0fb5431e7e74c76c714ec7e553fdc75c9d0c92fd938f8087933045"
+          },
+          "71938": {
+            "bytes": 69848,
+            "file": "datasets/coco2017/visual_refinement_original/000000071938.jpg",
+            "sha256": "14dee6fc9af713e90dade9ae855bc9905ffc6ebe8de44adccd97d9f5a99ad153"
+          },
+          "73946": {
+            "bytes": 104940,
+            "file": "datasets/coco2017/visual_refinement_original/000000073946.jpg",
+            "sha256": "83f98b5f14fdfa024bf06ff2699aa8152133f012a0b17741d026ef3a2fbd8178"
+          },
+          "77396": {
+            "bytes": 121771,
+            "file": "datasets/coco2017/visual_refinement_original/000000077396.jpg",
+            "sha256": "58a4aa081452ad2930aba0d5c716615aaede8e43a6e80a456132877d318991af"
+          },
+          "78170": {
+            "bytes": 155396,
+            "file": "datasets/coco2017/visual_refinement_original/000000078170.jpg",
+            "sha256": "e9ccccb034030771eafc383d2872bce55e7ff395313b610ffc1215eeb72912a3"
+          },
+          "78426": {
+            "bytes": 73195,
+            "file": "datasets/coco2017/visual_refinement_original/000000078426.jpg",
+            "sha256": "475db6e34f57f03cf611cc4c359d8707df49628491adc27d6b5209607284778b"
+          },
+          "802": {
+            "bytes": 62406,
+            "file": "datasets/coco2017/visual_refinement_original/000000000802.jpg",
+            "sha256": "d5b79e7fa716f85ca86f46e5f518da9b6c5e26414925624d76e6476861aec495"
+          },
+          "80413": {
+            "bytes": 92572,
+            "file": "datasets/coco2017/visual_refinement_original/000000080413.jpg",
+            "sha256": "ccfbf08efc80416f38a5b732d916b9f2a4b6436ae4a0398ccbc0d9dcc7db0aae"
+          },
+          "80932": {
+            "bytes": 205633,
+            "file": "datasets/coco2017/visual_refinement_original/000000080932.jpg",
+            "sha256": "c5bdb620680ad74c2bb788cabbf3374d68285bec3a2023fadf0ffc7eb257ba72"
+          },
+          "82696": {
+            "bytes": 99796,
+            "file": "datasets/coco2017/visual_refinement_original/000000082696.jpg",
+            "sha256": "ffb33316dedb78408fc1b7db2532b4df3b2e35d3ae76162d333e92ea17c0164c"
+          },
+          "94326": {
+            "bytes": 174543,
+            "file": "datasets/coco2017/visual_refinement_original/000000094326.jpg",
+            "sha256": "492ffd8a904c5f016947af4928607b8978c10d3d46dbf9231e394162c26f6263"
+          },
+          "97337": {
+            "bytes": 157747,
+            "file": "datasets/coco2017/visual_refinement_original/000000097337.jpg",
+            "sha256": "0bec64b322b803e72a1b1ec23b4daba6e61f8f55ef3a33164d87ae3694ff5d97"
+          }
+        },
+        "status": "MATERIALIZED_AS_CLEAN_INDUCTIVE_V1",
+        "total_image_bytes": 35054288
+      },
+      {
+        "clean_vs_cvbench_full2638_coco": 197,
+        "dir": "datasets/coco2017/val2017-original",
+        "id": "coco_val2017_original_clean_images",
+        "images": 240,
+        "reason": "no existing image+prompt manifest pairs these files; building one would invent a split/manifest, out of scope",
+        "status": "IMAGES_VERIFIED_NO_EXISTING_PROMPT_MANIFEST",
+        "usable_as_is": false,
+        "used_by_historical_dac_manifests": true
+      }
+    ],
+    "not_clean_for_cvbench": {
+      "datasets/cv_bench_*": "are the formal evaluation sources",
+      "datasets/dac_*": "COCO images overlapping CV-Bench COCO subset (3-24 ids each) and already used by the visual-refinement selector development",
+      "datasets/visual_refinement_20260912_test.jsonl": "sealed_test=true; never for training/selection"
+    },
+    "recommendation_policy": "no download, no invented split; candidates are existing, hash-verified local files only",
+    "verified_existing_only": true
+  },
+  "manifests": {
+    "full2638_16tok": {
+      "file_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "image_sha256_set_digest": "4656feb8d6b0e5da341834e3a40c942e731cf248feaa0d530deae569187b5d90",
+      "image_sha256_set_size": 2573,
+      "images_reused_by_multiple_questions": 65,
+      "missing_images": 0,
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "records": 2638,
+      "source_datasets": {
+        "ADE20K Validation Set": 633,
+        "COCO 2017 Validation Set": 805,
+        "Omni3D_Hypersim": 400,
+        "Omni3D_SUNRGBD": 400,
+        "Omni3D_nuScenes": 400
+      },
+      "sources": {
+        "ADE20K": 633,
+        "COCO": 805,
+        "Omni3D": 1200
+      },
+      "tasks": {
+        "Count": 788,
+        "Depth": 600,
+        "Distance": 600,
+        "Relation": 650
+      },
+      "types": {
+        "2D": 1438,
+        "3D": 1200
+      },
+      "unique_image_paths": 2638,
+      "unique_image_sha256": 2573
+    },
+    "full2638_64tok": {
+      "file_sha256": "a82813547444a5ab89dd7c9d3a0d1483e01a937fcf1d90f7c06e7faf0221f8a6",
+      "image_sha256_set_digest": "4656feb8d6b0e5da341834e3a40c942e731cf248feaa0d530deae569187b5d90",
+      "image_sha256_set_size": 2573,
+      "images_reused_by_multiple_questions": 65,
+      "missing_images": 0,
+      "path": "datasets/cv_bench_full2638_budget64_diagnostic.jsonl",
+      "records": 2638,
+      "source_datasets": {
+        "ADE20K Validation Set": 633,
+        "COCO 2017 Validation Set": 805,
+        "Omni3D_Hypersim": 400,
+        "Omni3D_SUNRGBD": 400,
+        "Omni3D_nuScenes": 400
+      },
+      "sources": {
+        "ADE20K": 633,
+        "COCO": 805,
+        "Omni3D": 1200
+      },
+      "tasks": {
+        "Count": 788,
+        "Depth": 600,
+        "Distance": 600,
+        "Relation": 650
+      },
+      "types": {
+        "2D": 1438,
+        "3D": 1200
+      },
+      "unique_image_paths": 2638,
+      "unique_image_sha256": 2573
+    },
+    "screening100_16tok": {
+      "file_sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+      "image_sha256_set_digest": "7d65168a377a8c9ff046a6dda38f6d27d667c2f463a3beaf9a8623a1b960ea3c",
+      "image_sha256_set_size": 100,
+      "images_reused_by_multiple_questions": 0,
+      "missing_images": 0,
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "records": 100,
+      "source_datasets": {
+        "ADE20K Validation Set": 20,
+        "COCO 2017 Validation Set": 20,
+        "Omni3D_Hypersim": 20,
+        "Omni3D_SUNRGBD": 20,
+        "Omni3D_nuScenes": 20
+      },
+      "sources": {
+        "ADE20K": 20,
+        "COCO": 20,
+        "Omni3D": 60
+      },
+      "tasks": {
+        "Count": 20,
+        "Depth": 30,
+        "Distance": 30,
+        "Relation": 20
+      },
+      "types": {
+        "2D": 40,
+        "3D": 60
+      },
+      "unique_image_paths": 100,
+      "unique_image_sha256": 100
+    },
+    "screening100_64tok": {
+      "file_sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668",
+      "image_sha256_set_digest": "7d65168a377a8c9ff046a6dda38f6d27d667c2f463a3beaf9a8623a1b960ea3c",
+      "image_sha256_set_size": 100,
+      "images_reused_by_multiple_questions": 0,
+      "missing_images": 0,
+      "path": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+      "records": 100,
+      "source_datasets": {
+        "ADE20K Validation Set": 20,
+        "COCO 2017 Validation Set": 20,
+        "Omni3D_Hypersim": 20,
+        "Omni3D_SUNRGBD": 20,
+        "Omni3D_nuScenes": 20
+      },
+      "sources": {
+        "ADE20K": 20,
+        "COCO": 20,
+        "Omni3D": 60
+      },
+      "tasks": {
+        "Count": 20,
+        "Depth": 30,
+        "Distance": 30,
+        "Relation": 20
+      },
+      "types": {
+        "2D": 40,
+        "3D": 60
+      },
+      "unique_image_paths": 100,
+      "unique_image_sha256": 100
+    },
+    "visual_refinement_calibration": {
+      "clean_vs_cvbench_and_history": 77,
+      "clean_vs_cvbench_full2638": 77,
+      "file_sha256": "d7746bf21061dfb70cb779bbf7aa6b006f15e41c3f465501d07ad5c6c8d88247",
+      "identity_key": "coco_image_id (image sha256 differs across resolutions; do not use raw sha for COCO identity)",
+      "in_cvbench_full2638_coco": 19,
+      "in_cvbench_screening100_coco": 0,
+      "in_historical_dac": 0,
+      "path": "datasets/visual_refinement_20260912_calibration.jsonl",
+      "records": 192,
+      "unique_coco_image_ids": 96
+    },
+    "visual_refinement_development": {
+      "clean_vs_cvbench_and_history": 159,
+      "clean_vs_cvbench_full2638": 159,
+      "file_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+      "identity_key": "coco_image_id (image sha256 differs across resolutions; do not use raw sha for COCO identity)",
+      "in_cvbench_full2638_coco": 33,
+      "in_cvbench_screening100_coco": 1,
+      "in_historical_dac": 0,
+      "path": "datasets/visual_refinement_20260912_development.jsonl",
+      "records": 384,
+      "unique_coco_image_ids": 192
+    },
+    "visual_refinement_test": {
+      "clean_vs_cvbench_and_history": 426,
+      "clean_vs_cvbench_full2638": 426,
+      "file_sha256": "8d644b56fc797a5af4b9105378b04a0e520959b0acd836b4fbbcb9d7637bd243",
+      "identity_key": "coco_image_id (image sha256 differs across resolutions; do not use raw sha for COCO identity)",
+      "in_cvbench_full2638_coco": 86,
+      "in_cvbench_screening100_coco": 2,
+      "in_historical_dac": 0,
+      "path": "datasets/visual_refinement_20260912_test.jsonl",
+      "records": 1024,
+      "sealed_test": true,
+      "unique_coco_image_ids": 512
+    }
+  },
+  "next_gate": {
+    "blocked_actions_this_round": [
+      "no GPU model load",
+      "no extraction",
+      "no training",
+      "no manifest construction",
+      "no downloads"
+    ],
+    "decision_required": "PI authorization on inductive vs transductive protocol, then choose a CV-Bench-independent extraction manifest",
+    "gate": "CLEAN_TRAINING_CORPUS_SELECTION",
+    "recommended_minimal_plan_not_executed": [
+      "Build (do not execute now) an extraction manifest from the 236-image clean visual_refinement_development+calibration subset (472 grounding/pointing records), hash-verified.",
+      "Run extract_prompt_projection_features.py with that clean manifest only after the GPU audit passes.",
+      "Run train_prompt_projection.py; keep internal test as an internal sanity check only.",
+      "Freeze Wt/Wv and run the single formal CV-Bench evaluation once."
+    ]
+  },
+  "overlap": {
+    "coco_identity_overlap": {
+      "cvbench_full2638_coco_images": 805,
+      "cvbench_screening100_coco_images": 20,
+      "local_coco_manifests_vs_cvbench": {
+        "dac_cutpoint_oracle_dev.jsonl": {
+          "example_full2638": [
+            333237,
+            358427,
+            559513
+          ],
+          "vs_full2638": 3,
+          "vs_screening100": 0
+        },
+        "dac_spatial_eval_expanded.jsonl": {
+          "example_full2638": [
+            23023,
+            86582,
+            87742,
+            125952,
+            166166,
+            232348,
+            276285,
+            319696,
+            335427,
+            368684
+          ],
+          "vs_full2638": 14,
+          "vs_screening100": 1
+        },
+        "dac_spatial_eval_smoke.jsonl": {
+          "example_full2638": [
+            22371,
+            42102,
+            414638,
+            546626
+          ],
+          "vs_full2638": 4,
+          "vs_screening100": 0
+        },
+        "dac_spatial_l2res_blind.jsonl": {
+          "example_full2638": [
+            82807,
+            85195,
+            163611,
+            186980,
+            216497,
+            226147,
+            228214,
+            237928,
+            239041,
+            243204
+          ],
+          "vs_full2638": 24,
+          "vs_screening100": 0
+        },
+        "dac_spatial_selector_calibration.jsonl": {
+          "example_full2638": [
+            23023,
+            232348,
+            276285,
+            368684,
+            407960,
+            505789
+          ],
+          "vs_full2638": 6,
+          "vs_screening100": 1
+        },
+        "dac_spatial_selector_validation.jsonl": {
+          "example_full2638": [
+            3661,
+            42889,
+            180296,
+            198489,
+            227765,
+            248314,
+            372260,
+            376365,
+            384661,
+            419312
+          ],
+          "vs_full2638": 10,
+          "vs_screening100": 0
+        },
+        "dac_spatial_task_routing_test.jsonl": {
+          "example_full2638": [
+            22192,
+            66771,
+            153632,
+            190236,
+            293858,
+            311180,
+            351331,
+            367082,
+            369771,
+            474167
+          ],
+          "vs_full2638": 12,
+          "vs_screening100": 0
+        },
+        "q8a_r0875_failure_attribution_20260911.jsonl": {
+          "example_full2638": [
+            82807,
+            85195,
+            163611,
+            228214,
+            243204,
+            281929,
+            308466,
+            331817,
+            375278,
+            395343
+          ],
+          "vs_full2638": 15,
+          "vs_screening100": 0
+        },
+        "q8b_r0875_failure_attribution_20260911.jsonl": {
+          "example_full2638": [
+            82807,
+            85195,
+            163611,
+            228214,
+            237928,
+            239041,
+            243204,
+            308466,
+            331817,
+            354072
+          ],
+          "vs_full2638": 16,
+          "vs_screening100": 0
+        },
+        "visual_refinement_20260912_calibration.jsonl": {
+          "example_full2638": [
+            50326,
+            72852,
+            85576,
+            96493,
+            104803,
+            138819,
+            139260,
+            156924,
+            175443,
+            202339
+          ],
+          "vs_full2638": 19,
+          "vs_screening100": 0
+        },
+        "visual_refinement_20260912_development.jsonl": {
+          "example_full2638": [
+            8277,
+            10977,
+            49810,
+            53505,
+            68833,
+            90108,
+            139684,
+            140076,
+            148620,
+            155154
+          ],
+          "vs_full2638": 33,
+          "vs_screening100": 1
+        },
+        "visual_refinement_20260912_test.jsonl": {
+          "example_full2638": [
+            1296,
+            7574,
+            11699,
+            14831,
+            15335,
+            18380,
+            25096,
+            25986,
+            39956,
+            47112
+          ],
+          "vs_full2638": 86,
+          "vs_screening100": 2
+        }
+      },
+      "note": "COCO identity is matched by coco_image_id recovered from test_2d/test_3d parquet source_filename; raw image SHA256 is not usable across resolutions.",
+      "visual_refinement_splits_pairwise_disjoint": true
+    },
+    "cvbench_manifest_relations": {
+      "full2638_16tok_ids_equals_full2638_64tok": true,
+      "screening100_image_sha_subset_of_full2638": true,
+      "screening100_sample_ids_subset_of_full2638": true,
+      "screening100_to_full2638_unique_image_intersection": 100
+    },
+    "internal_split_vs_formal_cvbench": {
+      "documented_screening100_64tok_limit4": {
+        "test": {
+          "image_overlap_full2638": 3,
+          "image_overlap_screening100": 3,
+          "images": 3,
+          "prompt_overlap_full2638": 3,
+          "prompt_overlap_screening100": 3,
+          "sample_id_overlap_full2638": 3,
+          "sample_id_overlap_screening100": 3
+        },
+        "train": {
+          "image_overlap_full2638": 11,
+          "image_overlap_screening100": 11,
+          "images": 11,
+          "prompt_overlap_full2638": 11,
+          "prompt_overlap_screening100": 11,
+          "sample_id_overlap_full2638": 11,
+          "sample_id_overlap_screening100": 11
+        },
+        "val": {
+          "image_overlap_full2638": 2,
+          "image_overlap_screening100": 2,
+          "images": 2,
+          "prompt_overlap_full2638": 2,
+          "prompt_overlap_screening100": 2,
+          "sample_id_overlap_full2638": 2,
+          "sample_id_overlap_screening100": 2
+        }
+      },
+      "full2638_64tok_all": {
+        "test": {
+          "image_overlap_full2638": 396,
+          "image_overlap_screening100": 16,
+          "images": 396,
+          "prompt_overlap_full2638": 370,
+          "prompt_overlap_screening100": 24,
+          "sample_id_overlap_full2638": 409,
+          "sample_id_overlap_screening100": 16
+        },
+        "train": {
+          "image_overlap_full2638": 1769,
+          "image_overlap_screening100": 69,
+          "images": 1769,
+          "prompt_overlap_full2638": 1434,
+          "prompt_overlap_screening100": 80,
+          "sample_id_overlap_full2638": 1812,
+          "sample_id_overlap_screening100": 69
+        },
+        "val": {
+          "image_overlap_full2638": 408,
+          "image_overlap_screening100": 15,
+          "images": 408,
+          "prompt_overlap_full2638": 373,
+          "prompt_overlap_screening100": 26,
+          "sample_id_overlap_full2638": 417,
+          "sample_id_overlap_screening100": 15
+        }
+      },
+      "screening100_16tok_all100": {
+        "test": {
+          "image_overlap_full2638": 16,
+          "image_overlap_screening100": 16,
+          "images": 16,
+          "prompt_overlap_full2638": 16,
+          "prompt_overlap_screening100": 16,
+          "sample_id_overlap_full2638": 16,
+          "sample_id_overlap_screening100": 16
+        },
+        "train": {
+          "image_overlap_full2638": 69,
+          "image_overlap_screening100": 69,
+          "images": 69,
+          "prompt_overlap_full2638": 68,
+          "prompt_overlap_screening100": 68,
+          "sample_id_overlap_full2638": 69,
+          "sample_id_overlap_screening100": 69
+        },
+        "val": {
+          "image_overlap_full2638": 15,
+          "image_overlap_screening100": 15,
+          "images": 15,
+          "prompt_overlap_full2638": 15,
+          "prompt_overlap_screening100": 15,
+          "sample_id_overlap_full2638": 15,
+          "sample_id_overlap_screening100": 15
+        }
+      },
+      "screening100_64tok_all100": {
+        "test": {
+          "image_overlap_full2638": 16,
+          "image_overlap_screening100": 16,
+          "images": 16,
+          "prompt_overlap_full2638": 16,
+          "prompt_overlap_screening100": 16,
+          "sample_id_overlap_full2638": 16,
+          "sample_id_overlap_screening100": 16
+        },
+        "train": {
+          "image_overlap_full2638": 69,
+          "image_overlap_screening100": 69,
+          "images": 69,
+          "prompt_overlap_full2638": 68,
+          "prompt_overlap_screening100": 68,
+          "sample_id_overlap_full2638": 69,
+          "sample_id_overlap_screening100": 69
+        },
+        "val": {
+          "image_overlap_full2638": 15,
+          "image_overlap_screening100": 15,
+          "images": 15,
+          "prompt_overlap_full2638": 15,
+          "prompt_overlap_screening100": 15,
+          "sample_id_overlap_full2638": 15,
+          "sample_id_overlap_screening100": 15
+        }
+      }
+    },
+    "method": "Group-hash split replayed deterministically with evaluation.prompt_projection_distillation.assign_split on the manifest's own image bytes; overlap measured against the formal CV-Bench manifests by image SHA256 (same embedded image bytes), sample_id and prompt text."
+  },
+  "schema": "prompt-distillation-data-provenance-audit-v1",
+  "status": "LEAKAGE_RISK_STATIC_AUDIT_COMPLETE",
+  "warnings": [
+    "The config does not pin the extraction manifest; provenance depends on the operator command. This is the root governance gap.",
+    "The documented command (screening100_budget64_diagnostic) is formal CV-Bench evaluation material; running it as-is creates contamination.",
+    "Internal image-hash grouping cannot detect external eval-set overlap; use it only for internal disjointness.",
+    "COCO identity must be matched by coco_image_id, not raw image SHA256 (resized copies differ).",
+    "The extraction source gap means the claim 'test evaluated once after freeze' is misleading when the internal pool is a subset of the formal eval set.",
+    "CURRENT_STATUS has a stale older bullet describing 'split by sample_id hash'; the frozen code splits by source_image_sha256."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_VALIDATION_ONLY",
+  "date": "2026-10-03",
+  "purpose": "Evaluate whether the trained prompt-conditioned spatial selector survives an FPGA-oriented INT8/INT32 numerical boundary without retraining or threshold tuning.",
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-03-selector-int8-numerical-audit-harness-prompt.md",
+    "sha256": "76c5b68b7676c9dd6c0d53016ffba5508a7071a41e7ec4e9b55ce2fe385f81f4"
+  },
+  "scope": {
+    "cpu_only": true,
+    "offline": true,
+    "validation_only": true,
+    "training": false,
+    "hyperparameter_tuning": false,
+    "raw_images": false,
+    "model_4b": false,
+    "internal_test_resolve_hash_open": false
+  },
+  "split_rule": {
+    "seed": 20260927,
+    "ratios": {"train": 0.7, "val": 0.15, "test": 0.15},
+    "salt": "prompt_projection_distillation_2026_09_27",
+    "expected_val_records": 76,
+    "expected_val_images": 38,
+    "expected_val_npz_aggregate_sha256": "0439b7cb798f9dc49751d8135dd009294df723b2b10839837d7145778ca68f4b"
+  },
+  "checkpoints": [
+    {
+      "seed": 20261003,
+      "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz",
+      "sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff",
+      "canonical_weights_sha256": "5b9063c6161e5d69ef5a4d814b02922a5b3697c1027cce53436a05225525f82f"
+    },
+    {
+      "seed": 20261004,
+      "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261004/best.npz",
+      "sha256": "c6f86779183270a57241cc7148a5480c6c4deb1f85d66652bf6117b6bb6412fb",
+      "canonical_weights_sha256": "035d095fe42f9101f8a09abf6a293c405ff2e1334baf5b2410f4a79807043ef5"
+    },
+    {
+      "seed": 20261005,
+      "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261005/best.npz",
+      "sha256": "acaba094de4a21e3c912efee1c80145053d7f372f197a2d26297fd59ab8bd6e4",
+      "canonical_weights_sha256": "5748997d16c78ba8a417ad41171309a31ccc086444049a1291a77d1fad6ce6e3"
+    }
+  ],
+  "frozen_inputs": {
+    "configs/hardware_regular_token_selector.json": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142",
+    "configs/spatial_prompt_contrastive_trainval.preregistered.json": "12d0aa9f856692fdd0da8e4d93783ef540ca9cadc38c9e4ee704ba903dd1dbbd",
+    "evaluation/hardware_regular_token_selector.py": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+    "evaluation/hardware_regular_selector_fixedpoint.py": "23e8d825d7966719774726c8debcdf3f8c6c33bab49a3fdcc231d7ec8d489e71",
+    "evaluation/prompt_projection_distillation.py": "cd2d4ccc3a4c5ba714f5e478f802b0cb9d64c6e279c15b6493661fb6fe0b0b98",
+    "evaluation/pair_loss_feasibility_audit.py": "2913e43fadef1397f33a6d2f38ea093727ce2fc129378c330c0698e8c5a73dea",
+    "evaluation/frozen_scorer_reduction_ablation.py": "fef63fd2e6c82e3b4f38806f896940a8e0b1d5533feb51e99d97e145783c0729",
+    "artifacts/token_selector/prompt_projection_features/index.jsonl": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "datasets/prompt_projection_clean_inductive_v1.jsonl": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "datasets/prompt_projection_clean_inductive_v1.lock.json": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+    "reports/token_selector/2026-10-03-task-pair-nesting-audit.json": "d50e55f2613198634ba87635666d033ca173574a5060f873ac474e7ee5d4d898",
+    "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json": "6980fda97a44d3390e0c1eefef464ad8c0b1b03cdbf3fb8f6708567493378b9f"
+  },
+  "primary_arm": {
+    "name": "SPLIT_WV_Q8_A8_Q8QUERY",
+    "host": "float Wt projection, per-token L2, prompt mean and final L2; final 128-D query quantized per vector to INT8",
+    "fpga_boundary": "global-per-image INT8 group_mean, per-Wv-output-row INT8 weights, INT32 projection, normalized visual-query dot, Q0.15 combined score",
+    "activation_quantization": "s=128/amax; q=clamp(round_half_away(x*s),-128,127); x_hat=q/s",
+    "weight_quantization": "d=max(abs(row))/127; q=clamp(round_half_away(w/d),-127,127); w_hat=q*d",
+    "combined_score_quantization": "q=clamp(round_half_away(score*32768),0,32767); score_hat=q/32768"
+  },
+  "descriptive_control": "FULL_WT_WV_Q8_A8",
+  "seeds": [20261003, 20261004, 20261005],
+  "budgets": [48, 64, 96],
+  "lambda_semantic": 0.5,
+  "region_grid": 3,
+  "statistics": {
+    "independent_unit": "image",
+    "record_aggregation": "per record then median across three seeds",
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261003,
+    "confidence": 0.95,
+    "p_values": false
+  },
+  "primary_metrics": [
+    "selected_set_jaccard",
+    "exact_set_match",
+    "retained_spatial_target_mass_delta_quant_minus_float",
+    "selected_set_ndcg_delta_quant_minus_float",
+    "score_rank_spearman",
+    "pointing_k48_prompt_utility_gap_delta_quant_minus_float"
+  ],
+  "decision_rule": {
+    "pass_label": "INT8_NUMERICS_PASS",
+    "fail_label": "INT8_NUMERICS_NOT_ESTABLISHED",
+    "all_required": [
+      "pins_and_isolation_pass",
+      "int32_worst_case_bounds_below_2147483647",
+      "mean_jaccard_each_budget_at_least_0.95",
+      "exact_set_match_rate_each_budget_at_least_0.75",
+      "mean_retained_mass_delta_each_budget_at_least_-0.01",
+      "mean_selected_ndcg_delta_each_budget_at_least_-0.01",
+      "pointing_k48_prompt_utility_gap_delta_at_least_-0.01",
+      "each_seed_k48_mean_jaccard_at_least_0.95"
+    ]
+  },
+  "limitations": [
+    "Grounding same-image Pointing prompt is descriptive, not a valid negative, because targets are nested.",
+    "Float L2 normalization, reciprocal square root and min-max are numerical golden operations in this audit.",
+    "Passing does not establish complete fixed-point HLS equivalence, FPGA latency, end-to-end accuracy or publication readiness."
+  ]
+}

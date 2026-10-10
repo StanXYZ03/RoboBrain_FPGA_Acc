@@ -1,0 +1,92 @@
+{
+  "format": "task-routing-test-lock-v1",
+  "created_before_inference": true,
+  "date": "2026-08-27",
+  "status": "FROZEN_UNTOUCHED_TEST",
+  "research_hypothesis": "The candidate interaction head is beneficial for Grounding but not Pointing; route Grounding to the frozen interaction head and Pointing to the same-budget L2 baseline.",
+  "manifest": "datasets/dac_spatial_task_routing_test.jsonl",
+  "manifest_sha256": "50a9437b12ee55738e228437ef31281ede0abe64f7b606d353b112c5eb889a13",
+  "manifest_images": 96,
+  "manifest_records": 192,
+  "manifest_tasks": {
+    "grounding": 96,
+    "pointing": 96
+  },
+  "dataset_builder": {
+    "source": "COCO 2017 val instances",
+    "seed": 20260827,
+    "max_side": 512,
+    "max_per_category": 4,
+    "category_count": 29,
+    "excluded_unique_images": 320,
+    "zero_overlap_verified_against": [
+      "datasets/dac_spatial_eval_smoke.jsonl",
+      "datasets/dac_spatial_eval_expanded.jsonl",
+      "datasets/dac_spatial_selector_calibration.jsonl",
+      "datasets/dac_spatial_selector_validation.jsonl",
+      "datasets/dac_spatial_l2res_blind.jsonl"
+    ],
+    "all_images_decode_verified": true
+  },
+  "model": {
+    "path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "label": "RoboBrain2.5-4B-BF16",
+    "dtype": "bf16",
+    "device": "cuda:0",
+    "decode": "custom deterministic greedy",
+    "do_sample": false
+  },
+  "routing_candidate": {
+    "selector": "task_routed_candidate_interaction",
+    "grounding_effective_selector": "candidate_interaction_quota",
+    "pointing_effective_selector": "l2_anchor",
+    "retention": 0.875,
+    "prune_after_layer": 5,
+    "region_grid": 3,
+    "variant": "full_task_lambda_0p5",
+    "artifact": "evaluation/results/candidate_interaction_selector_development.pt",
+    "artifact_sha256": "33e3f9a2926896d67ee89cd93c98e8f38c31a9e3b330aadc61b9a5a44233bac6",
+    "candidate_policy": {
+      "base_seed": 20260826,
+      "swap_counts": [1, 2, 4],
+      "candidates_per_swap": 2,
+      "maximum_groups_changed": 4,
+      "same_budget": true,
+      "same_coarse_region_histogram": true
+    }
+  },
+  "reference": {
+    "selector": "l2_anchor",
+    "retention": 0.875,
+    "prune_after_layer": 5,
+    "region_grid": 3,
+    "must_be_rerun_on_same_manifest_and_current_environment": true
+  },
+  "code_sha256": {
+    "run_hf_shallow_block_pruning.py": "4d1ca642cc5f91bb2c0f62aae89c17a067f29c7263ae58324389c654e82a4972",
+    "shallow_block_pruning.py": "aaf65536ab4f3be617b750983f300bf2b56da8386ba6444a5d33179a77d389a2"
+  },
+  "primary_metrics": [
+    "pointing.parse_rate",
+    "pointing.pck_0_1",
+    "pointing.pck_0_2",
+    "grounding.parse_rate",
+    "grounding.iou_mean",
+    "grounding.acc_0_5"
+  ],
+  "gate": {
+    "all_parse_rates_must_equal_reference": true,
+    "maximum_allowed_primary_metric_drop": 0.02,
+    "requires_at_least_one_strict_primary_metric_improvement": true,
+    "paired_bootstrap_iterations": 10000,
+    "paired_bootstrap_seed": 20260828,
+    "statistical_intervals_are_reported_but_not_used_for_post_hoc_tuning": true,
+    "pass_scope": "single untouched test-set evidence; broader publication claims require additional datasets or replications"
+  },
+  "algorithm_freeze": {
+    "no_weight_updates_after_lock": true,
+    "no_hyperparameter_changes_after_lock": true,
+    "no_task_route_changes_after_lock": true,
+    "no_use_of_revealed_old_blind_or_validation_sets": true
+  }
+}

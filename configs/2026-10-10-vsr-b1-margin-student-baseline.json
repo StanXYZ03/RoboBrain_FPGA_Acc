@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "scope": "Development baseline: distill VSR train-only True/False answer-margin saliency into a hardware-friendly Wt[128,2560]/Wv[128,1024] B1 head. No VSR dev/test labels are used.",
+  "feature_dim": 1024,
+  "prompt_dim": 2560,
+  "score_dim": 128,
+  "merge_unit": 4,
+  "temperature": 0.1,
+  "lambda_semantic": 0.5,
+  "budgets": [96],
+  "seed": 20261010,
+  "loss": {
+    "listwise_kl_weight": 1.0,
+    "score_mse_weight": 0.0,
+    "temperature_squared_scaling": true
+  },
+  "optim": {
+    "optimizer": "adamw",
+    "epochs": 20,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "batch_size": 8,
+    "grad_clip_norm": 1.0,
+    "init_std": 0.02
+  },
+  "split": {
+    "salt": "vsr_b1_margin_student_2026_10_10",
+    "seed": 20261010,
+    "ratios": {"train": 0.8, "val": 0.1, "test": 0.1},
+    "group_by": "source_image_sha256",
+    "require_image_sha256": true
+  },
+  "metrics": {"ks": [96]},
+  "controls": {
+    "l2_baseline": {"score": "per-group B1 L2", "purpose": "same-feature no-training baseline"},
+    "shuffled_prompt": {"assignment": "cyclic mismatch within split", "purpose": "prompt-use control"}
+  },
+  "promotion_criteria": {
+    "val_beats_l2": "strictly positive on primary metrics",
+    "val_correct_beats_shuffled": "strictly positive on primary metrics",
+    "primary_metrics": ["spearman", "ndcg_full"],
+    "no_arbitrary_threshold": true,
+    "test_discipline": "internal held-out VSR-train subset evaluated only after val-selected epoch freezes"
+  },
+  "scientific_boundary": {
+    "role": "baseline student, not the final relation-preserving candidate",
+    "dev_used_for_training_or_selection": false,
+    "official_test_opened": false,
+    "fixed_future_deployment_budget": 96,
+    "fixed_future_layout": "87 real + 9 context, 3x3 anchors, local candidate cap 16"
+  }
+}

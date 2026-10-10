@@ -1,0 +1,99 @@
+{
+  "status": "VSR_ZEROSHOT_METADATA_AUDIT_PASS_IMAGES_INCOMPLETE",
+  "official_commit": "b27a0af0ee1462d2b6b92c8c83e869d9254a241a",
+  "files": {
+    "train": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-zeroshot-b27a0af0/splits/zeroshot/train.jsonl",
+      "bytes": 1114884,
+      "sha256": "62daf2c5d573667038f88feaf1d26a1154c892083a72d83ed5c7551666ed3066",
+      "lines": 3489
+    },
+    "dev": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-zeroshot-b27a0af0/splits/zeroshot/dev.jsonl",
+      "bytes": 107245,
+      "sha256": "0abda42fe9333ab6a8671b32886738b5cfa6d37a8c277b56d8368c339c8dffce",
+      "lines": 340
+    },
+    "test": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-zeroshot-b27a0af0/splits/zeroshot/test.jsonl",
+      "bytes": 380380,
+      "sha256": "914d9156723b912d8f794b179248af865a68c5f81c9d8e3a21d007778cacaad4",
+      "lines": 1222
+    }
+  },
+  "test_split_policy": {
+    "json_parsed": false,
+    "labels_captions_relations_inspected": false,
+    "only_hash_bytes_and_line_count_checked": true
+  },
+  "development_splits": {
+    "train": {
+      "records": 3489,
+      "unique_images": 2249,
+      "relations": 60,
+      "label_counts": {
+        "0": 1690,
+        "1": 1799
+      },
+      "source_record_counts": {
+        "train2017": 3354,
+        "val2017": 135
+      }
+    },
+    "dev": {
+      "records": 340,
+      "unique_images": 227,
+      "relations": 40,
+      "label_counts": {
+        "0": 173,
+        "1": 167
+      },
+      "source_record_counts": {
+        "train2017": 318,
+        "val2017": 22
+      }
+    },
+    "train_dev_unique_image_overlap": 5,
+    "train_concept_count": 41,
+    "dev_concept_count": 14,
+    "train_dev_concept_overlap": 0
+  },
+  "local_cache": {
+    "root": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/coco2017",
+    "coverage": {
+      "train": {
+        "unique_images": 2249,
+        "cached_unique_images": 45,
+        "missing_unique_images": 2204,
+        "coverage_rate": 0.020008892841262782,
+        "missing_by_source": {
+          "train2017": 2157,
+          "val2017": 47
+        }
+      },
+      "dev": {
+        "unique_images": 227,
+        "cached_unique_images": 5,
+        "missing_unique_images": 222,
+        "coverage_rate": 0.022026431718061675,
+        "missing_by_source": {
+          "train2017": 215,
+          "val2017": 7
+        }
+      }
+    }
+  },
+  "image_requirements_manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/external/vsr-zeroshot-b27a0af0/development_image_requirements.jsonl",
+    "sha256": "6032022a9042ec6a74cecaedcfda0dd8593db57c266f920a97605dacd3e98d4b",
+    "unique_images": 2471,
+    "cached_unique_images": 50,
+    "missing_unique_images": 2421
+  },
+  "decision": {
+    "preferred_over_random_split": true,
+    "gpu_run_ready": false,
+    "next_safe_action": "Download only the 222 missing zero-shot dev images after traffic approval.",
+    "test_remains_sealed": true
+  }
+}

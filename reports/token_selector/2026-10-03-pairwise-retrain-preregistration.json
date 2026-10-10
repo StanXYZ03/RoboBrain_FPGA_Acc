@@ -1,0 +1,74 @@
+{
+  "status": "PREREGISTERED_TRAIN_VAL_ONLY",
+  "schema_version": "1.0-preregistered",
+  "report_stem": "2026-10-03-pairwise-retrain-preregistration",
+  "date": "2026-10-03",
+  "self_sha256_embedded": false,
+  "self_sha256_note": "This preregistration JSON deliberately does NOT embed its own SHA256 to avoid a self-reference paradox. The external SHA256 is recorded by the run report and the harness result JSON.",
+  "preregistered_config": {
+    "path": "configs/prompt_mean_pairwise_retrain.preregistered.json"
+  },
+  "frozen_inputs": {
+    "draft": {
+      "path": "configs/prompt_mean_pairwise_retrain.draft.json",
+      "sha256": "787f8f401bcb10b5fe8007a6a0f5b415858d893cb2797b3c1797d5f1fa785772",
+      "modified": false
+    },
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b"
+    },
+    "index": {
+      "path": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+      "sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26"
+    },
+    "train_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "scale_audit": {
+      "path": "reports/token_selector/2026-10-02-pair-loss-scale-train-only.json",
+      "sha256": "0d7bffa9aea8ad7aeff4c7d20b1944ef9eef6ed6a59457e1ea01337df3e37ca5"
+    },
+    "concentration_audit": {
+      "path": "reports/token_selector/2026-10-03-pair-gradient-concentration-train-only.json",
+      "sha256": "abb11e5844095a73166137c2f002f18506a06cedac128a2e1eca8b02a856869e"
+    }
+  },
+  "frozen_scorer_contract": {
+    "name": "prompt_mean_vector",
+    "Wt_shape": [128, 2560],
+    "Wv_shape": [128, 1024],
+    "runtime_query_shape": [1, 128],
+    "fpga_scorer": "Gx128 dot",
+    "token_axis_reduction": "none (prompt mean vector)",
+    "token_axis_max_softmax_exp": false
+  },
+  "frozen_facts": {
+    "student_temperature": 0.1,
+    "init_std": 0.02,
+    "seeds": [20261002, 20261003, 20261004],
+    "lambda_pair_0p25": 14.280209646136903,
+    "concentration_evidence": {
+      "interpretation": "explanatory variable only; frozen before the experiment and NOT allowed to change the experiment design",
+      "pair_norm_effective_sample_size_per_seed_concat": [42.188012, 40.960775, 41.287924],
+      "pair_norm_ess_over_image_count": "~41 / 159",
+      "signed_positive_effective_sample_size_per_seed_concat": [16.434, 16.434, 16.089],
+      "relative_negative_projection_fraction_per_seed_concat": [0.383648, 0.389937, 0.415094],
+      "relative_negative_projection_fraction_range": "~0.38 to ~0.42",
+      "signed_positive_ess_note": "about 16 of 159 image pairs carry net positive projection onto the aggregate pair gradient"
+    }
+  },
+  "arms": [
+    {"name": "A_KL_ONLY_CONTROL", "lambda_pair": 0.0, "role": "control"},
+    {"name": "B_PAIR_LAMBDA_1_CONTROL", "lambda_pair": 1.0, "role": "control"},
+    {"name": "C_PAIR_LAMBDA_0P25_PRIMARY", "lambda_pair": 14.280209646136903, "role": "primary_promotion_arm"}
+  ],
+  "primary_arm": "C_PAIR_LAMBDA_0P25_PRIMARY",
+  "winner_rule": "Only arm C may be promoted, and only if it passes gates A-F; A/B are controls. Otherwise NO_PROMOTION.",
+  "data_boundary": {
+    "train_val_readable": true,
+    "test_npz_forbidden": true,
+    "expected_test_records_not_read": 78,
+    "expected_test_images_not_read": 39
+  },
+  "change_policy": "After the first val NPZ read this preregistration and the preregistered config are frozen byte-for-byte; the run must prove both are unchanged.",
+  "authorization": "DeepSeek Harness may process necessary code, metrics and derived data via api.deepseek.com; raw images, 4B weights, keys, proxy config and credentials are never read, uploaded or printed."
+}

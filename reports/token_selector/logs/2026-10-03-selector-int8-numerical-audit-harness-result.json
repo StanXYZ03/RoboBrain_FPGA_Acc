@@ -1,0 +1,215 @@
+{
+  "checks": {
+    "each_seed_k48_mean_jaccard_at_least_0.95": true,
+    "exact_set_match_rate_each_budget_at_least_0.75": false,
+    "int32_worst_case_bounds_below_2147483647": true,
+    "mean_jaccard_each_budget_at_least_0.95": true,
+    "mean_retained_mass_delta_each_budget_at_least_-0.01": true,
+    "mean_selected_ndcg_delta_each_budget_at_least_-0.01": true,
+    "pins_and_isolation_pass": true,
+    "pointing_k48_prompt_utility_gap_delta_at_least_-0.01": true
+  },
+  "decision": "INT8_NUMERICS_NOT_ESTABLISHED",
+  "descriptive_control": "FULL_WT_WV_Q8_A8",
+  "files": {
+    "csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-selector-int8-numerical-audit-records.csv",
+    "csv_sha256": "c720168da69303dc320de76f4bcf81dd995b65c17af4802c17e106c3f6e3db84",
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-selector-int8-numerical-audit.json",
+    "json_sha256": "d2539b05285e6a736f675810022006d05cf09e9a86022b3ac890563c3bfb9100",
+    "md": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-selector-int8-numerical-audit.md",
+    "md_sha256": "af97da0c49dbde1c749f17dfb39cc963acc99ed6998ff7c840ee06fabb93427d"
+  },
+  "int32": {
+    "analytical": {
+      "group_mean_dot_wv_row": {
+        "activation_max_abs": 128,
+        "bound": 16646144,
+        "fits_int32": true,
+        "int32_max": 2147483647,
+        "length": 1024,
+        "weight_max_abs": 127
+      },
+      "prompt_dot_wt_row": {
+        "activation_max_abs": 128,
+        "bound": 41615360,
+        "fits_int32": true,
+        "int32_max": 2147483647,
+        "length": 2560,
+        "weight_max_abs": 127
+      },
+      "query_dot": {
+        "activation_max_abs": 128,
+        "bound": 2080768,
+        "fits_int32": true,
+        "int32_max": 2147483647,
+        "length": 128,
+        "weight_max_abs": 127
+      }
+    },
+    "no_overflow": true,
+    "observed_max_abs": {
+      "gm_wv_max_abs": 227969,
+      "prompt_wt_max_abs": 1023052
+    }
+  },
+  "isolation": {
+    "gpu_used": false,
+    "internal_test_report_files_parsed": false,
+    "model_4b_loaded": false,
+    "network_used": false,
+    "opened_npz_count": 76,
+    "opened_only_val_npz": true,
+    "raw_images_read": false,
+    "test_npz_opened": [],
+    "test_npz_resolved_hashed_or_opened": false,
+    "train_npz_opened": [],
+    "training_performed": false,
+    "val_images": 38,
+    "val_npz_aggregate": "0439b7cb798f9dc49751d8135dd009294df723b2b10839837d7145778ca68f4b",
+    "val_npz_aggregate_matches_prereg": true,
+    "val_records": 76
+  },
+  "limitations": [
+    "Grounding same-image Pointing prompt is descriptive, not a valid negative, because targets are nested.",
+    "Float L2 normalization, reciprocal square root and min-max are numerical golden operations in this audit.",
+    "Passing does not establish complete fixed-point HLS equivalence, FPGA latency, end-to-end accuracy or publication readiness.",
+    "Float L2 normalisation, reciprocal square root, min-max and row normalisation are software golden operations in this audit.",
+    "This audit is an engineering-equivalence check; it does not prove a complete fixed-point FPGA scorer, HLS/bit-level equivalence, FPGA latency, end-to-end accuracy or publication readiness.",
+    "The Pointing K48 prompt-utility gate uses the same-image other-task prompt; Grounding is reported descriptively only because its targets are nested.",
+    "The validation split has already been used in development; this is not a final or CV-Bench accuracy result."
+  ],
+  "overall": {
+    "48": {
+      "exact_set_match_rate": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.3157894736842105,
+        "ci_level": 0.95,
+        "ci_low": 0.13157894736842105,
+        "mean": 0.2236842105263158,
+        "median": 0.0,
+        "n": 38
+      },
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9653693056169835,
+        "ci_level": 0.95,
+        "ci_low": 0.9523454855626462,
+        "mean": 0.9590737347570609,
+        "median": 0.9591836734693877,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": -3.696449156463776e-05,
+        "ci_level": 0.95,
+        "ci_low": -0.0005316673629404611,
+        "mean": -0.00025338587741265275,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.001094468985528558,
+        "ci_level": 0.95,
+        "ci_low": -0.0010208363741244638,
+        "mean": -9.318711339088213e-05,
+        "median": 0.0,
+        "n": 38
+      }
+    },
+    "64": {
+      "exact_set_match_rate": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.23684210526315788,
+        "ci_level": 0.95,
+        "ci_low": 0.06578947368421052,
+        "mean": 0.14473684210526316,
+        "median": 0.0,
+        "n": 38
+      },
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9674761131772129,
+        "ci_level": 0.95,
+        "ci_low": 0.9575735602444165,
+        "mean": 0.9623342617058251,
+        "median": 0.9547681174546847,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0003338733772359445,
+        "ci_level": 0.95,
+        "ci_low": -0.0013248292799957926,
+        "mean": -0.00037347590474187675,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.001382074874146227,
+        "ci_level": 0.95,
+        "ci_low": -0.000789354629954507,
+        "mean": 0.00019969596895888847,
+        "median": -3.307292707226302e-05,
+        "n": 38
+      }
+    },
+    "96": {
+      "exact_set_match_rate": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.2631578947368421,
+        "ci_level": 0.95,
+        "ci_low": 0.10526315789473684,
+        "mean": 0.18421052631578946,
+        "median": 0.0,
+        "n": 38
+      },
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9794920089083328,
+        "ci_level": 0.95,
+        "ci_low": 0.9735839003386092,
+        "mean": 0.9765517019218283,
+        "median": 0.979381443298969,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.00043068973797122595,
+        "ci_level": 0.95,
+        "ci_low": -0.008392722709582726,
+        "mean": -0.0026360737552081214,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0012554709099545317,
+        "ci_level": 0.95,
+        "ci_low": -0.0014032215170303485,
+        "mean": -5.3724575937033046e-05,
+        "median": 4.4047636529320755e-06,
+        "n": 38
+      }
+    }
+  },
+  "pins_unchanged": true,
+  "pointing_k48_prompt_utility_gap_delta": {
+    "bootstrap_resamples": 2000,
+    "ci_high": 0.007120104337993433,
+    "ci_level": 0.95,
+    "ci_low": -0.038976943779904266,
+    "mean": -0.009432262424304705,
+    "median": 0.0,
+    "n": 38
+  },
+  "primary_arm": "SPLIT_WV_Q8_A8_Q8QUERY",
+  "report_stem": "2026-10-03-selector-int8-numerical-audit",
+  "schema_version": "1.0",
+  "seed_k48_mean_jaccard": {
+    "20261003": 0.9597599039615846,
+    "20261004": 0.9511508571039752,
+    "20261005": 0.961371074745688
+  }
+}

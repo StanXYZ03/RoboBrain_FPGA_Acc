@@ -1,0 +1,4 @@
+/build/
+/artifacts/*.dtb
+/artifacts/*.dtbo
+/artifacts/q8q8-selftest-arm64

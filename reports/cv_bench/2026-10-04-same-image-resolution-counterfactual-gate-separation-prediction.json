@@ -1,0 +1,1089 @@
+{
+  "generated_at": "2026-10-04T22:30:20.834607+08:00",
+  "schema_version": "1.0",
+  "design": "2026-10-04-same-image-resolution-counterfactual",
+  "mode": "analytic",
+  "authoritative": false,
+  "model_was_run": false,
+  "gate_threshold": 512,
+  "separation_rule": "A frozen sample separates iff its low-budget group count is <= 512 and its high-budget group count is > 512; otherwise it is dropped and replaced.",
+  "replacement_rule": "For each dropped sample, take the next unused reserve candidate from the same stratum in ascending selection_rank order whose own two budgets also separate. If the reserve for that stratum is exhausted the sample stays unresolved and the dry run fails closed.",
+  "processor_pixel_budgets": {
+    "low": {
+      "label": "low",
+      "min_pixels": 65536,
+      "max_pixels": 524288,
+      "expected_G_max": 512,
+      "note": "max_pixels = 512 * 1024 forces G <= 512"
+    },
+    "high": {
+      "label": "high",
+      "min_pixels": 525312,
+      "max_pixels": 16777216,
+      "expected_G_min": 513,
+      "note": "min_pixels = 513 * 1024 forces G >= 513; max_pixels stays at the model default"
+    }
+  },
+  "config": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/2026-10-04-same-image-resolution-counterfactual.preregistered.json",
+    "sha256": "ae1ba23936896f9c7b836164e092ec941af17c05611bf6c0368b71e913857f83"
+  },
+  "manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100.jsonl",
+    "sha256": "c53c7b7dd733b11f55edc85ba65745d72951d31f456c7403ec21e91b0031d4c5",
+    "count": 100
+  },
+  "reserve": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-04-same-image-resolution-counterfactual-ade20k-reserve.jsonl",
+    "sha256": "b6d9333b575a1391782d3fa03d82e37822848d02ddeddca76d500d0926e5005c",
+    "count": 533
+  },
+  "strata_without_reserve": [
+    "G>512::Relation::integer_wrong"
+  ],
+  "measurements": [
+    {
+      "sample_id": "88",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 256,
+      "height": 256,
+      "G_low": 64,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "202",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 203,
+      "height": 270,
+      "G_low": 70,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "126",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 302,
+      "height": 275,
+      "G_low": 81,
+      "G_high": 528,
+      "separated": true
+    },
+    {
+      "sample_id": "10",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 686,
+      "height": 457,
+      "G_low": 294,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "259",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 256,
+      "height": 256,
+      "G_low": 64,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "200",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 550,
+      "height": 301,
+      "G_low": 153,
+      "G_high": 527,
+      "separated": true
+    },
+    {
+      "sample_id": "169",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 256,
+      "height": 256,
+      "G_low": 64,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "208",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 256,
+      "height": 256,
+      "G_low": 64,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "103",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 640,
+      "height": 480,
+      "G_low": 300,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "337",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 700,
+      "height": 460,
+      "G_low": 308,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "102",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 356,
+      "height": 266,
+      "G_low": 88,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "111",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 450,
+      "height": 600,
+      "G_low": 266,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "153",
+      "stratum": "G<=512::Count::integer_correct",
+      "width": 500,
+      "height": 375,
+      "G_low": 192,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "48",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 700,
+      "height": 525,
+      "G_low": 352,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "265",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 300,
+      "height": 225,
+      "G_low": 70,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "195",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 250,
+      "height": 250,
+      "G_low": 64,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "109",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 400,
+      "height": 300,
+      "G_low": 108,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "267",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 384,
+      "height": 256,
+      "G_low": 96,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "12",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 396,
+      "height": 308,
+      "G_low": 120,
+      "G_high": 520,
+      "separated": true
+    },
+    {
+      "sample_id": "46",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 399,
+      "height": 600,
+      "G_low": 228,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "71",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 250,
+      "height": 286,
+      "G_low": 72,
+      "G_high": 550,
+      "separated": true
+    },
+    {
+      "sample_id": "318",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 640,
+      "height": 426,
+      "G_low": 260,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "131",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 640,
+      "height": 480,
+      "G_low": 300,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "266",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 750,
+      "height": 496,
+      "G_low": 368,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "302",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 750,
+      "height": 563,
+      "G_low": 414,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "43",
+      "stratum": "G<=512::Count::integer_wrong",
+      "width": 228,
+      "height": 211,
+      "G_low": 72,
+      "G_high": 528,
+      "separated": true
+    },
+    {
+      "sample_id": "399",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 496,
+      "height": 330,
+      "G_low": 160,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "480",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 307,
+      "height": 230,
+      "G_low": 70,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "616",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "544",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 263,
+      "height": 369,
+      "G_low": 96,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "478",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 496,
+      "height": 330,
+      "G_low": 160,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "459",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "447",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 496,
+      "height": 335,
+      "G_low": 160,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "345",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 350,
+      "height": 247,
+      "G_low": 88,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "368",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 369,
+      "height": 369,
+      "G_low": 144,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "374",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "349",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "532",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 246,
+      "height": 369,
+      "G_low": 96,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "418",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 256,
+      "height": 256,
+      "G_low": 64,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "496",
+      "stratum": "G<=512::Relation::integer_correct",
+      "width": 256,
+      "height": 256,
+      "G_low": 64,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "490",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 496,
+      "height": 331,
+      "G_low": 160,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "525",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 369,
+      "height": 369,
+      "G_low": 144,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "396",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "585",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "400",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 640,
+      "height": 428,
+      "G_low": 260,
+      "G_high": 532,
+      "separated": true
+    },
+    {
+      "sample_id": "562",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 600,
+      "height": 319,
+      "G_low": 190,
+      "G_high": 544,
+      "separated": true
+    },
+    {
+      "sample_id": "438",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 496,
+      "height": 353,
+      "G_low": 176,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "502",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 442,
+      "height": 600,
+      "G_low": 266,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "614",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 485,
+      "height": 361,
+      "G_low": 165,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "498",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "361",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 369,
+      "height": 369,
+      "G_low": 144,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "450",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 492,
+      "height": 369,
+      "G_low": 180,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "436",
+      "stratum": "G<=512::Relation::integer_wrong",
+      "width": 369,
+      "height": 369,
+      "G_low": 144,
+      "G_high": 529,
+      "separated": true
+    },
+    {
+      "sample_id": "261",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "30",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 1024,
+      "height": 709,
+      "G_low": 486,
+      "G_high": 704,
+      "separated": true
+    },
+    {
+      "sample_id": "201",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 1024,
+      "height": 768,
+      "G_low": 494,
+      "G_high": 768,
+      "separated": true
+    },
+    {
+      "sample_id": "246",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "118",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 1467,
+      "height": 2200,
+      "G_low": 486,
+      "G_high": 3174,
+      "separated": true
+    },
+    {
+      "sample_id": "3",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 1152,
+      "height": 864,
+      "G_low": 494,
+      "G_high": 972,
+      "separated": true
+    },
+    {
+      "sample_id": "234",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 1536,
+      "height": 2048,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "107",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 1024,
+      "height": 682,
+      "G_low": 486,
+      "G_high": 672,
+      "separated": true
+    },
+    {
+      "sample_id": "190",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 648,
+      "height": 864,
+      "G_low": 494,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "38",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 1024,
+      "height": 888,
+      "G_low": 504,
+      "G_high": 896,
+      "separated": true
+    },
+    {
+      "sample_id": "219",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "218",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "180",
+      "stratum": "G>512::Count::integer_correct",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "239",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "132",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 1536,
+      "height": 2048,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "18",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 1024,
+      "height": 768,
+      "G_low": 494,
+      "G_high": 768,
+      "separated": true
+    },
+    {
+      "sample_id": "241",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "49",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "44",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2200,
+      "height": 1649,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "283",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "213",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2200,
+      "height": 1467,
+      "G_low": 486,
+      "G_high": 3174,
+      "separated": true
+    },
+    {
+      "sample_id": "122",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 640,
+      "height": 854,
+      "G_low": 494,
+      "G_high": 540,
+      "separated": true
+    },
+    {
+      "sample_id": "310",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "214",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2200,
+      "height": 1467,
+      "G_low": 486,
+      "G_high": 3174,
+      "separated": true
+    },
+    {
+      "sample_id": "119",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "341",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 1600,
+      "height": 1200,
+      "G_low": 494,
+      "G_high": 1900,
+      "separated": true
+    },
+    {
+      "sample_id": "129",
+      "stratum": "G>512::Count::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "414",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "406",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 1024,
+      "height": 768,
+      "G_low": 494,
+      "G_high": 768,
+      "separated": true
+    },
+    {
+      "sample_id": "357",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 1024,
+      "height": 683,
+      "G_low": 486,
+      "G_high": 672,
+      "separated": true
+    },
+    {
+      "sample_id": "484",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "586",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "545",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 718,
+      "height": 1024,
+      "G_low": 486,
+      "G_high": 704,
+      "separated": true
+    },
+    {
+      "sample_id": "475",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 1600,
+      "height": 1200,
+      "G_low": 494,
+      "G_high": 1900,
+      "separated": true
+    },
+    {
+      "sample_id": "380",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 960,
+      "height": 1280,
+      "G_low": 494,
+      "G_high": 1200,
+      "separated": true
+    },
+    {
+      "sample_id": "624",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "629",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "360",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 1024,
+      "height": 683,
+      "G_low": 486,
+      "G_high": 672,
+      "separated": true
+    },
+    {
+      "sample_id": "350",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "412",
+      "stratum": "G>512::Relation::integer_correct",
+      "width": 1647,
+      "height": 2200,
+      "G_low": 494,
+      "G_high": 3519,
+      "separated": true
+    },
+    {
+      "sample_id": "501",
+      "stratum": "G>512::Relation::integer_wrong",
+      "width": 2200,
+      "height": 1467,
+      "G_low": 486,
+      "G_high": 3174,
+      "separated": true
+    },
+    {
+      "sample_id": "556",
+      "stratum": "G>512::Relation::integer_wrong",
+      "width": 1536,
+      "height": 2048,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "483",
+      "stratum": "G>512::Relation::integer_wrong",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "591",
+      "stratum": "G>512::Relation::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    },
+    {
+      "sample_id": "391",
+      "stratum": "G>512::Relation::integer_wrong",
+      "width": 2200,
+      "height": 1650,
+      "G_low": 494,
+      "G_high": 3588,
+      "separated": true
+    },
+    {
+      "sample_id": "395",
+      "stratum": "G>512::Relation::integer_wrong",
+      "width": 1467,
+      "height": 2200,
+      "G_low": 486,
+      "G_high": 3174,
+      "separated": true
+    },
+    {
+      "sample_id": "610",
+      "stratum": "G>512::Relation::integer_wrong",
+      "width": 2048,
+      "height": 1536,
+      "G_low": 494,
+      "G_high": 3072,
+      "separated": true
+    }
+  ],
+  "plan": {
+    "accepted": [
+      "88",
+      "202",
+      "126",
+      "10",
+      "259",
+      "200",
+      "169",
+      "208",
+      "103",
+      "337",
+      "102",
+      "111",
+      "153",
+      "48",
+      "265",
+      "195",
+      "109",
+      "267",
+      "12",
+      "46",
+      "71",
+      "318",
+      "131",
+      "266",
+      "302",
+      "43",
+      "399",
+      "480",
+      "616",
+      "544",
+      "478",
+      "459",
+      "447",
+      "345",
+      "368",
+      "374",
+      "349",
+      "532",
+      "418",
+      "496",
+      "490",
+      "525",
+      "396",
+      "585",
+      "400",
+      "562",
+      "438",
+      "502",
+      "614",
+      "498",
+      "361",
+      "450",
+      "436",
+      "261",
+      "30",
+      "201",
+      "246",
+      "118",
+      "3",
+      "234",
+      "107",
+      "190",
+      "38",
+      "219",
+      "218",
+      "180",
+      "239",
+      "132",
+      "18",
+      "241",
+      "49",
+      "44",
+      "283",
+      "213",
+      "122",
+      "310",
+      "214",
+      "119",
+      "341",
+      "129",
+      "414",
+      "406",
+      "357",
+      "484",
+      "586",
+      "545",
+      "475",
+      "380",
+      "624",
+      "629",
+      "360",
+      "350",
+      "412",
+      "501",
+      "556",
+      "483",
+      "591",
+      "391",
+      "395",
+      "610"
+    ],
+    "accepted_count": 100,
+    "rejected": [],
+    "rejected_count": 0,
+    "replaced": [],
+    "replaced_count": 0,
+    "unresolved": [],
+    "unresolved_count": 0,
+    "resolved": true
+  },
+  "final_manifest": null,
+  "contract_checks": [
+    {
+      "name": "mode is processor (authoritative) or analytic (prediction)",
+      "ok": true
+    },
+    {
+      "name": "no model forward pass was run",
+      "ok": true
+    },
+    {
+      "name": "all low-budget G <= 512 for accepted samples",
+      "ok": true
+    },
+    {
+      "name": "all high-budget G > 512 for accepted samples",
+      "ok": true
+    },
+    {
+      "name": "accepted + unresolved == frozen count",
+      "ok": true
+    },
+    {
+      "name": "no accepted sample duplicates a reserve sample",
+      "ok": true
+    },
+    {
+      "name": "reserve coverage: strata without reserve reported (any needed drop there would fail closed)",
+      "ok": true
+    }
+  ]
+}

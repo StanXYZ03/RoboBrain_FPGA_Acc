@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0-preregistered",
+  "status": "PREREGISTERED_TRAIN_ONLY_ZERO_UPDATE",
+  "report_stem": "2026-10-03-spatial-teacher-feasibility",
+  "date": "2026-10-03",
+  "seed": 20261003,
+  "self_sha256_embedded": false,
+  "self_sha256_note": "This preregistration config deliberately does NOT embed its own SHA256 to avoid a self-reference paradox. The external SHA256 is recorded by the run report, the report preregistration and the harness result JSON.",
+  "scope": "Parameter-free task-specific spatial supervision target feasibility audit. TRAIN split only. Zero-update: no optimizer, no training, no new Wt/Wv, no checkpoint. CPU-only float64 metrics. No 4B model load, no GPU, no network, no package installation. No val/test NPZ resolution, hashing, opening or scoring. No CV-Bench. Raw image bytes are never read.",
+  "preregistered_before_metrics": "This file is written before any new per-sample or aggregate spatial-target audit metric is computed.",
+  "inputs": {
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b"
+    },
+    "index": {
+      "path": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+      "sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26"
+    },
+    "clean_manifest": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+    },
+    "clean_manifest_lock": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.lock.json",
+      "sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105"
+    },
+    "teacher_pair_signal": {
+      "path": "reports/token_selector/2026-10-02-teacher-pair-signal-train-only.json",
+      "sha256": "09dbce65f33ae7cfffd778816228ae02863af95f318efe2e6510cb95304d52dd"
+    },
+    "hardware_regular_config": {
+      "path": "configs/hardware_regular_token_selector.json",
+      "sha256": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142"
+    }
+  },
+  "immutability_rule": "All six pinned inputs must be byte-for-byte unchanged before and after the audit run; the report records the pre-run and post-run SHA256 of every pinned input.",
+  "data_contract": {
+    "join": "For every TRAIN sample, join the feature index and the clean manifest by sample_id. Hard-fail if a sample_id is missing from either side, if a sample_id is duplicated on either side, if index.task != manifest.task, or if the image identity (manifest coco_image_id and manifest image path) is inconsistent inside one source_image_sha256 group.",
+    "task_pair_completeness": "Every TRAIN source_image_sha256 group must contain exactly one grounding record and one pointing record (set == {grounding, pointing}); otherwise hard-fail.",
+    "grid_contract": "Require group_count == grid_h * grid_w for every TRAIN sample; otherwise stop with BLOCKED_DATA_CONTRACT.",
+    "coordinate_convention": "Manifest coordinates are normalized [0,1000]. Grid cell (r,c) of a grid H x W covers [1000*c/W, 1000*(c+1)/W] x [1000*r/H, 1000*(r+1)/H]. The flat group index is row-major: g = r*W + c.",
+    "group_mean": "cached group_mean:float16[G,1024] loaded train-only and cast to float64 for the L2 baseline; never uploaded."
+  },
+  "split_rule": {
+    "source": "evaluation.prompt_projection_distillation.split_sample_ids",
+    "seed": 20260927,
+    "ratios": {"train": 0.7, "val": 0.15, "test": 0.15},
+    "salt": "prompt_projection_distillation_2026_09_27",
+    "group_by": "source_image_sha256",
+    "train_only": true,
+    "expected_train_records": 318,
+    "expected_train_images": 159,
+    "val_test_action": "never resolved, hashed, opened or scored"
+  },
+  "frozen_spatial_targets": {
+    "no_blending": "The spatial targets are NEVER blended with the cached semantic teacher target in this audit.",
+    "no_tuning": "The formulas below are frozen before any metric is computed and are not tuned after seeing metrics.",
+    "grounding_area_target": {
+      "formula": "clip bbox to [0,1000] for numerical boundary tolerance only; area[r*W+c] = max(0, min(x2,cx2)-max(x1,cx1)) * max(0, min(y2,cy2)-max(y1,cy1)); divide by total intersection area so mass sums to 1.",
+      "hard_fail": "invalid (non-finite or non-length-4) bbox; x2 <= x1 or y2 <= y1 after clip (zero/negative area); total intersection area <= 0",
+      "applicable_task": "grounding"
+    },
+    "pointing_bilinear_target": {
+      "formula": "u = x*W/1000 - 0.5, v = y*H/1000 - 0.5; clamp u to [0,W-1], v to [0,H-1]; c0=floor(u), c1=min(c0+1,W-1), r0=floor(v), r1=min(r0+1,H-1), fu=u-c0, fv=v-r0; mass (1-fu)(1-fv) at (r0,c0), fu(1-fv) at (r0,c1), (1-fu)fv at (r1,c0), fu*fv at (r1,c1); duplicate boundary indices are combined and the result is normalized to sum to 1. No Gaussian and no bandwidth parameter.",
+      "hard_fail": "non-finite or non-length-2 point; point outside [-1e-9, 1000+1e-9]",
+      "applicable_task": "pointing"
+    }
+  },
+  "metrics": {
+    "independent_unit": "image (grounding/pointing are paired, never two independent samples)",
+    "integrity_and_geometry": [
+      "joined / missing / duplicate counts",
+      "task pair completeness",
+      "bbox validity, point validity, point-inside-bbox fraction",
+      "grid shape distribution and group_count == grid_h*grid_w fraction",
+      "target finite / nonnegative / sum-to-one error",
+      "support size, entropy (nats), effective support exp(entropy), max mass, per task"
+    ],
+    "same_image_task_separation": [
+      "JS divergence in nats, symmetric KL, TV, argmax-different fraction",
+      "top-K Jaccard / overlap / disagreement at K=48/64/96 with K_eff=min(K,G)",
+      "paired per-image difference spatial-semantic for JS, TV and top-K disagreement"
+    ],
+    "semantic_teacher_comparator": "cached teacher_soft_target only (no new semantic model)",
+    "semantic_spatial_compatibility": "Spearman and full NDCG (K=G) between each spatial target and the cached semantic teacher target (relevance = teacher_soft_target), per task and overall; low agreement means the objectives differ, not automatically that one is wrong",
+    "hardware_regular_baseline": {
+      "l2_baseline": "evaluation.prompt_projection_distillation.l2_baseline_scores on cached group_mean",
+      "anchor_baseline": "evaluation.hardware_regular_token_selector.select_real_groups exactly, fed the L2 saliency as the ranking score because no trained semantic projection exists in this zero-update audit; if the module cannot be imported the anchor baseline is reported NOT_COMPUTED instead of inventing one",
+      "reported": "for K=48/64/96, spatial-target NDCG and retained target mass for L2 and the available anchor baseline, by task and overall"
+    }
+  },
+  "statistics": {
+    "paired_differences": ["js_nats", "tv", "k48_disagreement", "k64_disagreement", "k96_disagreement"],
+    "summaries": ["mean", "median", "std", "95% bootstrap CI", "two-sided sign-flip p-value", "Cohen dz"],
+    "bootstrap_resamples": 2000,
+    "permutation_resamples": 10000,
+    "ci_level": 0.95,
+    "seed": 20261003,
+    "multiple_comparison_policy": "No multiple candidate search is performed; report raw two-sided p-values. No Holm correction is invented.",
+    "implementation": "evaluation.prompt_identifiability_diagnostic.paired_effect for bootstrap/sign-flip/Cohen dz; median computed directly from the paired differences"
+  },
+  "decision_labels": {
+    "SPATIAL_SUPERVISION_SIGNAL_PRESENT": "Emitted only if all integrity checks pass AND the 95% bootstrap CI lower bound of (spatial-semantic) is greater than zero for BOTH JS and TV. Top-K results remain descriptive and cannot override this rule.",
+    "SPATIAL_SUPERVISION_SIGNAL_NOT_ESTABLISHED": "Emitted otherwise (all integrity checks pass but the joint JS+TV CI rule fails).",
+    "BLOCKED_DATA_CONTRACT": "Emitted if joins, geometry, grid or isolation contracts fail.",
+    "learnability_caveat": "Even when signal is present, learnability and downstream task accuracy remain untested."
+  },
+  "prohibitions": [
+    "no optimizer, no training, no parameter update, no new Wt/Wv, no checkpoint",
+    "no 4B model load, no inference, no GPU, no network, no package installation",
+    "no reading, resolving, hashing or scoring of val/test NPZ files",
+    "no CV-Bench evaluation",
+    "no reading of raw image bytes, model weights, keys, proxy files or credentials",
+    "no blending of the spatial targets with the semantic teacher",
+    "no formula tuning after seeing metrics",
+    "no multiple-candidate search, no Holm correction invented",
+    "no claim that a student can learn the target, no claim that downstream accuracy improves, no FPGA speedup claim"
+  ],
+  "authorization": "DeepSeek Harness may process necessary code, metrics and derived data via api.deepseek.com; raw images, 4B weights, keys, proxy config and credentials are never read, uploaded or printed."
+}

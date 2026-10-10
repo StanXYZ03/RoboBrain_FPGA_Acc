@@ -1,0 +1,148 @@
+{
+  "generated_at": "2026-10-04T22:28:16.814579+08:00",
+  "schema_version": "1.0",
+  "design": "2026-10-04-same-image-resolution-counterfactual",
+  "scope": "Frozen 100-sample ADE20K manifest for a same-image dual-processor-pixel-budget counterfactual; CPU-only, read-only; no model was run.",
+  "executed_on_gpu": false,
+  "model_was_run": false,
+  "gate_report": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/cv_bench/2026-10-04-gate-source-confounding.json",
+    "sha256": "17adb2c74c6c4de367a33da099512669c04235ad18824d293efa8a1499a49a6d",
+    "conclusion": "SOURCE_CONFOUNDING_NOT_RESOLVED",
+    "formal_outcome": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638"
+  },
+  "inputs_sha256": {
+    "formal_report": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.json",
+      "sha256": "53ec2ee10fde7b31b08a840263bd26409e35781ed25b89b20166ea90e84af6ea"
+    },
+    "full_manifest": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "corrected_l2_integer_arm": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f"
+    },
+    "prompt_plus_corrected_l2_integer_arm": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa"
+    }
+  },
+  "allocation": {
+    "method": "proportional largest-remainder allocation over the eight (gate_bin, task, original_integer_correct) strata with a per-stratum floor of min(minimum, n_available)",
+    "target_total": 100,
+    "minimum_per_stratum": 4,
+    "selection_seed": 20261004,
+    "strata_order": [
+      "G<=512::Count::integer_correct",
+      "G<=512::Count::integer_wrong",
+      "G<=512::Relation::integer_correct",
+      "G<=512::Relation::integer_wrong",
+      "G>512::Count::integer_correct",
+      "G>512::Count::integer_wrong",
+      "G>512::Relation::integer_correct",
+      "G>512::Relation::integer_wrong"
+    ],
+    "per_stratum": [
+      {
+        "stratum": "G<=512::Count::integer_correct",
+        "n_available": 102,
+        "target": 13,
+        "selected": 13,
+        "reserve": 89
+      },
+      {
+        "stratum": "G<=512::Count::integer_wrong",
+        "n_available": 82,
+        "target": 13,
+        "selected": 13,
+        "reserve": 69
+      },
+      {
+        "stratum": "G<=512::Relation::integer_correct",
+        "n_available": 218,
+        "target": 14,
+        "selected": 14,
+        "reserve": 204
+      },
+      {
+        "stratum": "G<=512::Relation::integer_wrong",
+        "n_available": 23,
+        "target": 13,
+        "selected": 13,
+        "reserve": 10
+      },
+      {
+        "stratum": "G>512::Count::integer_correct",
+        "n_available": 45,
+        "target": 13,
+        "selected": 13,
+        "reserve": 32
+      },
+      {
+        "stratum": "G>512::Count::integer_wrong",
+        "n_available": 113,
+        "target": 14,
+        "selected": 14,
+        "reserve": 99
+      },
+      {
+        "stratum": "G>512::Relation::integer_correct",
+        "n_available": 43,
+        "target": 13,
+        "selected": 13,
+        "reserve": 30
+      },
+      {
+        "stratum": "G>512::Relation::integer_wrong",
+        "n_available": 7,
+        "target": 7,
+        "selected": 7,
+        "reserve": 0
+      }
+    ]
+  },
+  "selected_count": 100,
+  "reserve_count": 533,
+  "contract_checks": [
+    {
+      "name": "every selected record is ADE20K",
+      "ok": true
+    },
+    {
+      "name": "exactly 100 selected",
+      "ok": true
+    },
+    {
+      "name": "selected sample_ids are unique",
+      "ok": true
+    },
+    {
+      "name": "selected and reserve are disjoint",
+      "ok": true
+    },
+    {
+      "name": "both original gate bins present",
+      "ok": true
+    },
+    {
+      "name": "both tasks present",
+      "ok": true
+    },
+    {
+      "name": "both original correctness classes present",
+      "ok": true
+    }
+  ],
+  "manifest": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100.jsonl",
+    "sha256": "c53c7b7dd733b11f55edc85ba65745d72951d31f456c7403ec21e91b0031d4c5",
+    "count": 100
+  },
+  "reserve": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-04-same-image-resolution-counterfactual-ade20k-reserve.jsonl",
+    "sha256": "b6d9333b575a1391782d3fa03d82e37822848d02ddeddca76d500d0926e5005c",
+    "count": 533
+  }
+}

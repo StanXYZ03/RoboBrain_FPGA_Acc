@@ -1,0 +1,21 @@
+{
+  "status": "R1_SUPERSEDED_BEFORE_SCORING",
+  "r1_config": "configs/2026-10-09-spatialeval-vqa-three-arm-external-confirmation.preregistered.json",
+  "r1_sha256": "16d26764d6a587af3cd68e12d79929b7301e93150ca7e09300713461921e002f",
+  "r2_config": "configs/2026-10-09-spatialeval-vqa-three-arm-external-confirmation-r2.preregistered.json",
+  "r2_sha256": "bd8e1a23e0d3fba03315c93d10d88856c4864aa133efc32331360b9d4d708014",
+  "reason": "R1 directly pinned an unused legacy projection instead of all three files actually loaded by the frozen v2 checkpoint loader.",
+  "algorithm_changed": false,
+  "dataset_changed": false,
+  "prompt_changed": false,
+  "metric_or_gate_changed": false,
+  "outputs_or_scores_observed": false,
+  "timing_metadata_only_observed": true,
+  "dense_prefix": {
+    "records": 93,
+    "bytes": 801929,
+    "path": "artifacts/token_selector/2026-10-09-spatialeval-vqa-three-arm/dense_prefix93_v1_unscored.jsonl",
+    "sha256": "179b68b9f3b008357f4458956c75236e8a181439abe890cbb1f42263bbca0196",
+    "policy": "retain byte-for-byte, resume append-only, never score separately"
+  }
+}

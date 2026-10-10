@@ -1,0 +1,1711 @@
+{
+ "artifact_storage_audit": {
+  "file_count": 44,
+  "top20_largest": [
+   {
+    "path": "vivado/post_route.dcp",
+    "size": 33501830
+   },
+   {
+    "path": "vivado/vivado_ooc.log",
+    "size": 1194323
+   },
+   {
+    "path": "vivado/vivado_console.log",
+    "size": 1139379
+   },
+   {
+    "path": "ip/export.zip",
+    "size": 1051551
+   },
+   {
+    "path": "hls/csynth.xml",
+    "size": 793285
+   },
+   {
+    "path": "protected_sha_after.json",
+    "size": 444839
+   },
+   {
+    "path": "protected_sha_before.json",
+    "size": 444839
+   },
+   {
+    "path": "ip/component.xml",
+    "size": 387049
+   },
+   {
+    "path": "hls/hls_export.log",
+    "size": 314226
+   },
+   {
+    "path": "vivado/timing_summary_post_route.rpt",
+    "size": 274273
+   },
+   {
+    "path": "vivado/timing_summary_post_synth.rpt",
+    "size": 272750
+   },
+   {
+    "path": "hls/csynth.rpt",
+    "size": 235559
+   },
+   {
+    "path": "vivado/utilization_hier_post_route.rpt",
+    "size": 185086
+   },
+   {
+    "path": "vivado/utilization_hier_post_synth.rpt",
+    "size": 184972
+   },
+   {
+    "path": "vivado/timing_summary_post_place.rpt",
+    "size": 112048
+   },
+   {
+    "path": "vivado/drc_post_route.rpt",
+    "size": 98002
+   },
+   {
+    "path": "vivado/clock_utilization_post_route.rpt",
+    "size": 57860
+   },
+   {
+    "path": "scripts/summarize_ooc.py",
+    "size": 40383
+   },
+   {
+    "path": "vivado/clock_utilization_post_synth.rpt",
+    "size": 18810
+   },
+   {
+    "path": "vivado/critical_paths_post_route.rpt",
+    "size": 17575
+   }
+  ],
+  "total_bytes": 40852056
+ },
+ "commands": {
+  "driver": "bash fpga_accel/integer_selector_pipeline_compact_ooc/scripts/run_ooc.sh",
+  "hls": "export LD_LIBRARY_PATH=/home/xilinx/xic/lib/lnx64.o/SuSE:$LD_LIBRARY_PATH && /home/xilinx/Vitis_HLS/2023.2/bin/vitis_hls -f fpga_accel/integer_selector_pipeline_compact_ooc/scripts/run_hls_export.tcl",
+  "timeouts_s": {
+   "hls": 7200,
+   "vivado_total": 5400
+  },
+  "vivado": "/home/xilinx/Vivado/2023.2/bin/vivado -mode batch -source fpga_accel/integer_selector_pipeline_compact_ooc/scripts/run_vivado_ooc.tcl -log /tmp/.../vivado_ooc.log"
+ },
+ "date": "2026-10-03",
+ "decision": "INTEGER_SELECTOR_COMPACT_IP_OOC_ROUTE_PASS",
+ "environment_warnings": {
+  "host_critical_warning_ids": [
+   "Common 17-741"
+  ],
+  "non_host_invalidating_critical_warning_ids": [],
+  "note": "The only console CRITICAL WARNING is [Common 17-741] (no write access to the local Xilinx Tcl store; reverted to the installation area). It is a host/Tcl-store setting, not a design DRC, and it does not invalidate implementation or timing."
+ },
+ "exported_ip": {
+  "archive": {
+   "path": "ip/export.zip",
+   "present": true,
+   "sha256": "b4e0654792e6591afd388aeb34bff713cd2b8688d068be1942a987bdff9a4090",
+   "size_bytes": 1051551
+  },
+  "bus_interfaces": [
+   {
+    "bus_type": "aximm",
+    "mode": "slave",
+    "name": "s_axi_control"
+   },
+   {
+    "bus_type": "clock",
+    "mode": null,
+    "name": "ap_clk"
+   },
+   {
+    "bus_type": "reset",
+    "mode": null,
+    "name": "ap_rst_n"
+   },
+   {
+    "bus_type": "interrupt",
+    "mode": null,
+    "name": "interrupt"
+   },
+   {
+    "bus_type": "aximm",
+    "mode": "master",
+    "name": "m_axi_input_arena"
+   },
+   {
+    "bus_type": "aximm",
+    "mode": "master",
+    "name": "m_axi_wv_q"
+   },
+   {
+    "bus_type": "aximm",
+    "mode": "master",
+    "name": "m_axi_output_arena"
+   }
+  ],
+  "component_xml_present": true,
+  "vlnv": "robobrain.local:hls:integer_selector_pipeline_compact:1.0"
+ },
+ "gates": {
+  "clock_exact_5_000_ns": true,
+  "drc_no_error_no_critical_warning": true,
+  "hls_csynth_and_export_no_error_fatal": true,
+  "interface_gates": true,
+  "no_bitstream_generated": true,
+  "no_unrouted_nets": true,
+  "opt_design_ok": true,
+  "part_exact": true,
+  "phys_opt_design_ok": true,
+  "place_design_ok": true,
+  "post_route_hold_whs_ge_0": true,
+  "post_route_setup_wns_ge_0": true,
+  "protected_files_byte_identical": true,
+  "resources_each_below_80_percent": true,
+  "route_design_ok": true,
+  "vivado_ooc_synth_ok": true
+ },
+ "hls": {
+  "csynth": {
+   "clock_uncertainty_ns": "1.35",
+   "estimated_clock_ns": "3.650",
+   "m_axi_data_widths": {
+    "input_arena": "128",
+    "output_arena": "128",
+    "wv_q": "128"
+   },
+   "part": "xczu9eg-ffvb1156-2-e",
+   "ports": {
+    "ap_clk": {
+     "bits": "1",
+     "dir": "in",
+     "object": "integer_selector_pipeline_compact",
+     "protocol": "ap_ctrl_hs",
+     "type": "return value"
+    },
+    "ap_rst_n": {
+     "bits": "1",
+     "dir": "in",
+     "object": "integer_selector_pipeline_compact",
+     "protocol": "ap_ctrl_hs",
+     "type": "return value"
+    },
+    "interrupt": {
+     "bits": "1",
+     "dir": "out",
+     "object": "integer_selector_pipeline_compact",
+     "protocol": "ap_ctrl_hs",
+     "type": "return value"
+    },
+    "m_axi_input_arena_ARADDR": {
+     "bits": "64",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARBURST": {
+     "bits": "2",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARCACHE": {
+     "bits": "4",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARLEN": {
+     "bits": "8",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARLOCK": {
+     "bits": "2",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARPROT": {
+     "bits": "3",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARQOS": {
+     "bits": "4",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARREGION": {
+     "bits": "4",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARSIZE": {
+     "bits": "3",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_ARVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWADDR": {
+     "bits": "64",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWBURST": {
+     "bits": "2",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWCACHE": {
+     "bits": "4",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWLEN": {
+     "bits": "8",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWLOCK": {
+     "bits": "2",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWPROT": {
+     "bits": "3",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWQOS": {
+     "bits": "4",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWREGION": {
+     "bits": "4",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWSIZE": {
+     "bits": "3",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_AWVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_BID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_BREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_BRESP": {
+     "bits": "2",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_BUSER": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_BVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_RDATA": {
+     "bits": "128",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_RID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_RLAST": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_RREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_RRESP": {
+     "bits": "2",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_RUSER": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_RVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_WDATA": {
+     "bits": "128",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_WID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_WLAST": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_WREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_WSTRB": {
+     "bits": "16",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_WUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_input_arena_WVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "input_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARADDR": {
+     "bits": "64",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARBURST": {
+     "bits": "2",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARCACHE": {
+     "bits": "4",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARLEN": {
+     "bits": "8",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARLOCK": {
+     "bits": "2",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARPROT": {
+     "bits": "3",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARQOS": {
+     "bits": "4",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARREGION": {
+     "bits": "4",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARSIZE": {
+     "bits": "3",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_ARVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWADDR": {
+     "bits": "64",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWBURST": {
+     "bits": "2",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWCACHE": {
+     "bits": "4",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWLEN": {
+     "bits": "8",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWLOCK": {
+     "bits": "2",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWPROT": {
+     "bits": "3",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWQOS": {
+     "bits": "4",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWREGION": {
+     "bits": "4",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWSIZE": {
+     "bits": "3",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_AWVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_BID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_BREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_BRESP": {
+     "bits": "2",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_BUSER": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_BVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_RDATA": {
+     "bits": "128",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_RID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_RLAST": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_RREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_RRESP": {
+     "bits": "2",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_RUSER": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_RVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_WDATA": {
+     "bits": "128",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_WID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_WLAST": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_WREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_WSTRB": {
+     "bits": "16",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_WUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_output_arena_WVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "output_arena",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARADDR": {
+     "bits": "64",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARBURST": {
+     "bits": "2",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARCACHE": {
+     "bits": "4",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARLEN": {
+     "bits": "8",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARLOCK": {
+     "bits": "2",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARPROT": {
+     "bits": "3",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARQOS": {
+     "bits": "4",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARREGION": {
+     "bits": "4",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARSIZE": {
+     "bits": "3",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_ARVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWADDR": {
+     "bits": "64",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWBURST": {
+     "bits": "2",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWCACHE": {
+     "bits": "4",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWLEN": {
+     "bits": "8",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWLOCK": {
+     "bits": "2",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWPROT": {
+     "bits": "3",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWQOS": {
+     "bits": "4",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWREGION": {
+     "bits": "4",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWSIZE": {
+     "bits": "3",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_AWVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_BID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_BREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_BRESP": {
+     "bits": "2",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_BUSER": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_BVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_RDATA": {
+     "bits": "128",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_RID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_RLAST": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_RREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_RRESP": {
+     "bits": "2",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_RUSER": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_RVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_WDATA": {
+     "bits": "128",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_WID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_WLAST": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_WREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_WSTRB": {
+     "bits": "16",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_WUSER": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "m_axi_wv_q_WVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "wv_q",
+     "protocol": "m_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_ARADDR": {
+     "bits": "8",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_ARREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_ARVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_AWADDR": {
+     "bits": "8",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_AWREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_AWVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_BREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_BRESP": {
+     "bits": "2",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_BVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_RDATA": {
+     "bits": "32",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_RREADY": {
+     "bits": "1",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_RRESP": {
+     "bits": "2",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_RVALID": {
+     "bits": "1",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_WDATA": {
+     "bits": "32",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_WREADY": {
+     "bits": "1",
+     "dir": "out",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_WSTRB": {
+     "bits": "4",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    },
+    "s_axi_control_WVALID": {
+     "bits": "1",
+     "dir": "in",
+     "object": "control",
+     "protocol": "s_axi",
+     "type": "pointer"
+    }
+   },
+   "present": true,
+   "resource_utilization_percent": {
+    "BRAM_18K": 16.1732,
+    "DSP": 8.4127,
+    "FF": 8.2377,
+    "LUT": 33.2345,
+    "URAM": 0.0
+   },
+   "resources_available": {
+    "BRAM_18K": 1824,
+    "DSP": 2520,
+    "FF": 548160,
+    "LUT": 274080,
+    "URAM": 0
+   },
+   "resources_used": {
+    "BRAM_18K": 295,
+    "DSP": 212,
+    "FF": 45156,
+    "LUT": 91089,
+    "URAM": 0
+   },
+   "s_axi_control_data_width": "32",
+   "target_clock_ns": "5.00",
+   "top": "integer_selector_pipeline_compact"
+  },
+  "export_log": {
+   "bytes": 314226,
+   "csynth_completed": true,
+   "error_lines": 0,
+   "export_completed": true,
+   "fatal_lines": 0,
+   "present": true,
+   "vitis_exit_clean": true
+  },
+  "identity_with_accepted": {
+   "accepted_estimated_clock_ns": 3.65,
+   "accepted_resource_utilization_percent": {
+    "BRAM_18K": 16.17,
+    "DSP": 8.41,
+    "FF": 8.24,
+    "LUT": 33.23,
+    "URAM": 0.0
+   },
+   "accepted_resources_used": {
+    "BRAM_18K": 295,
+    "DSP": 212,
+    "FF": 45156,
+    "LUT": 91089,
+    "URAM": 0
+   },
+   "identical": true,
+   "new_estimated_clock_ns": 3.65,
+   "new_resource_utilization_percent": {
+    "BRAM_18K": 16.1732,
+    "DSP": 8.4127,
+    "FF": 8.2377,
+    "LUT": 33.2345,
+    "URAM": 0.0
+   },
+   "new_resources_used": {
+    "BRAM_18K": 295,
+    "DSP": 212,
+    "FF": 45156,
+    "LUT": 91089,
+    "URAM": 0
+   }
+  }
+ },
+ "interfaces": {
+  "component_bus_interface_count": 7,
+  "component_port_count": 155,
+  "control_r_present": false,
+  "gates": {
+   "interface_gate_pass": true,
+   "no_control_r_interface": true,
+   "no_external_score_q_port": true,
+   "one_axi4lite_slave_control": true,
+   "three_128bit_axi4_masters_input_arena_wv_q_output_arena": true
+  },
+  "m_axi_bundles": [
+   "input_arena",
+   "output_arena",
+   "wv_q"
+  ],
+  "m_axi_data_widths": {
+   "input_arena": "128",
+   "output_arena": "128",
+   "wv_q": "128"
+  },
+  "m_axi_full_names": [
+   "m_axi_input_arena",
+   "m_axi_output_arena",
+   "m_axi_wv_q"
+  ],
+  "other_bus_interfaces": [
+   "ap_clk",
+   "ap_rst_n",
+   "interrupt"
+  ],
+  "s_axi_bundles": [
+   "control"
+  ],
+  "s_axi_control_data_width": "32",
+  "s_axi_full_names": [
+   "s_axi_control"
+  ],
+  "score_q_port_present": false
+ },
+ "license": {
+  "hls_license_errors": 0,
+  "license_error_lines": 0,
+  "synthesis_and_implementation_license_obtained": true,
+  "vivado_license_errors": 0,
+  "vivado_license_ok": true
+ },
+ "limitations": [
+  "Out-of-context (OOC) only: no PS, no DDR, no AXI interconnect contention, no DMA and no full ZCU102 block design.",
+  "Post-route timing/resources are the OOC Vivado result for the exported IP; they are not a board measurement.",
+  "No bitstream was generated and the board was not accessed.",
+  "No end-to-end model latency, throughput, speedup or task-accuracy claim is made.",
+  "The exported HLS OOC XDC carries only create_clock ap_clk 5.000 ns; it has no explicit set_clock_uncertainty. Vitis HLS csynth used its default 1.35 ns scheduling uncertainty, which is not present in the post-route OOC constraints.",
+  "The exported IP interface gate is parsed from the generated component.xml/csynth.xml, not from the C++ pragmas."
+ ],
+ "ooc": {
+  "hls_exit": 0,
+  "opt_ok": true,
+  "phys_opt_ok": true,
+  "place_ok": true,
+  "post_route_dcp": {
+   "archived": true,
+   "limit_bytes": 209715200,
+   "path": "vivado/post_route.dcp",
+   "sha256": "25f1ca2f5ef1ecb28f119f1300daf53aff0735723e5c36a7ed66a7a50696a4d3",
+   "size_bytes": 33501830,
+   "within_200mib": true
+  },
+  "route_ok": true,
+  "stage_status": [
+   {
+    "detail": "design_1",
+    "elapsed_s": 164,
+    "rc": 0,
+    "stage": "synth_design"
+   },
+   {
+    "detail": "0",
+    "elapsed_s": 15,
+    "rc": 0,
+    "stage": "opt_design"
+   },
+   {
+    "detail": "",
+    "elapsed_s": 96,
+    "rc": 0,
+    "stage": "place_design"
+   },
+   {
+    "detail": "",
+    "elapsed_s": 1,
+    "rc": 0,
+    "stage": "phys_opt_design"
+   },
+   {
+    "detail": "",
+    "elapsed_s": 64,
+    "rc": 0,
+    "stage": "route_design"
+   }
+  ],
+  "synth_ok": true,
+  "timeout_flag": false,
+  "vivado_exit": 0
+ },
+ "protected_sha_audit": {
+  "added": [],
+  "after_aggregate_sha256": "8fec4b4988ed014b5ac0e4e453ab46153ec731dc825ab2d6810608240ca5dfc5",
+  "after_file_count": 2260,
+  "all_protected_present_and_identical": true,
+  "before_aggregate_sha256": "8fec4b4988ed014b5ac0e4e453ab46153ec731dc825ab2d6810608240ca5dfc5",
+  "before_file_count": 2260,
+  "changed": [],
+  "missing": [],
+  "protected_files_unchanged": true
+ },
+ "qor_suggestions": {
+  "bytes": 3427,
+  "present": true,
+  "suggestion_lines": 0
+ },
+ "recommended_next_action": "Build the minimal Zynq UltraScale+ MPSoC block design around this exported IP (PS, clock/reset, three 128-bit AXI4 masters, AXI4-Lite control, memory map and DMA path), validate it, and only then consider a bitstream.",
+ "resources": {
+  "post_place": {
+   "bram_tile": {
+    "available": 912,
+    "used": 122.5,
+    "util_percent": 13.43
+   },
+   "dsp": {
+    "available": 2520,
+    "used": 210,
+    "util_percent": 8.33
+   },
+   "ff": {
+    "available": 548160,
+    "used": 30997,
+    "util_percent": 5.65
+   },
+   "lut": {
+    "available": 274080,
+    "used": 27607,
+    "util_percent": 10.07
+   },
+   "lut_as_logic": {
+    "available": 274080,
+    "used": 25317,
+    "util_percent": 9.24
+   },
+   "lut_as_memory": {
+    "available": 144000,
+    "used": 2290,
+    "util_percent": 1.59
+   },
+   "present": true
+  },
+  "post_route": {
+   "bram_tile": {
+    "available": 912,
+    "used": 122.5,
+    "util_percent": 13.43
+   },
+   "dsp": {
+    "available": 2520,
+    "used": 210,
+    "util_percent": 8.33
+   },
+   "ff": {
+    "available": 548160,
+    "used": 30997,
+    "util_percent": 5.65
+   },
+   "lut": {
+    "available": 274080,
+    "used": 27607,
+    "util_percent": 10.07
+   },
+   "lut_as_logic": {
+    "available": 274080,
+    "used": 25317,
+    "util_percent": 9.24
+   },
+   "lut_as_memory": {
+    "available": 144000,
+    "used": 2290,
+    "util_percent": 1.59
+   },
+   "present": true
+  },
+  "post_route_gate_rows": {
+   "bram_tile": {
+    "available": 912,
+    "used": 122.5,
+    "util_percent": 13.43
+   },
+   "dsp": {
+    "available": 2520,
+    "used": 210,
+    "util_percent": 8.33
+   },
+   "ff": {
+    "available": 548160,
+    "used": 30997,
+    "util_percent": 5.65
+   },
+   "lut": {
+    "available": 274080,
+    "used": 27607,
+    "util_percent": 10.07
+   },
+   "uram": {
+    "available": 0,
+    "note": "XCZU9EG has no URAM",
+    "used": 0,
+    "util_percent": 0.0
+   }
+  },
+  "post_synth": {
+   "bram_tile": {
+    "available": 912,
+    "used": 122.5,
+    "util_percent": 13.43
+   },
+   "dsp": {
+    "available": 2520,
+    "used": 210,
+    "util_percent": 8.33
+   },
+   "ff": {
+    "available": 548160,
+    "used": 31049,
+    "util_percent": 5.66
+   },
+   "lut": {
+    "available": 274080,
+    "used": 28427,
+    "util_percent": 10.37
+   },
+   "lut_as_logic": {
+    "available": 274080,
+    "used": 25587,
+    "util_percent": 9.34
+   },
+   "lut_as_memory": {
+    "available": 144000,
+    "used": 2840,
+    "util_percent": 1.97
+   },
+   "present": true
+  }
+ },
+ "route": {
+  "drc": {
+   "by_severity": {
+    "Warning": 125
+   },
+   "critical_warning": 0,
+   "error": 0,
+   "present": true,
+   "violations_found": 125,
+   "warning": 125
+  },
+  "status": {
+   "fully_routed_nets": 59967,
+   "logical_nets": 251921,
+   "present": true,
+   "routable_nets": 59967,
+   "routing_errors": 0,
+   "unrouted_nets": 0
+  }
+ },
+ "schema_version": 1.0,
+ "scope": {
+  "all_hls_vivado_projects_in_tmp": true,
+  "bitstream": false,
+  "board_access": false,
+  "cosim": false,
+  "flow": "Vitis HLS 2023.2 csynth_design + export_design -format ip_catalog (-flow syn); Vivado 2023.2 OOC synth_design + opt_design + place_design + phys_opt_design + route_design",
+  "gpu": false,
+  "network": false,
+  "part": "xczu9eg-ffvb1156-2-e",
+  "project_root": "session workspace (repo)",
+  "source_or_interface_change": false,
+  "top": "integer_selector_pipeline_compact",
+  "training": false
+ },
+ "task": "Export the accepted compact integer Selector IP catalog component and run a Vivado 2023.2 out-of-context place-and-route on xczu9eg-ffvb1156-2-e at ap_clk = 5.000 ns",
+ "timing": {
+  "achieved_frequency_mhz_from_5ns_minus_wns": 223.6636,
+  "clock_name": "ap_clk",
+  "clock_period_ns": 5.0,
+  "exported_xdc_uncertainty": "none in exported OOC XDC (create_clock ap_clk 5.000 only)",
+  "hls_default_clock_uncertainty_ns": "1.35",
+  "post_place": {
+   "constraints_met": true,
+   "present": true,
+   "ths_failing_endpoints": 0,
+   "ths_ns": 0.0,
+   "ths_total_endpoints": 116438,
+   "tns_failing_endpoints": 0,
+   "tns_ns": 0.0,
+   "tns_total_endpoints": 116438,
+   "tpws_failing_endpoints": 0,
+   "tpws_ns": 0.0,
+   "tpws_total_endpoints": 34346,
+   "whs_ns": 0.009,
+   "wns_ns": 0.828,
+   "wpws_ns": 1.958
+  },
+  "post_route": {
+   "constraints_met": true,
+   "present": true,
+   "ths_failing_endpoints": 0,
+   "ths_ns": 0.0,
+   "ths_total_endpoints": 116438,
+   "tns_failing_endpoints": 0,
+   "tns_ns": 0.0,
+   "tns_total_endpoints": 116438,
+   "tpws_failing_endpoints": 0,
+   "tpws_ns": 0.0,
+   "tpws_total_endpoints": 34346,
+   "whs_ns": 0.028,
+   "wns_ns": 0.529,
+   "wpws_ns": 1.958
+  },
+  "post_route_critical_path": {
+   "clock_uncertainty_ns": 0.035,
+   "data_path_delay_ns": 4.418,
+   "endpoint": "grp_ts_pool_context_packed_fu_2549/grp_ts_pool_context_packed_Pipeline_VITIS_LOOP_276_2_VITIS_LOOP_281_3_fu_303/mul_ln290_reg_1294_reg/DSP_OUTPUT_INST/ALU_OUT[15]",
+   "logic_levels": 5,
+   "met": true,
+   "path_type": "Setup (Max at Slow Process Corner)",
+   "present": true,
+   "setup_critical_path": {
+    "clock_uncertainty_ns": 0.035,
+    "data_path_delay_ns": 4.418,
+    "endpoint": "grp_ts_pool_context_packed_fu_2549/grp_ts_pool_context_packed_Pipeline_VITIS_LOOP_276_2_VITIS_LOOP_281_3_fu_303/mul_ln290_reg_1294_reg/DSP_OUTPUT_INST/ALU_OUT[15]",
+    "logic_levels": 5,
+    "met": true,
+    "path_type": "Setup (Max at Slow Process Corner)",
+    "slack_ns": 0.529,
+    "startpoint": "grp_ts_pool_context_packed_fu_2549/weights_U/ram_reg_bram_0/CLKARDCLK"
+   },
+   "slack_ns": 0.529,
+   "startpoint": "grp_ts_pool_context_packed_fu_2549/weights_U/ram_reg_bram_0/CLKARDCLK",
+   "worst_hold_path": {
+    "data_path_delay_ns": 0.081,
+    "endpoint": "grp_integer_selector_pipeline_compact_Pipeline_VITIS_LOOP_151_1_fu_2467/sdiv_13ns_32ns_28_17_1_U919/integer_selector_pipeline_compact_sdiv_13ns_32ns_28_17_1_divider_u/loop[9].divisor_tmp_reg[10][19]/D",
+    "logic_levels": 0,
+    "met": true,
+    "path_type": "Hold (Min at Fast Process Corner)",
+    "slack_ns": 0.028,
+    "startpoint": "grp_integer_selector_pipeline_compact_Pipeline_VITIS_LOOP_151_1_fu_2467/sdiv_13ns_32ns_28_17_1_U919/integer_selector_pipeline_compact_sdiv_13ns_32ns_28_17_1_divider_u/loop[8].divisor_tmp_reg[9][19]/C"
+   }
+  },
+  "post_synth": {
+   "constraints_met": true,
+   "present": true,
+   "ths_failing_endpoints": 0,
+   "ths_ns": 0.0,
+   "ths_total_endpoints": 116612,
+   "tns_failing_endpoints": 0,
+   "tns_ns": 0.0,
+   "tns_total_endpoints": 116612,
+   "tpws_failing_endpoints": 0,
+   "tpws_ns": 0.0,
+   "tpws_total_endpoints": 34451,
+   "whs_ns": 0.046,
+   "wns_ns": 1.406,
+   "wpws_ns": 1.958
+  },
+  "target_frequency_mhz": 200.0
+ },
+ "tool_versions": "=== tool versions ===\nVitis HLS - High-Level Synthesis from C, C++ and OpenCL v2023.2 (64-bit)\nSW Build 4023990 on Oct 11 2023\nIP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023\nTool Version Limit: 2023.10\nvivado v2023.2 (64-bit)\nTool Version Limit: 2023.10\nSW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023\nIP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023"
+}

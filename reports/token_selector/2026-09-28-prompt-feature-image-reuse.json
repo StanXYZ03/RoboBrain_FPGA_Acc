@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "report": "2026-09-28-prompt-feature-image-reuse",
+  "scope": "B1 prompt-projection feature extractor: audit image-dependent vs prompt-independent outputs and implement one vision forward per image with multi-prompt reuse (CPU only)",
+  "date_utc": "2026-09-28",
+  "gpu_used": false,
+  "cuda_model_loaded": false,
+  "extraction_run": false,
+  "training_run": false,
+  "inference_run": false,
+  "manifest": {
+    "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "sha256_prefix": "acab1a322a930211",
+    "records": 472,
+    "unique_images": 236,
+    "prompts_per_image": 2,
+    "unique_image_files": 236,
+    "image_files_total_bytes": 35054288,
+    "image_field_resolution": "relative to the manifest directory (datasets/) via evaluation.run_hf_token_reduction.resolve_image",
+    "ordering": "all 236 grounding records first, then all 236 pointing records (manifest is NOT image-contiguous: 472 first-occurrence blocks for 236 images)"
+  },
+  "audit": {
+    "image_dependent_outputs": [
+      "processor image tensors pixel_values / image_grid_thw",
+      "block0 patch capture and per-group 4-patch mean group_mean[G,1024]",
+      "full dense vision-tower + merger embedding merged_embeddings[G,2560]",
+      "merge grid (grid_h, grid_w)"
+    ],
+    "prompt_independent_of_image": true,
+    "per_record_outputs": [
+      "prompt_embeddings[T,2560] from the raw prompt text only (add_special_tokens=False)",
+      "teacher_scores[G] = per-group max cosine over prompt tokens",
+      "teacher_scores_normalized[G] and teacher_soft_target[G]"
+    ],
+    "shared_reuse_key": ["resolved_image_path", "source_image_sha256"],
+    "capture_mechanism": "removable forward hook on visual.blocks[0]; unchanged",
+    "schema_changed": false,
+    "teacher_definition_changed": false,
+    "student_definition_changed": false,
+    "split_contract_changed": false,
+    "manifest_pin_changed": false
+  },
+  "reuse_contract": {
+    "grouping": "samples are grouped by (resolved path, source_image_sha256) across the whole manifest",
+    "one_vision_forward_per_image_with_pending_prompts": true,
+    "zero_vision_forward_when_all_prompts_of_image_complete": true,
+    "prompt_embeddings_and_teacher_target_per_record": true,
+    "cache_lifetime": "only the current image group is resident; capture and image are dropped in a finally block and torch.cuda.empty_cache() runs after each processed group",
+    "index_order": "records are buffered and flushed in exactly manifest order by an ordered writer, even though groups are processed in first-occurrence order",
+    "overwrite_semantics": "--overwrite truncates the index (mode 'w') and rewrites; resume appends (mode 'a')",
+    "resume_hash_guard": "current file sha256 must equal the sha256 recorded for every already-completed sample of that path, else hard fail (DistillationContractError); same-path hash drift within a run also hard fails"
+  },
+  "tests": {
+    "new_test_file": "evaluation/tests/test_prompt_projection_feature_reuse.py",
+    "new_tests": 10,
+    "covered": [
+      "same image 2 prompts = 1 vision call + 2 prompt calls",
+      "different images = 1 vision call each",
+      "partial resume = 1 vision forward (only pending prompts written)",
+      "full resume = 0 vision forwards",
+      "same path content hash change on resume = hard fail",
+      "same path content hash change within a run = hard fail",
+      "grouped output equals per-sample legacy reference array-by-array (all five npz arrays)",
+      "interleaved image groups still emit index in manifest order",
+      "plan_image_groups first-occurrence order and manifest indices",
+      "validate-manifest-only imports no transformers/PIL (subprocess import guard)"
+    ],
+    "py_compile": "PASS (extract_prompt_projection_features.py, test_prompt_projection_feature_reuse.py, prompt_projection_distillation.py, train_prompt_projection.py, run_hf_token_reduction.py)",
+    "full_evaluation_regression": "python -m unittest discover -s evaluation/tests -> Ran 222 tests OK",
+    "distillation_module": "evaluation.tests.test_prompt_projection_distillation -> Ran 37 tests OK",
+    "reuse_module": "evaluation.tests.test_prompt_projection_feature_reuse -> Ran 10 tests OK"
+  },
+  "expected_savings": {
+    "records": 472,
+    "unique_images": 236,
+    "vision_forwards_legacy_per_record": 472,
+    "vision_forwards_with_reuse": 236,
+    "vision_forward_reduction_factor": 2.0,
+    "prompt_embedding_calls": 472,
+    "measured_wall_clock_speedup": null,
+    "claim": "structural forward-count reduction only; no measured timing is claimed or fabricated"
+  },
+  "warnings": [
+    "No GPU, no real model, no extraction, no training and no inference were run in this task; the 236 forward count is a structural expectation, not a measurement.",
+    "Image files are read once per sample for source_image_sha256 (the resume hash guard); this is disk-only and not a vision forward.",
+    "The emitted JSONL is manifest-ordered for a fresh run and for prefix-completing resumes; a non-prefix partial resume appends new records in manifest order after the existing prefix.",
+    "The frozen manifest pin, npz schema, split contract and teacher/student definitions are unchanged."
+  ],
+  "files_changed": [
+    "evaluation/extract_prompt_projection_features.py",
+    "evaluation/tests/test_prompt_projection_feature_reuse.py",
+    "reports/token_selector/2026-09-28-prompt-feature-image-reuse.md",
+    "reports/token_selector/2026-09-28-prompt-feature-image-reuse.json",
+    "CURRENT_STATUS.md"
+  ],
+  "next_gate": "After the GPU audit passes (no non-owner compute process, >=20480 MiB free, not saturated), run the pinned extraction against datasets/prompt_projection_clean_inductive_v1.jsonl and confirm vision_forwards=236 for 472 records; then train the Wt/Wv projection. Until then no GPU/model work is authorized."
+}

@@ -1,0 +1,439 @@
+{
+  "candidate_arm": "INTEGER_SCORER_Q16",
+  "candidate_vs_float": {
+    "48": {
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9653711063372717,
+        "ci_level": 0.95,
+        "ci_low": 0.9527169709989256,
+        "mean": 0.9590118152524167,
+        "median": 0.9591836734693877,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": -3.696449156463812e-05,
+        "ci_level": 0.95,
+        "ci_low": -0.0004973860406108538,
+        "mean": -0.00024402818991262613,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0009850085439109002,
+        "ci_level": 0.95,
+        "ci_low": -0.0010353658979941973,
+        "mean": -0.00017126614754116282,
+        "median": 0.0,
+        "n": 38
+      }
+    },
+    "64": {
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9687024483764469,
+        "ci_level": 0.95,
+        "ci_low": 0.9572300029114641,
+        "mean": 0.9627753759725483,
+        "median": 0.9547681174546847,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0003630025635953584,
+        "ci_level": 0.95,
+        "ci_low": -0.000667071961108148,
+        "mean": -0.00016388031185369712,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0011412243679810399,
+        "ci_level": 0.95,
+        "ci_low": -0.0009166776507629411,
+        "mean": -2.894232313680001e-05,
+        "median": -4.0880625630517094e-05,
+        "n": 38
+      }
+    },
+    "96": {
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9781575038144295,
+        "ci_level": 0.95,
+        "ci_low": 0.9715181941666324,
+        "mean": 0.9749569733679494,
+        "median": 0.979381443298969,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0003608824600567244,
+        "ci_level": 0.95,
+        "ci_low": -0.008629785227810953,
+        "mean": -0.002779436074294547,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0010974866737861937,
+        "ci_level": 0.95,
+        "ci_low": -0.0015776122402944737,
+        "mean": -0.00022323433690365273,
+        "median": 2.2554041498659694e-06,
+        "n": 38
+      }
+    }
+  },
+  "candidate_vs_per_tensor": {
+    "48": {
+      "exact_set_match_rate": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9342105263157895,
+        "ci_level": 0.95,
+        "ci_low": 0.7759868421052637,
+        "mean": 0.8552631578947368,
+        "median": 1.0,
+        "n": 38
+      },
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9973147153598282,
+        "ci_level": 0.95,
+        "ci_low": 0.9908566058002147,
+        "mean": 0.994092373791622,
+        "median": 1.0,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0,
+        "ci_level": 0.95,
+        "ci_low": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 7.525700896333081e-05,
+        "ci_level": 0.95,
+        "ci_low": -5.400083454591467e-05,
+        "mean": 4.989524849185739e-06,
+        "median": 0.0,
+        "n": 38
+      },
+      "replacement_count": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.22401315789473505,
+        "ci_level": 0.95,
+        "ci_low": 0.06578947368421052,
+        "mean": 0.14473684210526316,
+        "median": 0.0,
+        "n": 38
+      }
+    },
+    "64": {
+      "exact_set_match_rate": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.881578947368421,
+        "ci_level": 0.95,
+        "ci_low": 0.7368421052631579,
+        "mean": 0.8157894736842105,
+        "median": 1.0,
+        "n": 38
+      },
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9963562753036437,
+        "ci_level": 0.95,
+        "ci_low": 0.9911176542755488,
+        "mean": 0.9939393939393938,
+        "median": 1.0,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0003664177316015466,
+        "ci_level": 0.95,
+        "ci_low": -0.00048760636775058445,
+        "mean": -4.039621204967928e-05,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0003043715587505246,
+        "ci_level": 0.95,
+        "ci_low": -0.00043855431981829843,
+        "mean": -4.2520707738384594e-05,
+        "median": 0.0,
+        "n": 38
+      },
+      "replacement_count": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.2894736842105263,
+        "ci_level": 0.95,
+        "ci_low": 0.11842105263157894,
+        "mean": 0.19736842105263158,
+        "median": 0.0,
+        "n": 38
+      }
+    },
+    "96": {
+      "exact_set_match_rate": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9078947368421053,
+        "ci_level": 0.95,
+        "ci_low": 0.7631578947368421,
+        "mean": 0.8421052631578947,
+        "median": 1.0,
+        "n": 38
+      },
+      "jaccard": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.9981009224091156,
+        "ci_level": 0.95,
+        "ci_low": 0.9951166576234399,
+        "mean": 0.9967444384156267,
+        "median": 1.0,
+        "n": 38
+      },
+      "mass_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.0,
+        "ci_level": 0.95,
+        "ci_low": -2.1912296538654404e-18,
+        "mean": -7.304098846218135e-19,
+        "median": 0.0,
+        "n": 38
+      },
+      "ndcg_delta": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 6.658680191381284e-05,
+        "ci_level": 0.95,
+        "ci_low": -4.800856756107769e-05,
+        "mean": 6.427622061864241e-06,
+        "median": -9.123912535616285e-06,
+        "n": 38
+      },
+      "replacement_count": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.23684210526315788,
+        "ci_level": 0.95,
+        "ci_low": 0.09210526315789473,
+        "mean": 0.15789473684210525,
+        "median": 0.0,
+        "n": 38
+      }
+    }
+  },
+  "candidate_vs_per_tensor_score_spearman": {
+    "bootstrap_resamples": 2000,
+    "ci_high": 0.9999596867267934,
+    "ci_level": 0.95,
+    "ci_low": 0.9999542094051854,
+    "mean": 0.9999571507214855,
+    "median": 0.9999589772855533,
+    "n": 38
+  },
+  "checks": {
+    "candidate_vs_float_mass_delta_each_budget_at_least_-0.01": true,
+    "candidate_vs_float_ndcg_delta_each_budget_at_least_-0.01": true,
+    "candidate_vs_per_tensor_mean_jaccard_each_budget_at_least_0.98": true,
+    "candidate_vs_per_tensor_mean_replacement_count_each_budget_at_most_1.0": true,
+    "candidate_vs_per_tensor_mean_score_spearman_at_least_0.995": true,
+    "each_seed_k48_candidate_vs_per_tensor_mean_jaccard_at_least_0.97": true,
+    "pins_isolation_fixture_width_pass": true,
+    "pointing_k48_prompt_utility_gap_delta_candidate_vs_float_at_least_-0.01": true
+  },
+  "decision": "INTEGER_SCORER_NUMERICS_PASS",
+  "files": {
+    "csv": "reports/token_selector/2026-10-03-selector-integer-scorer-audit-records.csv",
+    "csv_dir_mirror": "reports/token_selector/2026-10-03-selector-integer-scorer-audit/2026-10-03-selector-integer-scorer-audit-records.csv",
+    "csv_sha256": "3f8ea377eb61b74b2d2394089940a1723babe43038a227e044fca3ea96a6f2cc",
+    "json": "reports/token_selector/2026-10-03-selector-integer-scorer-audit.json",
+    "json_dir_mirror": "reports/token_selector/2026-10-03-selector-integer-scorer-audit/2026-10-03-selector-integer-scorer-audit.json",
+    "json_sha256": "b6a5b74895273067a10b9715cf55466b619dea894f30b593566c41e596717b03",
+    "md": "reports/token_selector/2026-10-03-selector-integer-scorer-audit.md",
+    "md_dir_mirror": "reports/token_selector/2026-10-03-selector-integer-scorer-audit/2026-10-03-selector-integer-scorer-audit.md",
+    "md_sha256": "02ad33308199b909156bbce2a3dbcc828581abc2e37f299e39211e1f31f4a7bf"
+  },
+  "fixtures_validated": true,
+  "integer_width_contract": {
+    "all_fit_declared_widths": true,
+    "analytical_all_fit": true,
+    "observed_all_fit": true,
+    "observed_maxima": {
+      "dot_absmax": 156390982,
+      "l2_int_max": 607,
+      "l2_norm_max": 32767,
+      "l2_squared_sum_max": 369467,
+      "norm2_max": 558499699697,
+      "projection_int_absmax": 145258,
+      "score_q_max": 30581,
+      "semantic_norm_max": 32767,
+      "semantic_q16_absmax": 20902468,
+      "shifted_numerator_absmax": 10249239396352
+    },
+    "operations": [
+      {
+        "accumulation": "INT32 exact, length 1024",
+        "analytical_bound": 16646144,
+        "fits": true,
+        "inputs": "group_mean_q INT8 x Wv_q INT8",
+        "max_value": 2147483647,
+        "observed_fits": true,
+        "observed_max": 145258,
+        "op": "visual_projection_accumulator",
+        "width": "INT32"
+      },
+      {
+        "accumulation": "INT64 exact, length 128",
+        "analytical_bound": 272730423296,
+        "fits": true,
+        "inputs": "projection INT32 x query_q INT8",
+        "max_value": 9223372036854775807,
+        "observed_fits": true,
+        "observed_max": 156390982,
+        "op": "semantic_dot_accumulator",
+        "width": "INT64"
+      },
+      {
+        "accumulation": "INT64 nonnegative, length 128",
+        "analytical_bound": 35468046088798208,
+        "fits": true,
+        "inputs": "projection INT32 squared",
+        "max_value": 9223372036854775807,
+        "observed_fits": true,
+        "observed_max": 558499699697,
+        "op": "semantic_norm2_accumulator",
+        "width": "INT64"
+      },
+      {
+        "accumulation": "INT64 exact",
+        "analytical_bound": 17873661021126656,
+        "fits": true,
+        "inputs": "dot << 16",
+        "max_value": 9223372036854775807,
+        "observed_fits": true,
+        "observed_max": 10249239396352,
+        "op": "semantic_shifted_numerator",
+        "width": "INT64"
+      },
+      {
+        "accumulation": "exact signed rational, integer-only",
+        "analytical_bound": 201326592,
+        "fits": true,
+        "inputs": "round_half_away((dot << 16) / floor_sqrt(norm2))",
+        "max_value": 2147483647,
+        "observed_fits": true,
+        "observed_max": 20902468,
+        "op": "semantic_q16",
+        "width": "INT32"
+      },
+      {
+        "accumulation": "INT64 nonnegative",
+        "analytical_bound": 16777216,
+        "fits": true,
+        "inputs": "group_mean_q INT8 squared over 1024",
+        "max_value": 9223372036854775807,
+        "observed_fits": true,
+        "observed_max": 369467,
+        "op": "l2_squared_sum",
+        "width": "INT64"
+      },
+      {
+        "accumulation": "exact integer square root",
+        "analytical_bound": 4096,
+        "fits": true,
+        "inputs": "floor_sqrt(sum_1024 group_mean_q^2)",
+        "max_value": 2147483647,
+        "observed_fits": true,
+        "observed_max": 607,
+        "op": "l2_int",
+        "width": "INT32"
+      },
+      {
+        "accumulation": "exact rational round-half-away",
+        "analytical_bound": 32767,
+        "fits": true,
+        "inputs": "exact min-max of semantic_q16",
+        "max_value": 32767,
+        "observed_fits": true,
+        "observed_max": 32767,
+        "op": "semantic_norm_q15",
+        "width": "UINT16"
+      },
+      {
+        "accumulation": "exact rational round-half-away",
+        "analytical_bound": 32767,
+        "fits": true,
+        "inputs": "exact min-max of l2_int",
+        "max_value": 32767,
+        "observed_fits": true,
+        "observed_max": 32767,
+        "op": "l2_norm_q15",
+        "width": "UINT16"
+      },
+      {
+        "accumulation": "exact rational, clamped [0, 32767]",
+        "analytical_bound": 32767,
+        "fits": true,
+        "inputs": "round_half_away((semantic_norm_q15 + l2_norm_q15)/2)",
+        "max_value": 32767,
+        "observed_fits": true,
+        "observed_max": 30581,
+        "op": "score_q",
+        "width": "UINT16"
+      }
+    ]
+  },
+  "isolation": {
+    "gpu_used": false,
+    "internal_test_report_files_parsed": false,
+    "model_4b_loaded": false,
+    "network_used": false,
+    "opened_npz_count": 76,
+    "opened_only_val_npz": true,
+    "raw_images_read": false,
+    "test_npz_opened": [],
+    "test_npz_resolved_hashed_or_opened": false,
+    "train_npz_opened": [],
+    "training_performed": false,
+    "val_images": 38,
+    "val_npz_aggregate": "0439b7cb798f9dc49751d8135dd009294df723b2b10839837d7145778ca68f4b",
+    "val_npz_aggregate_matches_prereg": true,
+    "val_records": 76
+  },
+  "limitations": [
+    "This is a Python bit-exact numerical reference, not HLS synthesis or board execution.",
+    "Passing permits HLS implementation but does not prove latency, resources, task accuracy or end-to-end acceleration.",
+    "Validation has already been used in development; internal test remains sealed.",
+    "This is a Python bit-exact integer reference, not HLS synthesis, board execution, FPGA latency or end-to-end accuracy evidence.",
+    "Python arbitrary-precision integers are used only to prove fixed widths and to run the exact rational divisions/square roots.",
+    "The reference float-normalisation arm remains the accepted prior chain and is not re-derived here."
+  ],
+  "pins_unchanged": true,
+  "pointing_k48_prompt_utility_gap_delta_candidate_vs_float": {
+    "bootstrap_resamples": 2000,
+    "ci_high": 0.007120104337993433,
+    "ci_level": 0.95,
+    "ci_low": -0.038976943779904266,
+    "mean": -0.009432262424304705,
+    "median": 0.0,
+    "n": 38
+  },
+  "reference_arm": "PER_TENSOR_FLOAT_NORM",
+  "report_stem": "2026-10-03-selector-integer-scorer-audit",
+  "schema_version": "1.0",
+  "seed_k48_candidate_vs_per_tensor_mean_jaccard": {
+    "20261003": 0.9866165413533835,
+    "20261004": 0.9887862513426422,
+    "20261005": 0.9919441460794843
+  }
+}

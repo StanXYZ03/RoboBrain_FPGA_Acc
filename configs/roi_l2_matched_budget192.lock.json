@@ -1,0 +1,64 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-14",
+  "purpose": "Compare oracle ROI-384 with the frozen layer-5 L2+anchor selector at the same per-sample final visual-token budget on the revealed 192-image development split.",
+  "evidence_level": "revealed development comparison; calibration and test splits remain sealed",
+  "model": {
+    "path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "dtype": "bfloat16",
+    "backend": "Hugging Face Transformers",
+    "do_sample": false,
+    "decode": "custom greedy path already audited against native generation"
+  },
+  "dataset": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "manifest_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+    "unique_images": 192,
+    "task_records": 384,
+    "tasks": [
+      "grounding",
+      "pointing"
+    ]
+  },
+  "token_target": {
+    "source": "evaluation/results/global_roi_bf16_representation_gate32_stratified_20260912.jsonl",
+    "source_sha256_at_lock": "ed84655a65ee271f0f5ce0f7e72f02c1b02119102f4f1e769834230cebb5aa68",
+    "strategy": "roi_only",
+    "roi_long_edge": 384,
+    "oracle_margin": 0.5,
+    "expected_repeats": 3,
+    "rule": "For each task sample, L2 retains exactly ROI-384 final_context_visual_tokens; if the ROI target exceeds the dense grid, L2 is capped at dense identity and the exception is reported."
+  },
+  "actions": [
+    {
+      "label": "custom_dense",
+      "selector": "l2_anchor",
+      "retention": 1.0,
+      "output": "evaluation/results/roi_l2_matched_budget192/shallow_r1000.jsonl"
+    },
+    {
+      "label": "l2_matched_roi384",
+      "selector": "l2_anchor",
+      "retention": "per_sample",
+      "prune_after_layer": 5,
+      "anchor_grid": 3,
+      "output": "evaluation/results/roi_l2_matched_budget192/l2_matched_roi384.jsonl"
+    }
+  ],
+  "protocol": {
+    "warmup_per_action_shape": 1,
+    "quality_generations_per_sample": 1,
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 20260914,
+    "primary_noninferiority_margin": -0.02,
+    "latency_claim": "diagnostic within this run only; no formal cross-run latency comparison to ROI-384",
+    "test_split_access": false,
+    "calibration_split_access": false
+  },
+  "interpretation_constraints": [
+    "The final visual-token and LLM-prefill budgets are matched per sample, except explicitly reported ROI targets larger than dense.",
+    "L2 selects after vision layer 5, so six vision blocks still process the dense grid; equal final tokens do not imply equal vision compute.",
+    "Oracle ROI reads the ground-truth box and is not deployable.",
+    "This experiment identifies representation effects; it does not validate a new controller or establish test-set generalization."
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "status": "REVEALED_ORACLE_MECHANICS_PILOT_NOT_VALIDATION",
+  "result_records": 96,
+  "groups": {
+    "dense:grounding": {
+      "strategy": "dense",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 265.0,
+      "application_latency_ms_median": 508.88008915353566,
+      "application_latency_ms_p95": 542.4338290467858,
+      "iou_mean": 0.4354568808257615,
+      "acc_0_5": 0.5
+    },
+    "dense:pointing": {
+      "strategy": "dense",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 265.0,
+      "application_latency_ms_median": 294.98112108558416,
+      "application_latency_ms_p95": 318.58177203685045,
+      "pck_0_1": 0.25,
+      "pck_0_2": 0.25,
+      "point_nme_bbox_diag_mean": 0.6175270360506628
+    },
+    "global_only:grounding": {
+      "strategy": "global_only",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 46.0,
+      "application_latency_ms_median": 478.6972099682316,
+      "application_latency_ms_p95": 510.294774081558,
+      "iou_mean": 0.6182135666319314,
+      "acc_0_5": 0.75
+    },
+    "global_only:pointing": {
+      "strategy": "global_only",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 46.0,
+      "application_latency_ms_median": 253.8603451102972,
+      "application_latency_ms_p95": 259.7677807789296,
+      "pck_0_1": 0.0,
+      "pck_0_2": 0.5,
+      "point_nme_bbox_diag_mean": 0.5960437890211326
+    },
+    "global_roi:grounding": {
+      "strategy": "global_roi",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 120.5,
+      "application_latency_ms_median": 487.2138659702614,
+      "application_latency_ms_p95": 509.3183070421219,
+      "iou_mean": 0.37255687831638024,
+      "acc_0_5": 0.25
+    },
+    "global_roi:pointing": {
+      "strategy": "global_roi",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 120.5,
+      "application_latency_ms_median": 275.7160139735788,
+      "application_latency_ms_p95": 294.00685988366604,
+      "pck_0_1": 0.25,
+      "pck_0_2": 0.25,
+      "point_nme_bbox_diag_mean": 0.2533119680282633
+    },
+    "roi_only:grounding": {
+      "strategy": "roi_only",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 74.5,
+      "application_latency_ms_median": 472.87467343267053,
+      "application_latency_ms_p95": 482.7541580889374,
+      "iou_mean": 0.5803007153104329,
+      "acc_0_5": 0.5
+    },
+    "roi_only:pointing": {
+      "strategy": "roi_only",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 74.5,
+      "application_latency_ms_median": 262.7476330380887,
+      "application_latency_ms_p95": 270.07910306565464,
+      "pck_0_1": 0.25,
+      "pck_0_2": 0.5,
+      "point_nme_bbox_diag_mean": 0.1949063848153322
+    }
+  }
+}

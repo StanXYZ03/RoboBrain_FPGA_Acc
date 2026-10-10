@@ -1,0 +1,164 @@
+{
+  "failures": [],
+  "gates": {
+    "config_pin": {
+      "matches_manifest": true,
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "present": true,
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+    },
+    "construction_script": {
+      "actual": "d80186b664823f2abf6799b4037d5ad3382b375efdf5a5e5f30efe237356a4c9",
+      "expected": "d80186b664823f2abf6799b4037d5ad3382b375efdf5a5e5f30efe237356a4c9",
+      "passed": true,
+      "path": "evaluation/prompt_projection_clean_inductive.py"
+    },
+    "cvbench_coco_ids": {
+      "expected": 805,
+      "passed": true,
+      "recovered": 805,
+      "sha256_actual": "821ea2b3a959232a24aee381bec04e01846c06319a741fafdd32bfa5b22bcfe4",
+      "sha256_expected": "821ea2b3a959232a24aee381bec04e01846c06319a741fafdd32bfa5b22bcfe4"
+    },
+    "cvbench_parquet": [
+      {
+        "actual_sha256": "33196034ef4bf3265cae4a7ff5c4071b2ff1cc21123e8e285c6a91393897ecbc",
+        "passed": true,
+        "path": "datasets/CV-Bench/test_2d.parquet",
+        "sha256": "33196034ef4bf3265cae4a7ff5c4071b2ff1cc21123e8e285c6a91393897ecbc"
+      },
+      {
+        "actual_sha256": "ef91fe8b5392eb2a16e318ca68fa02449d45ba1e152afece12a0a526e9fbbc25",
+        "passed": true,
+        "path": "datasets/CV-Bench/test_3d.parquet",
+        "sha256": "ef91fe8b5392eb2a16e318ca68fa02449d45ba1e152afece12a0a526e9fbbc25"
+      }
+    ],
+    "formal_cvbench_manifests": [
+      {
+        "actual_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+        "id": "full2638_16tok",
+        "passed": true,
+        "path": "datasets/cv_bench_full2638.jsonl",
+        "records": 2638,
+        "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+      },
+      {
+        "actual_sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+        "id": "screening100_16tok",
+        "passed": true,
+        "path": "datasets/cv_bench_screening100.jsonl",
+        "records": 100,
+        "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+      },
+      {
+        "actual_sha256": "a82813547444a5ab89dd7c9d3a0d1483e01a937fcf1d90f7c06e7faf0221f8a6",
+        "id": "full2638_64tok",
+        "passed": true,
+        "path": "datasets/cv_bench_full2638_budget64_diagnostic.jsonl",
+        "records": 2638,
+        "sha256": "a82813547444a5ab89dd7c9d3a0d1483e01a937fcf1d90f7c06e7faf0221f8a6"
+      },
+      {
+        "actual_sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668",
+        "id": "screening100_64tok",
+        "passed": true,
+        "path": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+        "records": 100,
+        "sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668"
+      }
+    ],
+    "images_present_and_frozen": {
+      "images": 236,
+      "passed": true,
+      "problems": []
+    },
+    "manifest_sha256": {
+      "actual": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+      "expected": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+      "passed": true
+    },
+    "record_counts": {
+      "expected_records": 472,
+      "passed": true,
+      "records": 472
+    },
+    "same_image_same_split": {
+      "all_splits_nonempty": true,
+      "images": 236,
+      "passed": true,
+      "splits": {
+        "test": {
+          "images": 39,
+          "records": 78
+        },
+        "train": {
+          "images": 159,
+          "records": 318
+        },
+        "val": {
+          "images": 38,
+          "records": 76
+        }
+      }
+    },
+    "source_manifests": [
+      {
+        "actual_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+        "passed": true,
+        "path": "datasets/visual_refinement_20260912_development.jsonl",
+        "records_excluded": 66,
+        "records_in": 384,
+        "records_kept": 318,
+        "sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae"
+      },
+      {
+        "actual_sha256": "d7746bf21061dfb70cb779bbf7aa6b006f15e41c3f465501d07ad5c6c8d88247",
+        "passed": true,
+        "path": "datasets/visual_refinement_20260912_calibration.jsonl",
+        "records_excluded": 38,
+        "records_in": 192,
+        "records_kept": 154,
+        "sha256": "d7746bf21061dfb70cb779bbf7aa6b006f15e41c3f465501d07ad5c6c8d88247"
+      }
+    ],
+    "task_counts": {
+      "actual": {
+        "grounding": 236,
+        "pointing": 236
+      },
+      "expected": {
+        "grounding": 236,
+        "pointing": 236
+      },
+      "passed": true
+    },
+    "zero_cvbench_coco_overlap": {
+      "cvbench_coco_images": 805,
+      "overlap": [],
+      "passed": true,
+      "retained_unique_images": 236
+    },
+    "zero_formal_eval_image_sha_overlap": {
+      "formal_eval_images": 2573,
+      "overlap": [],
+      "passed": true,
+      "retained_images": 236
+    },
+    "zero_formal_sample_id_overlap": {
+      "formal_sample_ids": 2638,
+      "manifest_sample_ids": 472,
+      "overlap": [],
+      "passed": true
+    }
+  },
+  "lock": {
+    "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/prompt_projection_clean_inductive_v1.lock.json",
+    "sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105"
+  },
+  "manifest": {
+    "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,1082 @@
+{
+ "address_map": {
+  "all_segments": [
+   {
+    "offset": "0x0000000000000000",
+    "range": "0x0000000080000000",
+    "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_input_arena/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+   },
+   {
+    "offset": "0x0000000000000000",
+    "range": "0x0000000080000000",
+    "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_output_arena/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+   },
+   {
+    "offset": "0x0000000000000000",
+    "range": "0x0000000080000000",
+    "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_wv_q/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+   },
+   {
+    "offset": "",
+    "range": "0x00010000",
+    "segment": "/integer_selector_pipeline_compact_0/s_axi_control/Reg"
+   },
+   {
+    "offset": "0x00A0000000",
+    "range": "0x0000010000",
+    "segment": "/zynq_ultra_ps_e_0/Data/SEG_integer_selector_pipeline_compact_0_Reg"
+   },
+   {
+    "offset": "",
+    "range": "0x80000000",
+    "segment": "/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW"
+   },
+   {
+    "offset": "",
+    "range": "0x01000000",
+    "segment": "/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM"
+   }
+  ],
+  "domains": {
+   "control_registers": {
+    "base_address": "0x00A0000000",
+    "class": "AXI4-Lite register range",
+    "master": "/zynq_ultra_ps_e_0/M_AXI_HPM0_FPD",
+    "range": "0x0000010000",
+    "segment": "/zynq_ultra_ps_e_0/Data/SEG_integer_selector_pipeline_compact_0_Reg",
+    "slave": "/integer_selector_pipeline_compact_0/s_axi_control"
+   },
+   "ddr": {
+    "memmap": "HP0_DDR_LOW",
+    "ps_slave": "/zynq_ultra_ps_e_0/S_AXI_HP0_FPD",
+    "segments": {
+     "m_axi_input_arena": {
+      "offset": "0x0000000000000000",
+      "range": "0x0000000080000000",
+      "range_nonempty": true,
+      "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_input_arena/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+     },
+     "m_axi_output_arena": {
+      "offset": "0x0000000000000000",
+      "range": "0x0000000080000000",
+      "range_nonempty": true,
+      "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_output_arena/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+     },
+     "m_axi_wv_q": {
+      "offset": "0x0000000000000000",
+      "range": "0x0000000080000000",
+      "range_nonempty": true,
+      "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_wv_q/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+     }
+    }
+   }
+  }
+ },
+ "axi_interface_inventory": [
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Master",
+   "pin": "/integer_selector_pipeline_compact_0/m_axi_input_arena",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Master",
+   "pin": "/integer_selector_pipeline_compact_0/m_axi_output_arena",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Master",
+   "pin": "/integer_selector_pipeline_compact_0/m_axi_wv_q",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 32,
+   "freq_hz": "199998001",
+   "mode": "Slave",
+   "pin": "/integer_selector_pipeline_compact_0/s_axi_control",
+   "protocol": "AXI4LITE"
+  },
+  {
+   "data_width": 32,
+   "freq_hz": "199998001",
+   "mode": "Master",
+   "pin": "/smartconnect_control/M00_AXI",
+   "protocol": "AXI4LITE"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Slave",
+   "pin": "/smartconnect_control/S00_AXI",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Master",
+   "pin": "/smartconnect_ddr/M00_AXI",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Slave",
+   "pin": "/smartconnect_ddr/S00_AXI",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Slave",
+   "pin": "/smartconnect_ddr/S01_AXI",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Slave",
+   "pin": "/smartconnect_ddr/S02_AXI",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Master",
+   "pin": "/zynq_ultra_ps_e_0/M_AXI_HPM0_FPD",
+   "protocol": "AXI4"
+  },
+  {
+   "data_width": 128,
+   "freq_hz": "199998001",
+   "mode": "Slave",
+   "pin": "/zynq_ultra_ps_e_0/S_AXI_HP0_FPD",
+   "protocol": "AXI4"
+  }
+ ],
+ "cell_inventory": [
+  {
+   "cell": "/integer_selector_pipeline_compact_0",
+   "type": "ip",
+   "vlnv": "robobrain.local:hls:integer_selector_pipeline_compact:1.0"
+  },
+  {
+   "cell": "/proc_sys_reset_0",
+   "type": "ip",
+   "vlnv": "xilinx.com:ip:proc_sys_reset:5.0"
+  },
+  {
+   "cell": "/smartconnect_control",
+   "type": "ip",
+   "vlnv": "xilinx.com:ip:smartconnect:1.0"
+  },
+  {
+   "cell": "/smartconnect_ddr",
+   "type": "ip",
+   "vlnv": "xilinx.com:ip:smartconnect:1.0"
+  },
+  {
+   "cell": "/zynq_ultra_ps_e_0",
+   "type": "ip",
+   "vlnv": "xilinx.com:ip:zynq_ultra_ps_e:3.5"
+  }
+ ],
+ "clocks_resets": {
+  "ap_clk_freq_hz": "199998001",
+  "ap_clk_mhz": 199.998,
+  "clock_pins": [
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/integer_selector_pipeline_compact_0/ap_clk",
+    "type": "clk"
+   },
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/proc_sys_reset_0/slowest_sync_clk",
+    "type": "clk"
+   },
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/smartconnect_control/aclk",
+    "type": "clk"
+   },
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/smartconnect_ddr/aclk",
+    "type": "clk"
+   },
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/zynq_ultra_ps_e_0/maxihpm0_fpd_aclk",
+    "type": "clk"
+   },
+   {
+    "dir": "O",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/zynq_ultra_ps_e_0/pl_clk0",
+    "type": "clk"
+   },
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/zynq_ultra_ps_e_0/saxihp0_fpd_aclk",
+    "type": "clk"
+   }
+  ],
+  "proc_sys_reset_C_EXT_RESET_HIGH": "0",
+  "proc_sys_reset_active_low": true,
+  "reset_connectivity": {
+   "ap_rst_n_net": [
+    "/proc_sys_reset_0_peripheral_aresetn"
+   ],
+   "ext_reset_in_driven_by": [
+    "/proc_sys_reset_0/ext_reset_in"
+   ],
+   "peripheral_aresetn_members": [
+    "/proc_sys_reset_0_peripheral_aresetn"
+   ]
+  },
+  "reset_pins": [
+   {
+    "dir": "I",
+    "net": "/proc_sys_reset_0_peripheral_aresetn",
+    "pin": "/integer_selector_pipeline_compact_0/ap_rst_n",
+    "type": "rst"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/proc_sys_reset_0/aux_reset_in",
+    "type": "rst"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/proc_sys_reset_0/bus_struct_reset",
+    "type": "rst"
+   },
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_resetn0",
+    "pin": "/proc_sys_reset_0/ext_reset_in",
+    "type": "rst"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/proc_sys_reset_0/interconnect_aresetn",
+    "type": "rst"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/proc_sys_reset_0/mb_debug_sys_rst",
+    "type": "rst"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/proc_sys_reset_0/mb_reset",
+    "type": "rst"
+   },
+   {
+    "dir": "O",
+    "net": "/proc_sys_reset_0_peripheral_aresetn",
+    "pin": "/proc_sys_reset_0/peripheral_aresetn",
+    "type": "rst"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/proc_sys_reset_0/peripheral_reset",
+    "type": "rst"
+   },
+   {
+    "dir": "I",
+    "net": "/zynq_ultra_ps_e_0_pl_clk0",
+    "pin": "/proc_sys_reset_0/slowest_sync_clk",
+    "type": "clk"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/smartconnect_control/S00_AXI_arburst",
+    "type": "undef"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/smartconnect_control/S00_AXI_awburst",
+    "type": "undef"
+   },
+   {
+    "dir": "I",
+    "net": "/proc_sys_reset_0_peripheral_aresetn",
+    "pin": "/smartconnect_control/aresetn",
+    "type": "rst"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/smartconnect_ddr/M00_AXI_arburst",
+    "type": "undef"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/smartconnect_ddr/M00_AXI_awburst",
+    "type": "undef"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/smartconnect_ddr/S00_AXI_arburst",
+    "type": "undef"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/smartconnect_ddr/S01_AXI_arburst",
+    "type": "undef"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/smartconnect_ddr/S02_AXI_awburst",
+    "type": "undef"
+   },
+   {
+    "dir": "I",
+    "net": "/proc_sys_reset_0_peripheral_aresetn",
+    "pin": "/smartconnect_ddr/aresetn",
+    "type": "rst"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/zynq_ultra_ps_e_0/maxigp0_arburst",
+    "type": "undef"
+   },
+   {
+    "dir": "O",
+    "net": "",
+    "pin": "/zynq_ultra_ps_e_0/maxigp0_awburst",
+    "type": "undef"
+   },
+   {
+    "dir": "O",
+    "net": "/zynq_ultra_ps_e_0_pl_resetn0",
+    "pin": "/zynq_ultra_ps_e_0/pl_resetn0",
+    "type": "rst"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/zynq_ultra_ps_e_0/saxigp2_arburst",
+    "type": "undef"
+   },
+   {
+    "dir": "I",
+    "net": "",
+    "pin": "/zynq_ultra_ps_e_0/saxigp2_awburst",
+    "type": "undef"
+   }
+  ]
+ },
+ "connectivity": {
+  "all_interface_nets": [
+   {
+    "members": "/integer_selector_pipeline_compact_0/m_axi_input_arena /smartconnect_ddr/S00_AXI",
+    "net": "/integer_selector_pipeline_compact_0_m_axi_input_arena"
+   },
+   {
+    "members": "/integer_selector_pipeline_compact_0/m_axi_output_arena /smartconnect_ddr/S02_AXI",
+    "net": "/integer_selector_pipeline_compact_0_m_axi_output_arena"
+   },
+   {
+    "members": "/integer_selector_pipeline_compact_0/m_axi_wv_q /smartconnect_ddr/S01_AXI",
+    "net": "/integer_selector_pipeline_compact_0_m_axi_wv_q"
+   },
+   {
+    "members": "/smartconnect_control/M00_AXI /integer_selector_pipeline_compact_0/s_axi_control",
+    "net": "/smartconnect_control_M00_AXI"
+   },
+   {
+    "members": "/smartconnect_ddr/M00_AXI /zynq_ultra_ps_e_0/S_AXI_HP0_FPD",
+    "net": "/smartconnect_ddr_M00_AXI"
+   },
+   {
+    "members": "/zynq_ultra_ps_e_0/M_AXI_HPM0_FPD /smartconnect_control/S00_AXI",
+    "net": "/zynq_ultra_ps_e_0_M_AXI_HPM0_FPD"
+   }
+  ],
+  "ps_M_AXI_HPM0_FPD": [
+   "/zynq_ultra_ps_e_0/M_AXI_HPM0_FPD",
+   "/smartconnect_control/S00_AXI"
+  ],
+  "selector_master_nets": {
+   "m_axi_input_arena": [
+    "/integer_selector_pipeline_compact_0/m_axi_input_arena",
+    "/smartconnect_ddr/S00_AXI"
+   ],
+   "m_axi_output_arena": [
+    "/integer_selector_pipeline_compact_0/m_axi_output_arena",
+    "/smartconnect_ddr/S02_AXI"
+   ],
+   "m_axi_wv_q": [
+    "/integer_selector_pipeline_compact_0/m_axi_wv_q",
+    "/smartconnect_ddr/S01_AXI"
+   ]
+  },
+  "smartconnect_control_M00_AXI": [
+   "/smartconnect_control/M00_AXI",
+   "/integer_selector_pipeline_compact_0/s_axi_control"
+  ],
+  "smartconnect_ddr_M00_AXI": [
+   "/smartconnect_ddr/M00_AXI",
+   "/zynq_ultra_ps_e_0/S_AXI_HP0_FPD"
+  ]
+ },
+ "decision": "INTEGER_SELECTOR_MINIMAL_ZYNQ_BD_PASS",
+ "design": {
+  "board_part": "xilinx.com:zcu102:part0:3.4",
+  "design_name": "integer_selector_minimal_zynq_bd",
+  "interrupt_used": "0",
+  "part": "xczu9eg-ffvb1156-2-e",
+  "selector_vlnv": "robobrain.local:hls:integer_selector_pipeline_compact:1.0"
+ },
+ "gates": {
+  "clocks_resets_connected": true,
+  "exact_part_and_board_recorded": true,
+  "no_bitstream_no_board": true,
+  "output_products_and_wrapper": true,
+  "pl_clock_200mhz": true,
+  "protected_files_unchanged": true,
+  "ps_master_to_control_and_base": true,
+  "selector_interface_inventory_exact": true,
+  "selector_vlnv_instantiated": true,
+  "three_ddr_segments_nonempty": true,
+  "three_master_to_ps_ddr_path": true,
+  "validate_bd_design_no_error": true
+ },
+ "limitations": [
+  "No Ethernet/Jetson software path is implemented.",
+  "No PS software (bare-metal/Linux) driver is implemented.",
+  "No DDR traffic contention / arbitration bandwidth is measured.",
+  "No full-system timing sign-off (no implementation, no bitstream).",
+  "No bitstream is generated and the board is never accessed.",
+  "No board measurement is performed.",
+  "No model end-to-end latency is measured.",
+  "No task-accuracy claim is made."
+ ],
+ "next_action": "Implement the PS-side bare-metal/Linux register-and-DDR test harness using static JPG-derived fixture buffers, before any Jetson Ethernet integration.",
+ "output_products": {
+  "generate_target_all": true,
+  "top": "integer_selector_minimal_zynq_bd_wrapper",
+  "wrapper_files": "/tmp/robobrain_integer_selector_bd/vivado/project/integer_selector_minimal_zynq_bd.gen/sources_1/bd/integer_selector_minimal_zynq_bd/hdl/integer_selector_minimal_zynq_bd_wrapper.v"
+ },
+ "protected_sha_audit": {
+  "added": [],
+  "after_aggregate_sha256": "68c2c1b318be66e632e5b14f646881fd4e069528082b61924bf1ab29c8bada35",
+  "after_file_count": 2315,
+  "before_aggregate_sha256": "68c2c1b318be66e632e5b14f646881fd4e069528082b61924bf1ab29c8bada35",
+  "before_file_count": 2315,
+  "changed": [],
+  "missing": [],
+  "protected_files_unchanged": true
+ },
+ "ps_interfaces": {
+  "control_master": "M_AXI_HPM0_FPD (128-bit AXI4, GP0) -> AXI SmartConnect -> control",
+  "ddr_slave": "S_AXI_HP0_FPD (128-bit AXI4 high-performance DDR port, enabled via PSU__USE__S_AXI_GP2)",
+  "pl_clock_source": "pl_clk0 from IOPLL, requested 200 MHz",
+  "ps_config_subset": {
+   "CONFIG.PSU__CRL_APB__PL0_REF_CTRL__ACT_FREQMHZ": "199.998001",
+   "CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR0": "5",
+   "CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR1": "1",
+   "CONFIG.PSU__CRL_APB__PL0_REF_CTRL__FREQMHZ": "200",
+   "CONFIG.PSU__CRL_APB__PL0_REF_CTRL__SRCSEL": "IOPLL",
+   "CONFIG.PSU__FPGA_PL0_ENABLE": "1",
+   "CONFIG.PSU__IRQ_P2F_ADMA_CHAN__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_AIB_AXI__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_AMS__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APM_FPD__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_COMM__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_CPUMNT__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_CTI__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_EXTERR__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_IPI__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_L2ERR__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_PMU__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_APU_REGS__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ATB_LPD__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_CAN0__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_CAN1__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_CLKMON__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_CSUPMU_WDT__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_CSU_DMA__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_CSU__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_DDR_SS__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_DPDMA__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_DPORT__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_EFUSE__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT0_WAKEUP__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT0__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT1_WAKEUP__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT1__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT2_WAKEUP__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT2__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT3_WAKEUP__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_ENT3__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_FPD_APB__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_FPD_ATB_ERR__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_FP_WDT__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_GDMA_CHAN__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_GPIO__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_GPU__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_I2C0__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_I2C1__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_LPD_APB__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_LPD_APM__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_LP_WDT__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_NAND__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_OCM_ERR__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_PCIE_DMA__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_PCIE_LEGACY__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_PCIE_MSC__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_PCIE_MSI__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_PL_IPI__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_QSPI__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_R5_CORE0_ECC_ERR__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_R5_CORE1_ECC_ERR__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_RPU_IPI__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_RPU_PERMON__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_RTC_ALARM__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_RTC_SECONDS__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_SATA__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_SDIO0_WAKE__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_SDIO0__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_SDIO1_WAKE__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_SDIO1__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_SPI0__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_SPI1__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC0__INT0": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC0__INT1": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC0__INT2": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC1__INT0": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC1__INT1": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC1__INT2": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC2__INT0": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC2__INT1": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC2__INT2": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC3__INT0": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC3__INT1": "0",
+   "CONFIG.PSU__IRQ_P2F_TTC3__INT2": "0",
+   "CONFIG.PSU__IRQ_P2F_UART0__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_UART1__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_USB3_ENDPOINT__INT0": "0",
+   "CONFIG.PSU__IRQ_P2F_USB3_ENDPOINT__INT1": "0",
+   "CONFIG.PSU__IRQ_P2F_USB3_OTG__INT0": "0",
+   "CONFIG.PSU__IRQ_P2F_USB3_OTG__INT1": "0",
+   "CONFIG.PSU__IRQ_P2F_USB3_PMU_WAKEUP__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_XMPU_FPD__INT": "0",
+   "CONFIG.PSU__IRQ_P2F_XMPU_LPD__INT": "0",
+   "CONFIG.PSU__IRQ_P2F__INTF_FPD_SMMU__INT": "0",
+   "CONFIG.PSU__IRQ_P2F__INTF_PPD_CCI__INT": "0",
+   "CONFIG.PSU__MAXIGP0__DATA_WIDTH": "128",
+   "CONFIG.PSU__MAXIGP1__DATA_WIDTH": "128",
+   "CONFIG.PSU__MAXIGP2__DATA_WIDTH": "32",
+   "CONFIG.PSU__SAXIGP0__DATA_WIDTH": "128",
+   "CONFIG.PSU__SAXIGP1__DATA_WIDTH": "128",
+   "CONFIG.PSU__SAXIGP2__DATA_WIDTH": "128",
+   "CONFIG.PSU__SAXIGP3__DATA_WIDTH": "128",
+   "CONFIG.PSU__SAXIGP4__DATA_WIDTH": "128",
+   "CONFIG.PSU__SAXIGP5__DATA_WIDTH": "128",
+   "CONFIG.PSU__SAXIGP6__DATA_WIDTH": "128",
+   "CONFIG.PSU__USE__ADMA": "0",
+   "CONFIG.PSU__USE__APU_LEGACY_INTERRUPT": "0",
+   "CONFIG.PSU__USE__AUDIO": "0",
+   "CONFIG.PSU__USE__CLK": "0",
+   "CONFIG.PSU__USE__CLK0": "0",
+   "CONFIG.PSU__USE__CLK1": "0",
+   "CONFIG.PSU__USE__CLK2": "0",
+   "CONFIG.PSU__USE__CLK3": "0",
+   "CONFIG.PSU__USE__CROSS_TRIGGER": "0",
+   "CONFIG.PSU__USE__DDR_INTF_REQUESTED": "0",
+   "CONFIG.PSU__USE__DEBUG__TEST": "0",
+   "CONFIG.PSU__USE__EVENT_RPU": "0",
+   "CONFIG.PSU__USE__FABRIC__RST": "1",
+   "CONFIG.PSU__USE__FTM": "0",
+   "CONFIG.PSU__USE__GDMA": "0",
+   "CONFIG.PSU__USE__IRQ": "0",
+   "CONFIG.PSU__USE__IRQ0": "0",
+   "CONFIG.PSU__USE__IRQ1": "0",
+   "CONFIG.PSU__USE__M_AXI_GP0": "1",
+   "CONFIG.PSU__USE__M_AXI_GP1": "0",
+   "CONFIG.PSU__USE__M_AXI_GP2": "0",
+   "CONFIG.PSU__USE__PROC_EVENT_BUS": "0",
+   "CONFIG.PSU__USE__RPU_LEGACY_INTERRUPT": "0",
+   "CONFIG.PSU__USE__RST0": "0",
+   "CONFIG.PSU__USE__RST1": "0",
+   "CONFIG.PSU__USE__RST2": "0",
+   "CONFIG.PSU__USE__RST3": "0",
+   "CONFIG.PSU__USE__RTC": "0",
+   "CONFIG.PSU__USE__STM": "0",
+   "CONFIG.PSU__USE__S_AXI_ACE": "0",
+   "CONFIG.PSU__USE__S_AXI_ACP": "0",
+   "CONFIG.PSU__USE__S_AXI_GP0": "0",
+   "CONFIG.PSU__USE__S_AXI_GP1": "0",
+   "CONFIG.PSU__USE__S_AXI_GP2": "1",
+   "CONFIG.PSU__USE__S_AXI_GP3": "0",
+   "CONFIG.PSU__USE__S_AXI_GP4": "0",
+   "CONFIG.PSU__USE__S_AXI_GP5": "0",
+   "CONFIG.PSU__USE__S_AXI_GP6": "0",
+   "CONFIG.PSU__USE__USB3_0_HUB": "0",
+   "CONFIG.PSU__USE__USB3_1_HUB": "0",
+   "CONFIG.PSU__USE__VIDEO": "0"
+  }
+ },
+ "run_status": {
+  "BITSTREAM_FILES": "0",
+  "BUILD_RC": "0",
+  "BUILD_SECONDS": "31",
+  "FINISHED_UTC": "2026-10-03T13:19:29+00:00",
+  "SYNTH_PROC_RC": "0",
+  "SYNTH_RC": "0",
+  "SYNTH_SECONDS": "284"
+ },
+ "selector_interface_summary": {
+  "axi4_masters_128": [
+   {
+    "data_width": 128,
+    "freq_hz": "199998001",
+    "interface": "/integer_selector_pipeline_compact_0/m_axi_input_arena",
+    "mode": "Master",
+    "name": "m_axi_input_arena",
+    "protocol": "AXI4"
+   },
+   {
+    "data_width": 128,
+    "freq_hz": "199998001",
+    "interface": "/integer_selector_pipeline_compact_0/m_axi_wv_q",
+    "mode": "Master",
+    "name": "m_axi_wv_q",
+    "protocol": "AXI4"
+   },
+   {
+    "data_width": 128,
+    "freq_hz": "199998001",
+    "interface": "/integer_selector_pipeline_compact_0/m_axi_output_arena",
+    "mode": "Master",
+    "name": "m_axi_output_arena",
+    "protocol": "AXI4"
+   }
+  ],
+  "axi4lite_slave_control": {
+   "data_width": 32,
+   "freq_hz": "199998001",
+   "interface": "/integer_selector_pipeline_compact_0/s_axi_control",
+   "mode": "Slave",
+   "protocol": "AXI4LITE"
+  },
+  "control_r_present": false,
+  "score_port_present": false
+ },
+ "stage_status": [
+  {
+   "rc": "0",
+   "seconds": "3",
+   "stage": "create_project_ip_repo"
+  },
+  {
+   "rc": "0",
+   "seconds": "0",
+   "stage": "connect_bd"
+  },
+  {
+   "rc": "0",
+   "seconds": "0",
+   "stage": "assign_bd_address"
+  },
+  {
+   "rc": "0",
+   "seconds": "4",
+   "stage": "validate_bd_design"
+  },
+  {
+   "rc": "0",
+   "seconds": "0",
+   "stage": "save_bd_design"
+  }
+ ],
+ "synthesis": {
+  "critical_warning_count": 0,
+  "error_count": 0,
+  "open_run_seconds": 18,
+  "resources": {
+   "Block_RAM_Tile": {
+    "available": 912,
+    "fixed": 0,
+    "pct": 13.43,
+    "prohibited": 0,
+    "used": 122.5
+   },
+   "CLB_LUTs": {
+    "available": 274080,
+    "fixed": 0,
+    "pct": 11.86,
+    "prohibited": 0,
+    "used": 32514
+   },
+   "CLB_Registers": {
+    "available": 548160,
+    "fixed": 0,
+    "pct": 6.8,
+    "prohibited": 0,
+    "used": 37264
+   },
+   "DSPs": {
+    "available": 2520,
+    "fixed": 0,
+    "pct": 8.33,
+    "prohibited": 0,
+    "used": 210
+   },
+   "PS8": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 100.0,
+    "prohibited": 0,
+    "used": 1
+   },
+   "URAM": null
+  },
+  "run": true,
+  "status": "OK",
+  "timing": {
+   "THS_failing": "57404",
+   "THS_ns": "-1958.720",
+   "THS_total": "145506",
+   "TNS_failing": "0",
+   "TNS_ns": "0.000",
+   "TNS_total": "145506",
+   "TPWS_failing": "0",
+   "TPWS_ns": "0.000",
+   "TPWS_total": "42319",
+   "WHS_ns": "-0.096",
+   "WNS_ns": "1.184",
+   "WPWS_ns": "1.000"
+  },
+  "utilization": {
+   "BSCANE2": {
+    "available": 4,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "BUFGCE": {
+    "available": 116,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "BUFGCE_DIV": {
+    "available": 16,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "BUFGCTRL*": {
+    "available": 32,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "BUFG_GT": {
+    "available": 168,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "BUFG_PS": {
+    "available": 72,
+    "fixed": 0,
+    "pct": 1.39,
+    "prohibited": 0,
+    "used": 1
+   },
+   "Block RAM Tile": {
+    "available": 912,
+    "fixed": 0,
+    "pct": 13.43,
+    "prohibited": 0,
+    "used": 122.5
+   },
+   "Bonded IOB": {
+    "available": 328,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "CARRY8": {
+    "available": 34260,
+    "fixed": 0,
+    "pct": 6.05,
+    "prohibited": 0,
+    "used": 2072
+   },
+   "CLB LUTs*": {
+    "available": 274080,
+    "fixed": 0,
+    "pct": 11.86,
+    "prohibited": 0,
+    "used": 32514
+   },
+   "CLB Registers": {
+    "available": 548160,
+    "fixed": 0,
+    "pct": 6.8,
+    "prohibited": 0,
+    "used": 37264
+   },
+   "DNA_PORTE2": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "DSPs": {
+    "available": 2520,
+    "fixed": 0,
+    "pct": 8.33,
+    "prohibited": 0,
+    "used": 210
+   },
+   "EFUSE_USR": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "F7 Muxes": {
+    "available": 137040,
+    "fixed": 0,
+    "pct": 0.83,
+    "prohibited": 0,
+    "used": 1141
+   },
+   "F8 Muxes": {
+    "available": 68520,
+    "fixed": 0,
+    "pct": 0.6,
+    "prohibited": 0,
+    "used": 413
+   },
+   "F9 Muxes": {
+    "available": 34260,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "FRAME_ECCE4": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "GLOBAL CLOCK BUFFERs": {
+    "available": 404,
+    "fixed": 0,
+    "pct": 0.25,
+    "prohibited": 0,
+    "used": 1
+   },
+   "GTHE4_CHANNEL": {
+    "available": 24,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "GTHE4_COMMON": {
+    "available": 6,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "ICAPE3": {
+    "available": 2,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "LUT as Logic": {
+    "available": 274080,
+    "fixed": 0,
+    "pct": 10.52,
+    "prohibited": 0,
+    "used": 28832
+   },
+   "LUT as Memory": {
+    "available": 144000,
+    "fixed": 0,
+    "pct": 2.56,
+    "prohibited": 0,
+    "used": 3682
+   },
+   "MASTER_JTAG": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "MMCM": {
+    "available": 4,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "OBUFDS_GTE4": {
+    "available": 12,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "OBUFDS_GTE4_ADV": {
+    "available": 12,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "PLL": {
+    "available": 8,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "PS8": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 100.0,
+    "prohibited": 0,
+    "used": 1
+   },
+   "RAMB18": {
+    "available": 1824,
+    "fixed": 0,
+    "pct": 7.73,
+    "prohibited": 0,
+    "used": 141
+   },
+   "RAMB36/FIFO*": {
+    "available": 912,
+    "fixed": 0,
+    "pct": 5.7,
+    "prohibited": 0,
+    "used": 52
+   },
+   "Register as Flip Flop": {
+    "available": 548160,
+    "fixed": 0,
+    "pct": 6.8,
+    "prohibited": 0,
+    "used": 37264
+   },
+   "Register as Latch": {
+    "available": 548160,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "STARTUPE3": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   },
+   "SYSMONE4": {
+    "available": 1,
+    "fixed": 0,
+    "pct": 0.0,
+    "prohibited": 0,
+    "used": 0
+   }
+  },
+  "wall_seconds": "284"
+ },
+ "task": "integer_selector_minimal_zynq_bd",
+ "tool": {
+  "board_part": "xilinx.com:zcu102:part0:3.4",
+  "board_part_available_versions": [
+   "xilinx.com:zcu102:part0:3.3",
+   "xilinx.com:zcu102:part0:3.4"
+  ],
+  "board_part_status": "available",
+  "license_limit": "Tool Version Limit: 2023.10",
+  "part_available": true,
+  "tool_versions_txt": [
+   "=== tool versions ===",
+   "vivado v2023.2 (64-bit)",
+   "Tool Version Limit: 2023.10",
+   "SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023",
+   "IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023",
+   "Python 3.10.20"
+  ],
+  "vivado": "2023.2"
+ },
+ "validation": {
+  "critical_warning_count": 0,
+  "critical_warnings": [],
+  "error_count": 0,
+  "errors": [],
+  "evidence_dump_warning_count": 17,
+  "total_warning_count": 32,
+  "validate_bd_design_rc": "0",
+  "warning_count": 15,
+  "warning_examples": [
+   "WARNING: [BD 41-1051] Slave segment '/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM' with 'register' usage does not match address space '/integer_selector_pipeline_compact_0/Data_m_axi_input_arena' with 'memory' usage so will be excluded from this address space. Please use the 'include_bd_addr_seg' command to override this precaution if required.",
+   "WARNING: [BD 41-1051] Slave segment '/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM' with 'register' usage does not match address space '/integer_selector_pipeline_compact_0/Data_m_axi_output_arena' with 'memory' usage so will be excluded from this address space. Please use the 'include_bd_addr_seg' command to override this precaution if required.",
+   "WARNING: [BD 41-1051] Slave segment '/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM' with 'register' usage does not match address space '/integer_selector_pipeline_compact_0/Data_m_axi_wv_q' with 'memory' usage so will be excluded from this address space. Please use the 'include_bd_addr_seg' command to override this precaution if required.",
+   "WARNING: [BD 41-1629] Slave segment </zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM> is excluded from all addressing paths.",
+   "WARNING: [BD 41-237] Bus Interface property ARUSER_WIDTH does not match between /zynq_ultra_ps_e_0/S_AXI_HP0_FPD(1) and /smartconnect_ddr/M00_AXI(0)",
+   "WARNING: [BD 41-237] Bus Interface property AWUSER_WIDTH does not match between /zynq_ultra_ps_e_0/S_AXI_HP0_FPD(1) and /smartconnect_ddr/M00_AXI(0)",
+   "WARNING: [BD 41-2384] Width mismatch when connecting pin: '/smartconnect_ddr/S00_AXI_arlock'(1) to pin: '/integer_selector_pipeline_compact_0/m_axi_input_arena_ARLOCK'(2) - Only lower order bits will be connected.",
+   "WARNING: [BD 41-2384] Width mismatch when connecting pin: '/smartconnect_ddr/S01_AXI_arlock'(1) to pin: '/integer_selector_pipeline_compact_0/m_axi_wv_q_ARLOCK'(2) - Only lower order bits will be connected.",
+   "WARNING: [BD 41-2384] Width mismatch when connecting pin: '/smartconnect_ddr/S02_AXI_awlock'(1) to pin: '/integer_selector_pipeline_compact_0/m_axi_output_arena_AWLOCK'(2) - Only lower order bits will be connected.",
+   "WARNING: [BD 41-2937] The design that will be created by this Tcl script contains the following user IPs:",
+   "WARNING: [xilinx.com:ip:smartconnect:1.0-1] integer_selector_minimal_zynq_bd_smartconnect_control_0: IP integer_selector_minimal_zynq_bd_smartconnect_control_0 is configured in Low-area mode as all propagated traffic is low-bandwidth (AXI4LITE). SI S00_AXI has property HAS_BURST == 1. WRAP bursts are not supported in Low-area mode and will result in DECERR if received.",
+   "WARNING: [xilinx.com:ip:smartconnect:1.0-1] integer_selector_minimal_zynq_bd_smartconnect_control_0: If WRAP transactions are required then turn off Low-area mode using ADVANCED_PROPERTIES. Execute following: set_property CONFIG.ADVANCED_PROPERTIES {__experimental_features__ {disable_low_area_mode 1}} [get_bd_cells /integer_selector_minimal_zynq_bd_smartconnect_control_0]"
+  ],
+  "warning_notes": [
+   "AWLOCK/ARLOCK width mismatch (HLS 2-bit vs AXI4 1-bit) is benign; only the lower bit is used.",
+   "SmartConnect low-area mode does not support WRAP bursts; the AXI4-Lite control path issues single-beat register transactions only."
+  ]
+ }
+}

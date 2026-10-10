@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0-preregistered",
+  "status": "PREREGISTERED_TRAIN_VAL_ONLY",
+  "report_stem": "2026-10-03-spatial-prompt-contrastive-trainval",
+  "date": "2026-10-03",
+  "seed": 20261003,
+  "self_sha256_embedded": false,
+  "self_sha256_note": "This preregistration config deliberately does NOT embed its own SHA256 to avoid a self-reference paradox. The external SHA256 is recorded by the run report, the run harness result JSON and the preregistration report JSON.",
+  "preregistration_report": {
+    "path": "reports/token_selector/2026-10-03-spatial-prompt-contrastive-trainval-preregistration.json",
+    "sha256_note": "written immediately after this config; it pins this config's SHA256"
+  },
+  "preregistered_before_metrics": "This file and the preregistration report are written before any new validation NPZ is read for this experiment.",
+  "purpose": "Without changing the frozen prompt_mean_vector hardware structure (Wt[128,2560], Wv[128,1024], [1,128] query, Gx128 dot), test whether adding a fixed-weight (1.0) softplus same-image wrong-prompt contrastive term to the spatial KL base loss makes the student learn the same-image other-task prompt discrimination that arm B of the prior spatial-student experiment failed (G2), while keeping the already-positive deployed retained-mass utility.",
+  "prior_negative_result": {
+    "report": "reports/token_selector/2026-10-03-spatial-student-trainval.json",
+    "known_historical_defect": "the prior report's B_selector_minus_L2_anchor_mass_k48 aggregation used base - metric (l2_anchor - selector); the correct sign is selector - l2_anchor. This experiment computes P5 as selector - baseline only. The prior report and trainer are NOT modified.",
+    "failed_gate": "G2 prompt sensitivity (same-image other-task) was the only failing gate in the prior spatial-student experiment"
+  },
+  "scope": {
+    "train_val_only": true,
+    "internal_test_npz_must_not_be_resolved_hashed_opened_or_scored": true,
+    "cpu_only_float32": true,
+    "no_gpu": true,
+    "no_4b_model_load": true,
+    "no_feature_reextraction": true,
+    "no_raw_image_read": true,
+    "no_cv_bench": true,
+    "no_network": true,
+    "no_package_installation": true,
+    "no_hardware_speedup_claim": true,
+    "small_head_parameter_count": 458752,
+    "small_head_note": "about 458752 trainable parameters in a Wt[128,2560]/Wv[128,1024] head; this is NOT 4B model training",
+    "development_validation_only": true,
+    "development_validation_note": "the existing val split has already been used for development; this experiment is development validation only and must not be presented as final accuracy"
+  },
+  "frozen_inputs": {
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b"
+    },
+    "index": {
+      "path": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+      "sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26"
+    },
+    "clean_manifest": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+    },
+    "clean_manifest_lock": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.lock.json",
+      "sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105"
+    },
+    "train_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "spatial_audit_json": {
+      "path": "reports/token_selector/2026-10-03-spatial-teacher-feasibility.json",
+      "sha256": "1bd2b9e41f3e6d698548ff7ad85c9b0a0b513e0d3ef4d4b0c02cc259ffbcc739"
+    },
+    "spatial_audit_script": {
+      "path": "evaluation/spatial_teacher_feasibility_audit.py",
+      "sha256": "1d033c4036d5f2319c8828e393594fe0b6330ac9c43afe43af14499adf748aec"
+    },
+    "hardware_regular_config": {
+      "path": "configs/hardware_regular_token_selector.json",
+      "sha256": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142"
+    },
+    "hardware_regular_code": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "existing_spatial_trainer": {
+      "path": "evaluation/train_spatial_prompt_selector.py",
+      "sha256": "1308e8a0f18cfb047aa56ab4e8fa40423ebd127f22df309361b3916eee389fd2",
+      "note": "read-only reuse source; must remain byte-for-byte unchanged and must not be edited by this experiment"
+    },
+    "pair_loss_feasibility_audit": {
+      "path": "evaluation/pair_loss_feasibility_audit.py",
+      "sha256": "2913e43fadef1397f33a6d2f38ea093727ce2fc129378c330c0698e8c5a73dea"
+    },
+    "prompt_projection_distillation": {
+      "path": "evaluation/prompt_projection_distillation.py",
+      "sha256": "cd2d4ccc3a4c5ba714f5e478f802b0cb9d64c6e279c15b6493661fb6fe0b0b98"
+    },
+    "prompt_identifiability_diagnostic": {
+      "path": "evaluation/prompt_identifiability_diagnostic.py",
+      "sha256": "f7311aa1a0ea1f82131a66dd4b38af930b93a527a743449069238924a0811bae"
+    },
+    "frozen_scorer_reduction_ablation": {
+      "path": "evaluation/frozen_scorer_reduction_ablation.py",
+      "sha256": "fef63fd2e6c82e3b4f38806f896940a8e0b1d5533feb51e99d97e145783c0729"
+    },
+    "semantic_control_code": {
+      "path": "evaluation/train_pairwise_prompt_selector.py",
+      "sha256": "07b504d79743915b7b8dacf7028dea1de91ba36bb2776dedd6ed9e4012032fec"
+    }
+  },
+  "immutability_rule": "Every pinned input and the preregistration config/report pair must be byte-for-byte unchanged before and after the experiment; the run records the pre-run and post-run SHA256 of every pinned input.",
+  "frozen_architecture": {
+    "Wt_shape": [128, 2560],
+    "Wv_shape": [128, 1024],
+    "query": "normalize(mean_t(normalize(prompt_embeddings @ Wt.T)))",
+    "visual": "row_normalize(group_mean @ Wv.T)",
+    "score": "visual @ query",
+    "student_distribution": "softmax(score / 0.1)",
+    "runtime_query_shape": [1, 128],
+    "fpga_scorer": "Gx128 dot",
+    "token_axis_reduction": "none (prompt mean vector)",
+    "token_axis_max_softmax_exp": false
+  },
+  "frozen_spatial_targets": {
+    "grounding_area_target": "exact bbox/grid-cell intersection area with bbox_1000 clipped to [0,1000] for boundary tolerance only; divide by total intersection area so mass sums to 1; hard-fail invalid or zero/negative-area boxes; applicable task: grounding",
+    "pointing_bilinear_target": "u=x*W/1000-0.5, v=y*H/1000-0.5; clamp u to [0,W-1], v to [0,H-1]; separable bilinear mass over the up to four neighboring centers; combine duplicate boundary indices and normalize to sum 1; no Gaussian and no bandwidth parameter; applicable task: pointing",
+    "source": "evaluation.spatial_teacher_feasibility_audit.{grounding_area_target,pointing_bilinear_target}",
+    "no_blending": "spatial targets are never blended with the cached semantic teacher target",
+    "no_tuning": "target formulas are frozen before any metric and are not tuned after seeing metrics"
+  },
+  "split_rule": {
+    "source": "evaluation.prompt_projection_distillation.split_sample_ids",
+    "seed": 20260927,
+    "ratios": {"train": 0.7, "val": 0.15, "test": 0.15},
+    "salt": "prompt_projection_distillation_2026_09_27",
+    "group_by": "source_image_sha256",
+    "expected_train_records": 318,
+    "expected_train_images": 159,
+    "expected_val_records": 76,
+    "expected_val_images": 38,
+    "expected_test_records": 78,
+    "expected_test_images": 39,
+    "test_npz_action": "never resolved, hashed, opened or scored; no test path is built from the index in this experiment"
+  },
+  "arms": [
+    {
+      "name": "A_SPATIAL_KL_CONTROL",
+      "role": "control",
+      "target": "spatial (grounding area target / pointing bilinear target)",
+      "loss": "base only: (KL(tg||pg_correct)+KL(tp||pp_correct))/2",
+      "can_win": false
+    },
+    {
+      "name": "B_SPATIAL_KL_CONTRASTIVE",
+      "role": "primary_promotion_arm",
+      "target": "spatial (grounding area target / pointing bilinear target)",
+      "loss": "total = base + 1.0 * contrastive",
+      "can_win": true
+    }
+  ],
+  "loss_definition": {
+    "student_distribution": "softmax(student_score / 0.1)",
+    "temperature_squared_scaling": false,
+    "base": "0.5 * (KL(tg || pg_correct) + KL(tp || pp_correct)) where tg/tp are the frozen spatial targets, pg_correct is the grounding record scored with the grounding prompt and pp_correct is the pointing record scored with the pointing prompt",
+    "contrastive": "0.5 * (softplus(KL_g_correct - KL_g_wrong) + softplus(KL_p_correct - KL_p_wrong))",
+    "wrong_prompt_definition": "for a grounding record the wrong prompt is the same image's pointing prompt; for a pointing record the wrong prompt is the same image's grounding prompt. Both KL terms still use the record's own spatial target.",
+    "contrastive_weight": 1.0,
+    "contrastive_margin": 0.0,
+    "softplus_temperature": 1.0,
+    "softplus": "log(1 + exp(x)); numerically stable implementation",
+    "arm_A_total": "base",
+    "arm_B_total": "base + contrastive",
+    "image_pair_loss": "the image-pair loss is the per-image total; batch loss is the mean over the image pairs in the deterministic batch",
+    "forbidden_terms": [
+      "no margin tuning",
+      "no contrastive weight tuning",
+      "no softplus temperature tuning",
+      "no target blending",
+      "no rank loss",
+      "no auxiliary loss",
+      "no hyperparameter search"
+    ]
+  },
+  "optimization": {
+    "seeds": [20261003, 20261004, 20261005],
+    "optimizer": "AdamW",
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "batch_unit": "image_pair",
+    "batch_size_images": 4,
+    "grad_clip_norm": 1.0,
+    "init_std": 0.02,
+    "student_temperature": 0.1,
+    "device": "cpu",
+    "dtype": "float32",
+    "deterministic_cpu": true,
+    "deterministic_algorithms": true,
+    "torch_num_threads": 1,
+    "epoch0_state_shared_across_arms_within_seed": true,
+    "epoch_batch_order_shared_across_arms_within_seed": true,
+    "epoch0_is_pre_update": true,
+    "model_selection": "arm A best by its own val base; arm B best by its own val total (base + contrastive); tie earliest epoch",
+    "best_epoch_tie_break": "earliest epoch",
+    "save_full_epoch_weights": false,
+    "saved_checkpoints": ["best.npz", "final.npz", "metadata.json"],
+    "report_base_contrastive_total": true
+  },
+  "validation_metrics": {
+    "independent_unit": "image",
+    "record_to_image_aggregation": "average grounding and pointing record metrics before resampling",
+    "primary_relevance": "frozen spatial target",
+    "correct_prompt_spatial_alignment": ["spearman", "ndcg_full", "target_mass_at_K48", "target_mass_at_K64", "target_mass_at_K96"],
+    "same_image_other_task_control": "score the same visual groups with the paired task prompt of the same image; the (correct - same) gap is the prompt-discrimination quantity",
+    "cross_image_same_task_derangement": "descriptive secondary control; deterministic split-local image derangement with same-task donor and no self-pair",
+    "donor_seed": 20261103,
+    "deployed_selection_proxy": "at K=48 (descriptive also at K=64/96) use the existing score normalization/combine rule of evaluation.hardware_regular_token_selector.combine_scores with lambda_semantic from configs/hardware_regular_token_selector.json and the exact existing select_real_groups 3x3 anchor rule; arm B prompt-conditioned selector retained spatial-target mass is compared with the L2+anchor baseline retained spatial-target mass",
+    "deployed_ndcg": "evaluation.prompt_projection_distillation.ndcg_for_selected_indices (corrected selected-set NDCG) whenever deployed NDCG is reported",
+    "collapse_metric": "exact prompt-score invariance fraction via evaluation.prompt_identifiability_diagnostic.score_invariance_stats (np.array_equal)",
+    "budgets": [48, 64, 96]
+  },
+  "statistics": {
+    "seed_aggregation": "per-image median delta across the three seeds before bootstrap/permutation",
+    "bootstrap_resamples": 2000,
+    "permutation_resamples": 10000,
+    "permutation_sided": "two-sided sign-flip",
+    "ci_level": 0.95,
+    "alpha": 0.05,
+    "effect_size_floor_cohens_dz": 0.2,
+    "statistics_seed": 20261003,
+    "implementation": "evaluation.prompt_identifiability_diagnostic.paired_effect and evaluation.frozen_scorer_reduction_ablation.holm_bonferroni",
+    "primary_holm_family": [
+      "P1 B minus A of the (correct minus same-image-other-task) spatial Spearman gap",
+      "P2 B minus A of the (correct minus same-image-other-task) spatial full NDCG gap",
+      "P3 B absolute (correct minus same-image-other-task) spatial Spearman gap",
+      "P4 B absolute (correct minus same-image-other-task) spatial full NDCG gap",
+      "P5 B deployed selector minus L2+anchor retained spatial-target mass at K48 (selector minus baseline)"
+    ],
+    "holm_family_size": 5,
+    "primary_metric_policy": "only these five tests decide the result; other K/method metrics are descriptive and cannot decide the result",
+    "reported_per_test": ["raw two-sided p-value", "Holm-adjusted p-value", "95% bootstrap CI", "Cohen dz", "positive-seed count out of 3"],
+    "p5_sign_rule": "P5 per-image delta = selector_mass_k48 - l2_anchor_mass_k48 (selector minus baseline); the reverse sign is forbidden and unit-tested"
+  },
+  "gates": {
+    "G1_correct_alignment_non_inferiority": "both B-A correct-prompt spatial Spearman and full NDCG deltas satisfy: mean >= -0.02, 95% CI lower >= -0.05, and >= 2/3 seed means >= -0.02 (descriptive non-inferiority; NOT in the Holm family)",
+    "G2_prompt_discrimination_gain": "P1 and P2 both satisfy: mean > 0, 95% CI lower > 0, |dz| >= 0.2, Holm p < 0.05, positive mean in >= 2/3 seeds",
+    "G3_prompt_discrimination_absolute": "P3 and P4 both satisfy the same five conditions",
+    "G4_deployed_K48_utility": "P5 satisfies the same five conditions",
+    "G5_collapse_removed": "exact prompt-score invariance fraction <= 0.05 in every arm B seed",
+    "G6_validation_learning": ">= 2/3 arm B seeds have best_epoch > 0 and best val total < epoch0 val total",
+    "G7_hardware_contract": "runtime query remains [1,128]; FPGA scorer remains Gx128 dot; no token-axis max/softmax/exp; existing fixed-budget 3x3 anchor selection unchanged"
+  },
+  "decision_rule": {
+    "PROMPT_CONTRASTIVE_STUDENT_ESTABLISHED": "arm B passes G1-G7",
+    "PROMPT_CONTRASTIVE_STUDENT_NOT_ESTABLISHED": "arm B fails any of G1-G7",
+    "control_rule": "arm A is a control and can never win",
+    "internal_test": "no internal test evaluation in either case"
+  },
+  "prohibitions": [
+    "no third arm and no arm target substitution after the preregistration",
+    "no contrastive weight, margin or softplus temperature tuning",
+    "no target blending, rank loss, auxiliary loss or hyperparameter search",
+    "no learning-rate/epoch/temperature/init-std search",
+    "no reading, resolving, hashing or scoring of internal test NPZ files",
+    "no internal test evaluation in either decision branch",
+    "no 4B model load, no feature re-extraction, no raw image read, no GPU, no network, no package installation",
+    "no CV-Bench evaluation",
+    "no modification of evaluation/train_spatial_prompt_selector.py or any existing report",
+    "no post-hoc change of the five-test Holm family, the gates or the decision rule",
+    "no post-hoc change of the corrected selected-set NDCG helper",
+    "no claim of final accuracy, CV-Bench task accuracy, hardware speedup or board deployment"
+  ],
+  "authorization": "DeepSeek Harness may process necessary code, metrics and derived data via api.deepseek.com; raw images, 4B weights, keys, proxy config and credentials are never read, uploaded or printed."
+}

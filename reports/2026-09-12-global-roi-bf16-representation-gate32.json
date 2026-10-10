@@ -1,0 +1,300 @@
+{
+  "status": "SUPERSEDED_PREFIX_SAMPLING_BIAS",
+  "superseded_by": "reports/2026-09-12-global-roi-bf16-representation-gate32-stratified.json",
+  "evidence_level": "nonrepresentative manifest-prefix diagnostic; retained only for audit",
+  "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+  "manifest_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+  "results": "evaluation/results/global_roi_bf16_representation_gate32_20260912.jsonl",
+  "results_sha256": "f72d69ea19ec542db90a0e3f1ddc5961439296670f1629c7ee0ed9db3b146eaf",
+  "result_records": 768,
+  "outputs_deterministic_across_repeats": true,
+  "metrics": {
+    "dense:grounding": {
+      "strategy": "dense",
+      "task": "grounding",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.8574610139670304,
+      "secondary_mean": 0.96875,
+      "continuous_mean": 0.8574610139670304,
+      "visual_tokens_mean": 268.8125,
+      "application_latency_ms_p50": 510.6797890039161,
+      "application_latency_ms_p95": 547.483472910244,
+      "model_latency_ms_p50": 508.6848270148039,
+      "vision_ms_p50": 20.254752159118652,
+      "host_preprocess_ms_p50": 8.94437707029283
+    },
+    "dense:pointing": {
+      "strategy": "dense",
+      "task": "pointing",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.59375,
+      "secondary_mean": 0.875,
+      "continuous_mean": 0.10851661922383504,
+      "visual_tokens_mean": 268.8125,
+      "application_latency_ms_p50": 299.8833963647485,
+      "application_latency_ms_p95": 316.1226295051165,
+      "model_latency_ms_p50": 297.7956885006279,
+      "vision_ms_p50": 20.317119598388672,
+      "host_preprocess_ms_p50": 8.900753688067198
+    },
+    "global_only:grounding": {
+      "strategy": "global_only",
+      "task": "grounding",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.7290555911280755,
+      "secondary_mean": 0.84375,
+      "continuous_mean": 0.7290555911280755,
+      "visual_tokens_mean": 46.75,
+      "application_latency_ms_p50": 470.881212502718,
+      "application_latency_ms_p95": 495.17315899720415,
+      "model_latency_ms_p50": 468.9492945326492,
+      "vision_ms_p50": 8.967679977416992,
+      "host_preprocess_ms_p50": 7.006225059740245
+    },
+    "global_only:pointing": {
+      "strategy": "global_only",
+      "task": "pointing",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.46875,
+      "secondary_mean": 0.875,
+      "continuous_mean": 0.12290500748631819,
+      "visual_tokens_mean": 46.75,
+      "application_latency_ms_p50": 257.7447115909308,
+      "application_latency_ms_p95": 261.1727022449486,
+      "model_latency_ms_p50": 255.87135541718453,
+      "vision_ms_p50": 8.901087760925293,
+      "host_preprocess_ms_p50": 7.017976953648031
+    },
+    "roi_global_v2:grounding": {
+      "strategy": "roi_global_v2",
+      "task": "grounding",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.8232531869457866,
+      "secondary_mean": 0.9375,
+      "continuous_mean": 0.8232531869457866,
+      "visual_tokens_mean": 152.125,
+      "application_latency_ms_p50": 503.93982499372214,
+      "application_latency_ms_p95": 528.8630508584902,
+      "model_latency_ms_p50": 501.9100580830127,
+      "vision_ms_p50": 13.946879863739014,
+      "host_preprocess_ms_p50": 8.057369152083993
+    },
+    "roi_global_v2:pointing": {
+      "strategy": "roi_global_v2",
+      "task": "pointing",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.46875,
+      "secondary_mean": 0.9375,
+      "continuous_mean": 0.11247525239894847,
+      "visual_tokens_mean": 152.125,
+      "application_latency_ms_p50": 289.6149270236492,
+      "application_latency_ms_p95": 298.13547525554895,
+      "model_latency_ms_p50": 287.84723300486803,
+      "vision_ms_p50": 13.747136116027832,
+      "host_preprocess_ms_p50": 8.02693737205118
+    },
+    "roi_only:grounding": {
+      "strategy": "roi_only",
+      "task": "grounding",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.8156100320328225,
+      "secondary_mean": 0.90625,
+      "continuous_mean": 0.8156100320328225,
+      "visual_tokens_mean": 105.375,
+      "application_latency_ms_p50": 481.32996959611773,
+      "application_latency_ms_p95": 506.94337469758466,
+      "model_latency_ms_p50": 479.32977124582976,
+      "vision_ms_p50": 11.117567539215088,
+      "host_preprocess_ms_p50": 7.4722025310620666
+    },
+    "roi_only:pointing": {
+      "strategy": "roi_only",
+      "task": "pointing",
+      "unique_samples": 32,
+      "repeats": 96,
+      "parse_rate": 1.0,
+      "primary_mean": 0.5625,
+      "secondary_mean": 0.9375,
+      "continuous_mean": 0.11507926107578312,
+      "visual_tokens_mean": 105.375,
+      "application_latency_ms_p50": 267.7065999014303,
+      "application_latency_ms_p95": 272.44855649769306,
+      "model_latency_ms_p50": 265.8775724703446,
+      "vision_ms_p50": 11.043328285217285,
+      "host_preprocess_ms_p50": 7.455612299963832
+    }
+  },
+  "paired_vs_dense": {
+    "global_only": {
+      "grounding": {
+        "primary": {
+          "n": 32,
+          "mean_delta": -0.12840542283895492,
+          "ci95_low": -0.19647743739894086,
+          "ci95_high": -0.07113413523374217,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 32,
+          "mean_delta": -0.125,
+          "ci95_low": -0.25,
+          "ci95_high": -0.03125,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 32,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "visual_token_ratio": 0.17391304347826086,
+        "application_p50_ratio": 0.9220674533080201
+      },
+      "pointing": {
+        "primary": {
+          "n": 32,
+          "mean_delta": -0.125,
+          "ci95_low": -0.3125,
+          "ci95_high": 0.0625,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 32,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 32,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "visual_token_ratio": 0.17391304347826086,
+        "application_p50_ratio": 0.8594831014833367
+      }
+    },
+    "roi_global_v2": {
+      "grounding": {
+        "primary": {
+          "n": 32,
+          "mean_delta": -0.03420782702124376,
+          "ci95_low": -0.09710502010698581,
+          "ci95_high": 0.018376510895611934,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 32,
+          "mean_delta": -0.03125,
+          "ci95_low": -0.09375,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 32,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "visual_token_ratio": 0.5659149035108114,
+        "application_p50_ratio": 0.9868019761985485
+      },
+      "pointing": {
+        "primary": {
+          "n": 32,
+          "mean_delta": -0.125,
+          "ci95_low": -0.34375,
+          "ci95_high": 0.09375,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 32,
+          "mean_delta": 0.0625,
+          "ci95_low": -0.0625,
+          "ci95_high": 0.1875,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 32,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "visual_token_ratio": 0.5659149035108114,
+        "application_p50_ratio": 0.9657584599028293
+      }
+    },
+    "roi_only": {
+      "grounding": {
+        "primary": {
+          "n": 32,
+          "mean_delta": -0.041850981934207984,
+          "ci95_low": -0.11448043745410477,
+          "ci95_high": 0.01486319123855221,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 32,
+          "mean_delta": -0.0625,
+          "ci95_low": -0.15625,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 32,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "visual_token_ratio": 0.39200186003255055,
+        "application_p50_ratio": 0.9425279401304576
+      },
+      "pointing": {
+        "primary": {
+          "n": 32,
+          "mean_delta": -0.03125,
+          "ci95_low": -0.1875,
+          "ci95_high": 0.125,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 32,
+          "mean_delta": 0.0625,
+          "ci95_low": -0.0625,
+          "ci95_high": 0.1875,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 32,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "visual_token_ratio": 0.39200186003255055,
+        "application_p50_ratio": 0.8927023074522555
+      }
+    }
+  },
+  "errors": []
+}

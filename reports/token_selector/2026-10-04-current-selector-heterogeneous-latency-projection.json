@@ -1,0 +1,455 @@
+{
+  "generated_at": "2026-10-04T00:21:20.602438+00:00",
+  "scope": "PURE ANALYSIS ESTIMATE \u2014 not a ZCU102 or Jetson measurement",
+  "measurement_status": "not_measured",
+  "not_a_measurement": true,
+  "disclaimers": [
+    "Pure analytic projection: no bitstream, no board, no link measurement and no model run.",
+    "1 GbE time uses an explicit 110 MB/s effective-payload-bandwidth assumption.",
+    "10 GbE time assumes a hypothetical 1.1 GB/s effective payload bandwidth; it is not a measured link.",
+    "Wv is assumed resident: one 131,072 B load amortised away, 0 B per image.",
+    "FPGA compute uses the accepted compact-pipeline formula at the accepted 200 MHz target.",
+    "No pipelining / overlap: Jetson->FPGA, FPGA compute and FPGA->Jetson are strictly serial.",
+    "The measured baselines are the latency-100 software-Selector runs, not FPGA runs."
+  ],
+  "assumptions": {
+    "wv_resident": true,
+    "wv_bytes_per_image": 0,
+    "wv_one_time_bytes": 131072,
+    "gbe_effective_bytes_per_second": 110000000.0,
+    "gbe_effective_mbytes_per_second": 110.0,
+    "gbe_10g_assumed_bytes_per_second": 1100000000.0,
+    "gbe_10g_assumed_mbytes_per_second": 1100.0,
+    "fpga_target_mhz": 200.0,
+    "overlap": "none (strictly serial J->F, compute, F->J)",
+    "wv_load_cycles": 65539.0,
+    "per_group_cycles": 1842.0
+  },
+  "projection_formula": "projected_model_E2E = measured_model_inference - measured_software_selector + fpga_compute + jetson_to_fpga_transfer + fpga_to_jetson_transfer",
+  "inputs_sha256": {
+    "accepted_hls_report": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-integer-selector-compact-interface-hls.json",
+      "sha256": "8871aebd587793466520bb6541d54f9910fa2b93614a34e24366f55ef5ce85e2"
+    },
+    "accepted_csynth_model": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/fpga_accel/integer_selector_pipeline_compact_hls/scripts/summarize_csynth.py",
+      "sha256": "693455fbb9c052ee011c672f081d10167cdcd91826b825b972f2331d854db250"
+    },
+    "transfer_audit_module": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/fpga_accel/integer_selector_pipeline_compact_hls/tools/transfer_audit.py",
+      "sha256": "5bc312386148b38721afd3224797047a817955734b20fe8e5ed1a3409b9bc610"
+    },
+    "latency100_K48": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/latency100_k48_r3.jsonl",
+      "sha256": "7a416e2be0b9d0ffef84d092c2729f65b64259b1172485a21c4c327ccd95946c"
+    },
+    "latency100_K64": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/latency100_k64_r3.jsonl",
+      "sha256": "d52cbbda0437cf4697b6b88befc940348c9710d6ea82487e47bd1c62a856e7e5"
+    },
+    "latency100_K96": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/latency100_k96_r3.jsonl",
+      "sha256": "84190141b6eb8d967f2814ae1b7d1170f880e4eed8eb7f41824a1f365b44525b"
+    }
+  },
+  "cycle_model_source": {
+    "accepted_report": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-integer-selector-compact-interface-hls.json",
+    "accepted_functions": [
+      "summarize_csynth._selector_cycles",
+      "summarize_csynth._compact_overhead_cycles"
+    ],
+    "transfer_helpers": [
+      "transfer_audit.input_arena_bytes",
+      "transfer_audit.fpga_transfer_layout"
+    ]
+  },
+  "per_budget": {
+    "K48": {
+      "label": "K48",
+      "budget": 48,
+      "sample_count": 100,
+      "identity_bypass_count": 0,
+      "identity_bypass_fraction": 0.0,
+      "fpga_compute_ms": {
+        "mean": 8.96721533,
+        "median": 5.187028499999999,
+        "min": 1.462382,
+        "max": 41.47138,
+        "std_ddof0": 7.817056914964044,
+        "p95": 16.638673999999998
+      },
+      "transfer_ms": {
+        "1gbe_110MBps": {
+          "mean": 35.496843636363636,
+          "median": 19.990690909090908,
+          "min": 4.770327272727273,
+          "max": 168.7965090909091,
+          "std_ddof0": 32.05565754950887,
+          "p95": 66.95505454545454
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 3.5496843636363633,
+          "median": 1.9990690909090911,
+          "min": 0.4770327272727273,
+          "max": 16.87965090909091,
+          "std_ddof0": 3.205565754950887,
+          "p95": 6.695505454545454
+        }
+      },
+      "bytes": {
+        "jetson_to_fpga_mean": 3707724.8,
+        "fpga_to_jetson_arena_fixed": 196928
+      },
+      "total_cycles_estimate": {
+        "mean": 1793443.0659999999,
+        "median": 1037405.7,
+        "min": 292476.4,
+        "max": 8294276.0,
+        "std_ddof0": 1563411.382992809,
+        "p95": 3327734.8
+      },
+      "measured_baseline_ms": {
+        "model_inference": {
+          "mean": 156.9125096942298,
+          "median": 145.16012894455343,
+          "min": 113.3516919799149,
+          "max": 376.3904799707234,
+          "std_ddof0": 46.42104045686281,
+          "p95": 205.4244390456006
+        },
+        "selector_software": {
+          "mean": 45.399314059177414,
+          "median": 31.554466986563057,
+          "min": 8.42239591293037,
+          "max": 230.3519599372521,
+          "std_ddof0": 40.84813875710285,
+          "p95": 78.06373492348939
+        },
+        "application_end_to_end": {
+          "mean": 173.87830669642426,
+          "median": 156.1973855132237,
+          "min": 118.40351100545377,
+          "max": 484.4641770469025,
+          "std_ddof0": 63.95124689504996,
+          "p95": 236.9932970032096
+        }
+      },
+      "projected_model_e2e_ms": {
+        "1gbe_110MBps": {
+          "mean": 155.97725460141604,
+          "median": 148.94464087132621,
+          "min": 108.50553533046224,
+          "max": 356.30640912438037,
+          "std_ddof0": 44.87864139158385,
+          "p95": 211.47166349772107
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 124.03009532868877,
+          "median": 117.84638022750028,
+          "min": 102.3690407850077,
+          "max": 204.3895509425622,
+          "std_ddof0": 19.231622804153915,
+          "p95": 161.42438675445356
+        }
+      },
+      "projected_application_e2e_ms": {
+        "1gbe_110MBps": {
+          "mean": 172.94305160361048,
+          "median": 156.43365080892931,
+          "min": 112.21340023430713,
+          "max": 464.38010620055945,
+          "std_ddof0": 62.532787251724876,
+          "p95": 243.5251925497849
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 140.9958923308832,
+          "median": 131.84886368665886,
+          "min": 106.07690568885259,
+          "max": 312.46324801874124,
+          "std_ddof0": 35.133480699182925,
+          "p95": 183.8112594877062
+        }
+      },
+      "delta_projected_model_minus_measured_model_ms": {
+        "1gbe_110MBps": {
+          "mean": -0.9352550928137794,
+          "median": 2.377268488325427,
+          "min": -30.314758449251656,
+          "max": 6.848330552091113,
+          "std_ddof0": 7.750439089250587,
+          "p95": 6.544225558971277
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": -32.88241436554105,
+          "median": -26.34430967256157,
+          "min": -172.00092902816118,
+          "max": -6.482981185657636,
+          "std_ddof0": 30.098337620499468,
+          "p95": -11.570009988825944
+        }
+      }
+    },
+    "K64": {
+      "label": "K64",
+      "budget": 64,
+      "sample_count": 100,
+      "identity_bypass_count": 2,
+      "identity_bypass_fraction": 0.02,
+      "fpga_compute_ms": {
+        "mean": 9.02585569,
+        "median": 5.2484934999999995,
+        "min": 1.382615,
+        "max": 41.532845,
+        "std_ddof0": 7.819793262458224,
+        "p95": 16.700139
+      },
+      "transfer_ms": {
+        "1gbe_110MBps": {
+          "mean": 36.092625454545455,
+          "median": 20.586472727272728,
+          "min": 5.366109090909091,
+          "max": 169.39229090909092,
+          "std_ddof0": 32.05565754950887,
+          "p95": 67.55083636363636
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 3.6092625454545453,
+          "median": 2.058647272727273,
+          "min": 0.536610909090909,
+          "max": 16.93922909090909,
+          "std_ddof0": 3.205565754950887,
+          "p95": 6.755083636363636
+        }
+      },
+      "bytes": {
+        "jetson_to_fpga_mean": 3707724.8,
+        "fpga_to_jetson_arena_fixed": 262464
+      },
+      "total_cycles_estimate": {
+        "mean": 1805171.1379999998,
+        "median": 1049698.7,
+        "min": 276523.0,
+        "max": 8306569.0,
+        "std_ddof0": 1563958.6524916447,
+        "p95": 3340027.8
+      },
+      "measured_baseline_ms": {
+        "model_inference": {
+          "mean": 158.02664411254227,
+          "median": 148.20573048200458,
+          "min": 98.86265406385064,
+          "max": 376.7801800277084,
+          "std_ddof0": 48.17993206451529,
+          "p95": 211.81660098955035
+        },
+        "selector_software": {
+          "mean": 45.61926142196171,
+          "median": 24.687496479600668,
+          "min": 0.8940020343288779,
+          "max": 231.0472399694845,
+          "std_ddof0": 41.6895615105228,
+          "p95": 91.87937702517956
+        },
+        "application_end_to_end": {
+          "mean": 175.00112590612844,
+          "median": 158.4394290111959,
+          "min": 101.67992196511477,
+          "max": 482.2061189915985,
+          "std_ddof0": 66.17483241338722,
+          "p95": 244.46854193229228
+        }
+      },
+      "projected_model_e2e_ms": {
+        "1gbe_110MBps": {
+          "mean": 157.52586383512602,
+          "median": 147.79315687680102,
+          "min": 104.65515108317646,
+          "max": 357.1289688427701,
+          "std_ddof0": 45.900809059764335,
+          "p95": 216.89689644680354
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 125.0425009260351,
+          "median": 121.69859594116163,
+          "min": 99.82565290135828,
+          "max": 204.6759070245883,
+          "std_ddof0": 18.7382341984103,
+          "p95": 156.10114371953082
+        }
+      },
+      "projected_application_e2e_ms": {
+        "1gbe_110MBps": {
+          "mean": 174.50034562871215,
+          "median": 153.67183784452683,
+          "min": 107.4724189844406,
+          "max": 463.74327587753083,
+          "std_ddof0": 64.01111617325712,
+          "p95": 251.36116527554574
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 142.0169827196213,
+          "median": 132.98159143220195,
+          "min": 102.64292080262241,
+          "max": 311.290214059349,
+          "std_ddof0": 35.91162709664061,
+          "p95": 190.56541254827303
+        }
+      },
+      "delta_projected_model_minus_measured_model_ms": {
+        "1gbe_110MBps": {
+          "mean": -0.5007802774162546,
+          "median": 1.7072066463682347,
+          "min": -25.285200751258486,
+          "max": 7.7523233701753895,
+          "std_ddof0": 7.1855792746881395,
+          "p95": 6.905464302496938
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": -32.98414318650716,
+          "median": -21.296463474676912,
+          "min": -172.57516587857543,
+          "max": 1.025223874762034,
+          "std_ddof0": 30.881147052263575,
+          "p95": -10.741850231710174
+        }
+      }
+    },
+    "K96": {
+      "label": "K96",
+      "budget": 96,
+      "sample_count": 100,
+      "identity_bypass_count": 2,
+      "identity_bypass_fraction": 0.02,
+      "fpga_compute_ms": {
+        "mean": 9.16228009,
+        "median": 5.3868635000000005,
+        "min": 1.423705,
+        "max": 41.671215,
+        "std_ddof0": 7.821706561126452,
+        "p95": 16.838509
+      },
+      "transfer_ms": {
+        "1gbe_110MBps": {
+          "mean": 37.286516363636366,
+          "median": 21.780363636363635,
+          "min": 6.56,
+          "max": 170.58618181818184,
+          "std_ddof0": 32.05565754950887,
+          "p95": 68.74472727272727
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 3.7286516363636366,
+          "median": 2.1780363636363638,
+          "min": 0.656,
+          "max": 17.058618181818183,
+          "std_ddof0": 3.205565754950887,
+          "p95": 6.874472727272727
+        }
+      },
+      "bytes": {
+        "jetson_to_fpga_mean": 3707724.8,
+        "fpga_to_jetson_arena_fixed": 393792
+      },
+      "total_cycles_estimate": {
+        "mean": 1832456.018,
+        "median": 1077372.7,
+        "min": 284741.0,
+        "max": 8334243.0,
+        "std_ddof0": 1564341.3122252906,
+        "p95": 3367701.8
+      },
+      "measured_baseline_ms": {
+        "model_inference": {
+          "mean": 166.03881212999113,
+          "median": 152.23134902771562,
+          "min": 99.0563650848344,
+          "max": 380.8278649812564,
+          "std_ddof0": 51.392008768603574,
+          "p95": 212.21455303020775
+        },
+        "selector_software": {
+          "mean": 45.610231396276504,
+          "median": 26.595539005938917,
+          "min": 0.8859399240463972,
+          "max": 229.3182749999687,
+          "std_ddof0": 40.68056549319059,
+          "p95": 82.12886995170265
+        },
+        "application_end_to_end": {
+          "mean": 182.86786937853321,
+          "median": 167.09559655282646,
+          "min": 101.81289399042726,
+          "max": 482.5451469514519,
+          "std_ddof0": 67.12940540899874,
+          "p95": 246.87299598008394
+        }
+      },
+      "projected_model_e2e_ms": {
+        "1gbe_110MBps": {
+          "mean": 166.877377187351,
+          "median": 158.35591343638671,
+          "min": 106.154130160788,
+          "max": 374.337100053302,
+          "std_ddof0": 49.791799768518175,
+          "p95": 220.6960862682212
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 133.31951246007827,
+          "median": 131.21359643054262,
+          "min": 100.250130160788,
+          "max": 360.2224818714838,
+          "std_ddof0": 29.89052192530053,
+          "p95": 165.0260358973202
+        }
+      },
+      "projected_application_e2e_ms": {
+        "1gbe_110MBps": {
+          "mean": 183.7064344358931,
+          "median": 173.36104561981932,
+          "min": 108.91065906638086,
+          "max": 465.86898578521453,
+          "std_ddof0": 65.65864548990972,
+          "p95": 255.35452921809738
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": 150.14856970862036,
+          "median": 139.09281805439593,
+          "min": 103.00665906638086,
+          "max": 366.9366668728124,
+          "std_ddof0": 41.283250162387006,
+          "p95": 193.4842746726428
+        }
+      },
+      "delta_projected_model_minus_measured_model_ms": {
+        "1gbe_110MBps": {
+          "mean": 0.8385650573598631,
+          "median": 3.355201211628767,
+          "min": -20.80333570528302,
+          "max": 9.161736321916038,
+          "std_ddof0": 6.984106599845071,
+          "p95": 8.791096363497132
+        },
+        "10gbe_1p1GBps_assumed": {
+          "mean": -32.719299669912864,
+          "median": -21.666170889216012,
+          "min": -170.58844181815053,
+          "max": 1.193765075953607,
+          "std_ddof0": 29.876325081944703,
+          "p95": -11.56991038327456
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Pure analytic projection: no bitstream, no board, no link measurement and no model run.",
+    "1 GbE time uses an explicit 110 MB/s effective-payload-bandwidth assumption.",
+    "10 GbE time assumes a hypothetical 1.1 GB/s effective payload bandwidth; it is not a measured link.",
+    "Wv is assumed resident: one 131,072 B load amortised away, 0 B per image.",
+    "FPGA compute uses the accepted compact-pipeline formula at the accepted 200 MHz target.",
+    "No pipelining / overlap: Jetson->FPGA, FPGA compute and FPGA->Jetson are strictly serial.",
+    "The measured baselines are the latency-100 software-Selector runs, not FPGA runs.",
+    "The accepted cycle model is a formula estimate built from per-loop unit costs; it is not a measured FPGA latency.",
+    "Latency-100 G values differ from the accepted production grids, so the cycle model is extrapolated over the observed CV-Bench grid range.",
+    "The measured baselines include GPU/CPU scheduling noise; only their medians over 3 repeats are used and then aggregated over 100 samples."
+  ]
+}

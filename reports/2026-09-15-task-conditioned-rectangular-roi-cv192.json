@@ -1,0 +1,167 @@
+{
+  "status": "RECTANGULAR_ROI_LOCALIZATION_GATE_FAIL",
+  "lock": "configs/task_conditioned_rectangular_roi_cv.lock.json",
+  "lock_sha256": "e068e01255e9db8c1ba99efb9d355470039a313e5b0b6a46ef155e16f1ae51e5",
+  "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+  "manifest_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+  "features": "evaluation/results/task_conditioned_roi_scout256_prefix6_dev384_20260915.jsonl",
+  "features_sha256": "ef9af488077654d7f479dec61246adb4d36c38a109da257b82f0750a5f971b9c",
+  "samples": 384,
+  "unique_images": 192,
+  "analyses": {
+    "cosine_fixed_box": {
+      "grounding": {
+        "samples": 192,
+        "target_center_recalled": {
+          "mean": 0.5104166666666666,
+          "ci95_low": 0.4375,
+          "ci95_high": 0.5833333333333334
+        },
+        "target_box_coverage": {
+          "mean": 0.4332289531780989,
+          "ci95_low": 0.3835720661535669,
+          "ci95_high": 0.48452216896705885
+        },
+        "proposal_area_fraction": {
+          "mean": 0.36000000000000004,
+          "ci95_low": 0.36000000000000004,
+          "ci95_high": 0.36000000000000004
+        },
+        "final_roi_visual_token_ratio": {
+          "mean": 0.41129817432597954,
+          "ci95_low": 0.3971558695869167,
+          "ci95_high": 0.4274334838091814
+        },
+        "cumulative_vision_macs_ratio": {
+          "mean": 0.4165207249749949,
+          "ci95_low": 0.3999225204276242,
+          "ci95_high": 0.4356576149500975
+        },
+        "median_scout_prefix_ms": 4.171036067418754,
+        "gate_checks": {
+          "target_center_recall": false,
+          "target_box_coverage": false,
+          "final_roi_visual_tokens": true,
+          "cumulative_vision_macs": true
+        },
+        "gate_pass": false
+      },
+      "pointing": {
+        "samples": 192,
+        "target_center_recalled": {
+          "mean": 0.4739583333333333,
+          "ci95_low": 0.4010416666666667,
+          "ci95_high": 0.546875
+        },
+        "target_box_coverage": {
+          "mean": 0.3845598455336748,
+          "ci95_low": 0.33739652753266286,
+          "ci95_high": 0.431530693769489
+        },
+        "proposal_area_fraction": {
+          "mean": 0.36000000000000004,
+          "ci95_low": 0.36000000000000004,
+          "ci95_high": 0.36000000000000004
+        },
+        "final_roi_visual_token_ratio": {
+          "mean": 0.41129817432597954,
+          "ci95_low": 0.39705211341814245,
+          "ci95_high": 0.4275878326488229
+        },
+        "cumulative_vision_macs_ratio": {
+          "mean": 0.4165207249749949,
+          "ci95_low": 0.3999860887704394,
+          "ci95_high": 0.43533337458052773
+        },
+        "median_scout_prefix_ms": 4.159963456913829,
+        "gate_checks": {
+          "target_center_recall": false,
+          "target_box_coverage": false,
+          "final_roi_visual_tokens": true,
+          "cumulative_vision_macs": true
+        },
+        "gate_pass": false
+      },
+      "joint_gate_pass": false
+    },
+    "ridge_heatmap_scale": {
+      "grounding": {
+        "samples": 192,
+        "target_center_recalled": {
+          "mean": 0.8489583333333334,
+          "ci95_low": 0.796875,
+          "ci95_high": 0.8958333333333334
+        },
+        "target_box_coverage": {
+          "mean": 0.7345151085536997,
+          "ci95_low": 0.689223833745758,
+          "ci95_high": 0.7779943527606661
+        },
+        "proposal_area_fraction": {
+          "mean": 0.5595078879747333,
+          "ci95_low": 0.5288704342093346,
+          "ci95_high": 0.5911944504191743
+        },
+        "final_roi_visual_token_ratio": {
+          "mean": 0.4275912439908043,
+          "ci95_low": 0.4084449802923877,
+          "ci95_high": 0.4474575606562046
+        },
+        "cumulative_vision_macs_ratio": {
+          "mean": 0.433549202299842,
+          "ci95_low": 0.41327888659788964,
+          "ci95_high": 0.4552228749173118
+        },
+        "median_scout_prefix_ms": 4.171036067418754,
+        "gate_checks": {
+          "target_center_recall": false,
+          "target_box_coverage": false,
+          "final_roi_visual_tokens": true,
+          "cumulative_vision_macs": true
+        },
+        "gate_pass": false
+      },
+      "pointing": {
+        "samples": 192,
+        "target_center_recalled": {
+          "mean": 0.828125,
+          "ci95_low": 0.7708333333333334,
+          "ci95_high": 0.8802083333333334
+        },
+        "target_box_coverage": {
+          "mean": 0.729009710186571,
+          "ci95_low": 0.6833227257068303,
+          "ci95_high": 0.7724196594403178
+        },
+        "proposal_area_fraction": {
+          "mean": 0.5552751090682636,
+          "ci95_low": 0.5251605079659531,
+          "ci95_high": 0.5871279390192582
+        },
+        "final_roi_visual_token_ratio": {
+          "mean": 0.42371277819951086,
+          "ci95_low": 0.4049029808123344,
+          "ci95_high": 0.4439594563472145
+        },
+        "cumulative_vision_macs_ratio": {
+          "mean": 0.42975392799586026,
+          "ci95_low": 0.4090596975545961,
+          "ci95_high": 0.45244093448065575
+        },
+        "median_scout_prefix_ms": 4.159963456913829,
+        "gate_checks": {
+          "target_center_recall": false,
+          "target_box_coverage": false,
+          "final_roi_visual_tokens": true,
+          "cumulative_vision_macs": true
+        },
+        "gate_pass": false
+      },
+      "joint_gate_pass": false
+    }
+  },
+  "passing_candidates": [],
+  "calibration_accessed": false,
+  "test_accessed": false,
+  "next_action": "Stop this controller branch without tuning on development data."
+}

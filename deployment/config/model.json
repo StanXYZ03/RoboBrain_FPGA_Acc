@@ -1,0 +1,23 @@
+{
+  "repo_id": "mradermacher/RoboBrain2.5-4B-GGUF",
+  "revision": "a43f8ba7a3499579a8f43258ea36af018f26a17c",
+  "source_model": "BAAI/RoboBrain2.5-4B",
+  "official": false,
+  "files": [
+    {
+      "role": "model",
+      "name": "RoboBrain2.5-4B.Q8_0.gguf",
+      "bytes": 4693672576,
+      "sha256": "835b78ff8c298acc358d682d3bf44d620d084a4ccd4c90da07e4e1afba3349eb",
+      "architecture": "qwen3vl",
+      "file_type": 7
+    },
+    {
+      "role": "mmproj",
+      "name": "RoboBrain2.5-4B.mmproj-Q8_0.gguf",
+      "bytes": 453974336,
+      "sha256": "fcc278251252d38ecdd7288548767280f949a9aa5ae4cb48a9632cf3fa1dfde2",
+      "architecture": "clip"
+    }
+  ]
+}

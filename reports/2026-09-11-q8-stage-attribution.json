@@ -1,0 +1,65 @@
+{
+  "format": "q8-stage-attribution-v1",
+  "status": "ATTRIBUTION_COMPLETE_NOT_POPULATION_ESTIMATE",
+  "selection_bias_warning": "Subset selected after observing Q8-B degradation; do not use subset means as full-set accuracy.",
+  "sample_count": 63,
+  "classifications": {
+    "TOKEN_SET_OR_SHARED_COMPACTION_SUPPORTED": 48,
+    "EARLY_PRUNING_SUPPORTED": 15
+  },
+  "task_summary": {
+    "grounding": {
+      "n": 34,
+      "q8a_exact_stock_rate": 0.0,
+      "q8b_exact_stock_rate": 0.0,
+      "q8a_primary_mean": 0.8823529411764706,
+      "q8b_primary_mean": 0.9117647058823529,
+      "stock_primary_mean": 1.0,
+      "q8a_error_delta_mean_present": -0.13970141759519894,
+      "q8b_error_delta_mean_present": -0.12171768261876427
+    },
+    "pointing": {
+      "n": 29,
+      "q8a_exact_stock_rate": 0.10344827586206896,
+      "q8b_exact_stock_rate": 0.0,
+      "q8a_primary_mean": 0.5172413793103449,
+      "q8b_primary_mean": 0.3103448275862069,
+      "stock_primary_mean": 0.8620689655172413,
+      "q8a_error_delta_mean_present": 0.05615538580685871,
+      "q8b_error_delta_mean_present": 0.10861837184951345
+    }
+  },
+  "q8b_minus_q8a_paired": {
+    "pointing_pck_0_1": {
+      "n": 29,
+      "mean_delta": -0.20689655172413793,
+      "ci95_low": -0.3793103448275862,
+      "ci95_high": -0.034482758620689655,
+      "effect_vs_zero": "Q8B_LOWER"
+    },
+    "pointing_pck_0_2": {
+      "n": 29,
+      "mean_delta": 0.0,
+      "ci95_low": -0.13793103448275862,
+      "ci95_high": 0.13793103448275862,
+      "effect_vs_zero": "UNCERTAIN"
+    },
+    "grounding_acc_0_5": {
+      "n": 34,
+      "mean_delta": 0.029411764705882353,
+      "ci95_low": -0.058823529411764705,
+      "ci95_high": 0.14705882352941177,
+      "effect_vs_zero": "UNCERTAIN"
+    },
+    "grounding_iou_mean": {
+      "n": 34,
+      "mean_delta": 0.017983734976434688,
+      "ci95_low": -0.016733986896695217,
+      "ci95_high": 0.051911160086158266,
+      "effect_vs_zero": "UNCERTAIN"
+    }
+  },
+  "manifest_sha256": "75224f30d2404d0567d0b38312b041e72ee41636bd9073513144ed78d5f7d5df",
+  "q8b_raw_sha256": "13ee9fe4d268c606450ead82025eb0ff337feac515b4ee4a57fb9d70bf53b24f",
+  "q8a_raw_sha256": "0227ba4a5b40130e9c0b92c20aa357c01f7eb4afe3cab0fc9fb619d286ae39cd"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "pinned_path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+  "pinned_absolute_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/prompt_projection_clean_inductive_v1.jsonl",
+  "pinned_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+  "manifest_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/prompt_projection_clean_inductive_v1.jsonl",
+  "path_matches": true,
+  "pinned_manifest_exists": true,
+  "manifest_exists": true,
+  "manifest_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+  "sha256_matches": true,
+  "mode": "validate_manifest_only",
+  "gpu_used": false,
+  "model_loaded": false
+}

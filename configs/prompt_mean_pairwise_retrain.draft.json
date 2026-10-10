@@ -1,0 +1,92 @@
+{
+  "status": "DRAFT_REQUIRES_PI_APPROVAL",
+  "schema_version": "0.1-draft",
+  "date": "2026-10-02",
+  "purpose": "Isolate whether explicit paired prompt-discrimination supervision can make the fixed prompt_mean_vector scorer learnable without changing the feature cache, teacher, split, projection dimensions, FPGA query shape, or token budget contract.",
+  "scope": {
+    "train_val_only": true,
+    "test_npz_must_not_be_opened": true,
+    "no_4b_model_load": true,
+    "no_feature_reextraction": true,
+    "no_cv_bench": true,
+    "no_hardware_speedup_claim": true
+  },
+  "frozen_inputs": {
+    "config": "configs/prompt_projection_distillation.json",
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "index": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "features": "artifacts/token_selector/prompt_projection_features",
+    "split": "reuse existing source_image_sha256 grouped split; train=318 records/159 images, val=76 records/38 images"
+  },
+  "student": {
+    "visual_input": "group_mean[G,1024]",
+    "prompt_input": "prompt_embeddings[T,2560]",
+    "Wt_shape": [128, 2560],
+    "Wv_shape": [128, 1024],
+    "trainable": ["Wt", "Wv"],
+    "query": "normalize(mean_t(normalize(prompt_embeddings[t] @ Wt.T)))",
+    "visual": "row_normalize(group_mean @ Wv.T)",
+    "score": "visual_unit @ query",
+    "fpga_query_contract": "one 1x128 query per prompt; 128 bytes at INT8 before scale/alignment overhead",
+    "note": "Keep full-rank Wt/Wv in this feasibility stage so the only causal variable is paired supervision. Low-rank compression is a later stage only if this gate passes."
+  },
+  "arms": [
+    {
+      "name": "A_KL_ONLY_CONTROL",
+      "loss": "0.5 * (KL(y_g || p_g) + KL(y_p || p_p))",
+      "purpose": "Control for retraining the non-collapsing reducer without explicit paired discrimination."
+    },
+    {
+      "name": "B_KL_PLUS_ADAPTIVE_SWAP_HINGE",
+      "loss": "L_base + relu(JS_nats(y_g,y_p) + D_own - D_swap)",
+      "definitions": {
+        "L_base": "0.5 * (KL(y_g || p_g) + KL(y_p || p_p))",
+        "D_own": "L_base",
+        "D_swap": "0.5 * (KL(y_g || p_p) + KL(y_p || p_g))",
+        "margin": "JS_nats(y_g,y_p), computed from train-pair teacher_soft only",
+        "student_distribution": "softmax(student_score / 0.1)",
+        "teacher_distribution": "cached teacher_soft_target"
+      },
+      "reason": "All terms are in nats. Weak/ambiguous teacher pairs receive a small margin; strongly distinct pairs receive a larger margin. No manually tuned loss weight or fixed margin is introduced."
+    }
+  ],
+  "optimization": {
+    "seeds": [20261002, 20261003, 20261004],
+    "optimizer": "AdamW",
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "batch_unit": "image pair",
+    "batch_size_images": 4,
+    "grad_clip_norm": 1.0,
+    "initialization": "deterministic seeded randn, init_std=0.02",
+    "model_selection": "validation objective only; save epoch 0 and every completed epoch",
+    "no_hyperparameter_search": true
+  },
+  "validation_statistics": {
+    "independent_unit": "image; average grounding/pointing record deltas before resampling",
+    "bootstrap_resamples": 2000,
+    "permutation_resamples": 10000,
+    "alpha": 0.05,
+    "effect_size_floor_cohens_dz": 0.2,
+    "primary_metrics": ["spearman", "ndcg_full"],
+    "controls": ["same_image_other_task", "cross_image_same_task_derangement"],
+    "holm_family": "2 arms x 2 controls x 2 primary metrics = 8 tests",
+    "seed_aggregation": "take the per-image median delta across the three seeds before bootstrap/permutation; also require the delta sign to be positive in at least 2 of 3 seeds"
+  },
+  "promotion_gate": {
+    "A_prompt_sensitivity": "For same-image-other-task, both primary deltas >0, 95% CI lower >0, |dz|>=0.2, Holm-adjusted p<0.05, and positive sign in >=2/3 seeds.",
+    "B_shuffled_discrimination": "For cross-image-same-task derangement, both primary deltas >0, 95% CI lower >0, |dz|>=0.2, Holm-adjusted p<0.05, and positive sign in >=2/3 seeds.",
+    "C_collapse_removed": "exact_prompt_invariance_fraction <= 0.05 in every seed.",
+    "D_teacher_alignment": "Median-seed val correct Spearman and NDCG-full each >= frozen hard_max baseline minus 0.01 (0.0564749736 and 0.8499415696).",
+    "E_generalization": "At least 2/3 seeds select an epoch >0 and improve the val training objective relative to epoch 0.",
+    "F_hardware_contract": "Runtime query remains 1x128 and FPGA scorer remains Gx128 dot; no token-axis max/softmax/exp is introduced.",
+    "winner_rule": "Only arm B may be promoted as the proposed method, and only if B passes A-F. Arm A is an ablation/control, not a fallback winner. Otherwise result is NO_PROMOTION."
+  },
+  "after_gate": {
+    "if_pass": "Freeze the paired-supervision protocol, then start a separate low-rank/quantization and spatial-anchor fixed-budget stage. Do not evaluate the existing internal test split in this feasibility stage.",
+    "if_fail": "Stop projection-scorer retraining and redesign the teacher/supervision. Do not add post-hoc margins, reducers, ranks, or extra epochs.",
+    "formal_evaluation": "Use an independently frozen external benchmark protocol later; the existing internal test has already been observed in prior diagnostics and is not a pristine final holdout."
+  }
+}

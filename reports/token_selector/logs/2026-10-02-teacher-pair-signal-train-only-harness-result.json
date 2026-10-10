@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-02-teacher-pair-signal-train-only.csv",
+    "focused_tests": "evaluation/tests/test_teacher_pair_signal_audit.py",
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-02-teacher-pair-signal-train-only.json",
+    "markdown": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-02-teacher-pair-signal-train-only.md",
+    "script": "evaluation/teacher_pair_signal_audit.py"
+  },
+  "decision": "TEACHER_PAIR_SIGNAL_TRAIN_ONLY_DESCRIPTIVE / NONZERO_BUT_WEAK_AND_HETEROGENEOUS / NO_THRESHOLD_NO_TRAINING_NO_VAL_TEST_READ",
+  "environment": {
+    "numpy": "2.2.6",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.10.20"
+  },
+  "inputs": {
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "input_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "script_sha256": "95c7031757a72a9a9d12a572345150b8fff7f593cfa17210601f8bca7132c2ec"
+  },
+  "isolation": {
+    "opened_npz_count": 318,
+    "opened_only_train_npz": true,
+    "split_from_index_metadata_only": true,
+    "train_npz_count": 318,
+    "train_only": true,
+    "val_test_npz_opened": [],
+    "val_test_samples_ignored": 154
+  },
+  "key_metrics": {
+    "argmax_different_fraction": 0.11949685534591195,
+    "exact_identical_fraction": 0.0,
+    "js_positive_fraction": 1.0,
+    "mean_disagreement": {
+      "k48": 0.2808172579451815,
+      "k64": 0.2918189957557818,
+      "k96": 0.2909188193883226
+    },
+    "mean_js_nats": 0.05106673779152491,
+    "mean_symmetric_kl": 0.38520924663956857,
+    "mean_tv": 0.12721014201883765,
+    "median_js_nats": 0.009236346877548901,
+    "train_images": 159,
+    "train_records": 318,
+    "tv_positive_fraction": 1.0
+  },
+  "output_sha256": {
+    "csv": "06f8455152ccb2fdc348169b0144a9a913aa08a0d2a6b681299dd64a82f8812e",
+    "json": "09dbce65f33ae7cfffd778816228ae02863af95f318efe2e6510cb95304d52dd",
+    "md": "6b926634b94ebc0b0be8d7ba14c6e0e46157447a1b3ad8d42d9b20bb44c5b508"
+  },
+  "report": "2026-10-02-teacher-pair-signal-train-only",
+  "scope": "train-only descriptive teacher paired-signal (grounding vs pointing) learnability audit; no training, no tuning, no promotion threshold, no val/test feature cache read, CPU only",
+  "seed": 20261002,
+  "status": "COMPUTED",
+  "tests": {
+    "focused": {
+      "command": "python3 -m unittest evaluation.tests.test_teacher_pair_signal_audit",
+      "ran": 25,
+      "status": "OK"
+    },
+    "full": {
+      "command": "python3 -m unittest discover -s evaluation/tests",
+      "ran": 407,
+      "status": "OK"
+    },
+    "logs": {
+      "focused": "reports/token_selector/logs/2026-10-02-teacher-pair-signal-focused-tests.log",
+      "full": "reports/token_selector/logs/2026-10-02-teacher-pair-signal-full-tests.log",
+      "run": "reports/token_selector/logs/2026-10-02-teacher-pair-signal-run.log"
+    }
+  },
+  "tmp_persistence": "/tmp is non-persistent between harness commands; this durable copy is authoritative"
+}

@@ -1,0 +1,25 @@
+{
+  "status": "LOCKED_BEFORE_REMAINING_EXECUTIONS",
+  "locked_date": "2026-09-14",
+  "evidence_level": "revealed development ablation conditional on an oracle ROI",
+  "objective": "Bound whether pooled RoboBrain vision-prefix features become predictive before their compute cost defeats the token budget.",
+  "completed_vision_blocks": [1, 3, 6],
+  "already_completed": [1],
+  "remaining": [3, 6],
+  "shared_settings": {
+    "roi_long_edge": 384,
+    "oracle_margin": 0.5,
+    "projection_dim": 16,
+    "projection_seed": 20260914,
+    "spatial_pool": [4, 4],
+    "ridge_alpha": 10.0,
+    "folds": 5,
+    "fold_seed": 20260914
+  },
+  "gate": {
+    "action_balanced_accuracy_min": 0.55,
+    "vision_block_token_ratio_max": 0.5,
+    "primary_noninferiority_margin": -0.02
+  },
+  "stopping_rule": "After depths 3 and 6, do not add more depths or tune ridge thresholds on this development set. If no depth passes both tasks, stop the fixed-pooling linear policy and redesign the scout representation before further GPU experiments."
+}

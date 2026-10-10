@@ -1,0 +1,133 @@
+{
+  "artifacts": {
+    "csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-pair-gradient-concentration-train-only.csv",
+    "focused_tests": "evaluation/tests/test_pair_gradient_concentration_audit.py",
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-pair-gradient-concentration-train-only.json",
+    "markdown": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-pair-gradient-concentration-train-only.md",
+    "script": "evaluation/pair_gradient_concentration_audit.py"
+  },
+  "environment": {
+    "numpy": "2.2.6",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.10.20",
+    "torch": "2.5.1+cu124"
+  },
+  "inputs": {
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "draft_config_sha256": "787f8f401bcb10b5fe8007a6a0f5b415858d893cb2797b3c1797d5f1fa785772",
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "input_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "script_sha256": "7981c4ab76518c5039afde9b38b016abd75b12a4d5eb18446d8fa3d030190607"
+  },
+  "isolation": {
+    "opened_npz_count": 318,
+    "opened_only_train_npz": true,
+    "split_from_index_metadata_only": true,
+    "train_npz_count": 318,
+    "train_only": true,
+    "val_test_npz_opened": [],
+    "val_test_samples_ignored": 154
+  },
+  "key_metrics": {
+    "computed_r_median": 0.017506745782799503,
+    "cross_seed_pair_norm_rank_concat": {
+      "max": 0.9757541877906295,
+      "mean": 0.9641028220582263,
+      "min": 0.9474835984470626,
+      "pairwise_spearman": {
+        "20261002_vs_20261003": 0.9690706799369866,
+        "20261002_vs_20261004": 0.9757541877906295,
+        "20261003_vs_20261004": 0.9474835984470626
+      },
+      "shared_image_count": 159
+    },
+    "lambda_matches_frozen": true,
+    "lambda_target_0p25_used": 14.280209646136903,
+    "pair_norm_concentration_concat": {
+      "count": 477,
+      "effective_sample_size": 123.74205948314683,
+      "gini": 0.6802674884392947,
+      "positive_count": 466,
+      "positive_sum": 273.7427245248109,
+      "sum": 273.7427245248109,
+      "top_10pct": 0.5398481179718705,
+      "top_1pct": 0.08746439182545558,
+      "top_20pct": 0.7346873759289732,
+      "top_5pct": 0.35614070006680537,
+      "zero_count": 11
+    },
+    "pooled_correlations_concat": {
+      "group_count_vs_pair_norm": -0.02320323130854564,
+      "hinge_active_count": 466,
+      "hinge_margin_vs_pair_norm": 0.9154502955273124,
+      "hinge_margin_vs_pair_norm_hinge_active_only": 0.9093274784540581,
+      "js_vs_pair_norm": 0.9272400206539098,
+      "js_vs_pair_signed_contribution": 0.356083530982771,
+      "l_pair_vs_pair_norm": 0.9154558626326386
+    },
+    "r_median_matches_frozen": true,
+    "signed_contribution_concentration_concat": {
+      "count": 477,
+      "expected_sum": 3.0,
+      "negative_count": 189,
+      "negative_fraction": 0.39622641509433965,
+      "negative_mass_abs": 0.9460760247789896,
+      "negative_mass_signed": -0.9460760247789896,
+      "positive_count": 277,
+      "positive_effective_sample_size": 48.93703990902107,
+      "positive_gini": 0.7776470890479409,
+      "positive_sum": 3.9460808948461565,
+      "sum": 3.0000048700671673,
+      "sum_error_abs": 4.870067167317416e-06,
+      "top_10pct": 0.6605503614375594,
+      "top_1pct": 0.14484935180146508,
+      "top_20pct": 0.8328441894624161,
+      "top_5pct": 0.44411474852982474,
+      "zero_count": 11
+    },
+    "signed_sum_error_max": 1.728257597921612e-06,
+    "train_images": 159,
+    "train_records": 318
+  },
+  "limitations": [
+    "\u68af\u5ea6\u8303\u6570\u4e4b\u548c\u4e0d\u662f aggregate \u68af\u5ea6\uff1atop-k norm share \u53ea\u662f\u6a21\u957f\u5206\u5e03\uff0c\u4e0d\u80fd\u5f53\u4f5c\u5411\u91cf\u8d21\u732e\u6765\u8bfb\uff1b\u53ea\u6709 signed projection contribution \u624d\u6ee1\u8db3\u548c\u7ea6\u4e3a 1\u3002",
+    "signed projection contribution \u53ef\u4e3a\u8d1f\uff0c\u8d1f\u8d21\u732e\u5df2\u88ab\u5355\u72ec\u62a5\u544a\uff1b\u6b63\u8d21\u732e\u7684 share/ESS/Gini \u53ea\u5728 positive \u5b50\u96c6\u4e0a\u5b9a\u4e49\uff0c\u4e0d\u80fd\u63a9\u76d6\u8d1f\u8d28\u91cf\u3002",
+    "lambda \u4e3a\u6b63\u65f6\u53ea\u6539\u53d8 pair \u4e0e base \u7684\u76f8\u5bf9\u5c3a\u5ea6\uff0c\u4e0d\u6539\u53d8 pair-only \u7684\u96c6\u4e2d\u5ea6\u3001rank \u6216 cosine\uff1b\u672c\u5ba1\u8ba1\u4e0d\u636e\u6b64\u5ba3\u5e03\u4efb\u4f55 lambda \u4e3a winner\u3002",
+    "\u4e0d\u8bbe\u901a\u8fc7/\u5931\u8d25\u9608\u503c\uff0c\u4e0d\u5ba3\u5e03 promotion/no-promotion\uff0c\u4e0d\u4fee\u6539 DRAFT\uff0c\u4e5f\u4e0d\u6388\u6743\u91cd\u8bad\u3002",
+    "\u6240\u6709\u6570\u503c\u90fd\u662f internal train-only \u521d\u59cb\u68af\u5ea6\u8bca\u65ad\uff0c\u4e0d\u662f CV-Bench \u4efb\u52a1\u7cbe\u5ea6\uff0c\u4e0d\u80fd\u4ece\u521d\u59cb\u68af\u5ea6\u63a8\u65ad\u6536\u655b\u3001\u9a8c\u8bc1\u96c6\u6539\u8fdb\u6216\u4efb\u52a1\u7cbe\u5ea6\u3002"
+  ],
+  "next_decision": "PI/Codex decision only: this audit is descriptive and does not train, does not modify the DRAFT and does not give a promotion/no-promotion verdict; no retraining is authorized by this report",
+  "output_sha256": {
+    "csv": "edbb9b18a9ee73113c53bd97b3a91da0123ebd3518a25459982015e7f5d05840",
+    "json": "abb11e5844095a73166137c2f002f18506a06cedac128a2e1eca8b02a856869e",
+    "md": "214de023e07d06975fbd0add242feca29f2ab698cc053dbccae73e881b71677e"
+  },
+  "report": "2026-10-03-pair-gradient-concentration-train-only",
+  "scope": "train-only, CPU-only, zero-update concentration audit of the DRAFT pair loss at the frozen lambda_target_0p25 = 0.25 / r_med; per-image-pair L_base / L_pair gradients are reduced to scalars, the signed projection contribution is constructed to sum to 1 per seed, and no training, no tuning, no parameter save, no val/test feature cache read, no model load, no GPU, no network, no promotion decision and no accuracy claim is made",
+  "seeds": [
+    20261002,
+    20261003,
+    20261004
+  ],
+  "status": "COMPUTED",
+  "tests": {
+    "draft_sha256_unchanged": true,
+    "focused": {
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python3 -m unittest evaluation.tests.test_pair_gradient_concentration_audit -v",
+      "log": "reports/token_selector/logs/2026-10-03-pair-gradient-concentration-focused-tests.log",
+      "module": "evaluation/tests/test_pair_gradient_concentration_audit.py",
+      "ok": 24,
+      "ran": 24,
+      "result": "OK"
+    },
+    "full": {
+      "baseline_before_change": 450,
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python3 -m unittest discover -s evaluation/tests",
+      "log": "reports/token_selector/logs/2026-10-03-pair-gradient-concentration-full-tests.log",
+      "ok": 474,
+      "ran": 474,
+      "result": "OK"
+    },
+    "isolation_status": "opened_only_train_npz=True; val_test_npz_opened=[]; split_from_index_metadata_only=True"
+  }
+}

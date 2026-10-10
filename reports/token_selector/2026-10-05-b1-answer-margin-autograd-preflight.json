@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-05",
+  "status": "PREFLIGHT_PASS",
+  "scope": "CPU-only engineering feasibility preflight for a future B1 answer-choice-margin teacher signal. No model weights, no GPU, no network, no training, no dependency installation.",
+  "engineering_feasibility_only": true,
+  "is_selector_accuracy_evidence": false,
+  "settings": {
+    "seed": 20261005,
+    "hidden_dim": 64,
+    "vocab_size": 32,
+    "group_count": 30,
+    "selected_group_count": 8,
+    "merge_unit": 4,
+    "patch_tokens": 120,
+    "question_count": 3,
+    "option_counts": [
+      4,
+      6,
+      3
+    ]
+  },
+  "gather": {
+    "input_shape": [
+      120,
+      64
+    ],
+    "output_shape": [
+      32,
+      64
+    ],
+    "merge_unit": 4,
+    "selected_group_indices": [
+      0,
+      1,
+      3,
+      6,
+      12,
+      14,
+      19,
+      22
+    ],
+    "order_preserved": true,
+    "uses_detach": false,
+    "uses_numpy": false,
+    "uses_cpu_rebuild": false
+  },
+  "forward": {
+    "readout_shape": [
+      64
+    ],
+    "logits_shape": [
+      32
+    ],
+    "answer_logits_shape": [
+      3,
+      32
+    ]
+  },
+  "margin": {
+    "definition": "correct_option_logit - max(other_option_logits)",
+    "per_question": [
+      -0.22635748982429504,
+      -0.25999757647514343,
+      -0.21604061126708984
+    ],
+    "option_token_ids": [
+      [
+        3,
+        7,
+        11,
+        19
+      ],
+      [
+        0,
+        4,
+        8,
+        12,
+        16,
+        20
+      ],
+      [
+        1,
+        2,
+        5
+      ]
+    ],
+    "correct_index": [
+      2,
+      5,
+      0
+    ],
+    "differentiable": true
+  },
+  "gradient": {
+    "b1_hidden_grad_present": true,
+    "b1_hidden_grad_finite": true,
+    "b1_hidden_grad_nonzero": true,
+    "b1_hidden_grad_norm": 0.3603646755218506,
+    "positional_grad_present": true,
+    "positional_grad_nonzero": true
+  },
+  "negative_control": {
+    "description": "Detach the compact tensor before the fake lm_head; the original B1 hidden states must then receive no gradient.",
+    "control_graph_connected": false,
+    "control_backward_raises": true,
+    "b1_control_grad_is_none": true
+  },
+  "checks": [
+    {
+      "name": "differentiable_group_gather_shape",
+      "passed": true,
+      "detail": "compact shape (32, 64)"
+    },
+    {
+      "name": "differentiable_group_gather_requires_grad",
+      "passed": true,
+      "detail": "gathered tensor is connected to the B1 hidden states"
+    },
+    {
+      "name": "differentiable_group_gather_order",
+      "passed": true,
+      "detail": "row k*merge_unit+j equals hidden[group_k*merge_unit+j]"
+    },
+    {
+      "name": "choice_margin_shape",
+      "passed": true,
+      "detail": "margins shape (3,)"
+    },
+    {
+      "name": "choice_margin_finite",
+      "passed": true,
+      "detail": "margins [-0.22635748982429504, -0.25999757647514343, -0.21604061126708984]"
+    },
+    {
+      "name": "b1_hidden_grad_present",
+      "passed": true,
+      "detail": "backward populated hidden_states.grad"
+    },
+    {
+      "name": "b1_hidden_grad_finite",
+      "passed": true,
+      "detail": "gradient is finite"
+    },
+    {
+      "name": "b1_hidden_grad_nonzero",
+      "passed": true,
+      "detail": "gradient has a non-zero entry"
+    },
+    {
+      "name": "negative_control_detach_blocks_grad",
+      "passed": true,
+      "detail": "detaching the compact tensor disconnects the graph, leaves the control hidden grad as None and makes backward raise"
+    },
+    {
+      "name": "positional_margin_grad_present",
+      "passed": true,
+      "detail": "choice_margin_from_positions keeps a non-zero gradient"
+    }
+  ],
+  "label_hygiene": "Official CV-Bench answer labels must never be used to train a selector on the full2638 set and then be re-scored on that same set as if it were held out.",
+  "gpu_smoke_constraint": "Any follow-up GPU smoke test may use exactly one image and must not train.",
+  "required_statements": {
+    "engineering_feasibility_not_accuracy": "这只是工程可行性，不是 selector 精度证据。",
+    "label_hygiene": "官方答案标签不得在 CV-Bench full2638 上训练再对同集宣称结果。",
+    "gpu_smoke": "后续 GPU smoke 只能一张图，不得训练。"
+  },
+  "next_gate": "GPU single-image smoke of the frozen B1 forward that reuses differentiable_group_gather and choice_margin with a real lm_head; one image only, no training, no CV-Bench accuracy claim.",
+  "forbidden_claims": [
+    "selector accuracy improvement",
+    "CV-Bench full2638 accuracy",
+    "FPGA speedup or latency",
+    "teacher-signal quality"
+  ],
+  "artifacts": {
+    "module": {
+      "path": "evaluation/answer_margin_b1_preflight.py",
+      "sha256": "189b2694cf97aad8f5f373f0de02dd3e06e98a1f5f1f6a01334f97b5f825a7d9"
+    },
+    "test": {
+      "path": "evaluation/tests/test_answer_margin_b1_preflight.py",
+      "sha256": "05d8dad71d98b58244fc4a1d1e580c1490cf9da9e65bc449570ede1b4a152450"
+    }
+  }
+}

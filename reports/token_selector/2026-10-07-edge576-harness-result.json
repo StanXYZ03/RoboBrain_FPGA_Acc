@@ -1,0 +1,87 @@
+{
+  "状态": {
+    "决策": [
+      "EDGE576_MANIFEST_BUILT",
+      "EDGE576_MANIFEST_AUDIT_PASS",
+      "PREREGISTERED_NOT_EXECUTED"
+    ],
+    "范围": "edge576 未来实验 CPU-only 冻结基础设施",
+    "gpu_runs": 0,
+    "weights_loaded": false,
+    "network": false,
+    "training": false,
+    "deterministic_rebuild": "identical (b5355ba1…)",
+    "未改冻结文件": true
+  },
+  "文件": {
+    "builder": "evaluation/build_edge576_cv_bench_manifest.py",
+    "auditor": "evaluation/audit_edge576_cv_bench_manifest.py",
+    "builder_test": "evaluation/tests/test_build_edge576_cv_bench_manifest.py",
+    "auditor_test": "evaluation/tests/test_audit_edge576_cv_bench_manifest.py",
+    "prereg_test": "evaluation/tests/test_edge576_cvbench_prereg.py",
+    "prereg_generator": "scripts/preregister_edge576_cvbench_20261007.py",
+    "edge_manifest": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+    "edge_summary": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+    "prereg_config": "configs/2026-10-07-edge576-cvbench-three-arm-development.preregistered.json",
+    "报告": [
+      "reports/token_selector/2026-10-07-edge576-cv-bench-manifest.json",
+      "reports/token_selector/2026-10-07-edge576-cv-bench-manifest.md",
+      "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit.json",
+      "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit.md",
+      "reports/token_selector/2026-10-07-edge576-cvbench-prereg.json",
+      "reports/token_selector/2026-10-07-edge576-cvbench-prereg.md"
+    ],
+    "CURRENT_STATUS.md": "顶部新增本轮条目，旧条目未改"
+  },
+  "2638合同": {
+    "样本数": 2638,
+    "唯一sample_id": 2638,
+    "与冻结full_manifest_ID/标签/源/任务一致": true,
+    "冻结full_manifest_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+    "公式": "G = (image_grid_thw[0]*image_grid_thw[1]*image_grid_thw[2]) // (merge_size**2=4)",
+    "全部G<=576": true,
+    "无样本因G被删除": true,
+    "G>576即fail_closed": true,
+    "处理参数": {
+      "keep_aspect_ratio": true,
+      "min_pixels": 65536,
+      "max_pixels": 589824,
+      "patch_size": 16,
+      "merge_size": 2
+    }
+  },
+  "G分布": {
+    "min": 64,
+    "median": 300.0,
+    "mean": 357.06633813495074,
+    "p90": 576.0,
+    "p95": 576.0,
+    "max": 576,
+    "count_at_576": 400,
+    "bins": {
+      "g_le_96": 143,
+      "g_97_256": 781,
+      "g_257_512": 706,
+      "g_513_576": 1008
+    },
+    "identity_bypass_g_le_96": 143,
+    "compressed_96_lt_g_le_576": 2495
+  },
+  "哈希": {
+    "edge_manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+    "edge_summary_sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b",
+    "builder_sha256": "12258b15848e4a31ec96a5c80ff23ed80fe8a24cd536202ab93cffc28f72b48a",
+    "auditor_sha256": "45dcd04976e5c5c8acaf232989f219b1817b5a13fb87bfbe27dd4cbfe81ea683",
+    "prereg_config_sha256": "8958cbd6f61589217b73e983e0f57257f0cf9bc951c5adbd8506df5d6156b3f3",
+    "metric_v2_sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+    "model_identity_sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+    "prereg_pins_verified": "13/13"
+  },
+  "测试": {
+    "py_compile": "6 files OK",
+    "focused_tests": "39 OK",
+    "audit": "EDGE576_MANIFEST_AUDIT_PASS; 2638 record + 2638 image SHA + 2638 dims; processor grid re-derived 2638/2638 identical"
+  },
+  "阻塞": [],
+  "下一条允许命令": "先为 edge576 改编三臂 runner（消费 edge manifest、pinned min_pixels=65536/max_pixels=589824、逐样本断言 image_grid_thw==manifest 否则 fail closed），再运行 Dense@edge576，随后 corrected integer L2@B1 K96 与冻结 next candidate；manifest/模型身份/代码 SHA/门/输出路径全部冻结前不启动全量 GPU。"
+}

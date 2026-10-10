@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.1",
+  "scope": "hardware-regular CPU token selection and FPGA transfer layout",
+  "boundary": "B1",
+  "boundary_ablation": "B0",
+  "boundaries": ["B1", "B0"],
+  "budgets": [48, 64, 96],
+  "alignment": 16,
+  "context_slots_policy": "dynamic_up_to_max",
+  "max_context_slots": 9,
+  "context_eligibility": "region_has_at_least_2_input_groups_and_keeps_an_unselected_group_after_compression",
+  "context_weighting": "relu_combined_normalized_over_all_unselected_groups",
+  "context_representative": "nearest_unselected_group_to_weighted_centroid_lowest_index_tiebreak",
+  "real_budget_policy": "K_minus_dynamic_context_count",
+  "representation_uniqueness": "real_and_context_representative_indices_globally_unique",
+  "output_padding": "none_all_valid_true",
+  "region_grid": 3,
+  "merge_unit": 4,
+  "feature_dim": 1024,
+  "prompt_dim": 2560,
+  "score_dim": 128,
+  "lambda_semantic": 0.5,
+  "local_candidate_cap": 16,
+  "selection_rule": "anchors_plus_two_level_bounded_topk_with_context_reservation",
+  "tie_break": "original_group_index_ascending",
+  "fpga_layout": {
+    "alignment_bytes": 64,
+    "segments": [
+      {"name": "tokens_int8", "dtype": "int8", "shape": "[K, 4, 1024]"},
+      {"name": "group_index_uint16", "dtype": "uint16", "shape": "[K]"},
+      {"name": "source_type_uint8", "dtype": "uint8", "shape": "[K]"},
+      {"name": "region_id_uint8", "dtype": "uint8", "shape": "[K]"},
+      {"name": "valid_uint8", "dtype": "uint8", "shape": "[K]"}
+    ],
+    "writes_binary_file": false,
+    "metadata_note": "source_type selects real(0) vs context(1); hardware must read it to distinguish dynamic context groups from real groups"
+  },
+  "training": {
+    "enabled": false,
+    "weights_generated": false,
+    "note": "Wt/Wv interfaces only; weights must be supplied explicitly"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "report_stem": "2026-10-03-spatial-selector-failure-diagnostic",
+  "status": "SPATIAL_SELECTOR_FAILURE_DIAGNOSED",
+  "diagnosis_labels": [
+    "HEADROOM_PRESENT"
+  ],
+  "k48_image_level_mean_deltas": {
+    "semantic_anchor_minus_l2_anchor": 0.23781377953569835,
+    "combined_lambda_0.50_minus_l2_anchor": 0.2465827831005494,
+    "semantic_plain_minus_l2_plain": 0.26167798610404763,
+    "oracle_anchor_minus_l2_anchor": 0.7370955605826116,
+    "combined_lambda_0.50_grounding_minus_l2_anchor": 0.12105966546857483,
+    "combined_lambda_0.50_pointing_minus_l2_anchor": 0.37163530553063956
+  },
+  "task_stratification": {
+    "grounding": {
+      "combined_anchor_lambda_0.50": 0.12105966546857483,
+      "semantic_anchor": 0.12299888300431719,
+      "oracle_anchor": 0.5930720911120334
+    },
+    "pointing": {
+      "combined_anchor_lambda_0.50": 0.37163530553063956,
+      "semantic_anchor": 0.35189286039603496,
+      "oracle_anchor": 0.88111903005319
+    }
+  },
+  "l2_anchor_k48_overall_mass_mean": 0.15036557109195664,
+  "lambda_sweep_best": {
+    "lambda": "0.70",
+    "retained_mass_mean": 0.4015170773080894,
+    "note": "descriptive only; no significance or promotion claim"
+  },
+  "headroom_present": true,
+  "retained_mass_link_healthy": true,
+  "prior_report_sign_consistent": false,
+  "isolation": {
+    "opened_npz_count": 76,
+    "opened_only_val_npz": true,
+    "test_npz_opened": [],
+    "train_npz_opened": [],
+    "test_npz_resolved_hashed_or_opened": false,
+    "internal_test_report_files_parsed": false,
+    "restricted_val_report_files_parsed": true,
+    "restricted_val_report_parsed_note": "restricted val report files are byte-hashed by verify_prereg_pins; the trainval report JSON is additionally read only for the G3 sign cross-check and is never used as a metric source; the val-samples CSV is never parsed by the diagnostic itself",
+    "restricted_val_samples_csv_or_json_parsed_as_metric_source": false,
+    "prior_report_json_parsed_for_sign_cross_check_only": true
+  },
+  "provenance": {
+    "prereg_config_unchanged": true,
+    "prereg_report_unchanged": true,
+    "pins_unchanged": true,
+    "val_npz_aggregate_matches_prereg": true
+  },
+  "limitations": [
+    "Exploratory diagnostic on already-used validation; not a final accuracy conclusion.",
+    "No internal test NPZ was resolved, hashed, opened or scored.",
+    "Lambda sweep is descriptive only; no significance or promotion claim.",
+    "The oracle+anchor mode is an observational reachable upper bound, not a deployable selector.",
+    "Image-level statistics treat the 38 images as independent units.",
+    "This run reuses the frozen spatial targets, scorer, combine and anchor rules; it does not retrain.",
+    "The prior report's G3 primary test is computed as l2_anchor - selector by aggregate_validation, the negative of its stated selector - l2_anchor definition; this decomposition uses the stated sign and reports the discrepancy without editing the prior report.",
+    "Retained-mass deltas are descriptive and are not a significance or promotion test; the large oracle headroom only bounds achievable mass, not task accuracy."
+  ],
+  "files": {
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-spatial-selector-failure-diagnostic.json",
+    "md": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-spatial-selector-failure-diagnostic.md",
+    "csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-spatial-selector-failure-diagnostic-records.csv",
+    "json_sha256": "9a7ea53c06fbc79b557f87ac788fb4a5295933455e5b5934d1c6185416ce683d",
+    "md_sha256": "6e5462d809847b0600bd11403291d006c9bdcd8c804f287465ee4a9e81e311fb",
+    "csv_sha256": "cb2c078d3b898c483f60d647ac390350e0aa9e737b8ef0c621d0a1f16a1f163a"
+  }
+}

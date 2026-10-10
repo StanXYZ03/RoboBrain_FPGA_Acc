@@ -1,0 +1,122 @@
+{
+  "version": "2026-09-16-r2-literature-aligned",
+  "principle": "Use official benchmark metrics and commonly reported efficiency metrics; do not define a custom weighted quality score or universal pass threshold.",
+  "baseline": {
+    "model": "RoboBrain2.5-4B",
+    "precision": "BF16",
+    "do_sample": false,
+    "comparison_rule": "same_images_prompts_preprocessing_decode_policy_and_hardware"
+  },
+  "primary_quality": {
+    "suite": "RoboBrain2.5 official 2D spatial reasoning suite",
+    "benchmarks": [
+      "CV-Bench",
+      "CrossPoint",
+      "RoboSpatial",
+      "RefSpatial",
+      "EmbSpatial"
+    ],
+    "report": [
+      "official_absolute_metric_for_each_benchmark",
+      "arithmetic_mean_matching_the_RoboBrain2.5_report",
+      "absolute_delta_from_local_BF16",
+      "relative_retention_from_local_BF16"
+    ],
+    "aggregation": {
+      "average_score": "arithmetic mean of the five official benchmark scores",
+      "average_retention": "compressed average score divided by local BF16 average score"
+    }
+  },
+  "general_vlm_robustness": {
+    "role": "separate robustness table; never mixed with spatial scores using a custom weight",
+    "candidate_benchmarks": [
+      "GQA",
+      "TextVQA",
+      "POPE"
+    ],
+    "minimum_selected": 2,
+    "report": [
+      "official_absolute_metric_for_each_benchmark",
+      "arithmetic_mean",
+      "absolute_delta_from_local_BF16",
+      "relative_retention_from_local_BF16"
+    ]
+  },
+  "localization_diagnostic": {
+    "required": true,
+    "reason": "FEATHER shows that broad VQA averages can hide localization degradation",
+    "current_datasets": [
+      "frozen COCO Pointing/Grounding set"
+    ],
+    "report": [
+      "PCK@0.1",
+      "PCK@0.2",
+      "mean_IoU",
+      "Acc@0.5",
+      "format_success",
+      "paired_bootstrap_95%_CI"
+    ],
+    "claim_scope": "diagnostic only unless an official benchmark and evaluator are used"
+  },
+  "efficiency": {
+    "algorithmic": [
+      "visual_token_count_and_retention_ratio",
+      "FLOPs_or_MACs",
+      "KV_cache_and_peak_memory"
+    ],
+    "runtime": [
+      "model_end_to_end_latency_mean_p50_p95",
+      "TTFT",
+      "TPOT",
+      "output_tokens_per_second",
+      "decisions_per_second"
+    ],
+    "hardware": [
+      "average_and_peak_board_power",
+      "energy_per_decision",
+      "energy_per_output_token",
+      "LUT_FF_DSP_BRAM_URAM",
+      "achieved_frequency",
+      "effective_memory_bandwidth"
+    ]
+  },
+  "latency_boundaries": {
+    "model_end_to_end": "processor tensors ready through transfers, vision, projector, prefill, decode, and output tokens returned to host",
+    "application_pipeline": "JPEG decode, resize, normalization, layout conversion, model end-to-end, and output parsing",
+    "kernel_or_stage": "reported separately and never labeled end-to-end"
+  },
+  "comparison_points": {
+    "required_baselines": [
+      "unpruned_local_BF16",
+      "random_pruning_with_multiple_seeds",
+      "uniform_spatial_sampling",
+      "L2_topk",
+      "proposed_method"
+    ],
+    "token_retention_points": [
+      1.0,
+      0.75,
+      0.5,
+      0.25
+    ],
+    "additional_existing_point": 0.875,
+    "selection_rule": "Report the quality-efficiency Pareto frontier; do not convert it into an invented pass/fail score."
+  },
+  "experiment_scale": {
+    "development_screen": "fixed and stratified subset with recorded seed",
+    "paper_quality": "official validation or test split with official evaluator",
+    "performance": "at least 100 distinct samples after warmup",
+    "microbenchmark": "at least 20 measured repeats"
+  },
+  "evidence_levels": {
+    "software": "quality, token count, theoretical FLOPs/MACs, and GPU timing",
+    "implementation": "HLS or post-route resources and timing",
+    "board": "measured full-system latency, power, energy, and bandwidth"
+  },
+  "explicitly_forbidden": [
+    "custom E/G/Q weighted score presented as a community standard",
+    "custom universal quality pass threshold presented as literature standard",
+    "theoretical FLOPs or HLS estimates presented as board speedup",
+    "revealed development data presented as a new blind test"
+  ]
+}

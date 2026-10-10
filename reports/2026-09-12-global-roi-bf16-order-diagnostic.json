@@ -1,0 +1,56 @@
+{
+  "status": "REVEALED_ORACLE_MECHANICS_PILOT_NOT_VALIDATION",
+  "result_records": 48,
+  "groups": {
+    "global_roi_v2:grounding": {
+      "strategy": "global_roi_v2",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 134.0,
+      "application_latency_ms_median": 502.0294354762882,
+      "application_latency_ms_p95": 519.702424062416,
+      "iou_mean": 0.5761021894562525,
+      "acc_0_5": 0.75
+    },
+    "global_roi_v2:pointing": {
+      "strategy": "global_roi_v2",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 134.0,
+      "application_latency_ms_median": 277.1046550478786,
+      "application_latency_ms_p95": 288.40084793046117,
+      "pck_0_1": 0.5,
+      "pck_0_2": 1.0,
+      "point_nme_bbox_diag_mean": 0.09865154279306085
+    },
+    "roi_global_v2:grounding": {
+      "strategy": "roi_global_v2",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 134.0,
+      "application_latency_ms_median": 498.45216900575906,
+      "application_latency_ms_p95": 520.5235620960593,
+      "iou_mean": 0.896388790470871,
+      "acc_0_5": 1.0
+    },
+    "roi_global_v2:pointing": {
+      "strategy": "roi_global_v2",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 134.0,
+      "application_latency_ms_median": 277.21257240045816,
+      "application_latency_ms_p95": 288.25675905682147,
+      "pck_0_1": 0.5,
+      "pck_0_2": 1.0,
+      "point_nme_bbox_diag_mean": 0.10131972939199108
+    }
+  }
+}

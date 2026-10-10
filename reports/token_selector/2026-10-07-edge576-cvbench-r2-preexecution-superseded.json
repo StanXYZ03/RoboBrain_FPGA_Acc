@@ -1,0 +1,112 @@
+{
+  "status": "PREEXECUTION_SUPERSEDED",
+  "date": "2026-10-07",
+  "round": "2026-10-07 edge576 CV-Bench r2 pre-execution supersede",
+  "subject": {
+    "config": "configs/2026-10-07-edge576-cvbench-three-arm-development-r2.preregistered.json",
+    "config_sha256": "8f265557bfb86998135b6985023e136d7f397eb8e06eb64551a97308cc958d09",
+    "prereg_report_json": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.json",
+    "prereg_report_json_sha256": "ab2d22659850ea9757563dc84522ef5b50502cb28a788bf9a9e8bb285661d95b",
+    "prereg_report_md": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.md",
+    "prereg_report_md_sha256": "a2254d205e80240d9cfe6f1b8a11126f452edbe98de441398091e95a3b5e2b27",
+    "generator": "scripts/preregister_edge576_cvbench_r2_20261007.py",
+    "generator_sha256": "43ecab62deeb0248b7e4fb698cdd6d37aeeb85dd75b507be2dcf2dcbd6ea8430",
+    "prereg_test": "evaluation/tests/test_edge576_cvbench_prereg_r2.py",
+    "prereg_test_sha256": "94608ed8a7dcca3efb97f38f1d09dacdb97e7ef0743371d0cf08566a38838b42"
+  },
+  "executed": false,
+  "gpu_runs": 0,
+  "arm_runs": 0,
+  "never_executed": true,
+  "must_not_be_run": true,
+  "bytes_preserved": true,
+  "reason_summary": "r2 did not pin the newly added adapter/smoke execution layer, so it no longer describes the exact bytes that would execute; r2 was never executed, so superseding it costs no results.",
+  "single_reason": {
+    "id": "r2_did_not_pin_new_adapter_and_smoke_execution_layer",
+    "problem": "r2 pins the 40 frozen dependencies and the existing conservative_l2_guarded_rerank_v2 mechanism chain, but it does not pin the new edge576 runner adapter layer (edge576_cvbench_runner_contract.py, run_edge576_cvbench_three_arm.py and their focused test), the runner adaptation report JSON/MD, or the new independent single-sample smoke entry and its focused tests. The executable surface therefore drifted past the preregistration.",
+    "fix_in_r3": "r3 keeps the same three arms, the same primary metric and the same success gates, and adds SHA256 pins for the runner contract, the three-arm runner, its focused test, the runner adaptation report JSON/MD, the new run_edge576_cvbench_three_arm_smoke.py entry, its focused test and this supersede evidence."
+  },
+  "new_execution_layer_not_pinned_by_r2": [
+    {
+      "path": "evaluation/edge576_cvbench_runner_contract.py",
+      "sha256": "fdea7df65556ef47c297a8082d9aa1238fcb645bdb1e5910d02f5453107590db",
+      "role": "shared edge576 run contract + fail-closed model identity verifier"
+    },
+    {
+      "path": "evaluation/run_edge576_cvbench_three_arm.py",
+      "sha256": "b1fb2ca1bc67af4355bfe6f0ce52725adf788f3339e77f5c6ea4188788e3eb85",
+      "role": "three-arm runner adapter (preflight + resume + warmup)"
+    },
+    {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm.py",
+      "sha256": "6d4f513568faccd005ded47e6b963d89b783194b84411b5c80d25fabf700fa55",
+      "role": "runner adapter focused CPU tests"
+    },
+    {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-three-arm-runner-adaptation.json",
+      "sha256": "485947b8f44801d8c74488d8e446fed9ea6079149f8b9c2a98482df5fb783784",
+      "role": "runner adaptation machine report"
+    },
+    {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-three-arm-runner-adaptation.md",
+      "sha256": "6e496348d9aef43ae89aaebfa8d20e83bb82bb95490a0effc5622b5fef7655fe",
+      "role": "runner adaptation Chinese report"
+    },
+    {
+      "path": "evaluation/run_edge576_cvbench_three_arm_smoke.py",
+      "sha256": "3c956d7ea9a64a52dc6affbec0c85ae032b44ce58197c8b166d89480dc2ec255",
+      "role": "independent single-sample smoke entry"
+    },
+    {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm_smoke.py",
+      "sha256": "458a45101d8ca2a861b4a4d7f507e650402bee00e164e5991ea0ca1c508d1068",
+      "role": "smoke entry focused CPU tests"
+    }
+  ],
+  "r2_fixes_still_valid": {
+    "defect_A_third_arm_preregistered": "r2 pinned the third arm to the existing conservative_l2_guarded_rerank_v2 (is_new_mechanism=false); r3 inherits this unchanged.",
+    "defect_B_honest_record_completeness": "r2 requires 2638 unique complete outputs with parsed_answer allowed to be null and no 100% parse gate; r3 inherits this unchanged.",
+    "defect_C_auditor_model_path": "r2 shipped the corrected auditor; r3 inherits the corrected auditor and the re-audit report unchanged.",
+    "note": "These r2 fixes are not the supersede reason and are not revised by r3."
+  },
+  "unchanged_r2_content": {
+    "three_arms": [
+      "dense_edge576",
+      "corrected_l2_integer_b1_k96",
+      "v2_edge576_b1_k96"
+    ],
+    "primary_metric": "cv_bench_accuracy",
+    "success_gates_unchanged": true,
+    "quality_retention_threshold": 0.9,
+    "paired_bootstrap_strata": "task::source_dataset",
+    "paired_bootstrap_seed": 20261007,
+    "output_paths_unchanged": true
+  },
+  "superseded_by": {
+    "config": "configs/2026-10-07-edge576-cvbench-three-arm-development-r3.preregistered.json",
+    "generator": "scripts/preregister_edge576_cvbench_r3_20261007.py"
+  },
+  "unchanged_frozen_inputs": {
+    "edge576_manifest": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f"
+    },
+    "edge576_summary": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+      "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b"
+    },
+    "source_full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "model_identity_manifest": {
+      "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+    },
+    "cv_bench_metric_v2": {
+      "path": "evaluation/cv_bench_metric_v2.py",
+      "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1"
+    }
+  },
+  "scoping": "CPU-only, read-only. No GPU, no model weights, no network, no training, no dependency installation. The r2 config/report/generator/test bytes, the edge576 manifest, the builder, the source full manifest, the model identity and metric_v2 were not modified."
+}

@@ -1,0 +1,365 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_PENDING_CODEX_FINALIZATION",
+  "immutable": false,
+  "date": "2026-10-04",
+  "report_stem": "2026-10-04-b1-corrected-l2-prompt-ablation-full2638",
+  "diagnostic_only": false,
+  "formal_full2638_conclusion": true,
+  "preregistration_note": "Written before any full2638 corrected-L2 arm output exists. SHA256 values for the three full2638 arm JSONL outputs are null and MUST be filled in by Codex after generation; until then this config is pending and not immutable. Every other pin is frozen and is re-verified by the summariser.",
+  "promotion_basis": "The frozen screening100 experiment completed with CORRECTED_PROMPT_SELECTOR_SCREENING_PASS. Nothing is tuned from that result: manifest, arms, runner, boundary, K, grid, dtype/decoding and scoring are unchanged; only the sample set is promoted from the fixed 100-sample screening manifest to the full 2638-sample CV-Bench manifest.",
+  "round_scope": "CPU-only summariser, preregistration and focused tests. No GPU run, no board run, no training, no hyper-parameter tuning, no dependency installation. The three full2638 raw JSONLs are produced later by the host GPU runner exactly as pinned below; none existed when this file was written.",
+  "research_question": "On the full 2638-sample CV-Bench manifest, does the accepted integer chain preserve the corrected patch-wise L2 quality (integerisation gate), and does adding the frozen seed-20261003 prompt semantic term confirm a Prompt gain?",
+  "fixed_configuration": {
+    "manifest": "datasets/cv_bench_full2638.jsonl",
+    "sample_count": 2638,
+    "budget_K": 96,
+    "boundary": "B1 = after vision block 0",
+    "region_grid": 3,
+    "local_candidate_cap": 16,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "max_new_tokens": 16,
+    "training": false,
+    "selection_contract": "evaluation.hardware_regular_token_selector.select_hardware_regular_groups (unmodified)",
+    "integration": "evaluation.hardware_regular_b1_integration.forward_hardware_regular_b1_vision (unmodified) via its integer_scorer hook",
+    "checkpoint_seed": 20261003
+  },
+  "primary_metric": {
+    "identifier": "score(...)[\"cv_bench_accuracy\"]",
+    "definition": "Official CV-Bench combined score returned by the frozen scorer evaluation.build_cv_bench_pruning_report.score: ((accuracy_ADE20K + accuracy_COCO)/2 + accuracy_Omni3D)/2.",
+    "rule": "This is the ONE and ONLY primary metric for every arm and for every paired bootstrap comparison. It is never replaced by any other accuracy, and the decision uses only its paired stratified bootstrap 95% CI lower bounds."
+  },
+  "unweighted_metric": {
+    "identifier": "unweighted_sample_accuracy",
+    "underlying_field": "score(...)[\"accuracy\"]",
+    "definition": "Plain unweighted mean over the 2638 full2638 samples.",
+    "rule": "Secondary diagnostic only. It must never be called the CV-Bench primary score and must never drive the decision."
+  },
+  "forbidden_primary_metrics": [
+    "pointing",
+    "grounding",
+    "ndcg",
+    "retained_mass"
+  ],
+  "arms": {
+    "corrected_l2_float": {
+      "output_path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_float_k96_full2638.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED",
+      "rows": 2638,
+      "role": "primary_arm",
+      "score_formula": "mean(norm(raw_patch_i)) over the 4 patches, then the existing float min-max normalisation",
+      "uses_prompt": false,
+      "runner_arm": "corrected_l2_float"
+    },
+    "corrected_l2_integer": {
+      "output_path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED",
+      "rows": 2638,
+      "role": "primary_arm",
+      "score_formula": "global per-image symmetric INT8 of all raw patches; per-patch INT64 sum of squares + integer floor sqrt; per-group sum of the four patch norms; existing exact Q0.15 integer min-max",
+      "uses_prompt": false,
+      "runner_arm": "corrected_l2_integer"
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "output_path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED",
+      "rows": 2638,
+      "role": "primary_arm",
+      "score_formula": "existing accepted integer semantic chain (group-mean quantisation, frozen Wv_q, frozen prompt query, semantic Q0.15) with only the old norm(group_mean) L2 Q0.15 replaced by the corrected patch-wise L2 Q0.15; accepted lambda=0.5 round-half-away/clamp combine",
+      "uses_prompt": true,
+      "requires_checkpoint": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz",
+      "runner_arm": "prompt_plus_corrected_l2_integer"
+    }
+  },
+  "descriptive_references": {
+    "dense": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+      "rows": 2638,
+      "role": "descriptive_reference_only",
+      "note": "dense full2638; cannot override the decision"
+    },
+    "old_current_integer": {
+      "path": "artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k96.jsonl",
+      "sha256": "b8976a5befdde7ae84cae925d14e37b2f5dd4e4d60b30eb4bdd879b18b87241d",
+      "rows": 2638,
+      "score_mode": "integer",
+      "role": "descriptive_reference_only",
+      "note": "old current defective-L2 integer selector K96 full2638; cannot override the decision"
+    }
+  },
+  "output_paths": {
+    "corrected_l2_float": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_float_k96_full2638.jsonl",
+      "sha256": null
+    },
+    "corrected_l2_integer": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": null
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": null
+    }
+  },
+  "report_paths": {
+    "json": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.json",
+    "csv": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.csv",
+    "md": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.md"
+  },
+  "dataset_pins": {
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "records": 2638,
+      "unique_sample_ids": 2638
+    },
+    "images": {
+      "image_dir": "datasets/cv_bench_full2638_images",
+      "image_count": 2638,
+      "image_total_bytes": 404722392,
+      "image_aggregate_sha256": "abac17f614e8b76a6fdf3fd8526b44ca844ffe0fa42ba2428de6f879538110fc",
+      "image_aggregate_rule": "sha256 over sorted lines '<filename> <sha256(file)>'"
+    }
+  },
+  "checkpoint_pins": {
+    "deployment_seed": 20261003,
+    "projection_npz": {
+      "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz",
+      "sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff"
+    },
+    "wv_int8": {
+      "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_int8_rowmajor.bin",
+      "sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b"
+    },
+    "wv_per_tensor_scale": {
+      "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_per_tensor_scale_f32le.bin",
+      "sha256": "93585a3bd2d584a612b40d827f8d15f43c87acdc764d7e217d99df473428b13f"
+    }
+  },
+  "bootstrap": {
+    "method": "paired bootstrap, stratified by task::source_dataset",
+    "helper": "evaluation.build_cv_bench_pruning_report.paired_bootstrap_delta",
+    "seed": 20261004,
+    "repeats": 5000,
+    "ci_level": 0.95,
+    "metric": "score(...)[\"cv_bench_accuracy\"]"
+  },
+  "decision_rule": {
+    "uses_only_primary_metric": true,
+    "gates": {
+      "integer_minus_float": {
+        "definition": "corrected_l2_integer minus corrected_l2_float",
+        "pass_condition": "paired 95% CI lower bound >= -0.02"
+      },
+      "prompt_minus_integer_l2": {
+        "definition": "prompt_plus_corrected_l2_integer minus corrected_l2_integer",
+        "confirm_condition": "paired 95% CI lower bound > 0"
+      }
+    },
+    "ordered_outcomes": [
+      {
+        "outcome": "CORRECTED_L2_INTEGERIZATION_FAIL",
+        "condition": "integer_minus_float 95% CI lower bound < -0.02",
+        "meaning": "量化失败：整数纠正 L2 相对浮点纠正 L2 的主分配对置信区间下界低于 -0.02。"
+      },
+      {
+        "outcome": "CORRECTED_PROMPT_SELECTOR_FULL2638_PASS",
+        "condition": "quantization gate passes AND prompt_minus_integer_l2 95% CI lower bound > 0",
+        "meaning": "full2638 量化与 Prompt 双通过：整数纠正 L2 保真，且冻结 Prompt 语义项带来确认的正增益。"
+      },
+      {
+        "outcome": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638",
+        "condition": "quantization gate passes AND prompt_minus_integer_l2 95% CI lower bound <= 0",
+        "meaning": "full2638 量化通过但 Prompt 增益未确认：无法确认冻结 Prompt 语义项的正增益。"
+      }
+    ],
+    "descriptive_references_cannot_override": true
+  },
+  "screening_promotion_evidence": {
+    "outcome": "CORRECTED_PROMPT_SELECTOR_SCREENING_PASS",
+    "config": {
+      "path": "configs/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.preregistered.json",
+      "sha256": "80f2db140cc1997ced73f939d40a0b5c172993a73a64ab75d10ea46d5a563319"
+    },
+    "report_json": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.json",
+      "sha256": "abe35625c8af4bebe68e60eadc9856ae92c8ae9b4075aace5f54850d7ea693a9"
+    },
+    "report_csv": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.csv",
+      "sha256": "fcc42a1c673f619b908e1cb6140f72b6b93c6a84a5828dfa1c9df7946c3add85"
+    },
+    "report_md": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.md",
+      "sha256": "5661c957739ce291f0682537d2036b23bd7226d7f0d75eb2cf69cb29b4de7a89"
+    },
+    "execution_receipt": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100-execution-receipt.json",
+      "sha256": "efdf3286c547796e9aa87957aeefd89c7a4d2d31a58e26ddd3c7deec41ab09f7"
+    },
+    "raw_arm_jsonl": {
+      "corrected_l2_float": {
+        "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation/corrected_l2_float_k96_screening100.jsonl",
+        "sha256": "c9b25550ebf579844779067289d7a63140afefbad7ed8f3d44b5ca518b002ba3"
+      },
+      "corrected_l2_integer": {
+        "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation/corrected_l2_integer_k96_screening100.jsonl",
+        "sha256": "313beb877ceeaf0cbbdf025ff36e306c52ccf8a174cce84fd0532f32c01e6a7d"
+      },
+      "prompt_plus_corrected_l2_integer": {
+        "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation/prompt_plus_corrected_l2_integer_k96_screening100.jsonl",
+        "sha256": "fbaf08e5ba69a5ff604ab56c28a2d1cf778f0d24e83561d017b836abf5667b70"
+      }
+    },
+    "representative_activations": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation/representative_activations.npz",
+      "sha256": "c24679018b83e78d08be3942e486736d92b1b4a832fd68b66bfed972ba2c20a7"
+    },
+    "screening_metrics": {
+      "corrected_l2_float_cv_bench_accuracy": 0.7333333333333333,
+      "corrected_l2_integer_cv_bench_accuracy": 0.7333333333333333,
+      "prompt_plus_corrected_l2_integer_cv_bench_accuracy": 0.8208333333333333,
+      "prompt_minus_integer_l2_delta": 0.0875,
+      "prompt_minus_integer_l2_ci95": [0.016666666666666666, 0.1625]
+    },
+    "not_tuned": true
+  },
+  "validation_requirements": {
+    "exact_full2638": "The full manifest and all five inputs (three primary arms + dense + old current-integer) must each hold exactly 2638 unique sample_id values and the same sample_id set.",
+    "no_duplicates": "Every input must contain no duplicate sample_id.",
+    "arm_identity": "Every primary-arm record must carry arm equal to its file's pinned arm; missing/wrong arm fails closed.",
+    "budget_grid_cap": "Every primary-arm record must carry requested_budget == 96, region_grid == 3 and local_candidate_cap == 16.",
+    "manifest_sha": "Every primary-arm record must carry manifest_sha256 equal to the pinned full-manifest SHA256.",
+    "task_source": "Every primary-arm record task/source (when present) must match the full manifest.",
+    "record_hash": "Every primary-arm record record_sha256 must re-verify with the frozen runner digest rule.",
+    "exact_k_or_bypass": "Every non-bypass primary-arm record must emit output_group_count == 96 and strictly ascending selected_group_indices whose length equals output_group_count and whose SHA256 re-verifies; every identity-bypass record must emit output_group_count == full_llm_visual_tokens <= 96.",
+    "input_grid_consistency": "For every sample_id, the (image_grid_thw, full_patch_tokens, full_llm_visual_tokens) tuple must be identical across the three corrected-L2 arms, with grid[1]*grid[2] == full_patch_tokens == 4*full_llm_visual_tokens.",
+    "checkpoint_hashes": "Prompt-arm records must carry the config-pinned checkpoint/wv/wv-scale hashes; no-prompt arms must carry none.",
+    "config_pins": "Every non-null inputs_sha256 pin in this config is re-verified by the summariser.",
+    "output_path_consistency": "The summariser's arm output paths must equal this config's output_paths (relative and absolute normalisation).",
+    "fail_closed": "If any required input file is missing, or any check above fails, the summariser must raise and must NOT write a report."
+  },
+  "runner": {
+    "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+    "generation_command": "python evaluation/run_hf_hardware_regular_b1_corrected_l2.py --model <frozen local BF16 RoboBrain2.5-4B dir> --model-label <label> --manifest datasets/cv_bench_full2638.jsonl --output <arm output path> --arm <arm> --budget 96 --region-grid 3 --local-candidate-cap 16 --dtype bf16 --device cuda:0",
+    "one_arm_at_a_time": true,
+    "strict_offline_local_model": true,
+    "raw_jsonl_with_record_sha256": true,
+    "summariser": "evaluation/summarize_b1_corrected_l2_prompt_ablation_full2638.py"
+  },
+  "inputs_sha256": {
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "dense_full_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+    },
+    "old_current_integer_full_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k96.jsonl",
+      "sha256": "b8976a5befdde7ae84cae925d14e37b2f5dd4e4d60b30eb4bdd879b18b87241d"
+    },
+    "corrected_l2_float_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_float_k96_full2638.jsonl",
+      "sha256": null
+    },
+    "corrected_l2_integer_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": null
+    },
+    "prompt_plus_corrected_l2_integer_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": null
+    },
+    "screening_report_json": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.json",
+      "sha256": "abe35625c8af4bebe68e60eadc9856ae92c8ae9b4075aace5f54850d7ea693a9"
+    },
+    "screening_report_csv": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.csv",
+      "sha256": "fcc42a1c673f619b908e1cb6140f72b6b93c6a84a5828dfa1c9df7946c3add85"
+    },
+    "screening_report_md": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.md",
+      "sha256": "5661c957739ce291f0682537d2036b23bd7226d7f0d75eb2cf69cb29b4de7a89"
+    },
+    "screening_config": {
+      "path": "configs/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.preregistered.json",
+      "sha256": "80f2db140cc1997ced73f939d40a0b5c172993a73a64ab75d10ea46d5a563319"
+    },
+    "screening_summarizer": {
+      "path": "evaluation/summarize_b1_corrected_l2_prompt_ablation_screening100.py",
+      "sha256": "47100b742ee0b7758f9647e647a0eae42fa755b16bbcedb22e47843605a1788e"
+    },
+    "full2638_summarizer": {
+      "path": "evaluation/summarize_b1_corrected_l2_prompt_ablation_full2638.py",
+      "sha256": "3893fc037d8e0646e7d27b3d0cef93e1d7fe54edb1ddc6f66e276d2247392719"
+    },
+    "runner": {
+      "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+      "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9"
+    },
+    "core": {
+      "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+      "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585"
+    },
+    "evaluator": {
+      "path": "evaluation/build_cv_bench_pruning_report.py",
+      "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+    },
+    "metrics": {
+      "path": "evaluation/metrics.py",
+      "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+    },
+    "token_selector": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "b1_integration": {
+      "path": "evaluation/hardware_regular_b1_integration.py",
+      "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa"
+    },
+    "current_selector_integer": {
+      "path": "evaluation/current_selector_integer.py",
+      "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7"
+    },
+    "selector_int8_numerical_audit": {
+      "path": "evaluation/selector_int8_numerical_audit.py",
+      "sha256": "4329e11616d2790218670b6b2b7252cec847c75a56778fcba871044428ea05dc"
+    },
+    "selector_integer_scorer_audit": {
+      "path": "evaluation/selector_integer_scorer_audit.py",
+      "sha256": "3fcf91d28f670e7406a41028b02fcaaa4f7694abf8ba76210494cd05502b16a9"
+    },
+    "evaluation_protocol": {
+      "path": "configs/evaluation_protocol.json",
+      "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643"
+    },
+    "checkpoint_projection_npz": {
+      "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz",
+      "sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff"
+    },
+    "checkpoint_wv_int8": {
+      "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_int8_rowmajor.bin",
+      "sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b"
+    },
+    "checkpoint_wv_per_tensor_scale": {
+      "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_per_tensor_scale_f32le.bin",
+      "sha256": "93585a3bd2d584a612b40d827f8d15f43c87acdc764d7e217d99df473428b13f"
+    }
+  },
+  "limitations": [
+    "The Selector path is software only; no FPGA/board result and no latency/acceleration claim is made.",
+    "Dense and the old current-integer selector are descriptive references only; they can never override the decision.",
+    "Only score(...)[\"cv_bench_accuracy\"] drives the decision, via paired stratified bootstrap CI lower bounds; unweighted_sample_accuracy is descriptive.",
+    "Validation was already used in development; internal test remains sealed."
+  ]
+}

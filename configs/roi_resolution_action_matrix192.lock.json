@@ -1,0 +1,71 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-14",
+  "purpose": "Complete a 192-image revealed development action matrix for Dense, ROI-384, and ROI-512 before fitting any resolution controller.",
+  "evidence_level": "revealed development data; test split remains sealed",
+  "model": {
+    "path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "dtype": "bfloat16",
+    "backend": "Hugging Face Transformers",
+    "do_sample": false
+  },
+  "dataset": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "manifest_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+    "unique_images": 192,
+    "task_records": 384,
+    "tasks": [
+      "grounding",
+      "pointing"
+    ],
+    "sample_seed": 20260912
+  },
+  "actions": [
+    {
+      "strategy": "dense",
+      "output": "evaluation/results/global_roi_bf16_representation_gate32_stratified_20260912.jsonl",
+      "existing_records": 192,
+      "target_records": 1152
+    },
+    {
+      "strategy": "roi_only",
+      "label": "roi_only",
+      "oracle_margin": 0.5,
+      "roi_long_edge": 384,
+      "roi_upscale": true,
+      "output": "evaluation/results/global_roi_bf16_representation_gate32_stratified_20260912.jsonl",
+      "existing_records": 192,
+      "target_records": 1152
+    },
+    {
+      "strategy": "roi_only",
+      "label": "roi_only_m0500_s512",
+      "oracle_margin": 0.5,
+      "roi_long_edge": 512,
+      "roi_upscale": true,
+      "output": "evaluation/results/global_roi_bf16_roi_m0500_s512_stratified32_exactwarmup_20260914.jsonl",
+      "existing_records": 192,
+      "target_records": 1152
+    }
+  ],
+  "protocol": {
+    "warmup_per_representation": 1,
+    "repeats": 3,
+    "resume_key": [
+      "sample_id",
+      "strategy",
+      "repeat"
+    ],
+    "expected_new_records": 2880,
+    "controller_training_before_matrix_complete": false,
+    "test_split_access": false
+  },
+  "execution_constraints": [
+    "Check nvidia-smi and process ownership before each GPU run.",
+    "Do not execute while another user's process is actively loading the GPU.",
+    "Set HF_HUB_OFFLINE=1 and TRANSFORMERS_OFFLINE=1.",
+    "Append only through the runner's resume logic; never truncate existing JSONL files.",
+    "Preserve the current model labels for records appended to existing result files.",
+    "Do not fit or tune a controller until all three action columns are complete."
+  ]
+}

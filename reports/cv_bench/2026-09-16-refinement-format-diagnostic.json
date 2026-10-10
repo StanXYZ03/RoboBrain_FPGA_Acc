@@ -1,0 +1,46 @@
+{
+  "global256": {
+    "Count": {
+      "samples": 788,
+      "parse_failures": 62,
+      "cap_hits": 62
+    },
+    "Relation": {
+      "samples": 650,
+      "parse_failures": 0,
+      "cap_hits": 0
+    },
+    "Depth": {
+      "samples": 600,
+      "parse_failures": 0,
+      "cap_hits": 0
+    },
+    "Distance": {
+      "samples": 600,
+      "parse_failures": 0,
+      "cap_hits": 0
+    }
+  },
+  "cosine_global_roi": {
+    "Count": {
+      "samples": 788,
+      "parse_failures": 167,
+      "cap_hits": 167
+    },
+    "Relation": {
+      "samples": 650,
+      "parse_failures": 23,
+      "cap_hits": 23
+    },
+    "Depth": {
+      "samples": 600,
+      "parse_failures": 1,
+      "cap_hits": 1
+    },
+    "Distance": {
+      "samples": 600,
+      "parse_failures": 208,
+      "cap_hits": 209
+    }
+  }
+}

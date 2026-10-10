@@ -1,0 +1,628 @@
+{
+  "status": "EXTERNAL_CONFIRMATION_GATES_FAIL",
+  "scope": "SpatialEval VQA primary synthetic tasks only (4500 records)",
+  "spatialreal": "excluded from primary gate; official repository has no valid parser",
+  "official_total_score_exists": false,
+  "project_macro_notice": "The equal-task macro is a preregistered project aggregate, not an official SpatialEval total score.",
+  "scores": {
+    "dense_edge576": {
+      "metric": "spatialeval_official_parser_compatible_three_task_substring_accuracy__macro_micro_are_project_aggregation_not_official_total_score",
+      "official_commit": "d82ba382805265f205693cb83a30c4866ea6c35b",
+      "model_name_for_official_parser": "robobrain25",
+      "official_total_score_exists": false,
+      "metric_name_marks_aggregation": "the macro/micro fields are project aggregation, not an official SpatialEval total score",
+      "project_aggregation_notice": "micro and equal-task macro are project-defined summaries, not official SpatialEval total scores",
+      "expected_count": 4500,
+      "micro_project_summary": {
+        "count": 4500,
+        "official_compatible_correct": 2627,
+        "official_compatible_accuracy": 0.5837777777777777,
+        "strict_equal_correct": 2605,
+        "strict_equal_accuracy": 0.5788888888888889,
+        "parse_success_count": 4498,
+        "parse_failure_count": 2,
+        "parse_success_rate": 0.9995555555555555
+      },
+      "macro_project_summary": {
+        "weighting": "equal_task",
+        "task_count": 3,
+        "tasks": [
+          "spatialmap",
+          "mazenav",
+          "spatialgrid"
+        ],
+        "official_compatible_accuracy": 0.5837777777777777,
+        "strict_equal_accuracy": 0.5788888888888889
+      },
+      "equal_task_macro_project_summary": {
+        "weighting": "equal_task",
+        "task_count": 3,
+        "tasks": [
+          "spatialmap",
+          "mazenav",
+          "spatialgrid"
+        ],
+        "official_compatible_accuracy": 0.5837777777777777,
+        "strict_equal_accuracy": 0.5788888888888889
+      },
+      "per_task": {
+        "mazenav": {
+          "count": 1500,
+          "official_compatible_correct": 385,
+          "official_compatible_accuracy": 0.25666666666666665,
+          "strict_equal_correct": 385,
+          "strict_equal_accuracy": 0.25666666666666665,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid": {
+          "count": 1500,
+          "official_compatible_correct": 1187,
+          "official_compatible_accuracy": 0.7913333333333333,
+          "strict_equal_correct": 1187,
+          "strict_equal_accuracy": 0.7913333333333333,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap": {
+          "count": 1500,
+          "official_compatible_correct": 1055,
+          "official_compatible_accuracy": 0.7033333333333334,
+          "strict_equal_correct": 1033,
+          "strict_equal_accuracy": 0.6886666666666666,
+          "parse_success_count": 1498,
+          "parse_failure_count": 2,
+          "parse_success_rate": 0.9986666666666667
+        }
+      },
+      "per_task_question_id": {
+        "mazenav::0": {
+          "count": 500,
+          "official_compatible_correct": 78,
+          "official_compatible_accuracy": 0.156,
+          "strict_equal_correct": 78,
+          "strict_equal_accuracy": 0.156,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "mazenav::1": {
+          "count": 500,
+          "official_compatible_correct": 102,
+          "official_compatible_accuracy": 0.204,
+          "strict_equal_correct": 102,
+          "strict_equal_accuracy": 0.204,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "mazenav::2": {
+          "count": 500,
+          "official_compatible_correct": 205,
+          "official_compatible_accuracy": 0.41,
+          "strict_equal_correct": 205,
+          "strict_equal_accuracy": 0.41,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::0": {
+          "count": 500,
+          "official_compatible_correct": 275,
+          "official_compatible_accuracy": 0.55,
+          "strict_equal_correct": 275,
+          "strict_equal_accuracy": 0.55,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::1": {
+          "count": 500,
+          "official_compatible_correct": 500,
+          "official_compatible_accuracy": 1.0,
+          "strict_equal_correct": 500,
+          "strict_equal_accuracy": 1.0,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::2": {
+          "count": 500,
+          "official_compatible_correct": 412,
+          "official_compatible_accuracy": 0.824,
+          "strict_equal_correct": 412,
+          "strict_equal_accuracy": 0.824,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::0": {
+          "count": 500,
+          "official_compatible_correct": 434,
+          "official_compatible_accuracy": 0.868,
+          "strict_equal_correct": 434,
+          "strict_equal_accuracy": 0.868,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::1": {
+          "count": 500,
+          "official_compatible_correct": 441,
+          "official_compatible_accuracy": 0.882,
+          "strict_equal_correct": 419,
+          "strict_equal_accuracy": 0.838,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::2": {
+          "count": 500,
+          "official_compatible_correct": 180,
+          "official_compatible_accuracy": 0.36,
+          "strict_equal_correct": 180,
+          "strict_equal_accuracy": 0.36,
+          "parse_success_count": 498,
+          "parse_failure_count": 2,
+          "parse_success_rate": 0.996
+        }
+      }
+    },
+    "corrected_l2_integer_b1_k96": {
+      "metric": "spatialeval_official_parser_compatible_three_task_substring_accuracy__macro_micro_are_project_aggregation_not_official_total_score",
+      "official_commit": "d82ba382805265f205693cb83a30c4866ea6c35b",
+      "model_name_for_official_parser": "robobrain25",
+      "official_total_score_exists": false,
+      "metric_name_marks_aggregation": "the macro/micro fields are project aggregation, not an official SpatialEval total score",
+      "project_aggregation_notice": "micro and equal-task macro are project-defined summaries, not official SpatialEval total scores",
+      "expected_count": 4500,
+      "micro_project_summary": {
+        "count": 4500,
+        "official_compatible_correct": 1976,
+        "official_compatible_accuracy": 0.4391111111111111,
+        "strict_equal_correct": 1971,
+        "strict_equal_accuracy": 0.438,
+        "parse_success_count": 4500,
+        "parse_failure_count": 0,
+        "parse_success_rate": 1.0
+      },
+      "macro_project_summary": {
+        "weighting": "equal_task",
+        "task_count": 3,
+        "tasks": [
+          "spatialmap",
+          "mazenav",
+          "spatialgrid"
+        ],
+        "official_compatible_accuracy": 0.4391111111111112,
+        "strict_equal_accuracy": 0.438
+      },
+      "equal_task_macro_project_summary": {
+        "weighting": "equal_task",
+        "task_count": 3,
+        "tasks": [
+          "spatialmap",
+          "mazenav",
+          "spatialgrid"
+        ],
+        "official_compatible_accuracy": 0.4391111111111112,
+        "strict_equal_accuracy": 0.438
+      },
+      "per_task": {
+        "mazenav": {
+          "count": 1500,
+          "official_compatible_correct": 353,
+          "official_compatible_accuracy": 0.23533333333333334,
+          "strict_equal_correct": 353,
+          "strict_equal_accuracy": 0.23533333333333334,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid": {
+          "count": 1500,
+          "official_compatible_correct": 725,
+          "official_compatible_accuracy": 0.48333333333333334,
+          "strict_equal_correct": 725,
+          "strict_equal_accuracy": 0.48333333333333334,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap": {
+          "count": 1500,
+          "official_compatible_correct": 898,
+          "official_compatible_accuracy": 0.5986666666666667,
+          "strict_equal_correct": 893,
+          "strict_equal_accuracy": 0.5953333333333334,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        }
+      },
+      "per_task_question_id": {
+        "mazenav::0": {
+          "count": 500,
+          "official_compatible_correct": 74,
+          "official_compatible_accuracy": 0.148,
+          "strict_equal_correct": 74,
+          "strict_equal_accuracy": 0.148,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "mazenav::1": {
+          "count": 500,
+          "official_compatible_correct": 97,
+          "official_compatible_accuracy": 0.194,
+          "strict_equal_correct": 97,
+          "strict_equal_accuracy": 0.194,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "mazenav::2": {
+          "count": 500,
+          "official_compatible_correct": 182,
+          "official_compatible_accuracy": 0.364,
+          "strict_equal_correct": 182,
+          "strict_equal_accuracy": 0.364,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::0": {
+          "count": 500,
+          "official_compatible_correct": 137,
+          "official_compatible_accuracy": 0.274,
+          "strict_equal_correct": 137,
+          "strict_equal_accuracy": 0.274,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::1": {
+          "count": 500,
+          "official_compatible_correct": 364,
+          "official_compatible_accuracy": 0.728,
+          "strict_equal_correct": 364,
+          "strict_equal_accuracy": 0.728,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::2": {
+          "count": 500,
+          "official_compatible_correct": 224,
+          "official_compatible_accuracy": 0.448,
+          "strict_equal_correct": 224,
+          "strict_equal_accuracy": 0.448,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::0": {
+          "count": 500,
+          "official_compatible_correct": 322,
+          "official_compatible_accuracy": 0.644,
+          "strict_equal_correct": 322,
+          "strict_equal_accuracy": 0.644,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::1": {
+          "count": 500,
+          "official_compatible_correct": 345,
+          "official_compatible_accuracy": 0.69,
+          "strict_equal_correct": 340,
+          "strict_equal_accuracy": 0.68,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::2": {
+          "count": 500,
+          "official_compatible_correct": 231,
+          "official_compatible_accuracy": 0.462,
+          "strict_equal_correct": 231,
+          "strict_equal_accuracy": 0.462,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        }
+      }
+    },
+    "v2_edge576_b1_k96": {
+      "metric": "spatialeval_official_parser_compatible_three_task_substring_accuracy__macro_micro_are_project_aggregation_not_official_total_score",
+      "official_commit": "d82ba382805265f205693cb83a30c4866ea6c35b",
+      "model_name_for_official_parser": "robobrain25",
+      "official_total_score_exists": false,
+      "metric_name_marks_aggregation": "the macro/micro fields are project aggregation, not an official SpatialEval total score",
+      "project_aggregation_notice": "micro and equal-task macro are project-defined summaries, not official SpatialEval total scores",
+      "expected_count": 4500,
+      "micro_project_summary": {
+        "count": 4500,
+        "official_compatible_correct": 1955,
+        "official_compatible_accuracy": 0.43444444444444447,
+        "strict_equal_correct": 1950,
+        "strict_equal_accuracy": 0.43333333333333335,
+        "parse_success_count": 4500,
+        "parse_failure_count": 0,
+        "parse_success_rate": 1.0
+      },
+      "macro_project_summary": {
+        "weighting": "equal_task",
+        "task_count": 3,
+        "tasks": [
+          "spatialmap",
+          "mazenav",
+          "spatialgrid"
+        ],
+        "official_compatible_accuracy": 0.4344444444444444,
+        "strict_equal_accuracy": 0.43333333333333335
+      },
+      "equal_task_macro_project_summary": {
+        "weighting": "equal_task",
+        "task_count": 3,
+        "tasks": [
+          "spatialmap",
+          "mazenav",
+          "spatialgrid"
+        ],
+        "official_compatible_accuracy": 0.4344444444444444,
+        "strict_equal_accuracy": 0.43333333333333335
+      },
+      "per_task": {
+        "mazenav": {
+          "count": 1500,
+          "official_compatible_correct": 339,
+          "official_compatible_accuracy": 0.226,
+          "strict_equal_correct": 339,
+          "strict_equal_accuracy": 0.226,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid": {
+          "count": 1500,
+          "official_compatible_correct": 716,
+          "official_compatible_accuracy": 0.47733333333333333,
+          "strict_equal_correct": 716,
+          "strict_equal_accuracy": 0.47733333333333333,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap": {
+          "count": 1500,
+          "official_compatible_correct": 900,
+          "official_compatible_accuracy": 0.6,
+          "strict_equal_correct": 895,
+          "strict_equal_accuracy": 0.5966666666666667,
+          "parse_success_count": 1500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        }
+      },
+      "per_task_question_id": {
+        "mazenav::0": {
+          "count": 500,
+          "official_compatible_correct": 65,
+          "official_compatible_accuracy": 0.13,
+          "strict_equal_correct": 65,
+          "strict_equal_accuracy": 0.13,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "mazenav::1": {
+          "count": 500,
+          "official_compatible_correct": 92,
+          "official_compatible_accuracy": 0.184,
+          "strict_equal_correct": 92,
+          "strict_equal_accuracy": 0.184,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "mazenav::2": {
+          "count": 500,
+          "official_compatible_correct": 182,
+          "official_compatible_accuracy": 0.364,
+          "strict_equal_correct": 182,
+          "strict_equal_accuracy": 0.364,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::0": {
+          "count": 500,
+          "official_compatible_correct": 164,
+          "official_compatible_accuracy": 0.328,
+          "strict_equal_correct": 164,
+          "strict_equal_accuracy": 0.328,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::1": {
+          "count": 500,
+          "official_compatible_correct": 327,
+          "official_compatible_accuracy": 0.654,
+          "strict_equal_correct": 327,
+          "strict_equal_accuracy": 0.654,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialgrid::2": {
+          "count": 500,
+          "official_compatible_correct": 225,
+          "official_compatible_accuracy": 0.45,
+          "strict_equal_correct": 225,
+          "strict_equal_accuracy": 0.45,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::0": {
+          "count": 500,
+          "official_compatible_correct": 335,
+          "official_compatible_accuracy": 0.67,
+          "strict_equal_correct": 335,
+          "strict_equal_accuracy": 0.67,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::1": {
+          "count": 500,
+          "official_compatible_correct": 361,
+          "official_compatible_accuracy": 0.722,
+          "strict_equal_correct": 356,
+          "strict_equal_accuracy": 0.712,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        },
+        "spatialmap::2": {
+          "count": 500,
+          "official_compatible_correct": 204,
+          "official_compatible_accuracy": 0.408,
+          "strict_equal_correct": 204,
+          "strict_equal_accuracy": 0.408,
+          "parse_success_count": 500,
+          "parse_failure_count": 0,
+          "parse_success_rate": 1.0
+        }
+      }
+    }
+  },
+  "latency": {
+    "dense_edge576": {
+      "elapsed_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1426.782255774726,
+        "median_ms": 1467.6517214393243,
+        "p95_ms": 1499.0863550221547
+      },
+      "vision_encoder_seconds": {
+        "available_count": 4500,
+        "mean_ms": 32.59532299889459,
+        "median_ms": 38.452640533447266,
+        "p95_ms": 39.233980369567874
+      },
+      "llm_prefill_seconds": {
+        "available_count": 4500,
+        "mean_ms": 80.77959727562799,
+        "median_ms": 87.26220703125,
+        "p95_ms": 105.80989227294923
+      },
+      "decoder_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1220.916569908142,
+        "median_ms": 1249.6380290985105,
+        "p95_ms": 1261.570783996582
+      }
+    },
+    "corrected_l2_integer_b1_k96": {
+      "application_end_to_end_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1553.2314559402876,
+        "median_ms": 1462.1656788513064,
+        "p95_ms": 2363.2123646326368
+      },
+      "elapsed_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1526.0136249924803,
+        "median_ms": 1430.4477520054206,
+        "p95_ms": 2349.036538915243
+      },
+      "vision_encoder_seconds": {
+        "available_count": 4500,
+        "mean_ms": 54.94654082760422,
+        "median_ms": 55.802387883886695,
+        "p95_ms": 77.84401348326354
+      },
+      "llm_prefill_seconds": {
+        "available_count": 4500,
+        "mean_ms": 39.85661231486003,
+        "median_ms": 32.82582473754883,
+        "p95_ms": 60.38870944976808
+      },
+      "decoder_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1318.8145634028117,
+        "median_ms": 1235.20659160614,
+        "p95_ms": 2004.9353505134602
+      },
+      "selector_cpu_roundtrip_seconds": {
+        "available_count": 4500,
+        "mean_ms": 39.553896091723196,
+        "median_ms": 42.90390049573034,
+        "p95_ms": 57.13390572927892
+      }
+    },
+    "v2_edge576_b1_k96": {
+      "application_end_to_end_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1503.4830295518557,
+        "median_ms": 1500.3789935726672,
+        "p95_ms": 1730.9123096987607
+      },
+      "elapsed_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1472.9595773793342,
+        "median_ms": 1463.870485429652,
+        "p95_ms": 1720.1145033817738
+      },
+      "vision_encoder_seconds": {
+        "available_count": 4500,
+        "mean_ms": 100.92230236447519,
+        "median_ms": 103.33657707087696,
+        "p95_ms": 154.09793449798602
+      },
+      "llm_prefill_seconds": {
+        "available_count": 4500,
+        "mean_ms": 37.84394642808702,
+        "median_ms": 33.82929420471191,
+        "p95_ms": 49.79261417388916
+      },
+      "decoder_seconds": {
+        "available_count": 4500,
+        "mean_ms": 1237.1019960979886,
+        "median_ms": 1229.7387990951536,
+        "p95_ms": 1423.0428063392637
+      },
+      "selector_cpu_roundtrip_seconds": {
+        "available_count": 4500,
+        "mean_ms": 81.06751885968778,
+        "median_ms": 84.58585850894451,
+        "p95_ms": 130.46150943264368
+      }
+    }
+  },
+  "comparison": {
+    "v2_dense_equal_task_macro_retention": 0.7441948991244766,
+    "v2_minus_l2_stratified_paired_bootstrap": {
+      "stratification": "task::question_id",
+      "seed": 20261009,
+      "repetitions": 5000,
+      "observed_difference": -0.004666666666666667,
+      "ci_95_lower": -0.013777777777777778,
+      "ci_95_upper": 0.0044444444444444444,
+      "percentile_method": "linear interpolation over sorted bootstrap replicates"
+    }
+  },
+  "gates": {
+    "v2_dense_macro_retention_minimum": 0.9,
+    "v2_dense_macro_retention_pass": false,
+    "v2_minus_l2_ci95_lower_minimum": 0.0,
+    "v2_minus_l2_ci95_lower_pass": false,
+    "all_pass": false,
+    "per_task_gates": null
+  }
+}

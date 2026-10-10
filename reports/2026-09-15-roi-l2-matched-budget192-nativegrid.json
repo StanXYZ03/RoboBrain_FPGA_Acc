@@ -1,0 +1,318 @@
+{
+  "status": "ROI_L2_MATCHED_BUDGET192_COMPLETE",
+  "evidence_level": "revealed 192-image development comparison; not blind validation",
+  "files": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "native_results": "evaluation/results/global_roi_bf16_representation_gate32_stratified_20260912.jsonl",
+    "custom_dense": "evaluation/results/roi_l2_matched_budget192_nativegrid/shallow_r1000.jsonl",
+    "matched_l2": "evaluation/results/roi_l2_matched_budget192_nativegrid/l2_matched_roi384.jsonl"
+  },
+  "sha256": {
+    "manifest": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+    "native_results": "ed84655a65ee271f0f5ce0f7e72f02c1b02119102f4f1e769834230cebb5aa68",
+    "custom_dense": "16f1d3ac8224a6f95b6292d3b94524bfe68951b3d12cd3c1bb98cac141e61cb3",
+    "matched_l2": "3e9093bffb95e0a5f936017ca99c93773b1dcee15ce4549b56c25fd23f21d452"
+  },
+  "records": 384,
+  "unique_images": 192,
+  "token_matching": {
+    "mismatch_count": 0,
+    "mismatch_sample_ids": [],
+    "capped_roi_targets_count": 2,
+    "capped_roi_target_sample_ids": [
+      "coco-val-000000268831-1132340-grounding",
+      "coco-val-000000268831-1132340-pointing"
+    ]
+  },
+  "custom_dense_native_output_audit": {
+    "exact_matches": 384,
+    "total": 384,
+    "rate": 1.0
+  },
+  "token_summary": {
+    "native_dense": {
+      "kept_visual_tokens": 103118,
+      "dense_visual_tokens": 103118,
+      "ratio_to_dense": 1.0
+    },
+    "custom_dense": {
+      "kept_visual_tokens": 103118,
+      "dense_visual_tokens": 103118,
+      "ratio_to_dense": 1.0
+    },
+    "roi384": {
+      "kept_visual_tokens": 35304,
+      "dense_visual_tokens": 103118,
+      "ratio_to_dense": 0.3423650575069338
+    },
+    "l2_matched_roi384": {
+      "kept_visual_tokens": 35280,
+      "dense_visual_tokens": 103118,
+      "ratio_to_dense": 0.342132314435889
+    }
+  },
+  "encoder_compute_proxy_ratio_to_dense": {
+    "roi384": 0.3090078955257726,
+    "l2_matched_roi384": 0.4815979028353707
+  },
+  "metrics": {
+    "native_dense:grounding": {
+      "n": 192,
+      "primary_mean": 0.8103294106263609,
+      "secondary_mean": 0.9010416666666666,
+      "parse_rate": 1.0
+    },
+    "native_dense:pointing": {
+      "n": 192,
+      "primary_mean": 0.6458333333333334,
+      "secondary_mean": 0.8177083333333334,
+      "parse_rate": 1.0
+    },
+    "custom_dense:grounding": {
+      "n": 192,
+      "primary_mean": 0.8103294106263609,
+      "secondary_mean": 0.9010416666666666,
+      "parse_rate": 1.0
+    },
+    "custom_dense:pointing": {
+      "n": 192,
+      "primary_mean": 0.6458333333333334,
+      "secondary_mean": 0.8177083333333334,
+      "parse_rate": 1.0
+    },
+    "roi384:grounding": {
+      "n": 192,
+      "primary_mean": 0.7889506730096683,
+      "secondary_mean": 0.9010416666666666,
+      "parse_rate": 1.0
+    },
+    "roi384:pointing": {
+      "n": 192,
+      "primary_mean": 0.5989583333333334,
+      "secondary_mean": 0.8489583333333334,
+      "parse_rate": 1.0
+    },
+    "l2_matched_roi384:grounding": {
+      "n": 192,
+      "primary_mean": 0.5323635645493744,
+      "secondary_mean": 0.59375,
+      "parse_rate": 1.0
+    },
+    "l2_matched_roi384:pointing": {
+      "n": 192,
+      "primary_mean": 0.34375,
+      "secondary_mean": 0.5833333333333334,
+      "parse_rate": 1.0
+    }
+  },
+  "paired_bootstrap": {
+    "custom_dense_minus_native_dense": {
+      "grounding": {
+        "primary": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      },
+      "pointing": {
+        "primary": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      }
+    },
+    "roi384_minus_native_dense": {
+      "grounding": {
+        "primary": {
+          "n": 192,
+          "mean_delta": -0.02137873761669264,
+          "ci95_low": -0.04783458408347584,
+          "ci95_high": 0.003394046895928968,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": -0.046875,
+          "ci95_high": 0.046875,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      },
+      "pointing": {
+        "primary": {
+          "n": 192,
+          "mean_delta": -0.046875,
+          "ci95_low": -0.109375,
+          "ci95_high": 0.015625,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": 0.03125,
+          "ci95_low": -0.015625,
+          "ci95_high": 0.078125,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      }
+    },
+    "l2_matched_minus_native_dense": {
+      "grounding": {
+        "primary": {
+          "n": 192,
+          "mean_delta": -0.27796584607698643,
+          "ci95_low": -0.32669404155965526,
+          "ci95_high": -0.22891835246969472,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": -0.3072916666666667,
+          "ci95_low": -0.3802083333333333,
+          "ci95_high": -0.234375,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      },
+      "pointing": {
+        "primary": {
+          "n": 192,
+          "mean_delta": -0.3020833333333333,
+          "ci95_low": -0.375,
+          "ci95_high": -0.22916666666666666,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": -0.234375,
+          "ci95_low": -0.3072916666666667,
+          "ci95_high": -0.16145833333333334,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      }
+    },
+    "l2_matched_minus_roi384": {
+      "grounding": {
+        "primary": {
+          "n": 192,
+          "mean_delta": -0.2565871084602938,
+          "ci95_low": -0.30462041380873756,
+          "ci95_high": -0.209850050257106,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": -0.3072916666666667,
+          "ci95_low": -0.3802083333333333,
+          "ci95_high": -0.234375,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      },
+      "pointing": {
+        "primary": {
+          "n": 192,
+          "mean_delta": -0.2552083333333333,
+          "ci95_low": -0.3333333333333333,
+          "ci95_high": -0.171875,
+          "iterations": 10000
+        },
+        "secondary": {
+          "n": 192,
+          "mean_delta": -0.265625,
+          "ci95_low": -0.3333333333333333,
+          "ci95_high": -0.19791666666666666,
+          "iterations": 10000
+        },
+        "parse": {
+          "n": 192,
+          "mean_delta": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "iterations": 10000
+        }
+      }
+    }
+  },
+  "gate": {
+    "primary_noninferiority_margin": -0.02,
+    "l2_primary_noninferior_by_ci": {
+      "grounding": false,
+      "pointing": false
+    },
+    "joint_noninferiority_pass": false,
+    "test_split_accessed": false,
+    "calibration_split_accessed": false
+  },
+  "limitations": [
+    "ROI-384 uses the revealed ground-truth box and is not deployable.",
+    "L2 selection occurs after vision layer 5, so matched final tokens do not mean matched total vision compute.",
+    "Latency from different collection runs is not compared.",
+    "Development evidence cannot establish held-out generalization."
+  ]
+}

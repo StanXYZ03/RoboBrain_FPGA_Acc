@@ -1,0 +1,364 @@
+{
+  "schema_version": "1.0",
+  "executed_at": "2026-10-04T22:07:34+08:00",
+  "status": "EXECUTED_AND_REPORTED",
+  "objective": "Exploratory out-of-fold G-gated Prompt model selection on the frozen full2638 corrected-L2 arms: test whether a hardware-trivial gate that only observes the pre-selector group count G = full_llm_visual_tokens can choose between the integer-L2 arm and the Prompt+integer-L2 arm without any task/source/dataset identity (CPU-only, read-only).",
+  "analysis": "full2638_oof_gated_prompt",
+  "exploratory_only": true,
+  "not_a_formal_claim": true,
+  "formal_result_unchanged": true,
+  "formal_outcome": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638",
+  "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+  "unweighted_metric": "score(...)[\"accuracy\"] (unweighted sample accuracy)",
+  "external_validation_caveat": "Threshold discovery here uses the same full2638 corpus under 5-fold cross-validation, so the OOF score is an internally cross-validated estimate, not an untouched external evaluation. A paper/formal claim still requires replaying the frozen policy on an external frozen dataset.",
+  "external_validation_caveat_zh": "阈值发现与评估共用同一 full2638 语料（5-fold 交叉验证），因此 OOF 分数只是内部交叉验证估计，不是未触碰的外部评测；在提出论文/正式主张之前，必须把冻结策略在外部冻结数据集上重放。",
+  "inputs": {
+    "formal_report": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.json",
+      "sha256": "53ec2ee10fde7b31b08a840263bd26409e35781ed25b89b20166ea90e84af6ea"
+    },
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "records": 2638
+    },
+    "corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+      "records": 2638
+    },
+    "prompt_plus_corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa",
+      "records": 2638
+    }
+  },
+  "pins_verified": true,
+  "contract": {
+    "expected_sample_count": 2638,
+    "inputs_unchanged_during_analysis": true,
+    "unique_sample_ids_per_arm": true,
+    "record_sha256_verified": true,
+    "manifest_sha256_verified": true,
+    "selected_indices_strictly_ascending_unique_and_hashed": true
+  },
+  "reproduction": {
+    "never_matches_formal_integer": true,
+    "always_matches_formal_prompt": true,
+    "dense_matches_formal_dense": true
+  },
+  "artifacts": {
+    "script": {
+      "path": "evaluation/analyze_full2638_oof_gated_prompt.py",
+      "sha256": "80a77dc377a912bcb921f3acae5ad823bcac50920592f55808de17221e713724"
+    },
+    "tests": {
+      "path": "evaluation/tests/test_analyze_full2638_oof_gated_prompt.py",
+      "sha256": "81fde9c13ca601fdebe83ca7ca419f81e1a340cc46b9f3fc62a1eae1286cef34"
+    },
+    "report_json": {
+      "path": "reports/cv_bench/2026-10-04-full2638-oof-gated-prompt.json",
+      "sha256": "f66ecdb6893411db9a2195310410e60b0fb75a1796fb08bcae9c00080faf0908"
+    },
+    "report_csv": {
+      "path": "reports/cv_bench/2026-10-04-full2638-oof-gated-prompt.csv",
+      "sha256": "69b1ddac91de59df0fe5d3ae3da00149e050fad66e2446028e8d8bea015a1c1c"
+    },
+    "report_md": {
+      "path": "reports/cv_bench/2026-10-04-full2638-oof-gated-prompt.md",
+      "sha256": "f1de04919383ca331227254e3e70550c04d82251ba363762b0e5b5219722d8c2"
+    },
+    "dependencies": {
+      "heterogeneity_helper": {
+        "path": "evaluation/analyze_full2638_prompt_gain_heterogeneity.py",
+        "sha256": "fb41d9370b32032c7738556d73693daeaa026deb9f7730241c2c9c85c61dc547"
+      },
+      "evaluator": {
+        "path": "evaluation/build_cv_bench_pruning_report.py",
+        "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+      },
+      "metrics": {
+        "path": "evaluation/metrics.py",
+        "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+      },
+      "token_selector": {
+        "path": "evaluation/hardware_regular_token_selector.py",
+        "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+      },
+      "evaluation_protocol": {
+        "path": "configs/evaluation_protocol.json",
+        "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643"
+      }
+    }
+  },
+  "design": {
+    "folds": 5,
+    "fold_seed": 20261004,
+    "stratified_by": "task::source_dataset",
+    "fold_assignment": "strata processed in sorted order; ids sorted (numeric-aware) and shuffled with one random.Random(fold_seed); dealt round-robin across the folds",
+    "candidate_policies": [
+      "never_prompt",
+      "always_prompt",
+      "prompt_if_G_gt_96",
+      "prompt_if_G_gt_256",
+      "prompt_if_G_gt_512",
+      "prompt_if_G_gt_1024"
+    ],
+    "policy_rule": "never_prompt uses the integer-L2 arm on every sample; always_prompt uses the Prompt+integer-L2 arm on every sample; prompt_if_G_gt_T uses the Prompt arm iff the pre-selector G = full_llm_visual_tokens is strictly greater than T, else the integer-L2 arm. No task/source/dataset identity enters any policy.",
+    "selection_rule": "In each fold keep the other four folds, score all six candidate policies with the official cv_bench_accuracy, pick the maximum; exact ties prefer the lower Prompt-use rate, then the fixed order (never_prompt, always_prompt, prompt_if_G_gt_96, prompt_if_G_gt_256, prompt_if_G_gt_512, prompt_if_G_gt_1024). Apply the winner unchanged to the held-out fold.",
+    "dense_role": "descriptive_reference_only",
+    "bootstrap": {
+      "seed": 20261004,
+      "repeats": 5000,
+      "ci_level": 0.95,
+      "stratified_by": "task::source_dataset",
+      "gate": false
+    }
+  },
+  "fold_selections": [
+    {
+      "fold": 0,
+      "selected_policy": "prompt_if_G_gt_512",
+      "train_cv_bench_accuracy": 0.7864602661179804,
+      "held_out_cv_bench_accuracy": 0.7852575231481482,
+      "held_out_prompt_use_rate": 0.37358490566037733,
+      "held_out_sample_count": 530
+    },
+    {
+      "fold": 1,
+      "selected_policy": "prompt_if_G_gt_512",
+      "train_cv_bench_accuracy": 0.7881140598531903,
+      "held_out_cv_bench_accuracy": 0.7786630271759508,
+      "held_out_prompt_use_rate": 0.38446969696969696,
+      "held_out_sample_count": 528
+    },
+    {
+      "fold": 2,
+      "selected_policy": "prompt_if_G_gt_512",
+      "train_cv_bench_accuracy": 0.7899281564310829,
+      "held_out_cv_bench_accuracy": 0.7714328847481021,
+      "held_out_prompt_use_rate": 0.3908918406072106,
+      "held_out_sample_count": 527
+    },
+    {
+      "fold": 3,
+      "selected_policy": "prompt_if_G_gt_512",
+      "train_cv_bench_accuracy": 0.7802097115537752,
+      "held_out_cv_bench_accuracy": 0.8102010006901311,
+      "held_out_prompt_use_rate": 0.3700189753320683,
+      "held_out_sample_count": 527
+    },
+    {
+      "fold": 4,
+      "selected_policy": "prompt_if_G_gt_512",
+      "train_cv_bench_accuracy": 0.7863774167469382,
+      "held_out_cv_bench_accuracy": 0.7855406746031746,
+      "held_out_prompt_use_rate": 0.3916349809885932,
+      "held_out_sample_count": 526
+    }
+  ],
+  "selection_counts": {
+    "prompt_if_G_gt_512": 5
+  },
+  "selection_stable_across_folds": true,
+  "oof": {
+    "n": 2638,
+    "prompt_use_count": 1008,
+    "prompt_use_rate": 0.3821076573161486,
+    "cv_bench_accuracy": 0.7862178402166554,
+    "unweighted_accuracy": 0.7812736921910538,
+    "transitions_vs_never": {
+      "wrong_to_right": 133,
+      "right_to_wrong": 86,
+      "unchanged_right": 1928,
+      "unchanged_wrong": 491,
+      "net_corrections": 47
+    },
+    "transitions_vs_always": {
+      "wrong_to_right": 108,
+      "right_to_wrong": 87,
+      "unchanged_right": 1953,
+      "unchanged_wrong": 490,
+      "net_corrections": 21
+    }
+  },
+  "baselines": {
+    "never_prompt": {
+      "cv_bench_accuracy": 0.7668517264725796,
+      "unweighted_accuracy": 0.7634571645185747,
+      "role": "frozen integer-L2 arm"
+    },
+    "always_prompt": {
+      "cv_bench_accuracy": 0.7773617325561999,
+      "unweighted_accuracy": 0.7733131159969674,
+      "role": "frozen Prompt+integer-L2 arm"
+    },
+    "dense_descriptive": {
+      "cv_bench_accuracy": 0.8727298774444869,
+      "unweighted_accuracy": 0.868081880212282,
+      "role": "descriptive_reference_only; never a gate"
+    }
+  },
+  "comparisons": {
+    "oof_minus_never": {
+      "left": "oof_selected_policy",
+      "right": "never_prompt",
+      "metric": "score(...)[\"cv_bench_accuracy\"]",
+      "delta_point_estimate": 0.01936611374407582,
+      "delta_ci95": [
+        0.007391390205371273,
+        0.03096761453396535
+      ],
+      "stratified_by": "task::source_dataset",
+      "seed": 20261004,
+      "repeats": 5000
+    },
+    "oof_minus_always": {
+      "left": "oof_selected_policy",
+      "right": "always_prompt",
+      "metric": "score(...)[\"cv_bench_accuracy\"]",
+      "delta_point_estimate": 0.008856107660455526,
+      "delta_ci95": [
+        -0.0006859036629282,
+        0.018653778222601725
+      ],
+      "stratified_by": "task::source_dataset",
+      "seed": 20261004,
+      "repeats": 5000
+    },
+    "oof_minus_dense_descriptive": {
+      "left": "oof_selected_policy",
+      "right": "dense",
+      "metric": "score(...)[\"cv_bench_accuracy\"]",
+      "delta_point_estimate": -0.08651203722783152,
+      "delta_ci95": null,
+      "role": "descriptive context only; no bootstrap is run for dense"
+    }
+  },
+  "by_G_bin": [
+    {
+      "G_bin": "<=96",
+      "n": 143,
+      "prompt_use_rate": 0.0,
+      "oof_unweighted_accuracy": 0.7272727272727273,
+      "never_unweighted_accuracy": 0.7272727272727273,
+      "always_unweighted_accuracy": 0.7272727272727273,
+      "transitions_vs_never": {
+        "wrong_to_right": 0,
+        "right_to_wrong": 0,
+        "unchanged_right": 104,
+        "unchanged_wrong": 39,
+        "net_corrections": 0
+      }
+    },
+    {
+      "G_bin": "97-256",
+      "n": 781,
+      "prompt_use_rate": 0.0,
+      "oof_unweighted_accuracy": 0.8783610755441741,
+      "never_unweighted_accuracy": 0.8783610755441741,
+      "always_unweighted_accuracy": 0.8604353393085787,
+      "transitions_vs_never": {
+        "wrong_to_right": 0,
+        "right_to_wrong": 0,
+        "unchanged_right": 686,
+        "unchanged_wrong": 95,
+        "net_corrections": 0
+      }
+    },
+    {
+      "G_bin": "257-512",
+      "n": 706,
+      "prompt_use_rate": 0.0,
+      "oof_unweighted_accuracy": 0.7379603399433428,
+      "never_unweighted_accuracy": 0.7379603399433428,
+      "always_unweighted_accuracy": 0.7280453257790368,
+      "transitions_vs_never": {
+        "wrong_to_right": 0,
+        "right_to_wrong": 0,
+        "unchanged_right": 521,
+        "unchanged_wrong": 185,
+        "net_corrections": 0
+      }
+    },
+    {
+      "G_bin": "513-1024",
+      "n": 448,
+      "prompt_use_rate": 1.0,
+      "oof_unweighted_accuracy": 0.7991071428571429,
+      "never_unweighted_accuracy": 0.7477678571428571,
+      "always_unweighted_accuracy": 0.7991071428571429,
+      "transitions_vs_never": {
+        "wrong_to_right": 65,
+        "right_to_wrong": 42,
+        "unchanged_right": 293,
+        "unchanged_wrong": 48,
+        "net_corrections": 23
+      }
+    },
+    {
+      "G_bin": ">1024",
+      "n": 560,
+      "prompt_use_rate": 1.0,
+      "oof_unweighted_accuracy": 0.7,
+      "never_unweighted_accuracy": 0.6571428571428571,
+      "always_unweighted_accuracy": 0.7,
+      "transitions_vs_never": {
+        "wrong_to_right": 68,
+        "right_to_wrong": 44,
+        "unchanged_right": 324,
+        "unchanged_wrong": 124,
+        "net_corrections": 24
+      }
+    }
+  ],
+  "commands": {
+    "analysis": "python evaluation/analyze_full2638_oof_gated_prompt.py",
+    "focused_new": "python -m unittest evaluation.tests.test_analyze_full2638_oof_gated_prompt",
+    "full2638_summarizer_and_heterogeneity": "python -m unittest evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_full2638 evaluation.tests.test_analyze_full2638_prompt_gain_heterogeneity",
+    "cv_bench_scorer": "python -m unittest evaluation.tests.test_cv_bench_report",
+    "combined_required": "python -m unittest evaluation.tests.test_analyze_full2638_oof_gated_prompt evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_full2638 evaluation.tests.test_analyze_full2638_prompt_gain_heterogeneity evaluation.tests.test_cv_bench_report",
+    "full_suite": "python -m unittest discover -s evaluation/tests"
+  },
+  "tests": {
+    "focused_new": {
+      "module": "evaluation.tests.test_analyze_full2638_oof_gated_prompt",
+      "count": 39,
+      "result": "OK"
+    },
+    "full2638_summarizer": {
+      "module": "evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_full2638",
+      "count": 41,
+      "result": "OK"
+    },
+    "full2638_heterogeneity": {
+      "module": "evaluation.tests.test_analyze_full2638_prompt_gain_heterogeneity",
+      "count": 30,
+      "result": "OK"
+    },
+    "cv_bench_scorer": {
+      "module": "evaluation.tests.test_cv_bench_report",
+      "count": 4,
+      "result": "OK"
+    },
+    "combined_required": {
+      "count": 114,
+      "result": "OK"
+    },
+    "full_evaluation_suite": {
+      "command": "python -m unittest discover -s evaluation/tests",
+      "count": 1415,
+      "result": "OK"
+    }
+  },
+  "blocker": null,
+  "blocker_note": "No blocker for this diagnostic. The only forward requirement is that the frozen selected policy must be replayed on an external frozen dataset before any paper/formal claim, because threshold discovery used the same full2638 corpus under cross-validation.",
+  "scope": "Exploratory out-of-fold G-gated Prompt model selection on the frozen full2638 corrected-L2 arms; CPU-only, read-only; NOT a new formal claim and NOT a gate.",
+  "limitations": [
+    "Threshold discovery here uses the same full2638 corpus under 5-fold cross-validation, so the OOF score is an internally cross-validated estimate, not an untouched external evaluation. A paper/formal claim still requires replaying the frozen policy on an external frozen dataset.",
+    "This is exploratory model selection over frozen outputs; it changes no raw output, config or prior report and creates no formal claim.",
+    "The official cv_bench_accuracy requires all three sources (ADE20K, COCO, Omni3D); inside single-source task/source strata only the unweighted sample accuracy is reported and it is not a gate.",
+    "Threshold discovery and evaluation share the same full2638 corpus under cross-validation; selections being stable across folds does not make the score an external evaluation.",
+    "No GPU, model, board, network or training is used; the whole diagnostic is a CPU-only read-only re-analysis of frozen JSONLs."
+  ]
+}

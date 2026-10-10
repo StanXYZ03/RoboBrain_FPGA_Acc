@@ -1,0 +1,78 @@
+{
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "amendment": {
+    "time": "before any K192 warmup or scored record and before any accuracy summary",
+    "trigger": "K192 fail-closed preflight found that cap=16 exposes only 144 local candidates while 174 detail groups are required",
+    "change": "Use local_candidate_cap=32 for K192 only; K96 and K144 remain 16",
+    "observed_before_amendment": "Runtime progress and structural exception only; no accuracy was summarized or inspected",
+    "second_structural_finding": "v2 K192 still fails before its warmup because the frozen integer prompt scorer performs an unused internal cap=16 audit selection (144 candidates < 183 detail groups). The frozen HLS-audited scorer core will not be modified in this experiment; v2 K192 is reported as structurally infeasible with zero scored records."
+  },
+  "created_at": "2026-10-10",
+  "purpose": "Development-only VSR zero-shot dev budget curve; not external confirmation and not an official test result.",
+  "dataset": {
+    "name": "VSR",
+    "official_commit": "b27a0af0ee1462d2b6b92c8c83e869d9254a241a",
+    "split": "zeroshot/dev",
+    "samples": 340,
+    "test_policy": "The zeroshot test JSON must not be parsed or scored in this experiment."
+  },
+  "protocol": {
+    "arms": [
+      "dense_edge576",
+      "corrected_l2_integer_b1_k96",
+      "corrected_l2_integer_b1_k144",
+      "corrected_l2_integer_b1_k192",
+      "v2_edge576_b1_k96",
+      "v2_edge576_b1_k144",
+      "v2_edge576_b1_k192"
+    ],
+    "measured_arms_after_fail_closed_structural_audit": [
+      "dense_edge576",
+      "corrected_l2_integer_b1_k96",
+      "corrected_l2_integer_b1_k144",
+      "corrected_l2_integer_b1_k192",
+      "v2_edge576_b1_k96",
+      "v2_edge576_b1_k144"
+    ],
+    "structurally_infeasible_arm": "v2_edge576_b1_k192",
+    "budgets": [96, 144, 192],
+    "local_candidate_cap_by_budget": {"96": 16, "144": 16, "192": 32},
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "max_new_tokens": 4,
+    "warmup_per_arm": 1,
+    "model_load_in_timing": false,
+    "primary_metric": "overall binary accuracy over all 340 dev examples",
+    "diagnostic_metrics": ["parse success", "accuracy by relation", "paired accuracy delta", "visual token retention"],
+    "primary_latency": "CUDA-synchronized runner wall time around the complete per-sample frozen producer",
+    "bootstrap_seed": 20261010,
+    "bootstrap_repetitions": 5000,
+    "selector_inputs_exclude": ["official_label", "relation", "caption", "subject", "object"],
+    "development_screen": {
+      "relative_accuracy_vs_dense": 0.88,
+      "positive_observed_software_speedup": true,
+      "note": "Permissive exploration screen only, not an official VSR threshold or publication claim."
+    }
+  },
+  "prompt": "Statement: {caption}\nBased only on the image, is this statement true or false? Answer with exactly True or False.",
+  "pins": {
+    "dev_metadata": {"path": "datasets/external/vsr-zeroshot-b27a0af0/splits/zeroshot/dev.jsonl", "sha256": "0abda42fe9333ab6a8671b32886738b5cfa6d37a8c277b56d8368c339c8dffce"},
+    "dev_images": {"path": "datasets/external/vsr-zeroshot-b27a0af0/dev_images_manifest.jsonl", "sha256": "10ec0f015baaea250245d69c0ea21aa539f6579f4534f993a37f9ad54e902fae"},
+    "eval_manifest": {"path": "datasets/external/vsr-zeroshot-b27a0af0/vsr_zeroshot_dev_eval_manifest.jsonl", "sha256": "df935a1e773d1090697dfad73d923d9625d3aad1bff35d078edd688ffa9a787e"},
+    "contract": {"path": "evaluation/vsr_zeroshot_dev_contract.py", "sha256": "f8b9e1a2c601019bb1170c000d09f284e31504addf76473bc765e90e5c05e88c"},
+    "runner": {"path": "evaluation/run_vsr_zeroshot_dev_budget_curve.py", "sha256": "c37e623523a681876b8efcccbb8d94690734e79c65392d8ddddec175f128bb0a"},
+    "summarizer": {"path": "evaluation/summarize_vsr_zeroshot_dev_budget_curve.py", "sha256": "6f2f8b5d620f684a5e7fbef5955d96b1e0fcd06c34239152e7468481e1c0c9d0"},
+    "model_identity": {"path": "artifacts/provenance/robobrain25-4b-model-identity.json", "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"},
+    "dense_runner": {"path": "evaluation/run_hf_shallow_block_pruning.py", "sha256": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9"},
+    "l2_runner": {"path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py", "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9"},
+    "l2_core": {"path": "evaluation/hardware_regular_b1_corrected_l2.py", "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585"},
+    "v2_runner": {"path": "evaluation/run_hf_conservative_l2_guarded_rerank.py", "sha256": "834e5c8165e0cd52565c8a49c6a05bee17b2950afedfbe26a3ad6757c5bf2146"},
+    "v2_core": {"path": "evaluation/conservative_l2_guarded_reranker.py", "sha256": "9486771f020b65661d9485702ba6d0d9d7901d7119aea8cb13090799792e357b"},
+    "v2_checkpoint_loader": {"path": "evaluation/run_hf_conservative_l2_residual_rerank.py", "sha256": "ffd41f46c776eabc441c7d90b957c3f664f3510f3d21ce797415fbd70c27cb1c"},
+    "edge576_contract": {"path": "evaluation/edge576_cvbench_runner_contract.py", "sha256": "36f7c2e44a974350ddb3863871788ea14de3b901eca2ee6817e1e5cde8a83813"}
+  }
+}

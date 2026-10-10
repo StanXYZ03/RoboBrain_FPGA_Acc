@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-04",
+  "status": "PREFLIGHT_READY",
+  "scope": "CPU-only preflight: read-only audit, frozen deployment checkpoint, immutable preregistration, integer-selector software bridge, CV-Bench runner, official summariser, host driver, CPU tests. No GPU, no proposed CV-Bench output, no dependency installation.",
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-04-current-selector-cvbench-gate-harness-prompt.md",
+    "sha256": "8e1ae30e6eeb63359467842a92cad9cade75bded6e792a6c294e439a66076eea"
+  },
+  "frozen_deployment_checkpoint": {
+    "seed": 20261003,
+    "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz",
+    "sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff",
+    "selection_rule": "Only seed referenced by the accepted compact HLS/IP/OOC/Zynq-BD chain; never selected from CV-Bench; the three seeds are not averaged.",
+    "wv_int8": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_int8_rowmajor.bin",
+    "wv_int8_sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b",
+    "wv_scale": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_per_tensor_scale_f32le.bin",
+    "wv_scale_sha256": "93585a3bd2d584a612b40d827f8d15f43c87acdc764d7e217d99df473428b13f"
+  },
+  "preregistration": {
+    "config": "configs/current_selector_cvbench_20261004.preregistered.json",
+    "config_sha256": "f49f86b01c17c00bf58edbb5061103c5f4a781362d301a3c4b38aedb16d09864",
+    "report": "reports/token_selector/2026-10-04-current-selector-cvbench-preregistration.json",
+    "report_sha256": "942c829f78b9c41d3507c8b8094c5b29c79e17e16de6ab629457e6ca002426dd",
+    "report_md": "reports/token_selector/2026-10-04-current-selector-cvbench-preregistration.md",
+    "all_pins_verified": true,
+    "written_before_any_proposed_cvbench_output": true
+  },
+  "current_selector_chain": [
+    "selector_int8_numerical_audit.quantize_activation",
+    "selector_int8_numerical_audit.primary_quantized_query",
+    "selector_wv_scale_regularization.quantize_weight_tensor (accepted per-tensor INT8 Wv bundle)",
+    "selector_integer_scorer_audit.integer_chain",
+    "hardware_regular_token_selector.select_hardware_regular_groups with combined_scores = score_q / 2**15"
+  ],
+  "budgets": [48, 64, 96],
+  "created_files": [
+    "configs/current_selector_cvbench_20261004.preregistered.json",
+    "reports/token_selector/2026-10-04-current-selector-cvbench-preregistration.json",
+    "reports/token_selector/2026-10-04-current-selector-cvbench-preregistration.md",
+    "evaluation/current_selector_integer.py",
+    "evaluation/run_hf_current_selector_cvbench.py",
+    "evaluation/summarize_current_selector_cvbench.py",
+    "evaluation/tests/test_current_selector_cvbench.py",
+    "scripts/run_current_selector_cvbench.sh"
+  ],
+  "modified_files": [
+    "evaluation/hardware_regular_b1_integration.py (added SCORE_MODE_INTEGER + optional integer_scorer callback; existing modes unchanged)"
+  ],
+  "protected_untouched": [
+    "the original model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "app/ (not present in this workspace)",
+    "existing HLS / cosim / OOC / BD directories",
+    "existing reports"
+  ],
+  "tests": {
+    "focused": {"command": "python -m unittest evaluation.tests.test_current_selector_cvbench", "ran": 17, "result": "OK"},
+    "full": {"command": "python -m unittest discover -s evaluation/tests", "ran": 732, "result": "OK"},
+    "py_compile": "OK",
+    "cli_help": "OK for both new modules",
+    "driver_syntax": "bash -n OK"
+  },
+  "logs": "reports/token_selector/logs/2026-10-04-current-selector-cvbench-preflight/",
+  "log_sha_manifest": "reports/token_selector/logs/2026-10-04-current-selector-cvbench-preflight/created-files.sha256",
+  "claims": {
+    "accuracy_claimed": false,
+    "speedup_claimed": false,
+    "board_execution_claimed": false,
+    "selector_is_software_path": true
+  },
+  "next_host_command": "bash scripts/run_current_selector_cvbench.sh",
+  "gpu_runs_by": "Codex on the host (RTX A6000, free >= 20 GiB); the Harness namespace cannot see /dev/nvidia* and did not run any GPU work this round."
+}

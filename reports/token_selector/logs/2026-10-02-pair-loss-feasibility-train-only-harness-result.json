@@ -1,0 +1,99 @@
+{
+  "artifacts": {
+    "csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-02-pair-loss-feasibility-train-only.csv",
+    "focused_tests": "evaluation/tests/test_pair_loss_feasibility_audit.py",
+    "init_csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-02-pair-loss-feasibility-init-metrics.csv",
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-02-pair-loss-feasibility-train-only.json",
+    "markdown": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-02-pair-loss-feasibility-train-only.md",
+    "script": "evaluation/pair_loss_feasibility_audit.py"
+  },
+  "environment": {
+    "numpy": "2.2.6",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.10.20",
+    "torch": "2.5.1+cu124"
+  },
+  "inputs": {
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "draft_config_sha256": "787f8f401bcb10b5fe8007a6a0f5b415858d893cb2797b3c1797d5f1fa785772",
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "input_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "script_sha256": "2913e43fadef1397f33a6d2f38ea093727ce2fc129378c330c0698e8c5a73dea"
+  },
+  "isolation": {
+    "opened_npz_count": 318,
+    "opened_only_train_npz": true,
+    "split_from_index_metadata_only": true,
+    "train_npz_count": 318,
+    "train_only": true,
+    "val_test_npz_opened": [],
+    "val_test_samples_ignored": 154
+  },
+  "key_metrics": {
+    "d_swap_over_js_median": 5.203301175900368,
+    "gradient": {
+      "Wt": {
+        "all_finite": true,
+        "base_pair_cosine_max": 0.06409572809934616,
+        "base_pair_cosine_mean": 0.02997777285054326,
+        "base_pair_cosine_min": 0.007465224247425795,
+        "l_base_nonzero_seed_count": 3,
+        "l_base_norm_mean": 4.678639094034831,
+        "l_pair_nonzero_seed_count": 3,
+        "l_pair_norm_mean": 0.07450474053621292,
+        "l_total_nonzero_seed_count": 3,
+        "l_total_norm_mean": 4.681641419728597,
+        "pair_over_base_norm_ratio_mean": 0.017387468517514573
+      },
+      "Wv": {
+        "all_finite": true,
+        "base_pair_cosine_max": 0.012103471904993057,
+        "base_pair_cosine_mean": 0.004030267552783092,
+        "base_pair_cosine_min": -0.004774967208504677,
+        "l_base_nonzero_seed_count": 3,
+        "l_base_norm_mean": 5.127087593078613,
+        "l_pair_nonzero_seed_count": 3,
+        "l_pair_norm_mean": 0.07311964283386867,
+        "l_total_nonzero_seed_count": 3,
+        "l_total_norm_mean": 5.127992709477742,
+        "pair_over_base_norm_ratio_mean": 0.015915237884114693
+      },
+      "concat": {
+        "all_finite": true,
+        "base_pair_cosine_max": 0.03859522566199303,
+        "base_pair_cosine_mean": 0.016752049637337525,
+        "base_pair_cosine_min": 0.00555677292868495,
+        "l_base_nonzero_seed_count": 3,
+        "l_base_norm_mean": 6.947868347167969,
+        "l_pair_nonzero_seed_count": 3,
+        "l_pair_norm_mean": 0.10441195964813232,
+        "l_total_nonzero_seed_count": 3,
+        "l_total_norm_mean": 6.95060920715332,
+        "pair_over_base_norm_ratio_mean": 0.01659922655720068
+      }
+    },
+    "hinge_active_image_fraction_mean": 0.9769392033542976,
+    "l_base_mean": 2.769591967264811,
+    "l_pair_mean": 0.05109812940160433,
+    "l_total_mean": 2.820690155029297,
+    "slack_mean": 0.3341425088480437,
+    "slack_negative_image_count": 0,
+    "slack_nonnegative_fraction": 1.0,
+    "train_images": 159,
+    "train_records": 318
+  },
+  "output_sha256": {
+    "csv": "fdbd1dd696a26c499bf02c22b2c1e89c54965533b739818d6f656692330e16e0",
+    "init_csv": "647481a8d4450c36465977cf2a8b4514041fba141a9a0c2980486a05ee3d623a",
+    "json": "93e89249879a9ce5dde77dcf02a5792ebb4541c1386d91a0a70be98d992864fc",
+    "md": "3124f73ee80fa1ac33fdea15c5afbc260ab00dc7032cac78c31575263cca720f"
+  },
+  "report": "2026-10-02-pair-loss-feasibility-train-only",
+  "scope": "train-only, CPU-only, zero-update mathematical and initialisation-gradient feasibility audit of the DRAFT pair loss; no training, no tuning, no parameter save, no val/test feature cache read, no model load, no GPU, no network, no promotion threshold, no accuracy claim",
+  "seeds": [
+    20261002,
+    20261003,
+    20261004
+  ],
+  "status": "COMPUTED"
+}

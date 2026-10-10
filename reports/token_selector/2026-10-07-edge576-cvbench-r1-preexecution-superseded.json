@@ -1,0 +1,78 @@
+{
+  "status": "PREEXECUTION_SUPERSEDED",
+  "date": "2026-10-07",
+  "round": "2026-10-07 edge576 CV-Bench r1 pre-execution supersede",
+  "subject": {
+    "config": "configs/2026-10-07-edge576-cvbench-three-arm-development.preregistered.json",
+    "config_sha256": "8958cbd6f61589217b73e983e0f57257f0cf9bc951c5adbd8506df5d6156b3f3",
+    "prereg_report_json": "reports/token_selector/2026-10-07-edge576-cvbench-prereg.json",
+    "prereg_report_json_sha256": "c728c3125ffa5708abef0aa6d6fd050611ce8f864cd7bbbda3d85ad13b419afa",
+    "prereg_report_md": "reports/token_selector/2026-10-07-edge576-cvbench-prereg.md",
+    "prereg_report_md_sha256": "37252dad094aaf2efe411cf961e4411aa8f9d5ecb75c7cd884114fe433676c2c",
+    "generator": "scripts/preregister_edge576_cvbench_20261007.py",
+    "generator_sha256": "c01776756d37d45307fae9745c610d44ad2179d638d694a0f86372d343d06c57"
+  },
+  "executed": false,
+  "gpu_runs": 0,
+  "never_executed": true,
+  "must_not_be_run": true,
+  "bytes_preserved": true,
+  "reason_summary": "r1 was a pre-execution design draft with three defects found by the independent review; it was never run and is superseded by r2. All r1 bytes are kept unchanged as evidence of the unexecuted design defects.",
+  "defects": {
+    "A_third_arm_not_preregistered": {
+      "observed": "arms.next_candidate_b1_k96.mechanism_id == null and status == TO_BE_SELECTED_UNDER_INDEPENDENT_POLICY_REVIEW_20261005-001",
+      "problem": "A slot with a null mechanism is not a pre-registered candidate; it does not freeze what will be run.",
+      "r2_fix": "r2 freezes the third arm to the existing conservative_l2_guarded_rerank_v2 (mechanism_id set, is_new_mechanism=false) and pins its whole mechanism chain; no new mechanism is invented."
+    },
+    "B_record_completeness_conflicts_with_honest_parse": {
+      "observed": "success_gates.record_completeness == \"all 2638 unique samples present and parseable\"",
+      "problem": "Demanding that all 2638 outputs be parseable contradicts the honest parse contract: even Dense emits unparseable outputs, so a 100% parse gate can only be passed by aliasing the boolean correctness field.",
+      "r2_fix": "r2 record completeness requires only 2638 unique complete output records; parsed_answer may be null, parse failures count as wrong and are reported as success/failure counts and rates, and there is no 100% parse gate."
+    },
+    "C_auditor_model_flag_dropped": {
+      "observed": "the auditor CLI parsed --model but never forwarded it to audit(); verify_processor always opened DEFAULT_MODEL.",
+      "problem": "The audit report could not prove which processor path produced the 2638/2638 grid re-derivation, so the audit was not fully self-describing.",
+      "r2_fix": "audit() now takes an explicit model_path, main() forwards --model, the processor is opened only from that path, and the report records the actual processor model path."
+    }
+  },
+  "auditor_pin_now_stale": {
+    "r1_pinned_auditor_sha256": "45dcd04976e5c5c8acaf232989f219b1817b5a13fb87bfbe27dd4cbfe81ea683",
+    "fixed_auditor_sha256": "a999fe0a48b962104b9991df1c62329789a2164f530fe977767dd95ddbad352b",
+    "note": "Because the auditor was corrected, the r1 config's auditor pin no longer matches the on-disk auditor. r1 is superseded and must not be re-generated or executed; the re-audit uses the corrected auditor and is recorded separately."
+  },
+  "r1_self_test_status": {
+    "module": "evaluation/tests/test_edge576_cvbench_prereg.py",
+    "sha256": "5eb3b8c4bc773c4bf1e1ef50a56281ea05c6c03128af17fd2b2fa40ae362ad40",
+    "bytes_preserved": true,
+    "expected_result": "1 failure in test_every_pin_reverifies",
+    "cause": "the pinned r1 auditor (45dcd049) is stale after the deliberate defect-C fix; every other r1 assertion still holds",
+    "interpretation": "this expected failure is positive evidence that the r1 preregistration is superseded and cannot be executed; it is not a regression in the r2 or corrected-auditor focused tests"
+  },
+  "superseded_by": {
+    "config": "configs/2026-10-07-edge576-cvbench-three-arm-development-r2.preregistered.json",
+    "generator": "scripts/preregister_edge576_cvbench_r2_20261007.py"
+  },
+  "unchanged_frozen_inputs": {
+    "edge576_manifest": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f"
+    },
+    "edge576_summary": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+      "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b"
+    },
+    "source_full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "model_identity_manifest": {
+      "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+    },
+    "cv_bench_metric_v2": {
+      "path": "evaluation/cv_bench_metric_v2.py",
+      "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1"
+    }
+  },
+  "scoping": "CPU-only, read-only. No GPU, no model weights, no network, no training, no dependency installation. The edge576 manifest, builder, source full manifest, model identity and metric_v2 were not modified."
+}

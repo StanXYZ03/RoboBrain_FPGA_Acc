@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-27",
+  "status": "UNTOUCHED_TEST_COMPLETE / ROUTING_GATE_FAIL / RETAIN_L2",
+  "lock": "reports/2026-08-27-task-routing-test.lock.json",
+  "lock_sha256": "703302ac03b70507c0f144692f3569c7c610cdbb38edd45ab4ab5199ed448702",
+  "manifest": "datasets/dac_spatial_task_routing_test.jsonl",
+  "manifest_sha256": "50a9437b12ee55738e228437ef31281ede0abe64f7b606d353b112c5eb889a13",
+  "records": 192,
+  "images": 96,
+  "zero_overlap_with_all_prior_manifests": true,
+  "predictions": {
+    "l2": "evaluation/results/task_routing_test/l2/shallow_r0875.jsonl",
+    "routed": "evaluation/results/task_routing_test/routed/routed_interaction_full_task_lambda_0p5_r0875.jsonl"
+  },
+  "prediction_sha256": {
+    "l2": "737f214ddbc0c3496f968fe5069be2553ffbbafc94c5a402b08872997d3ee13f",
+    "routed": "12dbe3fac7df95d97e04a940578b592c99223a308d0299147b582b5d7c0ed2db"
+  },
+  "metrics": {
+    "l2": {
+      "pointing": {
+        "parse_rate": 1.0,
+        "pck_0_1": 0.5416666666666666,
+        "pck_0_2": 0.75,
+        "point_nme_bbox_diag_mean": 0.22202550525981715,
+        "latency_seconds_mean": 0.25302267492770625
+      },
+      "grounding": {
+        "parse_rate": 1.0,
+        "iou_mean": 0.7441603570557583,
+        "acc_0_5": 0.8229166666666666,
+        "latency_seconds_mean": 0.4484233758451713
+      }
+    },
+    "routed": {
+      "pointing": {
+        "parse_rate": 1.0,
+        "pck_0_1": 0.5416666666666666,
+        "pck_0_2": 0.75,
+        "point_nme_bbox_diag_mean": 0.22202550525981715,
+        "latency_seconds_mean": 0.2527545397800471
+      },
+      "grounding": {
+        "parse_rate": 1.0,
+        "iou_mean": 0.734304594255426,
+        "acc_0_5": 0.8125,
+        "latency_seconds_mean": 0.4516012482181395
+      }
+    }
+  },
+  "delta_routed_vs_l2": {
+    "pointing.pck_0_1": 0.0,
+    "pointing.pck_0_2": 0.0,
+    "grounding.iou_mean": -0.009855762800332209,
+    "grounding.acc_0_5": -0.010416666666666666
+  },
+  "paired_bootstrap_routed_vs_l2": {
+    "pointing": {
+      "pck_0_1": {
+        "mean_delta": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0,
+        "paired_samples": 96,
+        "iterations": 10000
+      },
+      "pck_0_2": {
+        "mean_delta": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0,
+        "paired_samples": 96,
+        "iterations": 10000
+      }
+    },
+    "grounding": {
+      "iou_mean": {
+        "mean_delta": -0.009855762800332209,
+        "ci95_low": -0.029127787308705008,
+        "ci95_high": 0.0025238447057141697,
+        "paired_samples": 96,
+        "iterations": 10000
+      },
+      "acc_0_5": {
+        "mean_delta": -0.010416666666666666,
+        "ci95_low": -0.03125,
+        "ci95_high": 0.0,
+        "paired_samples": 96,
+        "iterations": 10000
+      }
+    }
+  },
+  "implementation_checks": {
+    "pointing_text_equal": "96/96",
+    "pointing_mask_equal": "96/96",
+    "grounding_text_changed": "54/96",
+    "effective_selector_counts": {
+      "l2_anchor": 96,
+      "candidate_interaction_quota": 96
+    },
+    "grounding_candidate_counts": {
+      "swap_001_00": 28,
+      "swap_001_01": 26,
+      "swap_002_00": 9,
+      "swap_002_01": 9,
+      "swap_004_00": 9,
+      "swap_004_01": 15
+    }
+  },
+  "gate": {
+    "parse_rate_pass": true,
+    "maximum_primary_metric_drop_0p02_pass": true,
+    "at_least_one_strict_improvement_pass": false,
+    "statistically_resolved_improvement_pass": false,
+    "overall_pass": false,
+    "decision": "STOP_LEARNED_JOINT_DELETION / RETAIN_L2_0875 / PL_HOLD_FOR_LEARNED_HEADS"
+  }
+}

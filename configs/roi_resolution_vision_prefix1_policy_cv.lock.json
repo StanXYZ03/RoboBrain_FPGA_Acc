@@ -1,0 +1,30 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-14",
+  "evidence_level": "revealed development cross-validation conditional on an oracle ROI",
+  "objective": "Predict ROI-384 versus ROI-512 using reusable ROI-384 patch embedding plus one vision block.",
+  "scout": {
+    "roi_long_edge": 384,
+    "oracle_margin": 0.5,
+    "completed_vision_blocks": 1,
+    "projection_dim": 16,
+    "projection_seed": 20260914,
+    "spatial_pool": [4, 4],
+    "llm_prefill_or_decode_in_scout": false
+  },
+  "policy": {
+    "type": "ridge regression on continuous utility gain",
+    "ridge_alpha": 10.0,
+    "decision_threshold": 0.0,
+    "cross_validation": "5-fold grouped by COCO image ID",
+    "seed": 20260914
+  },
+  "cost_proxy": "vision-block-token work: low choice=24*ROI384 tokens; high choice=1*ROI384 tokens+24*ROI512 tokens; patch embedding, merger and fixed costs reported separately",
+  "gate": {
+    "action_balanced_accuracy_min": 0.55,
+    "vision_block_token_ratio_max": 0.5,
+    "primary_noninferiority_margin": -0.02,
+    "noninferiority_rule": "paired 95% bootstrap lower bound must be at or above the margin"
+  },
+  "mandatory_boundary": "ROI is generated from ground truth in this conditional experiment. No region-localization claim is allowed."
+}

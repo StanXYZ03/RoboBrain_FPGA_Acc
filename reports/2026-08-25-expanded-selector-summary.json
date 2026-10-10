@@ -1,0 +1,335 @@
+{
+  "date": "2026-08-25",
+  "scope": "96 held-out COCO images; 96 Pointing + 96 Grounding; 960 inferences",
+  "dataset": {
+    "manifest": "datasets/dac_spatial_eval_expanded.jsonl",
+    "sha256": "b00b5b335c693855a312a1c5b45419201599f9bf4392e65ce70a0bcc199da24c",
+    "images": 96,
+    "samples": 192,
+    "smoke_image_overlap": 0
+  },
+  "method": {
+    "name": "spatial residual + regional quota",
+    "score": "0.75*four-neighbor feature residual + 0.25*feature RMS energy",
+    "selection_unit": "Qwen3-VL 2x2 merger group",
+    "hardware_mapping": "four-neighbor stencil/line buffer, region sums, bounded regional top-k",
+    "task_specific_configuration": false
+  },
+  "gate": {
+    "expanded_data_gate_pass": true,
+    "coordinate_preservation_signal": true,
+    "strict_metric_dominance": false,
+    "bootstrap_resolved_improvement": false,
+    "algorithm_research_continue": true,
+    "pl_integration_pass": false,
+    "reason": "残差配额在 75% 预算的点估计提高 Pointing 与 Mean IoU，但 Acc@0.5 下降，且 96 样本的成对置信区间仍不足以确认稳定优势；继续算法消融，暂不固化硬件"
+  },
+  "results": [
+    {
+      "label": "full@1.000",
+      "path": "evaluation/results/shallow_block_expanded/shallow_r1000.jsonl",
+      "sha256": "08d4239ae0f3da36fce22dd8b0f4976df92a25b07dba19e8b4adfbad76490237",
+      "prediction_count": 192,
+      "actual_token_retention": 1.0,
+      "encoder_compute_retention": 1.0,
+      "llm_prefill_compute_retention": 1.0,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.02030846405029297,
+        "llm_prefill_seconds": 0.03141273593902588,
+        "decoder_seconds": 0.3971429147720337,
+        "elapsed_seconds": 0.4809481725023943
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1694.078,
+        "speedup": 1.0005501517639683,
+        "hz": 0.0005902915922407351
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5309757487707429,
+            "latency_seconds_median": 0.5329706870033988,
+            "latency_seconds_p95": 0.5828343210014282,
+            "iou_mean": 0.8007873609703716,
+            "acc_0_5": 0.8854166666666666,
+            "center_error_1000_mean": 49.14696657778382
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.340445757719408,
+            "latency_seconds_median": 0.319613826002751,
+            "latency_seconds_p95": 0.44229513900063466,
+            "point_error_1000_mean": 82.24037740161037,
+            "point_nme_image_diag_mean": 0.05815272854801959,
+            "point_nme_bbox_diag_mean": 0.16672068379128854,
+            "pck_0_1": 0.6354166666666666,
+            "pck_0_2": 0.8125
+          }
+        }
+      }
+    },
+    {
+      "label": "L2+anchor@0.875",
+      "path": "evaluation/results/shallow_block_expanded/shallow_r0875.jsonl",
+      "sha256": "da1ea7309e3b10c9c1ff6e0a2c561fce3736160fe923f30b74e93e4938236465",
+      "prediction_count": 192,
+      "actual_token_retention": 0.875,
+      "encoder_compute_retention": 0.8973366259844666,
+      "llm_prefill_compute_retention": 0.873362556985942,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.021064656257629395,
+        "llm_prefill_seconds": 0.030292479515075684,
+        "decoder_seconds": 0.3137228469848633,
+        "elapsed_seconds": 0.395576789000188
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1502.8327751595675,
+        "speedup": 1.1278766526901354,
+        "hz": 0.0006654100286665774
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.6020817002295189,
+            "latency_seconds_median": 0.5705646349961171,
+            "latency_seconds_p95": 0.7395023910066811,
+            "iou_mean": 0.7900816432179082,
+            "acc_0_5": 0.875,
+            "center_error_1000_mean": 48.75833177584425
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2903768218222164,
+            "latency_seconds_median": 0.2899506100002327,
+            "latency_seconds_p95": 0.3032890649919864,
+            "point_error_1000_mean": 89.46906447080487,
+            "point_nme_image_diag_mean": 0.06326418219372253,
+            "point_nme_bbox_diag_mean": 0.1773080315418406,
+            "pck_0_1": 0.6145833333333334,
+            "pck_0_2": 0.7916666666666666
+          }
+        }
+      }
+    },
+    {
+      "label": "residual+quota@0.875",
+      "path": "evaluation/results/shallow_block_expanded/residual_r0875.jsonl",
+      "sha256": "f8250b7a4e1427e8770fa6ab97aca970edf7c91e85a9246c4637694be5f81568",
+      "prediction_count": 192,
+      "actual_token_retention": 0.875,
+      "encoder_compute_retention": 0.8973366259844666,
+      "llm_prefill_compute_retention": 0.873362556985942,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.01865009593963623,
+        "llm_prefill_seconds": 0.030184367179870605,
+        "decoder_seconds": 0.3199184808731079,
+        "elapsed_seconds": 0.39961004000360845
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1502.8327751595675,
+        "speedup": 1.1278766526901354,
+        "hz": 0.0006654100286665774
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5290807846461879,
+            "latency_seconds_median": 0.5344311875014682,
+            "latency_seconds_p95": 0.5852698560047429,
+            "iou_mean": 0.7860229099017045,
+            "acc_0_5": 0.875,
+            "center_error_1000_mean": 51.569908935493174
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.29178861621888547,
+            "latency_seconds_median": 0.29024084450065857,
+            "latency_seconds_p95": 0.30865087200072594,
+            "point_error_1000_mean": 81.42740070614667,
+            "point_nme_image_diag_mean": 0.05757786721371058,
+            "point_nme_bbox_diag_mean": 0.165322679802837,
+            "pck_0_1": 0.6145833333333334,
+            "pck_0_2": 0.8125
+          }
+        }
+      }
+    },
+    {
+      "label": "L2+anchor@0.750",
+      "path": "evaluation/results/shallow_block_expanded/shallow_r0750.jsonl",
+      "sha256": "e5bc711c8974bc65aaf6b56221e7dd047ca45de15c20eca673817abf663cd2ad",
+      "prediction_count": 192,
+      "actual_token_retention": 0.75,
+      "encoder_compute_retention": 0.7972199302590857,
+      "llm_prefill_compute_retention": 0.7471929548330435,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.015721391677856446,
+        "llm_prefill_seconds": 0.0292490234375,
+        "decoder_seconds": 0.30864768123626707,
+        "elapsed_seconds": 0.38252238749555545
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1313.6496234878305,
+        "speedup": 1.2903060067871306,
+        "hz": 0.0007612379908007212
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5253487340526893,
+            "latency_seconds_median": 0.532149616497918,
+            "latency_seconds_p95": 0.5620088499999838,
+            "iou_mean": 0.7598641900215236,
+            "acc_0_5": 0.875,
+            "center_error_1000_mean": 57.5277268310543
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2889640875934371,
+            "latency_seconds_median": 0.28968827000790043,
+            "latency_seconds_p95": 0.2966871909884503,
+            "point_error_1000_mean": 90.07355925512785,
+            "point_nme_image_diag_mean": 0.0636916245549092,
+            "point_nme_bbox_diag_mean": 0.18489099234638637,
+            "pck_0_1": 0.5625,
+            "pck_0_2": 0.7916666666666666
+          }
+        }
+      }
+    },
+    {
+      "label": "residual+quota@0.750",
+      "path": "evaluation/results/shallow_block_expanded/residual_r0750.jsonl",
+      "sha256": "2e23ef12f8a65fb06810117a65a7df9b2572db175e2a98ce7ea9cf80abb184dd",
+      "prediction_count": 192,
+      "actual_token_retention": 0.75,
+      "encoder_compute_retention": 0.7972199302590857,
+      "llm_prefill_compute_retention": 0.7471929548330435,
+      "a6000_median_seconds": {
+        "vision_encoder_seconds": 0.017204224586486815,
+        "llm_prefill_seconds": 0.029336015701293947,
+        "decoder_seconds": 0.3248446855545044,
+        "elapsed_seconds": 0.39921407249494223
+      },
+      "zcu102_projection": {
+        "seconds_per_image": 1313.6496234878305,
+        "speedup": 1.2903060067871306,
+        "hz": 0.0007612379908007212
+      },
+      "metrics": {
+        "sample_count": 192,
+        "tasks": {
+          "grounding": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.5239179822898828,
+            "latency_seconds_median": 0.5249514059978537,
+            "latency_seconds_p95": 0.5777662170003168,
+            "iou_mean": 0.7670190686795433,
+            "acc_0_5": 0.8541666666666666,
+            "center_error_1000_mean": 54.78005585041894
+          },
+          "pointing": {
+            "sample_count": 96,
+            "parse_rate": 1.0,
+            "latency_seconds_mean": 0.2939307039785793,
+            "latency_seconds_median": 0.293452760000946,
+            "latency_seconds_p95": 0.30326145599246956,
+            "point_error_1000_mean": 87.54739619635171,
+            "point_nme_image_diag_mean": 0.06190535752566565,
+            "point_nme_bbox_diag_mean": 0.17271255371692232,
+            "pck_0_1": 0.6354166666666666,
+            "pck_0_2": 0.8229166666666666
+          }
+        }
+      }
+    }
+  ],
+  "paired_bootstrap": {
+    "retention_0875_residual_minus_l2": {
+      "pointing": {
+        "pck_0_1": {
+          "mean_delta": 0.0,
+          "ci95_low": -0.0625,
+          "ci95_high": 0.052083333333333336,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "pck_0_2": {
+          "mean_delta": 0.020833333333333332,
+          "ci95_low": -0.020833333333333332,
+          "ci95_high": 0.0625,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      },
+      "grounding": {
+        "iou_mean": {
+          "mean_delta": -0.004058733316203795,
+          "ci95_low": -0.03167762198948657,
+          "ci95_high": 0.024741904428634068,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "acc_0_5": {
+          "mean_delta": 0.0,
+          "ci95_low": -0.052083333333333336,
+          "ci95_high": 0.052083333333333336,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      }
+    },
+    "retention_0750_residual_minus_l2": {
+      "pointing": {
+        "pck_0_1": {
+          "mean_delta": 0.07291666666666667,
+          "ci95_low": -0.010416666666666666,
+          "ci95_high": 0.15625,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "pck_0_2": {
+          "mean_delta": 0.03125,
+          "ci95_low": -0.010416666666666666,
+          "ci95_high": 0.08333333333333333,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      },
+      "grounding": {
+        "iou_mean": {
+          "mean_delta": 0.007154878658019778,
+          "ci95_low": -0.03336909375349028,
+          "ci95_high": 0.04949502897875726,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "acc_0_5": {
+          "mean_delta": -0.020833333333333332,
+          "ci95_low": -0.08333333333333333,
+          "ci95_high": 0.041666666666666664,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      }
+    }
+  },
+  "projection_status": "first-order workload projection, not board measurement"
+}

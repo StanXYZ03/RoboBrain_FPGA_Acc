@@ -1,0 +1,11 @@
+{
+  "status": "VSR_B1_LABEL_FREE_STUDENT_INDEX_COMPLETE",
+  "records": 3483,
+  "unique_images": 2244,
+  "contains_official_label": false,
+  "contains_relation_subject_object_annotations": false,
+  "output": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-10-vsr-b1-margin-teacher/student_index.jsonl",
+  "output_sha256": "dde212c600160a3ddfd77895955a27c9ca1f44d14cbf4342097b797ddaf38ae9",
+  "teacher_index_sha256": "6e4662108eb756ada14b2d08c2a78a417583913a279d54164970db63e09530e1",
+  "source_manifest_sha256": "08ae6b609d2f1a1431d7e5d6dec1bf1720859e17159b13bd173a8502dc6bf4f4"
+}

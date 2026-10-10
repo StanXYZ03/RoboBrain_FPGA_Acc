@@ -1,0 +1,349 @@
+idx,type,task,stratum,source,source_dataset,filename,prompt,choices,ground_truth,parsed_answer,parse_success,correct,output_text,output_token_count,input_token_count,original_width,original_height,image_grid_thw,raw_vision_patch_count,merged_vision_token_estimate,image_decode_ms,processor_ms,host_to_device_ms,generation_ms,postprocess_ms,end_to_end_ms,peak_gpu_memory_mb
+21,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_130.png,"How many blinds are in the image? Select from the following choices.
+(A) 0
+(B) 1
+(C) 2
+(D) 3","[""0"", ""1"", ""2"", ""3""]",B,B,True,True,(B) 1,5,1243,1280,960,"[[1, 60, 80]]",4800,1200,3.568394109606743,15.769095160067081,19.171586027368903,316.9056789483875,0.07279706187546253,355.7550220284611,8794.5810546875
+55,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_185.png,"How many windows are in the image? Select from the following choices.
+(A) 0
+(B) 2
+(C) 3
+(D) 1","[""0"", ""2"", ""3"", ""1""]",B,D,True,False,(D) 1,5,151,300,400,"[[1, 24, 18]]",432,108,0.5268319509923458,2.079827943816781,0.9683768730610609,131.84837205335498,0.06958702579140663,135.69665397517383,8511.17333984375
+81,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_25.png,"How many steps are in the image? Select from the following choices.
+(A) 1
+(B) 3
+(C) 2
+(D) 0","[""1"", ""3"", ""2"", ""0""]",B,D,True,False,(D) 0,5,235,500,375,"[[1, 24, 32]]",768,192,0.7901671342551708,2.435883041471243,2.210767939686775,134.85591695643961,0.06862077862024307,140.58667491190135,8534.21923828125
+123,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_35.png,"How many pictures are in the image? Select from the following choices.
+(A) 0
+(B) 5
+(C) 2
+(D) 1
+(E) 3
+(F) 4","[""0"", ""5"", ""2"", ""1"", ""3"", ""4""]",E,E,True,True,(E) 3,5,821,1024,768,"[[1, 48, 64]]",3072,768,2.328312024474144,9.75226704031229,12.670479016378522,241.6557150427252,0.06370991468429565,266.74914895556867,8712.490234375
+189,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_48.png,"How many sconces are in the image? Select from the following choices.
+(A) 4
+(B) 1
+(C) 3
+(D) 0
+(E) 2","[""4"", ""1"", ""3"", ""0"", ""2""]",E,E,True,True,(E) 2,5,3638,2200,1650,"[[1, 104, 138]]",14352,3588,15.403026016429067,85.90345596894622,44.00212806649506,861.6090689320117,0.07668905891478062,1007.254617055878,9417.185546875
+195,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_487.png,"How many stones are in the image? Select from the following choices.
+(A) 2
+(B) 0
+(C) 1
+(D) 3
+(E) 4","[""2"", ""0"", ""1"", ""3"", ""4""]",A,C,True,False,(C) 1,5,112,250,250,"[[1, 16, 16]]",256,64,0.4735700786113739,1.53064401820302,0.8205310441553593,126.40857510268688,0.06499490700662136,131.9432631134987,8501.26513671875
+258,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_59.png,"How many mirrors are in the image? Select from the following choices.
+(A) 1
+(B) 0
+(C) 2
+(D) 3","[""1"", ""0"", ""2"", ""3""]",A,A,True,True,(A) 1,5,3115,2048,1536,"[[1, 96, 128]]",12288,3072,12.386985821649432,54.36835088767111,40.072465082630515,721.1444359272718,0.0740948598831892,828.3110288903117,9280.7509765625
+302,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_650.png,"How many posters are in the image? Select from the following choices.
+(A) 3
+(B) 1
+(C) 2
+(D) 0","[""3"", ""1"", ""2"", ""0""]",B,B,True,True,(B) 1,5,457,750,563,"[[1, 36, 46]]",1656,414,1.2952820397913456,5.743020912632346,4.513727966696024,173.68973209522665,0.06225192919373512,185.55763084441423,8591.15576171875
+329,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_87.png,"How many telephones are in the image? Select from the following choices.
+(A) 2
+(B) 3
+(C) 0
+(D) 1","[""2"", ""3"", ""0"", ""1""]",D,D,True,True,(D) 1,5,188,400,400,"[[1, 24, 24]]",576,144,0.74396887794137,2.2445491049438715,1.6588650178164244,132.1262449491769,0.06251921877264977,137.04650499857962,8522.8837890625
+339,2D,Count,Count::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/count/ade20k_96.png,"How many radios are in the image? Select from the following choices.
+(A) 0
+(B) 1
+(C) 2
+(D) 3","[""0"", ""1"", ""2"", ""3""]",B,B,True,True,(B) 1,5,3631,2200,1650,"[[1, 104, 138]]",14352,3588,11.418579844757915,77.27571786381304,52.78368294239044,862.6848391722888,0.0678368378430605,1004.4830208644271,9415.6845703125
+346,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_105.png,"Considering the relative positions of the wall (annotated by the red box) and the coffee table in the image provided, where is the wall (annotated by the red box) located with respect to the coffee table? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",B,B,True,True,(B) right,4,247,493,369,"[[1, 24, 30]]",720,180,0.6602969951927662,4.789886064827442,3.976181847974658,119.47215092368424,0.06588897667825222,129.19831601902843,8536.28759765625
+371,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_145.png,"Considering the relative positions of the outlet (annotated by the red box) and the desk organizer in the image provided, where is the outlet (annotated by the red box) located with respect to the desk organizer? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",B,B,True,True,(B) below,4,247,492,369,"[[1, 24, 30]]",720,180,0.7731630466878414,2.4185958318412304,3.195069031789899,113.22486097924411,0.06868806667625904,119.87980781123042,8536.28759765625
+402,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_192.png,"Considering the relative positions of the beam and the curtain in the image provided, where is the beam located with respect to the curtain? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",A,A,True,True,(A) above,4,2733,1960,1416,"[[1, 88, 122]]",10736,2684,9.87877300940454,63.29855998046696,38.12645701691508,609.6749601420015,0.07887999527156353,721.3175699580461,9180.6083984375
+426,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_248.png,"Considering the relative positions of the mountain (annotated by the red box) and the grass in the image provided, where is the mountain (annotated by the red box) located with respect to the grass? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",A,A,True,True,(A) above,4,225,496,332,"[[1, 20, 32]]",640,160,0.7407111115753651,2.370940987020731,2.1718409843742847,115.0878279004246,0.06536208093166351,120.65510894171894,8531.076171875
+427,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_25.png,"Considering the relative positions of the wall (annotated by the red box) and the person in the image provided, where is the wall (annotated by the red box) located with respect to the person? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",B,B,True,True,(B) below,4,209,496,276,"[[1, 18, 32]]",576,144,0.6514689885079861,2.0577500108629465,1.8889149650931358,110.6947329826653,0.07675099186599255,115.57921092025936,8527.89306640625
+523,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_47.png,"Considering the relative positions of the sink and the bathtub in the image provided, where is the sink located with respect to the bathtub? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",A,A,True,True,(A) above,4,113,256,256,"[[1, 16, 16]]",256,64,0.5231702234596014,1.1950698681175709,1.504848012700677,101.0280039627105,0.05751405842602253,104.49984692968428,8501.46337890625
+531,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_480.png,"Considering the relative positions of the buildings (annotated by the red box) and the vending machine in the image provided, where is the buildings (annotated by the red box) located with respect to the vending machine? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",A,A,True,True,(A) left,4,247,492,369,"[[1, 24, 30]]",720,180,0.761162955313921,2.296860096976161,1.9469140097498894,113.12305787578225,0.06644194945693016,118.4103349223733,8536.28759765625
+535,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_486.png,"Considering the relative positions of the field (annotated by the red box) and the mountain in the image provided, where is the field (annotated by the red box) located with respect to the mountain? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",B,B,True,True,(B) right,4,209,369,369,"[[1, 24, 24]]",576,144,0.6827500183135271,2.095326082780957,2.4666120298206806,108.03494905121624,0.059420010074973106,113.54421079158783,8527.89306640625
+539,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_490.png,"Considering the relative positions of the steps and the plants in the image provided, where is the steps located with respect to the plants? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",B,B,True,True,(B) below,4,817,1024,768,"[[1, 48, 64]]",3072,768,3.1598431523889303,9.939742973074317,10.344631969928741,217.18547702766955,0.0681199599057436,240.9993859473616,8698.8134765625
+587,2D,Relation,Relation::ADE20K Validation Set,ADE20K,ADE20K Validation Set,img/2D/relation/ade20k_599.png,"Considering the relative positions of the car (annotated by the red box) and the street number in the image provided, where is the car (annotated by the red box) located with respect to the street number? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",B,B,True,True,(B) right,4,247,492,369,"[[1, 24, 30]]",720,180,0.8009020239114761,2.8397999703884125,3.957401029765606,115.74273812584579,0.07455702871084213,123.62350290641189,8536.28759765625
+757,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_256.png,"How many tennis rackets are in the image? Select from the following choices.
+(A) 3
+(B) 2
+(C) 1
+(D) 0","[""3"", ""2"", ""1"", ""0""]",C,C,True,True,(C) 1,5,345,480,640,"[[1, 40, 30]]",1200,300,1.663195202127099,3.1014811247587204,3.723433008417487,159.5208088401705,0.06422982551157475,168.3019041083753,8565.2685546875
+857,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_361.png,"How many oranges are in the image? Select from the following choices.
+(A) 4
+(B) 0
+(C) 1
+(D) 2
+(E) 3","[""4"", ""0"", ""1"", ""2"", ""3""]",D,D,True,True,(D) 2,5,240,500,375,"[[1, 24, 32]]",768,192,1.5991679392755032,2.6590118650346994,2.1470480132848024,134.72071010619402,0.06256788037717342,141.42530411481857,8535.17822265625
+889,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_40.png,"How many bottles are in the image? Select from the following choices.
+(A) 4
+(B) 1
+(C) 2
+(D) 3
+(E) 0","[""4"", ""1"", ""2"", ""3"", ""0""]",C,D,True,False,(D) 3,5,348,640,480,"[[1, 30, 40]]",1200,300,2.065106062218547,2.877474995329976,4.232564941048622,157.98277501016855,0.06358698010444641,167.47593600302935,8565.8583984375
+906,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_420.png,"How many bicycles are in the image? Select from the following choices.
+(A) 0
+(B) 2
+(C) 3
+(D) 1","[""0"", ""2"", ""3"", ""1""]",D,D,True,True,(D) 1,5,303,426,640,"[[1, 40, 26]]",1040,260,2.1518110297620296,3.4380410797894,4.140814067795873,155.12259188108146,0.07025105878710747,165.17360298894346,8553.439453125
+920,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_435.png,"How many stop signs are in the image? Select from the following choices.
+(A) 3
+(B) 2
+(C) 0
+(D) 1","[""3"", ""2"", ""0"", ""1""]",D,D,True,True,(D) 1,5,324,640,432,"[[1, 28, 40]]",1120,280,1.807795837521553,3.554927883669734,3.165452042594552,159.28892884403467,0.08719507604837418,168.16086880862713,8559.24853515625
+926,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_440.png,"How many skateboards are in the image? Select from the following choices.
+(A) 2
+(B) 0
+(C) 1
+(D) 3","[""2"", ""0"", ""1"", ""3""]",C,C,True,True,(C) 1,5,304,640,426,"[[1, 26, 40]]",1040,260,1.4676288701593876,3.286070888862014,3.63785307854414,154.67042801901698,0.06414693780243397,163.37575111538172,8553.650390625
+941,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_458.png,"How many birds are in the image? Select from the following choices.
+(A) 2
+(B) 1
+(C) 0
+(D) 3","[""2"", ""1"", ""0"", ""3""]",B,B,True,True,(B) 1,5,303,640,427,"[[1, 26, 40]]",1040,260,2.7316759806126356,3.372439183294773,5.468840012326837,154.4413948431611,0.06927293725311756,166.33125999942422,8553.439453125
+946,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_465.png,"How many teddy bears are in the image? Select from the following choices.
+(A) 5
+(B) 6
+(C) 7
+(D) 0
+(E) 4
+(F) 3","[""5"", ""6"", ""7"", ""0"", ""4"", ""3""]",A,E,True,False,(E) 4,5,315,425,640,"[[1, 40, 26]]",1040,260,2.0513839554041624,3.3282849472016096,2.894395962357521,155.664507066831,0.06660888902842999,164.26986502483487,8557.82421875
+971,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_499.png,"How many suitcases are in the image? Select from the following choices.
+(A) 1
+(B) 3
+(C) 2
+(D) 0","[""1"", ""3"", ""2"", ""0""]",A,A,True,True,(A) 1,5,405,612,612,"[[1, 38, 38]]",1444,361,1.8578681629151106,4.82382788322866,4.045724170282483,163.925230037421,0.06952602416276932,174.98802696354687,8578.298828125
+1009,2D,Count,Count::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/count/coco_551.png,"How many motorcycles are in the image? Select from the following choices.
+(A) 2
+(B) 3
+(C) 1
+(D) 0","[""2"", ""3"", ""1"", ""0""]",C,C,True,True,(C) 1,5,303,640,403,"[[1, 26, 40]]",1040,260,2.010790864005685,3.2364209182560444,2.1623100619763136,157.42982411757112,0.07600802928209305,165.1575060095638,8553.439453125
+1155,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_197.png,"Considering the relative positions of the tennis racket and the handbag in the image provided, where is the tennis racket located with respect to the handbag? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",A,A,True,True,(A) left,4,353,480,640,"[[1, 40, 30]]",1200,300,1.967795193195343,2.959328005090356,3.299860982224345,136.87175000086427,0.07147295400500298,145.41632100008428,8566.8427734375
+1180,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_233.png,"Considering the relative positions of the carrot (annotated by the red box) and the chair in the image provided, where is the carrot (annotated by the red box) located with respect to the chair? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",A,B,True,False,(B) below,4,245,492,369,"[[1, 24, 30]]",720,180,0.9102069307118654,2.588822040706873,2.079523866996169,114.82946900650859,0.06575882434844971,120.69437000900507,8535.90380859375
+1275,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_39.png,"Considering the relative positions of the person and the dog in the image provided, where is the person located with respect to the dog? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",A,A,True,True,(A) left,4,369,640,508,"[[1, 32, 40]]",1280,320,2.086808905005455,3.6498589906841516,6.60499301739037,136.03632687591016,0.0692959874868393,148.70795304886997,8570.99169921875
+1302,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_433.png,"Considering the relative positions of the bird (annotated by the red box) and the boat in the image provided, where is the bird (annotated by the red box) located with respect to the boat? Select from the following choices.
+(A) above
+(B) below","[""above"", ""below""]",A,A,True,True,(A) above,4,241,496,364,"[[1, 22, 32]]",704,176,0.8552910294383764,2.5349410716444254,2.6205340400338173,116.07686011120677,0.08467887528240681,122.394944075495,8534.03662109375
+1303,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_434.png,"Considering the relative positions of the umbrella (annotated by the red box) and the bird in the image provided, where is the umbrella (annotated by the red box) located with respect to the bird? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",A,A,True,True,(A) left,4,225,496,332,"[[1, 20, 32]]",640,160,0.8013839833438396,2.2472350392490625,1.789798028767109,110.11571995913982,0.08387304842472076,115.24891806766391,8531.076171875
+1308,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_443.png,"Considering the relative positions of the book (annotated by the red box) and the cat in the image provided, where is the book (annotated by the red box) located with respect to the cat? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",B,B,True,True,(B) right,4,245,494,369,"[[1, 24, 30]]",720,180,0.8186409249901772,2.4507720954716206,3.8327290676534176,112.62927716597915,0.07127691060304642,120.03758200444281,8535.90380859375
+1314,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_452.png,"Considering the relative positions of the person (annotated by the red box) and the tennis racket in the image provided, where is the person (annotated by the red box) located with respect to the tennis racket? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",B,B,True,True,(B) right,4,175,277,369,"[[1, 24, 18]]",432,108,0.5703871138393879,1.8891978543251753,2.424023114144802,106.81524104438722,0.08191191591322422,112.0077280793339,8518.6240234375
+1357,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_519.png,"Considering the relative positions of the bottle (annotated by the red box) and the refrigerator in the image provided, where is the bottle (annotated by the red box) located with respect to the refrigerator? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",A,A,True,True,(A) left,4,245,492,369,"[[1, 24, 30]]",720,180,0.8048000745475292,2.371438080444932,1.9714359659701586,112.94287792406976,0.0691490713506937,118.36367100477219,8535.90380859375
+1401,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_587.png,"Considering the relative positions of the person and the kite in the image provided, where is the person located with respect to the kite? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",B,B,True,True,(B) right,4,241,375,500,"[[1, 32, 24]]",768,192,1.6666091978549957,2.4476940743625164,2.1391480695456266,113.70363994501531,0.0606318935751915,120.2311881352216,8535.37060546875
+1413,2D,Relation,Relation::COCO 2017 Validation Set,COCO,COCO 2017 Validation Set,img/2D/relation/coco_64.png,"Considering the relative positions of the refrigerator and the backpack in the image provided, where is the refrigerator located with respect to the backpack? Select from the following choices.
+(A) left
+(B) right","[""left"", ""right""]",B,B,True,True,(B) right,4,309,640,426,"[[1, 26, 40]]",1040,260,1.6605309210717678,3.2008890993893147,3.17608704790473,136.20597519911826,0.062496867030858994,144.5391708984971,8556.6728515625
+1482,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_44.jpg,"Which object is closer to the camera taking this photo, the lamp (highlighted by a red box) or the counter (highlighted by a blue box)?
+(A) lamp
+(B) counter","[""lamp"", ""counter""]",A,A,True,True,(A) lamp,4,817,1024,768,"[[1, 48, 64]]",3072,768,2.7377409860491753,9.78541700169444,9.744629031047225,217.66254398971796,0.11038314551115036,240.32947700470686,8698.8134765625
+1501,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_63.jpg,"Which object is closer to the camera taking this photo, the bookcase (highlighted by a red box) or the table (highlighted by a blue box)?
+(A) bookcase
+(B) table","[""bookcase"", ""table""]",B,A,True,False,(A) bookcase,5,819,1024,768,"[[1, 48, 64]]",3072,768,3.028466831892729,10.24888502433896,10.393914999440312,247.66009207814932,0.07746717892587185,271.6914580669254,8698.98828125
+1506,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_68.jpg,"Which object is closer to the camera taking this photo, the television (highlighted by a red box) or the lamp (highlighted by a blue box)?
+(A) television
+(B) lamp","[""television"", ""lamp""]",B,B,True,True,(B) lamp,4,817,1024,768,"[[1, 48, 64]]",3072,768,3.67185496725142,10.08945400826633,12.819824973121285,220.19044705666602,0.06642495281994343,247.11458501406014,8698.8134765625
+1543,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_105.jpg,"Which object is closer to the camera taking this photo, the refrigerator (highlighted by a red box) or the lamp (highlighted by a blue box)?
+(A) refrigerator
+(B) lamp","[""refrigerator"", ""lamp""]",B,B,True,True,(B) lamp,4,817,1024,768,"[[1, 48, 64]]",3072,768,2.7864589355885983,10.125492932274938,10.151959955692291,221.84291202574968,0.07039890624582767,245.25491101667285,8698.8134765625
+1544,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_106.jpg,"Which object is closer to the camera taking this photo, the books (highlighted by a red box) or the bookcase (highlighted by a blue box)?
+(A) books
+(B) bookcase","[""books"", ""bookcase""]",A,A,True,True,(A) books,4,819,1024,768,"[[1, 48, 64]]",3072,768,3.3154089469462633,10.359416017308831,14.403511071577668,219.58150109276175,0.07840991020202637,248.0329219251871,8698.98828125
+1549,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_111.jpg,"Which object is closer to the camera taking this photo, the pillow (highlighted by a red box) or the television (highlighted by a blue box)?
+(A) pillow
+(B) television","[""pillow"", ""television""]",A,A,True,True,(A) pillow,4,817,1024,768,"[[1, 48, 64]]",3072,768,2.722193021327257,10.099214967340231,11.323868064209819,221.6135219205171,0.06823218427598476,246.12838285975158,8698.8134765625
+1554,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_116.jpg,"Which object is closer to the camera taking this photo, the lamp (highlighted by a red box) or the television (highlighted by a blue box)?
+(A) lamp
+(B) television","[""lamp"", ""television""]",A,A,True,True,(A) lamp,4,817,1024,768,"[[1, 48, 64]]",3072,768,3.6980921868234873,10.030098026618361,10.329692158848047,225.0600322149694,0.0724338460713625,249.4706700090319,8698.8134765625
+1573,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_135.jpg,"Which object is closer to the camera taking this photo, the pillow (highlighted by a red box) or the mirror (highlighted by a blue box)?
+(A) pillow
+(B) mirror","[""pillow"", ""mirror""]",B,B,True,True,(B) mirror,4,817,1024,768,"[[1, 48, 64]]",3072,768,2.865337999537587,10.125036118552089,14.404131099581718,219.98168621212244,0.07410603575408459,247.7270090021193,8698.8134765625
+1576,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_138.jpg,"Which object is closer to the camera taking this photo, the sofa (highlighted by a red box) or the door (highlighted by a blue box)?
+(A) sofa
+(B) door","[""sofa"", ""door""]",B,B,True,True,(B) door,4,817,1024,768,"[[1, 48, 64]]",3072,768,2.5475460570305586,10.096821933984756,10.583569062873721,222.082237014547,0.089969951659441,245.6806399859488,8698.8134765625
+1601,3D,Depth,Depth::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/depth/omni3d_hypersim_163.jpg,"Which object is closer to the camera taking this photo, the sofa (highlighted by a red box) or the counter (highlighted by a blue box)?
+(A) sofa
+(B) counter","[""sofa"", ""counter""]",A,A,True,True,(A) sofa,4,817,1024,768,"[[1, 48, 64]]",3072,768,2.8729611076414585,9.9569340236485,11.658897157758474,220.84414982236922,0.07114792242646217,245.68758299574256,8698.8134765625
+1649,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_11.jpg,"Which object is closer to the camera taking this photo, the bin (highlighted by a red box) or the refrigerator (highlighted by a blue box)?
+(A) bin
+(B) refrigerator","[""bin"", ""refrigerator""]",A,A,True,True,(A) bin,4,440,730,530,"[[1, 34, 46]]",1564,391,1.660055946558714,5.64752402715385,4.3020599987357855,151.62916691042483,0.0646570697426796,163.5463039856404,8586.0419921875
+1670,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_32.jpg,"Which object is closer to the camera taking this photo, the box (highlighted by a red box) or the chair (highlighted by a blue box)?
+(A) box
+(B) chair","[""box"", ""chair""]",B,B,True,True,(B) chair,4,301,591,441,"[[1, 28, 36]]",1008,252,1.2818349059671164,3.4785920288413763,2.7924031019210815,132.29563692584634,0.06431899964809418,140.15327906236053,8552.892578125
+1684,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_46.jpg,"Which object is closer to the camera taking this photo, the towel (highlighted by a red box) or the faucet (highlighted by a blue box)?
+(A) towel
+(B) faucet","[""towel"", ""faucet""]",B,B,True,True,(B) faucet,4,283,561,427,"[[1, 26, 36]]",936,234,1.1333099100738764,3.2079031225293875,2.6508800219744444,133.50904383696616,0.06323517300188541,140.7942739315331,8548.05712890625
+1714,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_76.jpg,"Which object is closer to the camera taking this photo, the lamp (highlighted by a red box) or the chair (highlighted by a blue box)?
+(A) lamp
+(B) chair","[""lamp"", ""chair""]",B,B,True,True,(B) chair,4,440,730,530,"[[1, 34, 46]]",1564,391,1.7312290146946907,5.3616000805050135,6.886632181704044,145.1413668692112,0.07341103628277779,159.4540469814092,8586.0419921875
+1741,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_103.jpg,"Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the picture (highlighted by a blue box)?
+(A) table
+(B) picture","[""table"", ""picture""]",A,A,True,True,(A) table,4,283,561,427,"[[1, 26, 36]]",936,234,1.1430769227445126,3.3129879739135504,2.6279320009052753,131.27340096980333,0.0776899978518486,138.70000396855175,8548.05712890625
+1759,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_121.jpg,"Which object is closer to the camera taking this photo, the keyboard (highlighted by a red box) or the chair (highlighted by a blue box)?
+(A) keyboard
+(B) chair","[""keyboard"", ""chair""]",A,A,True,True,(A) keyboard,4,440,730,530,"[[1, 34, 46]]",1564,391,1.6762639861553907,5.326606100425124,4.253579070791602,147.37663813866675,0.0657730270177126,158.96219690330327,8586.0419921875
+1762,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_124.jpg,"Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the pillow (highlighted by a blue box)?
+(A) table
+(B) pillow","[""table"", ""pillow""]",B,B,True,True,(B) pillow,4,301,591,441,"[[1, 28, 36]]",1008,252,1.166346948593855,3.5262717865407467,2.858154010027647,132.772961165756,0.071320915594697,140.6305229756981,8552.892578125
+1790,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_152.jpg,"Which object is closer to the camera taking this photo, the picture (highlighted by a red box) or the keyboard (highlighted by a blue box)?
+(A) picture
+(B) keyboard","[""picture"", ""keyboard""]",B,B,True,True,(B) keyboard,4,283,561,427,"[[1, 26, 36]]",936,234,1.2219538912177086,3.1606319826096296,2.620251849293709,130.77288400381804,0.07092207670211792,138.07917502708733,8548.05712890625
+1812,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_174.jpg,"Which object is closer to the camera taking this photo, the dresser (highlighted by a red box) or the lamp (highlighted by a blue box)?
+(A) dresser
+(B) lamp","[""dresser"", ""lamp""]",B,B,True,True,(B) lamp,4,440,730,530,"[[1, 34, 46]]",1564,391,1.7278899904340506,5.333506036549807,4.2560959700495005,145.00938588753343,0.07256888784468174,156.68449294753373,8586.0419921875
+1829,3D,Depth,Depth::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/depth/omni3d_sunrgbd_191.jpg,"Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the chair (highlighted by a blue box)?
+(A) table
+(B) chair","[""table"", ""chair""]",B,B,True,True,(B) chair,4,440,730,530,"[[1, 34, 46]]",1564,391,1.6134351026266813,5.415044026449323,4.316606093198061,149.72607395611703,0.07077609188854694,161.4105619955808,8586.0419921875
+1844,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_6.jpg,"Which object is closer to the camera taking this photo, the truck (highlighted by a red box) or the pedestrian (highlighted by a blue box)?
+(A) truck
+(B) pedestrian","[""truck"", ""pedestrian""]",A,A,True,True,(A) truck,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,4.97276009991765,22.766093024984002,20.074979169294238,334.5330241136253,0.07080100476741791,382.7190031297505,8849.46435546875
+1845,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_7.jpg,"Which object is closer to the camera taking this photo, the car (highlighted by a red box) or the motorcycle (highlighted by a blue box)?
+(A) car
+(B) motorcycle","[""car"", ""motorcycle""]",B,B,True,True,(B) motorcycle,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,5.0279858987778425,22.372933104634285,19.948027096688747,340.35126096569,0.07297098636627197,388.06697307154536,8849.46435546875
+1850,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_12.jpg,"Which object is closer to the camera taking this photo, the motorcycle (highlighted by a red box) or the pedestrian (highlighted by a blue box)?
+(A) motorcycle
+(B) pedestrian","[""motorcycle"", ""pedestrian""]",B,B,True,True,(B) pedestrian,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,4.7736698761582375,22.402575006708503,16.202808124944568,340.2327289804816,0.06690085865557194,383.9694478083402,8849.46435546875
+1857,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_19.jpg,"Which object is closer to the camera taking this photo, the truck (highlighted by a red box) or the pedestrian (highlighted by a blue box)?
+(A) truck
+(B) pedestrian","[""truck"", ""pedestrian""]",B,B,True,True,(B) pedestrian,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,5.210505798459053,22.41409500129521,19.27326084114611,337.33298000879586,0.07892888970673084,384.59950289689004,8849.46435546875
+1886,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_48.jpg,"Which object is closer to the camera taking this photo, the trailer (highlighted by a red box) or the bus (highlighted by a blue box)?
+(A) trailer
+(B) bus","[""trailer"", ""bus""]",A,A,True,True,(A) trailer,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,4.813844803720713,23.041874170303345,19.221343100070953,335.5215759947896,0.07429788820445538,382.97207513824105,8849.46435546875
+1921,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_83.jpg,"Which object is closer to the camera taking this photo, the car (highlighted by a red box) or the bus (highlighted by a blue box)?
+(A) car
+(B) bus","[""car"", ""bus""]",A,A,True,True,(A) car,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,4.443559097126126,27.732206974178553,17.754792934283614,340.7827061600983,0.07848185487091541,391.0805890336633,8849.46435546875
+1931,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_93.jpg,"Which object is closer to the camera taking this photo, the bus (highlighted by a red box) or the truck (highlighted by a blue box)?
+(A) bus
+(B) truck","[""bus"", ""truck""]",B,B,True,True,(B) truck,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,4.628916038200259,22.39327784627676,18.65093596279621,340.18422896042466,0.07230392657220364,386.21743908151984,8849.46435546875
+1960,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_122.jpg,"Which object is closer to the camera taking this photo, the bus (highlighted by a red box) or the pedestrian (highlighted by a blue box)?
+(A) bus
+(B) pedestrian","[""bus"", ""pedestrian""]",B,B,True,True,(B) pedestrian,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,4.680673824623227,24.519552942365408,19.96983983553946,338.2365850266069,0.06775185465812683,387.757551856339,8849.46435546875
+1973,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_135.jpg,"Which object is closer to the camera taking this photo, the traffic cone (highlighted by a red box) or the trailer (highlighted by a blue box)?
+(A) traffic cone
+(B) trailer","[""traffic cone"", ""trailer""]",A,A,True,True,(A) traffic cone,5,1451,1600,900,"[[1, 56, 100]]",5600,1400,4.351693205535412,29.62935483083129,20.13648604042828,359.4675208441913,0.06629596464335918,413.93904900178313,8849.6611328125
+2020,3D,Depth,Depth::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/depth/omni3d_nuscenes_182.jpg,"Which object is closer to the camera taking this photo, the car (highlighted by a red box) or the truck (highlighted by a blue box)?
+(A) car
+(B) truck","[""car"", ""truck""]",B,B,True,True,(B) truck,4,1449,1600,900,"[[1, 56, 100]]",5600,1400,4.59788111038506,27.725904947146773,18.509561894461513,335.1440979167819,0.07986719720065594,386.33875199593604,8849.46435546875
+2050,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_12.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the door (highlighted by a blue box) or the bookcase (highlighted by a green box)?
+(A) door
+(B) bookcase","[""door"", ""bookcase""]",B,B,True,True,(B) bookcase,5,835,1024,768,"[[1, 48, 64]]",3072,768,2.524204785004258,9.360619122162461,9.887577034533024,247.03691015020013,0.07503898814320564,269.220702117309,8703.65087890625
+2104,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_66.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the pillow (highlighted by a red box), the table (highlighted by a blue box) or the lamp (highlighted by a green box)?
+(A) table
+(B) lamp","[""table"", ""lamp""]",A,A,True,True,(A) table,4,833,1024,768,"[[1, 48, 64]]",3072,768,2.5798871647566557,9.331699926406145,14.173889067023993,221.98941698297858,0.07053697481751442,248.4268608968705,8703.46826171875
+2115,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_77.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the sofa (highlighted by a red box), the table (highlighted by a blue box) or the shelves (highlighted by a green box)?
+(A) table
+(B) shelves","[""table"", ""shelves""]",A,A,True,True,(A) table,4,833,1024,768,"[[1, 48, 64]]",3072,768,3.2585759181529284,10.040807072073221,10.652255965396762,223.72595104388893,0.06958493031561375,248.04603192023933,8703.46826171875
+2142,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_104.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the towel (highlighted by a red box), the mirror (highlighted by a blue box) or the television (highlighted by a green box)?
+(A) mirror
+(B) television","[""mirror"", ""television""]",A,A,True,True,(A) mirror,4,833,1024,768,"[[1, 48, 64]]",3072,768,2.567935036495328,10.276546003296971,14.079519780352712,225.58441292494535,0.06490200757980347,252.8451371472329,8703.46826171875
+2152,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_114.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the door (highlighted by a blue box) or the lamp (highlighted by a green box)?
+(A) door
+(B) lamp","[""door"", ""lamp""]",B,B,True,True,(B) lamp,4,833,1024,768,"[[1, 48, 64]]",3072,768,3.151167882606387,10.080668842419982,10.352646000683308,223.57423300854862,0.06887293420732021,247.52687104046345,8703.46826171875
+2160,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_122.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the table (highlighted by a blue box) or the television (highlighted by a green box)?
+(A) table
+(B) television","[""table"", ""television""]",A,A,True,True,(A) table,4,833,1024,768,"[[1, 48, 64]]",3072,768,3.4697880037128925,10.087172966450453,14.425324043259025,222.5762950256467,0.06809993647038937,250.91004092246294,8703.46826171875
+2174,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_136.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the table (highlighted by a red box), the lamp (highlighted by a blue box) or the television (highlighted by a green box)?
+(A) lamp
+(B) television","[""lamp"", ""television""]",A,A,True,True,(A) lamp,4,833,1024,768,"[[1, 48, 64]]",3072,768,3.2910110894590616,10.089884046465158,10.465546045452356,225.08968506008387,0.08755596354603767,249.30505314841866,8703.46826171875
+2188,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_150.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the lamp (highlighted by a red box), the table (highlighted by a blue box) or the door (highlighted by a green box)?
+(A) table
+(B) door","[""table"", ""door""]",A,A,True,True,(A) table,4,833,1024,768,"[[1, 48, 64]]",3072,768,3.2761460170149803,10.037759086117148,14.664634829387069,223.16599101759493,0.06992998532950878,251.50223611854017,8703.46826171875
+2193,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_155.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the table (highlighted by a red box), the books (highlighted by a blue box) or the chair (highlighted by a green box)?
+(A) books
+(B) chair","[""books"", ""chair""]",A,A,True,True,(A) books,4,833,1024,768,"[[1, 48, 64]]",3072,768,3.4176839981228113,10.037377942353487,10.31324197538197,225.0003181397915,0.07343105971813202,249.12691791541874,8703.46826171875
+2217,3D,Distance,Distance::Omni3D_Hypersim,Omni3D,Omni3D_Hypersim,img/3D/distance/omni3d_hypersim_179.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the books (highlighted by a red box), the lamp (highlighted by a blue box) or the door (highlighted by a green box)?
+(A) lamp
+(B) door","[""lamp"", ""door""]",A,A,True,True,(A) lamp,4,833,1024,768,"[[1, 48, 64]]",3072,768,3.2550061587244272,10.092701995745301,14.380792854353786,224.4303619954735,0.0687579158693552,252.52248882316053,8703.46826171875
+2251,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_13.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the night stand (highlighted by a red box), the lamp (highlighted by a blue box) or the bed (highlighted by a green box)?
+(A) lamp
+(B) bed","[""lamp"", ""bed""]",B,B,True,True,(B) bed,4,457,730,530,"[[1, 34, 46]]",1564,391,1.7224701587110758,5.661922972649336,6.014449987560511,152.85206586122513,0.06919889710843563,166.5891099255532,8589.72216796875
+2267,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_29.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the tray (highlighted by a red box), the box (highlighted by a blue box) or the chair (highlighted by a green box)?
+(A) box
+(B) chair","[""box"", ""chair""]",B,B,True,True,(B) chair,4,299,561,427,"[[1, 26, 36]]",936,234,1.144113950431347,3.3445069566369057,2.608990063890815,130.59540395624936,0.07297308184206486,137.99831992946565,8551.3623046875
+2269,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_31.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the chair (highlighted by a red box), the tray (highlighted by a blue box) or the box (highlighted by a green box)?
+(A) tray
+(B) box","[""tray"", ""box""]",A,A,True,True,(A) tray,4,299,561,427,"[[1, 26, 36]]",936,234,1.1621678713709116,3.2288949005305767,3.4509149845689535,134.28747514262795,0.06758421659469604,142.4362810794264,8551.3623046875
+2293,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_55.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the monitor (highlighted by a red box), the keyboard (highlighted by a blue box) or the chair (highlighted by a green box)?
+(A) keyboard
+(B) chair","[""keyboard"", ""chair""]",A,A,True,True,(A) keyboard,4,456,730,530,"[[1, 34, 46]]",1564,391,1.5824860893189907,5.295278038829565,4.307110793888569,145.9523879457265,0.07594586350023746,157.47542586177588,8589.50537109375
+2309,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_71.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the lamp (highlighted by a red box), the chair (highlighted by a blue box) or the night stand (highlighted by a green box)?
+(A) chair
+(B) night stand","[""chair"", ""night stand""]",B,B,True,True,(B) night stand,5,458,730,530,"[[1, 34, 46]]",1564,391,1.5085609629750252,5.463266978040338,4.304688889533281,170.04736908711493,0.09390199556946754,181.69447989203036,8589.93798828125
+2385,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_147.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the mouse (highlighted by a red box), the chair (highlighted by a blue box) or the keyboard (highlighted by a green box)?
+(A) chair
+(B) keyboard","[""chair"", ""keyboard""]",B,B,True,True,(B) keyboard,4,456,730,530,"[[1, 34, 46]]",1564,391,1.8084058538079262,5.403961054980755,4.398561082780361,148.65561807528138,0.08176802657544613,160.61535105109215,8589.50537109375
+2386,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_148.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the monitor (highlighted by a red box), the mouse (highlighted by a blue box) or the chair (highlighted by a green box)?
+(A) mouse
+(B) chair","[""mouse"", ""chair""]",A,A,True,True,(A) mouse,4,456,730,530,"[[1, 34, 46]]",1564,391,1.7141848802566528,5.475236102938652,4.30490099824965,151.0159969329834,0.07400196045637131,162.84974291920662,8589.50537109375
+2394,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_156.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the box (highlighted by a red box), the monitor (highlighted by a blue box) or the chair (highlighted by a green box)?
+(A) monitor
+(B) chair","[""monitor"", ""chair""]",B,B,True,True,(B) chair,4,299,561,427,"[[1, 26, 36]]",936,234,1.1209750082343817,3.3515531104058027,2.652292139828205,131.26956997439265,0.07570185698568821,138.70960799977183,8551.3623046875
+2397,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_159.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the desk (highlighted by a red box), the table (highlighted by a blue box) or the monitor (highlighted by a green box)?
+(A) table
+(B) monitor","[""table"", ""monitor""]",B,B,True,True,(B) monitor,4,456,730,530,"[[1, 34, 46]]",1564,391,1.7274769488722086,5.566803039982915,3.8082499522715807,153.11056887730956,0.07030111737549305,164.55495008267462,8589.50537109375
+2430,3D,Distance,Distance::Omni3D_SUNRGBD,Omni3D,Omni3D_SUNRGBD,img/3D/distance/omni3d_sunrgbd_192.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the table (highlighted by a red box), the sofa (highlighted by a blue box) or the chair (highlighted by a green box)?
+(A) sofa
+(B) chair","[""sofa"", ""chair""]",A,A,True,True,(A) sofa,4,299,561,427,"[[1, 26, 36]]",936,234,1.2589560355991125,3.2948539592325687,2.558628795668483,134.5176340546459,0.0707369763404131,141.95431000553071,8551.3623046875
+2442,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_4.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the bus (highlighted by a red box), the truck (highlighted by a blue box) or the trailer (highlighted by a green box)?
+(A) truck
+(B) trailer","[""truck"", ""trailer""]",A,A,True,True,(A) truck,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.573597107082605,22.971394006162882,17.400083830580115,347.3569091875106,0.07578195072710514,392.6674460526556,8853.646484375
+2457,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_19.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the motorcycle (highlighted by a red box), the bus (highlighted by a blue box) or the car (highlighted by a green box)?
+(A) bus
+(B) car","[""bus"", ""car""]",B,A,True,False,(A) bus,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.9557979218661785,22.8155548684299,20.1286100782454,344.82625708915293,0.10035000741481781,393.12977995723486,8853.646484375
+2462,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_24.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the car (highlighted by a red box), the bus (highlighted by a blue box) or the trailer (highlighted by a green box)?
+(A) bus
+(B) trailer","[""bus"", ""trailer""]",B,B,True,True,(B) trailer,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.510901868343353,22.773609962314367,19.063935847952962,343.9034700859338,0.08577294647693634,390.655955998227,8853.646484375
+2471,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_33.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the trailer (highlighted by a red box), the bus (highlighted by a blue box) or the truck (highlighted by a green box)?
+(A) bus
+(B) truck","[""bus"", ""truck""]",B,B,True,True,(B) truck,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.698944045230746,28.73557200655341,18.591964151710272,346.0065689869225,0.06676395423710346,398.39075203053653,8853.646484375
+2494,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_56.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the motorcycle (highlighted by a red box), the pedestrian (highlighted by a blue box) or the truck (highlighted by a green box)?
+(A) pedestrian
+(B) truck","[""pedestrian"", ""truck""]",A,A,True,True,(A) pedestrian,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.551628837361932,23.626874899491668,19.50106304138899,348.10602106153965,0.0813901424407959,396.18238317780197,8853.646484375
+2525,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_87.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the pedestrian (highlighted by a red box), the motorcycle (highlighted by a blue box) or the bus (highlighted by a green box)?
+(A) motorcycle
+(B) bus","[""motorcycle"", ""bus""]",A,A,True,True,(A) motorcycle,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.359225044026971,22.7081801276654,17.967722844332457,347.19243412837386,0.06909482181072235,392.5883690826595,8853.646484375
+2564,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_126.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the pedestrian (highlighted by a red box), the bus (highlighted by a blue box) or the truck (highlighted by a green box)?
+(A) bus
+(B) truck","[""bus"", ""truck""]",B,B,True,True,(B) truck,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.534041043370962,22.73191185668111,14.239173149690032,346.95213311351836,0.09494018740952015,388.8533229473978,8853.646484375
+2580,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_142.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the truck (highlighted by a red box), the trailer (highlighted by a blue box) or the barrier (highlighted by a green box)?
+(A) trailer
+(B) barrier","[""trailer"", ""barrier""]",B,A,True,False,(A) trailer,4,1465,1600,900,"[[1, 56, 100]]",5600,1400,4.149559885263443,22.786879912018776,19.260005094110966,345.7608041353524,0.07189903408288956,392.31869811192155,8853.646484375
+2609,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_171.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the traffic cone (highlighted by a red box), the barrier (highlighted by a blue box) or the car (highlighted by a green box)?
+(A) barrier
+(B) car","[""barrier"", ""car""]",A,A,True,True,(A) barrier,4,1466,1600,900,"[[1, 56, 100]]",5600,1400,4.157800925895572,22.595748072490096,18.70701787993312,346.23717912472785,0.08428283035755157,392.0977108646184,8853.73046875
+2634,3D,Distance,Distance::Omni3D_nuScenes,Omni3D,Omni3D_nuScenes,img/3D/distance/omni3d_nuscenes_196.jpg,"Estimate the real-world distances between objects in this image. Which object is closer to the pedestrian (highlighted by a red box), the traffic cone (highlighted by a blue box) or the bus (highlighted by a green box)?
+(A) traffic cone
+(B) bus","[""traffic cone"", ""bus""]",A,B,True,False,(B) bus,4,1467,1600,900,"[[1, 56, 100]]",5600,1400,5.035600159317255,22.6385360583663,19.068117951974273,347.8929209522903,0.08757016621530056,395.0066091492772,8853.8154296875

@@ -1,0 +1,1046 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-03",
+  "task": "Bounded Vitis HLS 2023.2 C/RTL co-simulation of the accepted compact integer Selector pipeline",
+  "decision": "INTEGER_SELECTOR_COMPACT_RTL_COSIM_PASS",
+  "generated_at_utc": "2026-10-03T12:20:25Z",
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-03-integer-selector-compact-rtl-cosim-harness-prompt.md",
+    "sha256": "769c7afb72494bbea3a33e2ea68b93ecf6971133f5492be936d73206b1e03377"
+  },
+  "cases": [
+    {
+      "slot": "production_non_identity_G80_K48",
+      "case": "synth_g80_K48_cap16"
+    },
+    {
+      "slot": "real_correct_prompt_G260_K64",
+      "case": "real_grounding_correct_K64_cap16"
+    },
+    {
+      "slot": "production_stress_G400_K96",
+      "case": "synth_g400_K96_cap16"
+    },
+    {
+      "slot": "identity_G80_K96",
+      "case": "synth_g80_K96_cap16"
+    },
+    {
+      "slot": "zero_or_all_equal_tie_supported_budget",
+      "case": "zero_g128_K48_cap16"
+    }
+  ],
+  "resolved_cases": [
+    {
+      "budget": 48,
+      "case": "synth_g80_K48_cap16",
+      "context_count": 9,
+      "expected_sha256": "780d888ae9455ec6d6d21ee3a2825b0c22ffda21d1ddae1b4e8a7bab6f195377",
+      "grid": [
+        8,
+        10
+      ],
+      "group_count": 80,
+      "local_cap": 16,
+      "output_count": 48,
+      "real_count": 39,
+      "scale": 0.03125,
+      "scene": "synth_g80",
+      "status": 0,
+      "total_bytes": 196928
+    },
+    {
+      "budget": 64,
+      "case": "real_grounding_correct_K64_cap16",
+      "context_count": 9,
+      "expected_sha256": "f7b226c83e0c2b02b906c9b49f1fb8cdd0b279582ee53edbeed22da5495c0235",
+      "grid": [
+        13,
+        20
+      ],
+      "group_count": 260,
+      "local_cap": 16,
+      "output_count": 64,
+      "real_count": 55,
+      "scale": 0.03125,
+      "scene": "real_grounding_correct",
+      "status": 0,
+      "total_bytes": 262464
+    },
+    {
+      "budget": 96,
+      "case": "synth_g400_K96_cap16",
+      "context_count": 9,
+      "expected_sha256": "89930c550fab88302fdf76b837024642ed5c9043d0c103dbae53135fe9eb72dc",
+      "grid": [
+        20,
+        20
+      ],
+      "group_count": 400,
+      "local_cap": 16,
+      "output_count": 96,
+      "real_count": 87,
+      "scale": 0.03125,
+      "scene": "synth_g400",
+      "status": 0,
+      "total_bytes": 393792
+    },
+    {
+      "budget": 96,
+      "case": "synth_g80_K96_cap16",
+      "context_count": 0,
+      "expected_sha256": "9b5784b35ff165298376f0e032e19c7d43eceb5e09a1c3e3688698ef3a927d88",
+      "grid": [
+        8,
+        10
+      ],
+      "group_count": 80,
+      "local_cap": 16,
+      "output_count": 80,
+      "real_count": 80,
+      "scale": 0.03125,
+      "scene": "synth_g80",
+      "status": 0,
+      "total_bytes": 393792
+    },
+    {
+      "budget": 48,
+      "case": "zero_g128_K48_cap16",
+      "context_count": 9,
+      "expected_sha256": "f432452dcbeebcbe4b3fb5abf3c33ef036f94c4a43364ca9243e3c615bbfb63d",
+      "grid": [
+        8,
+        16
+      ],
+      "group_count": 128,
+      "local_cap": 16,
+      "output_count": 48,
+      "real_count": 39,
+      "scale": 0.03125,
+      "scene": "zero_g128",
+      "status": 0,
+      "total_bytes": 196928
+    }
+  ],
+  "case_resolution_ok": true,
+  "host": {
+    "plain": {
+      "cases": [
+        {
+          "case": "synth_g80_K48_cap16",
+          "group_count": 80,
+          "grid": [
+            8,
+            10
+          ],
+          "budget": 48,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 48,
+          "real_count": 39,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 196928,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "real_grounding_correct_K64_cap16",
+          "group_count": 260,
+          "grid": [
+            13,
+            20
+          ],
+          "budget": 64,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 64,
+          "real_count": 55,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 262464,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "synth_g400_K96_cap16",
+          "group_count": 400,
+          "grid": [
+            20,
+            20
+          ],
+          "budget": 96,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 96,
+          "real_count": 87,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 393792,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "synth_g80_K96_cap16",
+          "group_count": 80,
+          "grid": [
+            8,
+            10
+          ],
+          "budget": 96,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 80,
+          "real_count": 80,
+          "context_count": 0,
+          "scale_out": 0.03125,
+          "arena_bytes": 393792,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "zero_g128_K48_cap16",
+          "group_count": 128,
+          "grid": [
+            8,
+            16
+          ],
+          "budget": 48,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 48,
+          "real_count": 39,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 196928,
+          "checks": 10,
+          "mismatches": 0
+        }
+      ],
+      "summaries": [
+        {
+          "cases": 5,
+          "expected_cases": 5,
+          "checks": 51,
+          "passed": 51,
+          "failed": 0,
+          "scalar_mismatches": 0,
+          "arena_mismatches": 0
+        }
+      ],
+      "results": [
+        "PASS"
+      ],
+      "error_count": 0
+    },
+    "asan_ubsan": {
+      "cases": [
+        {
+          "case": "synth_g80_K48_cap16",
+          "group_count": 80,
+          "grid": [
+            8,
+            10
+          ],
+          "budget": 48,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 48,
+          "real_count": 39,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 196928,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "real_grounding_correct_K64_cap16",
+          "group_count": 260,
+          "grid": [
+            13,
+            20
+          ],
+          "budget": 64,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 64,
+          "real_count": 55,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 262464,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "synth_g400_K96_cap16",
+          "group_count": 400,
+          "grid": [
+            20,
+            20
+          ],
+          "budget": 96,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 96,
+          "real_count": 87,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 393792,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "synth_g80_K96_cap16",
+          "group_count": 80,
+          "grid": [
+            8,
+            10
+          ],
+          "budget": 96,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 80,
+          "real_count": 80,
+          "context_count": 0,
+          "scale_out": 0.03125,
+          "arena_bytes": 393792,
+          "checks": 10,
+          "mismatches": 0
+        },
+        {
+          "case": "zero_g128_K48_cap16",
+          "group_count": 128,
+          "grid": [
+            8,
+            16
+          ],
+          "budget": 48,
+          "local_cap": 16,
+          "scale_in": 0.03125,
+          "status": 0,
+          "output_count": 48,
+          "real_count": 39,
+          "context_count": 9,
+          "scale_out": 0.03125,
+          "arena_bytes": 196928,
+          "checks": 10,
+          "mismatches": 0
+        }
+      ],
+      "summaries": [
+        {
+          "cases": 5,
+          "expected_cases": 5,
+          "checks": 51,
+          "passed": 51,
+          "failed": 0,
+          "scalar_mismatches": 0,
+          "arena_mismatches": 0
+        }
+      ],
+      "results": [
+        "PASS"
+      ],
+      "error_count": 0
+    }
+  },
+  "rtl": {
+    "c_tb_cases": [
+      {
+        "case": "synth_g80_K48_cap16",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 196928,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "real_grounding_correct_K64_cap16",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 262464,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "synth_g400_K96_cap16",
+        "group_count": 400,
+        "grid": [
+          20,
+          20
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 96,
+        "real_count": 87,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 393792,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "synth_g80_K96_cap16",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 80,
+        "real_count": 80,
+        "context_count": 0,
+        "scale_out": 0.03125,
+        "arena_bytes": 393792,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "zero_g128_K48_cap16",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 196928,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "synth_g80_K48_cap16",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 196928,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "real_grounding_correct_K64_cap16",
+        "group_count": 260,
+        "grid": [
+          13,
+          20
+        ],
+        "budget": 64,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 64,
+        "real_count": 55,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 262464,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "synth_g400_K96_cap16",
+        "group_count": 400,
+        "grid": [
+          20,
+          20
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 96,
+        "real_count": 87,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 393792,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "synth_g80_K96_cap16",
+        "group_count": 80,
+        "grid": [
+          8,
+          10
+        ],
+        "budget": 96,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 80,
+        "real_count": 80,
+        "context_count": 0,
+        "scale_out": 0.03125,
+        "arena_bytes": 393792,
+        "checks": 10,
+        "mismatches": 0
+      },
+      {
+        "case": "zero_g128_K48_cap16",
+        "group_count": 128,
+        "grid": [
+          8,
+          16
+        ],
+        "budget": 48,
+        "local_cap": 16,
+        "scale_in": 0.03125,
+        "status": 0,
+        "output_count": 48,
+        "real_count": 39,
+        "context_count": 9,
+        "scale_out": 0.03125,
+        "arena_bytes": 196928,
+        "checks": 10,
+        "mismatches": 0
+      }
+    ],
+    "c_tb_summaries": [
+      {
+        "cases": 5,
+        "expected_cases": 5,
+        "checks": 51,
+        "passed": 51,
+        "failed": 0,
+        "scalar_mismatches": 0,
+        "arena_mismatches": 0
+      },
+      {
+        "cases": 5,
+        "expected_cases": 5,
+        "checks": 51,
+        "passed": 51,
+        "failed": 0,
+        "scalar_mismatches": 0,
+        "arena_mismatches": 0
+      }
+    ],
+    "c_tb_results": [
+      "PASS",
+      "PASS"
+    ],
+    "cosim_finished_pass": true,
+    "cosim_finished_fail": false,
+    "xsim_started": true,
+    "elapsed": {
+      "exit_code": 0,
+      "elapsed_seconds": 596
+    },
+    "cosim_report": {
+      "row": {
+        "rtl": "Verilog",
+        "status": "Pass",
+        "latency_min_cycles": 266036.0,
+        "latency_avg_cycles": 557566.0,
+        "latency_max_cycles": 1062296.0,
+        "interval_min_cycles": 265981.0,
+        "interval_avg_cycles": 600854.0,
+        "interval_max_cycles": 1062241.0,
+        "total_execution_cycles": 2787614.0
+      },
+      "simulation_tool": "xsim",
+      "raw": "Report time       : Sat Oct  3 08:17:34 PM CST 2026.\nSolution          : solution1.\nSimulation tool   : xsim.\n\n+----------+----------+-----------------------------------------------+-----------------------------------------------+----------------------+\n|          |          |             Latency(Clock Cycles)             |              Interval(Clock Cycles)           | Total Execution Time |\n+   RTL    +  Status  +-----------------------------------------------+-----------------------------------------------+    (Clock Cycles)    +\n|          |          |      min      |      avg      |      max      |      min      |      avg      |      max      |                      |\n+----------+----------+-----------------------------------------------+-----------------------------------------------+----------------------+\n|      VHDL|        NA|             NA|             NA|             NA|             NA|             NA|             NA|                    NA|\n|   Verilog|      Pass|         266036|         557566|        1062296|         265981|         600854|        1062241|               2787614|\n+----------+----------+-----------------------------------------------+-----------------------------------------------+----------------------+\n"
+    },
+    "per_transaction": [
+      {
+        "transaction": 0,
+        "case": "synth_g80_K48_cap16",
+        "group_count": 80,
+        "budget": 48,
+        "grid": [
+          8,
+          10
+        ],
+        "latency_cycles": 338225.0,
+        "interval_cycles": 338170.0,
+        "latency_ms_at_200mhz": 1.691125
+      },
+      {
+        "transaction": 1,
+        "case": "real_grounding_correct_K64_cap16",
+        "group_count": 260,
+        "budget": 64,
+        "grid": [
+          13,
+          20
+        ],
+        "latency_cycles": 737081.0,
+        "interval_cycles": 737026.0,
+        "latency_ms_at_200mhz": 3.685405
+      },
+      {
+        "transaction": 2,
+        "case": "synth_g400_K96_cap16",
+        "group_count": 400,
+        "budget": 96,
+        "grid": [
+          20,
+          20
+        ],
+        "latency_cycles": 1062296.0,
+        "interval_cycles": 1062241.0,
+        "latency_ms_at_200mhz": 5.31148
+      },
+      {
+        "transaction": 3,
+        "case": "synth_g80_K96_cap16",
+        "group_count": 80,
+        "budget": 96,
+        "grid": [
+          8,
+          10
+        ],
+        "latency_cycles": 266036.0,
+        "interval_cycles": 265981.0,
+        "latency_ms_at_200mhz": 1.33018
+      },
+      {
+        "transaction": 4,
+        "case": "zero_g128_K48_cap16",
+        "group_count": 128,
+        "budget": 48,
+        "grid": [
+          8,
+          16
+        ],
+        "latency_cycles": 384196.0,
+        "interval_cycles": null,
+        "latency_ms_at_200mhz": 1.92098
+      }
+    ],
+    "per_transaction_note": "Vitis emits per-transaction latency in result.transaction.rpt (parsed here); the cosim summary report gives the aggregate min/avg/max and total execution cycles"
+  },
+  "cosim_environment": {
+    "tool": "Vitis HLS 2023.2",
+    "rtl_language": "verilog",
+    "simulator": "xsim",
+    "part": "xczu9eg-ffvb1156-2-e",
+    "clock_ns": "5.00",
+    "clock_uncertainty_ns": "1.35",
+    "estimated_clock_ns": 3.65,
+    "trace_level": "none",
+    "argv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-03-integer-selector-compact-interface-hls/fixtures /home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/fpga_accel/integer_selector_pipeline_compact_cosim/cases/rtl_cosim_cases.txt",
+    "ldflags": "-no-pie"
+  },
+  "interface": {
+    "m_axi_bundles": [
+      "input_arena",
+      "output_arena",
+      "wv_q"
+    ],
+    "m_axi_data_widths": {
+      "input_arena": [
+        "128"
+      ],
+      "wv_q": [
+        "128"
+      ],
+      "output_arena": [
+        "128"
+      ]
+    },
+    "s_axi_bundles": [
+      "control"
+    ],
+    "control_r_present": false,
+    "score_ports": [],
+    "port_names": [
+      "m_axi_input_arena_ARADDR",
+      "m_axi_input_arena_ARBURST",
+      "m_axi_input_arena_ARCACHE",
+      "m_axi_input_arena_ARID",
+      "m_axi_input_arena_ARLEN",
+      "m_axi_input_arena_ARLOCK",
+      "m_axi_input_arena_ARPROT",
+      "m_axi_input_arena_ARQOS",
+      "m_axi_input_arena_ARREADY",
+      "m_axi_input_arena_ARREGION",
+      "m_axi_input_arena_ARSIZE",
+      "m_axi_input_arena_ARUSER",
+      "m_axi_input_arena_ARVALID",
+      "m_axi_input_arena_AWADDR",
+      "m_axi_input_arena_AWBURST",
+      "m_axi_input_arena_AWCACHE",
+      "m_axi_input_arena_AWID",
+      "m_axi_input_arena_AWLEN",
+      "m_axi_input_arena_AWLOCK",
+      "m_axi_input_arena_AWPROT",
+      "m_axi_input_arena_AWQOS",
+      "m_axi_input_arena_AWREADY",
+      "m_axi_input_arena_AWREGION",
+      "m_axi_input_arena_AWSIZE",
+      "m_axi_input_arena_AWUSER",
+      "m_axi_input_arena_AWVALID",
+      "m_axi_input_arena_BID",
+      "m_axi_input_arena_BREADY",
+      "m_axi_input_arena_BRESP",
+      "m_axi_input_arena_BUSER",
+      "m_axi_input_arena_BVALID",
+      "m_axi_input_arena_RDATA",
+      "m_axi_input_arena_RID",
+      "m_axi_input_arena_RLAST",
+      "m_axi_input_arena_RREADY",
+      "m_axi_input_arena_RRESP",
+      "m_axi_input_arena_RUSER",
+      "m_axi_input_arena_RVALID",
+      "m_axi_input_arena_WDATA",
+      "m_axi_input_arena_WID",
+      "m_axi_input_arena_WLAST",
+      "m_axi_input_arena_WREADY",
+      "m_axi_input_arena_WSTRB",
+      "m_axi_input_arena_WUSER",
+      "m_axi_input_arena_WVALID",
+      "m_axi_output_arena_ARADDR",
+      "m_axi_output_arena_ARBURST",
+      "m_axi_output_arena_ARCACHE",
+      "m_axi_output_arena_ARID",
+      "m_axi_output_arena_ARLEN",
+      "m_axi_output_arena_ARLOCK",
+      "m_axi_output_arena_ARPROT",
+      "m_axi_output_arena_ARQOS",
+      "m_axi_output_arena_ARREADY",
+      "m_axi_output_arena_ARREGION",
+      "m_axi_output_arena_ARSIZE",
+      "m_axi_output_arena_ARUSER",
+      "m_axi_output_arena_ARVALID",
+      "m_axi_output_arena_AWADDR",
+      "m_axi_output_arena_AWBURST",
+      "m_axi_output_arena_AWCACHE",
+      "m_axi_output_arena_AWID",
+      "m_axi_output_arena_AWLEN",
+      "m_axi_output_arena_AWLOCK",
+      "m_axi_output_arena_AWPROT",
+      "m_axi_output_arena_AWQOS",
+      "m_axi_output_arena_AWREADY",
+      "m_axi_output_arena_AWREGION",
+      "m_axi_output_arena_AWSIZE",
+      "m_axi_output_arena_AWUSER",
+      "m_axi_output_arena_AWVALID",
+      "m_axi_output_arena_BID",
+      "m_axi_output_arena_BREADY",
+      "m_axi_output_arena_BRESP",
+      "m_axi_output_arena_BUSER",
+      "m_axi_output_arena_BVALID",
+      "m_axi_output_arena_RDATA",
+      "m_axi_output_arena_RID",
+      "m_axi_output_arena_RLAST",
+      "m_axi_output_arena_RREADY",
+      "m_axi_output_arena_RRESP",
+      "m_axi_output_arena_RUSER",
+      "m_axi_output_arena_RVALID",
+      "m_axi_output_arena_WDATA",
+      "m_axi_output_arena_WID",
+      "m_axi_output_arena_WLAST",
+      "m_axi_output_arena_WREADY",
+      "m_axi_output_arena_WSTRB",
+      "m_axi_output_arena_WUSER",
+      "m_axi_output_arena_WVALID",
+      "m_axi_wv_q_ARADDR",
+      "m_axi_wv_q_ARBURST",
+      "m_axi_wv_q_ARCACHE",
+      "m_axi_wv_q_ARID",
+      "m_axi_wv_q_ARLEN",
+      "m_axi_wv_q_ARLOCK",
+      "m_axi_wv_q_ARPROT",
+      "m_axi_wv_q_ARQOS",
+      "m_axi_wv_q_ARREADY",
+      "m_axi_wv_q_ARREGION",
+      "m_axi_wv_q_ARSIZE",
+      "m_axi_wv_q_ARUSER",
+      "m_axi_wv_q_ARVALID",
+      "m_axi_wv_q_AWADDR",
+      "m_axi_wv_q_AWBURST",
+      "m_axi_wv_q_AWCACHE",
+      "m_axi_wv_q_AWID",
+      "m_axi_wv_q_AWLEN",
+      "m_axi_wv_q_AWLOCK",
+      "m_axi_wv_q_AWPROT",
+      "m_axi_wv_q_AWQOS",
+      "m_axi_wv_q_AWREADY",
+      "m_axi_wv_q_AWREGION",
+      "m_axi_wv_q_AWSIZE",
+      "m_axi_wv_q_AWUSER",
+      "m_axi_wv_q_AWVALID",
+      "m_axi_wv_q_BID",
+      "m_axi_wv_q_BREADY",
+      "m_axi_wv_q_BRESP",
+      "m_axi_wv_q_BUSER",
+      "m_axi_wv_q_BVALID",
+      "m_axi_wv_q_RDATA",
+      "m_axi_wv_q_RID",
+      "m_axi_wv_q_RLAST",
+      "m_axi_wv_q_RREADY",
+      "m_axi_wv_q_RRESP",
+      "m_axi_wv_q_RUSER",
+      "m_axi_wv_q_RVALID",
+      "m_axi_wv_q_WDATA",
+      "m_axi_wv_q_WID",
+      "m_axi_wv_q_WLAST",
+      "m_axi_wv_q_WREADY",
+      "m_axi_wv_q_WSTRB",
+      "m_axi_wv_q_WUSER",
+      "m_axi_wv_q_WVALID",
+      "s_axi_control_ARADDR",
+      "s_axi_control_ARREADY",
+      "s_axi_control_ARVALID",
+      "s_axi_control_AWADDR",
+      "s_axi_control_AWREADY",
+      "s_axi_control_AWVALID",
+      "s_axi_control_BREADY",
+      "s_axi_control_BRESP",
+      "s_axi_control_BVALID",
+      "s_axi_control_RDATA",
+      "s_axi_control_RREADY",
+      "s_axi_control_RRESP",
+      "s_axi_control_RVALID",
+      "s_axi_control_WDATA",
+      "s_axi_control_WREADY",
+      "s_axi_control_WSTRB",
+      "s_axi_control_WVALID"
+    ]
+  },
+  "csynth": {
+    "estimated_clock_ns": 3.65,
+    "latency_cycles": {
+      "unit": null,
+      "Best-caseLatency": 1.0,
+      "Average-caseLatency": null,
+      "Worst-caseLatency": 9337705.0,
+      "Best-caseRealTimeLatency": null,
+      "Average-caseRealTimeLatency": null,
+      "Worst-caseRealTimeLatency": null,
+      "Interval-min": 2.0,
+      "Interval-max": 9337706.0
+    },
+    "resources_used": {
+      "BRAM_18K": 295,
+      "DSP": 212,
+      "FF": 45156,
+      "LUT": 91089,
+      "URAM": 0
+    },
+    "resources_available": {
+      "BRAM_18K": 1824,
+      "DSP": 2520,
+      "FF": 548160,
+      "LUT": 274080,
+      "URAM": 0
+    }
+  },
+  "cosim_log_summary": {
+    "warning_count": 191,
+    "warning_codes": {
+      "HLS 207-4706": 9,
+      "HLS 214-398": 6,
+      "XFORM 203-561": 8,
+      "HLS 200-960": 9,
+      "SYN 201-103": 12,
+      "HLS 200-885": 5,
+      "HLS 200-878": 2,
+      "RTGEN 206-101": 139,
+      "XSIM 43-3431": 1
+    },
+    "error_count": 0,
+    "error_codes": {},
+    "error_lines": [],
+    "fatal_count": 0,
+    "fatal_lines": []
+  },
+  "trace_and_storage": {
+    "trace_level": "none",
+    "waveform_files": 0,
+    "waveform_audit": {
+      "project_dir": "/tmp/robobrain_integer_selector_compact_cosim",
+      "project_bytes": "381974323",
+      "waveform_files_wdb": "0",
+      "waveform_files_vcd": "0",
+      "waveform_files_saif": "0",
+      "waveform_files_fsdb": "0"
+    },
+    "artifact_audit": {
+      "artifact_dir": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim",
+      "total_files": 17,
+      "total_bytes": 1284950,
+      "total_megabytes": 1.225,
+      "largest_20": [
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_after.json",
+          "bytes": 364184
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_before.json",
+          "bytes": 364184
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/logs/03_cosim.log",
+          "bytes": 287250
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/syn_report/integer_selector_pipeline_compact_csynth.rpt",
+          "bytes": 122961
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/sim_report/integer_selector_pipeline_compact.log",
+          "bytes": 60839
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/syn_report/integer_selector_pipeline_compact_csynth.xml",
+          "bytes": 51575
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cases/rtl_cosim_cases_resolved.json",
+          "bytes": 12624
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/logs/00_case_resolution.log",
+          "bytes": 12624
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/sim_report/cosim_options.xml",
+          "bytes": 2548
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/logs/01_host_test.log",
+          "bytes": 1713
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/logs/02_host_test_asan_ubsan.log",
+          "bytes": 1713
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/sim_report/integer_selector_pipeline_compact_cosim.rpt",
+          "bytes": 1255
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_verify.json",
+          "bytes": 547
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/sim_report/result.transaction.rpt",
+          "bytes": 318
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/archive_index.txt",
+          "bytes": 258
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/sim_report/lat.rpt",
+          "bytes": 189
+        },
+        {
+          "path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/cosim/tmp_project_audit.txt",
+          "bytes": 168
+        }
+      ]
+    }
+  },
+  "protected_sha_audit": {
+    "before_path": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_before.json",
+    "before_total_files": 2229,
+    "before_aggregate_sha256": "2478d5e7ea068772d4830686e1cd8534cc212f4e48f76d8998b7c732ab4aa948",
+    "verify": {
+      "added": [],
+      "after": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_after.json",
+      "after_aggregate_sha256": "2478d5e7ea068772d4830686e1cd8534cc212f4e48f76d8998b7c732ab4aa948",
+      "after_total_files": 2229,
+      "before": "artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_before.json",
+      "before_aggregate_sha256": "2478d5e7ea068772d4830686e1cd8534cc212f4e48f76d8998b7c732ab4aa948",
+      "before_total_files": 2229,
+      "changed": [],
+      "missing": [],
+      "unchanged": true
+    }
+  },
+  "gate_checks": {
+    "gates": {
+      "protected_files_unchanged": true,
+      "host_test_five_cases_zero_mismatch": true,
+      "host_asan_ubsan_zero_mismatch": true,
+      "cosim_finished_pass": true,
+      "cosim_c_tb_five_cases_zero_mismatch": true,
+      "cosim_zero_errors": true,
+      "cosim_zero_fatals": true,
+      "interface_exactly_three_m_axi": true,
+      "interface_all_m_axi_128bit": true,
+      "interface_exactly_one_axilite_control": true,
+      "interface_no_control_r": true,
+      "interface_no_external_score_port": true,
+      "trace_level_none": true,
+      "zero_waveform_files": true,
+      "artifacts_bounded": true,
+      "xsim_timeout_flag_absent": true
+    },
+    "pass": true
+  },
+  "reproduction": {
+    "commands": [
+      "python3 fpga_accel/integer_selector_pipeline_compact_cosim/tools/validate_cases.py --fixtures artifacts/token_selector/2026-10-03-integer-selector-compact-interface-hls/fixtures --cases fpga_accel/integer_selector_pipeline_compact_cosim/cases/rtl_cosim_cases.txt",
+      "bash fpga_accel/integer_selector_pipeline_compact_cosim/scripts/run_host_test.sh",
+      "bash fpga_accel/integer_selector_pipeline_compact_cosim/scripts/run_cosim.sh",
+      "python3 fpga_accel/integer_selector_pipeline_compact_cosim/tools/protected_sha_audit.py snapshot --out artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_after.json",
+      "python3 fpga_accel/integer_selector_pipeline_compact_cosim/tools/protected_sha_audit.py verify --before artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_before.json --after artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_after.json --out artifacts/token_selector/2026-10-03-integer-selector-compact-rtl-cosim/protected_sha_verify.json",
+      "python3 fpga_accel/integer_selector_pipeline_compact_cosim/tools/build_report.py"
+    ],
+    "cosim_tcl": "fpga_accel/integer_selector_pipeline_compact_cosim/scripts/run_cosim.tcl",
+    "testbench": "fpga_accel/integer_selector_pipeline_compact_cosim/tb/tb_integer_selector_pipeline_compact_cosim.cpp"
+  },
+  "limitations": [
+    "Functional C/RTL co-simulation only: it proves RTL transaction behaviour against the frozen expected arenas, not routed timing, bitstream, board latency, model end-to-end speed or task accuracy.",
+    "XSim cosim is pre-implementation; the accepted csynth estimate (3.650 ns <= 5.0 ns) is a pre-route estimate, not a post-route timing sign-off.",
+    "The five cases are a bounded representative subset of the 23 accepted compact fixtures; they do not exhaust the fixture space.",
+    "Vitis reports per-transaction latency in result.transaction.rpt and the aggregate min/avg/max in the cosim report; the measured cycle counts are pre-implementation RTL numbers, not post-route/board latency.",
+    "Input/output canaries are checked in the co-simulation C phase and one word past the declared m_axi port depth; memory smaller than the declared cosim port depth is not independently modelled."
+  ],
+  "recommended_next_action": "Export the accepted IP (export_design) and run ZCU102 out-of-context synthesis/implementation only after this RTL co-simulation gate passes; route timing is still required before any bitstream/board claim."
+}

@@ -1,0 +1,48 @@
+{
+  "record": "b1-real-model-smoke-gpu-audit",
+  "timestamp_utc": "2026-09-27T07:41:21Z",
+  "host": "zhaoxiangyu workstation",
+  "gpu": {
+    "name": "NVIDIA RTX A6000",
+    "driver_version": "580.178.04",
+    "cuda_version": "13.0",
+    "memory_total_mib": 46068,
+    "memory_used_mib": 4886,
+    "memory_free_mib": 40600,
+    "memory_free_gib": 39.6484,
+    "power_draw_w": 298.95,
+    "power_draw_instant_w": 298.44,
+    "power_limit_w": 300.0,
+    "utilization_gpu_pct": 100,
+    "temperature_c": 86
+  },
+  "compute_processes": [
+    {
+      "pid": 16507,
+      "user": "seey6",
+      "cmd": "python main.py --port 7860 --listen 0.0.0.0",
+      "used_memory_mib": 382,
+      "owner_is_zhaoxiangyu": false
+    },
+    {
+      "pid": 562557,
+      "user": "ismy",
+      "cmd": "/home/ismy/for_dac/.venv-woq/bin/python -m woq.run --model facebook/opt-1.3b --method awq --seed 0 --tag main",
+      "used_memory_mib": 4410,
+      "owner_is_zhaoxiangyu": false
+    }
+  ],
+  "gates": {
+    "free_memory_gate_gib": 20,
+    "free_memory_ok": true,
+    "non_zhaoxiangyu_compute_process_present": true,
+    "process_ownership_gate_ok": false
+  },
+  "actions": {
+    "processes_killed": false,
+    "model_loaded": false,
+    "source_code_modified": false,
+    "original_model_modified": false
+  },
+  "verdict": "BLOCKED_GPU_AUDIT_NON_OWNER_COMPUTE_PROCESS"
+}

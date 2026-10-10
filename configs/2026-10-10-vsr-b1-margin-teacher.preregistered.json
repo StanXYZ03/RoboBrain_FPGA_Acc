@@ -1,0 +1,80 @@
+{
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "created_at": "2026-10-10",
+  "purpose": "Extract a train-only relation-aware B1 answer-margin teacher for a fixed-K96 hardware-regular student selector.",
+  "dataset": {
+    "name": "VSR",
+    "official_split": "zero-shot train",
+    "manifest": "datasets/external/vsr-zeroshot-b27a0af0/vsr_zeroshot_train_no_dev_image_overlap.jsonl",
+    "manifest_sha256": "08ae6b609d2f1a1431d7e5d6dec1bf1720859e17159b13bd173a8502dc6bf4f4",
+    "records": 3483,
+    "unique_images": 2244,
+    "dev_overlap_images_removed": 5,
+    "test_policy": "The VSR zero-shot test split remains sealed and must not be parsed, scored or used for selection."
+  },
+  "teacher": {
+    "model": "local RoboBrain2.5-4B BF16 SDPA, frozen parameters",
+    "cutpoint": "B1_after_vision_block_0",
+    "full_visual_retention_during_teacher": 1.0,
+    "labels": ["False", "True"],
+    "target": "correct True/False branch logit minus incorrect branch logit",
+    "saliency": "per merged group sum(abs(gradient * activation)) over 4 patches and 1024 channels",
+    "temperature": 0.1,
+    "optimizer": null,
+    "model_parameter_training": false
+  },
+  "student_cache": {
+    "allowed_arrays": [
+      "group_mean float16 [G,1024]",
+      "prompt_embeddings float16 [T,2560]",
+      "teacher_scores float32 [G]",
+      "teacher_scores_normalized float32 [G]",
+      "teacher_soft_target float32 [G]"
+    ],
+    "forbidden_arrays": ["full hidden states", "merged embeddings", "deepstack tensors"],
+    "selector_inference_forbidden_inputs": ["official_label", "relation annotation", "subject annotation", "object annotation", "teacher gradient"],
+    "selector_inference_allowed_inputs": ["B1 visual group features", "raw user prompt", "group position", "fixed hardware budget"]
+  },
+  "execution": {
+    "stage_a": {
+      "name": "engineering calibration only",
+      "samples": ["vsr-zs-train-0000", "vsr-zs-train-0001", "vsr-zs-train-0002"],
+      "quality_claim": false,
+      "go_gates": {
+        "all_three_records_complete": true,
+        "all_saliency_finite": true,
+        "all_saliency_nonzero_groups_positive": true,
+        "peak_cuda_gib_max": 35.0,
+        "projected_full_extraction_hours_max": 10.0
+      }
+    },
+    "stage_b": {
+      "name": "full leakage-controlled train extraction",
+      "authorized_only_if_stage_a_passes": true,
+      "records": 3483,
+      "append_only_resume": true,
+      "one_npz_per_record": true
+    },
+    "gpu_timing": "torch.cuda.synchronize before and after every timed GPU segment",
+    "model_load_excluded": true
+  },
+  "later_dev_gate_not_part_of_extraction": {
+    "fixed_budget": 96,
+    "fixed_layout": "87 real + 9 context, 3x3 anchors, local candidate cap 16",
+    "relative_accuracy_vs_dense_min": 0.88,
+    "required_correct_at_340_dev_examples": 237,
+    "same_budget_candidate_minus_corrected_l2_bootstrap_ci_lower_min": 0.0,
+    "note": "The extractor does not inspect dev predictions or choose a student architecture."
+  },
+  "pins": {
+    "extractor": {"path": "evaluation/extract_vsr_b1_margin_teacher.py", "sha256": "8e7f70c64bf50be2cdf1d2e19e7cb786f8bd7d84a7f2226fa1c5484195aca57a"},
+    "test": {"path": "evaluation/tests/test_extract_vsr_b1_margin_teacher.py", "sha256": "5b110a399405efa229f31bfa613017c71d9784c1ff438f8eae7450566dd572c9"},
+    "manifest_report": {"path": "reports/token_selector/2026-10-10-vsr-zeroshot-train-manifest.json", "sha256": "233a2c7b8f3ca3c4bc733edc170410a7a065436cc83798fd5fce49515ffe6242"},
+    "model_identity": {"path": "artifacts/provenance/robobrain25-4b-model-identity.json", "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"},
+    "margin": {"path": "evaluation/answer_margin_b1_preflight.py", "sha256": "189b2694cf97aad8f5f373f0de02dd3e06e98a1f5f1f6a01334f97b5f825a7d9"},
+    "saliency": {"path": "evaluation/b1_answer_margin_oracle.py", "sha256": "58f2843ad329f723a15388f2a95422b4a55572b769ca62100df585a5bb28c752"},
+    "vision": {"path": "evaluation/shallow_block_pruning.py", "sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a"},
+    "cache_schema": {"path": "evaluation/prompt_projection_distillation.py", "sha256": "cd2d4ccc3a4c5ba714f5e478f802b0cb9d64c6e279c15b6493661fb6fe0b0b98"},
+    "prompt_features": {"path": "evaluation/extract_prompt_projection_features.py", "sha256": "ccfd0ea8a9dfa7e3df423c3a2b7d9af036042d011871970e8fb2534e7c2ecf69"}
+  }
+}

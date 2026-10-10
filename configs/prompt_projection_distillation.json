@@ -1,0 +1,165 @@
+{
+  "schema_version": "1.1",
+  "scope": "B1 prompt-projection distillation: train explicit Wt[128,2560] / Wv[128,1024] from a dense teacher; no untrained random weight may enter inference",
+  "feature_dim": 1024,
+  "prompt_dim": 2560,
+  "score_dim": 128,
+  "merge_unit": 4,
+  "temperature": 0.1,
+  "lambda_semantic": 0.5,
+  "budgets": [48, 64, 96],
+  "seed": 20260927,
+  "loss": {
+    "listwise_kl_weight": 1.0,
+    "score_mse_weight": 0.0,
+    "temperature_squared_scaling": true,
+    "note": "main loss is listwise KL(teacher_soft || softmax(student/T)) scaled by T^2; score MSE is off unless score_mse_weight > 0"
+  },
+  "optim": {
+    "optimizer": "adamw",
+    "epochs": 30,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "batch_size": 8,
+    "grad_clip_norm": 1.0,
+    "init_std": 0.02,
+    "init": "deterministic_randn_seeded",
+    "note": "model selection uses the val split only; the test split is evaluated once after the best epoch is frozen"
+  },
+  "split": {
+    "salt": "prompt_projection_distillation_2026_09_27",
+    "seed": 20260927,
+    "ratios": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "group_by": "source_image_sha256",
+    "require_image_sha256": true,
+    "assignment": "sha256(salt|seed|source_image_sha256) mapped to [0,1) with cumulative train/val/test thresholds; every sample sharing an image hash gets the same split",
+    "forbidden": "independent per-sample_id split is forbidden for formal training; a missing/empty image hash is a hard error"
+  },
+  "metrics": {
+    "ks": [48, 64, 96],
+    "rank_metrics": ["pearson", "spearman", "ndcg"],
+    "k_metrics": ["topk_recall", "jaccard", "saliency_mass_retained"],
+    "spearman_tie_policy": "average_rank_stable_sort",
+    "ndcg_relevance": "teacher_scores_normalized",
+    "saliency_mass": "teacher_soft_target",
+    "hardware_constrained": {
+      "matched_real_budget": "for each budget K, R = real_group_count; compare source_type==REAL selected groups against teacher top-R recall/jaccard/saliency-mass (fair real-vs-real comparison)",
+      "total_budget_coverage": "for each budget K, compare source_type==REAL selected groups against teacher top-K recall/jaccard/saliency-mass; context groups occupy part of K so this is an upper-bound coverage, explicitly not a full score",
+      "total_budget_coverage_upper_bound_only": true
+    }
+  },
+  "controls": {
+    "l2_baseline": {
+      "score": "per-group L2 norm of group_mean; equals evaluation.hardware_regular_token_selector.group_l2_saliency on the [G,4,1024] broadcast",
+      "purpose": "no-training baseline the formal projection must beat on val"
+    },
+    "shuffled_prompt": {
+      "assignment": "within each split, sort sample_id ascending and give sample i the prompt embeddings of sample i+1 modulo n",
+      "score": "same Wt/Wv as the correct student",
+      "determinism": "depends only on the sorted sample_ids and their prompt embeddings",
+      "unavailable_when": "split sample count < 2; reported as unavailable, never fabricated"
+    }
+  },
+  "promotion_criteria": {
+    "val_beats_l2": "on the val split, student_correct must be strictly better than l2_baseline on every primary metric",
+    "val_correct_beats_shuffled": "on the val split, student_correct must be strictly better than student_shuffled_prompt on every primary metric",
+    "primary_metrics": ["spearman", "ndcg_full"],
+    "no_arbitrary_threshold": "no numeric margin is fixed a priori; the sign of the paired delta is the criterion",
+    "test_discipline": "the test split is evaluated exactly once after the best epoch is frozen; test never influences selection or hyperparameters"
+  },
+  "teacher": {
+    "encoder": "full dense vision tower (all 24 blocks) + merger",
+    "merged_embedding_dim": 2560,
+    "prompt_source": "raw user prompt text only",
+    "prompt_tokenization": "sample_prompt_only",
+    "add_special_tokens": false,
+    "score": "max_cosine_over_prompt_tokens",
+    "normalization": "minmax_per_sample",
+    "soft_target": "softmax(teacher_scores_normalized / temperature)"
+  },
+  "student": {
+    "boundary": "B1",
+    "encoder": "vision block 0 only",
+    "input": "per-group mean of the 4 patch positions [G,1024]",
+    "projection": "Wt[128,2560] prompt, Wv[128,1024] visual; y = features @ W.T",
+    "score": "max_cosine_over_prompt_tokens",
+    "weights": "must be trained before export/load; never random at inference"
+  },
+  "extraction": {
+    "manifest": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+      "strict_inductive": true,
+      "note": "frozen CV-Bench-independent corpus (236 COCO images / 472 records) built by evaluation/prompt_projection_clean_inductive.py; the extractor fails closed unless --manifest resolves to this exact relative path and sha256"
+    },
+    "cache_dir": "artifacts/token_selector/prompt_projection_features",
+    "index": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+    "npz_schema": [
+      "group_mean:float16[G,1024]",
+      "prompt_embeddings:float16[T,2560]",
+      "teacher_scores:float32[G]",
+      "teacher_scores_normalized:float32[G]",
+      "teacher_soft_target:float32[G]",
+      "meta_*:scalars"
+    ],
+    "index_fields": [
+      "sample_id",
+      "task",
+      "npz",
+      "group_count",
+      "prompt_token_count",
+      "grid_h",
+      "grid_w",
+      "teacher_score_min",
+      "teacher_score_max",
+      "sample_sha256",
+      "source_image_sha256",
+      "config_sha256"
+    ],
+    "source_image_sha256": "streaming SHA256 of the raw source image file bytes; written to both the npz metadata and the JSONL index and used to group the split",
+    "forbidden_payload": "any full dense hidden state, block0 per-patch hidden, deepstack or merged embeddings",
+    "capture": "removable forward hook on visual.blocks[0]",
+    "resume": "JSONL index; sample_ids already indexed are skipped",
+    "gpu_gate": {
+      "required_free_mib": 20480,
+      "owner_rule": "every GPU compute process must belong to the current user",
+      "on_failure": "write audit JSON and exit without loading any model",
+      "shared_gpu_policy": {
+        "opt_in_flag": "--allow-shared-gpu",
+        "supersedes": "the strict 24 GiB exclusive-owner gate for the 2026-09-28 'actually-runnable first' authorization; the legacy report is kept and annotated as superseded",
+        "min_free_mib": 14336,
+        "max_util_pct": 80.0,
+        "util_average_window_seconds": 5,
+        "post_load_min_free_mib": 4096,
+        "non_owner_processes_block": false,
+        "other_users_processes": "read-only nvidia-smi/ps only; never killed, paused or modified",
+        "default_without_flag": "legacy strict owner rule plus required_free_mib=20480 unchanged",
+        "runtime_audits": [
+          "gpu-audit-after-load.json",
+          "gpu-audit-after-extraction.json"
+        ]
+      }
+    },
+    "dense_vision_blocks": 24,
+    "capture_layer": 0
+  },
+  "definitions": {
+    "teacher_raw": "for each merged group g, max over prompt tokens t of cosine(merged_embeddings[g], prompt_embeddings[t])",
+    "teacher_normalized": "min-max of teacher_raw over the G groups of one sample",
+    "teacher_soft_target": "softmax(teacher_normalized / temperature) over groups; sums to 1",
+    "student_raw": "for each group g, max over prompt tokens t of cosine(group_mean[g] @ Wv.T, prompt_embeddings[t] @ Wt.T)",
+    "recall_at_k": "|student_topK ∩ teacher_topK| / K, teacher_topK by teacher_raw",
+    "jaccard_at_k": "|student_topK ∩ teacher_topK| / |student_topK ∪ teacher_topK|",
+    "saliency_mass_retained_at_k": "sum of teacher_soft_target over student_topK",
+    "ndcg_at_k": "graded NDCG@K using teacher_scores_normalized as relevance, ranked by student_raw",
+    "spearman": "Pearson correlation of average ranks (stable sort, no SciPy)",
+    "l2_baseline": "rank groups by the per-group L2 norm of group_mean and compute the same rank/K metrics",
+    "shuffled_prompt": "rank groups by student scores computed with cyclically mismatched prompt embeddings inside the same split",
+    "hardware_matched_real_budget": "R = real_group_count; selected source_type==REAL groups vs teacher top-R",
+    "hardware_total_budget_coverage": "selected source_type==REAL groups vs teacher top-K; upper-bound coverage because context groups share K"
+  }
+}

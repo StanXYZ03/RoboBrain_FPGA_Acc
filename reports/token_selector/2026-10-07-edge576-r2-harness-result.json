@@ -1,0 +1,572 @@
+{
+  "状态": {
+    "决策": [
+      "R1_PREEXECUTION_SUPERSEDED",
+      "EDGE576_AUDITOR_MODEL_PATH_FIXED",
+      "EDGE576_MANIFEST_AUDIT_PASS",
+      "EDGE576_R2_PREREGISTERED_NOT_EXECUTED"
+    ],
+    "范围": "edge576 CV-Bench 预执行修正 r2（CPU-only、只读、未来专用）",
+    "gpu_runs": 0,
+    "weights_loaded": false,
+    "network": false,
+    "training": false,
+    "dependency_install": false,
+    "第三臂状态": "NOT_EXECUTED",
+    "未改冻结文件": true,
+    "未改受保护输入": [
+      "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+      "datasets/cv_bench_full2638.jsonl",
+      "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "evaluation/cv_bench_metric_v2.py",
+      "evaluation/build_edge576_cv_bench_manifest.py"
+    ]
+  },
+  "文件": {
+    "r1_证据_字节保留": {
+      "r1_config": {
+        "path": "configs/2026-10-07-edge576-cvbench-three-arm-development.preregistered.json",
+        "sha256": "8958cbd6f61589217b73e983e0f57257f0cf9bc951c5adbd8506df5d6156b3f3",
+        "bytes": 10512
+      },
+      "r1_prereg_report_json": {
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg.json",
+        "sha256": "c728c3125ffa5708abef0aa6d6fd050611ce8f864cd7bbbda3d85ad13b419afa",
+        "bytes": 7793
+      },
+      "r1_prereg_report_md": {
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg.md",
+        "sha256": "37252dad094aaf2efe411cf961e4411aa8f9d5ecb75c7cd884114fe433676c2c",
+        "bytes": 2075
+      },
+      "r1_generator": {
+        "path": "scripts/preregister_edge576_cvbench_20261007.py",
+        "sha256": "c01776756d37d45307fae9745c610d44ad2179d638d694a0f86372d343d06c57",
+        "bytes": 19446
+      },
+      "r1_prereg_test": {
+        "path": "evaluation/tests/test_edge576_cvbench_prereg.py",
+        "sha256": "5eb3b8c4bc773c4bf1e1ef50a56281ea05c6c03128af17fd2b2fa40ae362ad40",
+        "bytes": 5147
+      },
+      "r1_audit_json": {
+        "path": "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit.json",
+        "sha256": "0caacd74c6083ae9788507de96ba43b3593a051a4f9392377f168d9402c430f8",
+        "bytes": 2384
+      },
+      "r1_audit_md": {
+        "path": "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit.md",
+        "sha256": "380ab4d2bdca07610d2700e72f54d2d38b0d6fd0c87f015b12ab815964506c35",
+        "bytes": 1618
+      },
+      "r1_harness_result": {
+        "path": "reports/token_selector/2026-10-07-edge576-harness-result.json",
+        "sha256": "f1327f7b71149553467d8596147fe84fc990bb824e7f58c929352ca676f6d79c",
+        "bytes": 3903
+      }
+    },
+    "作废报告": {
+      "json": {
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-r1-preexecution-superseded.json",
+        "sha256": "3f8ddd643bd28a6f6bfc7cf305dfdf45530d39db80577f66175841d894283e47",
+        "bytes": 5345
+      },
+      "md": {
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-r1-preexecution-superseded.md",
+        "sha256": "ce971e83f4e5eb3b331ae9d95c63a212ddb2a81f2d62a7b0769381a11600cd22",
+        "bytes": 3505
+      }
+    },
+    "审计器修复": {
+      "auditor": {
+        "path": "evaluation/audit_edge576_cv_bench_manifest.py",
+        "sha256": "a999fe0a48b962104b9991df1c62329789a2164f530fe977767dd95ddbad352b",
+        "bytes": 21924
+      },
+      "auditor_test": {
+        "path": "evaluation/tests/test_audit_edge576_cv_bench_manifest.py",
+        "sha256": "25d135908d39a1b4cef60e2b3942aafc3e2e2463e4c40833bcd1738b1e317a50",
+        "bytes": 14665
+      },
+      "reaudit_json": {
+        "path": "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit-r2.json",
+        "sha256": "34f1385fbe71aa7a947798614b71fe4da9e64ef56449d3b41ac6c52e7886469e",
+        "bytes": 2509
+      },
+      "reaudit_md": {
+        "path": "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit-r2.md",
+        "sha256": "78b978d692cc313394266346576ee2cc688d800c8ec1bd571a924267971a28c9",
+        "bytes": 2417
+      }
+    },
+    "r2": {
+      "config": {
+        "path": "configs/2026-10-07-edge576-cvbench-three-arm-development-r2.preregistered.json",
+        "sha256": "8f265557bfb86998135b6985023e136d7f397eb8e06eb64551a97308cc958d09",
+        "bytes": 22027
+      },
+      "generator": {
+        "path": "scripts/preregister_edge576_cvbench_r2_20261007.py",
+        "sha256": "43ecab62deeb0248b7e4fb698cdd6d37aeeb85dd75b507be2dcf2dcbd6ea8430",
+        "bytes": 34435
+      },
+      "prereg_test": {
+        "path": "evaluation/tests/test_edge576_cvbench_prereg_r2.py",
+        "sha256": "94608ed8a7dcca3efb97f38f1d09dacdb97e7ef0743371d0cf08566a38838b42",
+        "bytes": 12552
+      },
+      "report_json": {
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.json",
+        "sha256": "ab2d22659850ea9757563dc84522ef5b50502cb28a788bf9a9e8bb285661d95b",
+        "bytes": 18649
+      },
+      "report_md": {
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r2.md",
+        "sha256": "a2254d205e80240d9cfe6f1b8a11126f452edbe98de441398091e95a3b5e2b27",
+        "bytes": 4547
+      }
+    },
+    "冻结输入": {
+      "edge576_manifest": {
+        "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+        "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+        "bytes": 3280730
+      },
+      "edge576_summary": {
+        "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+        "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b",
+        "bytes": 2251
+      },
+      "source_full_manifest": {
+        "path": "datasets/cv_bench_full2638.jsonl",
+        "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+        "bytes": 1385852
+      },
+      "model_identity": {
+        "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+        "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+        "bytes": 2777
+      },
+      "cv_bench_metric_v2": {
+        "path": "evaluation/cv_bench_metric_v2.py",
+        "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+        "bytes": 12228
+      },
+      "edge576_builder": {
+        "path": "evaluation/build_edge576_cv_bench_manifest.py",
+        "sha256": "12258b15848e4a31ec96a5c80ff23ed80fe8a24cd536202ab93cffc28f72b48a",
+        "bytes": 26088
+      }
+    }
+  },
+  "r1缺陷与处置": {
+    "A_第三臂未预注册": "r1 mechanism_id=null → r2 冻结为现有 conservative_l2_guarded_rerank_v2（is_new_mechanism=false），不发明新机制",
+    "B_记录完整性口径": "r1「2638 全部可解析」→ r2 只要求 2638 唯一完整输出，parsed_answer 可 null，解析失败计错并报告成功/失败数/率，无 100% 解析门",
+    "C_审计器_model丢失": "audit() 显式接受 model_path，main 传入 --model，报告记录 processor_model_path；新增 4 个正/负例回归测试",
+    "r1从未执行": true,
+    "r1不得运行": true,
+    "r1自检预期失败": "evaluation/tests/test_edge576_cvbench_prereg.py 的 test_every_pin_reverifies 因 auditor pin 过期预期失败 1 项（作废正证据）"
+  },
+  "审计器修复": {
+    "新SHA": "a999fe0a48b962104b9991df1c62329789a2164f530fe977767dd95ddbad352b",
+    "audit显式参数": "model_path",
+    "main传参": "--model",
+    "报告字段": "processor_model_path",
+    "新增测试": [
+      "test_report_records_explicit_model_path",
+      "test_verify_processor_uses_explicit_model_path",
+      "test_provided_processor_skips_loader",
+      "test_main_forwards_model_flag_to_audit"
+    ],
+    "审计器测试数": 18
+  },
+  "复审2638": {
+    "命令": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python evaluation/audit_edge576_cv_bench_manifest.py --verify-processor --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --report reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit-r2.json",
+    "status": "EDGE576_MANIFEST_AUDIT_PASS",
+    "processor_model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "records_checked": 2638,
+    "image_hashes_checked": 2638,
+    "original_dims_checked": 2638,
+    "processor_grids_reverified": 2638,
+    "contracts_all_true": true,
+    "manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+    "旧审计报告字节未改": true
+  },
+  "r2预注册": {
+    "config_sha256": "8f265557bfb86998135b6985023e136d7f397eb8e06eb64551a97308cc958d09",
+    "status": "PREREGISTERED_NOT_EXECUTED",
+    "arm_status": "NOT_EXECUTED",
+    "executed": false,
+    "future_only": true,
+    "retroactive": false,
+    "revision": "r2",
+    "三臂": [
+      "dense_edge576",
+      "corrected_l2_integer_b1_k96",
+      "v2_edge576_b1_k96"
+    ],
+    "第三臂": {
+      "key": "v2_edge576_b1_k96",
+      "mechanism_id": "conservative_l2_guarded_rerank_v2",
+      "is_new_mechanism": false,
+      "status": "NOT_EXECUTED",
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/v2_edge576_k96_full2638.jsonl",
+      "output_sha256": null,
+      "cutpoint": "B1_after_vision_block_0",
+      "selector_budget": {
+        "K": 96,
+        "region_grid": 3,
+        "local_candidate_cap": 16,
+        "max_swaps_S": 16,
+        "identity_bypass_g_le": 96
+      }
+    },
+    "成功门": {
+      "主指标": "官方 cv_bench_accuracy",
+      "质量保留": "selector_cv_bench_accuracy / dense_edge576_cv_bench_accuracy >= 0.90（同输入）",
+      "相对L2": "task::source_dataset 分层配对 bootstrap 5000/seed 20261007/95% CI 下界 >= 0",
+      "布局": "K=96、real=87、context=9、G<=96 identity bypass",
+      "记录完整性": {
+        "definition": "exactly 2638 unique sample_id, each with one complete output record; completeness is about record presence, never about parse success",
+        "sample_count": 2638,
+        "unique_sample_id_count": 2638,
+        "all_2638_unique_complete_outputs": true,
+        "parsed_answer_may_be_null": true,
+        "parse_failures_count_as_wrong": true,
+        "requires_100_percent_parse": false,
+        "must_report": [
+          "parse_success_count",
+          "parse_failure_count",
+          "parse_success_rate",
+          "parse_failure_rate"
+        ]
+      },
+      "诚实解析": {
+        "source_field": "parsed_answer_key only",
+        "parsed_answer_may_be_null": true,
+        "parse_failures_count_as_wrong": true,
+        "must_report": [
+          "parse_success_count",
+          "parse_failure_count",
+          "parse_success_rate",
+          "parse_failure_rate"
+        ],
+        "requires_100_percent_parse": false,
+        "aliasing_correct_key_forbidden": true,
+        "note": "there is no 100% parse gate; parse failures are counted as wrong answers and reported separately"
+      },
+      "无泄漏": true
+    },
+    "发展性复测声明": "This is a developmental re-test of the EXISTING, already frozen conservative_l2_guarded_rerank_v2 mechanism in a new edge576 runtime domain. No new mechanism is invented and no v2 hyper-parameter is tuned. The edge576 domain is a different input distribution from the native-resolution development run, so this is a new falsifiable test of the same frozen mechanism, not a re-scoring of the old result.",
+    "非追溯声明": "The 2026-10-06 native-resolution conservative_l2_guarded_rerank_v2 DEVELOPMENT_STOP (output SHA 3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1) is frozen and is NOT modified, re-scored or re-adjudicated here; native-resolution results stay read-only."
+  },
+  "r2_pin_audit": {
+    "config_sha256": "8f265557bfb86998135b6985023e136d7f397eb8e06eb64551a97308cc958d09",
+    "total_pins": 40,
+    "verified_pins": 40,
+    "mismatches": [],
+    "pins": [
+      {
+        "name": "edge576_manifest",
+        "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+        "role": "edge576_manifest",
+        "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+        "verified": true
+      },
+      {
+        "name": "edge576_summary",
+        "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+        "role": "edge576_summary",
+        "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b",
+        "verified": true
+      },
+      {
+        "name": "source_full_manifest",
+        "path": "datasets/cv_bench_full2638.jsonl",
+        "role": "frozen_full_manifest",
+        "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+        "verified": true
+      },
+      {
+        "name": "builder",
+        "path": "evaluation/build_edge576_cv_bench_manifest.py",
+        "role": "edge576_builder",
+        "sha256": "12258b15848e4a31ec96a5c80ff23ed80fe8a24cd536202ab93cffc28f72b48a",
+        "verified": true
+      },
+      {
+        "name": "auditor",
+        "path": "evaluation/audit_edge576_cv_bench_manifest.py",
+        "role": "edge576_auditor_model_path_fixed",
+        "sha256": "a999fe0a48b962104b9991df1c62329789a2164f530fe977767dd95ddbad352b",
+        "verified": true
+      },
+      {
+        "name": "edge576_audit_r2_report",
+        "path": "reports/token_selector/2026-10-07-edge576-cv-bench-manifest-audit-r2.json",
+        "role": "edge576_reaudit_report",
+        "sha256": "34f1385fbe71aa7a947798614b71fe4da9e64ef56449d3b41ac6c52e7886469e",
+        "verified": true
+      },
+      {
+        "name": "builder_test",
+        "path": "evaluation/tests/test_build_edge576_cv_bench_manifest.py",
+        "role": "edge576_builder_test",
+        "sha256": "d7556f31054283b20a5d81e1f9c199566b35f91f4ae8b18a728b98323079e514",
+        "verified": true
+      },
+      {
+        "name": "auditor_test",
+        "path": "evaluation/tests/test_audit_edge576_cv_bench_manifest.py",
+        "role": "edge576_auditor_test_model_path",
+        "sha256": "25d135908d39a1b4cef60e2b3942aafc3e2e2463e4c40833bcd1738b1e317a50",
+        "verified": true
+      },
+      {
+        "name": "prereg_test_r2",
+        "path": "evaluation/tests/test_edge576_cvbench_prereg_r2.py",
+        "role": "edge576_prereg_r2_test",
+        "sha256": "94608ed8a7dcca3efb97f38f1d09dacdb97e7ef0743371d0cf08566a38838b42",
+        "verified": true
+      },
+      {
+        "name": "prereg_generator_r2",
+        "path": "scripts/preregister_edge576_cvbench_r2_20261007.py",
+        "role": "edge576_prereg_r2_generator",
+        "sha256": "43ecab62deeb0248b7e4fb698cdd6d37aeeb85dd75b507be2dcf2dcbd6ea8430",
+        "verified": true
+      },
+      {
+        "name": "cv_bench_metric_v2",
+        "path": "evaluation/cv_bench_metric_v2.py",
+        "role": "future_metric_v2",
+        "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+        "verified": true
+      },
+      {
+        "name": "model_identity_manifest",
+        "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+        "role": "model_identity",
+        "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+        "verified": true
+      },
+      {
+        "name": "corrected_l2_runner",
+        "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+        "role": "corrected_l2_runner",
+        "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9",
+        "verified": true
+      },
+      {
+        "name": "corrected_l2_integer_jsonl",
+        "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+        "role": "frozen_corrected_l2_control",
+        "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+        "verified": true
+      },
+      {
+        "name": "dense_full_jsonl",
+        "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+        "role": "frozen_native_dense_reference",
+        "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+        "verified": true
+      },
+      {
+        "name": "v2_config",
+        "path": "configs/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.preregistered.json",
+        "role": "frozen_v2_preregistered_config",
+        "sha256": "7499b6ea00939c58506e73b496c1c62bed08162dc8d6d535229f2ffa703e74eb",
+        "verified": true
+      },
+      {
+        "name": "v2_mechanism_core",
+        "path": "evaluation/conservative_l2_guarded_reranker.py",
+        "role": "frozen_v2_mechanism_core",
+        "sha256": "9486771f020b65661d9485702ba6d0d9d7901d7119aea8cb13090799792e357b",
+        "verified": true
+      },
+      {
+        "name": "v2_integration",
+        "path": "evaluation/hardware_regular_b1_guarded_rerank.py",
+        "role": "frozen_v2_integration",
+        "sha256": "0eaab5edceaeccda95bfbeb43c6ed0c6e81f1f67cde072bb024b33bc93fc15d2",
+        "verified": true
+      },
+      {
+        "name": "v2_runner",
+        "path": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+        "role": "frozen_v2_runner",
+        "sha256": "834e5c8165e0cd52565c8a49c6a05bee17b2950afedfbe26a3ad6757c5bf2146",
+        "verified": true
+      },
+      {
+        "name": "v2_summarizer",
+        "path": "evaluation/summarize_conservative_l2_guarded_rerank_full2638.py",
+        "role": "frozen_v2_summarizer",
+        "sha256": "7da4e93da2ac76ded26ff94b319b9712d3887e8800bbd95107caa3b8b6ea14d7",
+        "verified": true
+      },
+      {
+        "name": "v2_test_mechanism",
+        "path": "evaluation/tests/test_conservative_l2_guarded_reranker.py",
+        "role": "frozen_v2_test_mechanism",
+        "sha256": "87f1e4c8cec698c61872e5f602f7ab34fe846d2a5abbc7e6c46af280448feedd",
+        "verified": true
+      },
+      {
+        "name": "v2_test_integration",
+        "path": "evaluation/tests/test_hardware_regular_b1_guarded_rerank.py",
+        "role": "frozen_v2_test_integration",
+        "sha256": "95786e9695d84ad37fddd701a4472941aad307472fdf479dc41593e4dd17625d",
+        "verified": true
+      },
+      {
+        "name": "v2_test_runner",
+        "path": "evaluation/tests/test_run_hf_conservative_l2_guarded_rerank.py",
+        "role": "frozen_v2_test_runner",
+        "sha256": "ea309b6d32e279bd1e8210c179da37df6d679d2ce329ead86094c8bed4d40898",
+        "verified": true
+      },
+      {
+        "name": "v2_test_summarizer",
+        "path": "evaluation/tests/test_summarize_conservative_l2_guarded_rerank_full2638.py",
+        "role": "frozen_v2_test_summarizer",
+        "sha256": "7e7446132f729175c8af9996b37a5d1a4d4efc23210e3091a5b88b28c6f1471c",
+        "verified": true
+      },
+      {
+        "name": "v2_projection_npz",
+        "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz",
+        "role": "v2_checkpoint_projection_npz",
+        "sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff",
+        "verified": true
+      },
+      {
+        "name": "v2_wv_int8",
+        "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_int8_rowmajor.bin",
+        "role": "v2_checkpoint_wv_int8",
+        "sha256": "126bd8421dd128a318115c301bf9d1c7d336912150d19d2ec35203ed55d89d3b",
+        "verified": true
+      },
+      {
+        "name": "v2_wv_per_tensor_scale",
+        "path": "artifacts/token_selector/selector_wv_scale_regularization/20261003/Wv_per_tensor_scale_f32le.bin",
+        "role": "v2_checkpoint_wv_scale",
+        "sha256": "93585a3bd2d584a612b40d827f8d15f43c87acdc764d7e217d99df473428b13f",
+        "verified": true
+      },
+      {
+        "name": "v2_native_arm_jsonl",
+        "path": "artifacts/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638/conservative_l2_guarded_rerank_v2_k96_full2638.jsonl",
+        "role": "frozen_native_v2_output",
+        "sha256": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1",
+        "verified": true
+      },
+      {
+        "name": "integer_token_selector_core",
+        "path": "evaluation/hardware_regular_token_selector.py",
+        "role": "integer_scoring_token_selector_core",
+        "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+        "verified": true
+      },
+      {
+        "name": "integer_corrected_l2_core",
+        "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+        "role": "integer_corrected_l2_core",
+        "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585",
+        "verified": true
+      },
+      {
+        "name": "integer_b1_integration_core",
+        "path": "evaluation/hardware_regular_b1_integration.py",
+        "role": "integer_b1_integration_core",
+        "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa",
+        "verified": true
+      },
+      {
+        "name": "integer_current_selector_core",
+        "path": "evaluation/current_selector_integer.py",
+        "role": "integer_current_selector_core",
+        "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7",
+        "verified": true
+      },
+      {
+        "name": "integer_int8_numerical_audit",
+        "path": "evaluation/selector_int8_numerical_audit.py",
+        "role": "integer_int8_numerical_audit",
+        "sha256": "4329e11616d2790218670b6b2b7252cec847c75a56778fcba871044428ea05dc",
+        "verified": true
+      },
+      {
+        "name": "integer_scorer_audit",
+        "path": "evaluation/selector_integer_scorer_audit.py",
+        "role": "integer_scorer_audit",
+        "sha256": "3fcf91d28f670e7406a41028b02fcaaa4f7694abf8ba76210494cd05502b16a9",
+        "verified": true
+      },
+      {
+        "name": "v1_layout_rebuild_core",
+        "path": "evaluation/conservative_l2_residual_reranker.py",
+        "role": "v1_layout_rebuild_core_reused_by_v2",
+        "sha256": "64b699757fa9ea04eb12438509b5679644a263eb4783139e50d945e196fb5bf4",
+        "verified": true
+      },
+      {
+        "name": "evaluator",
+        "path": "evaluation/build_cv_bench_pruning_report.py",
+        "role": "official_cv_bench_evaluator",
+        "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b",
+        "verified": true
+      },
+      {
+        "name": "metrics",
+        "path": "evaluation/metrics.py",
+        "role": "metrics",
+        "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8",
+        "verified": true
+      },
+      {
+        "name": "r1_prereg_config",
+        "path": "configs/2026-10-07-edge576-cvbench-three-arm-development.preregistered.json",
+        "role": "superseded_r1_config",
+        "sha256": "8958cbd6f61589217b73e983e0f57257f0cf9bc951c5adbd8506df5d6156b3f3",
+        "verified": true
+      },
+      {
+        "name": "r1_prereg_report_json",
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-prereg.json",
+        "role": "superseded_r1_report",
+        "sha256": "c728c3125ffa5708abef0aa6d6fd050611ce8f864cd7bbbda3d85ad13b419afa",
+        "verified": true
+      },
+      {
+        "name": "r1_preexecution_superseded_json",
+        "path": "reports/token_selector/2026-10-07-edge576-cvbench-r1-preexecution-superseded.json",
+        "role": "r1_preexecution_superseded_evidence",
+        "sha256": "3f8ddd643bd28a6f6bfc7cf305dfdf45530d39db80577f66175841d894283e47",
+        "verified": true
+      }
+    ]
+  },
+  "测试": {
+    "py_compile": "OK",
+    "聚焦测试": "52 OK（builder 17 + auditor 18 + r2 prereg 17）",
+    "r1_prereg_模块": "8 tests, 1 expected failure (auditor pin stale; r1 superseded)",
+    "r2_pin审计": "40/40 verified, 0 mismatch",
+    "gpu_runs": 0
+  },
+  "下一步runner适配入口": {
+    "dense": "evaluation/run_hf_shallow_block_pruning.py with --retentions 1.0 (the frozen producer of the dense reference shallow_r1000.jsonl), re-pointed to the edge576 manifest and processor budgets",
+    "corrected_l2_integer": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+    "v2_candidate": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+    "required_edge576_inputs": {
+      "manifest": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "min_pixels": 65536,
+      "max_pixels": 589824,
+      "assert_image_grid_thw_equals_manifest": true
+    },
+    "status": "RUNNER_ADAPTATION_NOT_YET_IMPLEMENTED_NO_MODEL_RUN"
+  },
+  "阻塞": []
+}

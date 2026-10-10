@@ -1,0 +1,559 @@
+{
+  "format": "q8-expanded-paired-diagnostic-report-v1",
+  "status": "DEGRADATION",
+  "expanded_diagnostic_not_blind_validation": true,
+  "oracle_uses_ground_truth_bbox": true,
+  "manifest_sha256": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+  "raw_sha256": "13ee9fe4d268c606450ead82025eb0ff337feac515b4ee4a57fb9d70bf53b24f",
+  "stock_raw_sha256": null,
+  "masks_sha256": "01bed2f13be6eb5afe3e7940fca5342c760cb4efed80a8422ff160f34e7475fc",
+  "paired_records": 192,
+  "unique_images": 96,
+  "primary_metrics": {
+    "pointing_pck_0_1": {
+      "n": 96,
+      "mean_delta": -0.13541666666666666,
+      "ci95_low": -0.21901041666666643,
+      "ci95_high": -0.052083333333333336,
+      "stock_mean": 0.6458333333333334,
+      "compact_mean": 0.5104166666666666,
+      "loss_count": 16,
+      "gain_count": 3,
+      "noninferiority_margin": -0.05,
+      "decision": "DEGRADATION",
+      "effect_vs_zero": "DECREASE"
+    },
+    "pointing_pck_0_2": {
+      "n": 96,
+      "mean_delta": -0.010416666666666666,
+      "ci95_low": -0.052083333333333336,
+      "ci95_high": 0.03125,
+      "stock_mean": 0.8333333333333334,
+      "compact_mean": 0.8229166666666666,
+      "loss_count": 3,
+      "gain_count": 2,
+      "noninferiority_margin": -0.05,
+      "decision": "INCONCLUSIVE",
+      "effect_vs_zero": "UNCERTAIN"
+    },
+    "grounding_iou_mean": {
+      "n": 96,
+      "mean_delta": -0.015226414500685105,
+      "ci95_low": -0.0443803745087142,
+      "ci95_high": 0.018508884157493178,
+      "stock_mean": 0.7378859133250346,
+      "compact_mean": 0.7226594988243495,
+      "loss_count": 55,
+      "gain_count": 33,
+      "noninferiority_margin": -0.03,
+      "decision": "INCONCLUSIVE",
+      "effect_vs_zero": "UNCERTAIN"
+    },
+    "grounding_acc_0_5": {
+      "n": 96,
+      "mean_delta": 0.010416666666666666,
+      "ci95_low": -0.041666666666666664,
+      "ci95_high": 0.0625,
+      "stock_mean": 0.8645833333333334,
+      "compact_mean": 0.875,
+      "loss_count": 3,
+      "gain_count": 4,
+      "noninferiority_margin": -0.03,
+      "decision": "INCONCLUSIVE",
+      "effect_vs_zero": "UNCERTAIN"
+    }
+  },
+  "output_change_rate": 0.9427083333333334,
+  "diagnostic_subset_records": 63,
+  "grouped_attribution_by_task": {
+    "grounding": {
+      "category": {
+        "backpack": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.0403575474741209
+        },
+        "bed": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -36.436011434892436
+        },
+        "bench": {
+          "n": 4,
+          "output_change_rate": 0.75,
+          "mean_error_delta_present": 0.6980190262138164
+        },
+        "bicycle": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.3053999157379684
+        },
+        "book": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -117.10424880100355
+        },
+        "bottle": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 18.03418436556106
+        },
+        "bowl": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 1.1978346878778885
+        },
+        "cell phone": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -6.716162660369315
+        },
+        "chair": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 2.901819229174002
+        },
+        "clock": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -2.8777269023343597
+        },
+        "couch": {
+          "n": 4,
+          "output_change_rate": 0.75,
+          "mean_error_delta_present": -1.080766541115857
+        },
+        "cup": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.4871824357524406
+        },
+        "dining table": {
+          "n": 4,
+          "output_change_rate": 0.5,
+          "mean_error_delta_present": -7.349037262742613
+        },
+        "fork": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 11.884302838241478
+        },
+        "handbag": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 1.057458718281983
+        },
+        "keyboard": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.3706785006190992
+        },
+        "knife": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.872959583142876
+        },
+        "laptop": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.42329396348135284
+        },
+        "microwave": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 6.418884593307489
+        },
+        "mouse": {
+          "n": 1,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.7699131281463707
+        },
+        "oven": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -2.4832163722700336
+        },
+        "potted plant": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 58.27531373469966
+        },
+        "refrigerator": {
+          "n": 4,
+          "output_change_rate": 0.75,
+          "mean_error_delta_present": 1.5606125705818816
+        },
+        "scissors": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 102.62293628284675
+        },
+        "sink": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.39325416651953726
+        },
+        "spoon": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -55.30319543646746
+        },
+        "suitcase": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 7.216417179050653
+        },
+        "teddy bear": {
+          "n": 1,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -1.7366843495004005
+        },
+        "toilet": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 2.7858290351554817
+        },
+        "vase": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -7.582225137049328
+        }
+      },
+      "bbox_area_bin": {
+        "large": {
+          "n": 34,
+          "output_change_rate": 0.9411764705882353,
+          "mean_error_delta_present": -5.351465329561679
+        },
+        "medium": {
+          "n": 31,
+          "output_change_rate": 0.9032258064516129,
+          "mean_error_delta_present": -1.7548438537350448
+        },
+        "small": {
+          "n": 31,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 2.116155737464616
+        }
+      },
+      "bbox_position_bin": {
+        "border": {
+          "n": 49,
+          "output_change_rate": 0.9387755102040817,
+          "mean_error_delta_present": -2.6342407630235334
+        },
+        "center": {
+          "n": 47,
+          "output_change_rate": 0.9574468085106383,
+          "mean_error_delta_present": -0.8866245834324945
+        }
+      },
+      "full_visual_tokens": {
+        "144": {
+          "n": 5,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 3.6644112765255654
+        },
+        "160": {
+          "n": 12,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -26.181330579752366
+        },
+        "176": {
+          "n": 28,
+          "output_change_rate": 0.9285714285714286,
+          "mean_error_delta_present": 5.492335085680729
+        },
+        "192": {
+          "n": 41,
+          "output_change_rate": 0.926829268292683,
+          "mean_error_delta_present": 5.648934455382566
+        },
+        "208": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.0642979905343551
+        },
+        "224": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -81.11667210861282
+        },
+        "240": {
+          "n": 1,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 21.41763504902987
+        },
+        "256": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 21.477505026099514
+        }
+      },
+      "target_fully_retained": {
+        "False": {
+          "n": 2,
+          "output_change_rate": 0.5,
+          "mean_error_delta_present": -11.4426894887837
+        },
+        "True": {
+          "n": 94,
+          "output_change_rate": 0.9574468085106383,
+          "mean_error_delta_present": -1.5730188705522656
+        }
+      }
+    },
+    "pointing": {
+      "category": {
+        "backpack": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.24140070798289323
+        },
+        "bed": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.05259778737968926
+        },
+        "bench": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.1680598690925131
+        },
+        "bicycle": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.0048740268739170855
+        },
+        "book": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.028711480980554958
+        },
+        "bottle": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.03297206207667642
+        },
+        "bowl": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.006229524649631699
+        },
+        "cell phone": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.016115519330584287
+        },
+        "chair": {
+          "n": 4,
+          "output_change_rate": 0.75,
+          "mean_error_delta_present": -0.01907773007315209
+        },
+        "clock": {
+          "n": 2,
+          "output_change_rate": 0.5,
+          "mean_error_delta_present": -0.00279107255616207
+        },
+        "couch": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.01140379234531675
+        },
+        "cup": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.02125983889965163
+        },
+        "dining table": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.011359876197726182
+        },
+        "fork": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.021022567250701396
+        },
+        "handbag": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.0257930722611709
+        },
+        "keyboard": {
+          "n": 3,
+          "output_change_rate": 0.6666666666666666,
+          "mean_error_delta_present": -0.0012010117329415073
+        },
+        "knife": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.09771721373367737
+        },
+        "laptop": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.005036054076307918
+        },
+        "microwave": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.032308035459940404
+        },
+        "mouse": {
+          "n": 1,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.19430231155049904
+        },
+        "oven": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.009418147689904111
+        },
+        "potted plant": {
+          "n": 3,
+          "output_change_rate": 0.6666666666666666,
+          "mean_error_delta_present": 0.030138933092993286
+        },
+        "refrigerator": {
+          "n": 4,
+          "output_change_rate": 0.75,
+          "mean_error_delta_present": -0.013883221406107695
+        },
+        "scissors": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.04788071933734679
+        },
+        "sink": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.034886481115276924
+        },
+        "spoon": {
+          "n": 3,
+          "output_change_rate": 0.6666666666666666,
+          "mean_error_delta_present": 0.016394487636992264
+        },
+        "suitcase": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.017467680913886476
+        },
+        "teddy bear": {
+          "n": 1,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.011919549798960056
+        },
+        "toilet": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.05103171013750962
+        },
+        "vase": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.11787950151913096
+        }
+      },
+      "bbox_area_bin": {
+        "large": {
+          "n": 34,
+          "output_change_rate": 0.9411764705882353,
+          "mean_error_delta_present": -0.0003772623469225109
+        },
+        "medium": {
+          "n": 31,
+          "output_change_rate": 0.9032258064516129,
+          "mean_error_delta_present": 0.027312719127164965
+        },
+        "small": {
+          "n": 31,
+          "output_change_rate": 0.967741935483871,
+          "mean_error_delta_present": 0.04298909466543944
+        }
+      },
+      "bbox_position_bin": {
+        "border": {
+          "n": 49,
+          "output_change_rate": 0.8979591836734694,
+          "mean_error_delta_present": 0.03856201022478666
+        },
+        "center": {
+          "n": 47,
+          "output_change_rate": 0.9787234042553191,
+          "mean_error_delta_present": 0.005893421420443082
+        }
+      },
+      "full_visual_tokens": {
+        "144": {
+          "n": 5,
+          "output_change_rate": 0.8,
+          "mean_error_delta_present": 0.014601919002428337
+        },
+        "160": {
+          "n": 12,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.011944803475565221
+        },
+        "176": {
+          "n": 28,
+          "output_change_rate": 0.8928571428571429,
+          "mean_error_delta_present": 0.04777176013728385
+        },
+        "192": {
+          "n": 41,
+          "output_change_rate": 0.975609756097561,
+          "mean_error_delta_present": 0.019134144735667453
+        },
+        "208": {
+          "n": 3,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.011711915339802446
+        },
+        "224": {
+          "n": 4,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.05204851757596999
+        },
+        "240": {
+          "n": 1,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": -0.02785987886044311
+        },
+        "256": {
+          "n": 2,
+          "output_change_rate": 0.5,
+          "mean_error_delta_present": 0.014495528097524779
+        }
+      },
+      "target_fully_retained": {
+        "False": {
+          "n": 2,
+          "output_change_rate": 1.0,
+          "mean_error_delta_present": 0.009668638716575438
+        },
+        "True": {
+          "n": 94,
+          "output_change_rate": 0.9361702127659575,
+          "mean_error_delta_present": 0.02284246840789596
+        }
+      }
+    }
+  },
+  "target_coverage_audit": {
+    "target_centers_retained": 192,
+    "target_centers_total": 192,
+    "target_intersecting_cells_retained": 8510,
+    "target_intersecting_cells_total": 8566,
+    "samples_with_full_target_coverage": 188,
+    "samples_total": 192,
+    "target_intersecting_cell_retention_rate": 0.9934625262666356
+  },
+  "limitations": [
+    "This 96-image set was revealed in prior L2/residual work and is not a new blind test.",
+    "The geometric oracle reads ground-truth boxes and is not deployable.",
+    "Association by category, area, position, or grid does not establish causality.",
+    "Target coverage association cannot by itself distinguish semantic context loss from implementation effects."
+  ]
+}

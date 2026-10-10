@@ -1,0 +1,901 @@
+{
+  "report": "2026-09-28-selector-qkv-adapter-csynth",
+  "date": "2026-09-28",
+  "decision": "SELECTOR_QKV_ADAPTER_HLS_IMPLEMENTED / ADAPTER_LEGAL_M_192_256_384 / PARAM_CACHE_8KIB_BRAM / FUSED_LAYERNORM_Q8_0_BYTE_EXACT_VS_PYTHON_GOLDEN / INDEPENDENT_QKV_BIAS_ADD_KERNEL / GPP_ASAN_HLS_CSIM_PASS / CONTROLLED_CSYNTH_RUN / ATTENTION_STILL_MISSING / NO_END_TO_END_SPEEDUP_CLAIM / ADAPTER_CSYNTH_TIMING_FAIL / BIAS_CSYNTH_GATE_PASS / NO_COSIM_NO_ROUTE",
+  "scope": {
+    "cpu_only": true,
+    "gpu_used": false,
+    "board_used": false,
+    "csynth": true,
+    "csynth_only": true,
+    "cosim": false,
+    "ip_export": false,
+    "vivado": false,
+    "network": false,
+    "full_model_loaded": false,
+    "existing_hls_modified": false,
+    "model_files_modified": false
+  },
+  "contract_correction": {
+    "adapter_legal_rows": {
+      "before": "rows<=0 || rows>4320 (SQA_MAX_ROWS=4320)",
+      "after": "rows in {192,256,384} (SQA_MAX_ROWS=384, explicit legal check)",
+      "reason": "Selector legal budgets are K=48/64/96 only, so M=4K is 192/256/384",
+      "rejected_examples": [
+        0,
+        -1,
+        1,
+        191,
+        193,
+        385,
+        4320,
+        385
+      ],
+      "bias_add_note": "qkv_bias_add keeps the general row gate 1..4320; formal qkv case is M=192/256/384,N=3072"
+    },
+    "param_storage": {
+      "before": "norm_gamma/norm_beta re-read from m_axi per row/block",
+      "after": "norm_gamma/norm_beta read once into 256x128-bit on-chip caches (4KiB each, 8KiB total) explicitly BIND_STORAGE type=ram_2p impl=bram; rows read from cache",
+      "invariants": "math, Q8_0 payload/scale, port layout unchanged; byte-exact golden stays 0 mismatch"
+    }
+  },
+  "csim_regression": {
+    "logs": {
+      "gpp": {
+        "present": true,
+        "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/gpp_test.log",
+        "sha256": "33fcfb41828f850b5b883a2286db9a3cb07186713bcc537d9956b35c207a2114",
+        "summary": {
+          "passed": 18,
+          "total": 18,
+          "result": "PASS"
+        },
+        "fixture_lines": [
+          "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+          "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+        ],
+        "csim_done_zero_errors": false,
+        "runtime_error_count": 0,
+        "address_sanitizer_error_count": 0,
+        "failed_compilation": false
+      },
+      "asan_ubsan": {
+        "present": true,
+        "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/asan_ubsan_run.log",
+        "sha256": "92a322ccd59b06e73f0e437a43352cd190b718130dfb66df8cdc82ab9e00e0ce",
+        "summary": {
+          "passed": 18,
+          "total": 18,
+          "result": "PASS"
+        },
+        "fixture_lines": [
+          "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+          "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+        ],
+        "csim_done_zero_errors": false,
+        "runtime_error_count": 0,
+        "address_sanitizer_error_count": 0,
+        "failed_compilation": false
+      },
+      "hls_csim_adapter": {
+        "present": true,
+        "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_adapter.log",
+        "sha256": "632725257911339039f6c0c3497a3fa18d79a765ec4e0bf42bdcc817d8b0cd96",
+        "summary": {
+          "passed": 18,
+          "total": 18,
+          "result": "PASS"
+        },
+        "fixture_lines": [
+          "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+          "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+        ],
+        "csim_done_zero_errors": true,
+        "runtime_error_count": 0,
+        "address_sanitizer_error_count": 0,
+        "failed_compilation": false
+      },
+      "hls_csim_bias": {
+        "present": true,
+        "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_bias.log",
+        "sha256": "2191aefa9262cdd261f65713afc9aa978141e954fa68a2a886b55d6c443d6db0",
+        "summary": {
+          "passed": 18,
+          "total": 18,
+          "result": "PASS"
+        },
+        "fixture_lines": [
+          "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+          "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+        ],
+        "csim_done_zero_errors": true,
+        "runtime_error_count": 0,
+        "address_sanitizer_error_count": 0,
+        "failed_compilation": false
+      },
+      "csim_report": {
+        "present": true,
+        "path": "reports/token_selector/2026-09-28-selector-qkv-adapter-csim.json",
+        "decision": "SELECTOR_QKV_ADAPTER_HLS_IMPLEMENTED / ADAPTER_LEGAL_M_192_256_384 / PARAM_CACHE_8KIB_BRAM / FUSED_LAYERNORM_Q8_0_BYTE_EXACT_VS_PYTHON_GOLDEN / INDEPENDENT_QKV_BIAS_ADD_KERNEL / GPP_ASAN_HLS_CSIM_PASS / CSIM_NOT_CSYNTH / ATTENTION_STILL_MISSING / NO_END_TO_END_SPEEDUP_CLAIM",
+        "fixture_byte_exact": {
+          "gpp": {
+            "fixture_lines": [
+              "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+              "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+            ],
+            "mismatch_values": [
+              0,
+              0,
+              0
+            ],
+            "zero_mismatch": true
+          },
+          "asan_ubsan": {
+            "fixture_lines": [
+              "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+              "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+            ],
+            "mismatch_values": [
+              0,
+              0,
+              0
+            ],
+            "zero_mismatch": true
+          },
+          "hls_csim_adapter": {
+            "fixture_lines": [
+              "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+              "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+            ],
+            "mismatch_values": [
+              0,
+              0,
+              0
+            ],
+            "zero_mismatch": true
+          },
+          "hls_csim_bias": {
+            "fixture_lines": [
+              "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+              "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+            ],
+            "mismatch_values": [
+              0,
+              0,
+              0
+            ],
+            "zero_mismatch": true
+          }
+        }
+      }
+    },
+    "focused_python_contract": {
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python -m unittest evaluation.tests.test_selector_qkv_adapter_hls",
+      "returncode": 0,
+      "ran": 24,
+      "ok": true,
+      "output_tail": [
+        "Ran 24 tests in 0.096s",
+        "",
+        "OK"
+      ]
+    },
+    "full_regression": {
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python -m unittest discover -s evaluation/tests",
+      "returncode": 0,
+      "ran": 300,
+      "ok": true,
+      "output_tail": [
+        "Ran 300 tests in 14.533s",
+        "",
+        "OK"
+      ]
+    }
+  },
+  "adapter_csynth": {
+    "top": "selector_ln_q8_adapter",
+    "project_dir": "/tmp/robobrain_selector_qkv_adapter_csynth_adapter",
+    "summary": {
+      "tool": "selector_ln_q8_adapter",
+      "requested_top": "selector_ln_q8_adapter",
+      "part": "xczu9eg-ffvb1156-2-e",
+      "flow_target": "vivado",
+      "project_dir": "/tmp/robobrain_selector_qkv_adapter_csynth_adapter",
+      "clock_target_ns": 5.0,
+      "clock_uncertainty_ns": 1.35,
+      "effective_budget_ns": 3.65,
+      "estimated_clock_ns": 3.945,
+      "estimated_fmax_mhz": 253.49,
+      "timing_slack_ns": -0.295,
+      "timing_met": false,
+      "latency": {
+        "best": 1.0,
+        "average": 649044.0,
+        "worst": 2601752.0
+      },
+      "latency_finite": true,
+      "worst_latency_ms_at_200mhz": 13.0088,
+      "latency_under_33p3ms_at_200mhz": true,
+      "resources_used": {
+        "BRAM_18K": 54,
+        "DSP": 48,
+        "FF": 11419,
+        "LUT": 17596,
+        "URAM": 0
+      },
+      "resources_available": {
+        "BRAM_18K": 1824,
+        "DSP": 2520,
+        "FF": 548160,
+        "LUT": 274080,
+        "URAM": 0
+      },
+      "resource_utilization_percent": {
+        "BRAM_18K": 2.96,
+        "DSP": 1.9,
+        "FF": 2.08,
+        "LUT": 6.42,
+        "URAM": 0.0
+      },
+      "any_resource_over_50_percent": false,
+      "m_axi_bundles": {
+        "gmem0": 45,
+        "gmem1": 45
+      },
+      "console": {
+        "error_count": 0,
+        "warning_count": 22,
+        "ii_final_values": [
+          1,
+          2
+        ],
+        "all_loop_constraints_met": false
+      },
+      "loops": [
+        {
+          "loop": "selector_ln_q8_adapter",
+          "issue_type": "Timing",
+          "slack": "-0.29",
+          "latency_cycles": "2601752",
+          "latency_ns": "1.301e+07",
+          "iteration_latency": "-",
+          "interval": "2601753",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "selector_ln_q8_adapter_Pipeline_VITIS_LOOP_195_1",
+          "issue_type": "-",
+          "slack": "0.00",
+          "latency_cycles": "523",
+          "latency_ns": "2.615e+03",
+          "iteration_latency": "-",
+          "interval": "523",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "VITIS_LOOP_195_1",
+          "issue_type": "II",
+          "slack": "3.65",
+          "latency_cycles": "521",
+          "latency_ns": "2.605e+03",
+          "iteration_latency": "12",
+          "interval": "2",
+          "trip_count": "256",
+          "pipelined": "yes"
+        },
+        {
+          "loop": "VITIS_LOOP_201_2",
+          "issue_type": "-",
+          "slack": "3.65",
+          "latency_cycles": "2601216",
+          "latency_ns": "1.301e+07",
+          "iteration_latency": "6774",
+          "interval": "-",
+          "trip_count": "384",
+          "pipelined": "no"
+        },
+        {
+          "loop": "selector_ln_q8_adapter_Pipeline_VITIS_LOOP_209_3",
+          "issue_type": "-",
+          "slack": "0.00",
+          "latency_cycles": "71",
+          "latency_ns": "355.000",
+          "iteration_latency": "-",
+          "interval": "71",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "VITIS_LOOP_209_3",
+          "issue_type": "-",
+          "slack": "3.65",
+          "latency_cycles": "69",
+          "latency_ns": "345.000",
+          "iteration_latency": "7",
+          "interval": "1",
+          "trip_count": "64",
+          "pipelined": "yes"
+        },
+        {
+          "loop": "VITIS_LOOP_233_5",
+          "issue_type": "-",
+          "slack": "3.65",
+          "latency_cycles": "6624",
+          "latency_ns": "3.312e+04",
+          "iteration_latency": "207",
+          "interval": "-",
+          "trip_count": "32",
+          "pipelined": "no"
+        },
+        {
+          "loop": "selector_ln_q8_adapter_Pipeline_VITIS_LOOP_238_6",
+          "issue_type": "-",
+          "slack": "0.00",
+          "latency_cycles": "52",
+          "latency_ns": "260.000",
+          "iteration_latency": "-",
+          "interval": "52",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "VITIS_LOOP_238_6",
+          "issue_type": "-",
+          "slack": "3.65",
+          "latency_cycles": "50",
+          "latency_ns": "250.000",
+          "iteration_latency": "44",
+          "interval": "1",
+          "trip_count": "8",
+          "pipelined": "yes"
+        },
+        {
+          "loop": "selector_ln_q8_adapter_Pipeline_VITIS_LOOP_129_1",
+          "issue_type": "Timing",
+          "slack": "-0.29",
+          "latency_cycles": "67",
+          "latency_ns": "335.000",
+          "iteration_latency": "-",
+          "interval": "67",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "VITIS_LOOP_129_1",
+          "issue_type": "-",
+          "slack": "3.65",
+          "latency_cycles": "65",
+          "latency_ns": "325.000",
+          "iteration_latency": "4",
+          "interval": "2",
+          "trip_count": "32",
+          "pipelined": "yes"
+        },
+        {
+          "loop": "selector_ln_q8_adapter_Pipeline_VITIS_LOOP_142_2",
+          "issue_type": "-",
+          "slack": "0.47",
+          "latency_cycles": "44",
+          "latency_ns": "220.000",
+          "iteration_latency": "-",
+          "interval": "44",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "VITIS_LOOP_142_2",
+          "issue_type": "-",
+          "slack": "3.65",
+          "latency_cycles": "42",
+          "latency_ns": "210.000",
+          "iteration_latency": "12",
+          "interval": "1",
+          "trip_count": "32",
+          "pipelined": "yes"
+        }
+      ],
+      "legal_M_cycles": {
+        "available": true,
+        "loop": "VITIS_LOOP_201_2",
+        "trip_count_range": [
+          192,
+          384
+        ],
+        "row_loop_latency_cycles": {
+          "M_192": 1294848,
+          "M_384": 2601216
+        },
+        "row_loop_latency_ms_at_200mhz": {
+          "M_192": 6.4742,
+          "M_384": 13.0061
+        },
+        "M_256": {
+          "cycles_lower_bound": 1726464,
+          "cycles_upper_bound": 1734144,
+          "method": "row-loop iteration latency range 6744..6774 x M=256",
+          "is_exact": false
+        },
+        "note": "The tool reports the M=192 and M=384 row-loop bounds directly. M=256 is not separately schedulable because `rows` is a runtime scalar; only the bounded derivation above is given."
+      },
+      "latency_ms_at_200mhz": {
+        "best": 0.0,
+        "average": 3.2452,
+        "worst": 13.0088
+      }
+    },
+    "gate": {
+      "checks": {
+        "zero_errors": true,
+        "latency_finite": true,
+        "estimated_period_le_effective_budget": false,
+        "timing_slack_non_negative": false,
+        "any_resource_below_50_percent": true,
+        "worst_latency_target": true
+      },
+      "status": "FAIL",
+      "worst_latency_ms_at_200mhz": 13.0088,
+      "adapter_target_ms": 33.3,
+      "failed_checks": [
+        "estimated_period_le_effective_budget",
+        "timing_slack_non_negative"
+      ]
+    },
+    "fix_rounds": [
+      {
+        "round": 0,
+        "change": "original design (no scheduling pragma)",
+        "estimated_clock_ns": 3.945,
+        "result": "csynth completed; timing gate FAIL (3.945 > 3.650 ns)",
+        "evidence": "adapter_round0/console.log"
+      },
+      {
+        "round": 1,
+        "change": "scheduling pragma: HLS PIPELINE II=2 on the Q8_0 amax loop",
+        "estimated_clock_ns": 3.945,
+        "result": "csynth completed; timing gate still FAIL (3.945 ns, same fcmp->select->store path), latency reaches II=2 but the combinational compare is not broken",
+        "evidence": "adapter_round1/console.log"
+      },
+      {
+        "round": 2,
+        "change": "scheduling pragma: named compare + BIND_OP fcmp impl=fabric latency=1",
+        "estimated_clock_ns": null,
+        "result": "pre-synthesis ERROR: HLS 214-372 (fcmp impl=fabric unsupported on xczu9eg) and HLS 214-383 (fcmp latency range [-1,-1]); not a valid synthesized design",
+        "evidence": "adapter_round2_bindop_unsupported/console.log"
+      }
+    ],
+    "root_cause": "Q8_0 quantize_block 的 32 路 amax 归约是 loop-carried 依赖 (amax -> fcmp -> select -> amax)。2023.2 在该器件上把单精度浮点 `>` 实现为约 2.782 ns 的 fcmp，加上 select 0.449 ns 与 store 0.427 ns，单周期组合路径 3.945 ns > 默认 uncertainty 下的 3.650 ns effective budget。只允许调度/存储 pragma 的等价修复无法打断该组合路径：II=2 不生效；`BIND_OP op=fcmp` 在该器件不支持。同一 3.945 ns 路径也存在于现有 pl_resident_ffn 的 quantize_block csynth 中，证明这是算法实现的固有路径，而非本轮参数 cache 引入。",
+    "cosim_route_not_run": true
+  },
+  "bias_csynth": {
+    "top": "qkv_bias_add",
+    "project_dir": "/tmp/robobrain_selector_qkv_adapter_csynth_bias",
+    "summary": {
+      "tool": "qkv_bias_add",
+      "requested_top": "qkv_bias_add",
+      "part": "xczu9eg-ffvb1156-2-e",
+      "flow_target": "vivado",
+      "project_dir": "/tmp/robobrain_selector_qkv_adapter_csynth_bias",
+      "clock_target_ns": 5.0,
+      "clock_uncertainty_ns": 1.35,
+      "effective_budget_ns": 3.65,
+      "estimated_clock_ns": 3.65,
+      "estimated_fmax_mhz": 273.97,
+      "timing_slack_ns": 0.0,
+      "timing_met": true,
+      "latency": {
+        "best": 1.0,
+        "average": null,
+        "worst": 21012512.0
+      },
+      "latency_finite": false,
+      "worst_latency_ms_at_200mhz": 105.0626,
+      "latency_under_33p3ms_at_200mhz": false,
+      "resources_used": {
+        "BRAM_18K": 32,
+        "DSP": 9,
+        "FF": 4023,
+        "LUT": 3869,
+        "URAM": 0
+      },
+      "resources_available": {
+        "BRAM_18K": 1824,
+        "DSP": 2520,
+        "FF": 548160,
+        "LUT": 274080,
+        "URAM": 0
+      },
+      "resource_utilization_percent": {
+        "BRAM_18K": 1.75,
+        "DSP": 0.36,
+        "FF": 0.73,
+        "LUT": 1.41,
+        "URAM": 0.0
+      },
+      "any_resource_over_50_percent": false,
+      "m_axi_bundles": {
+        "gmem0": 45,
+        "gmem1": 45
+      },
+      "console": {
+        "error_count": 0,
+        "warning_count": 20,
+        "ii_final_values": [
+          2
+        ],
+        "all_loop_constraints_met": false
+      },
+      "loops": [
+        {
+          "loop": "qkv_bias_add",
+          "issue_type": "-",
+          "slack": "0.00",
+          "latency_cycles": "21012512",
+          "latency_ns": "1.051e+08",
+          "iteration_latency": "-",
+          "interval": "21012513",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "qkv_bias_add_Pipeline_VITIS_LOOP_286_1_VITIS_LOOP_288_2",
+          "issue_type": "-",
+          "slack": "0.00",
+          "latency_cycles": "21012503",
+          "latency_ns": "1.051e+08",
+          "iteration_latency": "-",
+          "interval": "21012503",
+          "trip_count": "-",
+          "pipelined": "no"
+        },
+        {
+          "loop": "VITIS_LOOP_286_1_VITIS_LOOP_288_2",
+          "issue_type": "II",
+          "slack": "3.65",
+          "latency_cycles": "21012501",
+          "latency_ns": "1.051e+08",
+          "iteration_latency": "24",
+          "interval": "2",
+          "trip_count": "10506240",
+          "pipelined": "yes"
+        }
+      ],
+      "formal_boundary": {
+        "available": true,
+        "loop": "VITIS_LOOP_286_1_VITIS_LOOP_288_2",
+        "achieved_ii": 2,
+        "flat_trip_count_max_rows_cols": 10506240,
+        "tool_worst_cycles_rows4320_cols9728": 21012512,
+        "formal_M384_N3072": {
+          "words": 294912,
+          "cycles": 589847,
+          "ms_at_200mhz": 2.9492,
+          "method": "flat pipeline: achieved II=2 x M*N/4 words (+23 reported overhead)",
+          "is_exact": false
+        },
+        "note": "`cols` is a runtime scalar, so the tool cannot report the exact M=384,N=3072 latency; the full dynamic worst case (M=4320, N=9728) is the reported hard boundary and the formal case is derived from the achieved II."
+      },
+      "latency_ms_at_200mhz": {
+        "best": 0.0,
+        "average": null,
+        "worst": 105.0626
+      }
+    },
+    "gate": {
+      "checks": {
+        "zero_errors": true,
+        "latency_finite": true,
+        "estimated_period_le_effective_budget": true,
+        "timing_slack_non_negative": true,
+        "any_resource_below_50_percent": true
+      },
+      "status": "PASS",
+      "worst_latency_ms_at_200mhz": 105.0626,
+      "adapter_target_ms": null,
+      "failed_checks": []
+    }
+  },
+  "tests": {
+    "focused_python_contract": {
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python -m unittest evaluation.tests.test_selector_qkv_adapter_hls",
+      "returncode": 0,
+      "ran": 24,
+      "ok": true,
+      "output_tail": [
+        "Ran 24 tests in 0.096s",
+        "",
+        "OK"
+      ]
+    },
+    "full_regression": {
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python -m unittest discover -s evaluation/tests",
+      "returncode": 0,
+      "ran": 300,
+      "ok": true,
+      "output_tail": [
+        "Ran 300 tests in 14.533s",
+        "",
+        "OK"
+      ]
+    }
+  },
+  "limitations": [
+    "仅 csynth_design：不是 C/RTL cosim、不是 place/route、不是 bitstream、不是板级结果。",
+    "激活为合成，非真实采集；只有 norm1 gamma/beta 与 qkv.bias 是真实张量。",
+    "数值链止于 +qkv.bias；reshape/split、RoPE、softmax、PV、attn.proj、残差、norm2、fc1/GELU/fc2 与 blocks 2..23 全部缺失。",
+    "不声称端到端加速，也不判任务精度；Q8Q8 权重侧工作不在本轮范围。",
+    "adapter 的 M=256 周期只能由 row-loop 迭代延迟范围给出有界推导，不是工具单独报告值。",
+    "bias 的 cols 为运行时标量，M=384,N=3072 周期由 achieved II 推导；工具硬边界为 M=4320,N=9728。",
+    "HLS 200-790 仍报 loop constraints 未满足（adapter 参数 cache 载入循环与 bias 内层循环存在 II violation），这不是 correctness/timing 门槛；gate 以 0 error/有限 latency/timing/资源判定。",
+    "adapter csynth timing gate FAIL：estimated period 3.945 ns > 3.650 ns effective budget；按门槛如实判 FAIL，未继续 cosim/route。"
+  ],
+  "files_changed": [
+    {
+      "path": "README.md",
+      "sha256": "2db43f9a6598f4123bf7ea3f91799990f01054bc86753456f4bb2d39a32b0aa2",
+      "bytes": 4431
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/README.md",
+      "sha256": "50f406da17bd52399af8b953d9f2ffec23f808802738a545b2b94517eccafe29",
+      "bytes": 8499
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/Makefile",
+      "sha256": "402c2d186cd38819070de05e46622a9e27e591920eea5a52a9ca521a87b0abe4",
+      "bytes": 2459
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/include/selector_qkv_adapter.h",
+      "sha256": "36c8e3e830b2fd51ca94074e5023297cfea313eebdc9a40b4f8a0082601c738c",
+      "bytes": 4668
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/src/selector_qkv_adapter.cpp",
+      "sha256": "0b4ae41fee0e2ce129fca92633bda18cc7f1a737b4a10f7e8e222dc6dea05cc9",
+      "bytes": 12345
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/tb/tb_selector_qkv_adapter.cpp",
+      "sha256": "b21ab4494c63160dae750c10c455a4ab53760ce336e6f33ebddd51b8ef8ed31f",
+      "bytes": 39868
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/tools/selector_qkv_golden.py",
+      "sha256": "c401a0a63291da8b54f19a0783c00a91b63d06cf51c5c59e02deee0b7df5ef3e",
+      "bytes": 16571
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/tools/generate_fixtures.py",
+      "sha256": "d19487eed01ea32b1858d9fa7da8391de1407068d7e4a008cfb27f43a047d70c",
+      "bytes": 11721
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_hls.tcl",
+      "sha256": "bec2b3e1897ba82ebb5d928a154c904820bfd5c26c7ee6ead79816da8487531d",
+      "bytes": 2488
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_stage.sh",
+      "sha256": "f230412033efbf7af3c9b6723a2a76027be16183f486cffea099d015bcbb3a7c",
+      "bytes": 1881
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_csynth.tcl",
+      "sha256": "4b6ee5b23e86a72888cc417e1c5439565bec66102e75917155f308dfd52d091f",
+      "bytes": 1589
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_csynth.sh",
+      "sha256": "d02e26b44c48861842e0bd853dcdda0e33a4fb809a2f3f7c68291198ddd631fc",
+      "bytes": 2108
+    },
+    {
+      "path": "scripts/validate_selector_qkv_adapter_csim.py",
+      "sha256": "59cdcb0d5a81a16cdd6d1fd91c621d901034c605f9a5caf63dbebb7522aee720",
+      "bytes": 30846
+    },
+    {
+      "path": "scripts/validate_selector_qkv_adapter_csynth.py",
+      "sha256": "e9d6cc53ce2b1b8744d1327d0f093e52e1b397a6cee149cf78ca3f5bc752708b",
+      "bytes": 36901
+    },
+    {
+      "path": "scripts/summarize_selector_csynth.py",
+      "sha256": "ea170b14bf634bb5dfeab63eeab40c0830dadeb052f93ffe1538623f22bdb69f",
+      "bytes": 9148
+    },
+    {
+      "path": "evaluation/tests/test_selector_qkv_adapter_hls.py",
+      "sha256": "2b11f64db95d20b77eefda5055fa8355b107248190188123736dcb4b7697d8c4",
+      "bytes": 17120
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/asan_ubsan_run.log",
+      "sha256": "92a322ccd59b06e73f0e437a43352cd190b718130dfb66df8cdc82ab9e00e0ce",
+      "bytes": 4774
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/fixture_manifest.json",
+      "sha256": "c56b278877f301e22905deadf96173c6979e5b1112184db6780da2507801f627",
+      "bytes": 4375
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/gpp_test.log",
+      "sha256": "33fcfb41828f850b5b883a2286db9a3cb07186713bcc537d9956b35c207a2114",
+      "bytes": 4688
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_adapter.log",
+      "sha256": "632725257911339039f6c0c3497a3fa18d79a765ec4e0bf42bdcc817d8b0cd96",
+      "bytes": 6997
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_bias.log",
+      "sha256": "2191aefa9262cdd261f65713afc9aa978141e954fa68a2a886b55d6c443d6db0",
+      "bytes": 6988
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/real_block1_adapter_fixture.bin",
+      "sha256": "02e16b51424e858d58b826501b59fa1132af6835dfa33b441e29d242b44dbc68",
+      "bytes": 413740
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/real_block1_bias_fixture.bin",
+      "sha256": "7461ad9bd9bea1446339dc36d50a56331e743a697a62f6aadaa2f49653700a9c",
+      "bytes": 9449500
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter/console.log",
+      "sha256": "0f4159ef1920607d218557f779ed5ce2b4e7cc55dcb50c18cf74a8fff4894e03",
+      "bytes": 47337
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter/csynth.rpt",
+      "sha256": "baee24263e7118f697bd781743b49b7d6ed5644a044b1a15a298e2401410a69a",
+      "bytes": 51983
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter/csynth.xml",
+      "sha256": "481b9957d445911f7bd54da77107586721ddbaa52bdb1df4a7200f6146da6a9a",
+      "bytes": 169332
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter/csynth_design_size.rpt",
+      "sha256": "01d22c4364ebccba6d502722e29b42aa3c17eb3eed9492fb7622eda6ffdc7dcd",
+      "bytes": 11526
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter/df_before.txt",
+      "sha256": "9d215559433a23963cb95ea2dd11ebc84b03de3822ea1f62946edbd50021c31d",
+      "bytes": 89
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter/selector_ln_q8_adapter_csynth.rpt",
+      "sha256": "ecdecec17770eb9846505733cc8f7922519c0b2d703d25fda8ae877ca42df36d",
+      "bytes": 38715
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter/summary.json",
+      "sha256": "f65eb83c654a448492dfda93ea9c4d615bc7e372149de28f18cf43f58d229032",
+      "bytes": 4862
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round0/console.log",
+      "sha256": "612a8101601f85b7222b546a0712f10cfd986cf521e1cf489bceacef949067dc",
+      "bytes": 47344
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round0/csynth.rpt",
+      "sha256": "b3bc7a1353bda4ac4ce267c18a79dc5061bdc7eb3e339852d72e40eab723a35c",
+      "bytes": 51983
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round0/csynth.xml",
+      "sha256": "e706922d0779ef7179d20ac154fbf699d072a5356eb1699e08c45dfa592be4b7",
+      "bytes": 169332
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round0/csynth_design_size.rpt",
+      "sha256": "638aeba1e6952978522123ae17b34174e12f330d52b7910760455c4cd838b4f0",
+      "bytes": 11526
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round0/df_before.txt",
+      "sha256": "9d215559433a23963cb95ea2dd11ebc84b03de3822ea1f62946edbd50021c31d",
+      "bytes": 89
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round0/selector_ln_q8_adapter_csynth.rpt",
+      "sha256": "ad4b82e4c2feb837493a2a68960f689872e2fc0f0aef3b143578132cbd3d0c39",
+      "bytes": 38715
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round0/summary.json",
+      "sha256": "62fb438d202d236a0b2d29e576fefef0b973d35ce86b5c73c5c4d32c55cd20db",
+      "bytes": 4862
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round1/console.log",
+      "sha256": "0f4159ef1920607d218557f779ed5ce2b4e7cc55dcb50c18cf74a8fff4894e03",
+      "bytes": 47337
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round1/csynth.rpt",
+      "sha256": "baee24263e7118f697bd781743b49b7d6ed5644a044b1a15a298e2401410a69a",
+      "bytes": 51983
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round1/csynth.xml",
+      "sha256": "481b9957d445911f7bd54da77107586721ddbaa52bdb1df4a7200f6146da6a9a",
+      "bytes": 169332
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round1/csynth_design_size.rpt",
+      "sha256": "01d22c4364ebccba6d502722e29b42aa3c17eb3eed9492fb7622eda6ffdc7dcd",
+      "bytes": 11526
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round1/df_before.txt",
+      "sha256": "9d215559433a23963cb95ea2dd11ebc84b03de3822ea1f62946edbd50021c31d",
+      "bytes": 89
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round1/selector_ln_q8_adapter_csynth.rpt",
+      "sha256": "ecdecec17770eb9846505733cc8f7922519c0b2d703d25fda8ae877ca42df36d",
+      "bytes": 38715
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round1/summary.json",
+      "sha256": "f65eb83c654a448492dfda93ea9c4d615bc7e372149de28f18cf43f58d229032",
+      "bytes": 4862
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round2_bindop_unsupported/console.log",
+      "sha256": "93ed8244316e7641f241f0e3d353cfc25771aec629694310227bb5df6f78644a",
+      "bytes": 22460
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/adapter_round2_bindop_unsupported/df_before.txt",
+      "sha256": "9d215559433a23963cb95ea2dd11ebc84b03de3822ea1f62946edbd50021c31d",
+      "bytes": 89
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/bias/console.log",
+      "sha256": "41aa3827837a6b8f4c7f4c717d7ab41664e8c5be8e6cec03a06d840eaf78754b",
+      "bytes": 22638
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/bias/csynth.rpt",
+      "sha256": "f99a71c555ed14f8a55b37af9103d6391d977acd6a5d25df5ef82fc00aca7234",
+      "bytes": 34031
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/bias/csynth.xml",
+      "sha256": "1fc7cefab78d6d05dce3bd1f7d6ada02466a3455e7425af7af99d9d8a38d65be",
+      "bytes": 99689
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/bias/csynth_design_size.rpt",
+      "sha256": "5a334f2df529e336302c14396142124a3caa523a2266fc122a6eb91a3bb3f69b",
+      "bytes": 6332
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/bias/df_before.txt",
+      "sha256": "9d215559433a23963cb95ea2dd11ebc84b03de3822ea1f62946edbd50021c31d",
+      "bytes": 89
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/bias/qkv_bias_add_csynth.rpt",
+      "sha256": "1c51827fe07532c1b1a7ef5dcea60707c14b87af13fd8f9ad35ddd41e56968b9",
+      "bytes": 20370
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csynth/bias/summary.json",
+      "sha256": "d2b1d4de5fd8db068c7072e60e2579b5494ab526c2ed03c5270fc7991f3e0bf9",
+      "bytes": 2087
+    }
+  ],
+  "next_gate": "adapter csynth 在默认 1.35 ns uncertainty / 5.0 ns 下 estimated 3.945 ns > 3.650 ns，未过 timing 门槛；下一步只有在独立授权下才可用不等价手段（例如把 32 路 amax 归约改成平衡树/分段最大值并对 fcmp 打拍，或重排量化块调度）以打破该 loop-carried 组合路径，再重跑同一条只 csynth_design 的流程；在此之前不 cosim、不导出 IP、不 route、不建 BD、不写驱动、不上板。+qkv.bias 之后的 attention 各算子与真实 block0 hidden 采集仍待完成。"
+}

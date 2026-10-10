@@ -1,0 +1,179 @@
+{
+  "audit_id": "gpu_audit_2026-09-28",
+  "kind": "read_only_gpu_safety_audit",
+  "timestamp_local": "2026-09-28T01:13:45+08:00",
+  "timezone": "CST",
+  "host": {
+    "auditor_user": "zhaoxiangyu",
+    "auditor_uid": 1005,
+    "auditor_groups": ["zhaoxiangyu", "dialout", "plugdev", "sharedgroup"],
+    "uptime": "up 2 days, 7:29",
+    "load_average": [1.67, 2.41, 2.41]
+  },
+  "command": "nvidia-smi; nvidia-smi --query-compute-apps=pid,used_memory,gpu_uuid --format=csv; nvidia-smi -q -d MEMORY,UTILIZATION,POWER,TEMPERATURE",
+  "gpu": {
+    "index": 0,
+    "name": "NVIDIA RTX A6000",
+    "driver_version": "580.178.04",
+    "cuda_version": "13.0",
+    "bus_id": "00000000:01:00.0",
+    "persistence_mode": "Off",
+    "display_attached": "Off",
+    "mig_mode": "N/A (disabled)",
+    "ecc_volatile_uncorrected": 0,
+    "memory": {
+      "total_mib": 46068,
+      "total_gib": 44.99,
+      "reserved_mib": 583,
+      "used_mib": 3426,
+      "free_mib": 42060,
+      "free_gib": 41.07,
+      "bar1_total_mib": 256,
+      "bar1_used_mib": 8
+    },
+    "utilization": {
+      "gpu_percent": 98,
+      "memory_percent": 58,
+      "encoder_percent": 0,
+      "decoder_percent": 0,
+      "jpeg_percent": 0,
+      "ofa_percent": 0,
+      "samples_14s": {
+        "gpu_avg_percent": 93,
+        "gpu_max_percent": 99,
+        "gpu_min_percent": 0,
+        "memory_avg_percent": 62,
+        "memory_max_percent": 70
+      }
+    },
+    "power": {
+      "instantaneous_w": 308.59,
+      "average_w": 292.52,
+      "current_limit_w": 300.0,
+      "requested_limit_w": 300.0,
+      "default_limit_w": 300.0,
+      "headroom_w": 7.48
+    },
+    "temperature_c": {
+      "gpu_current": 85,
+      "gpu_target": 84,
+      "gpu_max_operating": 93,
+      "gpu_slowdown": 95,
+      "gpu_shutdown": 98,
+      "memory_current": null
+    },
+    "fan_percent": 67,
+    "performance_state": "P2"
+  },
+  "processes": {
+    "compute": [
+      {
+        "pid": 16507,
+        "type": "C",
+        "gpu_index": 0,
+        "gpu_memory_mib": 382,
+        "process_name_reported_by_nvidia_smi": "python",
+        "cmdline": "python main.py --port 7860 --listen 0.0.0.0",
+        "user": "seey6",
+        "uid": 1001,
+        "ppid": 11981,
+        "stat": "Sl+",
+        "elapsed": "2-06:00:54",
+        "cpu_percent": 0.5,
+        "owned_by_auditor": false,
+        "zhaoxiangyu": false
+      },
+      {
+        "pid": 884366,
+        "type": "C",
+        "gpu_index": 0,
+        "gpu_memory_mib": 2950,
+        "process_name_reported_by_nvidia_smi": "python",
+        "cmdline": "python sensitivity/weight_sensitivity.py --max-images 0 --max-layerwise-images 0 --max-layerwise-layers 0 --resume-layerwise --run-dir-name phase1_weight_sensitivity_kodak24",
+        "user": "zhaoshengtao",
+        "uid": 1004,
+        "ppid": 884358,
+        "stat": "Rl",
+        "elapsed": "25:30",
+        "cpu_percent": 100,
+        "owned_by_auditor": false,
+        "zhaoxiangyu": false
+      }
+    ],
+    "graphics_only": [
+      {
+        "pid": 2346,
+        "type": "G",
+        "gpu_memory_mib": 35,
+        "cmdline": "/usr/lib/xorg/Xorg",
+        "note": "not a compute process"
+      },
+      {
+        "pid": 2513,
+        "type": "G",
+        "gpu_memory_mib": 9,
+        "cmdline": "/usr/bin/gnome-shell",
+        "note": "not a compute process"
+      }
+    ],
+    "compute_count": 2,
+    "non_auditor_compute_count": 2,
+    "non_auditor_zhaoxiangyu_compute_count": 0,
+    "compute_memory_accounted_mib": 3332,
+    "graphics_memory_accounted_mib": 44
+  },
+  "gate": {
+    "criteria": {
+      "no_non_zhaoxiangyu_compute_process": false,
+      "free_memory_at_least_20_gib": true,
+      "no_obvious_full_load": false
+    },
+    "free_memory_threshold_gib": 20,
+    "result": "BLOCKED",
+    "status": "BLOCKED",
+    "blocking_conflicts": [
+      "non-zhaoxiangyu compute process PID 16507 (user seey6/uid 1001, 382 MiB, python main.py --port 7860 --listen 0.0.0.0, elapsed 2-06:00:54)",
+      "non-zhaoxiangyu compute process PID 884366 (user zhaoshengtao/uid 1004, 2950 MiB, python sensitivity/weight_sensitivity.py ..., elapsed 25:30, 100% CPU, state Rl)",
+      "GPU obviously at full load: gpu util 98% (14 s samples avg 93%, max 99%), memory util 58%, power 292.52 W avg / 308.59 W instantaneous vs 300 W cap, temperature 85 C vs target 84 C / max operating 93 C, fan 67%, perf P2"
+    ],
+    "model_load_authorized": false
+  },
+  "evidence": {
+    "nvidia_smi": {
+      "driver_version": "580.178.04",
+      "cuda_version": "13.0",
+      "gpu": "NVIDIA RTX A6000",
+      "memory_usage": "3426MiB / 46068MiB",
+      "gpu_util": "98%",
+      "power": "293W / 300W",
+      "temp": "85C",
+      "fan": "67%",
+      "perf_state": "P2"
+    },
+    "cross_check": {
+      "method": "nvidia-smi compute-apps PID list cross-checked with `ps -o pid,user,uid,stat,etime,%cpu,%mem,args -p PID` and `/proc/PID/status` (Name/Uid/Gid/PPid) and `/proc/PID/cmdline`",
+      "pid_16507": {
+        "nvidia_smi_user_implied": "python",
+        "ps_user": "seey6",
+        "proc_uid": 1001,
+        "proc_ppid": 11981,
+        "cmdline": "python main.py --port 7860 --listen 0.0.0.0",
+        "matches": true
+      },
+      "pid_884366": {
+        "nvidia_smi_user_implied": "python",
+        "ps_user": "zhaoshengtao",
+        "proc_uid": 1004,
+        "proc_ppid": 884358,
+        "cmdline": "python sensitivity/weight_sensitivity.py --max-images 0 --max-layerwise-images 0 --max-layerwise-layers 0 --resume-layerwise --run-dir-name phase1_weight_sensitivity_kodak24",
+        "matches": true
+      }
+    }
+  },
+  "next_gate": "BLOCKED: do not load any model and do not start any GPU inference/training. Re-run this audit later; READY only when (a) zero non-zhaoxiangyu compute processes on the GPU, (b) free memory >= 20 GiB, and (c) GPU not at obvious full load (no sustained ~98% util / ~300 W / ~85 C). Owned-by-zhaoxiangyu compute processes may appear; the gate targets foreign-owner compute processes plus load headroom.",
+  "notes": [
+    "This audit is read-only: no model loaded, no inference run, no source modified, no process killed/paused.",
+    "Compute memory accounted by nvidia-smi = 382 + 2950 = 3332 MiB; plus 44 MiB graphics = 3376 MiB, consistent with the reported 3426 MiB used.",
+    "Both compute processes belong to users other than zhaoxiangyu (uid 1005); zhaoshengtao (uid 1004) is a distinct account."
+  ]
+}

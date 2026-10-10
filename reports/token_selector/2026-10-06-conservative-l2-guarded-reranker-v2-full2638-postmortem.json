@@ -1,0 +1,1224 @@
+{
+  "breakdown_by_arm": {
+    "corrected_l2_integer": {
+      "per_original_G_bin": {
+        "257-512": {
+          "accuracy": 0.7379603399433428,
+          "correct": 521,
+          "n": 706
+        },
+        "513-1024": {
+          "accuracy": 0.7477678571428571,
+          "correct": 335,
+          "n": 448
+        },
+        "97-256": {
+          "accuracy": 0.8783610755441741,
+          "correct": 686,
+          "n": 781
+        },
+        "<=96": {
+          "accuracy": 0.7272727272727273,
+          "correct": 104,
+          "n": 143
+        },
+        ">1024": {
+          "accuracy": 0.6571428571428571,
+          "correct": 368,
+          "n": 560
+        }
+      },
+      "per_source": {
+        "ADE20K": {
+          "accuracy": 0.6445497630331753,
+          "correct": 408,
+          "n": 633
+        },
+        "COCO": {
+          "accuracy": 0.7428571428571429,
+          "correct": 598,
+          "n": 805
+        },
+        "Omni3D": {
+          "accuracy": 0.84,
+          "correct": 1008,
+          "n": 1200
+        }
+      },
+      "per_source_dataset": {
+        "ADE20K Validation Set": {
+          "accuracy": 0.6445497630331753,
+          "correct": 408,
+          "n": 633
+        },
+        "COCO 2017 Validation Set": {
+          "accuracy": 0.7428571428571429,
+          "correct": 598,
+          "n": 805
+        },
+        "Omni3D_Hypersim": {
+          "accuracy": 0.7675,
+          "correct": 307,
+          "n": 400
+        },
+        "Omni3D_SUNRGBD": {
+          "accuracy": 0.9825,
+          "correct": 393,
+          "n": 400
+        },
+        "Omni3D_nuScenes": {
+          "accuracy": 0.77,
+          "correct": 308,
+          "n": 400
+        }
+      },
+      "per_task": {
+        "Count": {
+          "accuracy": 0.5177664974619289,
+          "correct": 408,
+          "n": 788
+        },
+        "Depth": {
+          "accuracy": 0.87,
+          "correct": 522,
+          "n": 600
+        },
+        "Distance": {
+          "accuracy": 0.81,
+          "correct": 486,
+          "n": 600
+        },
+        "Relation": {
+          "accuracy": 0.92,
+          "correct": 598,
+          "n": 650
+        }
+      }
+    },
+    "dense": {
+      "per_original_G_bin": {
+        "257-512": {
+          "accuracy": 0.8371104815864022,
+          "correct": 591,
+          "n": 706
+        },
+        "513-1024": {
+          "accuracy": 0.9665178571428571,
+          "correct": 433,
+          "n": 448
+        },
+        "97-256": {
+          "accuracy": 0.9052496798975672,
+          "correct": 707,
+          "n": 781
+        },
+        "<=96": {
+          "accuracy": 0.7272727272727273,
+          "correct": 104,
+          "n": 143
+        },
+        ">1024": {
+          "accuracy": 0.8125,
+          "correct": 455,
+          "n": 560
+        }
+      },
+      "per_source": {
+        "ADE20K": {
+          "accuracy": 0.7677725118483413,
+          "correct": 486,
+          "n": 633
+        },
+        "COCO": {
+          "accuracy": 0.8298136645962733,
+          "correct": 668,
+          "n": 805
+        },
+        "Omni3D": {
+          "accuracy": 0.9466666666666667,
+          "correct": 1136,
+          "n": 1200
+        }
+      },
+      "per_source_dataset": {
+        "ADE20K Validation Set": {
+          "accuracy": 0.7677725118483413,
+          "correct": 486,
+          "n": 633
+        },
+        "COCO 2017 Validation Set": {
+          "accuracy": 0.8298136645962733,
+          "correct": 668,
+          "n": 805
+        },
+        "Omni3D_Hypersim": {
+          "accuracy": 0.985,
+          "correct": 394,
+          "n": 400
+        },
+        "Omni3D_SUNRGBD": {
+          "accuracy": 0.9975,
+          "correct": 399,
+          "n": 400
+        },
+        "Omni3D_nuScenes": {
+          "accuracy": 0.8575,
+          "correct": 343,
+          "n": 400
+        }
+      },
+      "per_task": {
+        "Count": {
+          "accuracy": 0.682741116751269,
+          "correct": 538,
+          "n": 788
+        },
+        "Depth": {
+          "accuracy": 0.9816666666666667,
+          "correct": 589,
+          "n": 600
+        },
+        "Distance": {
+          "accuracy": 0.9116666666666666,
+          "correct": 547,
+          "n": 600
+        },
+        "Relation": {
+          "accuracy": 0.9476923076923077,
+          "correct": 616,
+          "n": 650
+        }
+      }
+    },
+    "new": {
+      "per_original_G_bin": {
+        "257-512": {
+          "accuracy": 0.7478753541076487,
+          "correct": 528,
+          "n": 706
+        },
+        "513-1024": {
+          "accuracy": 0.78125,
+          "correct": 350,
+          "n": 448
+        },
+        "97-256": {
+          "accuracy": 0.8834827144686299,
+          "correct": 690,
+          "n": 781
+        },
+        "<=96": {
+          "accuracy": 0.7272727272727273,
+          "correct": 104,
+          "n": 143
+        },
+        ">1024": {
+          "accuracy": 0.6892857142857143,
+          "correct": 386,
+          "n": 560
+        }
+      },
+      "per_source": {
+        "ADE20K": {
+          "accuracy": 0.6492890995260664,
+          "correct": 411,
+          "n": 633
+        },
+        "COCO": {
+          "accuracy": 0.7590062111801242,
+          "correct": 611,
+          "n": 805
+        },
+        "Omni3D": {
+          "accuracy": 0.8633333333333333,
+          "correct": 1036,
+          "n": 1200
+        }
+      },
+      "per_source_dataset": {
+        "ADE20K Validation Set": {
+          "accuracy": 0.6492890995260664,
+          "correct": 411,
+          "n": 633
+        },
+        "COCO 2017 Validation Set": {
+          "accuracy": 0.7590062111801242,
+          "correct": 611,
+          "n": 805
+        },
+        "Omni3D_Hypersim": {
+          "accuracy": 0.81,
+          "correct": 324,
+          "n": 400
+        },
+        "Omni3D_SUNRGBD": {
+          "accuracy": 0.9825,
+          "correct": 393,
+          "n": 400
+        },
+        "Omni3D_nuScenes": {
+          "accuracy": 0.7975,
+          "correct": 319,
+          "n": 400
+        }
+      },
+      "per_task": {
+        "Count": {
+          "accuracy": 0.5368020304568528,
+          "correct": 423,
+          "n": 788
+        },
+        "Depth": {
+          "accuracy": 0.895,
+          "correct": 537,
+          "n": 600
+        },
+        "Distance": {
+          "accuracy": 0.8316666666666667,
+          "correct": 499,
+          "n": 600
+        },
+        "Relation": {
+          "accuracy": 0.9215384615384615,
+          "correct": 599,
+          "n": 650
+        }
+      }
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "per_original_G_bin": {
+        "257-512": {
+          "accuracy": 0.7280453257790368,
+          "correct": 514,
+          "n": 706
+        },
+        "513-1024": {
+          "accuracy": 0.7991071428571429,
+          "correct": 358,
+          "n": 448
+        },
+        "97-256": {
+          "accuracy": 0.8604353393085787,
+          "correct": 672,
+          "n": 781
+        },
+        "<=96": {
+          "accuracy": 0.7272727272727273,
+          "correct": 104,
+          "n": 143
+        },
+        ">1024": {
+          "accuracy": 0.7,
+          "correct": 392,
+          "n": 560
+        }
+      },
+      "per_source": {
+        "ADE20K": {
+          "accuracy": 0.660347551342812,
+          "correct": 418,
+          "n": 633
+        },
+        "COCO": {
+          "accuracy": 0.7440993788819876,
+          "correct": 599,
+          "n": 805
+        },
+        "Omni3D": {
+          "accuracy": 0.8525,
+          "correct": 1023,
+          "n": 1200
+        }
+      },
+      "per_source_dataset": {
+        "ADE20K Validation Set": {
+          "accuracy": 0.660347551342812,
+          "correct": 418,
+          "n": 633
+        },
+        "COCO 2017 Validation Set": {
+          "accuracy": 0.7440993788819876,
+          "correct": 599,
+          "n": 805
+        },
+        "Omni3D_Hypersim": {
+          "accuracy": 0.83,
+          "correct": 332,
+          "n": 400
+        },
+        "Omni3D_SUNRGBD": {
+          "accuracy": 0.9275,
+          "correct": 371,
+          "n": 400
+        },
+        "Omni3D_nuScenes": {
+          "accuracy": 0.8,
+          "correct": 320,
+          "n": 400
+        }
+      },
+      "per_task": {
+        "Count": {
+          "accuracy": 0.5482233502538071,
+          "correct": 432,
+          "n": 788
+        },
+        "Depth": {
+          "accuracy": 0.8683333333333333,
+          "correct": 521,
+          "n": 600
+        },
+        "Distance": {
+          "accuracy": 0.8366666666666667,
+          "correct": 502,
+          "n": 600
+        },
+        "Relation": {
+          "accuracy": 0.9,
+          "correct": 585,
+          "n": 650
+        }
+      }
+    }
+  },
+  "bypass_breakdown": {
+    "G_max": 96,
+    "G_min": 64,
+    "by_original_G_bin": {
+      "<=96": 143
+    },
+    "by_source_dataset": {
+      "ADE20K Validation Set": 112,
+      "COCO 2017 Validation Set": 31
+    },
+    "by_task": {
+      "Count": 81,
+      "Relation": 62
+    },
+    "count": 143
+  },
+  "compressed_breakdown": {
+    "by_source_dataset": {
+      "ADE20K Validation Set": 521,
+      "COCO 2017 Validation Set": 774,
+      "Omni3D_Hypersim": 400,
+      "Omni3D_SUNRGBD": 400,
+      "Omni3D_nuScenes": 400
+    },
+    "by_task": {
+      "Count": 707,
+      "Depth": 600,
+      "Distance": 600,
+      "Relation": 588
+    },
+    "count": 2495
+  },
+  "correct_counts": {
+    "corrected_l2_integer": {
+      "correct": 2014,
+      "cv_bench_accuracy": 0.7668517264725796,
+      "n": 2638
+    },
+    "dense": {
+      "correct": 2290,
+      "cv_bench_accuracy": 0.8727298774444869,
+      "n": 2638
+    },
+    "new": {
+      "correct": 2058,
+      "cv_bench_accuracy": 0.7837404943432142,
+      "n": 2638
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "correct": 2040,
+      "cv_bench_accuracy": 0.7773617325561999,
+      "n": 2638
+    }
+  },
+  "corrected_l2_integer_vs_dense": {
+    "answer_changes": 459,
+    "by_original_G_bin": {
+      "257-512": {
+        "answer_changes": 139,
+        "n": 706,
+        "regressions": 89,
+        "repairs": 19,
+        "unchanged_correct": 502,
+        "unchanged_wrong": 96
+      },
+      "513-1024": {
+        "answer_changes": 108,
+        "n": 448,
+        "regressions": 102,
+        "repairs": 4,
+        "unchanged_correct": 331,
+        "unchanged_wrong": 11
+      },
+      "97-256": {
+        "answer_changes": 55,
+        "n": 781,
+        "regressions": 34,
+        "repairs": 13,
+        "unchanged_correct": 673,
+        "unchanged_wrong": 61
+      },
+      "<=96": {
+        "answer_changes": 0,
+        "n": 143,
+        "regressions": 0,
+        "repairs": 0,
+        "unchanged_correct": 104,
+        "unchanged_wrong": 39
+      },
+      ">1024": {
+        "answer_changes": 157,
+        "n": 560,
+        "regressions": 108,
+        "repairs": 21,
+        "unchanged_correct": 347,
+        "unchanged_wrong": 84
+      }
+    },
+    "by_source": {
+      "ADE20K": {
+        "answer_changes": 158,
+        "n": 633,
+        "regressions": 99,
+        "repairs": 21,
+        "unchanged_correct": 387,
+        "unchanged_wrong": 126
+      },
+      "COCO": {
+        "answer_changes": 143,
+        "n": 805,
+        "regressions": 91,
+        "repairs": 21,
+        "unchanged_correct": 577,
+        "unchanged_wrong": 116
+      },
+      "Omni3D": {
+        "answer_changes": 158,
+        "n": 1200,
+        "regressions": 143,
+        "repairs": 15,
+        "unchanged_correct": 993,
+        "unchanged_wrong": 49
+      }
+    },
+    "by_source_dataset": {
+      "ADE20K Validation Set": {
+        "answer_changes": 158,
+        "n": 633,
+        "regressions": 99,
+        "repairs": 21,
+        "unchanged_correct": 387,
+        "unchanged_wrong": 126
+      },
+      "COCO 2017 Validation Set": {
+        "answer_changes": 143,
+        "n": 805,
+        "regressions": 91,
+        "repairs": 21,
+        "unchanged_correct": 577,
+        "unchanged_wrong": 116
+      },
+      "Omni3D_Hypersim": {
+        "answer_changes": 87,
+        "n": 400,
+        "regressions": 87,
+        "repairs": 0,
+        "unchanged_correct": 307,
+        "unchanged_wrong": 6
+      },
+      "Omni3D_SUNRGBD": {
+        "answer_changes": 8,
+        "n": 400,
+        "regressions": 7,
+        "repairs": 1,
+        "unchanged_correct": 392,
+        "unchanged_wrong": 0
+      },
+      "Omni3D_nuScenes": {
+        "answer_changes": 63,
+        "n": 400,
+        "regressions": 49,
+        "repairs": 14,
+        "unchanged_correct": 294,
+        "unchanged_wrong": 43
+      }
+    },
+    "by_task": {
+      "Count": {
+        "answer_changes": 265,
+        "n": 788,
+        "regressions": 163,
+        "repairs": 33,
+        "unchanged_correct": 375,
+        "unchanged_wrong": 217
+      },
+      "Depth": {
+        "answer_changes": 75,
+        "n": 600,
+        "regressions": 71,
+        "repairs": 4,
+        "unchanged_correct": 518,
+        "unchanged_wrong": 7
+      },
+      "Distance": {
+        "answer_changes": 83,
+        "n": 600,
+        "regressions": 72,
+        "repairs": 11,
+        "unchanged_correct": 475,
+        "unchanged_wrong": 42
+      },
+      "Relation": {
+        "answer_changes": 36,
+        "n": 650,
+        "regressions": 27,
+        "repairs": 9,
+        "unchanged_correct": 589,
+        "unchanged_wrong": 25
+      }
+    },
+    "left": "corrected_l2_integer",
+    "net": -276,
+    "regressions": 333,
+    "repairs": 57,
+    "right": "dense",
+    "unchanged_correct": 1957,
+    "unchanged_wrong": 291
+  },
+  "date": "2026-10-06",
+  "development_only": true,
+  "do_not_tune_or_select_v3": true,
+  "full2638_role": "repeatedly observed development evidence; never an untouched confirmation set",
+  "generated_at": "2026-10-05T17:15:30.185566+00:00",
+  "is_a_gate": false,
+  "label_aware": true,
+  "limitations": [
+    "本尸检仅诊断/发展用途，使用官方答案字母计数修复/回归/不变，绝不是门，也不是精度估计。",
+    "禁止据这些标签调参、选择或声称 v3 规则；full2638 是被反复观测的发展集，永不构成未触碰确认集。",
+    "无数值 CI/p 值；不做论文、外部验证、FPGA 时延、上板部署或加速主张。",
+    "v2 相对修正整数 L2 的点估计为正且 CI 下界 >0，但未达到 90% dense 门，故最终判定 DEVELOPMENT_STOP。"
+  ],
+  "marker": "DIAGNOSTIC_DEVELOPMENT_ONLY",
+  "parse_failures": {
+    "corrected_l2_integer": {
+      "by_source_dataset": {
+        "ADE20K Validation Set": 9,
+        "COCO 2017 Validation Set": 33
+      },
+      "by_task": {
+        "Count": 42
+      },
+      "count": 42,
+      "parse_rate": 0.9840788476118272,
+      "sample_ids_prefix": [
+        "71",
+        "78",
+        "91",
+        "105",
+        "125",
+        "145",
+        "174",
+        "303",
+        "306",
+        "635",
+        "637",
+        "649",
+        "651",
+        "663",
+        "667",
+        "672",
+        "673",
+        "689",
+        "694",
+        "695"
+      ]
+    },
+    "dense": {
+      "by_source_dataset": {
+        "ADE20K Validation Set": 13,
+        "COCO 2017 Validation Set": 27
+      },
+      "by_task": {
+        "Count": 40
+      },
+      "count": 40,
+      "parse_rate": 0.9848369977255497,
+      "sample_ids_prefix": [
+        "71",
+        "78",
+        "91",
+        "125",
+        "145",
+        "157",
+        "174",
+        "217",
+        "236",
+        "270",
+        "303",
+        "306",
+        "310",
+        "635",
+        "637",
+        "643",
+        "649",
+        "651",
+        "663",
+        "672"
+      ]
+    },
+    "new": {
+      "by_source_dataset": {
+        "ADE20K Validation Set": 11,
+        "COCO 2017 Validation Set": 32
+      },
+      "by_task": {
+        "Count": 43
+      },
+      "count": 43,
+      "parse_rate": 0.9836997725549659,
+      "sample_ids_prefix": [
+        "1",
+        "71",
+        "78",
+        "79",
+        "91",
+        "105",
+        "145",
+        "174",
+        "241",
+        "303",
+        "306",
+        "635",
+        "637",
+        "649",
+        "651",
+        "663",
+        "667",
+        "672",
+        "673",
+        "686"
+      ]
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "by_source_dataset": {
+        "ADE20K Validation Set": 9,
+        "COCO 2017 Validation Set": 33
+      },
+      "by_task": {
+        "Count": 42
+      },
+      "count": 42,
+      "parse_rate": 0.9840788476118272,
+      "sample_ids_prefix": [
+        "1",
+        "71",
+        "78",
+        "91",
+        "125",
+        "145",
+        "174",
+        "303",
+        "306",
+        "635",
+        "637",
+        "643",
+        "649",
+        "651",
+        "663",
+        "667",
+        "672",
+        "673",
+        "686",
+        "689"
+      ]
+    }
+  },
+  "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+  "prompt_fusion_vs_corrected_l2_integer": {
+    "answer_changes": 484,
+    "by_original_G_bin": {
+      "257-512": {
+        "answer_changes": 156,
+        "n": 706,
+        "regressions": 63,
+        "repairs": 56,
+        "unchanged_correct": 458,
+        "unchanged_wrong": 129
+      },
+      "513-1024": {
+        "answer_changes": 111,
+        "n": 448,
+        "regressions": 42,
+        "repairs": 65,
+        "unchanged_correct": 293,
+        "unchanged_wrong": 48
+      },
+      "97-256": {
+        "answer_changes": 84,
+        "n": 781,
+        "regressions": 45,
+        "repairs": 31,
+        "unchanged_correct": 641,
+        "unchanged_wrong": 64
+      },
+      "<=96": {
+        "answer_changes": 0,
+        "n": 143,
+        "regressions": 0,
+        "repairs": 0,
+        "unchanged_correct": 104,
+        "unchanged_wrong": 39
+      },
+      ">1024": {
+        "answer_changes": 133,
+        "n": 560,
+        "regressions": 44,
+        "repairs": 68,
+        "unchanged_correct": 324,
+        "unchanged_wrong": 124
+      }
+    },
+    "by_source": {
+      "ADE20K": {
+        "answer_changes": 112,
+        "n": 633,
+        "regressions": 34,
+        "repairs": 44,
+        "unchanged_correct": 374,
+        "unchanged_wrong": 181
+      },
+      "COCO": {
+        "answer_changes": 157,
+        "n": 805,
+        "regressions": 60,
+        "repairs": 61,
+        "unchanged_correct": 538,
+        "unchanged_wrong": 146
+      },
+      "Omni3D": {
+        "answer_changes": 215,
+        "n": 1200,
+        "regressions": 100,
+        "repairs": 115,
+        "unchanged_correct": 908,
+        "unchanged_wrong": 77
+      }
+    },
+    "by_source_dataset": {
+      "ADE20K Validation Set": {
+        "answer_changes": 112,
+        "n": 633,
+        "regressions": 34,
+        "repairs": 44,
+        "unchanged_correct": 374,
+        "unchanged_wrong": 181
+      },
+      "COCO 2017 Validation Set": {
+        "answer_changes": 157,
+        "n": 805,
+        "regressions": 60,
+        "repairs": 61,
+        "unchanged_correct": 538,
+        "unchanged_wrong": 146
+      },
+      "Omni3D_Hypersim": {
+        "answer_changes": 97,
+        "n": 400,
+        "regressions": 36,
+        "repairs": 61,
+        "unchanged_correct": 271,
+        "unchanged_wrong": 32
+      },
+      "Omni3D_SUNRGBD": {
+        "answer_changes": 34,
+        "n": 400,
+        "regressions": 28,
+        "repairs": 6,
+        "unchanged_correct": 365,
+        "unchanged_wrong": 1
+      },
+      "Omni3D_nuScenes": {
+        "answer_changes": 84,
+        "n": 400,
+        "regressions": 36,
+        "repairs": 48,
+        "unchanged_correct": 272,
+        "unchanged_wrong": 44
+      }
+    },
+    "by_task": {
+      "Count": {
+        "answer_changes": 214,
+        "n": 788,
+        "regressions": 60,
+        "repairs": 84,
+        "unchanged_correct": 348,
+        "unchanged_wrong": 296
+      },
+      "Depth": {
+        "answer_changes": 99,
+        "n": 600,
+        "regressions": 50,
+        "repairs": 49,
+        "unchanged_correct": 472,
+        "unchanged_wrong": 29
+      },
+      "Distance": {
+        "answer_changes": 116,
+        "n": 600,
+        "regressions": 50,
+        "repairs": 66,
+        "unchanged_correct": 436,
+        "unchanged_wrong": 48
+      },
+      "Relation": {
+        "answer_changes": 55,
+        "n": 650,
+        "regressions": 34,
+        "repairs": 21,
+        "unchanged_correct": 564,
+        "unchanged_wrong": 31
+      }
+    },
+    "left": "prompt_plus_corrected_l2_integer",
+    "net": 26,
+    "regressions": 194,
+    "repairs": 220,
+    "right": "corrected_l2_integer",
+    "unchanged_correct": 1820,
+    "unchanged_wrong": 404
+  },
+  "report": "2026-10-06-conservative-l2-guarded-reranker-v2-full2638-postmortem",
+  "swap_count_breakdown": {
+    "bypass_count": 143,
+    "compressed_count": 2495,
+    "compressed_positive_swap": 2495,
+    "compressed_zero_swap": 0,
+    "histogram": {
+      "0": 143,
+      "10": 9,
+      "11": 11,
+      "12": 10,
+      "13": 18,
+      "14": 17,
+      "15": 11,
+      "16": 2406,
+      "6": 1,
+      "7": 2,
+      "8": 5,
+      "9": 5
+    }
+  },
+  "v2_vs_corrected_l2_integer": {
+    "answer_changes": 223,
+    "by_original_G_bin": {
+      "257-512": {
+        "answer_changes": 70,
+        "n": 706,
+        "regressions": 22,
+        "repairs": 29,
+        "unchanged_correct": 499,
+        "unchanged_wrong": 156
+      },
+      "513-1024": {
+        "answer_changes": 56,
+        "n": 448,
+        "regressions": 19,
+        "repairs": 34,
+        "unchanged_correct": 316,
+        "unchanged_wrong": 79
+      },
+      "97-256": {
+        "answer_changes": 39,
+        "n": 781,
+        "regressions": 15,
+        "repairs": 19,
+        "unchanged_correct": 671,
+        "unchanged_wrong": 76
+      },
+      "<=96": {
+        "answer_changes": 0,
+        "n": 143,
+        "regressions": 0,
+        "repairs": 0,
+        "unchanged_correct": 104,
+        "unchanged_wrong": 39
+      },
+      ">1024": {
+        "answer_changes": 58,
+        "n": 560,
+        "regressions": 17,
+        "repairs": 35,
+        "unchanged_correct": 351,
+        "unchanged_wrong": 157
+      }
+    },
+    "by_source": {
+      "ADE20K": {
+        "answer_changes": 63,
+        "n": 633,
+        "regressions": 23,
+        "repairs": 26,
+        "unchanged_correct": 385,
+        "unchanged_wrong": 199
+      },
+      "COCO": {
+        "answer_changes": 66,
+        "n": 805,
+        "regressions": 17,
+        "repairs": 30,
+        "unchanged_correct": 581,
+        "unchanged_wrong": 177
+      },
+      "Omni3D": {
+        "answer_changes": 94,
+        "n": 1200,
+        "regressions": 33,
+        "repairs": 61,
+        "unchanged_correct": 975,
+        "unchanged_wrong": 131
+      }
+    },
+    "by_source_dataset": {
+      "ADE20K Validation Set": {
+        "answer_changes": 63,
+        "n": 633,
+        "regressions": 23,
+        "repairs": 26,
+        "unchanged_correct": 385,
+        "unchanged_wrong": 199
+      },
+      "COCO 2017 Validation Set": {
+        "answer_changes": 66,
+        "n": 805,
+        "regressions": 17,
+        "repairs": 30,
+        "unchanged_correct": 581,
+        "unchanged_wrong": 177
+      },
+      "Omni3D_Hypersim": {
+        "answer_changes": 49,
+        "n": 400,
+        "regressions": 16,
+        "repairs": 33,
+        "unchanged_correct": 291,
+        "unchanged_wrong": 60
+      },
+      "Omni3D_SUNRGBD": {
+        "answer_changes": 10,
+        "n": 400,
+        "regressions": 5,
+        "repairs": 5,
+        "unchanged_correct": 388,
+        "unchanged_wrong": 2
+      },
+      "Omni3D_nuScenes": {
+        "answer_changes": 35,
+        "n": 400,
+        "regressions": 12,
+        "repairs": 23,
+        "unchanged_correct": 296,
+        "unchanged_wrong": 69
+      }
+    },
+    "by_task": {
+      "Count": {
+        "answer_changes": 106,
+        "n": 788,
+        "regressions": 29,
+        "repairs": 44,
+        "unchanged_correct": 379,
+        "unchanged_wrong": 336
+      },
+      "Depth": {
+        "answer_changes": 47,
+        "n": 600,
+        "regressions": 16,
+        "repairs": 31,
+        "unchanged_correct": 506,
+        "unchanged_wrong": 47
+      },
+      "Distance": {
+        "answer_changes": 47,
+        "n": 600,
+        "regressions": 17,
+        "repairs": 30,
+        "unchanged_correct": 469,
+        "unchanged_wrong": 84
+      },
+      "Relation": {
+        "answer_changes": 23,
+        "n": 650,
+        "regressions": 11,
+        "repairs": 12,
+        "unchanged_correct": 587,
+        "unchanged_wrong": 40
+      }
+    },
+    "left": "new",
+    "net": 44,
+    "regressions": 73,
+    "repairs": 117,
+    "right": "corrected_l2_integer",
+    "unchanged_correct": 1941,
+    "unchanged_wrong": 507
+  },
+  "v2_vs_dense": {
+    "answer_changes": 409,
+    "by_original_G_bin": {
+      "257-512": {
+        "answer_changes": 126,
+        "n": 706,
+        "regressions": 80,
+        "repairs": 17,
+        "unchanged_correct": 511,
+        "unchanged_wrong": 98
+      },
+      "513-1024": {
+        "answer_changes": 91,
+        "n": 448,
+        "regressions": 86,
+        "repairs": 3,
+        "unchanged_correct": 347,
+        "unchanged_wrong": 12
+      },
+      "97-256": {
+        "answer_changes": 46,
+        "n": 781,
+        "regressions": 27,
+        "repairs": 10,
+        "unchanged_correct": 680,
+        "unchanged_wrong": 64
+      },
+      "<=96": {
+        "answer_changes": 0,
+        "n": 143,
+        "regressions": 0,
+        "repairs": 0,
+        "unchanged_correct": 104,
+        "unchanged_wrong": 39
+      },
+      ">1024": {
+        "answer_changes": 146,
+        "n": 560,
+        "regressions": 94,
+        "repairs": 25,
+        "unchanged_correct": 361,
+        "unchanged_wrong": 80
+      }
+    },
+    "by_source": {
+      "ADE20K": {
+        "answer_changes": 154,
+        "n": 633,
+        "regressions": 96,
+        "repairs": 21,
+        "unchanged_correct": 390,
+        "unchanged_wrong": 126
+      },
+      "COCO": {
+        "answer_changes": 127,
+        "n": 805,
+        "regressions": 77,
+        "repairs": 20,
+        "unchanged_correct": 591,
+        "unchanged_wrong": 117
+      },
+      "Omni3D": {
+        "answer_changes": 128,
+        "n": 1200,
+        "regressions": 114,
+        "repairs": 14,
+        "unchanged_correct": 1022,
+        "unchanged_wrong": 50
+      }
+    },
+    "by_source_dataset": {
+      "ADE20K Validation Set": {
+        "answer_changes": 154,
+        "n": 633,
+        "regressions": 96,
+        "repairs": 21,
+        "unchanged_correct": 390,
+        "unchanged_wrong": 126
+      },
+      "COCO 2017 Validation Set": {
+        "answer_changes": 127,
+        "n": 805,
+        "regressions": 77,
+        "repairs": 20,
+        "unchanged_correct": 591,
+        "unchanged_wrong": 117
+      },
+      "Omni3D_Hypersim": {
+        "answer_changes": 70,
+        "n": 400,
+        "regressions": 70,
+        "repairs": 0,
+        "unchanged_correct": 324,
+        "unchanged_wrong": 6
+      },
+      "Omni3D_SUNRGBD": {
+        "answer_changes": 6,
+        "n": 400,
+        "regressions": 6,
+        "repairs": 0,
+        "unchanged_correct": 393,
+        "unchanged_wrong": 1
+      },
+      "Omni3D_nuScenes": {
+        "answer_changes": 52,
+        "n": 400,
+        "regressions": 38,
+        "repairs": 14,
+        "unchanged_correct": 305,
+        "unchanged_wrong": 43
+      }
+    },
+    "by_task": {
+      "Count": {
+        "answer_changes": 248,
+        "n": 788,
+        "regressions": 148,
+        "repairs": 33,
+        "unchanged_correct": 390,
+        "unchanged_wrong": 217
+      },
+      "Depth": {
+        "answer_changes": 56,
+        "n": 600,
+        "regressions": 54,
+        "repairs": 2,
+        "unchanged_correct": 535,
+        "unchanged_wrong": 9
+      },
+      "Distance": {
+        "answer_changes": 72,
+        "n": 600,
+        "regressions": 60,
+        "repairs": 12,
+        "unchanged_correct": 487,
+        "unchanged_wrong": 41
+      },
+      "Relation": {
+        "answer_changes": 33,
+        "n": 650,
+        "regressions": 25,
+        "repairs": 8,
+        "unchanged_correct": 591,
+        "unchanged_wrong": 26
+      }
+    },
+    "left": "new",
+    "net": -232,
+    "regressions": 287,
+    "repairs": 55,
+    "right": "dense",
+    "unchanged_correct": 2003,
+    "unchanged_wrong": 293
+  }
+}

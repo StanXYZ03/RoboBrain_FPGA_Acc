@@ -1,0 +1,242 @@
+{
+  "format": "heterogeneous-selector-break-even-config-v2",
+  "date": "2026-09-28",
+  "scope": "Jetson Xavier NX + ZCU102 fixed-point token selector break-even model (model only; no GPU, no board, no network, no measurement claims)",
+  "boundary": "B1",
+  "baseline_confusion_fix": {
+    "superseded": "the v1 J_ONLY baseline, which already included the Jetson software selector and the K-token post-B1 vision, so J_F_J shared that vision with the baseline and a post-B1 saving could not offset the FPGA round trip; and the v1 dense comparison, for which score generation was treated as cancelling",
+    "fix": "split the baseline into J_DENSE (no score, no selector, dense post-B1 vision) and J_PRUNED (Jetson score + software selector + K-token post-B1 vision) and report two strictly separated requirement sets, A algorithm benefit vs J_DENSE and B deployment choice vs J_PRUNED",
+    "consequence": "J_F_J vs J_PRUNED contains no vision saving term at all (T_vision_pruned cancels exactly); J_F_J vs J_DENSE keeps the T_score symbolic term; no full break-even in milliseconds relative to the old J_ONLY may be quoted"
+  },
+  "byte_contract": {
+    "source_module": "evaluation/hardware_regular_selector_fixedpoint.py",
+    "source_function": "fpga_transfer_layout",
+    "source_config": "configs/hardware_regular_token_selector.json",
+    "input_tokens": "int8[G,4,1024] = G*4096 B (G dense groups, each 4 merge tokens of 1024 features)",
+    "input_score": "uint16[G] = G*2 B (unsigned Q0.15 combined score produced on the Jetson; not generated inside the selector IP)",
+    "dense_input_formula": "G*4096 + G*2",
+    "output_layout": "5 segments (tokens_int8 K*4096 B + group_index_uint16 + source_type_uint8 + region_id_uint8 + valid_uint8), each segment 64 B aligned, total 64 B aligned",
+    "output_formula": "fpga_transfer_layout(K).total_bytes",
+    "alignment_bytes": 64,
+    "no_padding_of_tokens": true
+  },
+  "prior_art_audit": {
+    "audited": [
+      "configs/platform_agnostic_benefit_model.json",
+      "evaluation/heterogeneous_benefit_model.py",
+      "evaluation/tests/test_heterogeneous_benefit_model.py",
+      "reports/2026-09-10-platform-agnostic-benefit-model.{md,json,csv}",
+      "configs/hardware_regular_token_selector.json",
+      "evaluation/hardware_regular_selector_fixedpoint.py"
+    ],
+    "reused": [
+      "decimal serialization_ms convention (bytes*8/(gbps*1e9*eff)) and zero-overlap serialization lower bound",
+      "link + fixed-overhead sensitivity parameter style, and the 'sensitivity input, not a measurement' boundary",
+      "frozen 5-segment 64 B-aligned byte contract and the packed int8[G,4,1024] token grouping"
+    ],
+    "not_inherited": [
+      "the 2026-09-10 EXTERNAL_SELECTOR_ROUND_TRIP_REJECT verdict: it predates the fixed-point selector byte contract and the v4 csynth/cosim/OOC cycle evidence, used A6000 BF16 development-oracle stage timings, and assumed zero fixed link overhead; it is a stale conclusion, not a reused definition",
+      "the old cut-point oracle stage medians, which are not Jetson Xavier NX measurements"
+    ],
+    "left_untouched": [
+      "evaluation/heterogeneous_benefit_model.py and its tests",
+      "all selector RTL/HLS sources and the frozen golden reference"
+    ]
+  },
+  "grid_group_counts": [256, 576, 1024],
+  "grid_shapes": [[16, 16], [24, 24], [32, 32]],
+  "budgets": [48, 64, 96],
+  "selector_clock_hz": 200000000,
+  "selector_evidence": {
+    "csynth_summary": "artifacts/token_selector/2026-09-28-selector-csynth-v4/summary.json",
+    "csynth_worst_cycles_json_path": ["latency", "worst_cycles"],
+    "cosim_summary": "artifacts/token_selector/2026-09-28-selector-cosim-v4/summary.json",
+    "ooc_summary": "artifacts/token_selector/2026-09-28-selector-ooc-v4/summary.json",
+    "reports": [
+      "reports/token_selector/2026-09-28-selector-csynth-v4.md",
+      "reports/token_selector/2026-09-28-selector-cosim-v4.md",
+      "reports/token_selector/2026-09-28-selector-ooc-v4.md"
+    ],
+    "evidence_note": "selector cycle counts are read from the v4 csynth/cosim artifacts at model run time, never hand-filled; cosim verifies function only, OOC route WNS +0.689 ns at 5.000 ns is the timing evidence for the 200 MHz conversion, and neither is a full-system or on-board measurement"
+  },
+  "score_generation": {
+    "term_name": "T_score",
+    "device": "jetson",
+    "inside_selector_ip": false,
+    "counted_in_fpga_selector_cycles": false,
+    "measured": false,
+    "note": "Wt/Wv score generation stays on the Jetson; it is absent from J_DENSE, present in J_PRUNED/J_F_J/J_F_CONTINUE, and therefore does NOT cancel against the dense baseline; it cancels only in J_F_J vs J_PRUNED"
+  },
+  "unmeasured_terms": {
+    "T_score": {
+      "device": "jetson",
+      "measured": false,
+      "definition": "Wt/Wv score generation for the dense B1 groups",
+      "appears_in": ["J_PRUNED", "J_F_J", "J_F_CONTINUE"]
+    },
+    "T_sel_sw": {
+      "device": "jetson",
+      "measured": false,
+      "definition": "software token selector on the Jetson",
+      "appears_in": ["J_PRUNED"]
+    },
+    "T_vision_dense": {
+      "device": "jetson",
+      "measured": false,
+      "definition": "dense post-B1 vision on the Jetson",
+      "appears_in": ["J_DENSE"]
+    },
+    "T_vision_pruned": {
+      "device": "jetson",
+      "measured": false,
+      "definition": "K-token post-B1 vision on the Jetson; identical in J_PRUNED and J_F_J",
+      "appears_in": ["J_PRUNED", "J_F_J"]
+    },
+    "T_fpga_downstream": {
+      "device": "fpga",
+      "measured": false,
+      "definition": "real FPGA downstream core after the selector",
+      "appears_in": ["J_F_CONTINUE"]
+    }
+  },
+  "symbolic_missing_terms": [
+    "T_score",
+    "T_sel_sw",
+    "T_vision_dense",
+    "T_vision_pruned",
+    "T_fpga_downstream"
+  ],
+  "symbol_legend": {
+    "T_vision_dense": "dense post-B1 Jetson vision; total latency of J_DENSE",
+    "T_vision_pruned": "K-token post-B1 Jetson vision; identical in J_PRUNED and J_F_J",
+    "T_score": "Jetson Wt/Wv score generation; absent from J_DENSE",
+    "T_sel_sw": "Jetson software selector; present only in J_PRUNED",
+    "T_sel_fpga": "FPGA selector latency = selector_cycles / 200 MHz",
+    "T_link_dense(G)": "one-way serialization of the dense G-group send (G*4096 + G*2 bytes)",
+    "T_link_return(K)": "one-way serialization of the selected K-token return (5-segment 64 B-aligned layout)",
+    "F": "one fixed software+DMA overhead per link leg",
+    "S_prune": "T_vision_dense - T_vision_pruned (Jetson post-B1 vision saved by pruning)"
+  },
+  "placements": {
+    "J_DENSE": {
+      "description": "no score, no selector; dense post-B1 vision on the Jetson",
+      "uses_score": false,
+      "uses_software_selector": false,
+      "fpga_selector": false,
+      "return_to_jetson": false,
+      "link_legs": [],
+      "fixed_overheads": 0,
+      "total_ms": "T_vision_dense",
+      "baseline_role": "dense algorithm baseline for comparison A",
+      "symbolic_missing_terms": ["T_vision_dense"]
+    },
+    "J_PRUNED": {
+      "description": "Jetson score + software selector + K-token post-B1 vision on the Jetson",
+      "uses_score": true,
+      "uses_software_selector": true,
+      "fpga_selector": false,
+      "return_to_jetson": false,
+      "link_legs": [],
+      "fixed_overheads": 0,
+      "total_ms": "T_score + T_sel_sw + T_vision_pruned",
+      "baseline_role": "pruned deployment baseline for comparison B and candidate for comparison A",
+      "symbolic_missing_terms": ["T_score", "T_sel_sw", "T_vision_pruned"]
+    },
+    "J_F_J": {
+      "description": "Jetson score + FPGA selector round trip + the same K-token Jetson post-B1 vision",
+      "uses_score": true,
+      "uses_software_selector": false,
+      "fpga_selector": true,
+      "return_to_jetson": true,
+      "link_legs": ["dense_in(G)", "selected_out(K)"],
+      "fixed_overheads": 2,
+      "total_ms": "T_score + T_link_dense + T_sel_fpga + T_link_return + 2F + T_vision_pruned",
+      "baseline_role": "offload candidate; its K-token vision cancels exactly against J_PRUNED",
+      "symbolic_missing_terms": ["T_score", "T_vision_pruned"]
+    },
+    "J_F_CONTINUE": {
+      "description": "Jetson score + send to FPGA selector + real FPGA downstream core; no return to the Jetson",
+      "uses_score": true,
+      "uses_software_selector": false,
+      "fpga_selector": true,
+      "return_to_jetson": false,
+      "link_legs": ["dense_in(G)"],
+      "fixed_overheads": 1,
+      "total_ms": "T_score + T_link_dense + T_sel_fpga + F + T_fpga_downstream",
+      "baseline_role": "offload candidate; requires a real FPGA downstream core",
+      "requires_real_downstream_fpga_core": true,
+      "symbolic_missing_terms": ["T_score", "T_fpga_downstream"]
+    }
+  },
+  "comparison_A_algorithm_vs_J_DENSE": {
+    "baseline": "J_DENSE",
+    "question": "does pruning or the heterogeneous selector beat dense post-B1 vision on the Jetson?",
+    "requirements": {
+      "J_PRUNED": {
+        "requirement": "S_prune > T_score + T_sel_sw",
+        "known_lower_bound": "0",
+        "symbolic_missing_terms": ["T_score", "T_sel_sw", "T_vision_dense", "T_vision_pruned"]
+      },
+      "J_F_J": {
+        "requirement": "S_prune > T_score + T_link_dense + T_sel_fpga + T_link_return + 2F",
+        "known_lower_bound": "T_link_dense + T_sel_fpga + T_link_return + 2F",
+        "symbolic_missing_terms": ["T_score", "T_vision_dense", "T_vision_pruned"]
+      },
+      "J_F_CONTINUE": {
+        "requirement": "T_vision_dense - T_fpga_downstream > T_score + T_link_dense + T_sel_fpga + F",
+        "known_lower_bound": "T_link_dense + T_sel_fpga + F",
+        "symbolic_missing_terms": ["T_score", "T_vision_dense", "T_fpga_downstream"]
+      }
+    }
+  },
+  "comparison_B_deployment_vs_J_PRUNED": {
+    "baseline": "J_PRUNED",
+    "question": "given that pruning is already the deployment, does moving the selector to the FPGA help?",
+    "requirements": {
+      "J_F_J": {
+        "requirement": "T_sel_sw > T_link_dense + T_sel_fpga + T_link_return + 2F",
+        "known_lower_bound": "T_link_dense + T_sel_fpga + T_link_return + 2F",
+        "vision_terms_cancelled": true,
+        "cancelled_terms": ["T_vision_pruned", "T_score"],
+        "symbolic_missing_terms": ["T_sel_sw"],
+        "exact_threshold_in_scanned_terms": true
+      },
+      "J_F_CONTINUE": {
+        "requirement": "T_sel_sw + T_vision_pruned > T_link_dense + T_sel_fpga + F + T_fpga_downstream",
+        "known_lower_bound": "T_link_dense + T_sel_fpga + F",
+        "vision_terms_cancelled": false,
+        "symbolic_missing_terms": ["T_sel_sw", "T_vision_pruned", "T_fpga_downstream"],
+        "exact_threshold_in_scanned_terms": false
+      }
+    }
+  },
+  "break_even_definition": {
+    "note": "no full break-even in milliseconds is reported while T_score, T_sel_sw, T_vision_dense, T_vision_pruned and T_fpga_downstream are unmeasured; the tables report only the communication + FPGA-selector known part and state the remaining terms symbolically",
+    "J_F_J_vs_J_DENSE": "S_prune > T_score + T_link_dense + T_sel_fpga + T_link_return + 2F",
+    "J_F_CONTINUE_vs_J_DENSE": "T_vision_dense - T_fpga_downstream > T_score + T_link_dense + T_sel_fpga + F",
+    "J_F_J_vs_J_PRUNED": "T_sel_sw > T_link_dense + T_sel_fpga + T_link_return + 2F",
+    "J_F_CONTINUE_vs_J_PRUNED": "T_sel_sw + T_vision_pruned > T_link_dense + T_sel_fpga + F + T_fpga_downstream"
+  },
+  "link_profiles": {
+    "effective_throughput_MBps": [100, 250, 500, 1000, 2000, 3000],
+    "fixed_software_and_dma_overhead_ms": [0.1, 0.5, 1.0],
+    "model": "one-way pure serialization time = bytes / (throughput_MBps * 1000); each link leg that is used additionally carries exactly one fixed software+DMA overhead, no overlap with compute",
+    "note": "parameter scan only; these are not Xavier/ZCU102 measurements"
+  },
+  "selector_cycle_scenarios": [
+    {"id": "csynth_worst_bound", "source": "csynth latency.worst_cycles", "applies_to": "all G/K; static loop-bound worst case, conservative"},
+    {"id": "cosim_observed_max", "source": "cosim latency_cycles.max", "applies_to": "observed maximum over the 3 functional cosim cases (32x32/K96); not a per-G proof"},
+    {"id": "cosim_observed_avg", "source": "cosim latency_cycles.avg", "applies_to": "observed average over the 3 functional cosim cases; sensitivity only"},
+    {"id": "cosim_observed_min", "source": "cosim latency_cycles.min", "applies_to": "observed minimum (4x4/K48); optimistic, not applicable to G>=256"}
+  ],
+  "warnings": [
+    "No GPU was used, no ZCU102 access, no board measurements, no network.",
+    "This is a parameterized requirement model, not a measured Jetson Xavier NX result.",
+    "T_score, T_sel_sw, T_vision_dense, T_vision_pruned and T_fpga_downstream are unmeasured; only the communication + FPGA-selector part is numeric.",
+    "The reported millisecond values are lower bounds on the required term and must be quoted together with '+T_score' or 'T_sel_sw must exceed X', never as a full break-even.",
+    "The selector cycle counts come from v4 csynth (pre-route static bound) and functional C/RTL cosim; cosim does not prove 200 MHz.",
+    "The 200 MHz conversion is supported only by the separate OOC place-and-route timing report (WNS +0.689 ns at 5.000 ns), not by an on-board clock measurement.",
+    "Effective throughput and fixed software+DMA overhead are scanned assumptions, not measurements.",
+    "No current speedup is claimed."
+  ]
+}

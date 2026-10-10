@@ -1,0 +1,88 @@
+{
+  "status": "CURRENT_K96_NEAR_QUALITY_GATE_BUT_NO_NET_1GBE_BENEFIT",
+  "scope": "VSR zero-shot dev only; not external test confirmation",
+  "quality": {
+    "dense_correct": 269,
+    "dense_accuracy": 0.7911764705882353,
+    "v2_k96_correct": 233,
+    "v2_k96_accuracy": 0.6852941176470588,
+    "v2_k96_relative_to_dense": 0.8661710037174721,
+    "permissive_development_screen": 0.88,
+    "minimum_correct_for_screen": 237,
+    "correct_example_deficit": 4,
+    "v2_k96_minus_l2_k96": {
+      "observed_difference": 0.020588235294117647,
+      "ci_95_lower": -0.008823529411764706,
+      "ci_95_upper": 0.052941176470588235,
+      "seed": 20261010,
+      "repetitions": 5000
+    },
+    "v2_k96_l2_transitions": {
+      "l2_wrong_v2_correct": 17,
+      "l2_correct_v2_wrong": 10
+    },
+    "v2_k144_relative_to_dense": 0.9330855018587362,
+    "v2_k144_hls_compatible": false,
+    "v2_k144_hls_incompatibility": "accepted compact HLS interface requires K<=96"
+  },
+  "latency": {
+    "scope": "pure analytic projection; no Jetson, ZCU102, link, bitstream, or board measurement",
+    "accepted_hls_budget_limit": 96,
+    "sample_count": 340,
+    "mean_group_count": 281.3911764705882,
+    "identity_bypass_count": 0,
+    "mean_transfer_bytes": 1834642.8235294118,
+    "mean_fpga_compute_ms": 4.142683451470589,
+    "mean_transfer_1gbe_110MBps_ms": 16.67857112299465,
+    "mean_transfer_10gbe_assumed_1p1GBps_ms": 1.6678571122994652,
+    "projected_model_1gbe_ms": 91.55818332977313,
+    "projected_model_10gbe_ms": 76.54746931907795,
+    "projected_application_1gbe_ms": 98.43527978660478,
+    "projected_application_10gbe_ms": 83.4245657759096,
+    "assumptions": [
+      "Wv remains resident on FPGA and is not transferred per image.",
+      "Jetson-to-FPGA, FPGA compute, and FPGA-to-Jetson execute serially without overlap.",
+      "1 GbE uses 110 MB/s effective payload; 10 GbE uses an unmeasured 1.1 GB/s assumption.",
+      "Accepted compact HLS formula and 200 MHz target are synthesis-derived estimates, not board measurements."
+    ],
+    "dense_model_inference_ms": 88.97827205604271,
+    "speedup_vs_dense_model_1gbe": 0.9718221661908896,
+    "speedup_vs_dense_model_10gbe_assumed": 1.162393386058899,
+    "zero_transfer_projected_model_ms": 74.87961220677849,
+    "zero_transfer_speedup_vs_dense_model": 1.1882843598379098
+  },
+  "decision": {
+    "current_k96_promote": false,
+    "reason": "K96 misses the permissive quality screen by four correct examples and projected 1 GbE inference is slower than Dense.",
+    "extend_k144_hardware_now": false,
+    "reason_k144": "K144 passes the quality screen, but v2-L2 improvement is not statistically established and the accepted HLS core does not support K144.",
+    "next_primary_work": "Improve relation-preserving, prompt-conditioned K96 selection on VSR zero-shot train while keeping the existing K96 hardware contract fixed.",
+    "next_hardware_work": "Do not widen K yet; first make K96 quality pass. In parallel, treat inter-board transfer as a first-class architecture constraint and prefer PCIe/shared-memory or move the cut point to avoid a 1 GbE round trip."
+  },
+  "inputs": {
+    "summary": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-10-vsr-zeroshot-dev-budget-curve.json",
+      "sha256": "ace21d88a2f978febfc5a5ec05420fb823f733855f37753701fc0910649273d1"
+    },
+    "dense": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-10-vsr-zeroshot-dev-budget-curve/dense_edge576.jsonl",
+      "sha256": "3a75e7a1db03d77ff2b523786f844c4b282be2f942daad36e73ebbe307987299"
+    },
+    "l2_k96": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-10-vsr-zeroshot-dev-budget-curve/corrected_l2_integer_b1_k96.jsonl",
+      "sha256": "309762225a0abb85330a78fb92ee8bcba740422f6fecd1233acc329e89e0f572"
+    },
+    "v2_k96": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-10-vsr-zeroshot-dev-budget-curve/v2_edge576_b1_k96.jsonl",
+      "sha256": "67fcffec0fb90d9bfce5e8998d4619d30bda2b4a2643bb3eb7872b5961430859"
+    },
+    "v2_k144": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-10-vsr-zeroshot-dev-budget-curve/v2_edge576_b1_k144.jsonl",
+      "sha256": "3e51069aed6b562b0103be686cc4cae7d2e45e382d59e3d6f4404b0a2c04e528"
+    },
+    "accepted_hls_report": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-integer-selector-compact-interface-hls.json",
+      "sha256": "8871aebd587793466520bb6541d54f9910fa2b93614a34e24366f55ef5ce85e2"
+    }
+  }
+}

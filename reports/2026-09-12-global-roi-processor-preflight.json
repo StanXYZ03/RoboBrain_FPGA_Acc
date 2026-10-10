@@ -1,0 +1,291 @@
+{
+  "status": "PROCESSOR_MULTI_IMAGE_CONTRACT_PASS",
+  "scope": "CPU processor and coordinate-contract preflight only; no model forward, MRoPE, DeepStack, accuracy or latency claim",
+  "model": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+  "manifest": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/dac_spatial_l2res_blind.jsonl",
+  "global_long_edge": 256,
+  "roi_long_edge": 384,
+  "oracle_margin": 0.5,
+  "records": [
+    {
+      "sample_id": "coco-val-000000031248-117505-grounding",
+      "task": "grounding",
+      "source_image": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/coco2017/val2017-original/000000031248.jpg",
+      "source_is_original_resolution": true,
+      "source_size": [
+        500,
+        333
+      ],
+      "global_prepared_size": [
+        256,
+        170
+      ],
+      "roi_source_size": [
+        160,
+        71
+      ],
+      "roi_prepared_size": [
+        160,
+        71
+      ],
+      "requested_crop_box_1000": [
+        0.0,
+        787.147147147147,
+        319.45000000000005,
+        1000.0
+      ],
+      "effective_crop_box_1000": [
+        0.0,
+        786.7867867867868,
+        320.0,
+        1000.0
+      ],
+      "pixel_crop_box": [
+        0,
+        262,
+        160,
+        333
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          10,
+          16
+        ],
+        [
+          1,
+          4,
+          10
+        ]
+      ],
+      "encoder_tokens_per_image": [
+        160,
+        40
+      ],
+      "llm_visual_tokens_per_image": [
+        40,
+        10
+      ],
+      "encoder_tokens_total": 200,
+      "llm_visual_tokens_total": 50,
+      "image_token_placeholders": 50,
+      "placeholder_count_matches_merged_tokens": true,
+      "input_sequence_tokens": 166,
+      "coordinate_contract": "model outputs ROI-relative 0-1000; host remaps through effective_crop_box_1000",
+      "prepared_image_artifacts": {
+        "global": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000031248-117505-grounding-global.jpg",
+        "roi": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000031248-117505-grounding-roi.jpg"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000051326-1153088-grounding",
+      "task": "grounding",
+      "source_image": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/coco2017/val2017-original/000000051326.jpg",
+      "source_is_original_resolution": true,
+      "source_size": [
+        640,
+        427
+      ],
+      "global_prepared_size": [
+        256,
+        171
+      ],
+      "roi_source_size": [
+        440,
+        401
+      ],
+      "roi_prepared_size": [
+        384,
+        350
+      ],
+      "requested_crop_box_1000": [
+        312.609375,
+        63.22014051522234,
+        1000.0,
+        1000.0
+      ],
+      "effective_crop_box_1000": [
+        312.5,
+        60.88992974238876,
+        1000.0,
+        1000.0
+      ],
+      "pixel_crop_box": [
+        200,
+        26,
+        640,
+        427
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          10,
+          16
+        ],
+        [
+          1,
+          22,
+          24
+        ]
+      ],
+      "encoder_tokens_per_image": [
+        160,
+        528
+      ],
+      "llm_visual_tokens_per_image": [
+        40,
+        132
+      ],
+      "encoder_tokens_total": 688,
+      "llm_visual_tokens_total": 172,
+      "image_token_placeholders": 172,
+      "placeholder_count_matches_merged_tokens": true,
+      "input_sequence_tokens": 288,
+      "coordinate_contract": "model outputs ROI-relative 0-1000; host remaps through effective_crop_box_1000",
+      "prepared_image_artifacts": {
+        "global": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000051326-1153088-grounding-global.jpg",
+        "roi": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000051326-1153088-grounding-roi.jpg"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000031248-117505-pointing",
+      "task": "pointing",
+      "source_image": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/coco2017/val2017-original/000000031248.jpg",
+      "source_is_original_resolution": true,
+      "source_size": [
+        500,
+        333
+      ],
+      "global_prepared_size": [
+        256,
+        170
+      ],
+      "roi_source_size": [
+        160,
+        71
+      ],
+      "roi_prepared_size": [
+        160,
+        71
+      ],
+      "requested_crop_box_1000": [
+        0.0,
+        787.147147147147,
+        319.45000000000005,
+        1000.0
+      ],
+      "effective_crop_box_1000": [
+        0.0,
+        786.7867867867868,
+        320.0,
+        1000.0
+      ],
+      "pixel_crop_box": [
+        0,
+        262,
+        160,
+        333
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          10,
+          16
+        ],
+        [
+          1,
+          4,
+          10
+        ]
+      ],
+      "encoder_tokens_per_image": [
+        160,
+        40
+      ],
+      "llm_visual_tokens_per_image": [
+        40,
+        10
+      ],
+      "encoder_tokens_total": 200,
+      "llm_visual_tokens_total": 50,
+      "image_token_placeholders": 50,
+      "placeholder_count_matches_merged_tokens": true,
+      "input_sequence_tokens": 162,
+      "coordinate_contract": "model outputs ROI-relative 0-1000; host remaps through effective_crop_box_1000",
+      "prepared_image_artifacts": {
+        "global": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000031248-117505-pointing-global.jpg",
+        "roi": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000031248-117505-pointing-roi.jpg"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000051326-1153088-pointing",
+      "task": "pointing",
+      "source_image": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/coco2017/val2017-original/000000051326.jpg",
+      "source_is_original_resolution": true,
+      "source_size": [
+        640,
+        427
+      ],
+      "global_prepared_size": [
+        256,
+        171
+      ],
+      "roi_source_size": [
+        440,
+        401
+      ],
+      "roi_prepared_size": [
+        384,
+        350
+      ],
+      "requested_crop_box_1000": [
+        312.609375,
+        63.22014051522234,
+        1000.0,
+        1000.0
+      ],
+      "effective_crop_box_1000": [
+        312.5,
+        60.88992974238876,
+        1000.0,
+        1000.0
+      ],
+      "pixel_crop_box": [
+        200,
+        26,
+        640,
+        427
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          10,
+          16
+        ],
+        [
+          1,
+          22,
+          24
+        ]
+      ],
+      "encoder_tokens_per_image": [
+        160,
+        528
+      ],
+      "llm_visual_tokens_per_image": [
+        40,
+        132
+      ],
+      "encoder_tokens_total": 688,
+      "llm_visual_tokens_total": 172,
+      "image_token_placeholders": 172,
+      "placeholder_count_matches_merged_tokens": true,
+      "input_sequence_tokens": 284,
+      "coordinate_contract": "model outputs ROI-relative 0-1000; host remaps through effective_crop_box_1000",
+      "prepared_image_artifacts": {
+        "global": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000051326-1153088-pointing-global.jpg",
+        "roi": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/global_roi_preflight/coco-val-000000051326-1153088-pointing-roi.jpg"
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "prompt_projection_shared_gpu_provenance_v1",
+  "date": "2026-09-28",
+  "policy": "actually-runnable-first shared GPU: prefer a CUDA run whenever it can actually run",
+  "supersedes": "2026-09-28-prompt-projection-newpolicy-gate.json (24 GiB free-memory threshold) and 2026-09-28-prompt-feature-extraction.json (strict exclusive-owner 20 GiB gate)",
+  "source_pins": {
+    "extractor": {
+      "path": "evaluation/extract_prompt_projection_features.py",
+      "old_sha256": "cac52d49033263c0bc7c1afdc0ef3c58ffdda27e1e9a883ad1fcc205ddf2eb70",
+      "new_sha256": "ccfd0ea8a9dfa7e3df423c3a2b7d9af036042d011871970e8fb2534e7c2ecf69",
+      "changed": true,
+      "changes": [
+        "add opt-in --allow-shared-gpu / --min-free-mib (14336) / --max-util-pct (80) shared gate; default without the flag is the legacy strict owner gate",
+        "add one-shot runtime audits after model load and after extraction plus a 4096 MiB post-load free-memory guard",
+        "materialise the GPU block-0 capture on the host in the production adapter (values/dtypes unchanged) so the npz writer can consume it"
+      ]
+    },
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "old_sha256": "0b03f8f56422f5efdc34561b0cbce40b98510ff0ede88942854849307108ef99",
+      "new_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+      "changed": true,
+      "changes": [
+        "document the opt-in shared_gpu_policy inside extraction.gpu_gate; no feature, split, algorithm or training-hyperparameter value changed"
+      ]
+    },
+    "trainer": {
+      "path": "evaluation/train_prompt_projection.py",
+      "old_sha256": "f34a7865f815299f812c9e4d95d311a509ee9d7394f38a2cf9b07de0a3648983",
+      "new_sha256": "f34a7865f815299f812c9e4d95d311a509ee9d7394f38a2cf9b07de0a3648983",
+      "changed": false
+    },
+    "manifest_builder": {
+      "path": "evaluation/prompt_projection_clean_inductive.py",
+      "old_sha256": "d80186b664823f2abf6799b4037d5ad3382b375efdf5a5e5f30efe237356a4c9",
+      "new_sha256": "d80186b664823f2abf6799b4037d5ad3382b375efdf5a5e5f30efe237356a4c9",
+      "changed": false
+    },
+    "definitions": {
+      "path": "evaluation/prompt_projection_distillation.py",
+      "sha256": "93a607e41c8ba03543e9b1bd1f228466ad8e0925da8781a6aa659e73e28cc727",
+      "changed": false
+    },
+    "focused_tests": {
+      "path": "evaluation/tests/test_prompt_projection_distillation.py",
+      "old_sha256": "unknown_pre_change",
+      "new_sha256": "a2a50f80b7a6dd94943318110002373da13cf57efd6bed843496407e37fcfe0a",
+      "changed": true,
+      "changes": [
+        "add SharedGpuGateTests covering the opt-in policy, the legacy default and the one-shot runtime snapshot"
+      ]
+    }
+  },
+  "invariants": {
+    "features": "unchanged",
+    "split": "unchanged (source_image_sha256, salt/seed/ratios)",
+    "algorithm": "unchanged",
+    "training_hyperparameters": "unchanged",
+    "model_or_inference_source": "unchanged"
+  },
+  "manifest": {
+    "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "lock_sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+    "strict_inductive": true,
+    "records": 472,
+    "unique_images": 236
+  },
+  "extracted_artifacts": {
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "index_bytes": 326962,
+    "npz_count": 472,
+    "npz_total_bytes": 364136400,
+    "weights_npz": "artifacts/token_selector/prompt_projection_WtWv.npz",
+    "weights_sha256": "ece4a9162da653e50e9192677f61761b02b8ef3739430200c7fe15914c67cdb3"
+  }
+}

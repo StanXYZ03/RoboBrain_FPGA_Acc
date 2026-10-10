@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_PENDING_EXECUTION",
+  "date": "2026-10-04",
+  "report_stem": "2026-10-04-layer5-score-formula-replay-screening100",
+  "diagnostic_only": true,
+  "immutable": false,
+  "immutability_note": "先于任何 replay JSONL 写盘；在 Codex 真正运行该实验之前不得声明为 immutable。Codex 运行后需以实际产出与哈希复核本预注册。",
+  "experiment_question": "在冻结 CV-Bench screening100 上，仅把每组分聚合从 control 公式 norm(mean(x_0,x_1,x_2,x_3)) 换成历史公式 mean(norm(x_0),norm(x_1),norm(x_2),norm(x_3))，能否复现冻结的历史 shallow_r0250 索引集合？其余全固定：每样本 K_C 取自参考、region_grid=3、每个非空 3x3 区域取一个最高分 anchor（并列取低 index）、其余按全局降序稳定填充（并列取低 index）、输出升序。",
+  "single_variable_contract": {
+    "only_variable": "per_group_score_aggregation",
+    "control_formula": "norm(mean(x_0, x_1, x_2, x_3))",
+    "candidate_formula": "mean(norm(x_0), norm(x_1), norm(x_2), norm(x_3))",
+    "identical": [
+      "screening100 manifest and sample order",
+      "frozen unified layer-5 vision forward (cut=5)",
+      "per-sample K_C = len(reference.selected_group_indices)",
+      "region_grid=3 fixed 3x3 anchor + global-fill selection policy",
+      "lower group index tie-break",
+      "ascending output indices",
+      "all output slots are raw real 2x2 groups (no context pooling / slot reservation / local candidate cap)",
+      "BF16 weights, SDPA attention",
+      "vision only; no LLM decode"
+    ],
+    "forbidden_changes": [
+      "no B1-trained Wv projection",
+      "no cut-point change",
+      "no region_grid change",
+      "no context pooling",
+      "no context slot reservation",
+      "no local_candidate_cap",
+      "no change to K_C",
+      "no change to BF16 / SDPA",
+      "no LLM decode"
+    ],
+    "diagnostic_status": {
+      "hardware_alignment_relaxed_for_diagnostic": true,
+      "causal_diagnostic_only": true,
+      "fpga_deployable_candidate": false
+    }
+  },
+  "fixed_configuration": {
+    "manifest": "datasets/cv_bench_screening100.jsonl",
+    "sample_count": 100,
+    "reference": "evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl",
+    "reference_selector": "shallow_r0250",
+    "control": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl",
+    "cut_point": 5,
+    "region_grid": 3,
+    "dtype": "bf16",
+    "attention_implementation": "sdpa",
+    "decoding": null,
+    "llm_decode": false,
+    "b1_trained_wv_used": false,
+    "identity_bypass_allowed": false
+  },
+  "decision_rule": {
+    "primary": "candidate_selected_group_indices == reference_selected_group_indices for all 100 samples (exact ascending index arrays)",
+    "exact_count_required": 100,
+    "outcome_if_full": "L2_AGGREGATION_DIFFERENCE_FULLY_EXPLAINS_INDEX_SET",
+    "outcome_otherwise": "PARTIAL_OR_NOT_EXPLAINED",
+    "uses_only_index_set_equality": true,
+    "timing_is_descriptive_only": true
+  },
+  "output_paths": {
+    "runner_default": "artifacts/token_selector/2026-10-04-layer5-score-formula-replay/layer5_score_formula_replay_screening100.jsonl",
+    "report_json": "reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.json",
+    "report_csv": "reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.csv",
+    "report_md": "reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.md"
+  },
+  "runner_command": "python evaluation/run_hf_layer5_score_formula_replay.py --model <frozen BF16 RoboBrain2.5-4B> --model-label <label> --manifest datasets/cv_bench_screening100.jsonl --reference-jsonl evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl --control-jsonl artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl --output artifacts/token_selector/2026-10-04-layer5-score-formula-replay/layer5_score_formula_replay_screening100.jsonl --region-grid 3 --dtype bf16 --device cuda:0",
+  "summariser_command": "python evaluation/summarize_layer5_score_formula_replay.py --manifest datasets/cv_bench_screening100.jsonl --reference-jsonl evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl --control-jsonl artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl --replay-jsonl artifacts/token_selector/2026-10-04-layer5-score-formula-replay/layer5_score_formula_replay_screening100.jsonl --output-json reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.json --output-csv reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.csv --output-md reports/cv_bench/2026-10-04-layer5-score-formula-replay-screening100.md",
+  "explicit_non_formal_statement": "固定 100 样本 screening100 因果诊断；不是正式全量 2638 CV-Bench 结论，不是 FPGA 可部署配置；计时仅描述，不参与决定。",
+  "inputs_sha256": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+    },
+    "reference_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl",
+      "sha256": "ce019edd1ee35d11c83a3ff7c11bd9db46539cf56745aadcf0780f15abdbf7d0"
+    },
+    "control_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl",
+      "sha256": "838cbb847c957412b73010b4c54999d1cad486a83c6e54592a1c42d35420d989"
+    },
+    "evaluation/hardware_regular_token_selector.py": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "evaluation/hardware_regular_layer5_forced_index_ablation.py": {
+      "path": "evaluation/hardware_regular_layer5_forced_index_ablation.py",
+      "sha256": "50e1adc8935488c320cdeab037cc4f5eb10612c9f3b31f3d9149daaff9615927"
+    },
+    "evaluation/shallow_block_pruning.py": {
+      "path": "evaluation/shallow_block_pruning.py",
+      "sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a"
+    },
+    "evaluation/layer5_score_formula_replay.py": {
+      "path": "evaluation/layer5_score_formula_replay.py",
+      "sha256": "e2887367ee1cab02c4116625c38517fcd9cdb0cc0a76abd32c0f4bc729235ddb"
+    },
+    "evaluation/run_hf_layer5_score_formula_replay.py": {
+      "path": "evaluation/run_hf_layer5_score_formula_replay.py",
+      "sha256": "61dbb4bece03dd2067078584c3e9aa9a912647f694ff8fef3ba8a5638a3effb4"
+    },
+    "evaluation/summarize_layer5_score_formula_replay.py": {
+      "path": "evaluation/summarize_layer5_score_formula_replay.py",
+      "sha256": "cb732db8cf7972aa149ab2ea83ea59a0f7bc021ad29fe8b0c71b7b2d4786762e"
+    },
+    "evaluation/tests/test_layer5_score_formula_replay.py": {
+      "path": "evaluation/tests/test_layer5_score_formula_replay.py",
+      "sha256": "713a787aba0b0b85774edf77cc63e04252616a75236e5be97d3a8a913ac5874b"
+    },
+    "configs/evaluation_protocol.json": {
+      "path": "configs/evaluation_protocol.json",
+      "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643"
+    }
+  }
+}

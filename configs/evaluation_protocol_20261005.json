@@ -1,0 +1,115 @@
+{
+  "version": "2026-10-05-r3-official-spatial-vlm",
+  "supersedes_for_new_experiments": "configs/evaluation_protocol.json",
+  "preserve_old_file_for_reproducibility": true,
+  "principle": "Use each public benchmark's official metric. Do not promote a selector using API-route-specific custom metrics, retained feature mass, NDCG, or a newly invented aggregate score.",
+  "baseline": {
+    "model": "RoboBrain2.5-4B",
+    "algorithm_screening_precision": "BF16",
+    "deployment_precision": "the exact precision and runtime selected on Jetson Xavier NX, to be frozen before deployment evaluation",
+    "do_sample": false,
+    "comparison_rule": "same images, questions, preprocessing, decode policy, cut point, token budget and hardware",
+    "current_fixed_cutpoint": "B1_after_vision_block_0",
+    "current_fixed_budget": 96,
+    "current_control": "corrected integer patch-wise L2 plus deterministic 3x3 spatial anchors"
+  },
+  "primary_quality": {
+    "suite_role": "spatial-reasoning VLM evaluation",
+    "benchmarks": [
+      "CV-Bench",
+      "CrossPoint",
+      "RoboSpatial",
+      "RefSpatial",
+      "EmbSpatial"
+    ],
+    "currently_available_and_executed": [
+      "CV-Bench"
+    ],
+    "current_cv_bench_metric": "official cv_bench_accuracy = ((ADE20K accuracy + COCO accuracy)/2 + Omni3D accuracy)/2",
+    "report_per_benchmark": [
+      "official absolute metric",
+      "absolute delta from local dense BF16",
+      "relative retention from local dense BF16 as a descriptive ratio",
+      "parse or format success when part of the official evaluator",
+      "paired confidence interval when sample-level pairing is available"
+    ],
+    "aggregation_policy": "Do not report a five-benchmark aggregate until all five official evaluations are present. Never fill missing benchmarks with local diagnostics."
+  },
+  "development_and_confirmation": {
+    "cv_bench_status": "already repeatedly observed; valid for reproducible local comparison but not a pristine external holdout",
+    "development_rule": "A low-cost screening subset may reject a mechanism but cannot establish a publication claim.",
+    "promotion_rule": "Freeze the candidate before confirmation. On data not used to select the candidate, compare it against the same-budget corrected-L2 control with the official metric; require the pre-registered paired 95% confidence-interval lower bound to exceed zero before full-suite and hardware promotion.",
+    "formal_external_confirmation_needed": true,
+    "forbidden_routing_variables": [
+      "benchmark source name",
+      "task label",
+      "ground-truth answer",
+      "post-hoc G threshold"
+    ],
+    "allowed_runtime_inputs": [
+      "visual features available at the frozen cut point",
+      "prompt representation computable before selection",
+      "two-dimensional token coordinates",
+      "fixed aligned token budget",
+      "static hardware descriptor"
+    ]
+  },
+  "arms_for_next_algorithm_gate": [
+    "dense BF16 reference",
+    "same-budget corrected integer L2 plus 3x3 anchors",
+    "one frozen candidate mechanism"
+  ],
+  "non_primary_diagnostics": {
+    "optional": true,
+    "examples": [
+      "COCO Pointing PCK",
+      "COCO Grounding IoU",
+      "teacher NDCG",
+      "retained target mass",
+      "feature cosine similarity"
+    ],
+    "claim_scope": "mechanism diagnosis only; never a selector promotion criterion and never substituted for an official benchmark metric"
+  },
+  "latency": {
+    "exclude_model_load": true,
+    "warmup_minimum": 1,
+    "measured_repeats_minimum": 3,
+    "gpu_timing_requires_cuda_synchronize": true,
+    "report_raw_runs": true,
+    "statistics": [
+      "mean",
+      "median",
+      "min",
+      "max",
+      "population standard deviation",
+      "p95"
+    ],
+    "model_end_to_end_boundary": "preprocessed model inputs ready on host through decoded model output; separately report H2D, vision prefix, selector, remaining vision, LLM prefill and decode when reliable",
+    "application_end_to_end_boundary": "image file open/decode through final parsed output, including processor, H2D, model, heterogeneous communication and postprocess",
+    "heterogeneous_rule": "All Jetson-to-FPGA and FPGA-to-Jetson transfers, synchronization, packing and unpacking are included in heterogeneous end-to-end latency. Report compute-only kernel latency separately, never as system latency."
+  },
+  "efficiency": {
+    "report": [
+      "model p50 and p95 latency",
+      "application p50 and p95 latency",
+      "TTFT",
+      "TPOT when decode length is material",
+      "decision/s",
+      "peak memory",
+      "link bytes and measured effective bandwidth",
+      "FPGA LUT/FF/BRAM/DSP",
+      "post-route timing",
+      "board power",
+      "energy per decision"
+    ],
+    "analytic_projection_policy": "Label every analytic number as a projection with explicit bandwidth and overlap assumptions. It cannot be promoted to a measurement."
+  },
+  "current_forbidden_claims": [
+    "G>512 is a causal Prompt-routing rule",
+    "the current Prompt branch improves official quality",
+    "K96 is accuracy-equivalent to dense BF16",
+    "OOC route is board deployment",
+    "1 GbE heterogeneous execution is faster than the software selector",
+    "FPGA compute-only latency is end-to-end latency"
+  ]
+}

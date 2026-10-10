@@ -1,0 +1,629 @@
+{
+  "status": "GLOBAL_ROI_FAILURE_ATTRIBUTION_COMPLETE",
+  "evidence_level": "32-image revealed development diagnostic",
+  "geometric_target_coverage": "100% by construction: the expanded ground-truth bbox is inside every requested ROI; this does not prove semantic detail preservation",
+  "coordinate_mapping": "pixel-rounded crop mapping unit tests pass",
+  "analyses": {
+    "roi_only": {
+      "grounding": {
+        "n": 32,
+        "primary_delta_mean": -0.041850981934207984,
+        "continuous_error_delta_mean": 0.041850981934207984,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.4682666235048934,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": -0.08723850140822956,
+              "continuous_error_delta_mean": 0.08723850140822954
+            },
+            "medium": {
+              "n": 14,
+              "primary_delta_mean": -0.0024321378402334393,
+              "continuous_error_delta_mean": 0.0024321378402334393
+            },
+            "small": {
+              "n": 10,
+              "primary_delta_mean": -0.06072734808655509,
+              "continuous_error_delta_mean": 0.06072734808655509
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 25,
+              "primary_delta_mean": -0.01919166985747971,
+              "continuous_error_delta_mean": 0.019191669857479707
+            },
+            "interior": {
+              "n": 7,
+              "primary_delta_mean": -0.12277709649395183,
+              "continuous_error_delta_mean": 0.12277709649395183
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 15,
+              "primary_delta_mean": -0.0081157937802177,
+              "continuous_error_delta_mean": 0.008115793780217696
+            },
+            "overlap": {
+              "n": 17,
+              "primary_delta_mean": -0.07161732442302293,
+              "continuous_error_delta_mean": 0.07161732442302293
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 5,
+              "primary_delta_mean": 0.06936717184797363,
+              "continuous_error_delta_mean": -0.06936717184797363
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.05679482980884173,
+              "continuous_error_delta_mean": 0.05679482980884172
+            },
+            "sparse": {
+              "n": 17,
+              "primary_delta_mean": -0.06577170488506508,
+              "continuous_error_delta_mean": 0.06577170488506508
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": -0.012770588433959784,
+              "continuous_error_delta_mean": 0.012770588433959784
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.04378967483422453,
+              "continuous_error_delta_mean": 0.04378967483422453
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000049810-1813526-grounding",
+            "category": "bench",
+            "primary_delta": -0.7431992798728326,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000080932-107131-grounding",
+            "category": "chair",
+            "primary_delta": -0.5989992595588645,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000031050-1153302-grounding",
+            "category": "vase",
+            "primary_delta": -0.3815281754667501,
+            "target_area_bin": "medium",
+            "edge_bin": "interior",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000032038-2130609-grounding",
+            "category": "dining table",
+            "primary_delta": -0.10486729257857941,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000068833-105777-grounding",
+            "category": "chair",
+            "primary_delta": -0.05337334133621041,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000050380-102188-grounding",
+            "category": "chair",
+            "primary_delta": -0.045088048928693,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000001425-713032-grounding",
+            "category": "bowl",
+            "primary_delta": -0.024297355280811117,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000000802-332341-grounding",
+            "category": "refrigerator",
+            "primary_delta": -0.02086451473931672,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          }
+        ]
+      },
+      "pointing": {
+        "n": 32,
+        "primary_delta_mean": -0.03125,
+        "continuous_error_delta_mean": 0.006562641851948073,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.4682666235048934,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": 0.05940314869014197
+            },
+            "medium": {
+              "n": 14,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": -0.012736735916748353
+            },
+            "small": {
+              "n": 10,
+              "primary_delta_mean": -0.1,
+              "continuous_error_delta_mean": -0.008690634742432046
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 25,
+              "primary_delta_mean": -0.04,
+              "continuous_error_delta_mean": 0.007442579338346244
+            },
+            "interior": {
+              "n": 7,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": 0.003420007971954605
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 15,
+              "primary_delta_mean": 0.13333333333333333,
+              "continuous_error_delta_mean": -0.022844749122640087
+            },
+            "overlap": {
+              "n": 17,
+              "primary_delta_mean": -0.17647058823529413,
+              "continuous_error_delta_mean": 0.032510339770702334
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 5,
+              "primary_delta_mean": -0.2,
+              "continuous_error_delta_mean": -0.008518132657941036
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.1,
+              "continuous_error_delta_mean": -0.006908293243445612
+            },
+            "sparse": {
+              "n": 17,
+              "primary_delta_mean": 0.058823529411764705,
+              "continuous_error_delta_mean": 0.018922243234499977
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": 0.031239483634313274
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.03333333333333333,
+              "continuous_error_delta_mean": 0.004917519066457059
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000008277-689517-pointing",
+            "category": "fork",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000040083-103807-pointing",
+            "category": "chair",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000049810-1813526-pointing",
+            "category": "bench",
+            "primary_delta": -1.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000051008-1098870-pointing",
+            "category": "laptop",
+            "primary_delta": -1.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000000802-332341-pointing",
+            "category": "refrigerator",
+            "primary_delta": 0.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000001425-713032-pointing",
+            "category": "bowl",
+            "primary_delta": 0.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000002592-678926-pointing",
+            "category": "cup",
+            "primary_delta": 0.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000003934-115058-pointing",
+            "category": "couch",
+            "primary_delta": 0.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          }
+        ]
+      }
+    },
+    "roi_global_v2": {
+      "grounding": {
+        "n": 32,
+        "primary_delta_mean": -0.03420782702124376,
+        "continuous_error_delta_mean": 0.03420782702124376,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.4682666235048934,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": -0.041828795807910296,
+              "continuous_error_delta_mean": 0.041828795807910296
+            },
+            "medium": {
+              "n": 14,
+              "primary_delta_mean": 0.009528804229356147,
+              "continuous_error_delta_mean": -0.009528804229356147
+            },
+            "small": {
+              "n": 10,
+              "primary_delta_mean": -0.0893423357427504,
+              "continuous_error_delta_mean": 0.0893423357427504
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 25,
+              "primary_delta_mean": -0.002075355874923658,
+              "continuous_error_delta_mean": 0.0020753558749236588
+            },
+            "interior": {
+              "n": 7,
+              "primary_delta_mean": -0.14896665254381555,
+              "continuous_error_delta_mean": 0.14896665254381555
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 15,
+              "primary_delta_mean": -0.013275395306848993,
+              "continuous_error_delta_mean": 0.013275395306848995
+            },
+            "overlap": {
+              "n": 17,
+              "primary_delta_mean": -0.05267761971041561,
+              "continuous_error_delta_mean": 0.05267761971041561
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 5,
+              "primary_delta_mean": 0.10473850442479467,
+              "continuous_error_delta_mean": -0.10473850442479467
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.08271152732960901,
+              "continuous_error_delta_mean": 0.08271152732960901
+            },
+            "sparse": {
+              "n": 17,
+              "primary_delta_mean": -0.04654280667692256,
+              "continuous_error_delta_mean": 0.04654280667692256
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": -0.09131387877817382,
+              "continuous_error_delta_mean": 0.09131387877817382
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.03040075690411509,
+              "continuous_error_delta_mean": 0.03040075690411509
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000080932-107131-grounding",
+            "category": "chair",
+            "primary_delta": -0.6877014326160356,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000031050-1153302-grounding",
+            "category": "vase",
+            "primary_delta": -0.37969460782499953,
+            "target_area_bin": "medium",
+            "edge_bin": "interior",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000049810-1813526-grounding",
+            "category": "bench",
+            "primary_delta": -0.32449627094870825,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000078170-1589958-grounding",
+            "category": "chair",
+            "primary_delta": -0.16584100384992484,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": false
+          },
+          {
+            "sample_id": "coco-val-000000032038-2130609-grounding",
+            "category": "dining table",
+            "primary_delta": -0.07289310683718087,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000001425-713032-grounding",
+            "category": "bowl",
+            "primary_delta": -0.06273485241867438,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000050380-102188-grounding",
+            "category": "chair",
+            "primary_delta": -0.05800118300430723,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000002592-678926-grounding",
+            "category": "cup",
+            "primary_delta": -0.05075130750186441,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          }
+        ]
+      },
+      "pointing": {
+        "n": 32,
+        "primary_delta_mean": -0.125,
+        "continuous_error_delta_mean": 0.0039586331751134355,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.4682666235048934,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": -0.25,
+              "continuous_error_delta_mean": 0.01864670237235794
+            },
+            "medium": {
+              "n": 14,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": -0.0018584534475861692
+            },
+            "small": {
+              "n": 10,
+              "primary_delta_mean": -0.2,
+              "continuous_error_delta_mean": 0.0003520990890972773
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 25,
+              "primary_delta_mean": -0.2,
+              "continuous_error_delta_mean": 0.0028419583051109932
+            },
+            "interior": {
+              "n": 7,
+              "primary_delta_mean": 0.14285714285714285,
+              "continuous_error_delta_mean": 0.007946757710836442
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 15,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": -0.010355628427696488
+            },
+            "overlap": {
+              "n": 17,
+              "primary_delta_mean": -0.23529411764705882,
+              "continuous_error_delta_mean": 0.01658886400112219
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 5,
+              "primary_delta_mean": -0.2,
+              "continuous_error_delta_mean": -0.0027352945974346114
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.2,
+              "continuous_error_delta_mean": 0.0028348478653867897
+            },
+            "sparse": {
+              "n": 17,
+              "primary_delta_mean": -0.058823529411764705,
+              "continuous_error_delta_mean": 0.006588485643349122
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": 0.03816117128381995
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.13333333333333333,
+              "continuous_error_delta_mean": 0.0016784639678663342
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000000802-332341-pointing",
+            "category": "refrigerator",
+            "primary_delta": -1.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000008277-689517-pointing",
+            "category": "fork",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000010977-1095365-pointing",
+            "category": "toilet",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000032038-2130609-pointing",
+            "category": "dining table",
+            "primary_delta": -1.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000040083-103807-pointing",
+            "category": "chair",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000049810-1813526-pointing",
+            "category": "bench",
+            "primary_delta": -1.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000051008-1098870-pointing",
+            "category": "laptop",
+            "primary_delta": -1.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000056350-1094660-pointing",
+            "category": "toilet",
+            "primary_delta": -1.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          }
+        ]
+      }
+    }
+  },
+  "errors": []
+}

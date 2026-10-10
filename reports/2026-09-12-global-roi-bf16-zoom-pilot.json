@@ -1,0 +1,106 @@
+{
+  "status": "REVEALED_ORACLE_MECHANICS_PILOT_NOT_VALIDATION",
+  "result_records": 96,
+  "groups": {
+    "dense:grounding": {
+      "strategy": "dense",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 248.0,
+      "application_latency_ms_median": 509.4039204996079,
+      "application_latency_ms_p95": 652.3918518796563,
+      "iou_mean": 0.849212308856955,
+      "acc_0_5": 1.0
+    },
+    "dense:pointing": {
+      "strategy": "dense",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 248.0,
+      "application_latency_ms_median": 293.04790403693914,
+      "application_latency_ms_p95": 301.3053690083325,
+      "pck_0_1": 0.75,
+      "pck_0_2": 1.0,
+      "point_nme_bbox_diag_mean": 0.08412060194845344
+    },
+    "global_only:grounding": {
+      "strategy": "global_only",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 44.0,
+      "application_latency_ms_median": 477.3554770508781,
+      "application_latency_ms_p95": 496.4169207960367,
+      "iou_mean": 0.7774324854635843,
+      "acc_0_5": 1.0
+    },
+    "global_only:pointing": {
+      "strategy": "global_only",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 44.0,
+      "application_latency_ms_median": 254.6582539798692,
+      "application_latency_ms_p95": 256.66401511989534,
+      "pck_0_1": 0.5,
+      "pck_0_2": 1.0,
+      "point_nme_bbox_diag_mean": 0.10304877863178706
+    },
+    "global_roi:grounding": {
+      "strategy": "global_roi",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 134.0,
+      "application_latency_ms_median": 493.3899489697069,
+      "application_latency_ms_p95": 521.4823470450938,
+      "iou_mean": 0.5631772453342023,
+      "acc_0_5": 0.5
+    },
+    "global_roi:pointing": {
+      "strategy": "global_roi",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 134.0,
+      "application_latency_ms_median": 272.0789819722995,
+      "application_latency_ms_p95": 287.8171249758452,
+      "pck_0_1": 0.5,
+      "pck_0_2": 1.0,
+      "point_nme_bbox_diag_mean": 0.08594698125874434
+    },
+    "roi_only:grounding": {
+      "strategy": "roi_only",
+      "task": "grounding",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 90.0,
+      "application_latency_ms_median": 484.8394099390134,
+      "application_latency_ms_p95": 499.06791117973626,
+      "iou_mean": 0.865370075591748,
+      "acc_0_5": 1.0
+    },
+    "roi_only:pointing": {
+      "strategy": "roi_only",
+      "task": "pointing",
+      "unique_samples": 4,
+      "repeats_total": 12,
+      "parse_rate": 1.0,
+      "visual_tokens_mean": 90.0,
+      "application_latency_ms_median": 264.5245013991371,
+      "application_latency_ms_p95": 266.13437407650054,
+      "pck_0_1": 0.75,
+      "pck_0_2": 1.0,
+      "point_nme_bbox_diag_mean": 0.06722517739980255
+    }
+  }
+}

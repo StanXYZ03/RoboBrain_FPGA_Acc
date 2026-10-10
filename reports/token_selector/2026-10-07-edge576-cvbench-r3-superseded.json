@@ -1,0 +1,78 @@
+{
+  "status": "SUPERSEDED_AFTER_FIRST_GPU_SMOKE_FAILURE",
+  "date": "2026-10-07",
+  "round": "2026-10-07 edge576 CV-Bench r3 supersede",
+  "subject": {
+    "config": "configs/2026-10-07-edge576-cvbench-three-arm-development-r3.preregistered.json",
+    "config_sha256": "e7ff56c98a39f764deb6cd6b099211f5da45025ce6958b44e8f72c641ae83eed",
+    "prereg_report_json": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r3.json",
+    "prereg_report_json_sha256": "42a4aabddd8895a2b502befff2052056ad757af80608a106f8f5ad76e3158c49",
+    "prereg_report_md": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r3.md",
+    "prereg_report_md_sha256": "ce3561e2635185375275e1cea22e1e6bd97ee233f5710ca206632f2bc79d9051",
+    "generator": "scripts/preregister_edge576_cvbench_r3_20261007.py",
+    "generator_sha256": "03ed9f42862f90b664e7a9f3fdc8732690831669de48e00e0c2ace26d38f3eaa",
+    "prereg_test": "evaluation/tests/test_edge576_cvbench_prereg_r3.py",
+    "prereg_test_sha256": "632f988a0f07f86ab697823e97d97f01e5791491ebb335541b8364440321713e"
+  },
+  "executed": true,
+  "gpu_runs": 1,
+  "arm_runs_completed": 0,
+  "smoke_files_written": 0,
+  "records_written": 0,
+  "full2638_outputs_touched": false,
+  "never_executed": false,
+  "must_not_be_run": true,
+  "bytes_preserved": true,
+  "reason_summary": "r3 pinned a normalisation contract that hard-required output_token_ids for every arm, but the frozen dense producer never emits token ids; the one r3 dense smoke GPU attempt fail-closed inside normalize_record before writing any file. The executable surface must be fixed and re-pinned, so r3 is superseded with no results lost (it wrote nothing).",
+  "single_reason": {
+    "id": "r3_hard_required_a_field_the_dense_producer_never_emits",
+    "problem": "evaluation/run_edge576_cvbench_three_arm.py::normalize_record required ('output_text', 'output_token_ids', 'selected_group_indices') and edge576_cvbench_runner_contract.REQUIRED_EDGE_RECORD_FIELDS listed output_token_ids, but evaluation/run_hf_shallow_block_pruning.py::run_one (the dense producer) returns only output_text, the real integer count output_tokens and selected_group_indices. Only the frozen L2 and v2 producers emit output_token_ids.",
+    "first_failure": "The first r3 real-model execution (dense_edge576, sample_id 1838, cuda:0) completed model load, one warmup and one sample inference and then raised Edge576ContractError: frozen dense_edge576 record is missing 'output_token_ids' (fail closed) before opening the output stream.",
+    "evidence": "reports/token_selector/2026-10-07-edge576-cvbench-r3-first-gpu-attempt-failure.json",
+    "fix_in_r4": "Make output_token_ids optional and never fabricate it; require an auditable output_token_count mapped from the real frozen fields (output_token_ids length and/or output_tokens, which must agree), add output_token_ids_available, and keep fail-closed core-field validation. r4 re-pins the fixed execution layer and repeats the model-identity -> three-arm smoke pass -> full2638 order."
+  },
+  "execution_layer_pin_drift": {
+    "note": "The r3-pinned bytes of these files were the ones executing during the failed attempt; r4 re-pins the fixed bytes under the same pin names.",
+    "edge576_runner_contract": {
+      "path": "evaluation/edge576_cvbench_runner_contract.py",
+      "r3_sha256": "fdea7df65556ef47c297a8082d9aa1238fcb645bdb1e5910d02f5453107590db"
+    },
+    "edge576_runner": {
+      "path": "evaluation/run_edge576_cvbench_three_arm.py",
+      "r3_sha256": "b1fb2ca1bc67af4355bfe6f0ce52725adf788f3339e77f5c6ea4188788e3eb85"
+    },
+    "edge576_runner_test": {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm.py",
+      "r3_sha256": "6d4f513568faccd005ded47e6b963d89b783194b84411b5c80d25fabf700fa55"
+    },
+    "smoke_entry": {
+      "path": "evaluation/run_edge576_cvbench_three_arm_smoke.py",
+      "r3_sha256": "3c956d7ea9a64a52dc6affbec0c85ae032b44ce58197c8b166d89480dc2ec255"
+    },
+    "smoke_test": {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm_smoke.py",
+      "r3_sha256": "458a45101d8ca2a861b4a4d7f507e650402bee00e164e5991ea0ca1c508d1068"
+    }
+  },
+  "unchanged_r3_content": {
+    "three_arms": [
+      "dense_edge576",
+      "corrected_l2_integer_b1_k96",
+      "v2_edge576_b1_k96"
+    ],
+    "third_arm_mechanism": "conservative_l2_guarded_rerank_v2",
+    "third_arm_is_new_mechanism": false,
+    "primary_metric": "cv_bench_accuracy",
+    "success_gates_unchanged": true,
+    "quality_retention_threshold": 0.9,
+    "paired_bootstrap_strata": "task::source_dataset",
+    "paired_bootstrap_seed": 20261007,
+    "output_paths_unchanged": true,
+    "smoke_sample_id": "1838"
+  },
+  "superseded_by": {
+    "config": "configs/2026-10-07-edge576-cvbench-three-arm-development-r4.preregistered.json",
+    "generator": "scripts/preregister_edge576_cvbench_r4_20261007.py"
+  },
+  "scoping": "CPU-only, read-only while writing this evidence. The r3 config/report/generator/test bytes and the frozen r2 evidence are preserved unchanged. No GPU, no model weights, no network, no training, no dependency installation in this task."
+}

@@ -1,0 +1,155 @@
+{
+  "date": "2026-08-26",
+  "status": "576_INFERENCES / BLIND_COMPLETE / ALGORITHM_GATE_FAIL / PL_HOLD",
+  "manifest": "datasets/dac_spatial_l2res_blind.jsonl",
+  "manifest_sha256": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+  "configuration_lock": "reports/2026-08-25-l2-residual-selector.lock.json",
+  "configuration_lock_sha256": "f4fcbfa1284081b02861023bae897cf59015b5b2f0defb564e78824e18f3b53a",
+  "blind_lock": "reports/2026-08-26-l2-residual-blind.lock.json",
+  "blind_lock_sha256": "22bbdbe99bc0141d88cf6f9d98eaf52548ef9b1ff442d6cb952cb226f3b9e47c",
+  "prediction_sha256": {
+    "full": "c8d763f33a25014bdc329d9748d1e570c22b3f78ef082e6b09a5322349e8114d",
+    "l2": "119e67e0d322e6a835b901ab60c02614fe2899536d08d83e323d9db63f9ee9e4",
+    "frozen": "ad9ea4b79a134673d328a4e9ceffa9ff8419183de3ca7aa83156a0be297a4c01"
+  },
+  "inference_count": 576,
+  "metrics": {
+    "full": {
+      "pck_0_1": 0.5729166666666666,
+      "pck_0_2": 0.7708333333333334,
+      "iou_mean": 0.7803901754737415,
+      "acc_0_5": 0.8854166666666666,
+      "point_nme_bbox_diag_mean": 0.1697940000052172,
+      "point_latency_seconds_mean": 0.29322749786175945,
+      "grounding_latency_seconds_mean": 0.52116214996992
+    },
+    "l2": {
+      "pck_0_1": 0.5833333333333334,
+      "pck_0_2": 0.8125,
+      "iou_mean": 0.784043141437354,
+      "acc_0_5": 0.8854166666666666,
+      "point_nme_bbox_diag_mean": 0.15916649772259786,
+      "point_latency_seconds_mean": 0.2886487906983651,
+      "grounding_latency_seconds_mean": 0.5200217104590289
+    },
+    "frozen": {
+      "pck_0_1": 0.5729166666666666,
+      "pck_0_2": 0.7916666666666666,
+      "iou_mean": 0.7818754246181071,
+      "acc_0_5": 0.90625,
+      "point_nme_bbox_diag_mean": 0.15541214300457334,
+      "point_latency_seconds_mean": 0.293202478510769,
+      "grounding_latency_seconds_mean": 0.5283147227625401
+    }
+  },
+  "delta_frozen_vs_l2": {
+    "pck_0_1": -0.01041666666666674,
+    "pck_0_2": -0.02083333333333337,
+    "iou_mean": -0.0021677168192468788,
+    "acc_0_5": 0.02083333333333337
+  },
+  "delta_frozen_vs_full": {
+    "pck_0_1": 0.0,
+    "pck_0_2": 0.02083333333333326,
+    "iou_mean": 0.0014852491443656524,
+    "acc_0_5": 0.02083333333333337
+  },
+  "paired_bootstrap": {
+    "frozen_vs_l2": {
+      "pointing": {
+        "pck_0_1": {
+          "mean_delta": -0.010416666666666666,
+          "ci95_low": -0.0625,
+          "ci95_high": 0.03125,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "pck_0_2": {
+          "mean_delta": -0.020833333333333332,
+          "ci95_low": -0.0625,
+          "ci95_high": 0.020833333333333332,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      },
+      "grounding": {
+        "iou_mean": {
+          "mean_delta": -0.0021677168192469707,
+          "ci95_low": -0.013511192931824123,
+          "ci95_high": 0.009946012009182197,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "acc_0_5": {
+          "mean_delta": 0.020833333333333332,
+          "ci95_low": -0.020833333333333332,
+          "ci95_high": 0.0625,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      }
+    },
+    "frozen_vs_full": {
+      "pointing": {
+        "pck_0_1": {
+          "mean_delta": 0.0,
+          "ci95_low": -0.052083333333333336,
+          "ci95_high": 0.052083333333333336,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "pck_0_2": {
+          "mean_delta": 0.020833333333333332,
+          "ci95_low": -0.03125,
+          "ci95_high": 0.07291666666666667,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      },
+      "grounding": {
+        "iou_mean": {
+          "mean_delta": 0.00148524914436566,
+          "ci95_low": -0.01859131253753901,
+          "ci95_high": 0.02633586171279531,
+          "paired_samples": 96,
+          "iterations": 10000
+        },
+        "acc_0_5": {
+          "mean_delta": 0.020833333333333332,
+          "ci95_low": 0.0,
+          "ci95_high": 0.052083333333333336,
+          "paired_samples": 96,
+          "iterations": 10000
+        }
+      }
+    }
+  },
+  "compute_proxy": {
+    "full": {
+      "token_retention": 1.0,
+      "encoder_compute_retention": 1.0,
+      "llm_prefill_compute_retention": 1.0
+    },
+    "l2": {
+      "token_retention": 0.875,
+      "encoder_compute_retention": 0.8973550285976157,
+      "llm_prefill_compute_retention": 0.8733662921883938
+    },
+    "frozen": {
+      "token_retention": 0.875,
+      "encoder_compute_retention": 0.8973550285976157,
+      "llm_prefill_compute_retention": 0.8733662921883938
+    }
+  },
+  "gate": {
+    "blind_integrity_pass": true,
+    "configuration_frozen_pass": true,
+    "point_estimate_accuracy_vs_full_pass": true,
+    "statistical_noninferiority_vs_full_pass": false,
+    "strict_dominance_vs_l2_pass": false,
+    "statistically_resolved_gain_vs_l2_pass": false,
+    "pl_integration_pass": false,
+    "decision": "STOP_FIRST_ORDER_SALIENCY_DISTILLATION / RETAIN_L2_BASELINE / PL_HOLD",
+    "reason": "冻结候选在87.5% Token下保持full点估计，但未严格支配同预算L2；相对L2三项下降、一项提高，所有成对95% CI跨0，且统计非劣性未建立"
+  }
+}

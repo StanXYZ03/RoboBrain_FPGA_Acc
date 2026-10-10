@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "model": {
+    "name": "RoboBrain2.5-4B Q8_0 GGUF",
+    "sha256": "835b78f173a8229f4a17d9f4861662eb219f28a6ea76416abbce57ce28ef49eb",
+    "tensor_count": 399,
+    "tensor_payload_bytes": 4687714304,
+    "decoder_weight_bytes_per_token": 4274448384,
+    "decoder_layer_weight_bytes": 3861172224,
+    "output_weight_bytes": 413265920,
+    "output_norm_bytes": 10240,
+    "token_embedding_bytes_not_streamed_per_token": 413265920
+  },
+  "language": {
+    "layers": 36,
+    "hidden": 2560,
+    "kv_heads": 8,
+    "key_length": 128,
+    "value_length": 128,
+    "context_limit": 262144
+  },
+  "workload": {
+    "vision_encoder_tokens": 4320,
+    "merged_visual_tokens": 1080,
+    "observed_total_prompt_tokens": 1142
+  },
+  "formats": {
+    "BF16_or_FP16": {"bytes_numerator": 2, "bytes_denominator": 1},
+    "Q8_0_payload": {"bytes_numerator": 34, "bytes_denominator": 32},
+    "Q4_0_payload": {"bytes_numerator": 18, "bytes_denominator": 32}
+  },
+  "links": {
+    "1GbE_line_rate_upper_bound": {
+      "payload_bytes_per_second": 125000000,
+      "measured": false,
+      "note": "line-rate arithmetic only; protocol, copies and startup are excluded"
+    },
+    "1GbE_80pct_scenario": {
+      "payload_bytes_per_second": 100000000,
+      "measured": false,
+      "note": "planning scenario, not a measured Jetson-ZCU102 result"
+    },
+    "10GbE_80pct_scenario": {
+      "payload_bytes_per_second": 1000000000,
+      "measured": false,
+      "note": "planning scenario; current hardware path is not verified"
+    },
+    "fast_link_3GBps_scenario": {
+      "payload_bytes_per_second": 3000000000,
+      "measured": false,
+      "note": "generic payload-rate scenario, not a claim about ZCU102 PCIe"
+    }
+  },
+  "decoder_bandwidths": {
+    "PS_sequential_read_measured": {
+      "bytes_per_second": 2158000000,
+      "measured": true,
+      "source": "reports/2026-08-22-zcu102-operator-bottleneck.md"
+    },
+    "DDR4_2133_line_rate": {
+      "bytes_per_second": 17065000000,
+      "measured": false,
+      "source": "2133.125 MT/s x 8 byte interface"
+    },
+    "DDR4_2133_85pct_scenario": {
+      "bytes_per_second": 14505250000,
+      "measured": false,
+      "source": "85% of line rate; planning target, not measured"
+    }
+  },
+  "evidence": {
+    "gguf_metadata_extracted": "2026-09-01 read-only with gguf-py",
+    "visual_token_source": "docs/PL_ACCELERATION_RESEARCH_PLAN_2027.md",
+    "observed_prompt_source": "docs/ROBOT_COMPUTE_PLATFORM_AND_FPGA_ROLE_SURVEY.md"
+  }
+}

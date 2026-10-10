@@ -1,0 +1,91 @@
+#!/bin/sh
+# Minimal RAM-only PID 1.  It never mounts a persistent root filesystem.
+set -eu
+
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin
+mount_if_missing() {
+    target="$1"; type="$2"; source="$3"; options="${4:-}"
+    grep -q " $target " /proc/mounts 2>/dev/null && return 0
+    mkdir -p "$target"
+    if [ -n "$options" ]; then
+        mount -t "$type" -o "$options" "$source" "$target"
+    else
+        mount -t "$type" "$source" "$target"
+    fi
+}
+
+mkdir -p /proc /sys /dev /run /dev/shm /tmp
+mount_if_missing /proc proc proc
+mount_if_missing /sys sysfs sysfs
+mount_if_missing /dev devtmpfs devtmpfs mode=0755
+mount_if_missing /run tmpfs tmpfs mode=0755,nosuid,nodev
+mount_if_missing /dev/shm tmpfs tmpfs mode=1777,nosuid,nodev
+mount_if_missing /tmp tmpfs tmpfs mode=1777,nosuid,nodev
+hostname zcu102-robobrain
+/opt/robobrain/start_uart_shell.sh
+# OCM mailbox used only for headless JTAG diagnosis.  It is independent of SD
+# and remains readable even before Ethernet is available.
+devmem 0x7FF00000 32 0x52424901 || true
+
+# U-Boot supplies the current host Wi-Fi address.  Linux uses it only as the
+# peer address while both endpoints force traffic through the direct cable.
+HOST_IP="${HOST_IP:-172.21.51.222}"
+BOARD_ADDRESS="${BOARD_ADDRESS:-172.21.127.254/17}"
+ROBOBRAIN_PROFILE_MODE="${ROBOBRAIN_PROFILE_MODE:-0}"
+ROBOBRAIN_PL_SELFTEST="${ROBOBRAIN_PL_SELFTEST:-0}"
+for argument in $(cat /proc/cmdline); do
+    case "$argument" in
+        robobrain.host_ip=*) HOST_IP="${argument#*=}" ;;
+        robobrain.board_address=*) BOARD_ADDRESS="${argument#*=}" ;;
+        robobrain.profile=*) ROBOBRAIN_PROFILE_MODE="${argument#*=}" ;;
+        robobrain.pl_selftest=*) ROBOBRAIN_PL_SELFTEST="${argument#*=}" ;;
+    esac
+done
+case "$HOST_IP" in ''|*[!0-9.]*) echo "RAM_LINUX_INIT_FAIL invalid host IP"; poweroff -f;; esac
+case "$BOARD_ADDRESS" in ''|*[!0-9./]*) echo "RAM_LINUX_INIT_FAIL invalid board address"; poweroff -f;; esac
+case "$ROBOBRAIN_PROFILE_MODE" in 0|1) ;; *) echo "RAM_LINUX_INIT_FAIL invalid profile mode"; poweroff -f;; esac
+case "$ROBOBRAIN_PL_SELFTEST" in 0|1) ;; *) echo "RAM_LINUX_INIT_FAIL invalid PL self-test mode"; poweroff -f;; esac
+export HOST_IP BOARD_ADDRESS ROBOBRAIN_PROFILE_MODE ROBOBRAIN_PL_SELFTEST
+echo "RAM_LINUX_NETWORK host_ip=$HOST_IP board_address=$BOARD_ADDRESS profile=$ROBOBRAIN_PROFILE_MODE pl_selftest=$ROBOBRAIN_PL_SELFTEST"
+devmem 0x7FF00000 32 0x52424902 || true
+
+if grep -qw 'robobrain.selftest=1' /proc/cmdline; then
+    echo "RAM_LINUX_SELFTEST_BEGIN"
+    for command in sh blockdev dd sha256sum awk mount ip df tail nc wget httpd; do
+        command -v "$command" >/dev/null 2>&1 || {
+            echo "RAM_LINUX_SELFTEST_FAIL missing=$command"
+            poweroff -f
+        }
+    done
+    /opt/robobrain/selftest/llama-server --version
+    echo "RAM_LINUX_QEMU_PASS"
+    sync
+    poweroff -f
+fi
+
+if [ "$ROBOBRAIN_PL_SELFTEST" = 1 ]; then
+    echo "RAM_LINUX_PL_SELFTEST_BEGIN"
+    if [ -d /sys/class/uio ]; then
+        for uio in /sys/class/uio/uio*; do
+            [ -d "$uio" ] || continue
+            printf 'RAM_LINUX_UIO device=%s name=' "${uio##*/}"
+            cat "$uio/name" 2>/dev/null || echo unknown
+        done
+    fi
+    set +e
+    /opt/robobrain/q8q8-selftest --timeout-ms 5000
+    pl_status=$?
+    set -e
+    if [ "$pl_status" -eq 0 ]; then
+        echo "RAM_LINUX_PL_SELFTEST_PASS"
+        devmem 0x7FF00000 32 0x51385053 || true
+    else
+        echo "RAM_LINUX_PL_SELFTEST_FAIL rc=$pl_status"
+        devmem 0x7FF00000 32 0x51384641 || true
+    fi
+    echo "RAM_LINUX_PL_SELFTEST_HOLD uart_shell=enabled"
+    while :; do sleep 3600; done
+fi
+
+devmem 0x7FF00000 32 0x52424903 || true
+exec /opt/robobrain/boot_entrypoint.sh

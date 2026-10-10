@@ -1,0 +1,36 @@
+{
+  "status": "LOCKED_BEFORE_CORRECTED_EXECUTION",
+  "locked_date": "2026-09-15",
+  "parent_lock": "configs/roi_l2_matched_budget192.lock.json",
+  "reason": "The first execution audit found that processor defaults enlarged one small COCO image from the native baseline's 48 visual tokens to 80. This correction reproduces run_hf_global_roi.py explicit image bounds and changes no selector, budget, metric, seed, or dataset decision.",
+  "observed_before_correction": {
+    "custom_dense_native_exact_text_matches": 382,
+    "total_tasks": 384,
+    "affected_coco_image_id": 268831,
+    "affected_tasks": 2,
+    "native_dense_visual_tokens": 48,
+    "first_run_custom_dense_visual_tokens": 80
+  },
+  "correction": {
+    "processor_min_pixels": "(patch_size * spatial_merge_size)^2 = 1024",
+    "processor_max_pixels": "processor.image_processor.size.longest_edge",
+    "runner_flag": "--match-global-roi-processor-bounds",
+    "output_directory": "evaluation/results/roi_l2_matched_budget192_nativegrid"
+  },
+  "unchanged_protocol": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "unique_images": 192,
+    "task_records": 384,
+    "selector": "l2_anchor",
+    "prune_after_layer": 5,
+    "anchor_grid": 3,
+    "token_target_strategy": "roi_only",
+    "quality_generations_per_sample": 1,
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 20260914,
+    "primary_noninferiority_margin": -0.02,
+    "calibration_split_access": false,
+    "test_split_access": false
+  },
+  "preservation_rule": "Keep the first-run JSONL and report unchanged as audit evidence; write corrected outputs to a new directory."
+}

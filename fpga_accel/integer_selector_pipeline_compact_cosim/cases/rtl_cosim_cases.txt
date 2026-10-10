@@ -1,0 +1,5 @@
+synth_g80_K48_cap16 arena_synth_g80.bin 48 16 0.03125 8 10
+real_grounding_correct_K64_cap16 arena_real_grounding_correct.bin 64 16 0.03125 13 20
+synth_g400_K96_cap16 arena_synth_g400.bin 96 16 0.03125 20 20
+synth_g80_K96_cap16 arena_synth_g80.bin 96 16 0.03125 8 10
+zero_g128_K48_cap16 arena_zero_g128.bin 48 16 0.03125 8 16

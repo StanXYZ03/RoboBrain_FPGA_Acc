@@ -1,0 +1,3881 @@
+{
+  "status": "VISION_PREFIX_POLICY_CV_FAIL",
+  "evidence_level": "192-image revealed development grouped cross-validation",
+  "feature_contract": {
+    "feature_region": "vision_prefix",
+    "image_resolution": [
+      64,
+      64
+    ],
+    "image_features": [
+      "projected_mean_0",
+      "projected_mean_1",
+      "projected_mean_2",
+      "projected_mean_3",
+      "projected_mean_4",
+      "projected_mean_5",
+      "projected_mean_6",
+      "projected_mean_7",
+      "projected_mean_8",
+      "projected_mean_9",
+      "projected_mean_10",
+      "projected_mean_11",
+      "projected_mean_12",
+      "projected_mean_13",
+      "projected_mean_14",
+      "projected_mean_15",
+      "projected_std_0",
+      "projected_std_1",
+      "projected_std_2",
+      "projected_std_3",
+      "projected_std_4",
+      "projected_std_5",
+      "projected_std_6",
+      "projected_std_7",
+      "projected_std_8",
+      "projected_std_9",
+      "projected_std_10",
+      "projected_std_11",
+      "projected_std_12",
+      "projected_std_13",
+      "projected_std_14",
+      "projected_std_15",
+      "projected_min_0",
+      "projected_min_1",
+      "projected_min_2",
+      "projected_min_3",
+      "projected_min_4",
+      "projected_min_5",
+      "projected_min_6",
+      "projected_min_7",
+      "projected_min_8",
+      "projected_min_9",
+      "projected_min_10",
+      "projected_min_11",
+      "projected_min_12",
+      "projected_min_13",
+      "projected_min_14",
+      "projected_min_15",
+      "projected_max_0",
+      "projected_max_1",
+      "projected_max_2",
+      "projected_max_3",
+      "projected_max_4",
+      "projected_max_5",
+      "projected_max_6",
+      "projected_max_7",
+      "projected_max_8",
+      "projected_max_9",
+      "projected_max_10",
+      "projected_max_11",
+      "projected_max_12",
+      "projected_max_13",
+      "projected_max_14",
+      "projected_max_15",
+      "spatial_0_0_0",
+      "spatial_0_1_0",
+      "spatial_0_2_0",
+      "spatial_0_3_0",
+      "spatial_1_0_0",
+      "spatial_1_1_0",
+      "spatial_1_2_0",
+      "spatial_1_3_0",
+      "spatial_2_0_0",
+      "spatial_2_1_0",
+      "spatial_2_2_0",
+      "spatial_2_3_0",
+      "spatial_3_0_0",
+      "spatial_3_1_0",
+      "spatial_3_2_0",
+      "spatial_3_3_0",
+      "spatial_0_0_1",
+      "spatial_0_1_1",
+      "spatial_0_2_1",
+      "spatial_0_3_1",
+      "spatial_1_0_1",
+      "spatial_1_1_1",
+      "spatial_1_2_1",
+      "spatial_1_3_1",
+      "spatial_2_0_1",
+      "spatial_2_1_1",
+      "spatial_2_2_1",
+      "spatial_2_3_1",
+      "spatial_3_0_1",
+      "spatial_3_1_1",
+      "spatial_3_2_1",
+      "spatial_3_3_1",
+      "spatial_0_0_2",
+      "spatial_0_1_2",
+      "spatial_0_2_2",
+      "spatial_0_3_2",
+      "spatial_1_0_2",
+      "spatial_1_1_2",
+      "spatial_1_2_2",
+      "spatial_1_3_2",
+      "spatial_2_0_2",
+      "spatial_2_1_2",
+      "spatial_2_2_2",
+      "spatial_2_3_2",
+      "spatial_3_0_2",
+      "spatial_3_1_2",
+      "spatial_3_2_2",
+      "spatial_3_3_2",
+      "spatial_0_0_3",
+      "spatial_0_1_3",
+      "spatial_0_2_3",
+      "spatial_0_3_3",
+      "spatial_1_0_3",
+      "spatial_1_1_3",
+      "spatial_1_2_3",
+      "spatial_1_3_3",
+      "spatial_2_0_3",
+      "spatial_2_1_3",
+      "spatial_2_2_3",
+      "spatial_2_3_3",
+      "spatial_3_0_3",
+      "spatial_3_1_3",
+      "spatial_3_2_3",
+      "spatial_3_3_3",
+      "spatial_0_0_4",
+      "spatial_0_1_4",
+      "spatial_0_2_4",
+      "spatial_0_3_4",
+      "spatial_1_0_4",
+      "spatial_1_1_4",
+      "spatial_1_2_4",
+      "spatial_1_3_4",
+      "spatial_2_0_4",
+      "spatial_2_1_4",
+      "spatial_2_2_4",
+      "spatial_2_3_4",
+      "spatial_3_0_4",
+      "spatial_3_1_4",
+      "spatial_3_2_4",
+      "spatial_3_3_4",
+      "spatial_0_0_5",
+      "spatial_0_1_5",
+      "spatial_0_2_5",
+      "spatial_0_3_5",
+      "spatial_1_0_5",
+      "spatial_1_1_5",
+      "spatial_1_2_5",
+      "spatial_1_3_5",
+      "spatial_2_0_5",
+      "spatial_2_1_5",
+      "spatial_2_2_5",
+      "spatial_2_3_5",
+      "spatial_3_0_5",
+      "spatial_3_1_5",
+      "spatial_3_2_5",
+      "spatial_3_3_5",
+      "spatial_0_0_6",
+      "spatial_0_1_6",
+      "spatial_0_2_6",
+      "spatial_0_3_6",
+      "spatial_1_0_6",
+      "spatial_1_1_6",
+      "spatial_1_2_6",
+      "spatial_1_3_6",
+      "spatial_2_0_6",
+      "spatial_2_1_6",
+      "spatial_2_2_6",
+      "spatial_2_3_6",
+      "spatial_3_0_6",
+      "spatial_3_1_6",
+      "spatial_3_2_6",
+      "spatial_3_3_6",
+      "spatial_0_0_7",
+      "spatial_0_1_7",
+      "spatial_0_2_7",
+      "spatial_0_3_7",
+      "spatial_1_0_7",
+      "spatial_1_1_7",
+      "spatial_1_2_7",
+      "spatial_1_3_7",
+      "spatial_2_0_7",
+      "spatial_2_1_7",
+      "spatial_2_2_7",
+      "spatial_2_3_7",
+      "spatial_3_0_7",
+      "spatial_3_1_7",
+      "spatial_3_2_7",
+      "spatial_3_3_7",
+      "spatial_0_0_8",
+      "spatial_0_1_8",
+      "spatial_0_2_8",
+      "spatial_0_3_8",
+      "spatial_1_0_8",
+      "spatial_1_1_8",
+      "spatial_1_2_8",
+      "spatial_1_3_8",
+      "spatial_2_0_8",
+      "spatial_2_1_8",
+      "spatial_2_2_8",
+      "spatial_2_3_8",
+      "spatial_3_0_8",
+      "spatial_3_1_8",
+      "spatial_3_2_8",
+      "spatial_3_3_8",
+      "spatial_0_0_9",
+      "spatial_0_1_9",
+      "spatial_0_2_9",
+      "spatial_0_3_9",
+      "spatial_1_0_9",
+      "spatial_1_1_9",
+      "spatial_1_2_9",
+      "spatial_1_3_9",
+      "spatial_2_0_9",
+      "spatial_2_1_9",
+      "spatial_2_2_9",
+      "spatial_2_3_9",
+      "spatial_3_0_9",
+      "spatial_3_1_9",
+      "spatial_3_2_9",
+      "spatial_3_3_9",
+      "spatial_0_0_10",
+      "spatial_0_1_10",
+      "spatial_0_2_10",
+      "spatial_0_3_10",
+      "spatial_1_0_10",
+      "spatial_1_1_10",
+      "spatial_1_2_10",
+      "spatial_1_3_10",
+      "spatial_2_0_10",
+      "spatial_2_1_10",
+      "spatial_2_2_10",
+      "spatial_2_3_10",
+      "spatial_3_0_10",
+      "spatial_3_1_10",
+      "spatial_3_2_10",
+      "spatial_3_3_10",
+      "spatial_0_0_11",
+      "spatial_0_1_11",
+      "spatial_0_2_11",
+      "spatial_0_3_11",
+      "spatial_1_0_11",
+      "spatial_1_1_11",
+      "spatial_1_2_11",
+      "spatial_1_3_11",
+      "spatial_2_0_11",
+      "spatial_2_1_11",
+      "spatial_2_2_11",
+      "spatial_2_3_11",
+      "spatial_3_0_11",
+      "spatial_3_1_11",
+      "spatial_3_2_11",
+      "spatial_3_3_11",
+      "spatial_0_0_12",
+      "spatial_0_1_12",
+      "spatial_0_2_12",
+      "spatial_0_3_12",
+      "spatial_1_0_12",
+      "spatial_1_1_12",
+      "spatial_1_2_12",
+      "spatial_1_3_12",
+      "spatial_2_0_12",
+      "spatial_2_1_12",
+      "spatial_2_2_12",
+      "spatial_2_3_12",
+      "spatial_3_0_12",
+      "spatial_3_1_12",
+      "spatial_3_2_12",
+      "spatial_3_3_12",
+      "spatial_0_0_13",
+      "spatial_0_1_13",
+      "spatial_0_2_13",
+      "spatial_0_3_13",
+      "spatial_1_0_13",
+      "spatial_1_1_13",
+      "spatial_1_2_13",
+      "spatial_1_3_13",
+      "spatial_2_0_13",
+      "spatial_2_1_13",
+      "spatial_2_2_13",
+      "spatial_2_3_13",
+      "spatial_3_0_13",
+      "spatial_3_1_13",
+      "spatial_3_2_13",
+      "spatial_3_3_13",
+      "spatial_0_0_14",
+      "spatial_0_1_14",
+      "spatial_0_2_14",
+      "spatial_0_3_14",
+      "spatial_1_0_14",
+      "spatial_1_1_14",
+      "spatial_1_2_14",
+      "spatial_1_3_14",
+      "spatial_2_0_14",
+      "spatial_2_1_14",
+      "spatial_2_2_14",
+      "spatial_2_3_14",
+      "spatial_3_0_14",
+      "spatial_3_1_14",
+      "spatial_3_2_14",
+      "spatial_3_3_14",
+      "spatial_0_0_15",
+      "spatial_0_1_15",
+      "spatial_0_2_15",
+      "spatial_0_3_15",
+      "spatial_1_0_15",
+      "spatial_1_1_15",
+      "spatial_1_2_15",
+      "spatial_1_3_15",
+      "spatial_2_0_15",
+      "spatial_2_1_15",
+      "spatial_2_2_15",
+      "spatial_2_3_15",
+      "spatial_3_0_15",
+      "spatial_3_1_15",
+      "spatial_3_2_15",
+      "spatial_3_3_15",
+      "norm_min",
+      "norm_q10",
+      "norm_q25",
+      "norm_q50",
+      "norm_q75",
+      "norm_q90",
+      "norm_max",
+      "grid_h",
+      "grid_w",
+      "grid_aspect",
+      "group_count"
+    ],
+    "prompt_feature": "one-hot category explicitly present in prompt",
+    "oracle_roi_conditional": false,
+    "ground_truth_values_used_as_direct_features": false,
+    "feature_count": 358,
+    "vision_prefix_features": "evaluation/results/roi384_vision_prefix6_features_dev192_20260914.jsonl"
+  },
+  "cross_validation": {
+    "folds": 5,
+    "group": "coco_image_id",
+    "seed": 20260914,
+    "ridge_alpha": 10.0,
+    "decision_threshold": 0.0
+  },
+  "analyses": {
+    "grounding": {
+      "samples": 192,
+      "positive_high_better": 117,
+      "action_balanced_accuracy": 0.4953846153846154,
+      "gain_pearson_correlation": -0.017329441662805596,
+      "policy": {
+        "n": 192,
+        "high_selected": 109,
+        "high_selected_rate": 0.5677083333333334,
+        "parse_rate": 1.0,
+        "mean_final_context_visual_tokens": 129.47916666666666,
+        "mean_cumulative_processed_visual_tokens": 129.47916666666666,
+        "final_token_ratio_to_dense": 0.48216606218119046,
+        "processed_token_ratio_to_dense": 0.48216606218119046,
+        "mean_iou": 0.8091694911213155,
+        "acc_0_5": 0.9114583333333334,
+        "vision_block_token_work_ratio_to_dense": 0.5269691033573188
+      },
+      "primary_delta_vs_dense": {
+        "n": 192,
+        "mean_delta": -0.0011599195050453685,
+        "ci95_low": -0.024438504203397254,
+        "ci95_high": 0.021284381448212347,
+        "iterations": 10000
+      },
+      "gate": {
+        "balanced_accuracy": false,
+        "compute_budget": false,
+        "noninferiority": false,
+        "all": false
+      }
+    },
+    "pointing": {
+      "samples": 192,
+      "positive_high_better": 98,
+      "action_balanced_accuracy": 0.5265957446808511,
+      "gain_pearson_correlation": 0.048233613243360215,
+      "policy": {
+        "n": 192,
+        "high_selected": 91,
+        "high_selected_rate": 0.4739583333333333,
+        "parse_rate": 1.0,
+        "mean_final_context_visual_tokens": 126.6875,
+        "mean_cumulative_processed_visual_tokens": 126.6875,
+        "final_token_ratio_to_dense": 0.4717702050078551,
+        "processed_token_ratio_to_dense": 0.4717702050078551,
+        "mean_point_nme_bbox_diag": 0.1080692171878528,
+        "pck_0_1": 0.6197916666666666,
+        "pck_0_2": 0.8645833333333334,
+        "vision_block_token_work_ratio_to_dense": 0.5129657285827887
+      },
+      "primary_delta_vs_dense": {
+        "n": 192,
+        "mean_delta": -0.026041666666666668,
+        "ci95_low": -0.08854166666666667,
+        "ci95_high": 0.036458333333333336,
+        "iterations": 10000
+      },
+      "gate": {
+        "balanced_accuracy": false,
+        "compute_budget": false,
+        "noninferiority": false,
+        "all": false
+      }
+    }
+  },
+  "rows": [
+    {
+      "sample_id": "coco-val-000000000802-332341-grounding",
+      "coco_image_id": 802,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.004627571166040179,
+      "predicted_utility_gain_high_minus_low": 0.14982758143310104,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000001425-713032-grounding",
+      "coco_image_id": 1425,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.041505454978678524,
+      "predicted_utility_gain_high_minus_low": -0.05170198361642761,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000002592-678926-grounding",
+      "coco_image_id": 2592,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.03213776466661078,
+      "predicted_utility_gain_high_minus_low": 0.0844691861521349,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000003934-115058-grounding",
+      "coco_image_id": 3934,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.2066342201061363,
+      "predicted_utility_gain_high_minus_low": 0.14558054093416709,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000008277-689517-grounding",
+      "coco_image_id": 8277,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.009028269339481976,
+      "predicted_utility_gain_high_minus_low": -0.24146245601758554,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000010977-1095365-grounding",
+      "coco_image_id": 10977,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.005067386540296592,
+      "predicted_utility_gain_high_minus_low": -0.08512881033434819,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000019742-1151441-grounding",
+      "coco_image_id": 19742,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.10436853263129164,
+      "predicted_utility_gain_high_minus_low": -0.08208994432863102,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000019786-111323-grounding",
+      "coco_image_id": 19786,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.013201577595850722,
+      "predicted_utility_gain_high_minus_low": 0.18628294791863415,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000025394-1506985-grounding",
+      "coco_image_id": 25394,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.002658491617442249,
+      "predicted_utility_gain_high_minus_low": -0.04412815733758416,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000025603-1144688-grounding",
+      "coco_image_id": 25603,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.008323446275848356,
+      "predicted_utility_gain_high_minus_low": 0.06404226539608342,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000029397-575411-grounding",
+      "coco_image_id": 29397,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.04133454091951583,
+      "predicted_utility_gain_high_minus_low": 0.2721284205695057,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000031050-1153302-grounding",
+      "coco_image_id": 31050,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.3370503406312322,
+      "predicted_utility_gain_high_minus_low": -0.05500424103290667,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000032038-2130609-grounding",
+      "coco_image_id": 32038,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.07193732890291382,
+      "predicted_utility_gain_high_minus_low": -0.37661593418255024,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000035326-1641790-grounding",
+      "coco_image_id": 35326,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.16128864996355835,
+      "predicted_utility_gain_high_minus_low": 0.35085108898229217,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000038678-1883757-grounding",
+      "coco_image_id": 38678,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.026314419562546543,
+      "predicted_utility_gain_high_minus_low": 0.1674290935482732,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000040083-103807-grounding",
+      "coco_image_id": 40083,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.06818991290274601,
+      "predicted_utility_gain_high_minus_low": -0.11844292510682294,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000041872-316433-grounding",
+      "coco_image_id": 41872,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.013987957393462147,
+      "predicted_utility_gain_high_minus_low": 0.22324651577174776,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000049810-1813526-grounding",
+      "coco_image_id": 49810,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.7483840264666874,
+      "predicted_utility_gain_high_minus_low": 0.05477421728493836,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000050380-102188-grounding",
+      "coco_image_id": 50380,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.024892664275188436,
+      "predicted_utility_gain_high_minus_low": -0.1666417241606359,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000051008-1098870-grounding",
+      "coco_image_id": 51008,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.007738799894045356,
+      "predicted_utility_gain_high_minus_low": -0.0325662393608501,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000052413-324905-grounding",
+      "coco_image_id": 52413,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.020600640584817587,
+      "predicted_utility_gain_high_minus_low": -0.09356826714605891,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000052996-332281-grounding",
+      "coco_image_id": 52996,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.007461006107293167,
+      "predicted_utility_gain_high_minus_low": -0.06878753456751771,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000053505-1094075-grounding",
+      "coco_image_id": 53505,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.012060670134135365,
+      "predicted_utility_gain_high_minus_low": -0.12623575140962898,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000056350-1094660-grounding",
+      "coco_image_id": 56350,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.03866068432529712,
+      "predicted_utility_gain_high_minus_low": 0.07170885865197399,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000060347-575500-grounding",
+      "coco_image_id": 60347,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.008872580593279888,
+      "predicted_utility_gain_high_minus_low": -0.366669030969234,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000066523-318060-grounding",
+      "coco_image_id": 66523,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0060169182184047765,
+      "predicted_utility_gain_high_minus_low": -0.0607426101163239,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000068833-105777-grounding",
+      "coco_image_id": 68833,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.052961032226897964,
+      "predicted_utility_gain_high_minus_low": -0.1584592860304248,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000071938-322025-grounding",
+      "coco_image_id": 71938,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.014150961718858435,
+      "predicted_utility_gain_high_minus_low": 0.18468585078040664,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000073946-1612062-grounding",
+      "coco_image_id": 73946,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.007553466260931563,
+      "predicted_utility_gain_high_minus_low": -0.16349880895674335,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000077396-120016-grounding",
+      "coco_image_id": 77396,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.00830282138542815,
+      "predicted_utility_gain_high_minus_low": 0.24364607560660986,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000078170-1589958-grounding",
+      "coco_image_id": 78170,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.0018283635901541473,
+      "predicted_utility_gain_high_minus_low": 0.37871524898550635,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000080932-107131-grounding",
+      "coco_image_id": 80932,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.7012845065113079,
+      "predicted_utility_gain_high_minus_low": 0.08761258619646053,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000082696-122374-grounding",
+      "coco_image_id": 82696,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.07770978946780205,
+      "predicted_utility_gain_high_minus_low": 0.20613695078140926,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000090108-1092156-grounding",
+      "coco_image_id": 90108,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.023502866917650245,
+      "predicted_utility_gain_high_minus_low": 0.15177192373842113,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000094326-571324-grounding",
+      "coco_image_id": 94326,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.6018916874503428,
+      "predicted_utility_gain_high_minus_low": 0.1380716981494627,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000107226-2034549-grounding",
+      "coco_image_id": 107226,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.07339563302619634,
+      "predicted_utility_gain_high_minus_low": -0.04311444516397327,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000109976-1120978-grounding",
+      "coco_image_id": 109976,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.05148774797950029,
+      "predicted_utility_gain_high_minus_low": 0.16569835533500596,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000112997-324511-grounding",
+      "coco_image_id": 112997,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.0037962130670891048,
+      "predicted_utility_gain_high_minus_low": 0.00032269030669237683,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000113589-2108886-grounding",
+      "coco_image_id": 113589,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.007036007321692628,
+      "predicted_utility_gain_high_minus_low": 0.12288303615185177,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000115885-1611352-grounding",
+      "coco_image_id": 115885,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.6568598687991587,
+      "predicted_utility_gain_high_minus_low": 0.10103459337361578,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000124659-98013-grounding",
+      "coco_image_id": 124659,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.1404053698191271,
+      "predicted_utility_gain_high_minus_low": 0.04287352248069909,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000135410-2035059-grounding",
+      "coco_image_id": 135410,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.12676860098055354,
+      "predicted_utility_gain_high_minus_low": -0.1513582794180046,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000136600-1101931-grounding",
+      "coco_image_id": 136600,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.015492445843305336,
+      "predicted_utility_gain_high_minus_low": 0.14722993988770058,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000139684-97792-grounding",
+      "coco_image_id": 139684,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.041348367178654755,
+      "predicted_utility_gain_high_minus_low": 0.2381183435480305,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000140076-1959371-grounding",
+      "coco_image_id": 140076,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.08827606347233408,
+      "predicted_utility_gain_high_minus_low": 0.20937920206374688,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000141821-81028-grounding",
+      "coco_image_id": 141821,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.03332178329629254,
+      "predicted_utility_gain_high_minus_low": -0.199305535476625,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000148620-1097814-grounding",
+      "coco_image_id": 148620,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.016488200449692236,
+      "predicted_utility_gain_high_minus_low": -0.13460295966575372,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000150224-375181-grounding",
+      "coco_image_id": 150224,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.049149820140208855,
+      "predicted_utility_gain_high_minus_low": -0.4229901322409547,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000155154-1623652-grounding",
+      "coco_image_id": 155154,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.028797023932690458,
+      "predicted_utility_gain_high_minus_low": -0.11405482369141663,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000157390-1621501-grounding",
+      "coco_image_id": 157390,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.003993280200178084,
+      "predicted_utility_gain_high_minus_low": 0.1723731185776835,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000157601-670357-grounding",
+      "coco_image_id": 157601,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.028351140801302632,
+      "predicted_utility_gain_high_minus_low": -0.22720280250840258,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000159458-316096-grounding",
+      "coco_image_id": 159458,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.007821871669266622,
+      "predicted_utility_gain_high_minus_low": 0.09058035984488028,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000160556-1119718-grounding",
+      "coco_image_id": 160556,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.04710560183551116,
+      "predicted_utility_gain_high_minus_low": -0.18234798655828066,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000161642-334971-grounding",
+      "coco_image_id": 161642,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.03180682798822099,
+      "predicted_utility_gain_high_minus_low": 0.19058928306710576,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000166478-97919-grounding",
+      "coco_image_id": 166478,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.007475835967932776,
+      "predicted_utility_gain_high_minus_low": -0.06265738048910918,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000166918-1965088-grounding",
+      "coco_image_id": 166918,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0026718959913195617,
+      "predicted_utility_gain_high_minus_low": 0.009496972976506708,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000167240-1155125-grounding",
+      "coco_image_id": 167240,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.006594952628382056,
+      "predicted_utility_gain_high_minus_low": 0.22942395360294832,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000167572-1533850-grounding",
+      "coco_image_id": 167572,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.10204919462818884,
+      "predicted_utility_gain_high_minus_low": 0.17660728367876743,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000168458-1156199-grounding",
+      "coco_image_id": 168458,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.13377955045014234,
+      "predicted_utility_gain_high_minus_low": 0.16641443489977853,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000168974-327720-grounding",
+      "coco_image_id": 168974,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 8.338288616682732e-06,
+      "predicted_utility_gain_high_minus_low": -0.0888045101487675,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000170099-112811-grounding",
+      "coco_image_id": 170099,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.02234149340980529,
+      "predicted_utility_gain_high_minus_low": 0.23933032295910606,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000170595-320735-grounding",
+      "coco_image_id": 170595,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.020236016215008812,
+      "predicted_utility_gain_high_minus_low": -0.17352812785966518,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000170893-1094910-grounding",
+      "coco_image_id": 170893,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.3771920967585005,
+      "predicted_utility_gain_high_minus_low": -0.2553691740771123,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000171740-111862-grounding",
+      "coco_image_id": 171740,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.004654297992172651,
+      "predicted_utility_gain_high_minus_low": -0.003365344797980915,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000172617-1183984-grounding",
+      "coco_image_id": 172617,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.006498180152281541,
+      "predicted_utility_gain_high_minus_low": -0.002196327464910636,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000174123-687551-grounding",
+      "coco_image_id": 174123,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.016574153038844464,
+      "predicted_utility_gain_high_minus_low": 0.1706448727272418,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000179392-1116715-grounding",
+      "coco_image_id": 179392,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.0030606474730554556,
+      "predicted_utility_gain_high_minus_low": 0.08257203024564397,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000181753-2132020-grounding",
+      "coco_image_id": 181753,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.027344132594955384,
+      "predicted_utility_gain_high_minus_low": 0.2849161918105204,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000181816-575961-grounding",
+      "coco_image_id": 181816,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.006127356037806675,
+      "predicted_utility_gain_high_minus_low": -0.01127171404421185,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000186449-575383-grounding",
+      "coco_image_id": 186449,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.05853188929001202,
+      "predicted_utility_gain_high_minus_low": -0.03154723766128811,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000187243-1096009-grounding",
+      "coco_image_id": 187243,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.047234249516597604,
+      "predicted_utility_gain_high_minus_low": -0.1369497260556563,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000192871-711703-grounding",
+      "coco_image_id": 192871,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.013087668272658393,
+      "predicted_utility_gain_high_minus_low": 0.2512313927066713,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000197796-1133279-grounding",
+      "coco_image_id": 197796,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.03327126964933291,
+      "predicted_utility_gain_high_minus_low": 0.1232680065630104,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000201426-414419-grounding",
+      "coco_image_id": 201426,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.004798560336642166,
+      "predicted_utility_gain_high_minus_low": 0.20075582311608564,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000202001-112639-grounding",
+      "coco_image_id": 202001,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.011935271917542956,
+      "predicted_utility_gain_high_minus_low": -0.05742465470999396,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000203488-1396085-grounding",
+      "coco_image_id": 203488,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.007465267254661234,
+      "predicted_utility_gain_high_minus_low": -0.1359549953544966,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000206027-119587-grounding",
+      "coco_image_id": 206027,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.009229051465210136,
+      "predicted_utility_gain_high_minus_low": 0.00815691352731613,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000206218-1098254-grounding",
+      "coco_image_id": 206218,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.010817159928158127,
+      "predicted_utility_gain_high_minus_low": -0.38288575999033975,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000213086-1122736-grounding",
+      "coco_image_id": 213086,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.314122988472469,
+      "predicted_utility_gain_high_minus_low": -0.18177313357508307,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000215259-113243-grounding",
+      "coco_image_id": 215259,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.008891911985782652,
+      "predicted_utility_gain_high_minus_low": 0.10637031772656663,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000216419-334295-grounding",
+      "coco_image_id": 216419,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.005166523341222362,
+      "predicted_utility_gain_high_minus_low": 0.01706704425803642,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000223789-1130149-grounding",
+      "coco_image_id": 223789,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.01846924303903108,
+      "predicted_utility_gain_high_minus_low": -0.18415934006746076,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000227044-1133390-grounding",
+      "coco_image_id": 227044,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.019011550118742226,
+      "predicted_utility_gain_high_minus_low": -0.027386810430900528,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000228144-1614299-grounding",
+      "coco_image_id": 228144,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.3124343704054776,
+      "predicted_utility_gain_high_minus_low": -0.06348169558941832,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000231237-23210-grounding",
+      "coco_image_id": 231237,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.012148207951769407,
+      "predicted_utility_gain_high_minus_low": 0.05740725643374439,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000231339-331345-grounding",
+      "coco_image_id": 231339,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.02116023236139164,
+      "predicted_utility_gain_high_minus_low": -0.028230629736210516,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000233238-710399-grounding",
+      "coco_image_id": 233238,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.009649778904777487,
+      "predicted_utility_gain_high_minus_low": -0.3130766449861052,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000236914-393463-grounding",
+      "coco_image_id": 236914,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.17690811795948558,
+      "predicted_utility_gain_high_minus_low": 0.12802265606499047,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000242287-125686-grounding",
+      "coco_image_id": 242287,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.0059396782224589995,
+      "predicted_utility_gain_high_minus_low": -0.18623792326337762,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000246968-1119852-grounding",
+      "coco_image_id": 246968,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.0311043638862315,
+      "predicted_utility_gain_high_minus_low": 0.23498121250439274,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000251537-2194703-grounding",
+      "coco_image_id": 251537,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.3188530316183956,
+      "predicted_utility_gain_high_minus_low": 0.006150507634426933,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000257169-1095822-grounding",
+      "coco_image_id": 257169,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.006757545958973488,
+      "predicted_utility_gain_high_minus_low": 0.0453152038056301,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000262682-1123096-grounding",
+      "coco_image_id": 262682,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.015071081506762618,
+      "predicted_utility_gain_high_minus_low": -0.33176520922108527,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000262938-1141311-grounding",
+      "coco_image_id": 262938,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.01957009041925084,
+      "predicted_utility_gain_high_minus_low": 0.02305767259799712,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000263463-574930-grounding",
+      "coco_image_id": 263463,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.04795663221832591,
+      "predicted_utility_gain_high_minus_low": 0.3162024799374947,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000263796-1092667-grounding",
+      "coco_image_id": 263796,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.02103820215691754,
+      "predicted_utility_gain_high_minus_low": 0.15605162613453621,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000265518-669880-grounding",
+      "coco_image_id": 265518,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.013675521979034655,
+      "predicted_utility_gain_high_minus_low": -0.036201971536691246,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000268378-391967-grounding",
+      "coco_image_id": 268378,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.32564395323269285,
+      "predicted_utility_gain_high_minus_low": 0.25300494433655546,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000268831-1132340-grounding",
+      "coco_image_id": 268831,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.05905439969432724,
+      "predicted_utility_gain_high_minus_low": 0.16769949627596864,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000272416-1096721-grounding",
+      "coco_image_id": 272416,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.042880027602308135,
+      "predicted_utility_gain_high_minus_low": -0.0903698953880455,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000276055-676364-grounding",
+      "coco_image_id": 276055,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.020893089059945802,
+      "predicted_utility_gain_high_minus_low": -0.17301260052302908,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000277020-1621566-grounding",
+      "coco_image_id": 277020,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.01231961010531013,
+      "predicted_utility_gain_high_minus_low": 0.31048020440133034,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000283412-1507981-grounding",
+      "coco_image_id": 283412,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.004267691672408147,
+      "predicted_utility_gain_high_minus_low": 0.3590869429691532,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000284623-1134157-grounding",
+      "coco_image_id": 284623,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.1066151639794117,
+      "predicted_utility_gain_high_minus_low": -0.1642261673839157,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000284991-85862-grounding",
+      "coco_image_id": 284991,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.010722367587865489,
+      "predicted_utility_gain_high_minus_low": 0.22578128804202996,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000286907-1095698-grounding",
+      "coco_image_id": 286907,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.008808653064908856,
+      "predicted_utility_gain_high_minus_low": 0.05544745955543996,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000287667-1139179-grounding",
+      "coco_image_id": 287667,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": 0.12692342334809426,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000288762-687503-grounding",
+      "coco_image_id": 288762,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.09565130796587118,
+      "predicted_utility_gain_high_minus_low": 0.03255625727848667,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000289343-575188-grounding",
+      "coco_image_id": 289343,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.00885786933163768,
+      "predicted_utility_gain_high_minus_low": 0.3376183587208995,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000289992-1135247-grounding",
+      "coco_image_id": 289992,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.044802915905331475,
+      "predicted_utility_gain_high_minus_low": 0.2765323389975378,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000291634-128292-grounding",
+      "coco_image_id": 291634,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.05680585820015105,
+      "predicted_utility_gain_high_minus_low": -0.06392654964845804,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000296231-1941711-grounding",
+      "coco_image_id": 296231,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0013550537937259133,
+      "predicted_utility_gain_high_minus_low": 0.3735616594492801,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000301421-1103988-grounding",
+      "coco_image_id": 301421,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.32059507106627544,
+      "predicted_utility_gain_high_minus_low": 0.24815336410490602,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000301718-119483-grounding",
+      "coco_image_id": 301718,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.10015078610557193,
+      "predicted_utility_gain_high_minus_low": 0.24307596905009593,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000302760-1129949-grounding",
+      "coco_image_id": 302760,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.03848552281754136,
+      "predicted_utility_gain_high_minus_low": -0.08727486363897691,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000310072-577281-grounding",
+      "coco_image_id": 310072,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.024247946113803653,
+      "predicted_utility_gain_high_minus_low": -0.009612236323255124,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000310980-1114877-grounding",
+      "coco_image_id": 310980,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.1804978963572822,
+      "predicted_utility_gain_high_minus_low": 0.47457067336760006,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000316015-1115731-grounding",
+      "coco_image_id": 316015,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.01650567964251415,
+      "predicted_utility_gain_high_minus_low": 0.023251772496837214,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000316666-320401-grounding",
+      "coco_image_id": 316666,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.2194984319312543,
+      "predicted_utility_gain_high_minus_low": 0.2307553273542646,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000321214-2121063-grounding",
+      "coco_image_id": 321214,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": -0.13772747644257202,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000326970-1174936-grounding",
+      "coco_image_id": 326970,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0022403962322767867,
+      "predicted_utility_gain_high_minus_low": -0.2292461438072797,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000334483-1834005-grounding",
+      "coco_image_id": 334483,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.4007408085111922,
+      "predicted_utility_gain_high_minus_low": -0.04596035194271726,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000336209-574640-grounding",
+      "coco_image_id": 336209,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.07293124137874629,
+      "predicted_utility_gain_high_minus_low": -0.022473794510816096,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000345361-390529-grounding",
+      "coco_image_id": 345361,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.029347828507118034,
+      "predicted_utility_gain_high_minus_low": 0.12660491718562186,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000349152-1620611-grounding",
+      "coco_image_id": 349152,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": 0.0400330678042116,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000353096-1116633-grounding",
+      "coco_image_id": 353096,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.7312031774544796,
+      "predicted_utility_gain_high_minus_low": 0.0999847002787922,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000355240-2193197-grounding",
+      "coco_image_id": 355240,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.5955162043979128,
+      "predicted_utility_gain_high_minus_low": 0.2514165727044259,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000357567-1094427-grounding",
+      "coco_image_id": 357567,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.015790948496025248,
+      "predicted_utility_gain_high_minus_low": 0.09475071614492318,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000357978-1950439-grounding",
+      "coco_image_id": 357978,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.3662548775933834,
+      "predicted_utility_gain_high_minus_low": -0.089927353030186,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000359219-688533-grounding",
+      "coco_image_id": 359219,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.006622125928499978,
+      "predicted_utility_gain_high_minus_low": 0.14895770629067615,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000361238-1169723-grounding",
+      "coco_image_id": 361238,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.4035997013607606,
+      "predicted_utility_gain_high_minus_low": -0.05501438309328716,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000363461-102528-grounding",
+      "coco_image_id": 363461,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.011550611832656266,
+      "predicted_utility_gain_high_minus_low": 0.05066691179949208,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000363840-102560-grounding",
+      "coco_image_id": 363840,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.024099639868844558,
+      "predicted_utility_gain_high_minus_low": -0.0011205543021656152,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000364297-1115931-grounding",
+      "coco_image_id": 364297,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.030412036666465858,
+      "predicted_utility_gain_high_minus_low": -0.12094000008589652,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000368212-1096288-grounding",
+      "coco_image_id": 368212,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0024529544050437835,
+      "predicted_utility_gain_high_minus_low": 0.05619436335892948,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000370208-125303-grounding",
+      "coco_image_id": 370208,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.016166215003023288,
+      "predicted_utility_gain_high_minus_low": 0.22740966123944117,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000371749-111588-grounding",
+      "coco_image_id": 371749,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.06227335244039467,
+      "predicted_utility_gain_high_minus_low": 0.24784516610893154,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000375078-1153031-grounding",
+      "coco_image_id": 375078,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.05212409264170237,
+      "predicted_utility_gain_high_minus_low": 0.2780959880442549,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000378099-1107336-grounding",
+      "coco_image_id": 378099,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.016776368587883228,
+      "predicted_utility_gain_high_minus_low": 0.21646677266599235,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000379332-1579861-grounding",
+      "coco_image_id": 379332,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.057384684064334945,
+      "predicted_utility_gain_high_minus_low": 0.10956935872494022,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000383337-391085-grounding",
+      "coco_image_id": 383337,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.2478406431661308,
+      "predicted_utility_gain_high_minus_low": -0.06870193056353294,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000397354-120359-grounding",
+      "coco_image_id": 397354,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.3681257546984563,
+      "predicted_utility_gain_high_minus_low": -0.1870016280336097,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000405970-20600-grounding",
+      "coco_image_id": 405970,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.03372412744539666,
+      "predicted_utility_gain_high_minus_low": 0.05294851352651575,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000407825-341578-grounding",
+      "coco_image_id": 407825,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.10086208527856788,
+      "predicted_utility_gain_high_minus_low": -0.05366267443744707,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000415741-315201-grounding",
+      "coco_image_id": 415741,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.10243031569401573,
+      "predicted_utility_gain_high_minus_low": -0.21739694213923427,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000416745-1094503-grounding",
+      "coco_image_id": 416745,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.003098585077670468,
+      "predicted_utility_gain_high_minus_low": -0.039102769393330926,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000419974-1880254-grounding",
+      "coco_image_id": 419974,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.01765127705685432,
+      "predicted_utility_gain_high_minus_low": -0.12155100089152714,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000425226-332772-grounding",
+      "coco_image_id": 425226,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.013959839646576322,
+      "predicted_utility_gain_high_minus_low": 0.040560844679582174,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000428280-578099-grounding",
+      "coco_image_id": 428280,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.44200905536301527,
+      "predicted_utility_gain_high_minus_low": 0.02707597783129867,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000430056-1117016-grounding",
+      "coco_image_id": 430056,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.27444432819306364,
+      "predicted_utility_gain_high_minus_low": 0.21526754853032692,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000436617-1811135-grounding",
+      "coco_image_id": 436617,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.049464902565878266,
+      "predicted_utility_gain_high_minus_low": 0.03890038493412403,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000437392-1093807-grounding",
+      "coco_image_id": 437392,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.15813726392058758,
+      "predicted_utility_gain_high_minus_low": 0.23805960616216565,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000450488-317141-grounding",
+      "coco_image_id": 450488,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.012441889750328339,
+      "predicted_utility_gain_high_minus_low": -0.14160408116244333,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000451571-1941497-grounding",
+      "coco_image_id": 451571,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.2660727346157109,
+      "predicted_utility_gain_high_minus_low": -0.03123021571807286,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000452784-713581-grounding",
+      "coco_image_id": 452784,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0060053619302948835,
+      "predicted_utility_gain_high_minus_low": -0.003119834990620493,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000456662-331567-grounding",
+      "coco_image_id": 456662,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.012722236253824737,
+      "predicted_utility_gain_high_minus_low": -0.03715018201987137,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000458255-1141588-grounding",
+      "coco_image_id": 458255,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.0019807974212749935,
+      "predicted_utility_gain_high_minus_low": -0.13600728860629333,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000463842-316796-grounding",
+      "coco_image_id": 463842,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.11946657911910302,
+      "predicted_utility_gain_high_minus_low": 0.39098205305651257,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000467176-1951749-grounding",
+      "coco_image_id": 467176,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0067696938165418,
+      "predicted_utility_gain_high_minus_low": 0.21189419361949535,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000468233-338212-grounding",
+      "coco_image_id": 468233,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.017792569239236444,
+      "predicted_utility_gain_high_minus_low": 0.1590268374547435,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000468245-316948-grounding",
+      "coco_image_id": 468245,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.019502539558467147,
+      "predicted_utility_gain_high_minus_low": -0.1514898050735051,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000471893-118700-grounding",
+      "coco_image_id": 471893,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.10016705042944529,
+      "predicted_utility_gain_high_minus_low": 0.08476544471099173,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000473118-125429-grounding",
+      "coco_image_id": 473118,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.0017103995440960196,
+      "predicted_utility_gain_high_minus_low": 0.09454550582225708,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000474854-122353-grounding",
+      "coco_image_id": 474854,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.045648489278752424,
+      "predicted_utility_gain_high_minus_low": 0.21229681103090572,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000478136-1622756-grounding",
+      "coco_image_id": 478136,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.253795400663101,
+      "predicted_utility_gain_high_minus_low": 0.11924141898657689,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000480122-391893-grounding",
+      "coco_image_id": 480122,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.017668025383543284,
+      "predicted_utility_gain_high_minus_low": 0.13185212114297595,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000482436-1961886-grounding",
+      "coco_image_id": 482436,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.21845659311883242,
+      "predicted_utility_gain_high_minus_low": 0.11406910169557283,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000482978-1942439-grounding",
+      "coco_image_id": 482978,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.014714218007983448,
+      "predicted_utility_gain_high_minus_low": 0.28213792198472243,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000483531-314389-grounding",
+      "coco_image_id": 483531,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.04790880966789757,
+      "predicted_utility_gain_high_minus_low": -0.1466554005702285,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000492878-1131167-grounding",
+      "coco_image_id": 492878,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.09964626005878252,
+      "predicted_utility_gain_high_minus_low": 0.07804725994298839,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000497599-1100722-grounding",
+      "coco_image_id": 497599,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.02798062009613922,
+      "predicted_utility_gain_high_minus_low": 0.21947014073116777,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000499313-1621288-grounding",
+      "coco_image_id": 499313,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": 0.22473312483231178,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000505169-1094484-grounding",
+      "coco_image_id": 505169,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.05186634246280397,
+      "predicted_utility_gain_high_minus_low": -0.15875033893056908,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000517056-373476-grounding",
+      "coco_image_id": 517056,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.05950680089079724,
+      "predicted_utility_gain_high_minus_low": -0.27340654389201535,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000530146-2095270-grounding",
+      "coco_image_id": 530146,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.00842978443965181,
+      "predicted_utility_gain_high_minus_low": 0.07452674942443929,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000530975-1519219-grounding",
+      "coco_image_id": 530975,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.3569999660986318,
+      "predicted_utility_gain_high_minus_low": 0.11110181700059735,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000536947-331522-grounding",
+      "coco_image_id": 536947,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.054334264161122525,
+      "predicted_utility_gain_high_minus_low": -0.02333874574732548,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000539883-1396261-grounding",
+      "coco_image_id": 539883,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.01399584034284529,
+      "predicted_utility_gain_high_minus_low": 0.5798205819226347,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000542423-572224-grounding",
+      "coco_image_id": 542423,
+      "task": "grounding",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.008659651701746873,
+      "predicted_utility_gain_high_minus_low": 0.1798826191372321,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000551304-1623696-grounding",
+      "coco_image_id": 551304,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.12416024872370401,
+      "predicted_utility_gain_high_minus_low": -0.06949273067280287,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000555972-111535-grounding",
+      "coco_image_id": 555972,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.42668308831780544,
+      "predicted_utility_gain_high_minus_low": -0.04901633400240153,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000559707-685829-grounding",
+      "coco_image_id": 559707,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.0014669403958353922,
+      "predicted_utility_gain_high_minus_low": -0.14664734990444178,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000559956-1180006-grounding",
+      "coco_image_id": 559956,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.13394137818537288,
+      "predicted_utility_gain_high_minus_low": 0.07050939029471896,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000560312-1951834-grounding",
+      "coco_image_id": 560312,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.008813801948708844,
+      "predicted_utility_gain_high_minus_low": 0.20195344123493966,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000565853-1824012-grounding",
+      "coco_image_id": 565853,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.001137665310559255,
+      "predicted_utility_gain_high_minus_low": -0.2632425802186054,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000565877-99808-grounding",
+      "coco_image_id": 565877,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.022897094057230727,
+      "predicted_utility_gain_high_minus_low": -0.1835153812822432,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000567886-1159726-grounding",
+      "coco_image_id": 567886,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.028323794047716233,
+      "predicted_utility_gain_high_minus_low": -0.14143931316899352,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000568195-1616769-grounding",
+      "coco_image_id": 568195,
+      "task": "grounding",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.004973485970984126,
+      "predicted_utility_gain_high_minus_low": 0.06208002069767911,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000569059-108194-grounding",
+      "coco_image_id": 569059,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.008409248615887877,
+      "predicted_utility_gain_high_minus_low": -0.03974114372443224,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000569700-1152933-grounding",
+      "coco_image_id": 569700,
+      "task": "grounding",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.006763250295465095,
+      "predicted_utility_gain_high_minus_low": 0.05722695770484379,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000578545-318662-grounding",
+      "coco_image_id": 578545,
+      "task": "grounding",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.003528867719683193,
+      "predicted_utility_gain_high_minus_low": 0.09951301890749165,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000578922-1153155-grounding",
+      "coco_image_id": 578922,
+      "task": "grounding",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.03574606648357326,
+      "predicted_utility_gain_high_minus_low": 0.05653481922357424,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000000802-332341-pointing",
+      "coco_image_id": 802,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.012049979616983592,
+      "predicted_utility_gain_high_minus_low": 0.07392810195801708,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000001425-713032-pointing",
+      "coco_image_id": 1425,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.011438052090132517,
+      "predicted_utility_gain_high_minus_low": 0.12628784434199228,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000002592-678926-pointing",
+      "coco_image_id": 2592,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.015205599144445539,
+      "predicted_utility_gain_high_minus_low": 0.013739999163807784,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000003934-115058-pointing",
+      "coco_image_id": 3934,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.024480192725080313,
+      "predicted_utility_gain_high_minus_low": 0.04018796548905052,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000008277-689517-pointing",
+      "coco_image_id": 8277,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.025969413118654222,
+      "predicted_utility_gain_high_minus_low": 0.09845094296511855,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000010977-1095365-pointing",
+      "coco_image_id": 10977,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.016637088569055283,
+      "predicted_utility_gain_high_minus_low": -0.017388829925143387,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000019742-1151441-pointing",
+      "coco_image_id": 19742,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.0037820242321287556,
+      "predicted_utility_gain_high_minus_low": 0.02909546998530737,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000019786-111323-pointing",
+      "coco_image_id": 19786,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.014778994431235787,
+      "predicted_utility_gain_high_minus_low": 0.16260451293285128,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000025394-1506985-pointing",
+      "coco_image_id": 25394,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.0009998181308246163,
+      "predicted_utility_gain_high_minus_low": -0.05394923901545136,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000025603-1144688-pointing",
+      "coco_image_id": 25603,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.016828130770066965,
+      "predicted_utility_gain_high_minus_low": 0.09196973565594033,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000029397-575411-pointing",
+      "coco_image_id": 29397,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.01808360440385833,
+      "predicted_utility_gain_high_minus_low": 0.03646870801720566,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000031050-1153302-pointing",
+      "coco_image_id": 31050,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.04088540725725151,
+      "predicted_utility_gain_high_minus_low": 0.11369382790719214,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000032038-2130609-pointing",
+      "coco_image_id": 32038,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.0022559246717687303,
+      "predicted_utility_gain_high_minus_low": -0.050281924630737024,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000035326-1641790-pointing",
+      "coco_image_id": 35326,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.005519238552622097,
+      "predicted_utility_gain_high_minus_low": -0.021376292268511243,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000038678-1883757-pointing",
+      "coco_image_id": 38678,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.007940255677316451,
+      "predicted_utility_gain_high_minus_low": -0.05827683791765148,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000040083-103807-pointing",
+      "coco_image_id": 40083,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.035593380340372766,
+      "predicted_utility_gain_high_minus_low": -0.07505295535114531,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000041872-316433-pointing",
+      "coco_image_id": 41872,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.002754624807479636,
+      "predicted_utility_gain_high_minus_low": 0.028150572422145366,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000049810-1813526-pointing",
+      "coco_image_id": 49810,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.46260192685107127,
+      "predicted_utility_gain_high_minus_low": 0.035971147672178315,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000050380-102188-pointing",
+      "coco_image_id": 50380,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.004038063253367585,
+      "predicted_utility_gain_high_minus_low": -0.010057014862757554,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000051008-1098870-pointing",
+      "coco_image_id": 51008,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.0393745564996085,
+      "predicted_utility_gain_high_minus_low": -0.06700064389169459,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000052413-324905-pointing",
+      "coco_image_id": 52413,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.011474236663984094,
+      "predicted_utility_gain_high_minus_low": -0.03616086989547272,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000052996-332281-pointing",
+      "coco_image_id": 52996,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.03709451882594442,
+      "predicted_utility_gain_high_minus_low": 0.06401766309033262,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000053505-1094075-pointing",
+      "coco_image_id": 53505,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.00026503439741132687,
+      "predicted_utility_gain_high_minus_low": 0.0658939389627214,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000056350-1094660-pointing",
+      "coco_image_id": 56350,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.007840131366027153,
+      "predicted_utility_gain_high_minus_low": 0.021812667387354046,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000060347-575500-pointing",
+      "coco_image_id": 60347,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.035722962537512004,
+      "predicted_utility_gain_high_minus_low": -0.002377646400649286,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000066523-318060-pointing",
+      "coco_image_id": 66523,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.014431876724275927,
+      "predicted_utility_gain_high_minus_low": 0.0006467965243570384,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000068833-105777-pointing",
+      "coco_image_id": 68833,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.024186145541331264,
+      "predicted_utility_gain_high_minus_low": 0.14501452123692135,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000071938-322025-pointing",
+      "coco_image_id": 71938,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.000579088011730608,
+      "predicted_utility_gain_high_minus_low": 0.004048074037638702,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000073946-1612062-pointing",
+      "coco_image_id": 73946,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.01382280201254682,
+      "predicted_utility_gain_high_minus_low": -0.09956868005037182,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000077396-120016-pointing",
+      "coco_image_id": 77396,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.0031971139611702837,
+      "predicted_utility_gain_high_minus_low": -0.10551763503900498,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000078170-1589958-pointing",
+      "coco_image_id": 78170,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.013889730408704976,
+      "predicted_utility_gain_high_minus_low": 0.06421740869114258,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000080932-107131-pointing",
+      "coco_image_id": 80932,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0014181514426646058,
+      "predicted_utility_gain_high_minus_low": 0.043017446668407976,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000082696-122374-pointing",
+      "coco_image_id": 82696,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.05670722021297923,
+      "predicted_utility_gain_high_minus_low": -0.03903726838263535,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000090108-1092156-pointing",
+      "coco_image_id": 90108,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": 0.08771660092087244,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000094326-571324-pointing",
+      "coco_image_id": 94326,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.06372309557945627,
+      "predicted_utility_gain_high_minus_low": 0.04613766959250061,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000107226-2034549-pointing",
+      "coco_image_id": 107226,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.07730771540280586,
+      "predicted_utility_gain_high_minus_low": -0.0727502321089364,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000109976-1120978-pointing",
+      "coco_image_id": 109976,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.02486718322886615,
+      "predicted_utility_gain_high_minus_low": 0.08719236488280897,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000112997-324511-pointing",
+      "coco_image_id": 112997,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.0019873153978603973,
+      "predicted_utility_gain_high_minus_low": 0.06069088900660402,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000113589-2108886-pointing",
+      "coco_image_id": 113589,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.13675504010512843,
+      "predicted_utility_gain_high_minus_low": -0.03523266056007987,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000115885-1611352-pointing",
+      "coco_image_id": 115885,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.20127054053055754,
+      "predicted_utility_gain_high_minus_low": -0.0468935186821286,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000124659-98013-pointing",
+      "coco_image_id": 124659,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.053481601910101095,
+      "predicted_utility_gain_high_minus_low": 0.07177236072192236,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000135410-2035059-pointing",
+      "coco_image_id": 135410,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": -0.14448017609718988,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000136600-1101931-pointing",
+      "coco_image_id": 136600,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.005519674095932875,
+      "predicted_utility_gain_high_minus_low": -0.02377667543974449,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000139684-97792-pointing",
+      "coco_image_id": 139684,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.0012300358054037897,
+      "predicted_utility_gain_high_minus_low": -0.001495036331747786,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000140076-1959371-pointing",
+      "coco_image_id": 140076,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.08249681270654784,
+      "predicted_utility_gain_high_minus_low": -0.029569251508398658,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000141821-81028-pointing",
+      "coco_image_id": 141821,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.03130722245351635,
+      "predicted_utility_gain_high_minus_low": -0.027798135175253202,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000148620-1097814-pointing",
+      "coco_image_id": 148620,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.004226398017970125,
+      "predicted_utility_gain_high_minus_low": -0.03935908839412819,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000150224-375181-pointing",
+      "coco_image_id": 150224,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.03768800791269897,
+      "predicted_utility_gain_high_minus_low": -0.02486962132653776,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000155154-1623652-pointing",
+      "coco_image_id": 155154,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.020573463848235603,
+      "predicted_utility_gain_high_minus_low": -0.08057833522982955,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000157390-1621501-pointing",
+      "coco_image_id": 157390,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.005299934606637358,
+      "predicted_utility_gain_high_minus_low": 0.053169290392808675,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000157601-670357-pointing",
+      "coco_image_id": 157601,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.009279784294548437,
+      "predicted_utility_gain_high_minus_low": -0.020208370890750362,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000159458-316096-pointing",
+      "coco_image_id": 159458,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.01883283113987777,
+      "predicted_utility_gain_high_minus_low": 0.004070250086903636,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000160556-1119718-pointing",
+      "coco_image_id": 160556,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.01353575370168339,
+      "predicted_utility_gain_high_minus_low": 0.028762528236247715,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000161642-334971-pointing",
+      "coco_image_id": 161642,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.01122606594879313,
+      "predicted_utility_gain_high_minus_low": -0.07847749410320552,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000166478-97919-pointing",
+      "coco_image_id": 166478,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.13235299958246374,
+      "predicted_utility_gain_high_minus_low": 0.04470587690998438,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000166918-1965088-pointing",
+      "coco_image_id": 166918,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.012153629050848463,
+      "predicted_utility_gain_high_minus_low": 0.011792171567479633,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000167240-1155125-pointing",
+      "coco_image_id": 167240,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.00018440694692475196,
+      "predicted_utility_gain_high_minus_low": -0.07995707191432996,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000167572-1533850-pointing",
+      "coco_image_id": 167572,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.0007126677269548853,
+      "predicted_utility_gain_high_minus_low": 0.029779358429146544,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000168458-1156199-pointing",
+      "coco_image_id": 168458,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.009999945119667827,
+      "predicted_utility_gain_high_minus_low": 0.08023241000012554,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000168974-327720-pointing",
+      "coco_image_id": 168974,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.006138582284921586,
+      "predicted_utility_gain_high_minus_low": 0.07521464475519803,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000170099-112811-pointing",
+      "coco_image_id": 170099,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.10170177836736224,
+      "predicted_utility_gain_high_minus_low": -0.06825888008323763,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000170595-320735-pointing",
+      "coco_image_id": 170595,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.00651479980432812,
+      "predicted_utility_gain_high_minus_low": -0.01907596596491804,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000170893-1094910-pointing",
+      "coco_image_id": 170893,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.010749676147818715,
+      "predicted_utility_gain_high_minus_low": -0.09629829328739821,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000171740-111862-pointing",
+      "coco_image_id": 171740,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -9.439029456133341e-05,
+      "predicted_utility_gain_high_minus_low": 0.11019982892874565,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000172617-1183984-pointing",
+      "coco_image_id": 172617,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.031726244150918265,
+      "predicted_utility_gain_high_minus_low": -0.01909452105097692,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000174123-687551-pointing",
+      "coco_image_id": 174123,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.0019572178429478615,
+      "predicted_utility_gain_high_minus_low": -0.06026361984128357,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000179392-1116715-pointing",
+      "coco_image_id": 179392,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.015825823101773582,
+      "predicted_utility_gain_high_minus_low": -0.10628758886360028,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000181753-2132020-pointing",
+      "coco_image_id": 181753,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0011113320296226858,
+      "predicted_utility_gain_high_minus_low": 0.12681629229341532,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000181816-575961-pointing",
+      "coco_image_id": 181816,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.020496475957105645,
+      "predicted_utility_gain_high_minus_low": 0.106529035118016,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000186449-575383-pointing",
+      "coco_image_id": 186449,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.011969870248648429,
+      "predicted_utility_gain_high_minus_low": 0.027794092510127058,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000187243-1096009-pointing",
+      "coco_image_id": 187243,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.009649627053210954,
+      "predicted_utility_gain_high_minus_low": -0.07606162247987777,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000192871-711703-pointing",
+      "coco_image_id": 192871,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.025798498336293857,
+      "predicted_utility_gain_high_minus_low": -0.018725443630554436,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000197796-1133279-pointing",
+      "coco_image_id": 197796,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.01514425597090005,
+      "predicted_utility_gain_high_minus_low": 0.020345006598449386,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000201426-414419-pointing",
+      "coco_image_id": 201426,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.032701508969643744,
+      "predicted_utility_gain_high_minus_low": 0.0413038455024705,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000202001-112639-pointing",
+      "coco_image_id": 202001,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.011218840617019998,
+      "predicted_utility_gain_high_minus_low": -0.02241490261609682,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000203488-1396085-pointing",
+      "coco_image_id": 203488,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.0014076697117481884,
+      "predicted_utility_gain_high_minus_low": 0.10169805772998879,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000206027-119587-pointing",
+      "coco_image_id": 206027,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.08945926099012655,
+      "predicted_utility_gain_high_minus_low": 0.008338328041646597,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000206218-1098254-pointing",
+      "coco_image_id": 206218,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.014942850868648813,
+      "predicted_utility_gain_high_minus_low": 0.025455851776344497,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000213086-1122736-pointing",
+      "coco_image_id": 213086,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.0017920345319317743,
+      "predicted_utility_gain_high_minus_low": -0.062252201089029416,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000215259-113243-pointing",
+      "coco_image_id": 215259,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.0017435233016984825,
+      "predicted_utility_gain_high_minus_low": -0.07218939363510496,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000216419-334295-pointing",
+      "coco_image_id": 216419,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.007816030502120952,
+      "predicted_utility_gain_high_minus_low": 0.08927445501645866,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000223789-1130149-pointing",
+      "coco_image_id": 223789,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0017473464975908612,
+      "predicted_utility_gain_high_minus_low": -0.008950012536743112,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000227044-1133390-pointing",
+      "coco_image_id": 227044,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.015473312120320416,
+      "predicted_utility_gain_high_minus_low": -0.009405256489971044,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000228144-1614299-pointing",
+      "coco_image_id": 228144,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.7216194010405126,
+      "predicted_utility_gain_high_minus_low": -0.014244691118662606,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000231237-23210-pointing",
+      "coco_image_id": 231237,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.007444715402857599,
+      "predicted_utility_gain_high_minus_low": 0.04496465577129541,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000231339-331345-pointing",
+      "coco_image_id": 231339,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.02219594709612093,
+      "predicted_utility_gain_high_minus_low": 0.023041260847427917,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000233238-710399-pointing",
+      "coco_image_id": 233238,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.012064141736292278,
+      "predicted_utility_gain_high_minus_low": 0.02271808321200009,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000236914-393463-pointing",
+      "coco_image_id": 236914,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.004800284244793104,
+      "predicted_utility_gain_high_minus_low": -0.0598000642589602,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000242287-125686-pointing",
+      "coco_image_id": 242287,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.002271068673767262,
+      "predicted_utility_gain_high_minus_low": 0.05058147068804244,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000246968-1119852-pointing",
+      "coco_image_id": 246968,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.022551974671402367,
+      "predicted_utility_gain_high_minus_low": -0.07469764377163995,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000251537-2194703-pointing",
+      "coco_image_id": 251537,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.03301944590843558,
+      "predicted_utility_gain_high_minus_low": -0.026376836225431674,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000257169-1095822-pointing",
+      "coco_image_id": 257169,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.025498208132349154,
+      "predicted_utility_gain_high_minus_low": 0.026602640744623558,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000262682-1123096-pointing",
+      "coco_image_id": 262682,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.008878826863925757,
+      "predicted_utility_gain_high_minus_low": 0.01234930491921271,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000262938-1141311-pointing",
+      "coco_image_id": 262938,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": -0.13703804518765933,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000263463-574930-pointing",
+      "coco_image_id": 263463,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.025568514642520933,
+      "predicted_utility_gain_high_minus_low": 0.14177921925036818,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000263796-1092667-pointing",
+      "coco_image_id": 263796,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.05306230965926542,
+      "predicted_utility_gain_high_minus_low": 0.05768216331004968,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000265518-669880-pointing",
+      "coco_image_id": 265518,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.002912861039035399,
+      "predicted_utility_gain_high_minus_low": -0.01423319030155992,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000268378-391967-pointing",
+      "coco_image_id": 268378,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.01664765290348591,
+      "predicted_utility_gain_high_minus_low": -0.00968704759318059,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000268831-1132340-pointing",
+      "coco_image_id": 268831,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.020148109280855447,
+      "predicted_utility_gain_high_minus_low": 0.0728579727018747,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000272416-1096721-pointing",
+      "coco_image_id": 272416,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.015316486154402838,
+      "predicted_utility_gain_high_minus_low": -0.0008839869944123096,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000276055-676364-pointing",
+      "coco_image_id": 276055,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.026588810813362104,
+      "predicted_utility_gain_high_minus_low": -0.05952603499777387,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000277020-1621566-pointing",
+      "coco_image_id": 277020,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.026833355217950564,
+      "predicted_utility_gain_high_minus_low": -0.09336897857741079,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000283412-1507981-pointing",
+      "coco_image_id": 283412,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.009358180552125513,
+      "predicted_utility_gain_high_minus_low": -0.013260122719283616,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000284623-1134157-pointing",
+      "coco_image_id": 284623,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.025228081812608397,
+      "predicted_utility_gain_high_minus_low": 0.07368641709776179,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000284991-85862-pointing",
+      "coco_image_id": 284991,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.009163834599323517,
+      "predicted_utility_gain_high_minus_low": 0.1133074338507542,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000286907-1095698-pointing",
+      "coco_image_id": 286907,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.0020495472139022627,
+      "predicted_utility_gain_high_minus_low": -0.09145017525752554,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000287667-1139179-pointing",
+      "coco_image_id": 287667,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0087532141569263,
+      "predicted_utility_gain_high_minus_low": -0.08884842094914717,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000288762-687503-pointing",
+      "coco_image_id": 288762,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.032396741372493154,
+      "predicted_utility_gain_high_minus_low": 0.0021874678781904962,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000289343-575188-pointing",
+      "coco_image_id": 289343,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0008467376351381228,
+      "predicted_utility_gain_high_minus_low": 0.023056613954732266,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000289992-1135247-pointing",
+      "coco_image_id": 289992,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.008505564312309526,
+      "predicted_utility_gain_high_minus_low": -0.06038957107944075,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000291634-128292-pointing",
+      "coco_image_id": 291634,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 6.575657826352055e-05,
+      "predicted_utility_gain_high_minus_low": -0.03902135798620243,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000296231-1941711-pointing",
+      "coco_image_id": 296231,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.02229444486743626,
+      "predicted_utility_gain_high_minus_low": 0.08233250094132724,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000301421-1103988-pointing",
+      "coco_image_id": 301421,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0098069237244095,
+      "predicted_utility_gain_high_minus_low": -0.1052491907144455,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000301718-119483-pointing",
+      "coco_image_id": 301718,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.04146416159436206,
+      "predicted_utility_gain_high_minus_low": -0.0626980302848225,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000302760-1129949-pointing",
+      "coco_image_id": 302760,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.016025117481118015,
+      "predicted_utility_gain_high_minus_low": -0.021197943149788043,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000310072-577281-pointing",
+      "coco_image_id": 310072,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.00024630269109277014,
+      "predicted_utility_gain_high_minus_low": 0.02769241510746064,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000310980-1114877-pointing",
+      "coco_image_id": 310980,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.054266769117067654,
+      "predicted_utility_gain_high_minus_low": 0.07905690236676835,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000316015-1115731-pointing",
+      "coco_image_id": 316015,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.00525086216984268,
+      "predicted_utility_gain_high_minus_low": -0.0639581124416352,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000316666-320401-pointing",
+      "coco_image_id": 316666,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.08317749306870406,
+      "predicted_utility_gain_high_minus_low": -0.045332033476316834,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000321214-2121063-pointing",
+      "coco_image_id": 321214,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.00789828844754134,
+      "predicted_utility_gain_high_minus_low": -0.021486622633767962,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000326970-1174936-pointing",
+      "coco_image_id": 326970,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.0017373565773006056,
+      "predicted_utility_gain_high_minus_low": -0.0009195501567418556,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000334483-1834005-pointing",
+      "coco_image_id": 334483,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.04578984757867571,
+      "predicted_utility_gain_high_minus_low": 0.12025476378039203,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000336209-574640-pointing",
+      "coco_image_id": 336209,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.022468297034226953,
+      "predicted_utility_gain_high_minus_low": -0.016115396513796804,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000345361-390529-pointing",
+      "coco_image_id": 345361,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.011743609889840773,
+      "predicted_utility_gain_high_minus_low": 0.04333771054932554,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000349152-1620611-pointing",
+      "coco_image_id": 349152,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.007679145647907115,
+      "predicted_utility_gain_high_minus_low": -0.005639400456197077,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000353096-1116633-pointing",
+      "coco_image_id": 353096,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.16233702417222057,
+      "predicted_utility_gain_high_minus_low": -0.01712947523692686,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000355240-2193197-pointing",
+      "coco_image_id": 355240,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.02482873967793628,
+      "predicted_utility_gain_high_minus_low": 0.02785949922871216,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000357567-1094427-pointing",
+      "coco_image_id": 357567,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.0059170790090636305,
+      "predicted_utility_gain_high_minus_low": 0.04709261875311442,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000357978-1950439-pointing",
+      "coco_image_id": 357978,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.015777630209815235,
+      "predicted_utility_gain_high_minus_low": -0.05875522915945306,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000359219-688533-pointing",
+      "coco_image_id": 359219,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.18182395457207776,
+      "predicted_utility_gain_high_minus_low": -0.04851713252427848,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000361238-1169723-pointing",
+      "coco_image_id": 361238,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.01944233541944171,
+      "predicted_utility_gain_high_minus_low": 0.05370703594556908,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000363461-102528-pointing",
+      "coco_image_id": 363461,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0030092248097922207,
+      "predicted_utility_gain_high_minus_low": 0.04115667359063673,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000363840-102560-pointing",
+      "coco_image_id": 363840,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.022709221346747493,
+      "predicted_utility_gain_high_minus_low": 0.07206141873126201,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000364297-1115931-pointing",
+      "coco_image_id": 364297,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.013626602111375244,
+      "predicted_utility_gain_high_minus_low": -0.022356789355017996,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000368212-1096288-pointing",
+      "coco_image_id": 368212,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.0005782759951206418,
+      "predicted_utility_gain_high_minus_low": -0.024607285224320933,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000370208-125303-pointing",
+      "coco_image_id": 370208,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.00591039423869269,
+      "predicted_utility_gain_high_minus_low": 0.0065493842316078285,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000371749-111588-pointing",
+      "coco_image_id": 371749,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.01288485153262394,
+      "predicted_utility_gain_high_minus_low": -0.007384437760801371,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000375078-1153031-pointing",
+      "coco_image_id": 375078,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.053208264752100824,
+      "predicted_utility_gain_high_minus_low": -0.0013760285680246565,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000378099-1107336-pointing",
+      "coco_image_id": 378099,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": 0.06394194677765334,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000379332-1579861-pointing",
+      "coco_image_id": 379332,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0004903276893007819,
+      "predicted_utility_gain_high_minus_low": -0.05094373954081562,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000383337-391085-pointing",
+      "coco_image_id": 383337,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.02566162429652505,
+      "predicted_utility_gain_high_minus_low": -0.01571153468848165,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000397354-120359-pointing",
+      "coco_image_id": 397354,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.0068775219996145415,
+      "predicted_utility_gain_high_minus_low": 0.03554735107720446,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000405970-20600-pointing",
+      "coco_image_id": 405970,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": -0.09486752194451535,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000407825-341578-pointing",
+      "coco_image_id": 407825,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.004092233335314756,
+      "predicted_utility_gain_high_minus_low": 0.003653552176530254,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000415741-315201-pointing",
+      "coco_image_id": 415741,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.028691863823149685,
+      "predicted_utility_gain_high_minus_low": -0.01977972853882205,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000416745-1094503-pointing",
+      "coco_image_id": 416745,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.004870291646085663,
+      "predicted_utility_gain_high_minus_low": -0.023779217233288366,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000419974-1880254-pointing",
+      "coco_image_id": 419974,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.015603583842655033,
+      "predicted_utility_gain_high_minus_low": 0.0868457776077822,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000425226-332772-pointing",
+      "coco_image_id": 425226,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.07698335333649782,
+      "predicted_utility_gain_high_minus_low": -0.044045189965023775,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000428280-578099-pointing",
+      "coco_image_id": 428280,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.04730474435686843,
+      "predicted_utility_gain_high_minus_low": 0.16832247318488694,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000430056-1117016-pointing",
+      "coco_image_id": 430056,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.06383713055795373,
+      "predicted_utility_gain_high_minus_low": 0.0753100365170326,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000436617-1811135-pointing",
+      "coco_image_id": 436617,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.002739848794802935,
+      "predicted_utility_gain_high_minus_low": -0.17255840409032633,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000437392-1093807-pointing",
+      "coco_image_id": 437392,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0029763986985134466,
+      "predicted_utility_gain_high_minus_low": 0.045068952801455016,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000450488-317141-pointing",
+      "coco_image_id": 450488,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.011884026830809753,
+      "predicted_utility_gain_high_minus_low": -0.14058695909278457,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000451571-1941497-pointing",
+      "coco_image_id": 451571,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": -0.0037560970654614834,
+      "predicted_utility_gain_high_minus_low": -0.07116888196629312,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000452784-713581-pointing",
+      "coco_image_id": 452784,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.16592288963715213,
+      "predicted_utility_gain_high_minus_low": -0.020807632201918762,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000456662-331567-pointing",
+      "coco_image_id": 456662,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.026255471869892036,
+      "predicted_utility_gain_high_minus_low": 0.03260995423986251,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000458255-1141588-pointing",
+      "coco_image_id": 458255,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.019220072397441515,
+      "predicted_utility_gain_high_minus_low": 0.16618541512567334,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000463842-316796-pointing",
+      "coco_image_id": 463842,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.007865797816994646,
+      "predicted_utility_gain_high_minus_low": -0.02579678443483268,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000467176-1951749-pointing",
+      "coco_image_id": 467176,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.03335457086869785,
+      "predicted_utility_gain_high_minus_low": -0.08072046976843301,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000468233-338212-pointing",
+      "coco_image_id": 468233,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.005159733537638239,
+      "predicted_utility_gain_high_minus_low": 0.06083375424759381,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000468245-316948-pointing",
+      "coco_image_id": 468245,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.009574965310284275,
+      "predicted_utility_gain_high_minus_low": -0.016661535045557948,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000471893-118700-pointing",
+      "coco_image_id": 471893,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.0042282464997424885,
+      "predicted_utility_gain_high_minus_low": -0.07740990326142261,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000473118-125429-pointing",
+      "coco_image_id": 473118,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.00989219628723191,
+      "predicted_utility_gain_high_minus_low": 0.0014713547854328629,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000474854-122353-pointing",
+      "coco_image_id": 474854,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0014812291511364824,
+      "predicted_utility_gain_high_minus_low": -0.024674506638940125,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000478136-1622756-pointing",
+      "coco_image_id": 478136,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.130052713028891,
+      "predicted_utility_gain_high_minus_low": 0.11378047642107432,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000480122-391893-pointing",
+      "coco_image_id": 480122,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.004304671120761171,
+      "predicted_utility_gain_high_minus_low": -0.10703197197630929,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000482436-1961886-pointing",
+      "coco_image_id": 482436,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.07417513037442211,
+      "predicted_utility_gain_high_minus_low": -0.0343696495616569,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000482978-1942439-pointing",
+      "coco_image_id": 482978,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": 0.03791450287739442,
+      "predicted_utility_gain_high_minus_low": -0.1736725056802086,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000483531-314389-pointing",
+      "coco_image_id": 483531,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.00648309023765499,
+      "predicted_utility_gain_high_minus_low": -0.04508767738071792,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000492878-1131167-pointing",
+      "coco_image_id": 492878,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.013589751255184052,
+      "predicted_utility_gain_high_minus_low": 0.03558881056095351,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000497599-1100722-pointing",
+      "coco_image_id": 497599,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.02441288616453581,
+      "predicted_utility_gain_high_minus_low": 0.024730172224081186,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000499313-1621288-pointing",
+      "coco_image_id": 499313,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.07764551236055178,
+      "predicted_utility_gain_high_minus_low": -0.046222752208233776,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000505169-1094484-pointing",
+      "coco_image_id": 505169,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.011303413620826562,
+      "predicted_utility_gain_high_minus_low": 0.0022075916399237755,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000517056-373476-pointing",
+      "coco_image_id": 517056,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.0028651175421097186,
+      "predicted_utility_gain_high_minus_low": 0.15431296444468234,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000530146-2095270-pointing",
+      "coco_image_id": 530146,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": -0.015976615743684076,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000530975-1519219-pointing",
+      "coco_image_id": 530975,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.0,
+      "predicted_utility_gain_high_minus_low": -0.08993591576437389,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000536947-331522-pointing",
+      "coco_image_id": 536947,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.027821653672930775,
+      "predicted_utility_gain_high_minus_low": -0.13130879971367326,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000539883-1396261-pointing",
+      "coco_image_id": 539883,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.023271962808368463,
+      "predicted_utility_gain_high_minus_low": 0.0976519412902213,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000542423-572224-pointing",
+      "coco_image_id": 542423,
+      "task": "pointing",
+      "fold": 4,
+      "actual_utility_gain_high_minus_low": 0.014838199992663781,
+      "predicted_utility_gain_high_minus_low": 0.009774115475264843,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000551304-1623696-pointing",
+      "coco_image_id": 551304,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.01399223027795797,
+      "predicted_utility_gain_high_minus_low": 0.001570873485533343,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000555972-111535-pointing",
+      "coco_image_id": 555972,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": 0.01817908588604697,
+      "predicted_utility_gain_high_minus_low": -0.10171446709076708,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000559707-685829-pointing",
+      "coco_image_id": 559707,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": 0.010405768194616388,
+      "predicted_utility_gain_high_minus_low": -0.012346274552016138,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000559956-1180006-pointing",
+      "coco_image_id": 559956,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.05179654239962961,
+      "predicted_utility_gain_high_minus_low": -0.16778608812203916,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000560312-1951834-pointing",
+      "coco_image_id": 560312,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.01993359851238908,
+      "predicted_utility_gain_high_minus_low": 0.0343513803971184,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000565853-1824012-pointing",
+      "coco_image_id": 565853,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.013915148636374705,
+      "predicted_utility_gain_high_minus_low": 0.10361923493754249,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000565877-99808-pointing",
+      "coco_image_id": 565877,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": -0.006348950427365496,
+      "predicted_utility_gain_high_minus_low": 0.030117442169590804,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000567886-1159726-pointing",
+      "coco_image_id": 567886,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.00645543998977683,
+      "predicted_utility_gain_high_minus_low": -0.004476203603787044,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000568195-1616769-pointing",
+      "coco_image_id": 568195,
+      "task": "pointing",
+      "fold": 3,
+      "actual_utility_gain_high_minus_low": -0.028836450218993337,
+      "predicted_utility_gain_high_minus_low": -0.007995275623330024,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000569059-108194-pointing",
+      "coco_image_id": 569059,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.011587434087636558,
+      "predicted_utility_gain_high_minus_low": 0.07215630143702476,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000569700-1152933-pointing",
+      "coco_image_id": 569700,
+      "task": "pointing",
+      "fold": 0,
+      "actual_utility_gain_high_minus_low": -0.0025149870024720068,
+      "predicted_utility_gain_high_minus_low": -0.027833249424747387,
+      "choice": "low"
+    },
+    {
+      "sample_id": "coco-val-000000578545-318662-pointing",
+      "coco_image_id": 578545,
+      "task": "pointing",
+      "fold": 1,
+      "actual_utility_gain_high_minus_low": -0.01611350945854967,
+      "predicted_utility_gain_high_minus_low": 0.004491167433838829,
+      "choice": "high"
+    },
+    {
+      "sample_id": "coco-val-000000578922-1153155-pointing",
+      "coco_image_id": 578922,
+      "task": "pointing",
+      "fold": 2,
+      "actual_utility_gain_high_minus_low": 0.023511738483996084,
+      "predicted_utility_gain_high_minus_low": -0.07535857626442388,
+      "choice": "low"
+    }
+  ]
+}

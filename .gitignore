@@ -1,0 +1,69 @@
+# Model weights and exported artifacts
+RoboBrain2.5-4B/
+*.safetensors
+*.bin
+*.gguf
+*.onnx
+*.xmodel
+models/
+
+# Downloaded evaluation corpora, extracted features and raw predictions
+datasets/
+artifacts/
+evaluation/results/
+profiling_artifacts/
+profiling_build/
+profiling_src/
+third_party/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Native and board build trees
+build/
+**/build/
+deployment/artifacts/
+*.o
+*.d
+*.err
+*.elf
+*.dtb
+*.cpio
+*.cpio.gz
+*.bit
+*.dcp
+*.xsa
+*.zip
+
+# Generated inference results and reports
+app/api_results/
+app/result/
+
+# FPGA tool outputs (keep source TCL/HLS and curated reports)
+*.jou
+*.log
+*.str
+*.xpr
+*.runs/
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+.Xil/
+**/solution*/
+**/artifacts/
+*.pb
+*.dat
+
+# Local settings
+.env
+.vscode/
+.idea/
+.agents/
+.codex/
+*.orig
+*.bak
+*.backup

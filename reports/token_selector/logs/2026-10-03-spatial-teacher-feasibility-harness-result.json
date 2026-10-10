@@ -1,0 +1,277 @@
+{
+  "artifacts": {
+    "csv": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-spatial-teacher-feasibility.csv",
+    "focused_tests": "evaluation/tests/test_spatial_teacher_feasibility_audit.py",
+    "json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-spatial-teacher-feasibility.json",
+    "markdown": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-spatial-teacher-feasibility.md",
+    "script": "evaluation/spatial_teacher_feasibility_audit.py"
+  },
+  "correction": {
+    "anchor_mass_max_abs_diff": 0.0,
+    "anchor_mass_unchanged": true,
+    "anchor_ndcg_corrected": {
+      "48": {
+        "grounding": 0.2191770884370856,
+        "overall": 0.1356110169140511,
+        "pointing": 0.05204494539101661
+      },
+      "64": {
+        "grounding": 0.243338207876714,
+        "overall": 0.15597734304483335,
+        "pointing": 0.06861647821295272
+      },
+      "96": {
+        "grounding": 0.29111042190565956,
+        "overall": 0.19002649214054862,
+        "pointing": 0.08894256237543766
+      }
+    },
+    "anchor_ndcg_old": {
+      "48": {
+        "grounding": 0.21784019800584567,
+        "overall": 0.13453182077489712,
+        "pointing": 0.051223443543948574
+      },
+      "64": {
+        "grounding": 0.24073259343725642,
+        "overall": 0.154314918090992,
+        "pointing": 0.06789724274472748
+      },
+      "96": {
+        "grounding": 0.2876982912857768,
+        "overall": 0.18739107469519814,
+        "pointing": 0.0870838581046195
+      }
+    },
+    "corrected_definition": "ndcg_for_selected_indices(anchor_selected, L2 scores, spatial_target, effective): DCG over only the selected groups ordered by descending L2 score with deterministic low-index tie-break, divided by the all-group ideal DCG@K",
+    "defect": "anchor_baseline_record computed NDCG as ndcg_at_k(scores, target, effective), which ignores the anchor-selected set and therefore duplicated the pure-L2 NDCG even when anchor retained mass differed.",
+    "issued": "2026-10-03",
+    "label": "CORRECTION_ANCHOR_NDCG_RESTRICTED_TO_ANCHOR_SELECTED_GROUPS",
+    "note": "The pre-correction anchor NDCG equals the pure-L2 NDCG because the ranking ignored the anchor-selected set.  Retained target mass already used the selected set and is unchanged.  The preregistered spatial targets, JS/TV decision rule, data split, inputs and decision label were not modified.",
+    "old_definition": "ndcg_at_k(all L2 scores, spatial_target, effective)",
+    "old_output_sha256": {
+      "csv": "03bd34b00abf3bf218b7a82757431f1c335902c19c477374939c99d1a66e9f94",
+      "harness": "a22ea2ba8ca7213f156cb6262e6235019dbf55e4f943325ce5a8f3120c3e8e30",
+      "json": "85f836517e0c9a530389b6d98f126a435c126dd72c1e4b5b70afd68cdebaf154",
+      "md": "f4fb194d2a711c63e8226bfe943143c1b72754acc95da55047e646fcd22c99a0"
+    },
+    "old_script_sha256": "c800d12d68fd35ae29aabe3e83be2a143e44cd4d4a8c9f7d9edc5501903f9983",
+    "primary_metrics_unchanged": true
+  },
+  "decision_label": "SPATIAL_SUPERVISION_SIGNAL_PRESENT",
+  "environment": {
+    "numpy": "2.2.6",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.10.20"
+  },
+  "inputs": {
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "input_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "manifest_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "script_sha256": "1d033c4036d5f2319c8828e393594fe0b6330ac9c43afe43af14499adf748aec"
+  },
+  "isolation": {
+    "opened_npz_count": 318,
+    "opened_only_train_npz": true,
+    "split_from_index_metadata_only": true,
+    "train_npz_count": 318,
+    "train_only": true,
+    "val_test_npz_opened": [],
+    "val_test_samples_ignored": 154
+  },
+  "key_metrics": {
+    "paired_differences": {
+      "diff_js_nats": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.49298071117229225,
+        "ci_level": 0.95,
+        "ci_low": 0.44049064778638986,
+        "ci_rule_lower_gt_zero": true,
+        "cohens_dz": 2.8292345669278838,
+        "independent_image_units": 159,
+        "mean": 0.46694857684828106,
+        "median": 0.5021428458447664,
+        "n": 159,
+        "p_value_two_sided": 9.999000099990002e-05,
+        "permutation_resamples": 10000,
+        "sample_count": 159,
+        "signal_present": true,
+        "std": 0.16504413678054125
+      },
+      "diff_k48_disagreement": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.5526608494180208,
+        "ci_level": 0.95,
+        "ci_low": 0.43317833108195714,
+        "ci_rule_lower_gt_zero": true,
+        "cohens_dz": 1.3020543462579792,
+        "independent_image_units": 159,
+        "mean": 0.492348312399592,
+        "median": 0.5302922309337135,
+        "n": 159,
+        "p_value_two_sided": 9.999000099990002e-05,
+        "permutation_resamples": 10000,
+        "sample_count": 159,
+        "signal_present": true,
+        "std": 0.37813192192366585
+      },
+      "diff_k64_disagreement": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.474255935413271,
+        "ci_level": 0.95,
+        "ci_low": 0.35011690102634335,
+        "ci_rule_lower_gt_zero": true,
+        "cohens_dz": 1.0498431345363355,
+        "independent_image_units": 159,
+        "mean": 0.41243398628836847,
+        "median": 0.474827768945416,
+        "n": 159,
+        "p_value_two_sided": 9.999000099990002e-05,
+        "permutation_resamples": 10000,
+        "sample_count": 159,
+        "signal_present": true,
+        "std": 0.39285296319103946
+      },
+      "diff_k96_disagreement": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.3438783441169041,
+        "ci_level": 0.95,
+        "ci_low": 0.22370135682850537,
+        "ci_rule_lower_gt_zero": true,
+        "cohens_dz": 0.732591221484069,
+        "independent_image_units": 159,
+        "mean": 0.282972219752225,
+        "median": 0.27310134620269233,
+        "n": 159,
+        "p_value_two_sided": 9.999000099990002e-05,
+        "permutation_resamples": 10000,
+        "sample_count": 159,
+        "signal_present": true,
+        "std": 0.3862620946767358
+      },
+      "diff_tv": {
+        "bootstrap_resamples": 2000,
+        "ci_high": 0.7744531233650396,
+        "ci_level": 0.95,
+        "ci_low": 0.7006472782633839,
+        "ci_rule_lower_gt_zero": true,
+        "cohens_dz": 3.1350901788191945,
+        "independent_image_units": 159,
+        "mean": 0.739101400107991,
+        "median": 0.817174730157973,
+        "n": 159,
+        "p_value_two_sided": 9.999000099990002e-05,
+        "permutation_resamples": 10000,
+        "sample_count": 159,
+        "signal_present": true,
+        "std": 0.23575124093762667
+      }
+    },
+    "semantic_pair_signal": {
+      "js_nats": 0.0510667377915249,
+      "symmetric_kl": 0.38520924663956857,
+      "tv": 0.12721014201883768
+    },
+    "spatial_pair_signal": {
+      "js_nats": 0.518015314639806,
+      "symmetric_kl": 11.248109644449228,
+      "tv": 0.8663115421268288
+    },
+    "train_images": 159,
+    "train_records": 318
+  },
+  "limitations": [
+    "The audit does not train anything, does not build a student and does not claim the target is learnable.",
+    "No downstream task accuracy (CV-Bench or otherwise) is measured or claimed.",
+    "No FPGA latency, resource or speedup number is measured or claimed.",
+    "The semantic comparator is the existing cached max-over-prompt-token teacher only; no new semantic model is loaded.",
+    "The grounding area target and the pointing bilinear target have different structural support (an area over many cells vs at most four cells), so part of the same-image spatial separation reflects that structural difference and not only task-relevant geometry.",
+    "Low spatial/semantic agreement means the objectives differ, not automatically that either target is wrong.",
+    "The hardware-regular anchor baseline is a descriptive reference over the L2 saliency score in this zero-update audit; it is not a trained selector.",
+    "All numbers are TRAIN-split, image-level and CPU float64 internal measurements, never a promotion gate."
+  ],
+  "next_decision": "Codex/PI decision only: if decision_label == SPATIAL_SUPERVISION_SIGNAL_PRESENT, decide whether to design a trainable scorer and a promotion-gated experiment; if NOT_ESTABLISHED, no spatial supervision target is authorized by this audit; learnability and task accuracy remain untested either way.",
+  "no_gpu_model_network": {
+    "gpu_used": false,
+    "model_loaded": false,
+    "network_used": false
+  },
+  "output_sha256": {
+    "csv": "03bd34b00abf3bf218b7a82757431f1c335902c19c477374939c99d1a66e9f94",
+    "json": "1bd2b9e41f3e6d698548ff7ad85c9b0a0b513e0d3ef4d4b0c02cc259ffbcc739",
+    "md": "a28aadfd80d6ca39655bbfb62d95cf17f9e93fd5626c5b2dc869bc03d40f18a1"
+  },
+  "peak_rss_mib": 1215.17578125,
+  "preregistration": {
+    "all_pinned_match_after": true,
+    "byte_for_byte_unchanged": true,
+    "config_prereg_pin_match": true,
+    "pinned_inputs": {
+      "clean_manifest": {
+        "actual_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+        "match_config": true,
+        "match_report": true,
+        "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+        "pinned_config_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+        "pinned_report_sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+      },
+      "clean_manifest_lock": {
+        "actual_sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+        "match_config": true,
+        "match_report": true,
+        "path": "datasets/prompt_projection_clean_inductive_v1.lock.json",
+        "pinned_config_sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+        "pinned_report_sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105"
+      },
+      "config": {
+        "actual_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+        "match_config": true,
+        "match_report": true,
+        "path": "configs/prompt_projection_distillation.json",
+        "pinned_config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+        "pinned_report_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b"
+      },
+      "hardware_regular_config": {
+        "actual_sha256": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142",
+        "match_config": true,
+        "match_report": true,
+        "path": "configs/hardware_regular_token_selector.json",
+        "pinned_config_sha256": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142",
+        "pinned_report_sha256": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142"
+      },
+      "index": {
+        "actual_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+        "match_config": true,
+        "match_report": true,
+        "path": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+        "pinned_config_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+        "pinned_report_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26"
+      },
+      "teacher_pair_signal": {
+        "actual_sha256": "09dbce65f33ae7cfffd778816228ae02863af95f318efe2e6510cb95304d52dd",
+        "match_config": true,
+        "match_report": true,
+        "path": "reports/token_selector/2026-10-02-teacher-pair-signal-train-only.json",
+        "pinned_config_sha256": "09dbce65f33ae7cfffd778816228ae02863af95f318efe2e6510cb95304d52dd",
+        "pinned_report_sha256": "09dbce65f33ae7cfffd778816228ae02863af95f318efe2e6510cb95304d52dd"
+      }
+    },
+    "preregistration_config_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/spatial_teacher_feasibility.preregistered.json",
+    "preregistration_config_sha256": "bfa1963597993ea9e3482735f16b2d430638ac3bf8e0682b5078f4e112974490",
+    "preregistration_report_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-spatial-teacher-feasibility-preregistration.json",
+    "preregistration_report_sha256": "ce296bab00b82793b7f59781da126825680bb0d3cd8434e0e638f1f5bf1fcca9",
+    "unchanged_by_input": {
+      "clean_manifest": true,
+      "clean_manifest_lock": true,
+      "config": true,
+      "hardware_regular_config": true,
+      "index": true,
+      "teacher_pair_signal": true
+    }
+  },
+  "report": "2026-10-03-spatial-teacher-feasibility",
+  "runtime_seconds": 1.6416052450658754,
+  "scope": "parameter-free spatial supervision target feasibility audit; TRAIN split only; zero-update, CPU-only float64; no model load, no GPU, no network, no val/test npz, no CV-Bench",
+  "status": "COMPUTED"
+}

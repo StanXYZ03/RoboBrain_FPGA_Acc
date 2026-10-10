@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_VAL_ONLY_EXPLORATORY_DIAGNOSTIC",
+  "report_stem": "2026-10-03-task-pair-nesting-audit",
+  "created_at_utc": "2026-10-03T04:00:31Z",
+  "chronology_note": "Written before any byte of the operational records CSV, the clean manifest JSONL, or the operational JSON was read. Only SHA256 hashing of the pinned inputs occurred before freezing.",
+  "config": {
+    "path": "configs/task_pair_nesting_audit.preregistered.json",
+    "sha256": "a9ca0acc12d675a8de4945e1444abaee4d3dc185b13241eb78b12aa854360316"
+  },
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-03-task-pair-nesting-audit-harness-prompt.md",
+    "sha256": "6e369bad5403427cc4733dca2a6137297528e6716e16d24ab489ba846f46ad92"
+  },
+  "frozen_inputs": {
+    "datasets/prompt_projection_clean_inductive_v1.jsonl": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic-records.csv": "8fe570a5b9706dbeaa04919416691a1fda6fb45ef55361f8707232beaf3f6cf4",
+    "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json": "6980fda97a44d3390e0c1eefef464ad8c0b1b03cdbf3fb8f6708567493378b9f"
+  },
+  "reused_code": {
+    "evaluation/spatial_teacher_feasibility_audit.py": "1d033c4036d5f2319c8828e393594fe0b6330ac9c43afe43af14499adf748aec",
+    "evaluation/train_spatial_prompt_selector.py": "1308e8a0f18cfb047aa56ab4e8fa40423ebd127f22df309361b3916eee389fd2",
+    "evaluation/prompt_projection_distillation.py": "cd2d4ccc3a4c5ba714f5e478f802b0cb9d64c6e279c15b6493661fb6fe0b0b98",
+    "evaluation/operational_prompt_utility_diagnostic.py": "b7af91ba6ff585c170580d50354e79716055c03e1ca22d82688f39db6c7c1f75"
+  },
+  "data_scope": {
+    "split": "val only from the operational records CSV",
+    "expected_val_records": 76,
+    "expected_val_images": 38,
+    "seeds": [20261003, 20261004, 20261005],
+    "budgets": [48, 64, 96],
+    "primary_budget_k": 48
+  },
+  "decision_rule": {
+    "SAME_IMAGE_TASK_TARGETS_NESTED": "point_inside_bbox_overall_ratio_primary >= 0.80",
+    "SYMMETRIC_NEGATIVE_INVALID": "SAME_IMAGE_TASK_TARGETS_NESTED and grounding_gap_mean <= 0.0 and pointing_gap_mean > 0.0",
+    "otherwise": "NOT_ESTABLISHED"
+  },
+  "internal_test_contract": "No internal-test path may be resolved, hashed, opened, parsed or scored. No NPZ, raw image or model weight may be opened.",
+  "prior_decision_unchanged": "OPERATIONAL_PROMPT_UTILITY_NOT_ESTABLISHED",
+  "self_sha256_embedded": false
+}

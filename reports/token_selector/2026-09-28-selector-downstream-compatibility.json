@@ -1,0 +1,299 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-28",
+  "revision": "corrected_topology",
+  "supersedes": "reports/token_selector/2026-09-28-selector-downstream-compatibility.json (schema_version 1)",
+  "scope": "Read-only corrected interface-compatibility audit between the frozen Selector v4 packed top and the actually existing Q8xQ8 PE16 DATAFLOW / PL-resident FFN cores. Correction is based on the actual Transformers 4.57.0 source, model.safetensors.index.json, and read-only safetensors headers. No GPU, no board, no synthesis, no bitstream, no source/RTL/HLS/driver modification, no network.",
+  "decision": "SELECTOR_DOWNSTREAM_COMPAT_AUDIT_CORRECTED / FUSED_QKV_ONLY_DIRECT_PATH / DEQUANT_THEN_LAYERNORM_REQUIRED / SCALE_BROADCAST_NOT_EQUIVALENT_TO_LAYERNORM / FC1_NOT_DIRECT / DOWNSTREAM_INCOMPLETE / NO_FUSION_IMPLEMENTED",
+  "status": "AUDIT_ONLY_CORRECTED_NO_FUSION_IMPLEMENTED",
+  "correction_record": {
+    "reason": "The first 2026-09-28 audit assumed three independent vision Q/K/V projections and treated FFN fc1 as a direct selector boundary, which is false for the real Qwen3-VL vision tower.",
+    "changes": [
+      {
+        "id": 1,
+        "was": "Q/K/V are three independent q_proj/k_proj/v_proj Linear weights",
+        "corrected": "Qwen3VLVisionAttention has a single fused attn.qkv Linear[1024->3072] with bias, plus attn.proj Linear[1024->1024] with bias; no independent Q/K/V tensors exist",
+        "evidence": "modeling_qwen3_vl.py:175-176; index/header contain only blocks.N.attn.qkv.{weight,bias} and blocks.N.attn.proj.{weight,bias}"
+      },
+      {
+        "id": 2,
+        "was": "selector segment 0 can feed qkv/fc1 directly with only an x_scale=1/s broadcast adapter",
+        "corrected": "selector segment 0 is the block0 residual hidden; block1 starts with norm1 LayerNorm, then fused QKV. A 1/s broadcast is only a dequant adapter and is NOT equivalent to LayerNorm.",
+        "evidence": "modeling_qwen3_vl.py:267-274 and :254-255; quantization_contract.md:10-11"
+      },
+      {
+        "id": 3,
+        "was": "fc1 is a direct selector boundary",
+        "corrected": "fc1 input is norm2(hidden + attn(...)); the full attention path and a residual plus norm2 lie in between, so fc1 is not a direct boundary",
+        "evidence": "modeling_qwen3_vl.py:267-274"
+      },
+      {
+        "id": 4,
+        "was": "a scale broadcast adapter is sufficient",
+        "corrected": "a Dequant(global s) -> LayerNorm(norm1, eps=1e-6) -> Q8_0 requant chain is required; the existing pl_resident_ffn LayerNorm-Q8_0 core takes 4xfp32/128-bit, not selector int8, so an int8->fp32 adapter or a new int8-LayerNorm-Q8_0 variant is needed",
+        "evidence": "ffn_vector.h:11-12; ffn_vector.cpp:102-105, 233-278"
+      },
+      {
+        "id": 5,
+        "was": "downstream can be treated as GEMM-only",
+        "corrected": "after QKV GEMM the 3072 bias add, reshape/split, RoPE, softmax, PV, proj+bias, residual, norm2, fc1/gelu/fc2 are all still required and do not exist on the PL side; downstream completeness may not be claimed",
+        "evidence": "modeling_qwen3_vl.py:168-275 and downstream_inventory"
+      }
+    ]
+  },
+  "model_evidence": {
+    "transformers_source": {
+      "path": "/home/zhaoxiangyu/conda-envs/robobrain25/lib/python3.10/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py",
+      "version": "4.57.0",
+      "sha256": "dd63ed3b124232735b3dca1bfa28f9d6b0d3f7182afcb75dde8f3e724b2b22da"
+    },
+    "weight_index": {
+      "path": "models/Qwen3-VL-4B-Instruct/model.safetensors.index.json",
+      "sha256": "58a7841d7bff2548dd91577d216274a83cf1b500bc6a534b809d6c1b1707cf2b",
+      "total_size": 8875631616,
+      "num_tensors": 713,
+      "shards": {
+        "model-00001-of-00002.safetensors": 231,
+        "model-00002-of-00002.safetensors": 482
+      }
+    },
+    "header_only_read": {
+      "shard": "models/Qwen3-VL-4B-Instruct/model-00002-of-00002.safetensors",
+      "shard_bytes": 3908490048,
+      "method": "read 8-byte little-endian header length N, then JSON header, then data_offsets; no full model load",
+      "slice_check": {
+        "note": "read first 4 BF16 values of four block1 tensors; proves header+slice read path and dtype only, NOT a numerical/error verification",
+        "model.visual.blocks.1.norm1.weight": [0.621094, 0.302734, 0.324219, 0.285156],
+        "model.visual.blocks.1.attn.qkv.weight": [0.065430, 0.061035, 0.000404, 0.034424],
+        "model.visual.blocks.1.attn.qkv.bias": [-0.057129, 0.882812, -0.996094, -0.168945],
+        "model.visual.blocks.1.attn.proj.bias": [-0.087891, 0.135742, 0.077148, -0.412109]
+      }
+    },
+    "config": {
+      "path": "models/Qwen3-VL-4B-Instruct/config.json",
+      "sha256": "edac7703329133edfc53e46ac0081835144c99d7eebf28b71c732694d435224d",
+      "vision_hidden": 1024,
+      "vision_intermediate": 4096,
+      "num_heads": 16,
+      "head_dim": 64,
+      "depth": 24,
+      "hidden_act": "gelu_pytorch_tanh",
+      "spatial_merge_size": 2,
+      "out_hidden_size": 2560
+    },
+    "block01_tensors": [
+      {"name": "model.visual.blocks.0.attn.qkv.weight", "shape": [3072, 1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3079842304, 3086133760]},
+      {"name": "model.visual.blocks.0.attn.qkv.bias", "shape": [3072], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3079836160, 3079842304]},
+      {"name": "model.visual.blocks.0.attn.proj.weight", "shape": [1024, 1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3077739008, 3079836160]},
+      {"name": "model.visual.blocks.0.attn.proj.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3077736960, 3077739008]},
+      {"name": "model.visual.blocks.0.norm1.weight", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3102923264, 3102925312]},
+      {"name": "model.visual.blocks.0.norm1.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3102921216, 3102923264]},
+      {"name": "model.visual.blocks.0.norm2.weight", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3102927360, 3102929408]},
+      {"name": "model.visual.blocks.0.norm2.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3102925312, 3102927360]},
+      {"name": "model.visual.blocks.0.mlp.linear_fc1.weight", "shape": [4096, 1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3086141952, 3094530560]},
+      {"name": "model.visual.blocks.0.mlp.linear_fc1.bias", "shape": [4096], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3086133760, 3086141952]},
+      {"name": "model.visual.blocks.0.mlp.linear_fc2.weight", "shape": [1024, 4096], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3094532608, 3102921216]},
+      {"name": "model.visual.blocks.0.mlp.linear_fc2.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3094530560, 3094532608]},
+      {"name": "model.visual.blocks.1.attn.qkv.weight", "shape": [3072, 1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3105034752, 3111326208]},
+      {"name": "model.visual.blocks.1.attn.qkv.bias", "shape": [3072], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3105028608, 3105034752]},
+      {"name": "model.visual.blocks.1.attn.proj.weight", "shape": [1024, 1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3102931456, 3105028608]},
+      {"name": "model.visual.blocks.1.attn.proj.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3102929408, 3102931456]},
+      {"name": "model.visual.blocks.1.norm1.weight", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3128115712, 3128117760]},
+      {"name": "model.visual.blocks.1.norm1.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3128113664, 3128115712]},
+      {"name": "model.visual.blocks.1.norm2.weight", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3128119808, 3128121856]},
+      {"name": "model.visual.blocks.1.norm2.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3128117760, 3128119808]},
+      {"name": "model.visual.blocks.1.mlp.linear_fc1.weight", "shape": [4096, 1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3111334400, 3119723008]},
+      {"name": "model.visual.blocks.1.mlp.linear_fc1.bias", "shape": [4096], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3111326208, 3111334400]},
+      {"name": "model.visual.blocks.1.mlp.linear_fc2.weight", "shape": [1024, 4096], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3119725056, 3128113664]},
+      {"name": "model.visual.blocks.1.mlp.linear_fc2.bias", "shape": [1024], "dtype": "BF16", "shard": "model-00002-of-00002.safetensors", "data_offsets": [3119723008, 3119725056]}
+    ]
+  },
+  "corrected_topology": {
+    "attention": {
+      "class": "Qwen3VLVisionAttention",
+      "source_lines": "modeling_qwen3_vl.py:168-248",
+      "dim": 1024,
+      "num_heads": 16,
+      "head_dim": 64,
+      "scaling": 0.125,
+      "fused_qkv": {"linear": "nn.Linear(1024, 3072, bias=True)", "weight_shape": [3072, 1024], "bias_shape": [3072], "output_layout": "reshape(seq,3,16,64) => Q rows 0..1023 | K rows 1024..2047 | V rows 2048..3071"},
+      "proj": {"linear": "nn.Linear(1024, 1024)", "bias": true, "weight_shape": [1024, 1024], "bias_shape": [1024]},
+      "independent_q_k_v_weights": false
+    },
+    "block": {
+      "class": "Qwen3VLVisionBlock",
+      "source_lines": "modeling_qwen3_vl.py:251-275",
+      "norm1": "nn.LayerNorm(1024, eps=1e-6)",
+      "norm2": "nn.LayerNorm(1024, eps=1e-6)",
+      "forward": "hidden = hidden + attn(norm1(hidden)); hidden = hidden + mlp(norm2(hidden))",
+      "b1_position": "after block0, before block1",
+      "selector_segment0_is": "block0 residual hidden"
+    },
+    "mlp": {
+      "class": "Qwen3VLVisionMLP",
+      "source_lines": "modeling_qwen3_vl.py:46-56",
+      "linear_fc1": {"shape": [4096, 1024], "bias_shape": [4096]},
+      "linear_fc2": {"shape": [1024, 4096], "bias_shape": [1024]},
+      "act_fn": "gelu_pytorch_tanh"
+    },
+    "rope": {
+      "function": "apply_rotary_pos_emb_vision",
+      "source_lines": "modeling_qwen3_vl.py:116-127",
+      "note": "rotates Q and K only, cos/sin from vision axial RoPE"
+    }
+  },
+  "selector_contract": {
+    "top": "token_selector_top_packed",
+    "segment0": "tokens_int8: [K,4,1024] int8, group-major patch-minor, 128-bit little-endian packed lanes",
+    "global_scale": {
+      "definition": "x_real ~= q / s ; q = clamp(round(x_real * s), -128, 127); zero-point 0",
+      "source": "fpga_accel/token_selector_hls/quantization_contract.md:10-11",
+      "scope": "one global symmetric float s shared by the whole tensor, passed through scale_in -> scale_out, not in any output segment",
+      "dequant_broadcast": "filling activations_scale with the constant 1/s makes q8q8 compute x_dequant = q * (1/s) = q/s, i.e. a correct DEQUANT of the selector int8",
+      "not_layernorm": "the 1/s broadcast is elementwise linear scaling with no mean/variance, no centering, no normalization, and no norm1.weight/bias; it is NOT equivalent to LayerNorm and must not be claimed as such"
+    },
+    "metadata": ["group_index_uint16", "source_type_uint8", "region_id_uint8", "valid_uint8"],
+    "patch_indices_emitted": false
+  },
+  "downstream_inventory": {
+    "q8q8_pe16_dataflow_hls": {
+      "header": "fpga_accel/q8q8_pe16_dataflow_hls/include/q8q8_gemm.h",
+      "header_sha256": "b4fa360beff16071486238f46ee6ca01b1ddb29ff14eb5f3bede7bbe5e91c3f4",
+      "source_sha256": "34b1073849aa7629be6c7143242da8421a8f242b7eb27ee234a898a8263736dc",
+      "shape_limits": {"M": 4320, "N": 9728, "K": 9728},
+      "tiling": {"TM": 16, "TN": 64, "PE_N": 16, "QK": 32, "OUTPUT_LANES": 4},
+      "quant": "GGML Q8_0 per-32 int8 block with binary16 scale, weights and activations",
+      "has_bias": false,
+      "bias_note": "signature q8q8_gemm(weights_q, weights_scale, activations_q, activations_scale, output, m, n, k) has no bias; contribution = dot * weight_scale * activation_scale only (q8q8_gemm.cpp:181-186)",
+      "output_layout": "ap_uint<128> = 4 x fp32; address (m0+mi)*(n/4)+n0/4",
+      "requirements": ["k % 32 == 0", "n % 4 == 0"]
+    },
+    "q8q8_pe16_hls": {
+      "header_sha256": "b4fa360beff16071486238f46ee6ca01b1ddb29ff14eb5f3bede7bbe5e91c3f4",
+      "note": "board-validated PE16 baseline; same interface as DATAFLOW; also has no bias"
+    },
+    "q8q8_pe8_family": {
+      "members": ["q8q8_gemm_hls", "q8q8_dataflow_hls", "q8q8_weight_stationary_hls", "q8q8_output_burst_hls"],
+      "note": "same Q8_0 block layout; no bias"
+    },
+    "q8q8_gemv_stream6_hls": {"judgement": "INCOMPATIBLE for vision prefill: decoder M=1 GEMV"},
+    "pl_resident_ffn_hls": {
+      "header": "fpga_accel/pl_resident_ffn_hls/include/ffn_vector.h",
+      "header_sha256": "011d7ecd8898f3c253f062095845349cecfa7ccfc06d342736f962fb2872d034",
+      "source_sha256": "991ddfc3a898e994854ef9b675ae894d41c3dcdb9dd7feca872e22e8e6b858ce",
+      "ops": ["RMSNorm+Q8_0", "LayerNorm+Q8_0", "SiLU-Mul+Q8_0", "GELU+Q8_0 (PWL)", "FP32 residual add"],
+      "input_type": "ffnv_f32x4_t = ap_uint<128> = 4 x fp32",
+      "input_is_selector_int8": false,
+      "layernorm": {
+        "source_lines": "ffn_vector.cpp:233-278",
+        "formula": "value = (x-mean)*inverse_norm*gamma[col]+beta[col]; variance = mean_square - mean^2; inverse_norm = 1/sqrt(variance+eps)",
+        "gamma": "param0 fp32", "beta": "param1 fp32", "eps": "caller-supplied float (can be 1e-6)",
+        "cols_requirement": "cols % 32 == 0"
+      },
+      "q8_output": {"quant": "d = amax/127; q = round(x/d) clamped to [-127,127]", "scale": "binary16", "source_lines": "ffn_vector.cpp:209-231"},
+      "adapter_gap": "selector provides int8 + one global float s; this core needs 4xfp32/128b. Need an int8-global-scale -> fp32 adapter before LayerNorm, or a new direct int8 LayerNorm-Q8_0 variant."
+    }
+  },
+  "compatibility": [
+    {
+      "candidate": "segment0_dequant_layernorm_q8_0_fused_qkv_bias",
+      "boundary": "Selector segment0 -> Dequant(global s) -> LayerNorm(norm1, eps=1e-6) -> Q8_0 requant -> fused QKV GEMM -> +qkv.bias",
+      "gemm": "X[4K,1024] . Wqkv[3072,1024]^T -> [4K,3072]",
+      "dim_gate": "PASS",
+      "gemm_dims": {"M": "4K in {192,256,384}", "N": 3072, "K": 1024},
+      "dim_checks": ["M <= 4320", "N=3072 % 4 == 0", "N=3072 % 64 == 0", "K=1024 % 32 == 0"],
+      "activation_scale": "LayerNorm output must be RE-QUANTIZED to per-32 Q8_0; the selector global 1/s broadcast alone is not sufficient",
+      "bias": "must be added by a new operator; q8q8 has no bias",
+      "weight_quant": "needs Q8_0 vision weights; only BF16 safetensors exist in-repo",
+      "overall": "MODEL_CORRECT_DIRECT_CANDIDATE_ONLY_STILL_NEEDS_NEW_OPS"
+    },
+    {
+      "candidate": "independent_q_k_v_proj",
+      "overall": "NOT_A_MODEL_PATH",
+      "reason": "the model has a single fused attn.qkv Linear; no independent Q/K/V tensors exist"
+    },
+    {
+      "candidate": "vision_ffn_fc1_from_segment0",
+      "gemm": "X[4K,1024] . W1[4096,1024]^T -> [4K,4096]",
+      "dim_gate": "PASS",
+      "overall": "NOT_A_DIRECT_BOUNDARY",
+      "reason": "fc1 input is norm2(hidden + attn(norm1(hidden))); a full attention path plus residual plus norm2 lie in between"
+    },
+    {
+      "candidate": "vision_o_proj",
+      "gemm": "X_attn[4K,1024] . Wo[1024,1024]^T",
+      "dim_gate": "PASS",
+      "overall": "NOT_A_DIRECT_BOUNDARY",
+      "reason": "input is the attention output, not selector segment0"
+    },
+    {
+      "candidate": "vision_ffn_fc2",
+      "gemm": "X_gelu[4K,4096] . W2[1024,4096]^T",
+      "dim_gate": "PASS",
+      "overall": "NOT_A_DIRECT_BOUNDARY",
+      "reason": "input is gelu_pytorch_tanh(fc1)"
+    }
+  ],
+  "compatibility_summary": {
+    "model_correct_direct_candidates": ["segment0_dequant_layernorm_q8_0_fused_qkv_bias"],
+    "not_a_direct_boundary": ["o_proj", "fc1", "fc2"],
+    "not_a_model_path": ["independent_q_k_v"],
+    "hard_new_ops_required": [
+      "int8-global-scale -> fp32 dequant adapter (or direct int8 LayerNorm-Q8_0 variant)",
+      "LayerNorm(norm1, eps=1e-6, gamma, beta)",
+      "Q8_0 requantization",
+      "fused QKV bias add (3072)",
+      "Q/K/V reshape+split, RoPE, softmax, PV, proj+bias, residuals, norm2, fc1/gelu/fc2"
+    ],
+    "scale_broadcast_sufficient": false,
+    "downstream_complete": false
+  },
+  "zero_return_assessment": {
+    "placement": "J_F_CONTINUE (score on Jetson, selector on FPGA, K tokens stay on FPGA, real FPGA downstream core)",
+    "selector_has_axis": false,
+    "downstream_has_axis": false,
+    "bd_has_axi_dma": false,
+    "master_to_master_direct_stream": "NOT_POSSIBLE",
+    "corrected_requirement": "Even the shared-DDR / shared-onchip zero-return path must insert an int8->fp32(global s)->LayerNorm->Q8_0 elementwise chain plus a bias add between selector and Q8Q8; it is no longer a single-buffer selector-write/GEMM-read relationship.",
+    "true_zero_materialization": "requires option C (AXI4-Stream variant + width/FIFO adapter) which does not exist",
+    "missing_measured_term": "T_fpga_downstream unmeasured; no selector+downstream full-system chain exists"
+  },
+  "minimal_candidate": {
+    "id": "C1_cpu_numeric_chain",
+    "boundary": "Selector-style int8(global s) -> Dequant -> LayerNorm(norm1, eps=1e-6) -> Q8_0 -> Q8Q8(M=4K,N=3072,K=1024) -> +qkv.bias",
+    "input_evidence": "real block1 norm1/qkv small slice from header data_offsets, or a streaming read of one real full layer; no whole-model load",
+    "reference": "BF16/FP32 F.linear (torch or numpy float32) over the same real weights",
+    "stages_to_report": ["dequant-only", "dequant+LayerNorm", "dequant+LayerNorm+Q8_0", "dequant+LayerNorm+Q8_0+Q8Q8", "dequant+LayerNorm+Q8_0+Q8Q8+bias"],
+    "metrics": ["max_abs", "rmse"],
+    "implemented": false,
+    "authorization_required": true,
+    "missing_ops_after_qkv_bias": ["reshape/split Q/K/V", "RoPE", "QK^T*scaling", "softmax", "PV", "attn.proj+bias", "attention residual", "norm2", "fc1", "gelu_pytorch_tanh", "fc2+bias", "MLP residual", "blocks 2..23", "merger/DeepStack"],
+    "downstream_complete_claim_allowed": false,
+    "excluded": ["independent Q/K/V", "segment0 directly into fc1/o_proj/fc2", "1/s broadcast claimed as LayerNorm", "any downstream-complete claim"]
+  },
+  "blockers": [
+    "Model topology: selector segment0 is the block0 residual hidden and must pass norm1 LayerNorm before fused QKV; skipping it is model-incorrect",
+    "No int8-global-scale input path: pl_resident_ffn LayerNorm-Q8_0 core takes 4xfp32/128-bit, not selector int8; need an adapter or a new int8 variant",
+    "q8q8 GEMM has no bias: the fused QKV [3072] bias has no PL operator to add it",
+    "Vision Q8_0 weights do not exist (only BF16 safetensors in-repo)",
+    "PL side lacks attention/RoPE/softmax/PV, so the downstream after +qkv.bias is incomplete",
+    "No selector<->downstream BD/driver and no AXI4-Stream data plane",
+    "T_fpga_downstream unmeasured; selector has only OOC route + 3-case cosim, no bitstream/board signoff"
+  ],
+  "warnings": [
+    "Selector int8 clamps to [-128,127] (quantization_contract.md:11) while pl_resident_ffn quantize clamps to [-127,127] (ffn_vector.cpp:227-228); the -128 case must be unified across cores",
+    "Global s is passed through only; it is uncalibrated and must be maintained CPU/PS-side for dequant",
+    "LayerNorm gamma=norm1.weight and beta=norm1.bias must be cast BF16->FP32",
+    "pl_resident_ffn GELU is a 65-entry 0.25-step PWL (vision_ffn_composition max_abs ~0.0029255) while the model uses gelu_pytorch_tanh",
+    "selector metadata (source_type etc.) is not consumed by the GEMM; context rows are pooled synthetic values",
+    "All statements are interface/dimension/source inference; no end-to-end numeric or latency measurement was performed",
+    "This round implements no numerical chain"
+  ],
+  "files_changed": [
+    "reports/token_selector/2026-09-28-selector-downstream-compatibility.md",
+    "reports/token_selector/2026-09-28-selector-downstream-compatibility.json",
+    "CURRENT_STATUS.md",
+    "/tmp/robobrain_harness_result.json"
+  ],
+  "next_gate": "C1 step 1 (needs separate authorization): CPU-only numeric chain dequant+LayerNorm(eps=1e-6)+Q8_0+Q8Q8(M=4K,N=3072,K=1024)+bias against a BF16/FP32 reference using real block1 slices or one streaming layer; no BD, no HLS interface change, no synthesis, no board, no GPU."
+}

@@ -1,0 +1,100 @@
+{
+  "format": "cutpoint-oracle-experiment-lock-v1",
+  "created_date": "2026-09-04",
+  "status": "BF16_SMOKE_COMPLETE_Q8_GATE_REQUIRED",
+  "purpose": "Development-only BF16 upper-bound scan for cut-point elimination; not a deployable selector, not a publication accuracy claim, and not the final Q8_0 system result.",
+  "dataset": {
+    "path": "datasets/dac_cutpoint_oracle_dev.jsonl",
+    "sha256": "a3b978e98602c039fd2c62250ebec806fb6a7d8de6e5260740b83a4600a119c7",
+    "dataset_role": "cutpoint_oracle_dev",
+    "seed": 20260904,
+    "image_count": 16,
+    "sample_count": 32,
+    "tasks": {
+      "pointing": 16,
+      "grounding": 16
+    },
+    "overlap_with_all_excluded_images": 0,
+    "excluded_image_count": 416,
+    "excluded_manifests": {
+      "datasets/dac_spatial_eval_smoke.jsonl": "73ac09cd720e7adddfaf5203d4e18eb392e869fa57a59e75154b4ae5b42a494e",
+      "datasets/dac_spatial_eval_expanded.jsonl": "b00b5b335c693855a312a1c5b45419201599f9bf4392e65ce70a0bcc199da24c",
+      "datasets/dac_spatial_selector_calibration.jsonl": "a1aa8c241c085dff9ec9e02762cfcd5b4993d57e4179d63c6d8c8efeb9b726e3",
+      "datasets/dac_spatial_selector_validation.jsonl": "a3bc8ddf79a2e18c67e0d2b7816151951f26f39f1ff4de1d0c5977a725a3337c",
+      "datasets/dac_spatial_l2res_blind.jsonl": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+      "datasets/dac_spatial_task_routing_test.jsonl": "50a9437b12ee55738e228437ef31281ede0abe64f7b606d353b112c5eb889a13"
+    }
+  },
+  "model": {
+    "label": "RoboBrain2.5-4B-BF16",
+    "path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "model_safetensors_sha256": "e2f6e3c372f4ef76afb5e9e28ec56679944fcc3b4f2ce2ebda8b21264e96eb2f",
+    "config_sha256": "2e5533f64b7a1a18e5846b76a95c53cfe90a2b400b0e24e75089a7dc992d5420",
+    "preprocessor_config_sha256": "2767d5efeb29362bc8e25e8e6baa9bc862da73fdcb5eee4db4e7f23f6625b6f7"
+  },
+  "final_target_model": {
+    "quantization": "GGUF Q8_0",
+    "main_model_path": "/home/zhaoxiangyu/RoboBrain2.5/deployment/models/RoboBrain2.5-4B.Q8_0.gguf",
+    "main_model_sha256": "835b78ff8c298acc358d682d3bf44d620d084a4ccd4c90da07e4e1afba3349eb",
+    "mmproj_path": "/home/zhaoxiangyu/RoboBrain2.5/deployment/models/RoboBrain2.5-4B.mmproj-Q8_0.gguf",
+    "mmproj_sha256": "fcc278251252d38ecdd7288548767280f949a9aa5ae4cb48a9632cf3fa1dfde2",
+    "bf16_results_are_final": false,
+    "q8_revalidation_required_before_rtl": true
+  },
+  "matrix": {
+    "cut_points": [
+      "patch_embedding",
+      "vision_block_1",
+      "vision_block_3",
+      "deepstack_layer_5",
+      "post_merger"
+    ],
+    "retentions": [1.0, 0.75, 0.5, 0.25],
+    "initial_limit_per_task": 4,
+    "selector": "geometric_oracle",
+    "oracle_uses_ground_truth_bbox": true,
+    "anchor_grid": 3
+  },
+  "code_sha256": {
+    "evaluation/build_coco_spatial_smoke.py": "50890de4b60002e90e91484a02bc45ad5cbd6afc7abba0a9aa024f51246d79d4",
+    "evaluation/run_hf_cutpoint_oracle.py": "b0f681e7b6318d268da92dbfcfe7f0a35d1a01aa82599bc57e299c5d3d76e89d",
+    "evaluation/build_cutpoint_preflight.py": "285c404b795e8254ec56503633e7edd00579f2474356c6a1a128ba848ae69aa8",
+    "evaluation/build_cutpoint_oracle_report.py": "5b4d0a9ac34e623bbb4cb3186f06118de72cf362e8d2c4596b6a8d061a7e63df",
+    "evaluation/cutpoint_oracle.py": "750f3eb1ef8f6385f239fcaa708506f91656298edea96ef5fe6dcd3e03f742e6",
+    "evaluation/shallow_block_pruning.py": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a",
+    "evaluation/token_reduction.py": "6af9b507fb4a612b4013937150d6a7a59c8cf76d7e310c427b7fdb918f9a77b8"
+  },
+  "preflight": {
+    "json": "reports/2026-09-04-cutpoint-oracle-preflight.json",
+    "sha256": "f3ce974bcdd43aa72872ccf60e2a6cf0ee1cd594731ae79d25811aaf5c44c82f",
+    "latencies_are_serialization_estimates_not_measurements": true
+  },
+  "bf16_smoke_result": {
+    "record_count": 160,
+    "configuration_count": 20,
+    "records_per_configuration": 8,
+    "summary_json": "reports/2026-09-04-cutpoint-oracle-summary.json",
+    "summary_json_sha256": "4a76f22f12ada73031562996f24f513c0bc319c603972da6a3a958f8706c1709",
+    "summary_markdown": "reports/2026-09-04-cutpoint-oracle-summary.md",
+    "summary_markdown_sha256": "24cf76240a9662bc7260ed5e12c1a5aff5a352252d8f5d94ba87afe47446df41",
+    "full_retention_cross_cutpoint_match": true,
+    "provisional_candidate": "vision_block_1@0.75",
+    "provisional_candidate_raw_sha256": "e0767f89891c2df2d4c74dd6648ddd3ed9a8169e523a13133908080a4d7d71ab",
+    "interpretation": "BF16 structural feasibility only; the final Q8_0 main-model plus Q8_0 mmproj path must be revalidated."
+  },
+  "q8_gate": {
+    "path_audit": "reports/2026-09-04-q8-cutpoint-path-audit.md",
+    "path_audit_sha256": "ac48209b5501f1b9348fe361475e938ba8de03d1e5d36e4d14fe65a79f59ae2b",
+    "q8_a": "Post-merger token-column compaction with DeepStack, placeholder-token and MRoPE synchronization; 100% bypass must be bit/text identical.",
+    "q8_b": "After Q8-A passes, insert fixed-budget group gather after vision block 1 so that the remaining 23 visual blocks and LLM visual prefill perform less work.",
+    "rtl_allowed_before_q8_a_and_q8_b_pass": false
+  },
+  "safety": {
+    "board_access": false,
+    "sd_card_modified": false,
+    "initial_gpu_run_deferred_reason": "Another user's active process was drawing 286.13 W at 87 C; model load was not started.",
+    "gpu_run_started_only_after_idle": true,
+    "gpu_model_unloaded_after_run": true
+  },
+  "exact_next_command": "sed -n '1,240p' reports/2026-09-04-q8-cutpoint-path-audit.md"
+}

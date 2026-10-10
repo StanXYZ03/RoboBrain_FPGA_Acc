@@ -1,0 +1,838 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-28",
+  "scope": "CPU-only numeric interface/implementation self-consistency check for the single model-correct selector direct boundary: dequant(global s) -> LayerNorm(norm1, eps=1e-6) -> Q8_0 -> fused QKV GEMM(M,N=3072,K=1024) -> +qkv.bias. Real block1 weights are read tensor-by-tensor from BF16 safetensors; activations are deterministic synthetic block0 hidden, NOT captured real activations. No GPU, no board, no synthesis, no network, no existing HLS/RTL/model source modified, full model not loaded.",
+  "decision": "SELECTOR_QKV_CPU_NUMERIC_CHAIN_IMPLEMENTED / INTERFACE_AND_IMPLEMENTATION_SELF_CONSISTENT / SYNTHETIC_ACTIVATION / NO_TASK_ACCURACY_CLAIM",
+  "boundaries": {
+    "gpu_used": false,
+    "board_used": false,
+    "synthesis_run": false,
+    "network_used": false,
+    "full_model_loaded": false,
+    "activation_source": "deterministic synthetic block0 residual hidden (not real model activation)",
+    "weights_source": "real BF16 safetensors, four block1 tensors only, read-only",
+    "coverage": "up to +qkv.bias only; reshape/split, RoPE, softmax, PV, attn.proj, residual, norm2, fc1/gelu/fc2 and blocks 2..23 are NOT implemented",
+    "claim": "interface/numerical implementation self-consistency only; no task-accuracy pass/fail"
+  },
+  "memory_bytes": {
+    "norm1.weight": 4096,
+    "norm1.bias": 4096,
+    "qkv.weight": 12582912,
+    "qkv.bias": 12288,
+    "qkv_weight_q8_payload": 3145728,
+    "qkv_weight_q8_scales": 393216,
+    "total_weight_tensors": 12603392
+  },
+  "weights": {
+    "model.visual.blocks.1.norm1.weight": {
+      "dtype": "BF16",
+      "shape": [
+        1024
+      ],
+      "shard": "model-00002-of-00002.safetensors",
+      "data_offsets": [
+        3128115712,
+        3128117760
+      ],
+      "raw_bytes": 2048,
+      "raw_sha256": "41b623b3b4f0de8da5224e72c047ab3d73b3c5cc94225a4cc1135d57471647d8",
+      "fp32_sha256": "4ac5fc3694f1b9ee957089a122510c0e6863e97dd84954cc300054d3fe555920",
+      "stats": {
+        "min": -0.1376953125,
+        "max": 2.015625,
+        "mean": 0.5479680597782135,
+        "std": 0.3952509784530216,
+        "amax": 2.015625
+      }
+    },
+    "model.visual.blocks.1.norm1.bias": {
+      "dtype": "BF16",
+      "shape": [
+        1024
+      ],
+      "shard": "model-00002-of-00002.safetensors",
+      "data_offsets": [
+        3128113664,
+        3128115712
+      ],
+      "raw_bytes": 2048,
+      "raw_sha256": "855c11e4acc32c28f5d2de55752470f8b3f6bfc0b6ecc3072981592fada24115",
+      "fp32_sha256": "33b0ba233631ebd9684b8ea89dbc68e810d3cb6fec9c7f703463c979b3ab27b0",
+      "stats": {
+        "min": -3.125,
+        "max": 0.8515625,
+        "mean": -0.0062307147309184074,
+        "std": 0.19812611669248653,
+        "amax": 3.125
+      }
+    },
+    "model.visual.blocks.1.attn.qkv.weight": {
+      "dtype": "BF16",
+      "shape": [
+        3072,
+        1024
+      ],
+      "shard": "model-00002-of-00002.safetensors",
+      "data_offsets": [
+        3105034752,
+        3111326208
+      ],
+      "raw_bytes": 6291456,
+      "raw_sha256": "2a6ffd8e261ee288f7e697cef7472cbe8757a67f4108b1459ff20ba4d46d8765",
+      "fp32_sha256": "d4c0debd64fdb60c9c563eca0db5ab91d6effd83b4845ec022b41d794c6819d9",
+      "stats": {
+        "min": -0.353515625,
+        "max": 0.53515625,
+        "mean": -2.791708819826812e-05,
+        "std": 0.02525960280148944,
+        "amax": 0.53515625
+      }
+    },
+    "model.visual.blocks.1.attn.qkv.bias": {
+      "dtype": "BF16",
+      "shape": [
+        3072
+      ],
+      "shard": "model-00002-of-00002.safetensors",
+      "data_offsets": [
+        3105028608,
+        3105034752
+      ],
+      "raw_bytes": 6144,
+      "raw_sha256": "83c5f50d34c576dc2e48c1220ded36f4366b2071132d3d2ec87321832927385a",
+      "fp32_sha256": "5e6cad75c3eb2e03856901bb9b678a1326cbbdd937fecb14a0f924e3a295f8ac",
+      "stats": {
+        "min": -6.875,
+        "max": 6.96875,
+        "mean": 0.00479044986423105,
+        "std": 0.6552902391276859,
+        "amax": 6.96875
+      }
+    }
+  },
+  "shard": {
+    "shard": "model-00002-of-00002.safetensors",
+    "shard_bytes": 3908490048,
+    "header_sha256": "87e6341399ae7de5098b310951993b0010876a5c805dbe0b2c0cfbef7c8cb94e",
+    "read_only_unchanged": true,
+    "requested_tensors": [
+      "model.visual.blocks.1.norm1.weight",
+      "model.visual.blocks.1.norm1.bias",
+      "model.visual.blocks.1.attn.qkv.weight",
+      "model.visual.blocks.1.attn.qkv.bias"
+    ]
+  },
+  "selector_contract": {
+    "formula_quantize": "q = clamp(round_half_away(x * s), -128, 127)",
+    "formula_dequantize": "x_approx = q / s",
+    "zero_point": 0,
+    "scale": "single global symmetric s shared by the whole selector input",
+    "clamp": [
+      -128,
+      127
+    ],
+    "scale_rule": "s = 128.0 / amax(x)",
+    "note_1_over_s": "1/s broadcast is dequantization only and is NOT equivalent to LayerNorm"
+  },
+  "q8_0_contract": {
+    "block_size": 32,
+    "formula": "d = amax(block)/127; q = clamp(round_half_away(x/d), -127, 127); x_approx = q*d",
+    "clamp": [
+      -127,
+      127
+    ],
+    "scale_storage": "binary16",
+    "reference_reused": "fpga_accel/pl_resident_ffn_hls/scripts/export_real_tensor_case.py::q8_quantize",
+    "clamp_difference": "selector keeps -128, Q8_0 clamps to -127"
+  },
+  "weight_q8_0": {
+    "quantize_seconds": 0.05926595602068119,
+    "payload_sha256": "9e479e4f34dff872fccc2f0ec6ef6ee40c14cb31ab8be23450284dae041fec63",
+    "metrics_vs_fp32": {
+      "max_abs": 0.00205230712890625,
+      "rmse": 0.0001575555037822949,
+      "relative_l2": 0.00623744596440993,
+      "cosine_similarity": 0.9999805486315134
+    }
+  },
+  "weight_load_seconds": 0.020091391023015603,
+  "cases": [
+    {
+      "case_id": "m192_k48_seed20260928",
+      "seed": 20260928,
+      "rows_M": 192,
+      "selector_groups_K": 48,
+      "hidden_K": 1024,
+      "qkv_N": 3072,
+      "note": "required full case: M=4K with K=48 selector groups, hidden=1024, N=3072",
+      "x_synthetic": true,
+      "x_stats": {
+        "min": -3.793872356414795,
+        "max": 3.7848901748657227,
+        "mean": -0.00018906099101556606,
+        "std": 0.841428959092577,
+        "amax": 3.793872356414795
+      },
+      "x_sha256_fp32": "b812dc7f1b67139e19ee3e8fc308296326e75da4130b89bbea0cb0300c1dfb32",
+      "selector_scale_s": 33.73861531834979,
+      "selector_levels": 128.0,
+      "selector_saturated_values": 1,
+      "selector_saturation_fraction": 5.086263020833333e-06,
+      "selector_clamp": [
+        -128,
+        127
+      ],
+      "q8_0_clamp": [
+        -127,
+        127
+      ],
+      "levels": {
+        "B": {
+          "max_abs": 0.04800760746002197,
+          "rmse": 0.0058030252163102265,
+          "relative_l2": 0.0057277776069176185,
+          "cosine_similarity": 0.9999835984902886
+        },
+        "C": {
+          "max_abs": 0.059155166149139404,
+          "rmse": 0.007129425930440862,
+          "relative_l2": 0.007036978932950758,
+          "cosine_similarity": 0.9999752497766855
+        },
+        "D": {
+          "max_abs": 0.05982828140258789,
+          "rmse": 0.007974354711162255,
+          "relative_l2": 0.007870951553999061,
+          "cosine_similarity": 0.9999690277918949
+        }
+      },
+      "diagnostics": {
+        "selector_input_quantization": {
+          "max_abs": 0.02065753936767578,
+          "rmse": 0.00855993177248363,
+          "relative_l2": 0.010173088843575666,
+          "cosine_similarity": 0.9999482567069355
+        },
+        "layernorm_output": {
+          "max_abs": 0.03865385055541992,
+          "rmse": 0.006905482114347712,
+          "relative_l2": 0.00978714002828008,
+          "cosine_similarity": 0.9999521049859944
+        },
+        "activation_q8_0": {
+          "max_abs": 0.0276881605386734,
+          "rmse": 0.005094296821441731,
+          "relative_l2": 0.007220632876257316,
+          "cosine_similarity": 0.9999739328321976
+        },
+        "weight_q8_0": {
+          "max_abs": 0.00205230712890625,
+          "rmse": 0.0001575555037822949,
+          "relative_l2": 0.00623744596440993,
+          "cosine_similarity": 0.9999805486315134
+        },
+        "int32_sim_vs_dequant_fp32": {
+          "max_abs": 2.384185791015625e-06,
+          "rmse": 2.1016427396837842e-07,
+          "relative_l2": 2.074645460999358e-07,
+          "cosine_similarity": 0.9999999999999512
+        }
+      },
+      "level_max_abs_summary": {
+        "B": 0.04800760746002197,
+        "C": 0.059155166149139404,
+        "D": 0.05982828140258789
+      },
+      "fused_qkv_layout": {
+        "shape": [
+          192,
+          3072
+        ],
+        "segments": {
+          "q": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 7.172818183898926
+          },
+          "k": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 6.256494522094727
+          },
+          "v": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 3.3553359508514404
+          }
+        }
+      },
+      "timings_s": {
+        "synthesize_x": 0.005120390997035429,
+        "selector_quantize": 0.0013711779902223498,
+        "selector_dequantize": 0.00010280398419126868,
+        "layernorm_A": 0.0004585610004141927,
+        "layernorm_B": 0.00034518400207161903,
+        "activation_q8_0_quantize": 0.0012130380200687796,
+        "activation_q8_0_dequantize": 0.00012130101094953716,
+        "matmul_A_fp32": 0.010242239979561418,
+        "matmul_B_fp32": 0.010097371006850153,
+        "matmul_C_fp32": 0.01007417100481689,
+        "int32_q8q8_D": 0.21861611100030132,
+        "matmul_C_quant_weight_fp32": 0.009881784004392102
+      },
+      "kernel_total_s": 0.2625237430038396,
+      "peak_rss_kb": 173348
+    },
+    {
+      "case_id": "m192_k48_seed20260929",
+      "seed": 20260929,
+      "rows_M": 192,
+      "selector_groups_K": 48,
+      "hidden_K": 1024,
+      "qkv_N": 3072,
+      "note": "full case, second seed",
+      "x_synthetic": true,
+      "x_stats": {
+        "min": -3.868101119995117,
+        "max": 3.970970630645752,
+        "mean": 0.0009381865195929132,
+        "std": 0.8467751563420162,
+        "amax": 3.970970630645752
+      },
+      "x_sha256_fp32": "8b3146145e3a03f3b3ce8c50683a9500f940e75b0acd38d8b1c549471534cb05",
+      "selector_scale_s": 32.23393268440892,
+      "selector_levels": 128.0,
+      "selector_saturated_values": 1,
+      "selector_saturation_fraction": 5.086263020833333e-06,
+      "selector_clamp": [
+        -128,
+        127
+      ],
+      "q8_0_clamp": [
+        -127,
+        127
+      ],
+      "levels": {
+        "B": {
+          "max_abs": 0.04420959949493408,
+          "rmse": 0.006095177563799276,
+          "relative_l2": 0.006045362398786465,
+          "cosine_similarity": 0.9999817270658107
+        },
+        "C": {
+          "max_abs": 0.05374956130981445,
+          "rmse": 0.0073463337031469105,
+          "relative_l2": 0.007286292987051136,
+          "cosine_similarity": 0.9999734557752515
+        },
+        "D": {
+          "max_abs": 0.05854153633117676,
+          "rmse": 0.008151997387501882,
+          "relative_l2": 0.00808537207744447,
+          "cosine_similarity": 0.9999673128571163
+        }
+      },
+      "diagnostics": {
+        "selector_input_quantization": {
+          "max_abs": 0.031023263931274414,
+          "rmse": 0.008952025092304394,
+          "relative_l2": 0.010571896837897764,
+          "cosine_similarity": 0.9999441207842341
+        },
+        "layernorm_output": {
+          "max_abs": 0.039713382720947266,
+          "rmse": 0.007199653737469145,
+          "relative_l2": 0.01026642070500297,
+          "cosine_similarity": 0.9999472989142616
+        },
+        "activation_q8_0": {
+          "max_abs": 0.025315046310424805,
+          "rmse": 0.005063543946359558,
+          "relative_l2": 0.007220794967467862,
+          "cosine_similarity": 0.9999739300793167
+        },
+        "weight_q8_0": {
+          "max_abs": 0.00205230712890625,
+          "rmse": 0.0001575555037822949,
+          "relative_l2": 0.00623744596440993,
+          "cosine_similarity": 0.9999805486315134
+        },
+        "int32_sim_vs_dequant_fp32": {
+          "max_abs": 2.384185791015625e-06,
+          "rmse": 2.083939893829034e-07,
+          "relative_l2": 2.0669858704372135e-07,
+          "cosine_similarity": 0.9999999999999507
+        }
+      },
+      "level_max_abs_summary": {
+        "B": 0.04420959949493408,
+        "C": 0.05374956130981445,
+        "D": 0.05854153633117676
+      },
+      "fused_qkv_layout": {
+        "shape": [
+          192,
+          3072
+        ],
+        "segments": {
+          "q": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 7.147029876708984
+          },
+          "k": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 5.452263355255127
+          },
+          "v": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 3.1518349647521973
+          }
+        }
+      },
+      "timings_s": {
+        "synthesize_x": 0.001744704000884667,
+        "selector_quantize": 0.0012318310036789626,
+        "selector_dequantize": 7.82810093369335e-05,
+        "layernorm_A": 0.0004357630095910281,
+        "layernorm_B": 0.0003511509858071804,
+        "activation_q8_0_quantize": 0.0011786269897129387,
+        "activation_q8_0_dequantize": 8.454199996776879e-05,
+        "matmul_A_fp32": 0.010028738994151354,
+        "matmul_B_fp32": 0.00975270802155137,
+        "matmul_C_fp32": 0.009798097016755491,
+        "int32_q8q8_D": 0.21956681000301614,
+        "matmul_C_quant_weight_fp32": 0.01003797200974077
+      },
+      "kernel_total_s": 0.26254452104330994,
+      "peak_rss_kb": 188588
+    },
+    {
+      "case_id": "m192_k48_seed20260930",
+      "seed": 20260930,
+      "rows_M": 192,
+      "selector_groups_K": 48,
+      "hidden_K": 1024,
+      "qkv_N": 3072,
+      "note": "full case, third seed",
+      "x_synthetic": true,
+      "x_stats": {
+        "min": -3.8755714893341064,
+        "max": 4.247084140777588,
+        "mean": 0.001058750641173371,
+        "std": 0.844757862136431,
+        "amax": 4.247084140777588
+      },
+      "x_sha256_fp32": "3a1e11aa2b7546683f6695ec08e0ed6df85b279478cbab9b69b130f65be3b4b6",
+      "selector_scale_s": 30.138324496807545,
+      "selector_levels": 128.0,
+      "selector_saturated_values": 1,
+      "selector_saturation_fraction": 5.086263020833333e-06,
+      "selector_clamp": [
+        -128,
+        127
+      ],
+      "q8_0_clamp": [
+        -127,
+        127
+      ],
+      "levels": {
+        "B": {
+          "max_abs": 0.05082905292510986,
+          "rmse": 0.006472578026351717,
+          "relative_l2": 0.006405441774949567,
+          "cosine_similarity": 0.9999794860128277
+        },
+        "C": {
+          "max_abs": 0.058322787284851074,
+          "rmse": 0.007657415545929796,
+          "relative_l2": 0.007577989670631025,
+          "cosine_similarity": 0.9999712866631578
+        },
+        "D": {
+          "max_abs": 0.06831908226013184,
+          "rmse": 0.008438111877406914,
+          "relative_l2": 0.008350588297458465,
+          "cosine_similarity": 0.999965134107542
+        }
+      },
+      "diagnostics": {
+        "selector_input_quantization": {
+          "max_abs": 0.03318023681640625,
+          "rmse": 0.00957395834148124,
+          "relative_l2": 0.011333366934112422,
+          "cosine_similarity": 0.9999357839723331
+        },
+        "layernorm_output": {
+          "max_abs": 0.04249072074890137,
+          "rmse": 0.007700182698955805,
+          "relative_l2": 0.010954652559824415,
+          "cosine_similarity": 0.9999399959954192
+        },
+        "activation_q8_0": {
+          "max_abs": 0.02567305415868759,
+          "rmse": 0.005085280649192202,
+          "relative_l2": 0.007234985917410523,
+          "cosine_similarity": 0.9999738276277421
+        },
+        "weight_q8_0": {
+          "max_abs": 0.00205230712890625,
+          "rmse": 0.0001575555037822949,
+          "relative_l2": 0.00623744596440993,
+          "cosine_similarity": 0.9999805486315134
+        },
+        "int32_sim_vs_dequant_fp32": {
+          "max_abs": 2.6226043701171875e-06,
+          "rmse": 2.08532785283869e-07,
+          "relative_l2": 2.0636834532924294e-07,
+          "cosine_similarity": 0.9999999999999494
+        }
+      },
+      "level_max_abs_summary": {
+        "B": 0.05082905292510986,
+        "C": 0.058322787284851074,
+        "D": 0.06831908226013184
+      },
+      "fused_qkv_layout": {
+        "shape": [
+          192,
+          3072
+        ],
+        "segments": {
+          "q": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 7.220656871795654
+          },
+          "k": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 5.569490909576416
+          },
+          "v": {
+            "shape": [
+              192,
+              1024
+            ],
+            "max_abs": 3.6225533485412598
+          }
+        }
+      },
+      "timings_s": {
+        "synthesize_x": 0.0017489099991507828,
+        "selector_quantize": 0.001238964992808178,
+        "selector_dequantize": 7.126099080778658e-05,
+        "layernorm_A": 0.00044756499119102955,
+        "layernorm_B": 0.00037963801878504455,
+        "activation_q8_0_quantize": 0.0011948530154768378,
+        "activation_q8_0_dequantize": 8.357697515748441e-05,
+        "matmul_A_fp32": 0.010096942016389221,
+        "matmul_B_fp32": 0.009892499016132206,
+        "matmul_C_fp32": 0.00987008199444972,
+        "int32_q8q8_D": 0.22156716301105917,
+        "matmul_C_quant_weight_fp32": 0.010177800984820351
+      },
+      "kernel_total_s": 0.265020346007077,
+      "peak_rss_kb": 188588
+    },
+    {
+      "case_id": "m8_k2_seed20260928",
+      "seed": 20260928,
+      "rows_M": 8,
+      "selector_groups_K": 2,
+      "hidden_K": 1024,
+      "qkv_N": 3072,
+      "note": "small-M case proving the chain is M-independent",
+      "x_synthetic": true,
+      "x_stats": {
+        "min": -3.266411542892456,
+        "max": 3.0789289474487305,
+        "mean": -0.0017017470831888204,
+        "std": 0.836507192771475,
+        "amax": 3.266411542892456
+      },
+      "x_sha256_fp32": "0dece3922a9614b9f3f0f99ffc684c107a83cdf7e28f482b48ad2a62a54970d1",
+      "selector_scale_s": 39.18673391860907,
+      "selector_levels": 128.0,
+      "selector_saturated_values": 0,
+      "selector_saturation_fraction": 0.0,
+      "selector_clamp": [
+        -128,
+        127
+      ],
+      "q8_0_clamp": [
+        -127,
+        127
+      ],
+      "levels": {
+        "B": {
+          "max_abs": 0.0323120653629303,
+          "rmse": 0.005235769342431238,
+          "relative_l2": 0.005138831311750861,
+          "cosine_similarity": 0.9999867976817587
+        },
+        "C": {
+          "max_abs": 0.04231762886047363,
+          "rmse": 0.006596325048525788,
+          "relative_l2": 0.0064741969106894455,
+          "cosine_similarity": 0.9999790634480816
+        },
+        "D": {
+          "max_abs": 0.04866865277290344,
+          "rmse": 0.007504272165095981,
+          "relative_l2": 0.0073653337746136804,
+          "cosine_similarity": 0.9999728879123194
+        }
+      },
+      "diagnostics": {
+        "selector_input_quantization": {
+          "max_abs": 0.012758180499076843,
+          "rmse": 0.007353560004728514,
+          "relative_l2": 0.008790772932612967,
+          "cosine_similarity": 0.9999613604370788
+        },
+        "layernorm_output": {
+          "max_abs": 0.029226303100585938,
+          "rmse": 0.006015613694375805,
+          "relative_l2": 0.008561938728153395,
+          "cosine_similarity": 0.9999633463428703
+        },
+        "activation_q8_0": {
+          "max_abs": 0.020025067031383514,
+          "rmse": 0.005120705074425965,
+          "relative_l2": 0.007288704206374623,
+          "cosine_similarity": 0.9999734375292462
+        },
+        "weight_q8_0": {
+          "max_abs": 0.00205230712890625,
+          "rmse": 0.0001575555037822949,
+          "relative_l2": 0.00623744596440993,
+          "cosine_similarity": 0.9999805486315134
+        },
+        "int32_sim_vs_dequant_fp32": {
+          "max_abs": 1.6689300537109375e-06,
+          "rmse": 2.0359986982169353e-07,
+          "relative_l2": 1.9986713678497287e-07,
+          "cosine_similarity": 0.9999999999999796
+        }
+      },
+      "level_max_abs_summary": {
+        "B": 0.0323120653629303,
+        "C": 0.04231762886047363,
+        "D": 0.04866865277290344
+      },
+      "fused_qkv_layout": {
+        "shape": [
+          8,
+          3072
+        ],
+        "segments": {
+          "q": {
+            "shape": [
+              8,
+              1024
+            ],
+            "max_abs": 6.65409517288208
+          },
+          "k": {
+            "shape": [
+              8,
+              1024
+            ],
+            "max_abs": 4.076142311096191
+          },
+          "v": {
+            "shape": [
+              8,
+              1024
+            ],
+            "max_abs": 3.240522623062134
+          }
+        }
+      },
+      "timings_s": {
+        "synthesize_x": 0.0001897189940791577,
+        "selector_quantize": 7.52560154069215e-05,
+        "selector_dequantize": 5.78700564801693e-06,
+        "layernorm_A": 4.3854990508407354e-05,
+        "layernorm_B": 2.6644993340596557e-05,
+        "activation_q8_0_quantize": 9.59839962888509e-05,
+        "activation_q8_0_dequantize": 7.528986316174269e-06,
+        "matmul_A_fp32": 0.0018078539869748056,
+        "matmul_B_fp32": 0.0015590010152664036,
+        "matmul_C_fp32": 0.0014419190119951963,
+        "int32_q8q8_D": 0.010280101996613666,
+        "matmul_C_quant_weight_fp32": 0.0017984049918595701
+      },
+      "kernel_total_s": 0.01714233699021861,
+      "peak_rss_kb": 188592
+    }
+  ],
+  "self_consistency": [
+    {
+      "check": "q8_0_generalized_matches_existing_reference",
+      "detail": "width 96 (multiple of 32) delegated to existing export_real_tensor_case.q8_quantize",
+      "passed": true,
+      "max_abs_payload_diff": 0.0,
+      "max_abs_scale_diff": 0.0
+    },
+    {
+      "check": "blocked_fp32_matches_direct_small_case",
+      "detail": "x[4,64] W[8,64] block_k=32",
+      "passed": true,
+      "comparison": {
+        "max_abs": 2.384185791015625e-07,
+        "rmse": 9.08314089494691e-08,
+        "relative_l2": 6.512824658077524e-08,
+        "cosine_similarity": 0.9999999999999981
+      }
+    },
+    {
+      "check": "int32_accumulation_matches_dequantized_fp32_small_case",
+      "detail": "x[4,64] W[8,64], same Q8_0 payloads",
+      "passed": true,
+      "comparison": {
+        "max_abs": 2.384185791015625e-07,
+        "rmse": 9.170572180368878e-08,
+        "relative_l2": 5.7828183357917725e-08,
+        "cosine_similarity": 0.9999999999999982
+      }
+    },
+    {
+      "check": "fused_qkv_layout_matches_three_segment_gemms",
+      "detail": "[M,3072] split at 1024/2048 equals three GEMMs on W[0:1024]/[1024:2048]/[2048:3072]",
+      "passed": true,
+      "comparison": {
+        "q": {
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "relative_l2": 0.0,
+          "cosine_similarity": 1.0
+        },
+        "k": {
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "relative_l2": 0.0,
+          "cosine_similarity": 1.0000000000000002
+        },
+        "v": {
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "relative_l2": 0.0,
+          "cosine_similarity": 1.0
+        }
+      }
+    },
+    {
+      "check": "selector_minus128_vs_q8_0_minus127",
+      "detail": "selector keeps -128; Q8_0 clamps the same value to -127",
+      "passed": true,
+      "selector_q": [
+        -128,
+        -128,
+        127,
+        64
+      ],
+      "q8_0_q": [
+        -127,
+        -127,
+        127,
+        64
+      ]
+    }
+  ],
+  "determinism": {
+    "case_id": "m192_k48_seed20260928",
+    "repeat_count": 2,
+    "byte_identical_fields": [
+      "x_sha256_fp32",
+      "selector_scale_s",
+      "selector_saturated_values",
+      "levels",
+      "diagnostics"
+    ],
+    "passed": true,
+    "x_sha256_fp32": "b812dc7f1b67139e19ee3e8fc308296326e75da4130b89bbea0cb0300c1dfb32"
+  },
+  "tests": {
+    "focused": {
+      "module": "evaluation.tests.test_selector_qkv_numeric_chain",
+      "command": "python -m unittest evaluation.tests.test_selector_qkv_numeric_chain",
+      "tests_run": 20,
+      "result": "OK",
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.27,
+      "covers": [
+        "selector global INT8 round/clamp/dequant",
+        "LayerNorm center->scale->gamma->beta order",
+        "Q8_0 block-32 tail (including non-multiple-of-32 widths)",
+        "bias must be added",
+        "fused QKV three-segment Q|K|V layout",
+        "determinism (synthetic activation + full case)",
+        "read-only tensor loading (synthetic + real shard)",
+        "blocked FP32 == direct FP32",
+        "INT32 accumulation == dequantized FP32"
+      ]
+    },
+    "full_suite": {
+      "command": "python -m unittest discover -s evaluation/tests",
+      "tests_run": 276,
+      "result": "OK",
+      "failures": 0,
+      "errors": 0,
+      "seconds": 12.023,
+      "baseline_before_change": 256
+    },
+    "py_compile": {
+      "command": "python -m py_compile scripts/validate_selector_qkv_numeric_chain.py evaluation/tests/test_selector_qkv_numeric_chain.py",
+      "result": "OK"
+    }
+  },
+  "resource_usage": {
+    "cpu_count": 20,
+    "blas_thread_vars": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "peak_rss_kb_final": 188612
+  },
+  "limitations": [
+    "x_fp32 is deterministic synthetic block0 hidden; it is not a real captured activation.",
+    "CPU software emulation only: no GPU, no ZCU102 board, no synthesis/bitstream/cosim.",
+    "The chain stops at +qkv.bias; the remaining block1 attention/MLP path is absent.",
+    "No throughput/latency speedup is modelled or claimed; only wall-clock on this CPU host.",
+    "The selector global scale s is derived as 128/amax(x); it is not a calibrated production scale.",
+    "Results judge interface/numerical self-consistency only, not downstream task accuracy."
+  ],
+  "limitations_zh": [
+    "`x_fp32` 是确定性合成的 block0 hidden，不是真实采集激活。",
+    "纯 CPU 软件模拟：无 GPU、无 ZCU102 板卡、无综合/bitstream/cosim。",
+    "数值链只到 `+qkv.bias`；block1 后续 attention/MLP 路径完全缺失。",
+    "不建模也不声明吞吐/时延加速；表中 wall-clock 仅是本机 CPU 串行计时。",
+    "selector 全局 scale 由 `s = 128/amax(x)` 推导，不是标定后的生产 scale。",
+    "结论只判接口/数值实现自洽，不判下游任务精度。"
+  ],
+  "next_gate": "Only after this CPU chain is accepted: decide whether to implement the int8->fp32/LayerNorm-Q8_0 adapter and an explicit bias-add operator in HLS; do not synthesize, build a BD/driver, or go on board without separate authorization. Task accuracy still requires the full downstream path.",
+  "next_gate_zh": "仅在本 CPU 链被接受后：再决定是否在 HLS 中实现 int8→fp32/LayerNorm-Q8_0 适配器与显式 bias-add 算子；没有独立授权不得综合、不得建 BD/驱动、不得上板。任务精度仍取决于完整下游路径。"
+}

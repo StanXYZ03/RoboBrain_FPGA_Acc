@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_IMMUTABLE",
+  "date": "2026-10-04",
+  "report_stem": "2026-10-04-layer5-context-pooling-ablation-screening100",
+  "diagnostic_only": true,
+  "diagnostic_scope": "FIXED 100-SAMPLE CV-BENCH SCREENING. This is a single-variable context-pooling ablation of the frozen layer-5 L2 path and is explicitly NOT a formal full2638 CV-Bench conclusion. No formal accuracy, promotion, acceleration or hardware claim may be derived from it.",
+  "round_scope": "CPU-only preregistration, summariser and tests. No GPU run, no board run, no training, no hyper-parameter tuning, no dependency installation. The representative-arm raw JSONL is produced later by the host GPU runner exactly as pinned below; it did not exist when this file was written.",
+  "ablation_question": "Holding the frozen layer-5 L2 selector, K=96, region_grid=3, local_cap=16 and identical selection metadata/indices/positions fixed, does replacing every SOURCE_CONTEXT pooled group with its raw representative 2x2 group change the official CV-Bench screening100 accuracy by more than 0.02 (representative minus pooled)?",
+  "single_variable_contract": {
+    "baseline": "frozen layer5 L2 pooled artifact produced by evaluation/run_hf_hardware_regular_layer5_l2.py",
+    "treatment": "evaluation/run_hf_hardware_regular_layer5_context_ablation.py",
+    "identical": [
+      "screening100 manifest and sample order",
+      "score_mode=l2",
+      "budget K=96",
+      "prune_after_layer=5",
+      "region_grid=3",
+      "local_candidate_cap=16",
+      "BF16 weight dtype",
+      "sdpa attention",
+      "greedy_argmax decoding",
+      "frozen select_hardware_regular_groups output metadata: group_indices, patch_indices, source_type, region_id, valid",
+      "representative patch positions used for compact cos/sin",
+      "DeepStack index 5 called on the compact hidden"
+    ],
+    "only_change": "For every SOURCE_CONTEXT output slot, the compact hidden row uses cut_hidden[group_indices[slot]] (the raw representative 2x2 group) instead of the pooled selection.groups[slot]. SOURCE_REAL slots are unchanged.",
+    "verification": "The treatment integration re-derives the frozen pooled selection from the same inputs, asserts full metadata/index/position equality, asserts every SOURCE_REAL slot equals its raw 2x2 group, and records context_slots_replaced.",
+    "forbidden_changes": [
+      "no B1-trained Wv projection",
+      "no cut-point change",
+      "no score-mode change",
+      "no K / region_grid / local_candidate_cap change"
+    ]
+  },
+  "fixed_configuration": {
+    "manifest": "datasets/cv_bench_screening100.jsonl",
+    "sample_count": 100,
+    "budget_K": 96,
+    "region_grid": 3,
+    "local_candidate_cap": 16,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "max_new_tokens": 16,
+    "score_mode": "l2",
+    "cut_point": 5,
+    "b1_trained_wv_used": false,
+    "arms": {
+      "dense": "frozen custom dense (unpruned) path; REFERENCE ONLY, never decision-driving",
+      "pooled_layer5_l2": "frozen layer-5 L2 pooled baseline (artifacts/token_selector/2026-10-04-layer5-l2-diagnostic/layer5_l2_k96_screening100.jsonl)",
+      "representative_layer5_l2": "layer-5 L2 with SOURCE_CONTEXT slots replaced by the raw representative 2x2 group"
+    }
+  },
+  "primary_metric": {
+    "identifier": "score(...)[\"cv_bench_accuracy\"]",
+    "definition": "Official CV-Bench combined score returned by the frozen scorer evaluation.build_cv_bench_pruning_report.score: ((accuracy_ADE20K + accuracy_COCO)/2 + accuracy_Omni3D)/2.",
+    "rule": "This is the ONE and ONLY primary metric for every arm (dense, pooled, representative) and for every paired bootstrap comparison. It is never replaced by any other accuracy."
+  },
+  "unweighted_metric": {
+    "identifier": "unweighted_sample_accuracy",
+    "underlying_field": "score(...)[\"accuracy\"]",
+    "definition": "Plain unweighted mean over the 100 screening samples.",
+    "rule": "Secondary diagnostic only. It must never be called the CV-Bench primary score and must never drive the decision rule."
+  },
+  "forbidden_primary_metrics": ["pointing", "grounding", "ndcg", "retained_mass"],
+  "arms": {
+    "dense": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+      "rows": 2638,
+      "subset_rule": "restricted to the 100 sample_id values of datasets/cv_bench_screening100.jsonl, preserving manifest order",
+      "role": "REFERENCE ONLY: unpruned custom-dense reference; it never drives the decision"
+    },
+    "pooled_layer5_l2": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-l2-diagnostic/layer5_l2_k96_screening100.jsonl",
+      "sha256": "5395d5e2846022a75f8bb0317d4fa8ccd8e62771582437b55811bd08c64a571e",
+      "rows": 100,
+      "role": "frozen layer-5 L2 pooled baseline, K=96, screening100",
+      "runner": "evaluation/run_hf_hardware_regular_layer5_l2.py",
+      "integration": "evaluation/hardware_regular_layer5_integration.py",
+      "required_record_fields": ["sample_id", "score_mode", "prune_after_layer", "requested_budget", "output_group_count", "image_grid_thw", "full_patch_tokens", "full_llm_visual_tokens", "selected_group_indices", "source_type", "region_id", "valid", "output_text"],
+      "required_score_mode": "l2",
+      "required_requested_budget": 96,
+      "required_prune_after_layer": 5,
+      "uses_pooled_context_group_values": true
+    },
+    "representative_layer5_l2": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-context-pooling-ablation/layer5_context_ablation_k96_screening100.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED_AFTER_PREREGISTRATION",
+      "rows": 100,
+      "role": "layer-5 L2 single-variable context-pooling ablation arm (raw representative 2x2 context groups)",
+      "runner": "evaluation/run_hf_hardware_regular_layer5_context_ablation.py",
+      "integration": "evaluation/hardware_regular_layer5_context_ablation.py",
+      "generation_command": "python evaluation/run_hf_hardware_regular_layer5_context_ablation.py --model <frozen BF16 RoboBrain2.5-4B> --model-label <label> --manifest datasets/cv_bench_screening100.jsonl --output artifacts/token_selector/2026-10-04-layer5-context-pooling-ablation/layer5_context_ablation_k96_screening100.jsonl --score-mode l2 --prune-after-layer 5 --budget 96 --region-grid 3 --local-candidate-cap 16 --dtype bf16 --device cuda:0",
+      "required_record_fields": ["sample_id", "score_mode", "prune_after_layer", "requested_budget", "output_group_count", "image_grid_thw", "full_patch_tokens", "full_llm_visual_tokens", "selected_group_indices", "source_type", "region_id", "valid", "context_group_values_source", "uses_pooled_context_group_values", "context_slots_replaced", "output_text"],
+      "required_score_mode": "l2",
+      "required_requested_budget": 96,
+      "required_prune_after_layer": 5,
+      "required_context_group_values_source": "representative_raw_group",
+      "required_uses_pooled_context_group_values": false,
+      "forbids_b1_trained_wv": true
+    }
+  },
+  "dataset_pins": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+      "records": 100,
+      "unique_sample_ids": 100
+    },
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "records": 2638
+    }
+  },
+  "validation_requirements": {
+    "sample_id_identity": "The screening manifest, the dense full2638 subset, the pooled baseline and the representative arm must all select exactly the same 100 sample_id values.",
+    "no_duplicates": "Each of the four inputs must contain no duplicate sample_id.",
+    "score_mode_l2": "Every pooled and every representative record must have score_mode == \"l2\".",
+    "budget_k96": "Every pooled and every representative record must have requested_budget == 96; every non-bypass record must emit exactly K=96 output groups.",
+    "cutpoint_5": "Every pooled and every representative record must carry prune_after_layer == 5.",
+    "input_grid_consistency": "For every sample_id, the representative record's (image_grid_thw, full_patch_tokens, full_llm_visual_tokens) must equal the pooled record's tuple.",
+    "selection_metadata_identity": "For every sample_id, selected_group_indices, source_type, region_id and valid must be element-wise identical between the pooled baseline and the representative arm; context_group_count and real_group_count must also match. A mismatch invalidates the single-variable claim and the summariser must fail closed.",
+    "ablation_declaration": "Every representative record must declare context_group_values_source == \"representative_raw_group\" and uses_pooled_context_group_values == false; context_slots_replaced must equal context_group_count.",
+    "input_sha256": "Every non-null inputs_sha256 pin in this file is re-verified before scoring.",
+    "fail_closed": "If any required input file is missing, or any of the checks above fails, the summariser must raise and must NOT write a report."
+  },
+  "bootstrap": {
+    "method": "paired bootstrap, stratified by task::source_dataset",
+    "helper": "evaluation.build_cv_bench_pruning_report.paired_bootstrap_delta",
+    "seed": 20261004,
+    "repeats": 5000,
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "comparisons": [
+      "representative_minus_pooled",
+      "representative_minus_dense",
+      "pooled_minus_dense"
+    ],
+    "ci_level": 0.95
+  },
+  "decision_rule": {
+    "uses": "95% CI of score(...)[\"cv_bench_accuracy\"] for representative_minus_pooled only",
+    "threshold": 0.02,
+    "dense_role": "reference only; never drives the decision",
+    "ordered_rules": [
+      {
+        "outcome": "CONTEXT_POOLING_HARM_CONFIRMED",
+        "condition": "representative_minus_pooled 95% CI lower bound > 0.02",
+        "meaning": "上下文池化有害已确认：丢弃 pooled 上下文、改用代表原始 2x2 group 后，官方 CV-Bench 主分提升超过 0.02。"
+      },
+      {
+        "outcome": "CONTEXT_POOLING_HARM_NOT_CONFIRMED",
+        "condition": "otherwise (representative_minus_pooled 95% CI lower bound <= 0.02)",
+        "meaning": "上下文池化有害未确认：证据不足以证明用代表原始 group 替换 pooled 上下文能带来超过 0.02 的提升。"
+      }
+    ]
+  },
+  "inputs_sha256": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+    },
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "dense_full_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+    },
+    "pooled_layer5_l2_screening_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-l2-diagnostic/layer5_l2_k96_screening100.jsonl",
+      "sha256": "5395d5e2846022a75f8bb0317d4fa8ccd8e62771582437b55811bd08c64a571e"
+    },
+    "representative_layer5_l2_screening_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-context-pooling-ablation/layer5_context_ablation_k96_screening100.jsonl",
+      "sha256": null
+    },
+    "evaluation/build_cv_bench_pruning_report.py": {
+      "path": "evaluation/build_cv_bench_pruning_report.py",
+      "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+    },
+    "evaluation/metrics.py": {
+      "path": "evaluation/metrics.py",
+      "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+    },
+    "evaluation/hardware_regular_token_selector.py": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "evaluation/hardware_regular_layer5_integration.py": {
+      "path": "evaluation/hardware_regular_layer5_integration.py",
+      "sha256": "300e0483ec8fd6fb83cc95feedd298a2faea901af376f4faad9d112de5fb85d6"
+    },
+    "evaluation/run_hf_hardware_regular_layer5_l2.py": {
+      "path": "evaluation/run_hf_hardware_regular_layer5_l2.py",
+      "sha256": "216f67f4df96c8de1c11b08ea69320f838a19de9c0bef7fd228cb409e694e50a"
+    },
+    "evaluation/shallow_block_pruning.py": {
+      "path": "evaluation/shallow_block_pruning.py",
+      "sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a"
+    },
+    "evaluation/run_hf_shallow_block_pruning.py": {
+      "path": "evaluation/run_hf_shallow_block_pruning.py",
+      "sha256": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9"
+    },
+    "evaluation/run_hf_token_reduction.py": {
+      "path": "evaluation/run_hf_token_reduction.py",
+      "sha256": "28e9870d17c9f1b63389e55d09f92118291ad15adb3c3c33c99686a973df5c8e"
+    },
+    "evaluation/token_reduction.py": {
+      "path": "evaluation/token_reduction.py",
+      "sha256": "6af9b507fb4a612b4013937150d6a7a59c8cf76d7e310c427b7fdb918f9a77b8"
+    },
+    "configs/evaluation_protocol.json": {
+      "path": "configs/evaluation_protocol.json",
+      "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643"
+    }
+  },
+  "report_paths": {
+    "json": "reports/cv_bench/2026-10-04-layer5-context-pooling-ablation-screening100.json",
+    "md": "reports/cv_bench/2026-10-04-layer5-context-pooling-ablation-screening100.md"
+  },
+  "explicit_non_formal_statement": "This diagnostic runs on a fixed stratified 100-sample screening set. Its result is a single-variable context-pooling attribution signal only and is NOT a formal full2638 CV-Bench conclusion; it must not be quoted as the official CV-Bench accuracy of any approach, and it does not authorise promotion, RTL work or hardware claims.",
+  "limitations": [
+    "Screening100 is a diagnostic subset, not the formal 2638-sample CV-Bench benchmark.",
+    "The Selector path is software only; no FPGA/board result and no latency/acceleration claim is made.",
+    "Both Selector arms share the frozen selection metadata and K=96 and differ only in the SOURCE_CONTEXT group values; dense is a reference, not an exactly matched input grid.",
+    "Only score(...)[\"cv_bench_accuracy\"] drives the decision; unweighted_sample_accuracy is descriptive.",
+    "Neither arm uses the B1-trained Wv projection.",
+    "Validation was already used in development; internal test remains sealed."
+  ]
+}

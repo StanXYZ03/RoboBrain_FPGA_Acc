@@ -1,0 +1,283 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_IMMUTABLE",
+  "date": "2026-10-04",
+  "report_stem": "2026-10-04-layer5-adaptive-budget-screening100",
+  "diagnostic_only": true,
+  "diagnostic_scope": "FIXED 100-SAMPLE CV-BENCH SCREENING (screening100). This is a single-variable per-sample budget-schedule diagnostic at the layer-5 cut point and is explicitly NOT a formal full2638 CV-Bench conclusion. It compares the layer-5 adaptive hardware-rule budget (real-only unbounded global-L2 + 3x3 anchor selection) against the existing fixed-K=96 unbounded real-only artifact; no formal accuracy, promotion, acceleration or hardware claim may be derived from it.",
+  "round_scope": "CPU-only preregistration, summariser and tests. No GPU run, no board run, no training, no hyper-parameter tuning, no dependency installation. The adaptive-budget arm raw JSONL is produced later by the host GPU runner exactly as pinned below; it did not exist when this file was written.",
+  "experiment_question": "Holding the screening100 manifest, the layer-5 cut point, region_grid=3, the frozen unbounded real-only global-L2 + 3x3 anchor selection algorithm, all-real emission, BF16/SDPA and greedy decoding fixed, does replacing the single fixed budget K=96 with the per-sample adaptive hardware-rule budget K_raw = max(96, ceil(0.25*G)), K_eff = min(G, 16*ceil(K_raw/16)) (identity bypass when K_eff >= G) change the official CV-Bench screening100 accuracy relative to the fixed-K96 arm?",
+  "single_variable_contract": {
+    "baseline": "existing fixed-K=96 layer-5 unbounded real-only artifact (artifacts/token_selector/2026-10-04-layer5-unbounded-real-only/layer5_unbounded_real_only_k96_screening100.jsonl, SHA256 fd22c5a4b1941a8ad0a2c47bf15f0abcbeaa56553a9f9a790deb6e14054df94c)",
+    "treatment": "evaluation/run_hf_hardware_regular_layer5_adaptive_budget.py",
+    "reference": "frozen custom dense (unpruned) full2638 path restricted to the 100 screening ids; REFERENCE ONLY, never decision-driving",
+    "identical": [
+      "screening100 manifest and sample order",
+      "score_mode=l2",
+      "prune_after_layer=5",
+      "region_grid=3",
+      "frozen unbounded real-only global-L2 + 3x3 anchor selection algorithm",
+      "one anchor per non-empty 3x3 region",
+      "all output slots are raw real 2x2 groups (no context pooling, no context slot reservation, no local candidate cap)",
+      "DeepStack index 5 called on the compact hidden",
+      "blocks 0..5 full then blocks 6..23 on the compact sequence",
+      "BF16 weight dtype",
+      "sdpa attention",
+      "greedy_argmax decoding",
+      "do_sample=false and max_new_tokens=16"
+    ],
+    "only_change": "The per-sample token budget stops being a constant K=96 and becomes the adaptive hardware-rule budget derived from the real G = full_llm_visual_tokens: K_raw = max(96, ceil(0.25*G)), K_eff = min(G, 16*ceil(K_raw/16)), identity bypass when K_eff >= G.",
+    "verification": "The adaptive runner records budget_mode='adaptive_layer5_unbounded_real_only', budget_formula, budget_min=96, budget_retention_ratio=0.25, budget_alignment=16, full_llm_visual_tokens, raw_budget, effective_budget, requested_budget, adaptive_retention and identity_bypass; it fail-closes unless the integration was called with the formula K_eff, the emission is exactly K_eff or the identity bypass, and the all-real / no-context contract holds. The summariser re-derives K_raw/K_eff/retention/identity from full_llm_visual_tokens and re-checks everything, failing closed on any violation.",
+    "forbidden_changes": [
+      "no B1-trained Wv projection",
+      "no cut-point change",
+      "no score-mode change",
+      "no region_grid change",
+      "no context pooling",
+      "no context slot reservation",
+      "no local_candidate_cap",
+      "no change to the frozen unbounded real-only selection algorithm",
+      "no change to BF16 / SDPA / greedy decoding"
+    ]
+  },
+  "fixed_configuration": {
+    "manifest": "datasets/cv_bench_screening100.jsonl",
+    "sample_count": 100,
+    "budget_formula": "K_raw = max(96, ceil(0.25 * G)); K_eff = min(G, 16 * ceil(K_raw / 16)); identity_bypass if K_eff >= G (G = full_llm_visual_tokens)",
+    "budget_min": 96,
+    "budget_retention_ratio": 0.25,
+    "budget_alignment": 16,
+    "fixed_k96_budget": 96,
+    "region_grid": 3,
+    "local_candidate_cap": null,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "max_new_tokens": 16,
+    "score_mode": "l2",
+    "cut_point": 5,
+    "b1_trained_wv_used": false,
+    "arms": {
+      "dense": "frozen custom dense (unpruned) path; REFERENCE ONLY, never decision-driving",
+      "fixed_k96": "existing fixed-K=96 layer-5 unbounded real-only artifact",
+      "adaptive": "layer-5 adaptive-budget unbounded real-only global-L2 + 3x3 anchor arm"
+    }
+  },
+  "primary_metric": {
+    "identifier": "score(...)[\"cv_bench_accuracy\"]",
+    "definition": "Official CV-Bench combined score returned by the frozen scorer evaluation.build_cv_bench_pruning_report.score: ((accuracy_ADE20K + accuracy_COCO)/2 + accuracy_Omni3D)/2.",
+    "rule": "This is the ONE and ONLY primary metric for every arm (dense, fixed_k96, adaptive) and for every paired bootstrap comparison. It is never replaced by any other accuracy."
+  },
+  "unweighted_metric": {
+    "identifier": "unweighted_sample_accuracy",
+    "underlying_field": "score(...)[\"accuracy\"]",
+    "definition": "Plain unweighted mean over the 100 screening samples.",
+    "rule": "Secondary diagnostic only. It must never be called the CV-Bench primary score and must never drive the decision rule."
+  },
+  "forbidden_primary_metrics": ["pointing", "grounding", "ndcg", "retained_mass"],
+  "arms": {
+    "dense": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+      "rows": 2638,
+      "subset_rule": "restricted to the 100 sample_id values of datasets/cv_bench_screening100.jsonl, preserving manifest order",
+      "role": "REFERENCE ONLY: unpruned custom-dense reference; it never drives the decision"
+    },
+    "fixed_k96": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-unbounded-real-only/layer5_unbounded_real_only_k96_screening100.jsonl",
+      "sha256": "fd22c5a4b1941a8ad0a2c47bf15f0abcbeaa56553a9f9a790deb6e14054df94c",
+      "rows": 100,
+      "budget_mode": "fixed_k96_layer5_unbounded_real_only",
+      "role": "existing fixed-K=96 layer-5 unbounded real-only artifact, screening100; the paired baseline",
+      "runner": "evaluation/run_hf_hardware_regular_layer5_unbounded_l2.py",
+      "integration": "evaluation/hardware_regular_layer5_unbounded_l2.py",
+      "required_record_fields": ["sample_id", "score_mode", "prune_after_layer", "requested_budget", "output_group_count", "image_grid_thw", "full_patch_tokens", "full_llm_visual_tokens", "selected_group_indices", "source_type", "region_id", "valid", "selection_rule", "uses_context_pooling", "uses_context_slot_reservation", "uses_local_candidate_cap", "local_candidate_cap", "context_group_count", "real_group_count", "identity_bypass", "output_text"],
+      "required_score_mode": "l2",
+      "required_requested_budget": 96,
+      "required_prune_after_layer": 5,
+      "required_selection_rule": "unbounded_real_only_global_l2_3x3_anchor",
+      "required_uses_context_pooling": false,
+      "required_uses_context_slot_reservation": false,
+      "required_uses_local_candidate_cap": false,
+      "required_local_candidate_cap": null,
+      "required_context_group_count": 0,
+      "required_all_real": true,
+      "required_exact_96_or_identity": true,
+      "forbids_b1_trained_wv": true
+    },
+    "adaptive": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-adaptive-budget/layer5_adaptive_budget_screening100.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED_AFTER_PREREGISTRATION",
+      "rows": 100,
+      "budget_mode": "adaptive_layer5_unbounded_real_only",
+      "role": "layer-5 adaptive-budget unbounded real-only global-L2 + 3x3 anchor arm, screening100",
+      "runner": "evaluation/run_hf_hardware_regular_layer5_adaptive_budget.py",
+      "integration": "evaluation/hardware_regular_layer5_unbounded_l2.py",
+      "budget_module": "evaluation/layer5_adaptive_budget.py",
+      "generation_command": "python evaluation/run_hf_hardware_regular_layer5_adaptive_budget.py --model <frozen BF16 RoboBrain2.5-4B> --model-label <label> --manifest datasets/cv_bench_screening100.jsonl --output artifacts/token_selector/2026-10-04-layer5-adaptive-budget/layer5_adaptive_budget_screening100.jsonl --score-mode l2 --prune-after-layer 5 --region-grid 3 --dtype bf16 --device cuda:0",
+      "required_record_fields": ["sample_id", "score_mode", "prune_after_layer", "budget_mode", "budget_formula", "budget_min", "budget_retention_ratio", "budget_alignment", "full_llm_visual_tokens", "raw_budget", "effective_budget", "requested_budget", "adaptive_retention", "output_group_count", "image_grid_thw", "full_patch_tokens", "selected_group_indices", "source_type", "region_id", "valid", "selection_rule", "uses_context_pooling", "uses_context_slot_reservation", "uses_local_candidate_cap", "local_candidate_cap", "context_group_count", "real_group_count", "identity_bypass", "output_text"],
+      "required_score_mode": "l2",
+      "required_prune_after_layer": 5,
+      "required_budget_mode": "adaptive_layer5_unbounded_real_only",
+      "required_budget_min": 96,
+      "required_budget_retention_ratio": 0.25,
+      "required_budget_alignment": 16,
+      "required_selection_rule": "unbounded_real_only_global_l2_3x3_anchor",
+      "required_uses_context_pooling": false,
+      "required_uses_context_slot_reservation": false,
+      "required_uses_local_candidate_cap": false,
+      "required_local_candidate_cap": null,
+      "required_context_group_count": 0,
+      "required_all_real": true,
+      "required_exact_keff_or_identity": true,
+      "forbids_b1_trained_wv": true,
+      "adaptive_never_exceeds_fixed_k96": true
+    }
+  },
+  "dataset_pins": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+      "records": 100,
+      "unique_sample_ids": 100
+    },
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "records": 2638
+    }
+  },
+  "validation_requirements": {
+    "sample_id_identity": "The screening manifest, the dense full2638 subset, the fixed-K96 arm and the adaptive arm must all select exactly the same 100 sample_id values.",
+    "no_duplicates": "Each of the four inputs must contain no duplicate sample_id.",
+    "score_mode_l2": "Every fixed-K96 and every adaptive record must have score_mode == \"l2\".",
+    "cutpoint_5": "Every fixed-K96 and every adaptive record must carry prune_after_layer == 5.",
+    "fixed_k96_budget": "Every fixed-K96 record must have requested_budget == 96 and must emit exactly 96 output groups, or the G <= 96 identity bypass.",
+    "adaptive_budget_formula": "Every adaptive record's raw_budget / effective_budget / requested_budget / adaptive_retention / identity_bypass must equal the frozen formula re-derived from its real full_llm_visual_tokens.",
+    "adaptive_budget_emission": "Every non-bypass adaptive record must emit exactly K_eff output groups; a bypass record must be the K_eff >= G identity bypass and keep exactly G real groups.",
+    "input_grid_consistency": "For every sample_id, the adaptive record's (image_grid_thw, full_patch_tokens, full_llm_visual_tokens) must equal the fixed-K96 record's tuple.",
+    "all_real_no_context": "Every fixed-K96 and adaptive record must declare selection_rule == \"unbounded_real_only_global_l2_3x3_anchor\", uses_context_pooling == false, uses_context_slot_reservation == false, uses_local_candidate_cap == false, local_candidate_cap null and context_group_count == 0; source_type must be all 0 (SOURCE_REAL) and real_group_count must equal output_group_count.",
+    "selection_metadata_identity": "NOT required between the fixed-K96 and adaptive arms: the single changed variable is the per-sample budget, so selected_group_indices/source_type/region_id legitimately differ. The summariser must never require cross-arm metadata identity.",
+    "input_sha256": "Every non-null inputs_sha256 pin in this file is re-verified before scoring.",
+    "fail_closed": "If any required input file is missing, or any of the checks above fails, the summariser must raise and must NOT write a report."
+  },
+  "bootstrap": {
+    "method": "paired bootstrap, stratified by task::source_dataset",
+    "helper": "evaluation.build_cv_bench_pruning_report.paired_bootstrap_delta",
+    "seed": 20261004,
+    "repeats": 5000,
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "comparisons": [
+      "adaptive_minus_fixed_k96",
+      "adaptive_minus_dense",
+      "fixed_k96_minus_dense"
+    ],
+    "ci_level": 0.95
+  },
+  "decision_rule": {
+    "type": "descriptive_only",
+    "outcome": "DIAGNOSTIC_NO_PROMOTION_THRESHOLD",
+    "uses": "95% paired stratified bootstrap CI on score(...)[\"cv_bench_accuracy\"] for adaptive_minus_fixed_k96, reported descriptively only",
+    "threshold": null,
+    "dense_role": "reference only; never drives the decision",
+    "note": "This screening100 diagnostic preregisters no CONFIRMED/NOT_CONFIRMED promotion threshold; it is a budget-schedule attribution signal, not a formal full2638 CV-Bench conclusion."
+  },
+  "inputs_sha256": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+    },
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "dense_full_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+    },
+    "fixed_k96_unbounded_screening_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-unbounded-real-only/layer5_unbounded_real_only_k96_screening100.jsonl",
+      "sha256": "fd22c5a4b1941a8ad0a2c47bf15f0abcbeaa56553a9f9a790deb6e14054df94c"
+    },
+    "adaptive_budget_screening_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-adaptive-budget/layer5_adaptive_budget_screening100.jsonl",
+      "sha256": null
+    },
+    "evaluation/build_cv_bench_pruning_report.py": {
+      "path": "evaluation/build_cv_bench_pruning_report.py",
+      "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+    },
+    "evaluation/metrics.py": {
+      "path": "evaluation/metrics.py",
+      "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+    },
+    "evaluation/hardware_regular_token_selector.py": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "evaluation/hardware_regular_layer5_unbounded_l2.py": {
+      "path": "evaluation/hardware_regular_layer5_unbounded_l2.py",
+      "sha256": "de05d3877848228937d00b566afad26d45f450ef145ede9175092a97dda0b78a"
+    },
+    "evaluation/run_hf_hardware_regular_layer5_unbounded_l2.py": {
+      "path": "evaluation/run_hf_hardware_regular_layer5_unbounded_l2.py",
+      "sha256": "bd4a84abc0a41fccb99e94335ba7c34359068efd89d32140f12f1bbd47648a79"
+    },
+    "evaluation/hardware_regular_layer5_context_ablation.py": {
+      "path": "evaluation/hardware_regular_layer5_context_ablation.py",
+      "sha256": "06a2cef5e22e8f47be30a9b959e46a1f9cdda7dabe0fcc91f32719dd8c9518ae"
+    },
+    "evaluation/run_hf_hardware_regular_layer5_context_ablation.py": {
+      "path": "evaluation/run_hf_hardware_regular_layer5_context_ablation.py",
+      "sha256": "3065e7efccb16a2c934d703767f98851945f0b999bc416cf9d6faa34a94b0567"
+    },
+    "evaluation/layer5_adaptive_budget.py": {
+      "path": "evaluation/layer5_adaptive_budget.py",
+      "sha256": "0a95de91eff7868382123b577054e9eb7a9370b91003708e6e5af1c41649bda0"
+    },
+    "evaluation/run_hf_hardware_regular_layer5_adaptive_budget.py": {
+      "path": "evaluation/run_hf_hardware_regular_layer5_adaptive_budget.py",
+      "sha256": "9b17cc3b3270b6dce32e0d06fda62f14a894e5efb5558f7642f12f83569a8b57"
+    },
+    "evaluation/summarize_layer5_adaptive_budget_screening100.py": {
+      "path": "evaluation/summarize_layer5_adaptive_budget_screening100.py",
+      "sha256": "eb4fa2d0aadf127bba37633792a580e18aa38af2649302bed3cbabc600284e9d"
+    },
+    "evaluation/shallow_block_pruning.py": {
+      "path": "evaluation/shallow_block_pruning.py",
+      "sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a"
+    },
+    "evaluation/run_hf_shallow_block_pruning.py": {
+      "path": "evaluation/run_hf_shallow_block_pruning.py",
+      "sha256": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9"
+    },
+    "evaluation/run_hf_token_reduction.py": {
+      "path": "evaluation/run_hf_token_reduction.py",
+      "sha256": "28e9870d17c9f1b63389e55d09f92118291ad15adb3c3c33c99686a973df5c8e"
+    },
+    "evaluation/token_reduction.py": {
+      "path": "evaluation/token_reduction.py",
+      "sha256": "6af9b507fb4a612b4013937150d6a7a59c8cf76d7e310c427b7fdb918f9a77b8"
+    },
+    "configs/evaluation_protocol.json": {
+      "path": "configs/evaluation_protocol.json",
+      "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643"
+    }
+  },
+  "report_paths": {
+    "json": "reports/cv_bench/2026-10-04-layer5-adaptive-budget-screening100.json",
+    "md": "reports/cv_bench/2026-10-04-layer5-adaptive-budget-screening100.md"
+  },
+  "explicit_non_formal_statement": "This diagnostic runs on a fixed 100-sample screening set. Its result is a per-sample budget-schedule diagnostic signal only and is NOT a formal full2638 CV-Bench conclusion; it must not be quoted as the official CV-Bench accuracy of any approach, and it does not authorise promotion, RTL work or hardware claims.",
+  "limitations": [
+    "Screening100 is a diagnostic subset, not the formal 2638-sample CV-Bench benchmark.",
+    "The Selector path is software only; no FPGA/board result and no latency/acceleration claim is made.",
+    "Both Selector arms are raw real groups at the same layer-5 cut point using the same frozen selection algorithm; they differ only in the per-sample budget, so cross-arm selection metadata is not required to match.",
+    "The adaptive budget K_eff = min(G, 16*ceil(K_raw/16)) never exceeds the fixed-K96 budget for any sample, so the two arms coincide whenever K_eff == 96 and always coincide on the G <= 96 identity bypass.",
+    "Only score(...)[\"cv_bench_accuracy\"] drives the report; unweighted_sample_accuracy is descriptive.",
+    "Neither arm uses the B1-trained Wv projection.",
+    "Validation was already used in development; internal test remains sealed."
+  ]
+}

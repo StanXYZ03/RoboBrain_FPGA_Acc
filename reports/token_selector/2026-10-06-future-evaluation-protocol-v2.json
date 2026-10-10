@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-06",
+  "development_decision_unchanged": "DEVELOPMENT_STOP",
+  "findings": [
+    {
+      "affects_frozen_scores": false,
+      "id": "parse_gate_key_alias",
+      "severity": "protocol_defect_fixed_for_future_only",
+      "summary": "冻结 scorer 用 correct_key.replace('_correct','_answer') 推导解析键；当 correct_key='correct' 时该推导与布尔正确性字段同名，使解析门恒为 1.0，而诚实失败为 dense=40、修正整数 L2=42、prompt=42、v2=43。"
+    },
+    {
+      "affects_frozen_scores": false,
+      "id": "model_weight_shards_unpinned",
+      "severity": "provenance_gap_fixed_for_future_only",
+      "summary": "冻结 v2 预注册固定了代码/checkpoint/数据，但只记录 model_path/model_label，未固定本地模型权重分片；新增模型身份清单以流式 SHA256 记录全部分片与配置文件。"
+    }
+  ],
+  "honest_parse_counts": {
+    "corrected_l2_integer": {
+      "frozen_reported_parse_success_rate": 1.0,
+      "parse_failure_count": 42,
+      "parse_success_count": 2596,
+      "parse_success_rate": 0.9840788476118272,
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "role": "corrected integer-L2 K96 control",
+      "sample_count": 2638,
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f"
+    },
+    "dense": {
+      "frozen_reported_parse_success_rate": 1.0,
+      "parse_failure_count": 40,
+      "parse_success_count": 2598,
+      "parse_success_rate": 0.9848369977255497,
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "role": "custom dense BF16",
+      "sample_count": 2638,
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "frozen_reported_parse_success_rate": 1.0,
+      "parse_failure_count": 42,
+      "parse_success_count": 2596,
+      "parse_success_rate": 0.9840788476118272,
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "role": "descriptive strongest prior same-budget comparator",
+      "sample_count": 2638,
+      "sha256": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa"
+    },
+    "v2": {
+      "frozen_reported_parse_success_rate": 1.0,
+      "parse_failure_count": 43,
+      "parse_success_count": 2595,
+      "parse_success_rate": 0.9836997725549659,
+      "path": "artifacts/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638/conservative_l2_guarded_rerank_v2_k96_full2638.jsonl",
+      "role": "conservative_l2_guarded_rerank_v2 development arm",
+      "sample_count": 2638,
+      "sha256": "3018f7593d31fd02854f3f63f992b6fc6293ba64c24185e2905877a71d88fdb1"
+    }
+  },
+  "limitations": [
+    "本报告为未来协议，不追溯修改任何冻结 v2 主分或 DEVELOPMENT_STOP 判定。",
+    "诚实解析计数为只读重算，不改变官方主指标，也不构成新的精度主张。",
+    "本轮 CPU-only：gpu_runs=0、未加载模型权重、未联网、未训练、未安装依赖。",
+    "模型身份清单只是本地文件哈希，不是模型质量/精度/部署主张。"
+  ],
+  "marker": "PROTOCOL_V2_READY",
+  "model_identity_manifest": {
+    "file_count": 10,
+    "model_dir": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+    "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+  },
+  "next_allowed_action": "在新协议下独立预注册新候选，按生命周期安全路径规则执行，并固定模型身份清单；在任何外部验证或硬件主张前先完成只读审计。",
+  "primary_scores": {
+    "corrected_l2_integer": {
+      "accuracy_2d": 0.6937034529451591,
+      "accuracy_3d": 0.84,
+      "cv_bench_accuracy": 0.7668517264725796,
+      "expected_frozen_cv_bench_accuracy": 0.7668517264725796,
+      "unchanged": true
+    },
+    "dense": {
+      "accuracy_2d": 0.7987930882223073,
+      "accuracy_3d": 0.9466666666666667,
+      "cv_bench_accuracy": 0.8727298774444869,
+      "expected_frozen_cv_bench_accuracy": 0.8727298774444869,
+      "unchanged": true
+    },
+    "prompt_plus_corrected_l2_integer": {
+      "accuracy_2d": 0.7022234651123997,
+      "accuracy_3d": 0.8525,
+      "cv_bench_accuracy": 0.7773617325561999,
+      "expected_frozen_cv_bench_accuracy": 0.7773617325561999,
+      "unchanged": true
+    },
+    "v2": {
+      "accuracy_2d": 0.7041476553530953,
+      "accuracy_3d": 0.8633333333333333,
+      "cv_bench_accuracy": 0.7837404943432142,
+      "expected_frozen_cv_bench_accuracy": 0.7837404943432142,
+      "unchanged": true
+    }
+  },
+  "primary_scores_unchanged": true,
+  "protocol": {
+    "all_pins_match": true,
+    "config_path": "configs/evaluation_protocol_v2.json",
+    "config_sha256": "aeb963f1887b22c206531fb9902d9629e7b26aefa9529244cd8bdf6112c885ed",
+    "lifecycle_states": [
+      "PREREGISTERED_NOT_EXECUTED",
+      "EXECUTED_UNAUDITED",
+      "AUDITED_STOP",
+      "AUDITED_GO_EXTERNAL_VALIDATION"
+    ],
+    "measurement_classes": [
+      "board_measurement",
+      "development",
+      "fpga_estimate",
+      "software_latency",
+      "untouched_confirmation"
+    ],
+    "pins_verified": {
+      "cv_bench_metric_v2_source": {
+        "expected_sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+        "match": true,
+        "observed_sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+        "path": "evaluation/cv_bench_metric_v2.py"
+      },
+      "model_identity_builder": {
+        "expected_sha256": "33caea5818bf06a7d5655513ae23dd0fc17fcd9a5d8108ae600dd9c82fb8545f",
+        "match": true,
+        "observed_sha256": "33caea5818bf06a7d5655513ae23dd0fc17fcd9a5d8108ae600dd9c82fb8545f",
+        "path": "scripts/build_model_identity_manifest.py"
+      },
+      "model_identity_manifest": {
+        "expected_sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+        "match": true,
+        "observed_sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+        "path": "artifacts/provenance/robobrain25-4b-model-identity.json"
+      }
+    }
+  },
+  "schema_version": "1.0",
+  "scope": {
+    "dependency_installation": false,
+    "future_only": true,
+    "gpu_runs": 0,
+    "model_weights_loaded": false,
+    "network_used": false,
+    "retroactive": false,
+    "training": false
+  },
+  "title": "未来评测协议 v2：生命周期安全 + 诚实解析门 + 模型身份固定"
+}

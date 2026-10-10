@@ -1,0 +1,418 @@
+{
+  "generated_at": "2026-10-04T04:09:51.101203+00:00",
+  "schema_version": "1.0",
+  "report_scope": "diagnostic screening100; NOT a formal full2638 CV-Bench conclusion",
+  "diagnostic_only": true,
+  "formal_full2638_conclusion": false,
+  "explicit_non_formal_statement": "Fixed stratified 100-sample screening: a diagnostic adaptive-budget signal only, NOT a formal full2638 CV-Bench conclusion. It must not be quoted as the official CV-Bench accuracy of any approach.",
+  "fixed_configuration": {
+    "manifest": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_screening100.jsonl",
+    "cut_point": 5,
+    "region_grid": 3,
+    "local_candidate_cap": null,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "score_mode": "l2",
+    "bootstrap_seed": 20261004,
+    "bootstrap_repeats": 5000,
+    "b1_trained_wv_used": false,
+    "budget_formula": "G = full_llm_visual_tokens; K_raw = max(96, ceil(0.25 * G)); K_eff = min(G, 16 * ceil(K_raw / 16)); identity_bypass if K_eff >= G",
+    "budget_min": 96,
+    "budget_retention_ratio": 0.25,
+    "budget_alignment": 16,
+    "fixed_k96_budget": 96,
+    "selection_rule": "unbounded_real_only_global_l2_3x3_anchor",
+    "uses_context_pooling": false,
+    "uses_context_slot_reservation": false,
+    "uses_local_candidate_cap": false
+  },
+  "primary_metric": {
+    "identifier": "score(...)[\"cv_bench_accuracy\"]",
+    "formula": "((accuracy_ADE20K + accuracy_COCO)/2 + accuracy_Omni3D)/2",
+    "rule": "the only primary metric for every arm and every comparison"
+  },
+  "unweighted_metric": {
+    "identifier": "unweighted_sample_accuracy",
+    "underlying_field": "score(...)[\"accuracy\"]",
+    "rule": "secondary diagnostic only; never the CV-Bench primary and never decision-driving"
+  },
+  "forbidden_primary_metrics": [
+    "pointing",
+    "grounding",
+    "ndcg",
+    "retained_mass"
+  ],
+  "arms": {
+    "dense": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "role": "reference_only"
+    },
+    "fixed_k96": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-layer5-unbounded-real-only/layer5_unbounded_real_only_k96_screening100.jsonl",
+      "prune_after_layer": 5,
+      "score_mode": "l2",
+      "requested_budget": 96,
+      "selection_rule": "unbounded_real_only_global_l2_3x3_anchor"
+    },
+    "adaptive": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-layer5-adaptive-budget/layer5_adaptive_budget_screening100.jsonl",
+      "prune_after_layer": 5,
+      "score_mode": "l2",
+      "budget_mode": "adaptive_layer5_unbounded_real_only",
+      "budget_formula": "G = full_llm_visual_tokens; K_raw = max(96, ceil(0.25 * G)); K_eff = min(G, 16 * ceil(K_raw / 16)); identity_bypass if K_eff >= G",
+      "selection_rule": "unbounded_real_only_global_l2_3x3_anchor"
+    }
+  },
+  "validation": {
+    "screening_sample_count": 100,
+    "dense_full_sample_count": 2638,
+    "fixed_k96_sample_count": 100,
+    "adaptive_sample_count": 100,
+    "sample_ids_identical": true,
+    "all_score_mode_l2": true,
+    "all_prune_after_layer_5": true,
+    "input_grid_consistent_fixed_k96_vs_adaptive": true,
+    "grid_signature_definition": "(tuple(image_grid_thw), full_patch_tokens, full_llm_visual_tokens)",
+    "fixed_k96_declaration_ok": true,
+    "adaptive_declaration_ok": true,
+    "adaptive_budget_formula_ok": true,
+    "adaptive_identity_or_exact_budget": true,
+    "fixed_k96_identity_or_exact_96": true,
+    "selection_rule": "unbounded_real_only_global_l2_3x3_anchor",
+    "all_real": true,
+    "no_context": true,
+    "no_context_slot_reservation": true,
+    "no_local_candidate_cap": true,
+    "selection_metadata_identity_required": false,
+    "checks": [
+      "100 identical unique sample_ids across manifest/dense/fixed_k96/adaptive",
+      "no duplicate sample_id in any input",
+      "every fixed_k96 and adaptive record score_mode == \"l2\"",
+      "every fixed_k96 and adaptive record prune_after_layer == 5",
+      "every fixed_k96 record requested_budget == 96 and emits exactly 96 groups or the G<=96 identity bypass",
+      "every adaptive record re-derives K_raw/K_eff/retention/identity from the real full_llm_visual_tokens and emits exactly K_eff or the identity groups",
+      "adaptive input grid == fixed_k96 input grid for every sample",
+      "both arms prove all-real (source_type all 0) and context-free (context_group_count == 0, no pooling / slot reservation / local cap)",
+      "the frozen selection_rule unbounded_real_only_global_l2_3x3_anchor is preserved"
+    ]
+  },
+  "config_pin_verification": {
+    "pins_verified": true,
+    "checks": [
+      {
+        "name": "screening_manifest",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_screening100.jsonl",
+        "expected_sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+        "actual_sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+        "matches": true
+      },
+      {
+        "name": "full_manifest",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+        "expected_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+        "actual_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+        "matches": true
+      },
+      {
+        "name": "dense_full_jsonl",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+        "expected_sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+        "actual_sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+        "matches": true
+      },
+      {
+        "name": "fixed_k96_unbounded_screening_jsonl",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-layer5-unbounded-real-only/layer5_unbounded_real_only_k96_screening100.jsonl",
+        "expected_sha256": "fd22c5a4b1941a8ad0a2c47bf15f0abcbeaa56553a9f9a790deb6e14054df94c",
+        "actual_sha256": "fd22c5a4b1941a8ad0a2c47bf15f0abcbeaa56553a9f9a790deb6e14054df94c",
+        "matches": true
+      },
+      {
+        "name": "evaluation/build_cv_bench_pruning_report.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/build_cv_bench_pruning_report.py",
+        "expected_sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b",
+        "actual_sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b",
+        "matches": true
+      },
+      {
+        "name": "evaluation/metrics.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/metrics.py",
+        "expected_sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8",
+        "actual_sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8",
+        "matches": true
+      },
+      {
+        "name": "evaluation/hardware_regular_token_selector.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/hardware_regular_token_selector.py",
+        "expected_sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+        "actual_sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+        "matches": true
+      },
+      {
+        "name": "evaluation/hardware_regular_layer5_unbounded_l2.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/hardware_regular_layer5_unbounded_l2.py",
+        "expected_sha256": "de05d3877848228937d00b566afad26d45f450ef145ede9175092a97dda0b78a",
+        "actual_sha256": "de05d3877848228937d00b566afad26d45f450ef145ede9175092a97dda0b78a",
+        "matches": true
+      },
+      {
+        "name": "evaluation/run_hf_hardware_regular_layer5_unbounded_l2.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/run_hf_hardware_regular_layer5_unbounded_l2.py",
+        "expected_sha256": "bd4a84abc0a41fccb99e94335ba7c34359068efd89d32140f12f1bbd47648a79",
+        "actual_sha256": "bd4a84abc0a41fccb99e94335ba7c34359068efd89d32140f12f1bbd47648a79",
+        "matches": true
+      },
+      {
+        "name": "evaluation/hardware_regular_layer5_context_ablation.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/hardware_regular_layer5_context_ablation.py",
+        "expected_sha256": "06a2cef5e22e8f47be30a9b959e46a1f9cdda7dabe0fcc91f32719dd8c9518ae",
+        "actual_sha256": "06a2cef5e22e8f47be30a9b959e46a1f9cdda7dabe0fcc91f32719dd8c9518ae",
+        "matches": true
+      },
+      {
+        "name": "evaluation/run_hf_hardware_regular_layer5_context_ablation.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/run_hf_hardware_regular_layer5_context_ablation.py",
+        "expected_sha256": "3065e7efccb16a2c934d703767f98851945f0b999bc416cf9d6faa34a94b0567",
+        "actual_sha256": "3065e7efccb16a2c934d703767f98851945f0b999bc416cf9d6faa34a94b0567",
+        "matches": true
+      },
+      {
+        "name": "evaluation/layer5_adaptive_budget.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/layer5_adaptive_budget.py",
+        "expected_sha256": "0a95de91eff7868382123b577054e9eb7a9370b91003708e6e5af1c41649bda0",
+        "actual_sha256": "0a95de91eff7868382123b577054e9eb7a9370b91003708e6e5af1c41649bda0",
+        "matches": true
+      },
+      {
+        "name": "evaluation/run_hf_hardware_regular_layer5_adaptive_budget.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/run_hf_hardware_regular_layer5_adaptive_budget.py",
+        "expected_sha256": "9b17cc3b3270b6dce32e0d06fda62f14a894e5efb5558f7642f12f83569a8b57",
+        "actual_sha256": "9b17cc3b3270b6dce32e0d06fda62f14a894e5efb5558f7642f12f83569a8b57",
+        "matches": true
+      },
+      {
+        "name": "evaluation/summarize_layer5_adaptive_budget_screening100.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/summarize_layer5_adaptive_budget_screening100.py",
+        "expected_sha256": "eb4fa2d0aadf127bba37633792a580e18aa38af2649302bed3cbabc600284e9d",
+        "actual_sha256": "eb4fa2d0aadf127bba37633792a580e18aa38af2649302bed3cbabc600284e9d",
+        "matches": true
+      },
+      {
+        "name": "evaluation/shallow_block_pruning.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/shallow_block_pruning.py",
+        "expected_sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a",
+        "actual_sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a",
+        "matches": true
+      },
+      {
+        "name": "evaluation/run_hf_shallow_block_pruning.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/run_hf_shallow_block_pruning.py",
+        "expected_sha256": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9",
+        "actual_sha256": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9",
+        "matches": true
+      },
+      {
+        "name": "evaluation/run_hf_token_reduction.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/run_hf_token_reduction.py",
+        "expected_sha256": "28e9870d17c9f1b63389e55d09f92118291ad15adb3c3c33c99686a973df5c8e",
+        "actual_sha256": "28e9870d17c9f1b63389e55d09f92118291ad15adb3c3c33c99686a973df5c8e",
+        "matches": true
+      },
+      {
+        "name": "evaluation/token_reduction.py",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/token_reduction.py",
+        "expected_sha256": "6af9b507fb4a612b4013937150d6a7a59c8cf76d7e310c427b7fdb918f9a77b8",
+        "actual_sha256": "6af9b507fb4a612b4013937150d6a7a59c8cf76d7e310c427b7fdb918f9a77b8",
+        "matches": true
+      },
+      {
+        "name": "configs/evaluation_protocol.json",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/evaluation_protocol.json",
+        "expected_sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643",
+        "actual_sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643",
+        "matches": true
+      }
+    ]
+  },
+  "adaptive_budget_overview": {
+    "sample_count": 100,
+    "raw_budget_min": 96,
+    "raw_budget_max": 897,
+    "effective_budget_min": 64,
+    "effective_budget_max": 912,
+    "effective_budget_mean": 200.48,
+    "retention_mean": 0.35686500112137076,
+    "identity_bypass_sample_ids": [
+      "195",
+      "523"
+    ],
+    "identity_bypass_count": 2,
+    "fixed_k96_budget": 96,
+    "adaptive_never_exceeds_fixed_k96": false
+  },
+  "metrics": {
+    "dense": {
+      "label": "dense",
+      "sample_count": 100,
+      "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+      "cv_bench_accuracy": 0.8916666666666666,
+      "accuracy_2d": 0.85,
+      "accuracy_3d": 0.9333333333333333,
+      "unweighted_sample_accuracy": 0.9,
+      "unweighted_metric": "score(...)[\"accuracy\"]",
+      "parse_success_rate": 1.0,
+      "unweighted_task_accuracy": {
+        "Count": 0.75,
+        "Depth": 0.9666666666666667,
+        "Distance": 0.9,
+        "Relation": 0.95
+      },
+      "unweighted_source_accuracy": {
+        "ADE20K": 0.85,
+        "COCO": 0.85,
+        "Omni3D": 0.9333333333333333
+      }
+    },
+    "fixed_k96": {
+      "label": "layer5_unbounded_real_only_block5",
+      "sample_count": 100,
+      "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+      "cv_bench_accuracy": 0.7458333333333333,
+      "accuracy_2d": 0.675,
+      "accuracy_3d": 0.8166666666666667,
+      "unweighted_sample_accuracy": 0.76,
+      "unweighted_metric": "score(...)[\"accuracy\"]",
+      "parse_success_rate": 1.0,
+      "unweighted_task_accuracy": {
+        "Count": 0.45,
+        "Depth": 0.8666666666666667,
+        "Distance": 0.7666666666666667,
+        "Relation": 0.9
+      },
+      "unweighted_source_accuracy": {
+        "ADE20K": 0.6,
+        "COCO": 0.75,
+        "Omni3D": 0.8166666666666667
+      }
+    },
+    "adaptive": {
+      "label": "layer5_adaptive_budget_unbounded_real_only_block5",
+      "sample_count": 100,
+      "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+      "cv_bench_accuracy": 0.7625,
+      "accuracy_2d": 0.725,
+      "accuracy_3d": 0.8,
+      "unweighted_sample_accuracy": 0.77,
+      "unweighted_metric": "score(...)[\"accuracy\"]",
+      "parse_success_rate": 1.0,
+      "unweighted_task_accuracy": {
+        "Count": 0.55,
+        "Depth": 0.9333333333333333,
+        "Distance": 0.6666666666666666,
+        "Relation": 0.9
+      },
+      "unweighted_source_accuracy": {
+        "ADE20K": 0.7,
+        "COCO": 0.75,
+        "Omni3D": 0.8
+      }
+    }
+  },
+  "project_interpretation": {
+    "role": "project_interpretation_not_official_metric",
+    "is_official_cv_bench_metric": false,
+    "definition": "arm cv_bench_accuracy / dense cv_bench_accuracy; a project interpretation ratio, NOT an official CV-Bench metric",
+    "adaptive_over_dense_ratio": 0.8551401869158879,
+    "fixed_k96_over_dense_ratio": 0.8364485981308412,
+    "adaptive_over_fixed_k96_ratio": 1.0223463687150838,
+    "dense_role": "reference_only",
+    "primary_metric": "score(...)[\"cv_bench_accuracy\"]"
+  },
+  "comparisons": {
+    "adaptive_minus_fixed_k96": {
+      "left": "adaptive",
+      "right": "fixed_k96",
+      "metric": "score(...)[\"cv_bench_accuracy\"]",
+      "delta_point_estimate": 0.016666666666666607,
+      "delta_ci95": [
+        -0.04583333333333339,
+        0.08333333333333326
+      ],
+      "stratified_by": "task::source_dataset",
+      "seed": 20261004,
+      "repeats": 5000
+    },
+    "adaptive_minus_dense": {
+      "left": "adaptive",
+      "right": "dense",
+      "metric": "score(...)[\"cv_bench_accuracy\"]",
+      "delta_point_estimate": -0.12916666666666665,
+      "delta_ci95": [
+        -0.2041666666666666,
+        -0.054166666666666696
+      ],
+      "stratified_by": "task::source_dataset",
+      "seed": 20261004,
+      "repeats": 5000
+    },
+    "fixed_k96_minus_dense": {
+      "left": "fixed_k96",
+      "right": "dense",
+      "metric": "score(...)[\"cv_bench_accuracy\"]",
+      "delta_point_estimate": -0.14583333333333326,
+      "delta_ci95": [
+        -0.22916666666666663,
+        -0.0625
+      ],
+      "stratified_by": "task::source_dataset",
+      "seed": 20261004,
+      "repeats": 5000
+    }
+  },
+  "decision": {
+    "type": "descriptive_only",
+    "outcome": "DIAGNOSTIC_NO_PROMOTION_THRESHOLD",
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "uses_only_primary_metric": true,
+    "dense_drives_decision": false,
+    "dense_role": "reference_only",
+    "note": "screening100 diagnostic only: the paired stratified bootstrap CI on score(...)[\"cv_bench_accuracy\"] is reported descriptively; no CONFIRMED/NOT_CONFIRMED promotion claim is made."
+  },
+  "inputs_sha256": {
+    "preregistered_config": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/2026-10-04-layer5-adaptive-budget-screening100.preregistered.json",
+      "sha256": "55a39d9f1b2f0df264391e6e8c99198d8c4086221116bbbd2509d3e00e52025f"
+    },
+    "screening_manifest": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+    },
+    "full_manifest": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "dense_full_jsonl": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+    },
+    "fixed_k96_unbounded_screening_jsonl": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-layer5-unbounded-real-only/layer5_unbounded_real_only_k96_screening100.jsonl",
+      "sha256": "fd22c5a4b1941a8ad0a2c47bf15f0abcbeaa56553a9f9a790deb6e14054df94c"
+    },
+    "adaptive_budget_screening_jsonl": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-layer5-adaptive-budget/layer5_adaptive_budget_screening100.jsonl",
+      "sha256": "8f9442dd0f533e8a475fd51784682b729a64decb31f3166a7f32d72b4405d3e3"
+    }
+  },
+  "limitations": [
+    "Screening100 is a fixed diagnostic subset, not the formal 2638-sample benchmark.",
+    "The adaptive budget is derived from the measured real G; it is a software selection diagnostic and makes no FPGA/latency/acceleration claim.",
+    "Both Selector arms use the same frozen unbounded real-only global-L2 + 3x3 anchor algorithm and raw real groups; only the per-sample budget differs.",
+    "Dense is the frozen custom dense path and is reference only; it never drives the decision.",
+    "Only score(...)[\"cv_bench_accuracy\"] is reported as the primary metric; the adaptive/dense ratio is project interpretation, not an official CV-Bench metric.",
+    "Forbidden primary metrics (pointing/grounding/ndcg/retained_mass) are never reported.",
+    "Neither arm uses the B1-trained Wv projection."
+  ]
+}

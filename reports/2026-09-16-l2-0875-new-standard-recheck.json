@@ -1,0 +1,559 @@
+{
+  "date": "2026-09-16",
+  "scheme": {
+    "name": "layer-5 L2 + 3x3 regional anchor",
+    "requested_retention": 0.875,
+    "selection": "L2 top-k with one regional anchor per non-empty 3x3 cell",
+    "parameter_tuning_in_this_recheck": false
+  },
+  "protocol": {
+    "path": "configs/evaluation_protocol.json",
+    "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643",
+    "version": "2026-09-16-r2-literature-aligned"
+  },
+  "evidence_scope": {
+    "dataset": "COCO 2017 validation-derived frozen spatial set",
+    "distinct_images": 96,
+    "tasks": [
+      "pointing",
+      "grounding"
+    ],
+    "samples_per_configuration": 192,
+    "role": "revealed frozen reproduction and COCO spatial diagnostic only",
+    "not_valid_for": [
+      "new hyperparameter selection",
+      "RoboBrain2.5 official five-benchmark quality table",
+      "general VLM robustness table",
+      "a newly proposed universal quality score"
+    ]
+  },
+  "integrity": {
+    "actual_sha256": {
+      "manifest": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+      "full": "c8d763f33a25014bdc329d9748d1e570c22b3f78ef082e6b09a5322349e8114d",
+      "l2": "119e67e0d322e6a835b901ab60c02614fe2899536d08d83e323d9db63f9ee9e4"
+    },
+    "expected_sha256": {
+      "manifest": "9ae7aaf1d14cb206b5b924020ed0b9ed015c2483a72062fe5f6df15344560cd9",
+      "full": "c8d763f33a25014bdc329d9748d1e570c22b3f78ef082e6b09a5322349e8114d",
+      "l2": "119e67e0d322e6a835b901ab60c02614fe2899536d08d83e323d9db63f9ee9e4"
+    },
+    "matches": {
+      "manifest": true,
+      "full": true,
+      "l2": true
+    }
+  },
+  "quality": {
+    "full": {
+      "pointing_format_success": 1.0,
+      "grounding_format_success": 1.0,
+      "format_success_macro": 1.0,
+      "pck_0_1": 0.5729166666666666,
+      "pck_0_2": 0.7708333333333334,
+      "point_nme_bbox_diag_mean": 0.1697940000052172,
+      "iou_mean": 0.7803901754737415,
+      "acc_0_5": 0.8854166666666666
+    },
+    "l2": {
+      "pointing_format_success": 1.0,
+      "grounding_format_success": 1.0,
+      "format_success_macro": 1.0,
+      "pck_0_1": 0.5833333333333334,
+      "pck_0_2": 0.8125,
+      "point_nme_bbox_diag_mean": 0.15916649772259786,
+      "iou_mean": 0.784043141437354,
+      "acc_0_5": 0.8854166666666666
+    },
+    "retention": {
+      "pck_0_1": 1.0181818181818183,
+      "pck_0_2": 1.054054054054054,
+      "point_nme_bbox_diag_mean": 1.0667697187202132,
+      "iou_mean": 1.0046809481697985,
+      "acc_0_5": 1.0,
+      "format_success_macro": 1.0,
+      "coco_spatial_diagnostic_mean_retention": 1.0114313831758084,
+      "coco_spatial_diagnostic_all_metrics_retention": 1.028737307825177
+    }
+  },
+  "paired_image_bootstrap": {
+    "unit": "image_id_with_pointing_and_grounding_resampled_together",
+    "image_count": 96,
+    "iterations": 10000,
+    "seed": 20260916,
+    "confidence_intervals": {
+      "pck_0_1": {
+        "bootstrap_mean": 1.0204281479486716,
+        "ci95_low": 0.9152542372881355,
+        "ci95_high": 1.1372549019607843
+      },
+      "pck_0_2": {
+        "bootstrap_mean": 1.0556743146841752,
+        "ci95_low": 1.0,
+        "ci95_high": 1.1285714285714286
+      },
+      "point_nme_bbox_diag_mean": {
+        "bootstrap_mean": 1.070123258650795,
+        "ci95_low": 0.982315469417047,
+        "ci95_high": 1.1916783762473588
+      },
+      "iou_mean": {
+        "bootstrap_mean": 1.004657557005847,
+        "ci95_low": 0.9792160261702939,
+        "ci95_high": 1.0340583860742263
+      },
+      "acc_0_5": {
+        "bootstrap_mean": 0.9998733191746987,
+        "ci95_low": 0.9418604651162791,
+        "ci95_high": 1.0602409638554215
+      },
+      "coco_spatial_diagnostic_mean_retention": {
+        "bootstrap_mean": 1.0125428524772593,
+        "ci95_low": 0.9537322864215643,
+        "ci95_high": 1.0760514192554207
+      },
+      "coco_spatial_diagnostic_all_metrics_retention": {
+        "bootstrap_mean": 1.0301513194928376,
+        "ci95_low": 0.9812187525020323,
+        "ci95_high": 1.0832257869753412
+      }
+    }
+  },
+  "compute_proxy": {
+    "full": {
+      "token_retention": 1.0,
+      "encoder_compute_retention": 1.0,
+      "llm_prefill_compute_retention": 1.0
+    },
+    "l2": {
+      "token_retention": 0.875,
+      "encoder_compute_retention": 0.8973550285976157,
+      "llm_prefill_compute_retention": 0.8733662921883938
+    }
+  },
+  "timing": {
+    "scope": "archived A6000 single-run-per-image inference-core records; elapsed_seconds starts after processor and host-to-device transfer and therefore is not the formal model-E2E boundary",
+    "full": {
+      "combined": {
+        "preprocess_seconds": {
+          "count": 192,
+          "mean": 0.14815609266209626,
+          "p50": 0.13217091000115033,
+          "p95": 0.23900934519915606,
+          "min": 0.06609065298107453,
+          "max": 0.2527041529829148
+        },
+        "vision_encoder_seconds": {
+          "count": 192,
+          "mean": 0.01743623584508896,
+          "p50": 0.017000288009643552,
+          "p95": 0.021934086894989012,
+          "min": 0.013845279693603515,
+          "max": 0.027225088119506836
+        },
+        "llm_prefill_seconds": {
+          "count": 192,
+          "mean": 0.032202707628409065,
+          "p50": 0.03128115177154541,
+          "p95": 0.044600439453124995,
+          "min": 0.02872105598449707,
+          "max": 0.0471220817565918
+        },
+        "decoder_seconds": {
+          "count": 192,
+          "mean": 0.33089887850483257,
+          "p50": 0.3170530242919922,
+          "p95": 0.4627861756324768,
+          "min": 0.2017240982055664,
+          "max": 0.565546911239624
+        },
+        "timed_stage_seconds": {
+          "count": 192,
+          "mean": 0.38053782197833064,
+          "p50": 0.36816340923309326,
+          "p95": 0.5137750814437867,
+          "min": 0.24857823944091795,
+          "max": 0.6112128953933715
+        },
+        "elapsed_seconds": {
+          "count": 192,
+          "mean": 0.4071948239158398,
+          "p50": 0.3929888129932806,
+          "p95": 0.5502250321631436,
+          "min": 0.2660753219970502,
+          "max": 0.6484882670047227
+        }
+      },
+      "grounding": {
+        "preprocess_seconds": {
+          "count": 96,
+          "mean": 0.14666133424088912,
+          "p50": 0.13191213249228895,
+          "p95": 0.23873043400089955,
+          "min": 0.08956083600060083,
+          "max": 0.2527041529829148
+        },
+        "vision_encoder_seconds": {
+          "count": 96,
+          "mean": 0.017404002646605174,
+          "p50": 0.016978400230407715,
+          "p95": 0.02166860866546631,
+          "min": 0.014246912002563476,
+          "max": 0.027225088119506836
+        },
+        "llm_prefill_seconds": {
+          "count": 96,
+          "mean": 0.03232429842154185,
+          "p50": 0.03123456001281738,
+          "p95": 0.04433660888671875,
+          "min": 0.028887840270996095,
+          "max": 0.04710982513427735
+        },
+        "decoder_seconds": {
+          "count": 96,
+          "mean": 0.43710744766394294,
+          "p50": 0.4402157926559448,
+          "p95": 0.4830039515495301,
+          "min": 0.377075424194336,
+          "max": 0.565546911239624
+        },
+        "timed_stage_seconds": {
+          "count": 96,
+          "mean": 0.48683574873209,
+          "p50": 0.4889401607513427,
+          "p95": 0.5296344473361969,
+          "min": 0.4260011215209961,
+          "max": 0.6112128953933715
+        },
+        "elapsed_seconds": {
+          "count": 96,
+          "mean": 0.52116214996992,
+          "p50": 0.5239846214972204,
+          "p95": 0.5645762125059264,
+          "min": 0.4563373139826581,
+          "max": 0.6484882670047227
+        }
+      },
+      "pointing": {
+        "preprocess_seconds": {
+          "count": 96,
+          "mean": 0.14965085108330337,
+          "p50": 0.13247758250508923,
+          "p95": 0.23835864750435576,
+          "min": 0.06609065298107453,
+          "max": 0.24754377297358587
+        },
+        "vision_encoder_seconds": {
+          "count": 96,
+          "mean": 0.017468469043572743,
+          "p50": 0.017119904518127442,
+          "p95": 0.022347280502319336,
+          "min": 0.013845279693603515,
+          "max": 0.025865215301513672
+        },
+        "llm_prefill_seconds": {
+          "count": 96,
+          "mean": 0.032081116835276285,
+          "p50": 0.031466448783874515,
+          "p95": 0.0446710729598999,
+          "min": 0.02872105598449707,
+          "max": 0.0471220817565918
+        },
+        "decoder_seconds": {
+          "count": 96,
+          "mean": 0.2246903093457222,
+          "p50": 0.22402777671813967,
+          "p95": 0.23597003221511842,
+          "min": 0.2017240982055664,
+          "max": 0.2570306243896484
+        },
+        "timed_stage_seconds": {
+          "count": 96,
+          "mean": 0.2742398952245712,
+          "p50": 0.2727833437919617,
+          "p95": 0.2992597703933716,
+          "min": 0.24857823944091795,
+          "max": 0.3103256969451904
+        },
+        "elapsed_seconds": {
+          "count": 96,
+          "mean": 0.29322749786175945,
+          "p50": 0.29193415500049014,
+          "p95": 0.3184883757348871,
+          "min": 0.2660753219970502,
+          "max": 0.3296403120039031
+        }
+      }
+    },
+    "l2": {
+      "combined": {
+        "preprocess_seconds": {
+          "count": 192,
+          "mean": 0.15874750894378545,
+          "p50": 0.14641568950901274,
+          "p95": 0.24013393676432315,
+          "min": 0.05484118399908766,
+          "max": 0.25302695998107083
+        },
+        "vision_encoder_seconds": {
+          "count": 192,
+          "mean": 0.017496427516142526,
+          "p50": 0.01721702480316162,
+          "p95": 0.02259477243423462,
+          "min": 0.014680064201354981,
+          "max": 0.025347808837890624
+        },
+        "llm_prefill_seconds": {
+          "count": 192,
+          "mean": 0.030699812322854996,
+          "p50": 0.030209024429321288,
+          "p95": 0.03205406799316406,
+          "min": 0.028688383102416993,
+          "max": 0.04530585479736328
+        },
+        "decoder_seconds": {
+          "count": 192,
+          "mean": 0.32949370910724,
+          "p50": 0.34060121536254884,
+          "p95": 0.4653169920921325,
+          "min": 0.19842422485351563,
+          "max": 0.5755011520385742
+        },
+        "timed_stage_seconds": {
+          "count": 192,
+          "mean": 0.37768994894623753,
+          "p50": 0.38647726249694825,
+          "p95": 0.5125017347812653,
+          "min": 0.24441126441955563,
+          "max": 0.6245425605773925
+        },
+        "elapsed_seconds": {
+          "count": 192,
+          "mean": 0.404335250578697,
+          "p50": 0.41141038050409406,
+          "p95": 0.5492596654134104,
+          "min": 0.26184644701424986,
+          "max": 0.6619387580140028
+        }
+      },
+      "grounding": {
+        "preprocess_seconds": {
+          "count": 96,
+          "mean": 0.16830346183390552,
+          "p50": 0.1731938184966566,
+          "p95": 0.24056324601406232,
+          "min": 0.0921329119883012,
+          "max": 0.25302695998107083
+        },
+        "vision_encoder_seconds": {
+          "count": 96,
+          "mean": 0.017566930721203487,
+          "p50": 0.017218048095703126,
+          "p95": 0.022860928058624268,
+          "min": 0.014680064201354981,
+          "max": 0.025347808837890624
+        },
+        "llm_prefill_seconds": {
+          "count": 96,
+          "mean": 0.03098188392321269,
+          "p50": 0.03070924758911133,
+          "p95": 0.03211596775054932,
+          "min": 0.029485055923461914,
+          "max": 0.04530585479736328
+        },
+        "decoder_seconds": {
+          "count": 96,
+          "mean": 0.43716157629092534,
+          "p50": 0.44110280036926264,
+          "p95": 0.48995190429687496,
+          "min": 0.37708595275878914,
+          "max": 0.5755011520385742
+        },
+        "timed_stage_seconds": {
+          "count": 96,
+          "mean": 0.4857103909353415,
+          "p50": 0.4882656140327454,
+          "p95": 0.5427717533111572,
+          "min": 0.4240677433013916,
+          "max": 0.6245425605773925
+        },
+        "elapsed_seconds": {
+          "count": 96,
+          "mean": 0.5200217104590289,
+          "p50": 0.5233769324986497,
+          "p95": 0.5769936810029321,
+          "min": 0.4542940829996951,
+          "max": 0.6619387580140028
+        }
+      },
+      "pointing": {
+        "preprocess_seconds": {
+          "count": 96,
+          "mean": 0.1491915560536654,
+          "p50": 0.13852342899190262,
+          "p95": 0.23912433125951793,
+          "min": 0.05484118399908766,
+          "max": 0.25064326301799156
+        },
+        "vision_encoder_seconds": {
+          "count": 96,
+          "mean": 0.01742592431108157,
+          "p50": 0.017209344863891602,
+          "p95": 0.022132479190826414,
+          "min": 0.014712832450866698,
+          "max": 0.024913919448852538
+        },
+        "llm_prefill_seconds": {
+          "count": 96,
+          "mean": 0.030417740722497307,
+          "p50": 0.030065055847167968,
+          "p95": 0.03192000818252564,
+          "min": 0.028688383102416993,
+          "max": 0.044750846862792966
+        },
+        "decoder_seconds": {
+          "count": 96,
+          "mean": 0.22182584192355473,
+          "p50": 0.2212494249343872,
+          "p95": 0.22568458175659178,
+          "min": 0.19842422485351563,
+          "max": 0.3041164779663086
+        },
+        "timed_stage_seconds": {
+          "count": 96,
+          "mean": 0.2696695069571336,
+          "p50": 0.2685824956893921,
+          "p95": 0.2792990789413452,
+          "min": 0.24441126441955563,
+          "max": 0.34888678169250487
+        },
+        "elapsed_seconds": {
+          "count": 96,
+          "mean": 0.2886487906983651,
+          "p50": 0.28767439498915337,
+          "p95": 0.29836438399070175,
+          "min": 0.26184644701424986,
+          "max": 0.36852667800849304
+        }
+      }
+    },
+    "speedup_full_over_l2": {
+      "combined": {
+        "preprocess_seconds": {
+          "mean": 0.933281370194982,
+          "p50": 0.9027100199737437,
+          "p95": 0.995316815355962
+        },
+        "vision_encoder_seconds": {
+          "mean": 0.9965597736453322,
+          "p50": 0.9874114839238503,
+          "p95": 0.9707593629823611
+        },
+        "llm_prefill_seconds": {
+          "mean": 1.0489545437525432,
+          "p50": 1.0354903000834248,
+          "p95": 1.3914127674102583
+        },
+        "decoder_seconds": {
+          "mean": 1.0042646319451738,
+          "p50": 0.9308628683385906,
+          "p95": 0.9945610916801538
+        },
+        "timed_stage_seconds": {
+          "mean": 1.0075402404539457,
+          "p50": 0.9526133745992377,
+          "p95": 1.0024845704435807
+        },
+        "elapsed_seconds": {
+          "mean": 1.0070722830449486,
+          "p50": 0.9552233769885878,
+          "p95": 1.0017575780828665
+        }
+      },
+      "grounding": {
+        "preprocess_seconds": {
+          "mean": 0.8714100865353889,
+          "p50": 0.7616445762169937,
+          "p95": 0.9923811636086103
+        },
+        "vision_encoder_seconds": {
+          "mean": 0.9907252964570722,
+          "p50": 0.9860815892740353,
+          "p95": 0.9478446636068146
+        },
+        "llm_prefill_seconds": {
+          "mean": 1.0433290145188163,
+          "p50": 1.0171060011217048,
+          "p95": 1.3805160483124599
+        },
+        "decoder_seconds": {
+          "mean": 0.999876181645602,
+          "p50": 0.9979891133935779,
+          "p95": 0.985819112679405
+        },
+        "timed_stage_seconds": {
+          "mean": 1.002316931689646,
+          "p50": 1.001381515919227,
+          "p95": 0.9757958922976063
+        },
+        "elapsed_seconds": {
+          "mean": 1.002193061343313,
+          "p50": 1.0011610924380436,
+          "p95": 0.9784790216845674
+        }
+      },
+      "pointing": {
+        "preprocess_seconds": {
+          "mean": 1.0030785591476286,
+          "p50": 0.9563550618778951,
+          "p95": 0.9967979680230399
+        },
+        "vision_encoder_seconds": {
+          "mean": 1.0024414620270168,
+          "p50": 0.9948028035656475,
+          "p95": 1.009705253064553
+        },
+        "llm_prefill_seconds": {
+          "mean": 1.0546844069700656,
+          "p50": 1.0466120184120182,
+          "p95": 1.3994693455108427
+        },
+        "decoder_seconds": {
+          "mean": 1.0129131367081867,
+          "p50": 1.0125575548256291,
+          "p95": 1.0455744489874803
+        },
+        "timed_stage_seconds": {
+          "mean": 1.0169481092579151,
+          "p50": 1.0156408111846118,
+          "p95": 1.0714670865642857
+        },
+        "elapsed_seconds": {
+          "mean": 1.0158625544639093,
+          "p50": 1.014807574415851,
+          "p95": 1.0674477009454737
+        }
+      }
+    }
+  },
+  "assessment": {
+    "data_integrity_pass": true,
+    "coco_diagnostic_point_estimates_no_degradation": true,
+    "formal_noninferiority_established": false,
+    "robobrain_official_five_benchmark_results_available": false,
+    "general_vlm_robustness_results_available": false,
+    "custom_weighted_quality_score_used": false,
+    "formal_model_end_to_end_performance_available": false,
+    "zcu102_on_board_performance_available": false,
+    "zcu102_energy_available": false,
+    "decision": "RETAIN_AS_FROZEN_SAFE_BASELINE / NOT_MAIN_ACCELERATION_SCHEME"
+  },
+  "limitations": [
+    "The frozen COCO set is already revealed and cannot validate a new method.",
+    "The official RoboBrain2.5 spatial suite and general VLM robustness benchmarks have not been run.",
+    "Latency records have one measured run per distinct image, not the new protocol's repeated timing design.",
+    "The archived elapsed_seconds excludes processor and host-to-device transfer, so it cannot close the formal model-E2E gate.",
+    "No full-model ZCU102 latency or board-energy measurement exists for this pruning scheme."
+  ],
+  "output_json": "reports/2026-09-16-l2-0875-new-standard-recheck.json"
+}

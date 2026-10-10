@@ -1,0 +1,183 @@
+{
+ "artifact_storage_audit": {
+  "file_count": 44,
+  "top20_largest": [
+   {
+    "path": "vivado/post_route.dcp",
+    "size": 33501830
+   },
+   {
+    "path": "vivado/vivado_ooc.log",
+    "size": 1194323
+   },
+   {
+    "path": "vivado/vivado_console.log",
+    "size": 1139379
+   },
+   {
+    "path": "ip/export.zip",
+    "size": 1051551
+   },
+   {
+    "path": "hls/csynth.xml",
+    "size": 793285
+   },
+   {
+    "path": "protected_sha_after.json",
+    "size": 444839
+   },
+   {
+    "path": "protected_sha_before.json",
+    "size": 444839
+   },
+   {
+    "path": "ip/component.xml",
+    "size": 387049
+   },
+   {
+    "path": "hls/hls_export.log",
+    "size": 314226
+   },
+   {
+    "path": "vivado/timing_summary_post_route.rpt",
+    "size": 274273
+   },
+   {
+    "path": "vivado/timing_summary_post_synth.rpt",
+    "size": 272750
+   },
+   {
+    "path": "hls/csynth.rpt",
+    "size": 235559
+   },
+   {
+    "path": "vivado/utilization_hier_post_route.rpt",
+    "size": 185086
+   },
+   {
+    "path": "vivado/utilization_hier_post_synth.rpt",
+    "size": 184972
+   },
+   {
+    "path": "vivado/timing_summary_post_place.rpt",
+    "size": 112048
+   },
+   {
+    "path": "vivado/drc_post_route.rpt",
+    "size": 98002
+   },
+   {
+    "path": "vivado/clock_utilization_post_route.rpt",
+    "size": 57860
+   },
+   {
+    "path": "scripts/summarize_ooc.py",
+    "size": 40383
+   },
+   {
+    "path": "vivado/clock_utilization_post_synth.rpt",
+    "size": 18810
+   },
+   {
+    "path": "vivado/critical_paths_post_route.rpt",
+    "size": 17575
+   }
+  ],
+  "total_bytes": 40852056
+ },
+ "date": "2026-10-03",
+ "decision": "INTEGER_SELECTOR_COMPACT_IP_OOC_ROUTE_PASS",
+ "environment_warnings": {
+  "host_critical_warning_ids": [
+   "Common 17-741"
+  ],
+  "non_host_invalidating_critical_warning_ids": [],
+  "note": "The only console CRITICAL WARNING is [Common 17-741] (no write access to the local Xilinx Tcl store; reverted to the installation area). It is a host/Tcl-store setting, not a design DRC, and it does not invalidate implementation or timing."
+ },
+ "evidence_paths": {
+  "artifact_dir": "artifacts/token_selector/2026-10-03-integer-selector-compact-ip-ooc-route",
+  "harness_result": "reports/token_selector/logs/2026-10-03-integer-selector-compact-ip-ooc-route-harness-result.json",
+  "report_json": "reports/token_selector/2026-10-03-integer-selector-compact-ip-ooc-route.json",
+  "report_md": "reports/token_selector/2026-10-03-integer-selector-compact-ip-ooc-route.md"
+ },
+ "exported_ip": {
+  "archive": {
+   "path": "ip/export.zip",
+   "present": true,
+   "sha256": "b4e0654792e6591afd388aeb34bff713cd2b8688d068be1942a987bdff9a4090",
+   "size_bytes": 1051551
+  },
+  "vlnv": "robobrain.local:hls:integer_selector_pipeline_compact:1.0"
+ },
+ "gates": {
+  "clock_exact_5_000_ns": true,
+  "drc_no_error_no_critical_warning": true,
+  "hls_csynth_and_export_no_error_fatal": true,
+  "interface_gates": true,
+  "no_bitstream_generated": true,
+  "no_unrouted_nets": true,
+  "opt_design_ok": true,
+  "part_exact": true,
+  "phys_opt_design_ok": true,
+  "place_design_ok": true,
+  "post_route_hold_whs_ge_0": true,
+  "post_route_setup_wns_ge_0": true,
+  "protected_files_byte_identical": true,
+  "resources_each_below_80_percent": true,
+  "route_design_ok": true,
+  "vivado_ooc_synth_ok": true
+ },
+ "interfaces": {
+  "interface_gate_pass": true,
+  "no_control_r_interface": true,
+  "no_external_score_q_port": true,
+  "one_axi4lite_slave_control": true,
+  "three_128bit_axi4_masters_input_arena_wv_q_output_arena": true
+ },
+ "license": {
+  "hls_license_errors": 0,
+  "license_error_lines": 0,
+  "synthesis_and_implementation_license_obtained": true,
+  "vivado_license_errors": 0,
+  "vivado_license_ok": true
+ },
+ "limitations": [
+  "Out-of-context (OOC) only: no PS, no DDR, no AXI interconnect contention, no DMA and no full ZCU102 block design.",
+  "Post-route timing/resources are the OOC Vivado result for the exported IP; they are not a board measurement.",
+  "No bitstream was generated and the board was not accessed.",
+  "No end-to-end model latency, throughput, speedup or task-accuracy claim is made.",
+  "The exported HLS OOC XDC carries only create_clock ap_clk 5.000 ns; it has no explicit set_clock_uncertainty. Vitis HLS csynth used its default 1.35 ns scheduling uncertainty, which is not present in the post-route OOC constraints.",
+  "The exported IP interface gate is parsed from the generated component.xml/csynth.xml, not from the C++ pragmas."
+ ],
+ "post_route_dcp": {
+  "archived": true,
+  "limit_bytes": 209715200,
+  "path": "vivado/post_route.dcp",
+  "sha256": "25f1ca2f5ef1ecb28f119f1300daf53aff0735723e5c36a7ed66a7a50696a4d3",
+  "size_bytes": 33501830,
+  "within_200mib": true
+ },
+ "protected_sha_audit": {
+  "after_aggregate_sha256": "8fec4b4988ed014b5ac0e4e453ab46153ec731dc825ab2d6810608240ca5dfc5",
+  "after_file_count": 2260,
+  "before_aggregate_sha256": "8fec4b4988ed014b5ac0e4e453ab46153ec731dc825ab2d6810608240ca5dfc5",
+  "before_file_count": 2260,
+  "protected_files_unchanged": true
+ },
+ "recommended_next_action": "Build the minimal Zynq UltraScale+ MPSoC block design around this exported IP (PS, clock/reset, three 128-bit AXI4 masters, AXI4-Lite control, memory map and DMA path), validate it, and only then consider a bitstream.",
+ "route": {
+  "drc_critical_warning": 0,
+  "drc_error": 0,
+  "routing_errors": 0,
+  "unrouted_nets": 0
+ },
+ "schema_version": 1.0,
+ "task": "Export the accepted compact integer Selector IP catalog component and run a Vivado 2023.2 out-of-context place-and-route on xczu9eg-ffvb1156-2-e at ap_clk = 5.000 ns",
+ "timing": {
+  "achieved_frequency_mhz": 223.6636,
+  "post_route_ths_ns": 0.0,
+  "post_route_tns_ns": 0.0,
+  "post_route_whs_ns": 0.028,
+  "post_route_wns_ns": 0.529
+ }
+}

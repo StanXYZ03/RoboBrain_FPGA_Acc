@@ -1,0 +1,43 @@
+--- xfsbl_ddr_init.c
++++ xfsbl_ddr_init.c
+@@ -1288,8 +1288,18 @@
+ 	/* Calculate Bank Group Address Map based on HIF Addresses */
+ 	XFsbl_DdrCalcBgAddr(DdrDataPtr, HifAddr);
+ 
+-	/* Rank Width is 0U for the New DIMM */
+-	DdrDataPtr->AddrMapCsBit0 = 0x1FU;
++	/*
++	 * Vivado 2023.2 generated code disables the rank-select address bit even
++	 * when SPD reports two ranks.  Derive the position from the live SPD
++	 * geometry so this path is independent of the original 4 GiB preset.
++	 */
++	if (PDimmPtr->NRanks == 2U) {
++		DdrDataPtr->AddrMapCsBit0 = PDimmPtr->NumBgAddr
++			+ PDimmPtr->NumBankAddr + PDimmPtr->NumColAddr
++			+ PDimmPtr->NumRowAddr - 6U;
++	} else {
++		DdrDataPtr->AddrMapCsBit0 = 0x1FU;
++	}
+ 
+ 	/* Address Map Register 0U */
+ 	RegVal[0U] = ((DdrDataPtr->AddrMapCsBit0 & 0x1FU) << 0U);
+@@ -6569,6 +6579,19 @@
+ 	/* Initialize the Parameters with their default values */
+ 	XFsbl_InitilizeDdrParams(DdrDataPtr);
+ 
++	/* Read-only JTAG evidence in otherwise unused OCM. */
++	Xil_Out32(0xFFFEF000U, 0x53504434U); /* "SPD4" */
++	Xil_Out32(0xFFFEF004U, PDimmPtr->NRanks);
++	Xil_Out32(0xFFFEF008U, (u32)PDimmPtr->RankDensity);
++	Xil_Out32(0xFFFEF00CU, (u32)(PDimmPtr->RankDensity >> 32U));
++	Xil_Out32(0xFFFEF010U, PDimmPtr->BusWidth);
++	Xil_Out32(0xFFFEF014U, PDimmPtr->DramWidth);
++	Xil_Out32(0xFFFEF018U, PDimmPtr->NumRowAddr);
++	Xil_Out32(0xFFFEF01CU, PDimmPtr->NumColAddr);
++	Xil_Out32(0xFFFEF020U, PDimmPtr->NumBankAddr);
++	Xil_Out32(0xFFFEF024U, PDimmPtr->NumBgAddr);
++	memcpy((void *)0xFFFEF040U, PDimmPtr->Mpart, sizeof(PDimmPtr->Mpart));
++
+ 	/* Assert Reset for DDR controller */
+ 	RegVal = Xil_In32(CRF_APB_RST_DDR_SS_OFFSET);
+ 	RegVal |= 0x00000008U;

@@ -1,0 +1,41 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-14",
+  "evidence_level": "revealed development cross-validation; no calibration or test access",
+  "objective": "Predict whether ROI-512 improves task utility over ROI-384 using only low-cost deployable image and prompt-category features.",
+  "inputs": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "unique_images": 192,
+    "tasks": ["grounding", "pointing"],
+    "actions": ["roi_only_m0500_s384", "roi_only_m0500_s512"]
+  },
+  "allowed_features": [
+    "task identity",
+    "category explicitly present in the task prompt",
+    "source width, height, aspect ratio and pixel count",
+    "64x64 RGB mean, standard deviation and histograms",
+    "64x64 luminance quantiles, gradients, edge fractions and 4x4 pooled statistics"
+  ],
+  "forbidden_features": [
+    "ground-truth bbox or point",
+    "target area, edge, overlap or scene-complexity stratification labels",
+    "calibration or test records",
+    "high-resolution action output at decision time"
+  ],
+  "model": {
+    "type": "ridge regression on continuous utility gain",
+    "ridge_alpha": 10.0,
+    "decision_threshold": 0.0,
+    "cross_validation": "5-fold grouped by COCO image ID",
+    "seed": 20260914,
+    "feature_standardization": "training fold statistics only"
+  },
+  "gate": {
+    "action_balanced_accuracy_min": 0.55,
+    "mean_final_visual_token_ratio_max": 0.5,
+    "grounding_mean_iou_noninferiority_margin": -0.02,
+    "pointing_pck_0_1_noninferiority_margin": -0.02,
+    "noninferiority_rule": "paired 95% bootstrap lower bound must be at or above the margin"
+  },
+  "failure_interpretation": "Cheap global statistics are insufficient; this does not reject a learned visual scout or reusable encoder features."
+}

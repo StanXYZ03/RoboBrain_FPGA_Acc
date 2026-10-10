@@ -1,0 +1,9 @@
+{
+  "configs/cv_bench_refinement_20260916.lock.json": "93dbac570fb92ccb3ae2dc64e89b294a11caaf5990aa13ea5875afb044007548",
+  "evaluation/run_cv_bench_refinement.py": "8b05cbf9527c06e26876e2e7053cb5a9a10614faeb16578fae1edca34cc3850d",
+  "evaluation/extract_task_conditioned_roi_scout.py": "2a390d14afc3f25927e395f01ec462ab1f72af7bd0a3183f7ee8925343016da7",
+  "evaluation/evaluate_task_conditioned_roi_proposals.py": "f8ec1db7524f1f0c84e0910c06725611872197768bd77f094c5b694edba1fcfe",
+  "evaluation/visual_refinement.py": "f79b8b99b0bbd4b3246837d700c75100aa64a824a1c47b97562c0408063473b9",
+  "datasets/cv_bench_full2638.jsonl": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+  "datasets/cv_bench_screening100.jsonl": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+}

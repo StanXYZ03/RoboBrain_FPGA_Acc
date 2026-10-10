@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_VALIDATION_ONLY",
+  "date": "2026-10-03",
+  "purpose": "Determine whether replacing 128 per-output-row Wv scales with one per-tensor Wv scale preserves selector behavior sufficiently to simplify the FPGA scorer.",
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-03-selector-wv-scale-regularization-harness-prompt.md",
+    "sha256": "c80cc3180e7ecc0e78b1a986ada83ca6086ac316fabb5e88ea4ac5125f1dd2bc"
+  },
+  "scope": {
+    "cpu_only": true,
+    "offline": true,
+    "validation_only": true,
+    "training": false,
+    "hyperparameter_tuning": false,
+    "raw_images": false,
+    "model_4b": false,
+    "internal_test_resolve_hash_open": false
+  },
+  "split_rule": {
+    "seed": 20260927,
+    "ratios": {"train": 0.7, "val": 0.15, "test": 0.15},
+    "salt": "prompt_projection_distillation_2026_09_27",
+    "expected_val_records": 76,
+    "expected_val_images": 38,
+    "expected_val_npz_aggregate_sha256": "0439b7cb798f9dc49751d8135dd009294df723b2b10839837d7145778ca68f4b"
+  },
+  "checkpoints": [
+    {"seed": 20261003, "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261003/best.npz", "sha256": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff", "canonical_weights_sha256": "5b9063c6161e5d69ef5a4d814b02922a5b3697c1027cce53436a05225525f82f"},
+    {"seed": 20261004, "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261004/best.npz", "sha256": "c6f86779183270a57241cc7148a5480c6c4deb1f85d66652bf6117b6bb6412fb", "canonical_weights_sha256": "035d095fe42f9101f8a09abf6a293c405ff2e1334baf5b2410f4a79807043ef5"},
+    {"seed": 20261005, "path": "artifacts/token_selector/spatial_prompt_contrastive_trainval/B_SPATIAL_KL_CONTRASTIVE/20261005/best.npz", "sha256": "acaba094de4a21e3c912efee1c80145053d7f372f197a2d26297fd59ab8bd6e4", "canonical_weights_sha256": "5748997d16c78ba8a417ad41171309a31ccc086444049a1291a77d1fad6ce6e3"}
+  ],
+  "frozen_inputs": {
+    "configs/selector_int8_numerical_audit.preregistered.json": "119ff51926bb532e47f817a87e8898efedfd817583e3c9d80f307b4d46415696",
+    "configs/hardware_regular_token_selector.json": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142",
+    "evaluation/selector_int8_numerical_audit.py": "4329e11616d2790218670b6b2b7252cec847c75a56778fcba871044428ea05dc",
+    "evaluation/tests/test_selector_int8_numerical_audit.py": "81e2bda24ab3e8eabf6163db7c23e194d54c7b10c9cf9fa39a7643d409513ad9",
+    "evaluation/hardware_regular_token_selector.py": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+    "evaluation/prompt_projection_distillation.py": "cd2d4ccc3a4c5ba714f5e478f802b0cb9d64c6e279c15b6493661fb6fe0b0b98",
+    "artifacts/token_selector/prompt_projection_features/index.jsonl": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "datasets/prompt_projection_clean_inductive_v1.jsonl": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "datasets/prompt_projection_clean_inductive_v1.lock.json": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+    "reports/token_selector/2026-10-03-selector-int8-numerical-audit.json": "d2539b05285e6a736f675810022006d05cf09e9a86022b3ac890563c3bfb9100",
+    "reports/token_selector/2026-10-03-task-pair-nesting-audit.json": "d50e55f2613198634ba87635666d033ca173574a5060f873ac474e7ee5d4d898"
+  },
+  "reference_arm": "PER_ROW_WV",
+  "candidate_arm": "PER_TENSOR_WV",
+  "candidate_quantization": "d=max(abs(Wv))/127; q=clamp(round_half_away(Wv/d),-127,127); Wv_hat=q*d",
+  "unchanged_chain": "global-per-image A8 group_mean, float-Wt prompt_mean_vector then per-vector Q8 query, INT32 projection, software-golden float normalization/L2/min-max, Q0.15 score, 3x3 anchor selection",
+  "seeds": [20261003, 20261004, 20261005],
+  "budgets": [48, 64, 96],
+  "lambda_semantic": 0.5,
+  "statistics": {
+    "independent_unit": "image",
+    "record_aggregation": "median across three seeds then mean across the two task records per image",
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261003,
+    "confidence": 0.95,
+    "p_values": false
+  },
+  "decision_rule": {
+    "pass_label": "PER_TENSOR_WV_ACCEPTABLE_FOR_HLS",
+    "fail_label": "PER_TENSOR_WV_NOT_ESTABLISHED",
+    "all_required": [
+      "pins_isolation_int32_fixture_pass",
+      "candidate_vs_per_row_mean_jaccard_each_budget_at_least_0.98",
+      "candidate_vs_per_row_mean_replacement_count_each_budget_at_most_1.0",
+      "candidate_vs_per_row_mean_score_spearman_at_least_0.995",
+      "candidate_vs_float_mass_delta_each_budget_at_least_-0.01",
+      "candidate_vs_float_ndcg_delta_each_budget_at_least_-0.01",
+      "pointing_k48_prompt_utility_gap_delta_candidate_vs_float_at_least_-0.01",
+      "each_seed_k48_candidate_vs_per_row_mean_jaccard_at_least_0.97"
+    ],
+    "exact_set_rate": "descriptive_only"
+  },
+  "limitations": [
+    "Float normalization, reciprocal square root, L2 and min-max remain software golden.",
+    "Passing does not establish complete fixed-point HLS equivalence, FPGA latency, end-to-end accuracy or publication readiness.",
+    "Validation has already been used for development; internal test remains sealed."
+  ]
+}

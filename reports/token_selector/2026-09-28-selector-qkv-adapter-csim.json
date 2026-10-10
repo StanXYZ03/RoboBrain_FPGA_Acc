@@ -1,0 +1,920 @@
+{
+  "report": "2026-09-28-selector-qkv-adapter-csim",
+  "date": "2026-09-28",
+  "decision": "SELECTOR_QKV_ADAPTER_HLS_IMPLEMENTED / ADAPTER_LEGAL_M_192_256_384 / PARAM_CACHE_8KIB_BRAM / FUSED_LAYERNORM_Q8_0_BYTE_EXACT_VS_PYTHON_GOLDEN / INDEPENDENT_QKV_BIAS_ADD_KERNEL / GPP_ASAN_HLS_CSIM_PASS / CSIM_NOT_CSYNTH / ATTENTION_STILL_MISSING / NO_END_TO_END_SPEEDUP_CLAIM",
+  "scope": {
+    "cpu_only": true,
+    "gpu_used": false,
+    "board_used": false,
+    "csynth": false,
+    "cosim": false,
+    "ip_export": false,
+    "vivado": false,
+    "network": false,
+    "full_model_loaded": false,
+    "existing_hls_modified": false,
+    "model_files_modified": false
+  },
+  "design_contract": {
+    "adapter_top": "selector_ln_q8_adapter",
+    "bias_add_top": "qkv_bias_add",
+    "adapter_input": {
+      "layout": "int8[M,1024], 128-bit little-endian packed, lane L = bits[8L+7:8L]",
+      "words_per_row": 64,
+      "selector_contract": "x ~= q/s, q = clamp(round_half_away(x*s), -128, 127), zero point 0",
+      "global_scale": "single positive float s per image",
+      "legal_rows": [
+        192,
+        256,
+        384
+      ],
+      "max_rows": 384,
+      "rows_gate": "rows must be exactly 192/256/384; 1/191/193/385/4320 rejected",
+      "selector_clamp_in": [
+        -128,
+        127
+      ]
+    },
+    "adapter_output": {
+      "payload": "act_q[row*32+block] = 256-bit = 32 int8 little-endian",
+      "scale": "act_scale[row*32+block] = binary16 (stored d = amax/127)",
+      "q8_0_clamp": [
+        -127,
+        127
+      ],
+      "matches_existing": "q8q8_pe16_dataflow activations_q/activations_scale and ffn_vector quantize_block"
+    },
+    "bias_add": {
+      "layout": "128-bit = 4 fp32, word = row*(cols/4)+col/4, lane = col%4",
+      "operation": "y_out = y_in + bias[col]",
+      "rows_gate": [
+        1,
+        4320
+      ],
+      "cols_gate": [
+        1,
+        9728
+      ],
+      "formal_case": {
+        "rows_M": [
+          192,
+          256,
+          384
+        ],
+        "cols_N": 3072
+      },
+      "independent_operator": true
+    },
+    "half_conversion": "exact copy of ffn_vector.cpp::float_to_half_bits"
+  },
+  "contract_correction": {
+    "adapter_legal_rows": {
+      "before": "rows<=0 || rows>4320 (SQA_MAX_ROWS=4320)",
+      "after": "rows in {192,256,384} (SQA_MAX_ROWS=384, explicit legal check)",
+      "reason": "Selector legal budgets are K=48/64/96 only, so M=4K is 192/256/384",
+      "rejected_examples": [
+        0,
+        -1,
+        1,
+        191,
+        193,
+        385,
+        4320,
+        385
+      ],
+      "bias_add_note": "qkv_bias_add keeps the general row gate 1..4320; formal qkv case is M=192/256/384,N=3072"
+    },
+    "param_storage": {
+      "before": "norm_gamma/norm_beta re-read from m_axi per row/block",
+      "after": "norm_gamma/norm_beta read once into 256x128-bit on-chip caches (4KiB each, 8KiB total) explicitly BIND_STORAGE type=ram_2p impl=bram; rows read from cache",
+      "invariants": "math, Q8_0 payload/scale, port layout unchanged; byte-exact golden stays 0 mismatch"
+    }
+  },
+  "math_equivalence": {
+    "identity": "LN(q/s) = ((q - mean_q) / sqrt(var_q + eps*s*s)) * gamma + beta",
+    "derivation": [
+      "x = q/s, so mean_x = mean_q/s and var_x = var_q/s^2",
+      "(x-mean_x)/sqrt(var_x+eps) = (q-mean_q)/s / sqrt(var_q/s^2+eps)",
+      "= (q-mean_q)/sqrt(var_q + eps*s*s)",
+      "then multiply by gamma and add beta"
+    ],
+    "population_variance": true,
+    "variance_formula": "var_q = E[q^2] - E[q]^2, clamped at 0; same as ffn_vector row_statistics",
+    "scale_broadcast_is_not_layernorm": true,
+    "eps_term": "(eps*s)*s left-associative float32",
+    "constant_row": "var_q=0 and eps*s*s=0 -> inverse_norm=0 -> output = beta (matches direct chain)",
+    "minus128": "input -128 is used in the statistics; only the Q8_0 output clamps to -127",
+    "case_metrics": [
+      {
+        "case_id": "m192_k48_seed20260928",
+        "rows_M": 192,
+        "selector_groups_K": 48,
+        "seed": 20260928,
+        "global_scale_s": 33.73861531834979,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 7.152557373046875e-07,
+          "rmse": 7.912800874686243e-08,
+          "relative_l2": 7.909419042188848e-08,
+          "cosine": 0.9999999999999972
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.017146319150924683,
+          "rmse": 0.005354312323989795,
+          "relative_l2": 0.0053520239576192495,
+          "cosine": 0.9999856787139333
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01714630424976349,
+          "rmse": 0.005354312605588404,
+          "relative_l2": 0.005352024207819473,
+          "cosine": 0.9999856787123468
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 1,
+          "payload_bytes": 196608,
+          "scale_values": 6144
+        }
+      },
+      {
+        "case_id": "m192_k48_seed20260929",
+        "rows_M": 192,
+        "selector_groups_K": 48,
+        "seed": 20260929,
+        "global_scale_s": 32.23393268440892,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 7.768414141247853e-08,
+          "relative_l2": 7.78444351866485e-08,
+          "cosine": 0.9999999999999977
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.02048206329345703,
+          "rmse": 0.0053149884302444265,
+          "relative_l2": 0.005325955399044788,
+          "cosine": 0.9999858171544633
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.02048206329345703,
+          "rmse": 0.005314988386114208,
+          "relative_l2": 0.005325955306147683,
+          "cosine": 0.9999858171547966
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 196608,
+          "scale_values": 6144
+        }
+      },
+      {
+        "case_id": "m192_k48_seed20260930",
+        "rows_M": 192,
+        "selector_groups_K": 48,
+        "seed": 20260930,
+        "global_scale_s": 30.138324496807545,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 8.198127424376985e-08,
+          "relative_l2": 8.203580218467808e-08,
+          "cosine": 0.9999999999999973
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.019663333892822266,
+          "rmse": 0.005351271015057905,
+          "relative_l2": 0.005354830288713805,
+          "cosine": 0.9999856632874652
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01966327428817749,
+          "rmse": 0.0053512707888366635,
+          "relative_l2": 0.00535483006249027,
+          "cosine": 0.9999856632886778
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 196608,
+          "scale_values": 6144
+        }
+      },
+      {
+        "case_id": "m256_k64_seed20260930",
+        "rows_M": 256,
+        "selector_groups_K": 64,
+        "seed": 20260930,
+        "global_scale_s": 30.610204760238812,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 8.307632152633203e-08,
+          "relative_l2": 8.312465709981744e-08,
+          "cosine": 0.9999999999999976
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.01966571807861328,
+          "rmse": 0.005338100644390294,
+          "relative_l2": 0.005341206465052895,
+          "cosine": 0.9999857358847255
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01966571807861328,
+          "rmse": 0.005338100768354672,
+          "relative_l2": 0.005341206442796573,
+          "cosine": 0.999985735884258
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 1,
+          "scale_value_mismatch": 2,
+          "payload_bytes": 262144,
+          "scale_values": 8192
+        }
+      },
+      {
+        "case_id": "m256_k64_seed20261001",
+        "rows_M": 256,
+        "selector_groups_K": 64,
+        "seed": 20261001,
+        "global_scale_s": 28.420556825347617,
+        "selector_saturated_values": 0,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 8.432758408807389e-08,
+          "relative_l2": 8.429518877601843e-08,
+          "cosine": 0.9999999999999978
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.018497377634048462,
+          "rmse": 0.0053364604776556905,
+          "relative_l2": 0.005334410421267678,
+          "cosine": 0.9999857721947094
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01849740743637085,
+          "rmse": 0.00533646040831376,
+          "relative_l2": 0.005334410202125932,
+          "cosine": 0.9999857721952344
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 1,
+          "payload_bytes": 262144,
+          "scale_values": 8192
+        }
+      },
+      {
+        "case_id": "m384_k96_seed20261001",
+        "rows_M": 384,
+        "selector_groups_K": 96,
+        "seed": 20261001,
+        "global_scale_s": 29.962925888388334,
+        "selector_saturated_values": 0,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 7.769083934114647e-08,
+          "relative_l2": 7.765711827570728e-08,
+          "cosine": 0.9999999999999973
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.01979696750640869,
+          "rmse": 0.005344005865020152,
+          "relative_l2": 0.005341686343529458,
+          "cosine": 0.9999857336802532
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.019797086715698242,
+          "rmse": 0.0053440057752512865,
+          "relative_l2": 0.005341686226937125,
+          "cosine": 0.9999857336807031
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 393216,
+          "scale_values": 12288
+        }
+      },
+      {
+        "case_id": "m384_k96_seed20261002",
+        "rows_M": 384,
+        "selector_groups_K": 96,
+        "seed": 20261002,
+        "global_scale_s": 29.957719438373648,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 7.703047302336468e-08,
+          "relative_l2": 7.684826920840813e-08,
+          "cosine": 0.9999999999999973
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.01998436450958252,
+          "rmse": 0.00535834989083801,
+          "relative_l2": 0.005345675532838332,
+          "cosine": 0.9999857123921104
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01998436450958252,
+          "rmse": 0.005358350015256327,
+          "relative_l2": 0.005345675650900649,
+          "cosine": 0.9999857123914392
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 2,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 393216,
+          "scale_values": 12288
+        }
+      }
+    ]
+  },
+  "real_tensor_evidence": {
+    "shard_info": {
+      "shard": "model-00002-of-00002.safetensors",
+      "shard_bytes": 3908490048,
+      "header_sha256": "87e6341399ae7de5098b310951993b0010876a5c805dbe0b2c0cfbef7c8cb94e",
+      "read_only_unchanged": true,
+      "requested_tensors": [
+        "model.visual.blocks.1.norm1.weight",
+        "model.visual.blocks.1.norm1.bias",
+        "model.visual.blocks.1.attn.qkv.bias"
+      ]
+    },
+    "tensors": {
+      "model.visual.blocks.1.norm1.weight": {
+        "dtype": "BF16",
+        "shape": [
+          1024
+        ],
+        "data_offsets": [
+          3128115712,
+          3128117760
+        ],
+        "raw_bytes": 2048,
+        "raw_sha256": "41b623b3b4f0de8da5224e72c047ab3d73b3c5cc94225a4cc1135d57471647d8",
+        "fp32_sha256": "4ac5fc3694f1b9ee957089a122510c0e6863e97dd84954cc300054d3fe555920",
+        "min": -0.1376953125,
+        "max": 2.015625
+      },
+      "model.visual.blocks.1.norm1.bias": {
+        "dtype": "BF16",
+        "shape": [
+          1024
+        ],
+        "data_offsets": [
+          3128113664,
+          3128115712
+        ],
+        "raw_bytes": 2048,
+        "raw_sha256": "855c11e4acc32c28f5d2de55752470f8b3f6bfc0b6ecc3072981592fada24115",
+        "fp32_sha256": "33b0ba233631ebd9684b8ea89dbc68e810d3cb6fec9c7f703463c979b3ab27b0",
+        "min": -3.125,
+        "max": 0.8515625
+      },
+      "model.visual.blocks.1.attn.qkv.bias": {
+        "dtype": "BF16",
+        "shape": [
+          3072
+        ],
+        "data_offsets": [
+          3105028608,
+          3105034752
+        ],
+        "raw_bytes": 6144,
+        "raw_sha256": "83c5f50d34c576dc2e48c1220ded36f4366b2071132d3d2ec87321832927385a",
+        "fp32_sha256": "5e6cad75c3eb2e03856901bb9b678a1326cbbdd937fecb14a0f924e3a295f8ac",
+        "min": -6.875,
+        "max": 6.96875
+      }
+    },
+    "adapter_fixture": {
+      "path": "real_block1_adapter_fixture.bin",
+      "sha256": "02e16b51424e858d58b826501b59fa1132af6835dfa33b441e29d242b44dbc68",
+      "bytes": 413740,
+      "rows_M": 192,
+      "legal_rows_M": [
+        192,
+        256,
+        384
+      ],
+      "max_rows": 384,
+      "selector_groups_K": 48,
+      "hidden": 1024,
+      "block": 32,
+      "blocks_per_row": 32,
+      "global_scale_s": 33.73861531834979,
+      "epsilon": 1e-06,
+      "selector_levels": 128.0,
+      "selector_saturated_values": 1,
+      "hidden_amax": 3.793872356414795,
+      "input_is_synthetic_activation": true,
+      "gamma_beta_source": "real model.visual.blocks.1.norm1.weight/bias (BF16->FP32)",
+      "expected_source": "Python fused golden (selector_qkv_golden.py)",
+      "metrics": {
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 5.649613080269192e-08,
+          "relative_l2": 8.007737958930535e-08,
+          "cosine": 0.9999999999999969
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.0276881605386734,
+          "rmse": 0.005094284393297171,
+          "relative_l2": 0.007220617399846687,
+          "cosine": 0.9999739329492995
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 2,
+          "payload_bytes": 196608,
+          "scale_values": 6144
+        }
+      }
+    },
+    "bias_fixture": {
+      "path": "real_block1_bias_fixture.bin",
+      "sha256": "7461ad9bd9bea1446339dc36d50a56331e743a697a62f6aadaa2f49653700a9c",
+      "bytes": 9449500,
+      "rows_M": 384,
+      "formal_rows_M": [
+        192,
+        256,
+        384
+      ],
+      "cols_N": 3072,
+      "bias_source": "real model.visual.blocks.1.attn.qkv.bias (BF16->FP32)",
+      "input_is_synthetic_q8q8_like_output": true,
+      "expected": "element-wise FP32 input + real qkv.bias"
+    },
+    "note": "read-only header + byte-range reads; the full model was never loaded"
+  },
+  "numerics": {
+    "adapter_real_block1": {
+      "fused_vs_direct": {
+        "max_abs": 9.5367431640625e-07,
+        "rmse": 5.649613080269192e-08,
+        "relative_l2": 8.007737958930535e-08,
+        "cosine": 0.9999999999999969
+      },
+      "dequant_vs_direct": {
+        "max_abs": 0.0276881605386734,
+        "rmse": 0.005094284393297171,
+        "relative_l2": 0.007220617399846687,
+        "cosine": 0.9999739329492995
+      },
+      "fused_golden_payload_vs_direct_quant_payload": {
+        "payload_byte_mismatch": 0,
+        "scale_value_mismatch": 2,
+        "payload_bytes": 196608,
+        "scale_values": 6144
+      }
+    },
+    "required_cases": [
+      {
+        "case_id": "m192_k48_seed20260928",
+        "rows_M": 192,
+        "selector_groups_K": 48,
+        "seed": 20260928,
+        "global_scale_s": 33.73861531834979,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 7.152557373046875e-07,
+          "rmse": 7.912800874686243e-08,
+          "relative_l2": 7.909419042188848e-08,
+          "cosine": 0.9999999999999972
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.017146319150924683,
+          "rmse": 0.005354312323989795,
+          "relative_l2": 0.0053520239576192495,
+          "cosine": 0.9999856787139333
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01714630424976349,
+          "rmse": 0.005354312605588404,
+          "relative_l2": 0.005352024207819473,
+          "cosine": 0.9999856787123468
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 1,
+          "payload_bytes": 196608,
+          "scale_values": 6144
+        }
+      },
+      {
+        "case_id": "m192_k48_seed20260929",
+        "rows_M": 192,
+        "selector_groups_K": 48,
+        "seed": 20260929,
+        "global_scale_s": 32.23393268440892,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 7.768414141247853e-08,
+          "relative_l2": 7.78444351866485e-08,
+          "cosine": 0.9999999999999977
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.02048206329345703,
+          "rmse": 0.0053149884302444265,
+          "relative_l2": 0.005325955399044788,
+          "cosine": 0.9999858171544633
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.02048206329345703,
+          "rmse": 0.005314988386114208,
+          "relative_l2": 0.005325955306147683,
+          "cosine": 0.9999858171547966
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 196608,
+          "scale_values": 6144
+        }
+      },
+      {
+        "case_id": "m192_k48_seed20260930",
+        "rows_M": 192,
+        "selector_groups_K": 48,
+        "seed": 20260930,
+        "global_scale_s": 30.138324496807545,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 8.198127424376985e-08,
+          "relative_l2": 8.203580218467808e-08,
+          "cosine": 0.9999999999999973
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.019663333892822266,
+          "rmse": 0.005351271015057905,
+          "relative_l2": 0.005354830288713805,
+          "cosine": 0.9999856632874652
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01966327428817749,
+          "rmse": 0.0053512707888366635,
+          "relative_l2": 0.00535483006249027,
+          "cosine": 0.9999856632886778
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 196608,
+          "scale_values": 6144
+        }
+      },
+      {
+        "case_id": "m256_k64_seed20260930",
+        "rows_M": 256,
+        "selector_groups_K": 64,
+        "seed": 20260930,
+        "global_scale_s": 30.610204760238812,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 8.307632152633203e-08,
+          "relative_l2": 8.312465709981744e-08,
+          "cosine": 0.9999999999999976
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.01966571807861328,
+          "rmse": 0.005338100644390294,
+          "relative_l2": 0.005341206465052895,
+          "cosine": 0.9999857358847255
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01966571807861328,
+          "rmse": 0.005338100768354672,
+          "relative_l2": 0.005341206442796573,
+          "cosine": 0.999985735884258
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 1,
+          "scale_value_mismatch": 2,
+          "payload_bytes": 262144,
+          "scale_values": 8192
+        }
+      },
+      {
+        "case_id": "m256_k64_seed20261001",
+        "rows_M": 256,
+        "selector_groups_K": 64,
+        "seed": 20261001,
+        "global_scale_s": 28.420556825347617,
+        "selector_saturated_values": 0,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 8.432758408807389e-08,
+          "relative_l2": 8.429518877601843e-08,
+          "cosine": 0.9999999999999978
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.018497377634048462,
+          "rmse": 0.0053364604776556905,
+          "relative_l2": 0.005334410421267678,
+          "cosine": 0.9999857721947094
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01849740743637085,
+          "rmse": 0.00533646040831376,
+          "relative_l2": 0.005334410202125932,
+          "cosine": 0.9999857721952344
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 1,
+          "payload_bytes": 262144,
+          "scale_values": 8192
+        }
+      },
+      {
+        "case_id": "m384_k96_seed20261001",
+        "rows_M": 384,
+        "selector_groups_K": 96,
+        "seed": 20261001,
+        "global_scale_s": 29.962925888388334,
+        "selector_saturated_values": 0,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 7.769083934114647e-08,
+          "relative_l2": 7.765711827570728e-08,
+          "cosine": 0.9999999999999973
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.01979696750640869,
+          "rmse": 0.005344005865020152,
+          "relative_l2": 0.005341686343529458,
+          "cosine": 0.9999857336802532
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.019797086715698242,
+          "rmse": 0.0053440057752512865,
+          "relative_l2": 0.005341686226937125,
+          "cosine": 0.9999857336807031
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 0,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 393216,
+          "scale_values": 12288
+        }
+      },
+      {
+        "case_id": "m384_k96_seed20261002",
+        "rows_M": 384,
+        "selector_groups_K": 96,
+        "seed": 20261002,
+        "global_scale_s": 29.957719438373648,
+        "selector_saturated_values": 1,
+        "fused_vs_direct": {
+          "max_abs": 9.5367431640625e-07,
+          "rmse": 7.703047302336468e-08,
+          "relative_l2": 7.684826920840813e-08,
+          "cosine": 0.9999999999999973
+        },
+        "dequant_vs_direct": {
+          "max_abs": 0.01998436450958252,
+          "rmse": 0.00535834989083801,
+          "relative_l2": 0.005345675532838332,
+          "cosine": 0.9999857123921104
+        },
+        "dequant_vs_fused": {
+          "max_abs": 0.01998436450958252,
+          "rmse": 0.005358350015256327,
+          "relative_l2": 0.005345675650900649,
+          "cosine": 0.9999857123914392
+        },
+        "fused_golden_payload_vs_direct_quant_payload": {
+          "payload_byte_mismatch": 2,
+          "scale_value_mismatch": 0,
+          "payload_bytes": 393216,
+          "scale_values": 12288
+        }
+      }
+    ],
+    "metric_definitions": {
+      "max_abs": "max |actual-reference|",
+      "rmse": "sqrt(mean((actual-reference)^2))",
+      "relative_l2": "||actual-reference||_2 / ||reference||_2",
+      "cosine": "<actual,reference> / (||actual|| ||reference||)"
+    }
+  },
+  "tests": {
+    "focused_python_contract": {
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python -m unittest evaluation.tests.test_selector_qkv_adapter_hls",
+      "returncode": 0,
+      "ran": 24,
+      "ok": true,
+      "output_tail": [
+        "Ran 24 tests in 0.109s",
+        "",
+        "OK"
+      ]
+    },
+    "full_regression": {
+      "command": "/home/zhaoxiangyu/conda-envs/robobrain25/bin/python -m unittest discover -s evaluation/tests",
+      "returncode": 0,
+      "ran": 300,
+      "ok": true,
+      "output_tail": [
+        "Ran 300 tests in 14.999s",
+        "",
+        "OK"
+      ]
+    },
+    "gpp": {
+      "present": true,
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/gpp_test.log",
+      "sha256": "33fcfb41828f850b5b883a2286db9a3cb07186713bcc537d9956b35c207a2114",
+      "summary": {
+        "passed": 18,
+        "total": 18,
+        "result": "PASS"
+      },
+      "fixture_lines": [
+        "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+        "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+      ],
+      "csim_done_zero_errors": false,
+      "runtime_error_count": 0,
+      "address_sanitizer_error_count": 0,
+      "failed_compilation": false
+    },
+    "asan_ubsan": {
+      "present": true,
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/asan_ubsan_run.log",
+      "sha256": "92a322ccd59b06e73f0e437a43352cd190b718130dfb66df8cdc82ab9e00e0ce",
+      "summary": {
+        "passed": 18,
+        "total": 18,
+        "result": "PASS"
+      },
+      "fixture_lines": [
+        "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+        "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+      ],
+      "csim_done_zero_errors": false,
+      "runtime_error_count": 0,
+      "address_sanitizer_error_count": 0,
+      "failed_compilation": false
+    },
+    "hls_csim_adapter": {
+      "present": true,
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_adapter.log",
+      "sha256": "632725257911339039f6c0c3497a3fa18d79a765ec4e0bf42bdcc817d8b0cd96",
+      "summary": {
+        "passed": 18,
+        "total": 18,
+        "result": "PASS"
+      },
+      "fixture_lines": [
+        "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+        "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+      ],
+      "csim_done_zero_errors": true,
+      "runtime_error_count": 0,
+      "address_sanitizer_error_count": 0,
+      "failed_compilation": false
+    },
+    "hls_csim_bias": {
+      "present": true,
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_bias.log",
+      "sha256": "2191aefa9262cdd261f65713afc9aa978141e954fa68a2a886b55d6c443d6db0",
+      "summary": {
+        "passed": 18,
+        "total": 18,
+        "result": "PASS"
+      },
+      "fixture_lines": [
+        "SQA_FIXTURE name=adapter_real_block1 rows=192 cols=1024 scale=33.7386169 payload_byte_mismatch=0 scale_byte_mismatch=0 fused_vs_direct[max_abs=4.29153442e-06 relative_l2=2.78197902e-07 cosine=1] quant_vs_direct[max_abs=0.0276881605 rmse=0.0050942842 relative_l2=0.00722061636 cosine=0.999973933] result=PASS",
+        "SQA_FIXTURE name=qkv_bias_add_real rows=384 cols=3072 byte_mismatch=0 result=PASS"
+      ],
+      "csim_done_zero_errors": true,
+      "runtime_error_count": 0,
+      "address_sanitizer_error_count": 0,
+      "failed_compilation": false
+    }
+  },
+  "limitations": [
+    "仅 HLS C-sim：不是综合，不是时序/资源/功耗，不是板级结果。",
+    "激活为合成，非真实采集；只有 norm1 gamma/beta 与 qkv.bias 是真实张量。",
+    "数值链止于 +qkv.bias；reshape/split、RoPE、softmax、PV、attn.proj、残差、norm2、fc1/GELU/fc2 与 blocks 2..23 全部缺失。",
+    "不声称端到端加速，也不判任务精度。",
+    "仓库不存在 Vision tower 的 Q8_0 激活/权重产物；Q8Q8 权重侧工作不在本轮范围。",
+    "Python golden 的 direct 参考使用向量化求和而 C++ 使用顺序求和，fused_vs_direct 的 max_abs 数量级略有差异（均远小于 Q8_0 步长）。"
+  ],
+  "files_changed": [
+    {
+      "path": "README.md",
+      "sha256": "2db43f9a6598f4123bf7ea3f91799990f01054bc86753456f4bb2d39a32b0aa2",
+      "bytes": 4431
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/README.md",
+      "sha256": "50f406da17bd52399af8b953d9f2ffec23f808802738a545b2b94517eccafe29",
+      "bytes": 8499
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/Makefile",
+      "sha256": "402c2d186cd38819070de05e46622a9e27e591920eea5a52a9ca521a87b0abe4",
+      "bytes": 2459
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/include/selector_qkv_adapter.h",
+      "sha256": "36c8e3e830b2fd51ca94074e5023297cfea313eebdc9a40b4f8a0082601c738c",
+      "bytes": 4668
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/src/selector_qkv_adapter.cpp",
+      "sha256": "0b4ae41fee0e2ce129fca92633bda18cc7f1a737b4a10f7e8e222dc6dea05cc9",
+      "bytes": 12345
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/tb/tb_selector_qkv_adapter.cpp",
+      "sha256": "b21ab4494c63160dae750c10c455a4ab53760ce336e6f33ebddd51b8ef8ed31f",
+      "bytes": 39868
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/tools/selector_qkv_golden.py",
+      "sha256": "c401a0a63291da8b54f19a0783c00a91b63d06cf51c5c59e02deee0b7df5ef3e",
+      "bytes": 16571
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/tools/generate_fixtures.py",
+      "sha256": "d19487eed01ea32b1858d9fa7da8391de1407068d7e4a008cfb27f43a047d70c",
+      "bytes": 11721
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_hls.tcl",
+      "sha256": "bec2b3e1897ba82ebb5d928a154c904820bfd5c26c7ee6ead79816da8487531d",
+      "bytes": 2488
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_stage.sh",
+      "sha256": "f230412033efbf7af3c9b6723a2a76027be16183f486cffea099d015bcbb3a7c",
+      "bytes": 1881
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_csynth.tcl",
+      "sha256": "4b6ee5b23e86a72888cc417e1c5439565bec66102e75917155f308dfd52d091f",
+      "bytes": 1589
+    },
+    {
+      "path": "fpga_accel/selector_qkv_adapter_hls/scripts/run_csynth.sh",
+      "sha256": "d02e26b44c48861842e0bd853dcdda0e33a4fb809a2f3f7c68291198ddd631fc",
+      "bytes": 2108
+    },
+    {
+      "path": "scripts/validate_selector_qkv_adapter_csim.py",
+      "sha256": "59cdcb0d5a81a16cdd6d1fd91c621d901034c605f9a5caf63dbebb7522aee720",
+      "bytes": 30846
+    },
+    {
+      "path": "evaluation/tests/test_selector_qkv_adapter_hls.py",
+      "sha256": "2b11f64db95d20b77eefda5055fa8355b107248190188123736dcb4b7697d8c4",
+      "bytes": 17120
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/asan_ubsan_run.log",
+      "sha256": "92a322ccd59b06e73f0e437a43352cd190b718130dfb66df8cdc82ab9e00e0ce",
+      "bytes": 4774
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/fixture_manifest.json",
+      "sha256": "c56b278877f301e22905deadf96173c6979e5b1112184db6780da2507801f627",
+      "bytes": 4375
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/gpp_test.log",
+      "sha256": "33fcfb41828f850b5b883a2286db9a3cb07186713bcc537d9956b35c207a2114",
+      "bytes": 4688
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_adapter.log",
+      "sha256": "632725257911339039f6c0c3497a3fa18d79a765ec4e0bf42bdcc817d8b0cd96",
+      "bytes": 6997
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/hls_csim_bias.log",
+      "sha256": "2191aefa9262cdd261f65713afc9aa978141e954fa68a2a886b55d6c443d6db0",
+      "bytes": 6988
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/real_block1_adapter_fixture.bin",
+      "sha256": "02e16b51424e858d58b826501b59fa1132af6835dfa33b441e29d242b44dbc68",
+      "bytes": 413740
+    },
+    {
+      "path": "artifacts/token_selector/2026-09-28-selector-qkv-adapter-csim/real_block1_bias_fixture.bin",
+      "sha256": "7461ad9bd9bea1446339dc36d50a56331e743a697a62f6aadaa2f49653700a9c",
+      "bytes": 9449500
+    }
+  ],
+  "next_gate": "在 +qkv.bias 之后实现 attention 各算子（reshape/split、RoPE、softmax、PV、attn.proj+bias、残差、norm2、fc1/GELU/fc2），仅在独立授权下再考虑 csynth/BD/驱动/上板；同时采集真实 block0 hidden 激活以做 fixture 级数值验证。"
+}

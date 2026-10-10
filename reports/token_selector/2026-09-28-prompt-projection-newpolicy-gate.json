@@ -1,0 +1,218 @@
+{
+  "schema": "prompt-projection-newpolicy-gate-v1",
+  "date": "2026-09-28",
+  "time_local": "15:52",
+  "status": "BLOCKED",
+  "decision": "GPU_GATE_BLOCKED_NEW_POLICY / MODEL_LOAD_NOT_ACTIVATED / PROMPT_PROJECTION_EXTRACTION_NOT_RUN / TRAINING_NOT_RUN",
+  "gpu_policy": {
+    "policy_name": "shared_gpu_low_occupancy_coexistence_v1",
+    "supersedes": "旧策略「存在其他用户 compute 进程即阻塞」(G1 owner rule)",
+    "entry_conditions": {
+      "free_mib_min": 24576,
+      "free_gib_min": 24.0,
+      "avg_utilization_pct_max": 50.0
+    },
+    "runtime_conditions": {
+      "reserve_for_other_users_mib_min": 12288,
+      "on_oom_or_sustained_contention": "优雅退出并保存阶段，不频繁轮询"
+    },
+    "other_user_context_allowed": true,
+    "kill_pause_modify_others_forbidden": true,
+    "network_forbidden": true,
+    "entry_gate_result": "BLOCKED",
+    "blocking_condition": "memory_free_mib=22317 < 24576 (24 GiB)",
+    "utilization_gate": "PASS (avg 0% < 50%)",
+    "owner_gate": "NOT_BLOCKING (其他用户上下文允许共存)",
+    "model_load_authorized": false,
+    "run_authorized": false
+  },
+  "gpu_audits": {
+    "startup": {
+      "checked_at_local": "2026-09-28T15:52:08+08:00",
+      "raw_log": "reports/token_selector/logs/gpu_audit_20260928T155208_newpolicy.log",
+      "gpu_index": 0,
+      "name": "NVIDIA RTX A6000",
+      "driver_version": "580.178.04",
+      "cuda_version": "13.0",
+      "memory_total_mib": 46068,
+      "memory_used_mib": 23169,
+      "memory_free_mib": 22317,
+      "memory_free_gib": 21.794,
+      "memory_shortfall_mib": 2259,
+      "utilization_samples_pct": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "utilization_avg_pct": 0.0,
+      "utilization_max_pct": 0,
+      "temperature_c_range": [
+        32,
+        33
+      ],
+      "power_draw_w_range": [
+        11.0,
+        16.74
+      ],
+      "power_limit_w": 300.0,
+      "sampling_duration_s": 5,
+      "sustained_high_utilization": false
+    },
+    "compute_processes": [
+      {
+        "pid": 16507,
+        "user": "seey6",
+        "uid": 1001,
+        "used_gpu_memory_mib": 23038,
+        "process_name": "python",
+        "cmdline": "python main.py --port 7860 --listen 0.0.0.0",
+        "elapsed": "2-20:39:20",
+        "state": "Sl+",
+        "is_executor_user": false,
+        "note": "仅记录，未 kill/暂停/修改"
+      }
+    ],
+    "other_user_compute_process_count": 1,
+    "post_model_load": "NOT_RUN (门禁未通过，未加载模型)",
+    "post_extraction": "NOT_RUN (未抽取)"
+  },
+  "data_integrity": {
+    "unique_training_source": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "manifest_sha256_expected": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "manifest_sha256_actual": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "manifest_sha256_matches_pin": true,
+    "lock_sha256_actual": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105",
+    "config_sha256_actual": "0b03f8f56422f5efdc34561b0cbce40b98510ff0ede88942854849307108ef99",
+    "extractor_sha256_actual": "cac52d49033263c0bc7c1afdc0ef3c58ffdda27e1e9a883ad1fcc205ddf2eb70",
+    "trainer_sha256_actual": "f34a7865f815299f812c9e4d95d311a509ee9d7394f38a2cf9b07de0a3648983",
+    "validate_manifest_only": {
+      "status": "PASS",
+      "mode": "validate_manifest_only",
+      "gpu_used": false,
+      "model_loaded": false,
+      "sha256_matches": true,
+      "path_matches": true,
+      "evidence": "reports/token_selector/logs/2026-09-28-prompt-projection-validate-manifest-only-newpolicy.json"
+    },
+    "cpu_validate_status": "PASS",
+    "cpu_validate_failures": [],
+    "unique_images": 236,
+    "prompt_records": 472,
+    "task_counts": {
+      "grounding": 236,
+      "pointing": 236
+    },
+    "split_by_source_image_sha256": {
+      "isolation_verified_on_cpu": true,
+      "images": {
+        "test": 39,
+        "train": 159,
+        "val": 38
+      },
+      "records": {
+        "test": 78,
+        "train": 318,
+        "val": 76
+      },
+      "all_splits_nonempty": true
+    },
+    "cvbench_exclusion": {
+      "zero_coco_id_overlap": true,
+      "zero_formal_sample_id_overlap": true,
+      "zero_formal_eval_image_sha_overlap": true,
+      "cv_bench_admitted_to_training": false
+    },
+    "images_present_and_frozen": true,
+    "construction_script_sha256_matches": true,
+    "evidence": "reports/token_selector/logs/2026-09-28-prompt-projection-clean-inductive-validate-newpolicy.json"
+  },
+  "extraction": {
+    "status": "NOT_RUN",
+    "reason": "新策略门禁 BLOCKED：空闲显存 22317 MiB < 24 GiB",
+    "out_dir": "artifacts/token_selector/prompt_projection_features",
+    "out_dir_created": false,
+    "cache_index_saved": false,
+    "unique_images_expected": 236,
+    "prompt_records_expected": 472,
+    "planned_vision_forwards_same_image_once": 236,
+    "actual_vision_forwards": null,
+    "peak_gpu_memory_mib": null,
+    "stage_timings_s": null,
+    "torch_cuda_synchronize_used": null,
+    "split_counts_saved": false,
+    "source_and_manifest_hashes_saved": false
+  },
+  "training": {
+    "status": "NOT_RUN",
+    "reason": "依赖抽取 cache/index，未生成",
+    "w_t_dim": [
+      128,
+      2560
+    ],
+    "w_v_dim": [
+      128,
+      1024
+    ],
+    "val_checkpoint_selection": "NOT_RUN",
+    "test_evaluated_once": "NOT_RUN",
+    "train_val_test_metrics": {
+      "pearson": "NOT_RUN",
+      "spearman": "NOT_RUN",
+      "ndcg": "NOT_RUN",
+      "k48_recall": "NOT_RUN",
+      "k64_recall": "NOT_RUN",
+      "k96_recall": "NOT_RUN",
+      "k48_jaccard": "NOT_RUN",
+      "k64_jaccard": "NOT_RUN",
+      "k96_jaccard": "NOT_RUN",
+      "k48_saliency_mass": "NOT_RUN",
+      "k64_saliency_mass": "NOT_RUN",
+      "k96_saliency_mass": "NOT_RUN"
+    },
+    "cvbench_task_accuracy_claimed": false
+  },
+  "controls": {
+    "l2_baseline": "NOT_RUN",
+    "shuffled_prompt": "NOT_RUN"
+  },
+  "tests": {
+    "focused_modules": [
+      "evaluation.tests.test_prompt_projection_clean_inductive",
+      "evaluation.tests.test_prompt_projection_distillation",
+      "evaluation.tests.test_prompt_projection_feature_reuse",
+      "evaluation.tests.test_metrics"
+    ],
+    "focused_tests": "63 tests OK",
+    "full_regression": "python -m unittest discover -s evaluation/tests => Ran 300 tests OK",
+    "full_regression_log": "reports/token_selector/logs/2026-09-28-prompt-projection-full-regression.log",
+    "py_compile": "not needed (no source change)"
+  },
+  "limitations": [
+    "本轮未加载 RoboBrain2.5-4B，未激活模型路径，未 import transformers/PIL，未创建输出目录，未抽取、未训练、未评估。",
+    "门禁在新策略下因空闲显存 22317 MiB < 24576 MiB (24 GiB) 判 BLOCKED；其他用户上下文本身不再阻塞，利用率 0% 达标。",
+    "extractor 内置 gpu_gate 仍保留「owner_rule: every compute process must belong to current user」及 required_free_mib=20480；新策略下若未来显存恢复但该进程仍在，脚本内置门槛仍会拦截，需在另行授权时最小调整 gate（不改算法/超参数）。",
+    "按 image hash 的 train/val/test 隔离已在 CPU 上以冻结 lock/manifest 验证（159/38/39 图，318/76/78 记录），但未在抽取运行期核验。",
+    "无任何蒸馏指标、无 CV-Bench 任务精度声明、无端到端加速声明。",
+    "未 kill/暂停/修改任何他人进程；未联网/下载；未改原模型/inference.py/api.py。"
+  ],
+  "files_changed": [
+    "reports/token_selector/2026-09-28-prompt-projection-newpolicy-gate.md",
+    "reports/token_selector/2026-09-28-prompt-projection-newpolicy-gate.json",
+    "reports/token_selector/logs/gpu_audit_20260928T155208_newpolicy.log",
+    "reports/token_selector/logs/2026-09-28-prompt-projection-validate-manifest-only-newpolicy.json",
+    "reports/token_selector/logs/2026-09-28-prompt-projection-clean-inductive-validate-newpolicy.json",
+    "reports/token_selector/logs/2026-09-28-prompt-projection-full-regression.log",
+    "reports/token_selector/2026-09-28-prompt-distillation-gpu-gate.md (annotated superseded)",
+    "reports/token_selector/2026-09-28-prompt-distillation-gpu-gate.json (annotated superseded)",
+    "CURRENT_STATUS.md",
+    "/tmp/robobrain_harness_result.json"
+  ],
+  "next_gate": {
+    "condition": "空闲显存 >= 24576 MiB (24 GiB) 且 5s 平均 GPU 利用率 < 50%",
+    "then": "运行干净归纳抽取（同一图一次视觉前向，预期 vision_forwards=236）→ 训练 128 维 Wt/Wv（val 选 checkpoint，test 仅一次）→ L2/shuffled 控制 → 聚焦与全量回归",
+    "exact_command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /home/zhaoxiangyu/conda-envs/robobrain25/bin/python evaluation/extract_prompt_projection_features.py --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --manifest datasets/prompt_projection_clean_inductive_v1.jsonl --config configs/prompt_projection_distillation.json --out-dir artifacts/token_selector/prompt_projection_features",
+    "note": "运行前需按新策略对 extractor 内置 gate 做最小非语义调整或明确授权 bypass；不得 kill 他人进程"
+  }
+}

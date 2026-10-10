@@ -1,0 +1,27 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-14",
+  "evidence_level": "revealed development cross-validation conditional on an oracle ROI",
+  "objective": "Final 384/512 scale-controller candidate using task-conditioned spatial Patch-Text relevance at the first DeepStack extraction point.",
+  "feature_point": {
+    "roi_long_edge": 384,
+    "completed_vision_blocks": 6,
+    "deepstack_layer_zero_based": 5,
+    "text_relevance": "maximum cosine similarity from each projected visual group to prompt token embeddings",
+    "spatial_summary": "4x4 relevance map, seven quantiles, top-8 values and normalized coordinates",
+    "base_projection_features": 331
+  },
+  "policy": {
+    "ridge_alpha": 10.0,
+    "decision_threshold": 0.0,
+    "folds": 5,
+    "fold_group": "COCO image ID",
+    "seed": 20260914
+  },
+  "gate": {
+    "action_balanced_accuracy_min": 0.55,
+    "vision_block_token_ratio_max": 0.5,
+    "primary_noninferiority_margin": -0.02
+  },
+  "stopping_rule": "If either task fails the joint gate, stop the current ROI-384/512 scale-controller branch. Do not tune depth, projection, ridge alpha, threshold or feature subsets on this development set."
+}

@@ -1,0 +1,612 @@
+{
+  "preregistration_sha256": "b2686bc394833c4026ff8a2e69359fba0e8e6b94f57815be1b70e7768c96d508",
+  "seed": 20261002,
+  "split": "val",
+  "test_not_yet_evaluated": true,
+  "val_gate": {
+    "candidates": {
+      "hard_max": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 1.0,
+          "pass": false
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": 0.0,
+          "correct_spearman_delta_vs_baseline": 0.0,
+          "pass": true
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "mean_cos": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": -0.015647100575217343,
+          "correct_spearman_delta_vs_baseline": -0.04355379279661117,
+          "pass": false
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "norm_lse_tau003": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": -6.178244876808847e-07,
+          "correct_spearman_delta_vs_baseline": -3.543748963642096e-05,
+          "pass": true
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "norm_lse_tau010": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": true,
+              "effect_size": true,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": 0.00019247283983747643,
+          "correct_spearman_delta_vs_baseline": -0.001059041804759249,
+          "pass": true
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "norm_lse_tau030": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": -0.010276154966641582,
+          "correct_spearman_delta_vs_baseline": -0.027318636335542813,
+          "pass": false
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "prompt_mean_vector": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": -0.015647100575217343,
+          "correct_spearman_delta_vs_baseline": -0.04355379279661117,
+          "pass": false
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "softmax_mean_tau003": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": true,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.02631578947368421,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": 1.5483221793566315e-06,
+          "correct_spearman_delta_vs_baseline": -0.00010859237892162088,
+          "pass": true
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "softmax_mean_tau010": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": -0.000601453800648688,
+          "correct_spearman_delta_vs_baseline": 0.0028172992518726014,
+          "pass": true
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "softmax_mean_tau030": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": true,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": -0.0041017468900717,
+          "correct_spearman_delta_vs_baseline": -0.013770175528646046,
+          "pass": false
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "topk_mean_k2": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.9473684210526315,
+          "pass": false
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": 0.0010716955990094368,
+          "correct_spearman_delta_vs_baseline": -0.0001562988578448915,
+          "pass": true
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      },
+      "topk_mean_k4": {
+        "A_prompt_sensitivity": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            }
+          },
+          "role": "same_image_other_task"
+        },
+        "B_shuffled_discrimination": {
+          "pass": false,
+          "per_metric": {
+            "ndcg_full": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": true
+            },
+            "spearman": {
+              "ci_low_positive": false,
+              "effect_size": false,
+              "holm_significant": false,
+              "mean_positive": false
+            }
+          },
+          "role": "cross_image_same_task_shuffled"
+        },
+        "C_collapse_removed": {
+          "exact_prompt_invariance_fraction": 0.0,
+          "pass": true
+        },
+        "D_teacher_non_regression": {
+          "correct_ndcg_full_delta_vs_baseline": 0.001381962486314281,
+          "correct_spearman_delta_vs_baseline": 0.0009512093872160315,
+          "pass": true
+        },
+        "E_numeric_and_contract": {
+          "contract_ok": true,
+          "finite": true,
+          "pass": true
+        },
+        "passed_all": false
+      }
+    },
+    "collapse_exact_invariance_max": 0.05,
+    "fixed_before_test": true,
+    "holm_family_definition": "{ (candidate, condition, metric) : candidate in NON_BASELINE_CANDIDATES (10 candidates), condition in {same_image_other_task, cross_image_same_task_shuffled}, metric in {spearman, ndcg_full} }; m = 40",
+    "passing_candidates": [],
+    "primary_metrics": [
+      "spearman",
+      "ndcg_full"
+    ],
+    "split": "val",
+    "teacher_non_regression_tolerance": -0.01,
+    "thresholds": {
+      "alpha": 0.05,
+      "bootstrap_resamples": 2000,
+      "effect_size_floor_cohens_dz": 0.2,
+      "permutation_resamples": 10000
+    }
+  },
+  "winner": "NO_PROMOTION",
+  "winner_ranking": [],
+  "winner_reason": "no candidate passed all pre-registered val gates A-E"
+}

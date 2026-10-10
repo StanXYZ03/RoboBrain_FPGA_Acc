@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-10-03T17:02:41.200111+00:00",
+  "manifest": "datasets/cv_bench_full2638.jsonl",
+  "manifest_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+  "native_json": "reports/cv_bench/cv_bench_bf16_full2638.json",
+  "dense_jsonl": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+  "status": "IN_PROGRESS",
+  "formal_sample_count": 2638,
+  "forbidden_primary_metrics": [
+    "pointing",
+    "grounding",
+    "ndcg",
+    "retained_mass"
+  ],
+  "candidates": [
+    {
+      "label": "K48",
+      "status": "IN_PROGRESS",
+      "candidate_jsonl": "reports/token_selector/logs/2026-10-04-current-selector-cvbench-preflight/nonexistent-k48.jsonl",
+      "completed": 0,
+      "expected": 2638,
+      "reason": "file_missing"
+    }
+  ]
+}

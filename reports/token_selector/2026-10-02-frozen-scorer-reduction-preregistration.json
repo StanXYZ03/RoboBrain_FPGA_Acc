@@ -1,0 +1,187 @@
+{
+  "baseline_candidate": "hard_max",
+  "candidate_order": [
+    "hard_max",
+    "mean_cos",
+    "topk_mean_k2",
+    "topk_mean_k4",
+    "norm_lse_tau003",
+    "norm_lse_tau010",
+    "norm_lse_tau030",
+    "softmax_mean_tau003",
+    "softmax_mean_tau010",
+    "softmax_mean_tau030",
+    "prompt_mean_vector"
+  ],
+  "candidate_selection_rule": "the candidate set, its parameters and its order are frozen before the test split is read; no candidate may be added, removed or re-parameterised after test is seen (no post-hoc tuning)",
+  "candidates": [
+    {
+      "description": "existing baseline: per group max over prompt-token cosines",
+      "kind": "hard_max",
+      "name": "hard_max",
+      "parameters": {},
+      "token_competition": true
+    },
+    {
+      "description": "arithmetic mean over all prompt-token cosines",
+      "kind": "mean_cos",
+      "name": "mean_cos",
+      "parameters": {},
+      "token_competition": false
+    },
+    {
+      "description": "mean of the highest 2 cosines; T<2 uses all",
+      "kind": "topk_mean",
+      "name": "topk_mean_k2",
+      "parameters": {
+        "k": 2
+      },
+      "token_competition": true
+    },
+    {
+      "description": "mean of the highest 4 cosines; T<4 uses all",
+      "kind": "topk_mean",
+      "name": "topk_mean_k4",
+      "parameters": {
+        "k": 4
+      },
+      "token_competition": true
+    },
+    {
+      "description": "tau*(logsumexp(sim/tau) - log(T)), tau=0.03",
+      "kind": "norm_lse",
+      "name": "norm_lse_tau003",
+      "parameters": {
+        "tau": 0.03
+      },
+      "token_competition": true
+    },
+    {
+      "description": "tau*(logsumexp(sim/tau) - log(T)), tau=0.10",
+      "kind": "norm_lse",
+      "name": "norm_lse_tau010",
+      "parameters": {
+        "tau": 0.1
+      },
+      "token_competition": true
+    },
+    {
+      "description": "tau*(logsumexp(sim/tau) - log(T)), tau=0.30",
+      "kind": "norm_lse",
+      "name": "norm_lse_tau030",
+      "parameters": {
+        "tau": 0.3
+      },
+      "token_competition": true
+    },
+    {
+      "description": "softmax(sim/tau)-weighted mean of sim, tau=0.03",
+      "kind": "softmax_mean",
+      "name": "softmax_mean_tau003",
+      "parameters": {
+        "tau": 0.03
+      },
+      "token_competition": true
+    },
+    {
+      "description": "softmax(sim/tau)-weighted mean of sim, tau=0.10",
+      "kind": "softmax_mean",
+      "name": "softmax_mean_tau010",
+      "parameters": {
+        "tau": 0.1
+      },
+      "token_competition": true
+    },
+    {
+      "description": "softmax(sim/tau)-weighted mean of sim, tau=0.30",
+      "kind": "softmax_mean",
+      "name": "softmax_mean_tau030",
+      "parameters": {
+        "tau": 0.3
+      },
+      "token_competition": true
+    },
+    {
+      "description": "normalise each prompt token Wt projection (existing cosine convention), mean over tokens, re-normalise; every visual group does a single cosine/dot against this one 128-d query",
+      "kind": "prompt_mean_vector",
+      "name": "prompt_mean_vector",
+      "parameters": {},
+      "token_competition": false
+    }
+  ],
+  "hardware_cost_contract": {
+    "scope_note": "analytic symbol counts only (G=visual group count, T=prompt token count, D=128); the prompt reducer runs on the host/Jetson and the scorer on the FPGA.  NOT synthesised and NOT measured on ZCU102; no latency, resource or speedup claim is made.  INT8 bytes assume one signed int8 per element (128-byte 1x128 query / 16-byte 128-bit alignment not modelled here).",
+    "symbols": [
+      "G=visual group count",
+      "T=prompt token count",
+      "D=128"
+    ]
+  },
+  "inputs": {
+    "config": "configs/prompt_projection_distillation.json",
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "index": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "projection": "artifacts/token_selector/prompt_projection_WtWv.npz",
+    "projection_npz_sha256": "132a6d9fcd35ee94f6cb6c60f1c05c5b3ca2a669f56e7777e29a65a676f79d0c"
+  },
+  "preregistration_date": "2026-10-02",
+  "preregistration_sha256": "b2686bc394833c4026ff8a2e69359fba0e8e6b94f57815be1b70e7768c96d508",
+  "primary_metrics": [
+    "spearman",
+    "ndcg_full"
+  ],
+  "promotion_gate": {
+    "A_prompt_sensitivity": "same-image-other-task spearman and ndcg_full paired delta > 0, 95% CI lower bound > 0, |dz| >= 0.2 and Holm-adjusted p < 0.05",
+    "B_shuffled_discrimination": "cross-image-same-task shuffled spearman and ndcg_full paired delta > 0, 95% CI lower bound > 0, |dz| >= 0.2 and Holm-adjusted p < 0.05",
+    "C_collapse_removed": "exact_prompt_invariance_fraction <= 0.05",
+    "D_teacher_non_regression": "val correct-prompt spearman and ndcg_full both >= hard_max baseline + -0.01",
+    "E_numeric_and_contract": "all metrics finite and the hardware contract complete"
+  },
+  "report_version": "1.0",
+  "schema_version": "1.0",
+  "scope": "CPU-only frozen-weight scorer-reduction ablation; no training, no tuning, no 4B model load, no GPU, no network, no CV-Bench",
+  "seed": 20261002,
+  "split_summary": {
+    "test": {
+      "image_count": 39,
+      "sample_count": 78
+    },
+    "train": {
+      "image_count": 159,
+      "sample_count": 318
+    },
+    "val": {
+      "image_count": 38,
+      "sample_count": 76
+    }
+  },
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_resamples": 2000,
+    "ci_level": 0.95,
+    "cross_image_donor": "fixed-seed deterministic derangement on images (bijective, no self-pair); student donors keep the task",
+    "derangement_split_offsets": {
+      "test": 202,
+      "train": 0,
+      "val": 101
+    },
+    "donor_scope": "strictly split-local",
+    "effect_size_floor_cohens_dz": 0.2,
+    "exact_invariance": "np.array_equal; tolerance variant explicitly named 1e-9",
+    "holm_bonferroni_family": "{ (candidate, condition, metric) : candidate in NON_BASELINE_CANDIDATES (10 candidates), condition in {same_image_other_task, cross_image_same_task_shuffled}, metric in {spearman, ndcg_full} }; m = 40",
+    "independent_unit": "image (grounding/pointing averaged before resampling)",
+    "permutation_resamples": 10000
+  },
+  "test_discipline": {
+    "no_post_hoc_selection_on_test": "if no candidate passes, winner=NO_PROMOTION and the single test evaluation is a frozen diagnostic only and may not be used to pick a candidate",
+    "test_evaluated_once_after_winner_written": true,
+    "val_decides": true
+  },
+  "winner_selection_lexicographic": [
+    "maximise min(same spearman delta, same ndcg_full delta, cross spearman delta, cross ndcg_full delta)",
+    "then maximise val correct-prompt spearman + ndcg_full",
+    "then minimise per-group MAC/compare/exp and prompt-side transfer bytes",
+    "then follow the fixed candidate order"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "schema": "prompt-projection-distillation-gpu-gate-v1",
+  "superseded_by_new_policy": {
+    "date": "2026-09-28",
+    "time_local": "15:52",
+    "new_policy_report": "reports/token_selector/2026-09-28-prompt-projection-newpolicy-gate.json",
+    "note": "门槛 G1「不得存在其他用户计算进程」已被新共存策略取代；本报告原样保留为历史记录。新策略仅以空闲显存>=24GiB 且 平均利用率<50% 为门槛，允许与其他用户低占用 CUDA 上下文共存，禁止 kill/暂停/修改他人进程。",
+    "new_policy_recheck_result": "BLOCKED_INSUFFICIENT_FREE_MEMORY",
+    "new_policy_recheck_reason": "空闲 22317 MiB < 24576 MiB (24 GiB)；util 0% < 50% PASS；非 G1 进程归属原因"
+  },
+  "date": "2026-09-28",
+  "time_local": "14:47",
+  "status": "BLOCKED",
+  "decision": "GPU_GATE_BLOCKED / MODEL_LOAD_NOT_ACTIVATED / PROMPT_PROJECTION_EXTRACTION_NOT_RUN",
+  "task": "干净归纳 Prompt 投影蒸馏 GPU 门禁（只读审计）",
+  "executor": "zhaoxiangyu",
+  "executor_uid": 1005,
+  "model_load_authorized": false,
+  "gpu": {
+    "index": 0,
+    "name": "NVIDIA RTX A6000",
+    "driver_version": "580.178.04",
+    "cuda_version": "13.0",
+    "memory_total_mib": 46068,
+    "memory_used_mib": 471,
+    "memory_free_mib": 45015,
+    "utilization_gpu_pct": 0,
+    "utilization_memory_pct": 1,
+    "power_draw_w": 9.41,
+    "power_limit_w": 300.0,
+    "temperature_c": 27
+  },
+  "sampling": {
+    "duration_s": 12,
+    "interval_s": 1,
+    "samples": 12,
+    "utilization_gpu_pct": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "util_avg_pct": 0,
+    "util_max_pct": 0,
+    "power_draw_w_min": 9.29,
+    "power_draw_w_max": 14.54,
+    "temperature_c_min": 27,
+    "temperature_c_max": 27,
+    "memory_used_mib_min": 471,
+    "memory_used_mib_max": 471,
+    "sustained_high_utilization": false
+  },
+  "compute_processes": [
+    {
+      "pid": 16507,
+      "user": "seey6",
+      "uid": 1001,
+      "used_gpu_memory_mib": 382,
+      "process_name": "python",
+      "cmdline": "python main.py --port 7860 --listen 0.0.0.0",
+      "elapsed": "2-19:34:44",
+      "cpu_pct": 0.4,
+      "rss_kb": 72428,
+      "state": "Sl+",
+      "is_executor_user": false
+    }
+  ],
+  "other_user_compute_process_count": 1,
+  "recheck_after_report": {
+    "time_local": "14:49",
+    "additional_compute_processes": [
+      {
+        "pid": 1215914,
+        "user": "chenbowu",
+        "uid": 1003,
+        "used_gpu_memory_mib": 2004,
+        "cmdline": "/home/chenbowu/miniconda3/envs/cbw/bin/python -u fault_research_framework_20260924/clip_study/token_transfer.py stage_b --output fault_research_runs/clip_token_transfer_localization_20260928",
+        "is_executor_user": false
+      }
+    ],
+    "other_user_compute_process_count": 2,
+    "gate_result_unchanged": "BLOCKED"
+  },
+  "gates": {
+    "G1_no_other_user_compute_process": {
+      "pass": false,
+      "rule": "不得存在其他用户计算进程",
+      "evidence": "PID 16507 owner=seey6 uid=1001 (executor uid=1005); 382 MiB compute app"
+    },
+    "G2_free_memory_ge_20gib": {
+      "pass": true,
+      "rule": "空闲显存 >= 20480 MiB",
+      "observed_mib": 45015
+    },
+    "G3_not_sustained_high_utilization": {
+      "pass": true,
+      "rule": "GPU 不能持续高利用率",
+      "observed_util_avg_pct": 0,
+      "observed_util_max_pct": 0
+    }
+  },
+  "gate_result": "BLOCKED",
+  "blocking_gate": "G1_no_other_user_compute_process",
+  "pinned_inputs": {
+    "unique_data_source": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+    "manifest_sha256_expected": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "manifest_sha256_observed": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "manifest_sha256_matches": true,
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "0b03f8f56422f5efdc34561b0cbce40b98510ff0ede88942854849307108ef99"
+    },
+    "extractor": {
+      "path": "evaluation/extract_prompt_projection_features.py",
+      "sha256": "cac52d49033263c0bc7c1afdc0ef3c58ffdda27e1e9a883ad1fcc205ddf2eb70"
+    },
+    "trainer": {
+      "path": "evaluation/train_prompt_projection.py",
+      "sha256": "f34a7865f815299f812c9e4d95d311a509ee9d7394f38a2cf9b07de0a3648983"
+    },
+    "manifest_builder": {
+      "path": "evaluation/prompt_projection_clean_inductive.py",
+      "sha256": "d80186b664823f2abf6799b4037d5ad3382b375efdf5a5e5f30efe237356a4c9"
+    },
+    "split_contract": {
+      "group_by": "source_image_sha256",
+      "isolation": "strict image-hash train/val/test isolation; same image never crosses splits",
+      "expected_images": {"train": 159, "val": 38, "test": 39, "total": 236},
+      "expected_records": {"train": 318, "val": 76, "test": 78, "total": 472}
+    },
+    "cv_bench_forbidden_in_training": true
+  },
+  "not_run": {
+    "model_loaded": false,
+    "environment_activated": false,
+    "transformers_imported": false,
+    "output_dir_created": false,
+    "output_dir": "artifacts/token_selector/prompt_projection_features",
+    "vision_forward": false,
+    "prompt_embedding": false,
+    "extraction": "NOT_RUN",
+    "training": "NOT_RUN",
+    "controls": "NOT_RUN",
+    "tests": "NOT_RUN",
+    "cv_bench_evaluated": false
+  },
+  "compliance": {
+    "processes_killed": false,
+    "processes_suspended": false,
+    "network_used": false,
+    "model_modified": false,
+    "inference_py_modified": false,
+    "api_py_modified": false,
+    "hf_hub_offline": "1",
+    "transformers_offline": "1"
+  },
+  "limitations": [
+    "本轮仅执行只读 GPU 门禁；门禁因存在非执行者用户计算进程（seey6 PID 16507）判 BLOCKED。",
+    "未加载 RoboBrain2.5-4B，未激活 conda 环境，未 import transformers/PIL，未创建输出目录，未抽取，未训练，未评估 CV-Bench。",
+    "manifest SHA256 静态校验通过且与 config pin 一致，但按 image hash 的 train/val/test 隔离在未抽取状态下未做运行期核验（NOT_RUN）。",
+    "无任何蒸馏指标、无任务精度声明、无端到端加速声明。"
+  ],
+  "files_changed": [
+    "reports/token_selector/2026-09-28-prompt-distillation-gpu-gate.md",
+    "reports/token_selector/2026-09-28-prompt-distillation-gpu-gate.json",
+    "CURRENT_STATUS.md",
+    "/tmp/robobrain_harness_result.json"
+  ],
+  "evidence": [
+    "nvidia-smi -q / --query-gpu/--query-compute-apps",
+    "ps -o pid,user,uid,etime,%cpu,%mem,rss,stat,cmd -p 16507",
+    "stat -c '%U %u' /proc/16507",
+    "sha256sum datasets/prompt_projection_clean_inductive_v1.jsonl"
+  ],
+  "next_gate": "当且仅当 GPU 上不存在非 zhaoxiangyu 计算进程、空闲显存 >= 20480 MiB、且利用率非持续满载时重跑只读门禁；仅在门禁 READY 且独立授权门开启后才运行 extraction/training。"
+}

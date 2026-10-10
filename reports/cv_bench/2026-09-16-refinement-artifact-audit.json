@@ -1,0 +1,44 @@
+{
+  "frozen_source_checks": {
+    "configs/cv_bench_refinement_20260916.lock.json": true,
+    "evaluation/run_cv_bench_refinement.py": true,
+    "evaluation/extract_task_conditioned_roi_scout.py": true,
+    "evaluation/evaluate_task_conditioned_roi_proposals.py": true,
+    "evaluation/visual_refinement.py": true,
+    "datasets/cv_bench_full2638.jsonl": true,
+    "datasets/cv_bench_screening100.jsonl": true
+  },
+  "raw_counts": {
+    "evaluation/results/cv_bench_refinement_full2638_20260916.jsonl": 5276,
+    "evaluation/results/cv_bench_refinement_latency100_20260916.jsonl": 900
+  },
+  "csv_counts": {
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638.csv": 3,
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638-accuracy-raw.csv": 7914,
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638-latency-raw.csv": 900
+  },
+  "dense_identity_matched_runs": 300,
+  "tests_passed": 88,
+  "hashes": {
+    "evaluation/results/cv_bench_refinement_full2638_20260916.jsonl": "8385b2ce3e6146e9e2292b9432d01a9d63251ab91e990e685ce712d4f396c84f",
+    "evaluation/results/cv_bench_refinement_latency100_20260916.jsonl": "78a08c0b951804a9adb455ac5b27be8674bfb8d6d7f723ce18fac994002f0a02",
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638.json": "4ad06025ee81002fc754c96be74ab05d2e0552b0cdadfc0b6fbc733062176e3a",
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638.csv": "f827db9214fa39526621e4f70338e88e1785e666d246d0800c334e27d0d807f9",
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638.md": "fea5429f4b3272b1b28fbb2cec6053ed89da40f41275fde3cb33ce31b817b6aa",
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638-accuracy-raw.csv": "484cda3a40ce960ae420d612f866e0011391034f024a031e8d62baf2163756d0",
+    "reports/cv_bench/2026-09-16-global-local-refinement-full2638-latency-raw.csv": "3227e2473b225005c6fe36a1c62960f073d759a5c86e3631925f7a91944571b6",
+    "evaluation/build_cv_refinement_report.py": "7f5be430b745604d827912a4a884eff0bae810499f6580962bbab2bba8aa8e2e"
+  },
+  "gpu_own_sessions_exited": true,
+  "last_gpu_total_used_mib": 1131,
+  "other_gpu_process": {
+    "pid": 2131226,
+    "owner": "chenbowu",
+    "memory_mib": 1048,
+    "modified": false
+  },
+  "sealed_data_access": false,
+  "board_access": false,
+  "original_model_app_modified": false,
+  "budget64_inference_started": false
+}

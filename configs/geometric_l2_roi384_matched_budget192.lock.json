@@ -1,0 +1,42 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-15",
+  "purpose": "Separate target-coverage failure from crop/resampling effects by comparing layer-5 geometric-oracle token selection, layer-5 L2 selection, and ROI-384 at the same per-sample final visual-token budget.",
+  "evidence_level": "revealed development mechanism diagnostic; not deployable and not blind validation",
+  "dataset": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "manifest_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+    "unique_images": 192,
+    "task_records": 384,
+    "calibration_split_access": false,
+    "test_split_access": false
+  },
+  "new_action": {
+    "selector": "geometric_oracle",
+    "oracle_input": "COCO ground-truth bbox",
+    "selection_rule": "Rank target-intersecting merged cells first by overlap, then preserve spatial anchors and nearest context.",
+    "prune_after_layer": 5,
+    "anchor_grid": 3,
+    "processor_bounds": "identical to run_hf_global_roi.py",
+    "per_sample_final_token_target": "ROI-384 final_context_visual_tokens, capped at dense identity",
+    "output": "evaluation/results/geometric_matched_roi384_nativegrid/geometric_oracle_matched_roi384.jsonl"
+  },
+  "frozen_comparators": {
+    "dense": "evaluation/results/global_roi_bf16_representation_gate32_stratified_20260912.jsonl strategy=dense",
+    "roi384": "evaluation/results/global_roi_bf16_representation_gate32_stratified_20260912.jsonl strategy=roi_only",
+    "l2_matched": "evaluation/results/roi_l2_matched_budget192_nativegrid/l2_matched_roi384.jsonl"
+  },
+  "protocol": {
+    "warmup": 1,
+    "quality_generations_per_sample": 1,
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 20260915,
+    "primary_noninferiority_margin": -0.02,
+    "no_parameter_tuning_after_results": true
+  },
+  "decision_logic": [
+    "If geometric oracle substantially closes the L2-to-ROI quality gap, target-aware contiguous token selection is supported for the next action-space design.",
+    "If geometric oracle remains close to L2 and far below ROI, crop resampling, local magnification, or representation-distribution effects dominate this implementation.",
+    "Either result remains an oracle diagnostic and cannot be presented as a deployable selector."
+  ]
+}

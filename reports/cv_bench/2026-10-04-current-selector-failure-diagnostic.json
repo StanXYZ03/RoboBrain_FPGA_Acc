@@ -1,0 +1,827 @@
+{
+  "generated_at": "2026-10-04T00:28:42.006137+00:00",
+  "scope": "CPU-only read-only diagnostic of the frozen 2026-10-04 current Selector CV-Bench outputs; software Selector path, no FPGA claim",
+  "formal_sample_count": 2638,
+  "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+  "secondary_metric": "score(...)[\"accuracy\"]",
+  "metric_definitions": {
+    "primary": "Official CV-Bench score returned by the frozen scorer as score(...)[\"cv_bench_accuracy\"] = ((ADE20K + COCO)/2 + Omni3D)/2. This is the ONE formal CV-Bench primary metric.",
+    "secondary": "unweighted_sample_accuracy = score(...)[\"accuracy\"], the plain mean over all 2638 samples. Reported only as a secondary diagnostic and never as the CV-Bench primary.",
+    "g_buckets": "secondary unweighted sample accuracy diagnostic"
+  },
+  "forbidden_primary_metrics": [
+    "pointing",
+    "grounding",
+    "ndcg",
+    "retained_mass"
+  ],
+  "inputs_sha256": {
+    "formal_quality_report": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/cv_bench/2026-10-04-current-selector-cvbench.json",
+      "sha256": "d4ee60fe777cf0b6b075467c72acc1d2aec9ee2eb9cd7537523c5b7fe6344311"
+    },
+    "manifest": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+    },
+    "dense_jsonl": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+    },
+    "l2_layer5_report": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/cv_bench/2026-09-16-cv-bench-l2-0250-full2638.json",
+      "sha256": "36ff7f9fc971bf389fee252fc4ab0af97321e3ad3d5c10fb1f2b1017f2cc6f55"
+    },
+    "official_scorer_module": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/build_cv_bench_pruning_report.py",
+      "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+    },
+    "candidate_K48_jsonl": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k48.jsonl",
+      "sha256": "de5a5761e6c0e7f7718f6a48c5af2ea20d7ffce23235559691cb423d898a95c5"
+    },
+    "candidate_K64_jsonl": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k64.jsonl",
+      "sha256": "7d1f48acefd7193dfc31665468de4089ad537beb2f24eefbab04879c554a006e"
+    },
+    "candidate_K96_jsonl": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k96.jsonl",
+      "sha256": "b8976a5befdde7ae84cae925d14e37b2f5dd4e4d60b30eb4bdd879b18b87241d"
+    }
+  },
+  "g_bucket_definition": {
+    "G<=96": {
+      "low": 0,
+      "high": 96
+    },
+    "97-256": {
+      "low": 97,
+      "high": 256
+    },
+    "257-768": {
+      "low": 257,
+      "high": 768
+    },
+    ">768": {
+      "low": 769,
+      "high": null
+    }
+  },
+  "g_definition": "group_count = full_llm_visual_tokens (patch tokens / spatial_merge_size**2)",
+  "candidates": {
+    "K48": {
+      "label": "K48",
+      "budget": 48,
+      "sample_count": 2638,
+      "cv_bench_accuracy": 0.6534285248201898,
+      "cv_bench_accuracy_2d": 0.5910237163070462,
+      "cv_bench_accuracy_3d": 0.7158333333333333,
+      "unweighted_sample_accuracy": 0.6493555724033359,
+      "parse_success_rate": 0.9886277482941622,
+      "formal_report_cv_bench_accuracy": 0.6534285248201898,
+      "formal_report_matches_recompute": true,
+      "formal_report_unweighted_sample_accuracy": 0.6493555724033359,
+      "relative_retention_vs_dense": 0.7487179500873148,
+      "unweighted_task_accuracy": {
+        "Count": 0.4086294416243655,
+        "Depth": 0.7283333333333334,
+        "Distance": 0.7033333333333334,
+        "Relation": 0.8184615384615385
+      },
+      "unweighted_source_accuracy": {
+        "ADE20K": 0.5671406003159558,
+        "COCO": 0.6149068322981367,
+        "Omni3D": 0.7158333333333333
+      },
+      "g_buckets": {
+        "G<=96": {
+          "sample_count": 143,
+          "unweighted_sample_accuracy": 0.6993006993006993,
+          "parse_success_rate": 0.958041958041958,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        "97-256": {
+          "sample_count": 781,
+          "unweighted_sample_accuracy": 0.7490396927016645,
+          "parse_success_rate": 0.9897567221510883,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        "257-768": {
+          "sample_count": 1144,
+          "unweighted_sample_accuracy": 0.6031468531468531,
+          "parse_success_rate": 0.9868881118881119,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        ">768": {
+          "sample_count": 570,
+          "unweighted_sample_accuracy": 0.5929824561403508,
+          "parse_success_rate": 0.9982456140350877,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        }
+      },
+      "task_accuracy_by_g_bucket": {
+        "G<=96": {
+          "Count": {
+            "sample_count": 81,
+            "unweighted_sample_accuracy": 0.5308641975308642,
+            "parse_success_rate": 0.9259259259259259,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 62,
+            "unweighted_sample_accuracy": 0.9193548387096774,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "97-256": {
+          "Count": {
+            "sample_count": 148,
+            "unweighted_sample_accuracy": 0.4527027027027027,
+            "parse_success_rate": 0.9459459459459459,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 104,
+            "unweighted_sample_accuracy": 0.7115384615384616,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 73,
+            "unweighted_sample_accuracy": 0.863013698630137,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 456,
+            "unweighted_sample_accuracy": 0.8355263157894737,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "257-768": {
+          "Count": {
+            "sample_count": 430,
+            "unweighted_sample_accuracy": 0.413953488372093,
+            "parse_success_rate": 0.9651162790697675,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 296,
+            "unweighted_sample_accuracy": 0.75,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 327,
+            "unweighted_sample_accuracy": 0.6819571865443425,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 91,
+            "unweighted_sample_accuracy": 0.7362637362637363,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        ">768": {
+          "Count": {
+            "sample_count": 129,
+            "unweighted_sample_accuracy": 0.26356589147286824,
+            "parse_success_rate": 0.9922480620155039,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 200,
+            "unweighted_sample_accuracy": 0.705,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 200,
+            "unweighted_sample_accuracy": 0.68,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 41,
+            "unweighted_sample_accuracy": 0.6585365853658537,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        }
+      },
+      "source_accuracy_by_g_bucket": {
+        "G<=96": {
+          "ADE20K": {
+            "sample_count": 112,
+            "unweighted_sample_accuracy": 0.6428571428571429,
+            "parse_success_rate": 0.9464285714285714,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 31,
+            "unweighted_sample_accuracy": 0.9032258064516129,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "97-256": {
+          "ADE20K": {
+            "sample_count": 263,
+            "unweighted_sample_accuracy": 0.7262357414448669,
+            "parse_success_rate": 0.9923954372623575,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 341,
+            "unweighted_sample_accuracy": 0.7536656891495601,
+            "parse_success_rate": 0.9824046920821115,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 177,
+            "unweighted_sample_accuracy": 0.7740112994350282,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "257-768": {
+          "ADE20K": {
+            "sample_count": 88,
+            "unweighted_sample_accuracy": 0.3977272727272727,
+            "parse_success_rate": 0.9886363636363636,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 433,
+            "unweighted_sample_accuracy": 0.48498845265588914,
+            "parse_success_rate": 0.9676674364896074,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 623,
+            "unweighted_sample_accuracy": 0.7142857142857143,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        ">768": {
+          "ADE20K": {
+            "sample_count": 170,
+            "unweighted_sample_accuracy": 0.3588235294117647,
+            "parse_success_rate": 0.9941176470588236,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 400,
+            "unweighted_sample_accuracy": 0.6925,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        }
+      },
+      "identity_bucket": {
+        "sample_count": 0,
+        "unweighted_sample_accuracy": null,
+        "parse_success_rate": null,
+        "metric": "secondary unweighted sample accuracy diagnostic"
+      }
+    },
+    "K64": {
+      "label": "K64",
+      "budget": 64,
+      "sample_count": 2638,
+      "cv_bench_accuracy": 0.7033306104226154,
+      "cv_bench_accuracy_2d": 0.6349945541785641,
+      "cv_bench_accuracy_3d": 0.7716666666666666,
+      "unweighted_sample_accuracy": 0.6990144048521607,
+      "parse_success_rate": 0.9890068233510235,
+      "formal_report_cv_bench_accuracy": 0.7033306104226154,
+      "formal_report_matches_recompute": true,
+      "formal_report_unweighted_sample_accuracy": 0.6990144048521607,
+      "relative_retention_vs_dense": 0.8058972525176935,
+      "unweighted_task_accuracy": {
+        "Count": 0.46954314720812185,
+        "Depth": 0.7866666666666666,
+        "Distance": 0.7566666666666667,
+        "Relation": 0.8430769230769231
+      },
+      "unweighted_source_accuracy": {
+        "ADE20K": 0.6066350710900474,
+        "COCO": 0.6633540372670808,
+        "Omni3D": 0.7716666666666666
+      },
+      "g_buckets": {
+        "G<=96": {
+          "sample_count": 143,
+          "unweighted_sample_accuracy": 0.7202797202797203,
+          "parse_success_rate": 0.965034965034965,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        "97-256": {
+          "sample_count": 781,
+          "unweighted_sample_accuracy": 0.7989756722151088,
+          "parse_success_rate": 0.9884763124199744,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        "257-768": {
+          "sample_count": 1144,
+          "unweighted_sample_accuracy": 0.6608391608391608,
+          "parse_success_rate": 0.9868881118881119,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        ">768": {
+          "sample_count": 570,
+          "unweighted_sample_accuracy": 0.6333333333333333,
+          "parse_success_rate": 1.0,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        }
+      },
+      "task_accuracy_by_g_bucket": {
+        "G<=96": {
+          "Count": {
+            "sample_count": 81,
+            "unweighted_sample_accuracy": 0.5555555555555556,
+            "parse_success_rate": 0.9382716049382716,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 62,
+            "unweighted_sample_accuracy": 0.9354838709677419,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "97-256": {
+          "Count": {
+            "sample_count": 148,
+            "unweighted_sample_accuracy": 0.5608108108108109,
+            "parse_success_rate": 0.9391891891891891,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 104,
+            "unweighted_sample_accuracy": 0.8173076923076923,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 73,
+            "unweighted_sample_accuracy": 0.8767123287671232,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 456,
+            "unweighted_sample_accuracy": 0.8596491228070176,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "257-768": {
+          "Count": {
+            "sample_count": 430,
+            "unweighted_sample_accuracy": 0.4720930232558139,
+            "parse_success_rate": 0.9651162790697675,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 296,
+            "unweighted_sample_accuracy": 0.8141891891891891,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 327,
+            "unweighted_sample_accuracy": 0.746177370030581,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 91,
+            "unweighted_sample_accuracy": 0.7472527472527473,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        ">768": {
+          "Count": {
+            "sample_count": 129,
+            "unweighted_sample_accuracy": 0.3023255813953488,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 200,
+            "unweighted_sample_accuracy": 0.73,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 200,
+            "unweighted_sample_accuracy": 0.73,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 41,
+            "unweighted_sample_accuracy": 0.7317073170731707,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        }
+      },
+      "source_accuracy_by_g_bucket": {
+        "G<=96": {
+          "ADE20K": {
+            "sample_count": 112,
+            "unweighted_sample_accuracy": 0.6607142857142857,
+            "parse_success_rate": 0.9553571428571429,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 31,
+            "unweighted_sample_accuracy": 0.9354838709677419,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "97-256": {
+          "ADE20K": {
+            "sample_count": 263,
+            "unweighted_sample_accuracy": 0.7680608365019012,
+            "parse_success_rate": 0.9923954372623575,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 341,
+            "unweighted_sample_accuracy": 0.8005865102639296,
+            "parse_success_rate": 0.9794721407624634,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 177,
+            "unweighted_sample_accuracy": 0.8418079096045198,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "257-768": {
+          "ADE20K": {
+            "sample_count": 88,
+            "unweighted_sample_accuracy": 0.4431818181818182,
+            "parse_success_rate": 0.9886363636363636,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 433,
+            "unweighted_sample_accuracy": 0.535796766743649,
+            "parse_success_rate": 0.9676674364896074,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 623,
+            "unweighted_sample_accuracy": 0.7784911717495987,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        ">768": {
+          "ADE20K": {
+            "sample_count": 170,
+            "unweighted_sample_accuracy": 0.40588235294117647,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 400,
+            "unweighted_sample_accuracy": 0.73,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        }
+      },
+      "identity_bucket": {
+        "sample_count": 61,
+        "unweighted_sample_accuracy": 0.6721311475409836,
+        "parse_success_rate": 0.9672131147540983,
+        "metric": "secondary unweighted sample accuracy diagnostic"
+      }
+    },
+    "K96": {
+      "label": "K96",
+      "budget": 96,
+      "sample_count": 2638,
+      "cv_bench_accuracy": 0.7648694965313552,
+      "cv_bench_accuracy_2d": 0.6997389930627103,
+      "cv_bench_accuracy_3d": 0.83,
+      "unweighted_sample_accuracy": 0.7615617892342684,
+      "parse_success_rate": 0.9863532979529946,
+      "formal_report_cv_bench_accuracy": 0.7648694965313552,
+      "formal_report_matches_recompute": true,
+      "formal_report_unweighted_sample_accuracy": 0.7615617892342684,
+      "relative_retention_vs_dense": 0.8764103490658911,
+      "unweighted_task_accuracy": {
+        "Count": 0.5469543147208121,
+        "Depth": 0.835,
+        "Distance": 0.825,
+        "Relation": 0.8953846153846153
+      },
+      "unweighted_source_accuracy": {
+        "ADE20K": 0.660347551342812,
+        "COCO": 0.7391304347826086,
+        "Omni3D": 0.83
+      },
+      "g_buckets": {
+        "G<=96": {
+          "sample_count": 143,
+          "unweighted_sample_accuracy": 0.7272727272727273,
+          "parse_success_rate": 0.965034965034965,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        "97-256": {
+          "sample_count": 781,
+          "unweighted_sample_accuracy": 0.8489116517285531,
+          "parse_success_rate": 0.9884763124199744,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        "257-768": {
+          "sample_count": 1144,
+          "unweighted_sample_accuracy": 0.7473776223776224,
+          "parse_success_rate": 0.9807692307692307,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        },
+        ">768": {
+          "sample_count": 570,
+          "unweighted_sample_accuracy": 0.6789473684210526,
+          "parse_success_rate": 1.0,
+          "metric": "secondary unweighted sample accuracy diagnostic"
+        }
+      },
+      "task_accuracy_by_g_bucket": {
+        "G<=96": {
+          "Count": {
+            "sample_count": 81,
+            "unweighted_sample_accuracy": 0.5555555555555556,
+            "parse_success_rate": 0.9382716049382716,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 62,
+            "unweighted_sample_accuracy": 0.9516129032258065,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "97-256": {
+          "Count": {
+            "sample_count": 148,
+            "unweighted_sample_accuracy": 0.5878378378378378,
+            "parse_success_rate": 0.9391891891891891,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 104,
+            "unweighted_sample_accuracy": 0.9519230769230769,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 73,
+            "unweighted_sample_accuracy": 0.8904109589041096,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 456,
+            "unweighted_sample_accuracy": 0.9035087719298246,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "257-768": {
+          "Count": {
+            "sample_count": 430,
+            "unweighted_sample_accuracy": 0.5837209302325581,
+            "parse_success_rate": 0.9488372093023256,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 296,
+            "unweighted_sample_accuracy": 0.8445945945945946,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 327,
+            "unweighted_sample_accuracy": 0.8409785932721713,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 91,
+            "unweighted_sample_accuracy": 0.8681318681318682,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        ">768": {
+          "Count": {
+            "sample_count": 129,
+            "unweighted_sample_accuracy": 0.37209302325581395,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Depth": {
+            "sample_count": 200,
+            "unweighted_sample_accuracy": 0.76,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Distance": {
+            "sample_count": 200,
+            "unweighted_sample_accuracy": 0.775,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Relation": {
+            "sample_count": 41,
+            "unweighted_sample_accuracy": 0.7804878048780488,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        }
+      },
+      "source_accuracy_by_g_bucket": {
+        "G<=96": {
+          "ADE20K": {
+            "sample_count": 112,
+            "unweighted_sample_accuracy": 0.6607142857142857,
+            "parse_success_rate": 0.9553571428571429,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 31,
+            "unweighted_sample_accuracy": 0.967741935483871,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "97-256": {
+          "ADE20K": {
+            "sample_count": 263,
+            "unweighted_sample_accuracy": 0.8022813688212928,
+            "parse_success_rate": 0.9923954372623575,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 341,
+            "unweighted_sample_accuracy": 0.844574780058651,
+            "parse_success_rate": 0.9794721407624634,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 177,
+            "unweighted_sample_accuracy": 0.9265536723163842,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        "257-768": {
+          "ADE20K": {
+            "sample_count": 88,
+            "unweighted_sample_accuracy": 0.6022727272727273,
+            "parse_success_rate": 0.9772727272727273,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "COCO": {
+            "sample_count": 433,
+            "unweighted_sample_accuracy": 0.6397228637413395,
+            "parse_success_rate": 0.953810623556582,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 623,
+            "unweighted_sample_accuracy": 0.8426966292134831,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        },
+        ">768": {
+          "ADE20K": {
+            "sample_count": 170,
+            "unweighted_sample_accuracy": 0.47058823529411764,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          },
+          "Omni3D": {
+            "sample_count": 400,
+            "unweighted_sample_accuracy": 0.7675,
+            "parse_success_rate": 1.0,
+            "metric": "secondary unweighted sample accuracy diagnostic"
+          }
+        }
+      },
+      "identity_bucket": {
+        "sample_count": 143,
+        "unweighted_sample_accuracy": 0.7272727272727273,
+        "parse_success_rate": 0.965034965034965,
+        "metric": "secondary unweighted sample accuracy diagnostic"
+      }
+    }
+  },
+  "identity_bypass_verification": {
+    "K48": {
+      "budget": 48,
+      "identity_bypass_count": 0,
+      "g_le_k_count": 0,
+      "identity_set_equals_g_le_k": true,
+      "missing_identity_for_g_le_k": [],
+      "spurious_identity_for_g_gt_k": [],
+      "dense_text_match_count": 0,
+      "dense_answer_match_count": 0,
+      "identity_full_sequence_match_count": 0,
+      "identity_retention_match_count": 0,
+      "all_identity_outputs_match_dense": true,
+      "mismatches": []
+    },
+    "K64": {
+      "budget": 64,
+      "identity_bypass_count": 61,
+      "g_le_k_count": 61,
+      "identity_set_equals_g_le_k": true,
+      "missing_identity_for_g_le_k": [],
+      "spurious_identity_for_g_gt_k": [],
+      "dense_text_match_count": 61,
+      "dense_answer_match_count": 61,
+      "identity_full_sequence_match_count": 61,
+      "identity_retention_match_count": 61,
+      "all_identity_outputs_match_dense": true,
+      "mismatches": []
+    },
+    "K96": {
+      "budget": 96,
+      "identity_bypass_count": 143,
+      "g_le_k_count": 143,
+      "identity_set_equals_g_le_k": true,
+      "missing_identity_for_g_le_k": [],
+      "spurious_identity_for_g_gt_k": [],
+      "dense_text_match_count": 143,
+      "dense_answer_match_count": 143,
+      "identity_full_sequence_match_count": 143,
+      "identity_retention_match_count": 143,
+      "all_identity_outputs_match_dense": true,
+      "mismatches": []
+    }
+  },
+  "l2_layer5_comparison": {
+    "l2_layer5_cv_bench_accuracy": 0.7954859905017024,
+    "l2_layer5_unweighted_task_accuracy": {
+      "Count": 0.5241116751269036,
+      "Depth": 0.9283333333333333,
+      "Distance": 0.8733333333333333,
+      "Relation": 0.8984615384615384
+    },
+    "l2_layer5_unweighted_source_accuracy": {
+      "ADE20K": 0.6635071090047393,
+      "COCO": 0.7167701863354037,
+      "Omni3D": 0.9008333333333334
+    },
+    "l2_layer5_retention": 0.25,
+    "l2_layer5_prune_after_layer": 5,
+    "l2_layer5_anchor_grid": 3,
+    "l2_layer5_position_policy": "preserve original positions",
+    "l2_layer5_dense_accuracy": 0.8727298774444869,
+    "comparison_metric": "score(...)[\"cv_bench_accuracy\"]",
+    "current_selector_boundary": "B1 (after vision block 0)",
+    "cut_point_differs": true,
+    "attribution_caveat": "The frozen L2@25% baseline prunes after vision layer 5 (prune_after_layer=5) while the current Selector prunes at boundary B1 (after vision block 0). The cut points differ, so any accuracy difference between the two must NOT be attributed to the ranker/selector alone.",
+    "not_attributable_to_ranker": true,
+    "candidates": {
+      "K48": {
+        "current_selector_cv_bench_accuracy": 0.6534285248201898,
+        "current_minus_l2_layer5": -0.14205746568151267
+      },
+      "K64": {
+        "current_selector_cv_bench_accuracy": 0.7033306104226154,
+        "current_minus_l2_layer5": -0.09215538007908708
+      },
+      "K96": {
+        "current_selector_cv_bench_accuracy": 0.7648694965313552,
+        "current_minus_l2_layer5": -0.03061649397034727
+      }
+    }
+  },
+  "limitations": [
+    "Software Selector path only; this is not an FPGA or latency result.",
+    "The comparison against L2@25% uses a different vision cut point (layer 5 vs B1/block 0) and therefore isolates no single component.",
+    "G buckets are observational strata over CV-Bench, not a controlled sweep.",
+    "G-bucket means are secondary unweighted sample accuracy diagnostic only and must not be presented as the formal CV-Bench primary score.",
+    "Forbidden primary metrics (pointing/grounding/ndcg/retained_mass) are never used."
+  ],
+  "all_identity_checks_pass": true,
+  "formal_scores_reproduced": true
+}

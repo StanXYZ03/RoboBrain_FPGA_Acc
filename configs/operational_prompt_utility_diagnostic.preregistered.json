@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0-preregistered",
+  "status": "PREREGISTERED_VAL_ONLY_EXPLORATORY_DIAGNOSTIC",
+  "report_stem": "2026-10-03-operational-prompt-utility-diagnostic",
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-03-operational-prompt-utility-diagnostic-harness-prompt.md",
+    "sha256": "a3edca6c187d7fed1fbd4500c692cb3d0a2f74f9420858a0759e77b754da1d9c"
+  },
+  "scope": "Zero-training development-validation diagnostic; not final accuracy or promotion evidence.",
+  "data": {
+    "split": "frozen val only",
+    "expected_records": 76,
+    "expected_images": 38,
+    "val_npz_aggregate_sha256": "0439b7cb798f9dc49751d8135dd009294df723b2b10839837d7145778ca68f4b",
+    "internal_test": "must not be resolved, hashed, opened, parsed or scored"
+  },
+  "arms": ["A_SPATIAL_KL_CONTROL", "B_SPATIAL_KL_CONTRASTIVE"],
+  "seeds": [20261003, 20261004, 20261005],
+  "budgets": [48, 64, 96],
+  "deployment": {
+    "lambda_semantic": 0.5,
+    "region_grid": 3,
+    "correct_prompt": "record prompt",
+    "wrong_prompt": "same-image other-task prompt",
+    "metrics": ["retained_spatial_target_mass", "selected_set_ndcg", "selected_jaccard", "selected_overlap_count"]
+  },
+  "aggregation": {
+    "record_to_image": "mean grounding and pointing records where overall is reported",
+    "seed_to_image": "median across three seeds",
+    "independent_unit": "source image",
+    "bootstrap_resamples": 2000,
+    "sign_flip_resamples": 10000,
+    "statistics_seed": 20261003,
+    "alpha": 0.05,
+    "effect_size_floor": 0.2,
+    "positive_seed_min": 2
+  },
+  "primary_holm_family": [
+    "P1_B_correct_selector_minus_wrong_selector_mass_k48",
+    "P2_B_minus_A_correct_wrong_gap_mass_k48"
+  ],
+  "primary_pass_rule": "Each test requires mean>0, CI lower>0, Cohen dz>=0.2, Holm-adjusted p<0.05 and at least 2/3 positive seed means.",
+  "auxiliary_gates": {
+    "S1": "B grounding and pointing K48 correct-wrong retained-mass means are both >0",
+    "S2": "B K48 correct-wrong selected-set NDCG mean >0",
+    "S3": "B K48 correct-vs-wrong selected Jaccard mean <0.95",
+    "S4": "Prior contrastive report G1, G4, G5 and G7 pass and every pinned input SHA matches"
+  },
+  "decision_rule": "OPERATIONAL_PROMPT_UTILITY_SUPPORTED iff P1, P2 and S1-S4 all pass; otherwise OPERATIONAL_PROMPT_UTILITY_NOT_ESTABLISHED.",
+  "strata": ["overall", "task", "grid", "group_count"],
+  "prohibitions": ["training", "GPU", "network", "raw images", "4B weights", "feature re-extraction", "internal test access", "posthoc threshold changes"]
+}

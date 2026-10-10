@@ -1,0 +1,629 @@
+{
+  "status": "GLOBAL_ROI_FAILURE_ATTRIBUTION_COMPLETE",
+  "evidence_level": "32-image revealed development diagnostic",
+  "geometric_target_coverage": "100% by construction: the expanded ground-truth bbox is inside every requested ROI; this does not prove semantic detail preservation",
+  "coordinate_mapping": "pixel-rounded crop mapping unit tests pass",
+  "analyses": {
+    "roi_only": {
+      "grounding": {
+        "n": 32,
+        "primary_delta_mean": -0.01215111041918771,
+        "continuous_error_delta_mean": 0.012151110419187712,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.41820613818401436,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": -0.0002913439401861784,
+              "continuous_error_delta_mean": 0.0002913439401861784
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.0336481752073453,
+              "continuous_error_delta_mean": 0.03364817520734531
+            },
+            "small": {
+              "n": 14,
+              "primary_delta_mean": -0.0035730735585045898,
+              "continuous_error_delta_mean": 0.0035730735585045898
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 26,
+              "primary_delta_mean": 0.003396812610441551,
+              "continuous_error_delta_mean": -0.003396812610441549
+            },
+            "interior": {
+              "n": 6,
+              "primary_delta_mean": -0.07952544354758118,
+              "continuous_error_delta_mean": 0.07952544354758118
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 14,
+              "primary_delta_mean": 0.02062195889863257,
+              "continuous_error_delta_mean": -0.02062195889863257
+            },
+            "overlap": {
+              "n": 18,
+              "primary_delta_mean": -0.03764127544415904,
+              "continuous_error_delta_mean": 0.037641275444159045
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 7,
+              "primary_delta_mean": 0.006966911395930785,
+              "continuous_error_delta_mean": -0.006966911395930785
+            },
+            "medium": {
+              "n": 9,
+              "primary_delta_mean": -0.07749929353630489,
+              "continuous_error_delta_mean": 0.07749929353630489
+            },
+            "sparse": {
+              "n": 16,
+              "primary_delta_mean": 0.01624310804007636,
+              "continuous_error_delta_mean": -0.016243108040076358
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": 0.043618003089470114,
+              "continuous_error_delta_mean": -0.043618003089470114
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.015869051319764897,
+              "continuous_error_delta_mean": 0.0158690513197649
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000326970-1174936-grounding",
+            "category": "handbag",
+            "primary_delta": -0.3023110708429385,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000228144-1614299-grounding",
+            "category": "dining table",
+            "primary_delta": -0.2714971197963465,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000530975-1519219-grounding",
+            "category": "fork",
+            "primary_delta": -0.23654570697706168,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000310980-1114877-grounding",
+            "category": "keyboard",
+            "primary_delta": -0.1528899422367298,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000497599-1100722-grounding",
+            "category": "laptop",
+            "primary_delta": -0.14896032238964185,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000135410-2035059-grounding",
+            "category": "bicycle",
+            "primary_delta": -0.145234290620174,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000559956-1180006-grounding",
+            "category": "handbag",
+            "primary_delta": -0.11019551779262249,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000187243-1096009-grounding",
+            "category": "toilet",
+            "primary_delta": -0.09452500889879933,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          }
+        ]
+      },
+      "pointing": {
+        "n": 32,
+        "primary_delta_mean": -0.03125,
+        "continuous_error_delta_mean": -0.037269605259286805,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.41820613818401436,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": 0.125,
+              "continuous_error_delta_mean": -0.004862619442349968
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.1,
+              "continuous_error_delta_mean": -0.0038918129657581095
+            },
+            "small": {
+              "n": 14,
+              "primary_delta_mean": -0.07142857142857142,
+              "continuous_error_delta_mean": -0.07962916307862834
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 26,
+              "primary_delta_mean": -0.038461538461538464,
+              "continuous_error_delta_mean": -0.03691015633326651
+            },
+            "interior": {
+              "n": 6,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": -0.038827217272041394
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 14,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": -0.020687488016924875
+            },
+            "overlap": {
+              "n": 18,
+              "primary_delta_mean": -0.05555555555555555,
+              "continuous_error_delta_mean": -0.05016680755890164
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 7,
+              "primary_delta_mean": 0.14285714285714285,
+              "continuous_error_delta_mean": -0.14542277894196257
+            },
+            "medium": {
+              "n": 9,
+              "primary_delta_mean": -0.1111111111111111,
+              "continuous_error_delta_mean": -0.014642873828079266
+            },
+            "sparse": {
+              "n": 16,
+              "primary_delta_mean": -0.0625,
+              "continuous_error_delta_mean": -0.002680128203170401
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": -0.014284760196324683
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.03333333333333333,
+              "continuous_error_delta_mean": -0.038801928263484275
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000135410-2035059-pointing",
+            "category": "bicycle",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000310980-1114877-pointing",
+            "category": "keyboard",
+            "primary_delta": -1.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000451571-1941497-pointing",
+            "category": "chair",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000542423-572224-pointing",
+            "category": "bench",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000056350-1094660-pointing",
+            "category": "toilet",
+            "primary_delta": 0.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000136600-1101931-pointing",
+            "category": "laptop",
+            "primary_delta": 0.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000155154-1623652-pointing",
+            "category": "toilet",
+            "primary_delta": 0.0,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": false
+          },
+          {
+            "sample_id": "coco-val-000000159458-316096-pointing",
+            "category": "bed",
+            "primary_delta": 0.0,
+            "target_area_bin": "large",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          }
+        ]
+      }
+    },
+    "roi_global_v2": {
+      "grounding": {
+        "n": 32,
+        "primary_delta_mean": -0.012310521198253857,
+        "continuous_error_delta_mean": 0.012310521198253856,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.41820613818401436,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": -0.017681658309089632,
+              "continuous_error_delta_mean": 0.017681658309089632
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.05619223852475876,
+              "continuous_error_delta_mean": 0.056192238524758756
+            },
+            "small": {
+              "n": 14,
+              "primary_delta_mean": 0.022102783812584372,
+              "continuous_error_delta_mean": -0.022102783812584372
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 26,
+              "primary_delta_mean": 0.0020057139180893403,
+              "continuous_error_delta_mean": -0.0020057139180893425
+            },
+            "interior": {
+              "n": 6,
+              "primary_delta_mean": -0.07434754003574105,
+              "continuous_error_delta_mean": 0.07434754003574105
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 14,
+              "primary_delta_mean": 0.020746587689206175,
+              "continuous_error_delta_mean": -0.020746587689206175
+            },
+            "overlap": {
+              "n": 18,
+              "primary_delta_mean": -0.03802160588850055,
+              "continuous_error_delta_mean": 0.038021605888500544
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 7,
+              "primary_delta_mean": 0.02232119609059161,
+              "continuous_error_delta_mean": -0.02232119609059161
+            },
+            "medium": {
+              "n": 9,
+              "primary_delta_mean": -0.08100752575658814,
+              "continuous_error_delta_mean": 0.08100752575658814
+            },
+            "sparse": {
+              "n": 16,
+              "primary_delta_mean": 0.01118016755193928,
+              "continuous_error_delta_mean": -0.011180167551939284
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": 0.06104898275291393,
+              "continuous_error_delta_mean": -0.06104898275291393
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.017201154794998376,
+              "continuous_error_delta_mean": 0.017201154794998376
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000310980-1114877-grounding",
+            "category": "keyboard",
+            "primary_delta": -0.5417328486112409,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000530975-1519219-grounding",
+            "category": "fork",
+            "primary_delta": -0.3336161750087343,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000326970-1174936-grounding",
+            "category": "handbag",
+            "primary_delta": -0.31018496277307883,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000228144-1614299-grounding",
+            "category": "dining table",
+            "primary_delta": -0.2785539448016414,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000559956-1180006-grounding",
+            "category": "handbag",
+            "primary_delta": -0.24921684192982918,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000497599-1100722-grounding",
+            "category": "laptop",
+            "primary_delta": -0.14896032238964185,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000187243-1096009-grounding",
+            "category": "toilet",
+            "primary_delta": -0.12916150297698104,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000471893-118700-grounding",
+            "category": "dining table",
+            "primary_delta": -0.07741865662028247,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          }
+        ]
+      },
+      "pointing": {
+        "n": 32,
+        "primary_delta_mean": -0.15625,
+        "continuous_error_delta_mean": -0.01032783309197138,
+        "candidate_parse_rate": 1.0,
+        "crop_area_fraction_mean": 0.41820613818401436,
+        "crop_edge_touch_rate": 0.9375,
+        "breakdowns": {
+          "target_area_bin": {
+            "large": {
+              "n": 8,
+              "primary_delta_mean": 0.125,
+              "continuous_error_delta_mean": 0.0042354453447436555
+            },
+            "medium": {
+              "n": 10,
+              "primary_delta_mean": -0.3,
+              "continuous_error_delta_mean": 0.02787053968905977
+            },
+            "small": {
+              "n": 14,
+              "primary_delta_mean": -0.21428571428571427,
+              "continuous_error_delta_mean": -0.04593425847083079
+            }
+          },
+          "edge_bin": {
+            "edge": {
+              "n": 26,
+              "primary_delta_mean": -0.19230769230769232,
+              "continuous_error_delta_mean": -0.004747143154448746
+            },
+            "interior": {
+              "n": 6,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": -0.034510822821236124
+            }
+          },
+          "overlap_bin": {
+            "clear": {
+              "n": 14,
+              "primary_delta_mean": -0.07142857142857142,
+              "continuous_error_delta_mean": -0.008168298211735616
+            },
+            "overlap": {
+              "n": 18,
+              "primary_delta_mean": -0.2222222222222222,
+              "continuous_error_delta_mean": -0.012007471332154749
+            }
+          },
+          "scene_complexity_bin": {
+            "dense": {
+              "n": 7,
+              "primary_delta_mean": -0.14285714285714285,
+              "continuous_error_delta_mean": -0.12354526928556316
+            },
+            "medium": {
+              "n": 9,
+              "primary_delta_mean": -0.2222222222222222,
+              "continuous_error_delta_mean": 0.0043188069325593315
+            },
+            "sparse": {
+              "n": 16,
+              "primary_delta_mean": -0.125,
+              "continuous_error_delta_mean": 0.030966060228926496
+            }
+          },
+          "crop_touches_image_edge": {
+            "false": {
+              "n": 2,
+              "primary_delta_mean": 0.0,
+              "continuous_error_delta_mean": 0.015753606899700123
+            },
+            "true": {
+              "n": 30,
+              "primary_delta_mean": -0.16666666666666666,
+              "continuous_error_delta_mean": -0.012066595758082813
+            }
+          }
+        },
+        "worst_primary_deltas": [
+          {
+            "sample_id": "coco-val-000000056350-1094660-pointing",
+            "category": "toilet",
+            "primary_delta": -1.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000135410-2035059-pointing",
+            "category": "bicycle",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000228144-1614299-pointing",
+            "category": "dining table",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000310980-1114877-pointing",
+            "category": "keyboard",
+            "primary_delta": -1.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000451571-1941497-pointing",
+            "category": "chair",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "clear",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000471893-118700-pointing",
+            "category": "dining table",
+            "primary_delta": -1.0,
+            "target_area_bin": "medium",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000542423-572224-pointing",
+            "category": "bench",
+            "primary_delta": -1.0,
+            "target_area_bin": "small",
+            "edge_bin": "interior",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          },
+          {
+            "sample_id": "coco-val-000000107226-2034549-pointing",
+            "category": "bicycle",
+            "primary_delta": 0.0,
+            "target_area_bin": "small",
+            "edge_bin": "edge",
+            "overlap_bin": "overlap",
+            "crop_touches_image_edge": true
+          }
+        ]
+      }
+    }
+  },
+  "errors": []
+}

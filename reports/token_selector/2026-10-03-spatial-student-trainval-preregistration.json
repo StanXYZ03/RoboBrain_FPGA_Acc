@@ -1,0 +1,159 @@
+{
+  "status": "PREREGISTERED_TRAIN_VAL_ONLY",
+  "schema_version": "1.0-preregistered",
+  "report_stem": "2026-10-03-spatial-student-trainval-preregistration",
+  "date": "2026-10-03",
+  "seed": 20261003,
+  "self_sha256_embedded": false,
+  "self_sha256_note": "This preregistration JSON deliberately does NOT embed its own SHA256 to avoid a self-reference paradox. The external SHA256 is recorded by the run report and the harness result JSON.",
+  "preregistered_before_metrics": "This file is written before any new validation NPZ is read for this experiment.",
+  "preregistered_config": {
+    "path": "configs/spatial_student_trainval.preregistered.json",
+    "sha256": "0ee94dca8e20535461f6526b026860a9160f7c8eea21920d0a38bf8610019abf",
+    "frozen_contract_authority": true
+  },
+  "research_question": "Does replacing the weak task-specific semantic teacher with the preregistered bbox/point spatial teacher make the existing hardware-cheap prompt_mean_vector student learn task-conditioned spatial token scores?",
+  "frozen_inputs": {
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b"
+    },
+    "index": {
+      "path": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+      "sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26"
+    },
+    "clean_manifest": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+    },
+    "clean_manifest_lock": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.lock.json",
+      "sha256": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105"
+    },
+    "train_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "spatial_audit_json": {
+      "path": "reports/token_selector/2026-10-03-spatial-teacher-feasibility.json",
+      "sha256": "1bd2b9e41f3e6d698548ff7ad85c9b0a0b513e0d3ef4d4b0c02cc259ffbcc739",
+      "correction_label": "CORRECTION_ANCHOR_NDCG_RESTRICTED_TO_ANCHOR_SELECTED_GROUPS"
+    },
+    "spatial_audit_script": {
+      "path": "evaluation/spatial_teacher_feasibility_audit.py",
+      "sha256": "1d033c4036d5f2319c8828e393594fe0b6330ac9c43afe43af14499adf748aec"
+    },
+    "semantic_control_code": {
+      "path": "evaluation/train_pairwise_prompt_selector.py",
+      "sha256": "07b504d79743915b7b8dacf7028dea1de91ba36bb2776dedd6ed9e4012032fec"
+    },
+    "hardware_regular_config": {
+      "path": "configs/hardware_regular_token_selector.json",
+      "sha256": "6350c89bfc48bf59ae507bbacd80bda2eb3ba9f6cefbfde07ad1593c6e418142"
+    },
+    "hardware_regular_code": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    }
+  },
+  "frozen_architecture": {
+    "Wt_shape": [128, 2560],
+    "Wv_shape": [128, 1024],
+    "query": "normalize(mean_t(normalize(prompt_embeddings @ Wt.T)))",
+    "visual": "row_normalize(group_mean @ Wv.T)",
+    "score": "visual @ query",
+    "student_distribution": "softmax(score / 0.1)",
+    "runtime_query_shape": [1, 128],
+    "fpga_scorer": "Gx128 dot",
+    "token_axis_max_softmax_exp": false
+  },
+  "frozen_spatial_targets": {
+    "grounding_area_target": "exact bbox/grid-cell intersection area normalized to sum 1 (grounding)",
+    "pointing_bilinear_target": "separable bilinear point mass over up to four neighboring centers, normalized to sum 1 (pointing)",
+    "source": "evaluation.spatial_teacher_feasibility_audit (corrected audit)",
+    "no_blending": true,
+    "no_tuning": true
+  },
+  "arms": [
+    {"name": "A_SEMANTIC_KL_CONTROL", "target": "cached teacher_soft_target", "role": "control", "can_win": false},
+    {"name": "B_SPATIAL_KL_PRIMARY", "target": "grounding area target / pointing bilinear target", "role": "primary_promotion_arm", "can_win": true}
+  ],
+  "loss_definition": {
+    "record_loss": "KL(target || softmax(student_score / 0.1)) in nats",
+    "image_pair_loss": "mean of grounding and pointing record losses",
+    "batch_loss": "mean of image-pair losses",
+    "temperature_squared_scaling": false,
+    "forbidden_terms": ["pair hinge", "target blending", "margin", "rank loss", "auxiliary loss", "hyperparameter search"]
+  },
+  "optimization": {
+    "seeds": [20261003, 20261004, 20261005],
+    "optimizer": "AdamW",
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "batch_size_images": 4,
+    "grad_clip_norm": 1.0,
+    "init_std": 0.02,
+    "student_temperature": 0.1,
+    "device": "cpu",
+    "dtype": "float32",
+    "deterministic_cpu": true,
+    "torch_num_threads": 1,
+    "epoch0_state_shared_across_arms_within_seed": true,
+    "epoch_batch_order_shared_across_arms_within_seed": true,
+    "epoch0_is_pre_update": true,
+    "model_selection": "each arm's own val KL, tie earliest",
+    "save_full_epoch_weights": false
+  },
+  "validation_metrics": {
+    "independent_unit": "image",
+    "correct_prompt_spatial_alignment": ["spearman", "ndcg_full", "target_mass_at_K48", "target_mass_at_K64", "target_mass_at_K96"],
+    "same_image_other_task_control": "correct minus wrong prompt for spatial Spearman and full NDCG",
+    "cross_image_same_task_derangement": "descriptive deterministic derangement, same task donor, no self-pair, donor seed 20261103",
+    "deployed_selection_proxy": "combine_scores (lambda_semantic from hardware config) + exact select_real_groups 3x3 anchor rule; compare B retained spatial-target mass vs L2+anchor baseline at K48",
+    "deployed_ndcg": "ndcg_for_selected_indices (corrected selected-set NDCG)",
+    "collapse_metric": "exact prompt-score invariance fraction (np.array_equal)"
+  },
+  "statistics": {
+    "seed_aggregation": "per-image median delta across seeds then image-level paired effect",
+    "bootstrap_resamples": 2000,
+    "permutation_resamples": 10000,
+    "permutation_sided": "two-sided sign-flip",
+    "ci_level": 0.95,
+    "alpha": 0.05,
+    "effect_size_floor_cohens_dz": 0.2,
+    "statistics_seed": 20261003,
+    "holm_family_size": 5,
+    "holm_family": [
+      "B minus A correct spatial Spearman",
+      "B minus A correct spatial full NDCG",
+      "B correct minus same-image-other-task spatial Spearman",
+      "B correct minus same-image-other-task spatial full NDCG",
+      "B deployed selector minus L2+anchor retained spatial-target mass at K48"
+    ],
+    "primary_metric_policy": "only these five tests decide the result; other metrics are descriptive"
+  },
+  "gates": {
+    "G1_spatial_supervision_gain": "both B-A correct spatial Spearman/NDCG deltas: mean>0, CI lower>0, |dz|>=0.2, Holm p<0.05, positive in >=2/3 seeds",
+    "G2_prompt_sensitivity": "both B correct-vs-same-image-other-task Spearman/NDCG deltas satisfy the same five conditions",
+    "G3_deployed_K48_utility": "B selector minus L2+anchor retained target mass at K48 satisfies the same five conditions",
+    "G4_collapse_removed": "exact prompt-score invariance fraction <= 0.05 in every B seed",
+    "G5_validation_learning": ">=2/3 B seeds have best_epoch>0 and best val spatial KL < epoch0 val spatial KL",
+    "G6_hardware_contract": "query [1,128], FPGA Gx128 dot, no token-axis max/softmax/exp, existing fixed-budget 3x3 anchor selection"
+  },
+  "decision_rule": {
+    "SPATIAL_STUDENT_LEARNABLE": "B passes G1-G6",
+    "SPATIAL_STUDENT_NOT_ESTABLISHED": "B fails any gate",
+    "control_rule": "A is a control and can never win",
+    "no_internal_test_evaluation": true
+  },
+  "prohibitions": [
+    "no third arm and no arm target substitution",
+    "no pair hinge, target blending, margin, rank loss, auxiliary loss or hyperparameter search",
+    "no learning-rate/epoch/temperature/init-std search",
+    "no internal test NPZ read or evaluation",
+    "no 4B model load, no feature re-extraction, no raw image read, no GPU, no network, no package installation",
+    "no CV-Bench evaluation",
+    "no post-hoc change of the five-test Holm family, gates, decision rule or corrected selected-set NDCG helper",
+    "no claim of CV-Bench task accuracy, hardware speedup or board deployment"
+  ],
+  "change_policy": "After the first validation NPZ read for this experiment, this preregistration and the preregistered config are frozen byte-for-byte; the run must prove both are unchanged.",
+  "authorization": "DeepSeek Harness may process necessary code, metrics and derived data via api.deepseek.com; raw images, 4B weights, keys, proxy config and credentials are never read, uploaded or printed."
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "executed_at": "2026-10-04",
+  "status": "EXECUTED_AND_REPORTED",
+  "analysis": "full2638_gate_source_confounding",
+  "objective": "Quantify source-dataset confounding of the frozen G>512 Prompt gate on the frozen full2638 corrected-L2 arms and test whether the ADE20K same-source effect difference between G>512 and G<=512 is strictly positive.",
+  "execution": {
+    "cpu_only": true,
+    "read_only": true,
+    "gpu_used": false,
+    "network_used": false,
+    "training": false,
+    "dependency_install": false,
+    "frozen_inputs_modified": false,
+    "existing_reports_modified": false,
+    "evaluation_protocol_modified": false
+  },
+  "exploratory_only": true,
+  "not_a_formal_claim": true,
+  "formal_result_unchanged": true,
+  "formal_outcome": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638",
+  "conclusion": "SOURCE_CONFOUNDING_NOT_RESOLVED",
+  "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+  "unweighted_metric": "score(...)[\"accuracy\"] (unweighted sample accuracy)",
+  "gate": {
+    "policy": "prompt_if_G_gt_512",
+    "threshold": 512,
+    "definition_of_G": "G = full_llm_visual_tokens (pre-selector real visual group count)",
+    "gate_on_count": 1008,
+    "gate_off_count": 1630,
+    "gate_on_fraction": 0.3821076573161486
+  },
+  "inputs": {
+    "formal_report": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.json",
+      "sha256": "53ec2ee10fde7b31b08a840263bd26409e35781ed25b89b20166ea90e84af6ea"
+    },
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "records": 2638
+    },
+    "corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+      "records": 2638
+    },
+    "prompt_plus_corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa",
+      "records": 2638
+    }
+  },
+  "pins_verified": true,
+  "contract": {
+    "expected_sample_count": 2638,
+    "inputs_unchanged_during_analysis": true,
+    "sample_ids_identical": true,
+    "unique_sample_ids_per_arm": true,
+    "gate_contract_checks_all_ok": true
+  },
+  "frozen_reproduction": {
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "frozen_delta_point_estimate": 0.010510006083620294,
+    "recomputed_delta_point_estimate": 0.010510006083620294,
+    "reproduced": true
+  },
+  "key_results": {
+    "source_g_bin_table": [
+      {"source_dataset": "ADE20K Validation Set", "n": 633, "G<=96": 112, "97-256": 263, "257-512": 50, "513-1024": 48, ">1024": 160, "G>512": 208, "G<=512": 425},
+      {"source_dataset": "COCO 2017 Validation Set", "n": 805, "G<=96": 31, "97-256": 341, "257-512": 433, "513-1024": 0, ">1024": 0, "G>512": 0, "G<=512": 805},
+      {"source_dataset": "Omni3D_Hypersim", "n": 400, "G<=96": 0, "97-256": 0, "257-512": 0, "513-1024": 400, ">1024": 0, "G>512": 400, "G<=512": 0},
+      {"source_dataset": "Omni3D_SUNRGBD", "n": 400, "G<=96": 0, "97-256": 177, "257-512": 223, "513-1024": 0, ">1024": 0, "G>512": 0, "G<=512": 400},
+      {"source_dataset": "Omni3D_nuScenes", "n": 400, "G<=96": 0, "97-256": 0, "257-512": 0, "513-1024": 0, ">1024": 400, "G>512": 400, "G<=512": 0}
+    ],
+    "dependency_exploratory": {
+      "cramers_v_gate_vs_source_dataset": 0.8807832908953135,
+      "mutual_information_bits_gate_vs_source_dataset": 0.7403229666950484,
+      "cramers_v_gbin_vs_source_dataset": 0.6654216942895954,
+      "mutual_information_bits_gbin_vs_source_dataset": 1.1635430180538708
+    },
+    "source_dataset_effects_unweighted_paired_delta_ci95": {
+      "ADE20K Validation Set": {"n": 633, "wrong_to_right": 44, "right_to_wrong": 34, "net": 10, "delta": 0.015797788309636651, "ci95": [-0.011058451816745656, 0.044233807266982623]},
+      "COCO 2017 Validation Set": {"n": 805, "wrong_to_right": 61, "right_to_wrong": 60, "net": 1, "delta": 0.0012422360248447205, "ci95": [-0.024844720496894408, 0.02857142857142857]},
+      "Omni3D_Hypersim": {"n": 400, "wrong_to_right": 61, "right_to_wrong": 36, "net": 25, "delta": 0.0625, "ci95": [0.015, 0.1075]},
+      "Omni3D_SUNRGBD": {"n": 400, "wrong_to_right": 6, "right_to_wrong": 28, "net": -22, "delta": -0.055, "ci95": [-0.0825, -0.0275]},
+      "Omni3D_nuScenes": {"n": 400, "wrong_to_right": 48, "right_to_wrong": 36, "net": 12, "delta": 0.03, "ci95": [-0.015, 0.075]}
+    },
+    "ade_interaction": {
+      "n_G_le_512": 425,
+      "n_G_gt_512": 208,
+      "effect_G_le_512": 0.0,
+      "effect_G_gt_512": 0.04807692307692307,
+      "interaction": 0.04807692307692307,
+      "bootstrap_ci95_interaction": [-0.018823529411764704, 0.11497737556561086],
+      "bootstrap_strata": "task::gate_bin",
+      "bootstrap_seed": 20261004,
+      "bootstrap_repeats": 5000,
+      "ci_lower_bound_gt_zero": false
+    },
+    "gate_policy_effect_in_sample": {
+      "gated_official_cv_bench_accuracy": 0.7862178402166554,
+      "integer_official_cv_bench_accuracy": 0.7668517264725796,
+      "prompt_official_cv_bench_accuracy": 0.7773617325561999,
+      "gated_minus_integer_official": 0.01936611374407582
+    }
+  },
+  "artifacts": {
+    "script": {"path": "evaluation/analyze_gate_source_confounding.py", "sha256": "87586b0331ef8ed79b075cd6cdbe6b8ca94bee828c177e086e2944fe9d6a0573"},
+    "tests": {"path": "evaluation/tests/test_analyze_gate_source_confounding.py", "sha256": "292146c696c69b927c6f7425d552641c8128ebca3ccd00c1cf1dfeb8344eebc2", "test_count": 26},
+    "report_json": {"path": "reports/cv_bench/2026-10-04-gate-source-confounding.json", "sha256": "17adb2c74c6c4de367a33da099512669c04235ad18824d293efa8a1499a49a6d"},
+    "report_csv": {"path": "reports/cv_bench/2026-10-04-gate-source-confounding.csv", "sha256": "09a2229654a6d40cc5bcab42e7b4484daac565c36db10317e48277926bffec4b"},
+    "report_md": {"path": "reports/cv_bench/2026-10-04-gate-source-confounding.md", "sha256": "af910303439d90ef0e898fc765be3e5dac50d34743959f76961294ed4142b49e"}
+  },
+  "tests": {
+    "focused_and_related": {"count": 206, "status": "OK"},
+    "full_evaluation_tests": {"count": 1482, "status": "OK"},
+    "command": "python -m unittest discover -s evaluation/tests"
+  },
+  "reproduce": "python evaluation/analyze_gate_source_confounding.py",
+  "interpretation_zh": "G>512 门控与 source_dataset 严重混同；ADE20K 内 G>512 与 G<=512 的同源 Prompt 效应差为 +0.048077，但 95% CI [-0.018824, +0.114977] 未整体 >0，故结论为 SOURCE_CONFOUNDING_NOT_RESOLVED。Cramer's V 与互信息仅探索性、不作门；正式 CV-Bench 结论不变。"
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_VAL_ONLY_EXPLORATORY_DIAGNOSTIC",
+  "created_at_utc": "2026-10-02T20:00:24Z",
+  "chronology_note": "This replacement preregistration was written by Codex before the fresh execution process loaded any validation feature or checkpoint. A prior aborted Harness process parsed validation feature files before freezing and produced no metrics or deliverables; it is excluded from the experiment record.",
+  "config": {
+    "path": "configs/operational_prompt_utility_diagnostic.preregistered.json",
+    "sha256": "8413da0f591782bb9c7eddc80ab8a25da4df7fae66a58ad0ccefea11cb1c6775"
+  },
+  "authority_prompt": {
+    "path": "reports/token_selector/prompts/2026-10-03-operational-prompt-utility-diagnostic-harness-prompt.md",
+    "sha256": "a3edca6c187d7fed1fbd4500c692cb3d0a2f74f9420858a0759e77b754da1d9c"
+  },
+  "frozen_inputs": {
+    "reports/token_selector/2026-10-03-spatial-prompt-contrastive-trainval.json": "4fb9a9ac181452ae3025a04906cb0eafa74cbd06ae6ac261425b153294097597",
+    "configs/spatial_prompt_contrastive_trainval.preregistered.json": "12d0aa9f856692fdd0da8e4d93783ef540ca9cadc38c9e4ee704ba903dd1dbbd",
+    "reports/token_selector/2026-10-03-spatial-prompt-contrastive-trainval-preregistration.json": "5513f89ca327fe992923f7f3e7fc6612fb506d74f1e3d1ec3e65748dd6f1816b",
+    "evaluation/train_spatial_prompt_contrastive_selector.py": "51fd7ad6f83fda94900ebc2ae86378aaaf5e6e63c2eca416a27f13a47dfd9a94",
+    "evaluation/train_spatial_prompt_selector.py": "1308e8a0f18cfb047aa56ab4e8fa40423ebd127f22df309361b3916eee389fd2",
+    "evaluation/prompt_projection_distillation.py": "cd2d4ccc3a4c5ba714f5e478f802b0cb9d64c6e279c15b6493661fb6fe0b0b98",
+    "evaluation/hardware_regular_token_selector.py": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b",
+    "artifacts/token_selector/prompt_projection_features/index.jsonl": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "datasets/prompt_projection_clean_inductive_v1.jsonl": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+    "datasets/prompt_projection_clean_inductive_v1.lock.json": "a723458da9b9e170c9ffcde3bfa8844ae18c3e84fe1ba15bbd3d4b3f57e2e105"
+  },
+  "checkpoints": {
+    "A_SPATIAL_KL_CONTROL/20261003": "6f7821cbb83d490d8cd2523a5c98a49db7c9d1bf8862a59be775d47189c7dc66",
+    "A_SPATIAL_KL_CONTROL/20261004": "34f152a9e7fbf965c677807615fbd9f81c4cd21cbb54745779384574d1c65b60",
+    "A_SPATIAL_KL_CONTROL/20261005": "5a0cabdc65a671a3eefaf024f0fc04679dab5bf351d2cea87d0ed7fb8f320dfe",
+    "B_SPATIAL_KL_CONTRASTIVE/20261003": "1f1d379e3229f310d11fee4ff620480e13fea9005abefc762c66f0d331ca72ff",
+    "B_SPATIAL_KL_CONTRASTIVE/20261004": "c6f86779183270a57241cc7148a5480c6c4deb1f85d66652bf6117b6bb6412fb",
+    "B_SPATIAL_KL_CONTRASTIVE/20261005": "acaba094de4a21e3c912efee1c80145053d7f372f197a2d26297fd59ab8bd6e4"
+  },
+  "val_npz_aggregate_sha256": "0439b7cb798f9dc49751d8135dd009294df723b2b10839837d7145778ca68f4b",
+  "primary_holm_family_size": 2,
+  "decision_rule": "Frozen in the config; no posthoc changes permitted.",
+  "internal_test_contract": "No internal-test path may be resolved, hashed, opened, parsed or scored."
+}

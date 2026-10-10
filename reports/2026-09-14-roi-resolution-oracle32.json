@@ -1,0 +1,1262 @@
+{
+  "status": "ROI_RESOLUTION_REVEALED_ORACLE_COMPLETE",
+  "evidence_level": "revealed 32-image development upper bound; not a deployable selector",
+  "selection_rule": {
+    "grounding": "choose the resolution with higher ground-truth IoU",
+    "pointing": "choose the resolution with lower ground-truth bbox-normalized point error",
+    "ties": "choose low resolution"
+  },
+  "cost_boundary": {
+    "one_shot": "only the selected resolution is encoded",
+    "active_escalation": "low resolution is encoded first; selected high resolution is then re-encoded and both token counts are charged"
+  },
+  "analyses": {
+    "grounding": {
+      "action_complementarity": {
+        "high_better": 23,
+        "high_worse": 9
+      },
+      "policies": {
+        "fixed_low_384": {
+          "n": 32,
+          "high_selected": 0,
+          "high_selected_rate": 0.0,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 80.625,
+          "mean_cumulative_processed_visual_tokens": 80.625,
+          "final_token_ratio_to_dense": 0.2899527983816588,
+          "processed_token_ratio_to_dense": 0.2899527983816588,
+          "mean_iou": 0.7989106229747055,
+          "acc_0_5": 1.0
+        },
+        "fixed_high_512": {
+          "n": 32,
+          "high_selected": 32,
+          "high_selected_rate": 1.0,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 143.5,
+          "mean_cumulative_processed_visual_tokens": 143.5,
+          "final_token_ratio_to_dense": 0.516071027197123,
+          "processed_token_ratio_to_dense": 0.516071027197123,
+          "mean_iou": 0.8329680860064367,
+          "acc_0_5": 1.0
+        },
+        "revealed_one_shot_oracle": {
+          "n": 32,
+          "high_selected": 23,
+          "high_selected_rate": 0.71875,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 123.125,
+          "mean_cumulative_processed_visual_tokens": 123.125,
+          "final_token_ratio_to_dense": 0.44279613396268824,
+          "processed_token_ratio_to_dense": 0.44279613396268824,
+          "mean_iou": 0.8540344211507683,
+          "acc_0_5": 1.0
+        },
+        "revealed_active_escalation_oracle": {
+          "n": 32,
+          "high_selected": 23,
+          "high_selected_rate": 0.71875,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 123.125,
+          "mean_cumulative_processed_visual_tokens": 177.125,
+          "final_token_ratio_to_dense": 0.44279613396268824,
+          "processed_token_ratio_to_dense": 0.6369970779950551,
+          "mean_iou": 0.8540344211507683,
+          "acc_0_5": 1.0
+        }
+      },
+      "high_selection_count_by_stratum": {
+        "edge_bin": {
+          "edge": 18,
+          "interior": 5
+        },
+        "overlap_bin": {
+          "clear": 9,
+          "overlap": 14
+        },
+        "scene_complexity_bin": {
+          "sparse": 12,
+          "medium": 6,
+          "dense": 5
+        },
+        "target_area_bin": {
+          "large": 4,
+          "medium": 7,
+          "small": 12
+        }
+      }
+    },
+    "pointing": {
+      "action_complementarity": {
+        "high_better": 14,
+        "equal": 3,
+        "high_worse": 15
+      },
+      "policies": {
+        "fixed_low_384": {
+          "n": 32,
+          "high_selected": 0,
+          "high_selected_rate": 0.0,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 80.625,
+          "mean_cumulative_processed_visual_tokens": 80.625,
+          "final_token_ratio_to_dense": 0.2899527983816588,
+          "processed_token_ratio_to_dense": 0.2899527983816588,
+          "mean_point_nme_bbox_diag": 0.08688285742981204,
+          "pck_0_1": 0.6875,
+          "pck_0_2": 0.9375
+        },
+        "fixed_high_512": {
+          "n": 32,
+          "high_selected": 32,
+          "high_selected_rate": 1.0,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 143.5,
+          "mean_cumulative_processed_visual_tokens": 143.5,
+          "final_token_ratio_to_dense": 0.516071027197123,
+          "processed_token_ratio_to_dense": 0.516071027197123,
+          "mean_point_nme_bbox_diag": 0.10596724824177453,
+          "pck_0_1": 0.65625,
+          "pck_0_2": 0.875
+        },
+        "revealed_one_shot_oracle": {
+          "n": 32,
+          "high_selected": 14,
+          "high_selected_rate": 0.4375,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 108.25,
+          "mean_cumulative_processed_visual_tokens": 108.25,
+          "final_token_ratio_to_dense": 0.38930096650932794,
+          "processed_token_ratio_to_dense": 0.38930096650932794,
+          "mean_point_nme_bbox_diag": 0.0751649733556233,
+          "pck_0_1": 0.71875,
+          "pck_0_2": 0.9375
+        },
+        "revealed_active_escalation_oracle": {
+          "n": 32,
+          "high_selected": 14,
+          "high_selected_rate": 0.4375,
+          "parse_rate": 1.0,
+          "mean_final_context_visual_tokens": 108.25,
+          "mean_cumulative_processed_visual_tokens": 144.625,
+          "final_token_ratio_to_dense": 0.38930096650932794,
+          "processed_token_ratio_to_dense": 0.5201168801977972,
+          "mean_point_nme_bbox_diag": 0.0751649733556233,
+          "pck_0_1": 0.71875,
+          "pck_0_2": 0.9375
+        }
+      },
+      "high_selection_count_by_stratum": {
+        "edge_bin": {
+          "edge": 11,
+          "interior": 3
+        },
+        "overlap_bin": {
+          "clear": 5,
+          "overlap": 9
+        },
+        "scene_complexity_bin": {
+          "sparse": 8,
+          "medium": 1,
+          "dense": 5
+        },
+        "target_area_bin": {
+          "large": 4,
+          "medium": 5,
+          "small": 5
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "sample_id": "coco-val-000000029397-575411-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.04133454091951583,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.31363032868179286,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.07525050589259658,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000056350-1094660-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.03866068432529712,
+      "low_tokens": 120,
+      "high_tokens": 208,
+      "stratification": {
+        "target_area_fraction": 0.05515337316843949,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000107226-2034549-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.07339563302619634,
+      "low_tokens": 48,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.019255478027343766,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.4708514500401028,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000135410-2035059-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.12676860098055354,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.01775861897786459,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.165892672765789,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000136600-1101931-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.015492445843305336,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.14549931602160826,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000155154-1623652-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.028797023932690458,
+      "low_tokens": 108,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.028927065599999996,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000159458-316096-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.007821871669266622,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.26285669384765625,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.026365943329523446,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000168974-327720-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 8.338288616682732e-06,
+      "low_tokens": 60,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.0153829088,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 1.0000000000000004,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000170893-1094910-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.3771920967585005,
+      "low_tokens": 60,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.1464828058268229,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.40030650295097675,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000172617-1183984-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.006498180152281541,
+      "low_tokens": 84,
+      "high_tokens": 160,
+      "stratification": {
+        "target_area_fraction": 0.14699491546666668,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.3755737154371433,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000187243-1096009-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.047234249516597604,
+      "low_tokens": 84,
+      "high_tokens": 144,
+      "stratification": {
+        "target_area_fraction": 0.09761309879557292,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.09461099514396773,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000227044-1133390-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.019011550118742226,
+      "low_tokens": 84,
+      "high_tokens": 144,
+      "stratification": {
+        "target_area_fraction": 0.18271861816406249,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.64963052854289,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000228144-1614299-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.3124343704054776,
+      "low_tokens": 60,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.024474412962147883,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.8550536856036831,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000277020-1621566-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.01231961010531013,
+      "low_tokens": 48,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.04583893706597221,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.5345223379834008,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000286907-1095698-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.008808653064908856,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.055539603352864585,
+        "target_area_bin": "medium",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000310980-1114877-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.1804978963572822,
+      "low_tokens": 24,
+      "high_tokens": 48,
+      "stratification": {
+        "target_area_fraction": 0.06001863162324352,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.9999999999999998,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000326970-1174936-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.0022403962322767867,
+      "low_tokens": 108,
+      "high_tokens": 208,
+      "stratification": {
+        "target_area_fraction": 0.030894343587239595,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.3315045205161889,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000375078-1153031-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.05212409264170237,
+      "low_tokens": 36,
+      "high_tokens": 48,
+      "stratification": {
+        "target_area_fraction": 0.06925494205729164,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.9843212957295541,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000378099-1107336-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.016776368587883228,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.03852665546179526,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.13294431900782833,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000425226-332772-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.013959839646576322,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.2719304067382813,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.5873520831295668,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000450488-317141-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.012441889750328339,
+      "low_tokens": 120,
+      "high_tokens": 224,
+      "stratification": {
+        "target_area_fraction": 0.1675412407185629,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000451571-1941497-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.2660727346157109,
+      "low_tokens": 96,
+      "high_tokens": 160,
+      "stratification": {
+        "target_area_fraction": 0.03881488427734374,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000456662-331567-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.012722236253824737,
+      "low_tokens": 132,
+      "high_tokens": 224,
+      "stratification": {
+        "target_area_fraction": 0.24718952886710244,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.43411258895143384,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000467176-1951749-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.0067696938165418,
+      "low_tokens": 72,
+      "high_tokens": 144,
+      "stratification": {
+        "target_area_fraction": 0.025043683557242992,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.41556313993174143,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000471893-118700-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.10016705042944529,
+      "low_tokens": 60,
+      "high_tokens": 96,
+      "stratification": {
+        "target_area_fraction": 0.07106807851385749,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.2209293179220316,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000492878-1131167-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.09964626005878252,
+      "low_tokens": 108,
+      "high_tokens": 208,
+      "stratification": {
+        "target_area_fraction": 0.3661873881835936,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.055267826498664706,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000497599-1100722-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.02798062009613922,
+      "low_tokens": 72,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.08031223598507023,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.5861945595674719,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000530975-1519219-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.3569999660986318,
+      "low_tokens": 36,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.015431295735677066,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.19792790118636527,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000542423-572224-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.008659651701746873,
+      "low_tokens": 60,
+      "high_tokens": 96,
+      "stratification": {
+        "target_area_fraction": 0.03887673253676472,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.2685876310355259,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000559956-1180006-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.13394137818537288,
+      "low_tokens": 36,
+      "high_tokens": 64,
+      "stratification": {
+        "target_area_fraction": 0.03310098291015624,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.9897404202719409,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000565877-99808-grounding",
+      "task": "grounding",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.022897094057230727,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.2540573036812062,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.6103952358611027,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000569059-108194-grounding",
+      "task": "grounding",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.008409248615887877,
+      "low_tokens": 48,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.03136445556640625,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000029397-575411-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.01808360440385833,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.31363032868179286,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.07525050589259658,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000056350-1094660-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.007840131366027153,
+      "low_tokens": 120,
+      "high_tokens": 208,
+      "stratification": {
+        "target_area_fraction": 0.05515337316843949,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000107226-2034549-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.07730771540280586,
+      "low_tokens": 48,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.019255478027343766,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.4708514500401028,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000135410-2035059-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": 0.0,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.01775861897786459,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.165892672765789,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000136600-1101931-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.005519674095932875,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.14549931602160826,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000155154-1623652-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.020573463848235603,
+      "low_tokens": 108,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.028927065599999996,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000159458-316096-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.01883283113987777,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.26285669384765625,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.026365943329523446,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000168974-327720-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.006138582284921586,
+      "low_tokens": 60,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.0153829088,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 1.0000000000000004,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000170893-1094910-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.010749676147818715,
+      "low_tokens": 60,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.1464828058268229,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.40030650295097675,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000172617-1183984-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.031726244150918265,
+      "low_tokens": 84,
+      "high_tokens": 160,
+      "stratification": {
+        "target_area_fraction": 0.14699491546666668,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.3755737154371433,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000187243-1096009-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.009649627053210954,
+      "low_tokens": 84,
+      "high_tokens": 144,
+      "stratification": {
+        "target_area_fraction": 0.09761309879557292,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.09461099514396773,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000227044-1133390-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.015473312120320416,
+      "low_tokens": 84,
+      "high_tokens": 144,
+      "stratification": {
+        "target_area_fraction": 0.18271861816406249,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.64963052854289,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000228144-1614299-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.7216194010405126,
+      "low_tokens": 60,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.024474412962147883,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.8550536856036831,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000277020-1621566-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.026833355217950564,
+      "low_tokens": 48,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.04583893706597221,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.5345223379834008,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000286907-1095698-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.0020495472139022627,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.055539603352864585,
+        "target_area_bin": "medium",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000310980-1114877-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.054266769117067654,
+      "low_tokens": 24,
+      "high_tokens": 48,
+      "stratification": {
+        "target_area_fraction": 0.06001863162324352,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.9999999999999998,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000326970-1174936-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.0017373565773006056,
+      "low_tokens": 108,
+      "high_tokens": 208,
+      "stratification": {
+        "target_area_fraction": 0.030894343587239595,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.3315045205161889,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000375078-1153031-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.053208264752100824,
+      "low_tokens": 36,
+      "high_tokens": 48,
+      "stratification": {
+        "target_area_fraction": 0.06925494205729164,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.9843212957295541,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000378099-1107336-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": 0.0,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.03852665546179526,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.13294431900782833,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000425226-332772-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.07698335333649782,
+      "low_tokens": 108,
+      "high_tokens": 192,
+      "stratification": {
+        "target_area_fraction": 0.2719304067382813,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.5873520831295668,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000450488-317141-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.011884026830809753,
+      "low_tokens": 120,
+      "high_tokens": 224,
+      "stratification": {
+        "target_area_fraction": 0.1675412407185629,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000451571-1941497-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.0037560970654614834,
+      "low_tokens": 96,
+      "high_tokens": 160,
+      "stratification": {
+        "target_area_fraction": 0.03881488427734374,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000456662-331567-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.026255471869892036,
+      "low_tokens": 132,
+      "high_tokens": 224,
+      "stratification": {
+        "target_area_fraction": 0.24718952886710244,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.43411258895143384,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000467176-1951749-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.03335457086869785,
+      "low_tokens": 72,
+      "high_tokens": 144,
+      "stratification": {
+        "target_area_fraction": 0.025043683557242992,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.41556313993174143,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000471893-118700-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.0042282464997424885,
+      "low_tokens": 60,
+      "high_tokens": 96,
+      "stratification": {
+        "target_area_fraction": 0.07106807851385749,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.2209293179220316,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000492878-1131167-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.013589751255184052,
+      "low_tokens": 108,
+      "high_tokens": 208,
+      "stratification": {
+        "target_area_fraction": 0.3661873881835936,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.055267826498664706,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000497599-1100722-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.02441288616453581,
+      "low_tokens": 72,
+      "high_tokens": 112,
+      "stratification": {
+        "target_area_fraction": 0.08031223598507023,
+        "target_area_bin": "medium",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.5861945595674719,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000530975-1519219-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": 0.0,
+      "low_tokens": 36,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.015431295735677066,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.19792790118636527,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000542423-572224-pointing",
+      "task": "pointing",
+      "choice": "high",
+      "revealed_utility_gain_high_minus_low": 0.014838199992663781,
+      "low_tokens": 60,
+      "high_tokens": 96,
+      "stratification": {
+        "target_area_fraction": 0.03887673253676472,
+        "target_area_bin": "small",
+        "edge_bin": "interior",
+        "bbox_overlap_proxy": 0.2685876310355259,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000559956-1180006-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.05179654239962961,
+      "low_tokens": 36,
+      "high_tokens": 64,
+      "stratification": {
+        "target_area_fraction": 0.03310098291015624,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.9897404202719409,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "medium",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000565877-99808-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.006348950427365496,
+      "low_tokens": 96,
+      "high_tokens": 176,
+      "stratification": {
+        "target_area_fraction": 0.2540573036812062,
+        "target_area_bin": "large",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.6103952358611027,
+        "overlap_bin": "overlap",
+        "scene_complexity_bin": "sparse",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    },
+    {
+      "sample_id": "coco-val-000000569059-108194-pointing",
+      "task": "pointing",
+      "choice": "low",
+      "revealed_utility_gain_high_minus_low": -0.011587434087636558,
+      "low_tokens": 48,
+      "high_tokens": 80,
+      "stratification": {
+        "target_area_fraction": 0.03136445556640625,
+        "target_area_bin": "small",
+        "edge_bin": "edge",
+        "bbox_overlap_proxy": 0.0,
+        "overlap_bin": "clear",
+        "scene_complexity_bin": "dense",
+        "occlusion_note": "bbox overlap is a proxy, not a human occlusion label"
+      }
+    }
+  ]
+}

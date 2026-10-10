@@ -1,0 +1,278 @@
+{
+  "generated_at": "2026-10-03T17:44:25.775164+00:00",
+  "manifest": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+  "manifest_sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+  "native_json": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/cv_bench/cv_bench_bf16_full2638.json",
+  "dense_jsonl": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+  "status": "COMPLETE",
+  "formal_sample_count": 2638,
+  "forbidden_primary_metrics": [
+    "pointing",
+    "grounding",
+    "ndcg",
+    "retained_mass"
+  ],
+  "candidates": [
+    {
+      "label": "K48",
+      "status": "COMPLETE",
+      "candidate_jsonl": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k48.jsonl",
+      "completed": 2638,
+      "expected": 2638,
+      "duplicate_sample_ids": [],
+      "extra_sample_ids": [],
+      "sample_count": 2638,
+      "selector_path": "software",
+      "official_scorer": "evaluation.build_cv_bench_pruning_report.parse_choice/answer_letter/score/paired_bootstrap_delta",
+      "candidate": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9886277482941622,
+        "accuracy": 0.6493555724033359,
+        "source_accuracy": {
+          "ADE20K": 0.5671406003159558,
+          "COCO": 0.6149068322981367,
+          "Omni3D": 0.7158333333333333
+        },
+        "task_accuracy": {
+          "Count": 0.4086294416243655,
+          "Depth": 0.7283333333333334,
+          "Distance": 0.7033333333333334,
+          "Relation": 0.8184615384615385
+        },
+        "accuracy_2d": 0.5910237163070462,
+        "accuracy_3d": 0.7158333333333333,
+        "cv_bench_accuracy": 0.6534285248201898
+      },
+      "dense_bf16_reference": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9848369977255497,
+        "accuracy": 0.868081880212282,
+        "source_accuracy": {
+          "ADE20K": 0.7677725118483413,
+          "COCO": 0.8298136645962733,
+          "Omni3D": 0.9466666666666667
+        },
+        "task_accuracy": {
+          "Count": 0.682741116751269,
+          "Depth": 0.9816666666666667,
+          "Distance": 0.9116666666666666,
+          "Relation": 0.9476923076923077
+        },
+        "accuracy_2d": 0.7987930882223073,
+        "accuracy_3d": 0.9466666666666667,
+        "cv_bench_accuracy": 0.8727298774444869
+      },
+      "native_bf16_reference": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9848369977255497,
+        "accuracy": 0.868081880212282,
+        "source_accuracy": {
+          "ADE20K": 0.7677725118483413,
+          "COCO": 0.8298136645962733,
+          "Omni3D": 0.9466666666666667
+        },
+        "task_accuracy": {
+          "Count": 0.682741116751269,
+          "Depth": 0.9816666666666667,
+          "Distance": 0.9116666666666666,
+          "Relation": 0.9476923076923077
+        },
+        "accuracy_2d": 0.7987930882223073,
+        "accuracy_3d": 0.9466666666666667,
+        "cv_bench_accuracy": 0.8727298774444869
+      },
+      "absolute_delta_vs_dense": -0.21930135262429717,
+      "relative_retention_vs_dense": 0.7487179500873148,
+      "paired_bootstrap_ci95_vs_dense": [
+        -0.23824303572655103,
+        -0.20129053702667976
+      ],
+      "paired_bootstrap_ci95_vs_native": [
+        -0.23770630341565846,
+        -0.2010521474198581
+      ],
+      "bootstrap_seed": 20261004,
+      "bootstrap_repeats": 5000,
+      "forbidden_primary_metrics": [
+        "pointing",
+        "grounding",
+        "ndcg",
+        "retained_mass"
+      ]
+    },
+    {
+      "label": "K64",
+      "status": "COMPLETE",
+      "candidate_jsonl": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k64.jsonl",
+      "completed": 2638,
+      "expected": 2638,
+      "duplicate_sample_ids": [],
+      "extra_sample_ids": [],
+      "sample_count": 2638,
+      "selector_path": "software",
+      "official_scorer": "evaluation.build_cv_bench_pruning_report.parse_choice/answer_letter/score/paired_bootstrap_delta",
+      "candidate": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9890068233510235,
+        "accuracy": 0.6990144048521607,
+        "source_accuracy": {
+          "ADE20K": 0.6066350710900474,
+          "COCO": 0.6633540372670808,
+          "Omni3D": 0.7716666666666666
+        },
+        "task_accuracy": {
+          "Count": 0.46954314720812185,
+          "Depth": 0.7866666666666666,
+          "Distance": 0.7566666666666667,
+          "Relation": 0.8430769230769231
+        },
+        "accuracy_2d": 0.6349945541785641,
+        "accuracy_3d": 0.7716666666666666,
+        "cv_bench_accuracy": 0.7033306104226154
+      },
+      "dense_bf16_reference": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9848369977255497,
+        "accuracy": 0.868081880212282,
+        "source_accuracy": {
+          "ADE20K": 0.7677725118483413,
+          "COCO": 0.8298136645962733,
+          "Omni3D": 0.9466666666666667
+        },
+        "task_accuracy": {
+          "Count": 0.682741116751269,
+          "Depth": 0.9816666666666667,
+          "Distance": 0.9116666666666666,
+          "Relation": 0.9476923076923077
+        },
+        "accuracy_2d": 0.7987930882223073,
+        "accuracy_3d": 0.9466666666666667,
+        "cv_bench_accuracy": 0.8727298774444869
+      },
+      "native_bf16_reference": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9848369977255497,
+        "accuracy": 0.868081880212282,
+        "source_accuracy": {
+          "ADE20K": 0.7677725118483413,
+          "COCO": 0.8298136645962733,
+          "Omni3D": 0.9466666666666667
+        },
+        "task_accuracy": {
+          "Count": 0.682741116751269,
+          "Depth": 0.9816666666666667,
+          "Distance": 0.9116666666666666,
+          "Relation": 0.9476923076923077
+        },
+        "accuracy_2d": 0.7987930882223073,
+        "accuracy_3d": 0.9466666666666667,
+        "cv_bench_accuracy": 0.8727298774444869
+      },
+      "absolute_delta_vs_dense": -0.16939926702187158,
+      "relative_retention_vs_dense": 0.8058972525176935,
+      "paired_bootstrap_ci95_vs_dense": [
+        -0.18659766173108439,
+        -0.15283475856858297
+      ],
+      "paired_bootstrap_ci95_vs_native": [
+        -0.18624616094119495,
+        -0.15269072640389347
+      ],
+      "bootstrap_seed": 20261004,
+      "bootstrap_repeats": 5000,
+      "forbidden_primary_metrics": [
+        "pointing",
+        "grounding",
+        "ndcg",
+        "retained_mass"
+      ]
+    },
+    {
+      "label": "K96",
+      "status": "COMPLETE",
+      "candidate_jsonl": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k96.jsonl",
+      "completed": 2638,
+      "expected": 2638,
+      "duplicate_sample_ids": [],
+      "extra_sample_ids": [],
+      "sample_count": 2638,
+      "selector_path": "software",
+      "official_scorer": "evaluation.build_cv_bench_pruning_report.parse_choice/answer_letter/score/paired_bootstrap_delta",
+      "candidate": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9863532979529946,
+        "accuracy": 0.7615617892342684,
+        "source_accuracy": {
+          "ADE20K": 0.660347551342812,
+          "COCO": 0.7391304347826086,
+          "Omni3D": 0.83
+        },
+        "task_accuracy": {
+          "Count": 0.5469543147208121,
+          "Depth": 0.835,
+          "Distance": 0.825,
+          "Relation": 0.8953846153846153
+        },
+        "accuracy_2d": 0.6997389930627103,
+        "accuracy_3d": 0.83,
+        "cv_bench_accuracy": 0.7648694965313552
+      },
+      "dense_bf16_reference": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9848369977255497,
+        "accuracy": 0.868081880212282,
+        "source_accuracy": {
+          "ADE20K": 0.7677725118483413,
+          "COCO": 0.8298136645962733,
+          "Omni3D": 0.9466666666666667
+        },
+        "task_accuracy": {
+          "Count": 0.682741116751269,
+          "Depth": 0.9816666666666667,
+          "Distance": 0.9116666666666666,
+          "Relation": 0.9476923076923077
+        },
+        "accuracy_2d": 0.7987930882223073,
+        "accuracy_3d": 0.9466666666666667,
+        "cv_bench_accuracy": 0.8727298774444869
+      },
+      "native_bf16_reference": {
+        "sample_count": 2638,
+        "parse_success_rate": 0.9848369977255497,
+        "accuracy": 0.868081880212282,
+        "source_accuracy": {
+          "ADE20K": 0.7677725118483413,
+          "COCO": 0.8298136645962733,
+          "Omni3D": 0.9466666666666667
+        },
+        "task_accuracy": {
+          "Count": 0.682741116751269,
+          "Depth": 0.9816666666666667,
+          "Distance": 0.9116666666666666,
+          "Relation": 0.9476923076923077
+        },
+        "accuracy_2d": 0.7987930882223073,
+        "accuracy_3d": 0.9466666666666667,
+        "cv_bench_accuracy": 0.8727298774444869
+      },
+      "absolute_delta_vs_dense": -0.10786038091313177,
+      "relative_retention_vs_dense": 0.8764103490658911,
+      "paired_bootstrap_ci95_vs_dense": [
+        -0.12297794442318433,
+        -0.09383393188307687
+      ],
+      "paired_bootstrap_ci95_vs_native": [
+        -0.12219543875658645,
+        -0.09324111006446667
+      ],
+      "bootstrap_seed": 20261004,
+      "bootstrap_repeats": 5000,
+      "forbidden_primary_metrics": [
+        "pointing",
+        "grounding",
+        "ndcg",
+        "retained_mass"
+      ]
+    }
+  ]
+}

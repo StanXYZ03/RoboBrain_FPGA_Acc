@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0",
+  "report_stem": "2026-10-03-task-pair-nesting-audit",
+  "date": "2026-10-03",
+  "status": "SYMMETRIC_NEGATIVE_INVALID",
+  "generated_at_utc": "2026-10-03T04:05:39Z",
+  "exploratory": {
+    "validation_already_used": true,
+    "statement": "Explanatory diagnostic on already-used validation data. It does not change the prior OPERATIONAL_PROMPT_UTILITY_NOT_ESTABLISHED decision and supports no accuracy or promotion claim.",
+    "no_training": true,
+    "no_gpu": true,
+    "no_network": true,
+    "not_final_accuracy": true
+  },
+  "decision": {
+    "decision": "SYMMETRIC_NEGATIVE_INVALID",
+    "same_image_task_targets_nested": true,
+    "nested_ratio_threshold": 0.8,
+    "nested_ratio": 1.0,
+    "grounding_gap_negative_or_zero": true,
+    "pointing_gap_positive": true,
+    "grounding_gap_mean": -0.0019252304813808796,
+    "pointing_gap_mean": 0.2877651809180278,
+    "rule": "SYMMETRIC_NEGATIVE_INVALID iff nested_ratio>=0.80 and grounding_gap_mean<=0 and pointing_gap_mean>0; otherwise NOT_ESTABLISHED"
+  },
+  "point_inside_bbox": {
+    "overall_ratio_primary": 1.0,
+    "record_count": 76,
+    "record_true_count": 76,
+    "per_task_record_ratio": {
+      "grounding": 1.0,
+      "pointing": 1.0
+    },
+    "image_ratio_secondary": 1.0,
+    "image_count": 38,
+    "image_true_count": 38,
+    "shared_ground_truth_images": 38,
+    "gate_uses": "overall_ratio_primary (record level)"
+  },
+  "bbox_area_norm": {
+    "count": 38,
+    "min": 0.02358034013856132,
+    "p25": 0.06063751528880638,
+    "median": 0.13821523788509393,
+    "p75": 0.20678305249763257,
+    "max": 0.983556078125,
+    "mean": 0.20233146924038592,
+    "zero_count": 0
+  },
+  "gaps": {
+    "arm": "B_SPATIAL_KL_CONTRASTIVE",
+    "budget_k": 48,
+    "seed_to_image_task": "median across the three seeds",
+    "grounding": {
+      "n_images": 38,
+      "mean": -0.0019252304813808796,
+      "median": -0.00040863218328940354
+    },
+    "pointing": {
+      "n_images": 38,
+      "mean": 0.2877651809180278,
+      "median": 0.1441668115120024
+    },
+    "overall": {
+      "n_images": 38,
+      "mean": 0.14291997521832342,
+      "median": 0.10175942175035474
+    }
+  },
+  "stratification": {
+    "point_inside_true": {
+      "n_images": 38,
+      "grounding_gap_mean": -0.0019252304813808796,
+      "grounding_jaccard_mean": 0.24601759836970738,
+      "pointing_gap_mean": 0.2877651809180278,
+      "pointing_jaccard_mean": 0.24601759836970738
+    },
+    "point_inside_false": {
+      "n_images": 0,
+      "grounding_gap_mean": null,
+      "grounding_jaccard_mean": null,
+      "pointing_gap_mean": null,
+      "pointing_jaccard_mean": null
+    },
+    "note": "one stratum is empty; point-inside is a constant across the 38 val images, so no between-stratum contrast exists"
+  },
+  "spearman": {
+    "n_images": 38,
+    "bbox_area_vs_grounding_gap_k48": -0.04956778640989167,
+    "method": "reused evaluation.prompt_projection_distillation.spearman"
+  },
+  "jaccard": {
+    "field": "correct_wrong_selected_jaccard",
+    "arm": "B_SPATIAL_KL_CONTRASTIVE",
+    "budget_k": 48,
+    "grounding": {
+      "n_images": 38,
+      "mean": 0.24601759836970738,
+      "median": 0.23076923076923078
+    },
+    "pointing": {
+      "n_images": 38,
+      "mean": 0.24601759836970738,
+      "median": 0.23076923076923078
+    }
+  },
+  "cross_check": {
+    "matches_within_tolerance": true,
+    "tolerance": 1e-09,
+    "deltas": {
+      "grounding.gap_mass": {
+        "computed": -0.0019252304813808796,
+        "operational": -0.0019252304813808796,
+        "abs_delta": 0.0
+      },
+      "grounding.jaccard": {
+        "computed": 0.24601759836970738,
+        "operational": 0.24601759836970738,
+        "abs_delta": 0.0
+      },
+      "pointing.gap_mass": {
+        "computed": 0.2877651809180278,
+        "operational": 0.2877651809180278,
+        "abs_delta": 0.0
+      },
+      "pointing.jaccard": {
+        "computed": 0.24601759836970738,
+        "operational": 0.24601759836970738,
+        "abs_delta": 0.0
+      }
+    },
+    "prior_decision": "OPERATIONAL_PROMPT_UTILITY_NOT_ESTABLISHED"
+  },
+  "provenance": {
+    "prereg_config": {
+      "path": "configs/task_pair_nesting_audit.preregistered.json",
+      "sha256": "a9ca0acc12d675a8de4945e1444abaee4d3dc185b13241eb78b12aa854360316"
+    },
+    "prereg_report": {
+      "path": "reports/token_selector/2026-10-03-task-pair-nesting-audit-preregistration.json",
+      "sha256": "35ea54432b104ad2c911c2648b207b1e2e65c3ffa8230740a99e9366ada3f892"
+    },
+    "authority_prompt_sha256": "6e369bad5403427cc4733dca2a6137297528e6716e16d24ab489ba846f46ad92",
+    "input_pins": {
+      "datasets/prompt_projection_clean_inductive_v1.jsonl": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+      "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic-records.csv": "8fe570a5b9706dbeaa04919416691a1fda6fb45ef55361f8707232beaf3f6cf4",
+      "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json": "6980fda97a44d3390e0c1eefef464ad8c0b1b03cdbf3fb8f6708567493378b9f"
+    },
+    "hashes_before": {
+      "configs/task_pair_nesting_audit.preregistered.json": "a9ca0acc12d675a8de4945e1444abaee4d3dc185b13241eb78b12aa854360316",
+      "reports/token_selector/2026-10-03-task-pair-nesting-audit-preregistration.json": "35ea54432b104ad2c911c2648b207b1e2e65c3ffa8230740a99e9366ada3f892",
+      "reports/token_selector/prompts/2026-10-03-task-pair-nesting-audit-harness-prompt.md": "6e369bad5403427cc4733dca2a6137297528e6716e16d24ab489ba846f46ad92",
+      "datasets/prompt_projection_clean_inductive_v1.jsonl": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+      "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic-records.csv": "8fe570a5b9706dbeaa04919416691a1fda6fb45ef55361f8707232beaf3f6cf4",
+      "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json": "6980fda97a44d3390e0c1eefef464ad8c0b1b03cdbf3fb8f6708567493378b9f"
+    },
+    "hashes_after": {
+      "configs/task_pair_nesting_audit.preregistered.json": "a9ca0acc12d675a8de4945e1444abaee4d3dc185b13241eb78b12aa854360316",
+      "reports/token_selector/2026-10-03-task-pair-nesting-audit-preregistration.json": "35ea54432b104ad2c911c2648b207b1e2e65c3ffa8230740a99e9366ada3f892",
+      "reports/token_selector/prompts/2026-10-03-task-pair-nesting-audit-harness-prompt.md": "6e369bad5403427cc4733dca2a6137297528e6716e16d24ab489ba846f46ad92",
+      "datasets/prompt_projection_clean_inductive_v1.jsonl": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213",
+      "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic-records.csv": "8fe570a5b9706dbeaa04919416691a1fda6fb45ef55361f8707232beaf3f6cf4",
+      "reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json": "6980fda97a44d3390e0c1eefef464ad8c0b1b03cdbf3fb8f6708567493378b9f"
+    },
+    "protected_files_unchanged": true
+  },
+  "isolation": {
+    "read_paths": [
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/task_pair_nesting_audit.preregistered.json",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic-records.csv",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-task-pair-nesting-audit-preregistration.json"
+    ],
+    "allowed_read_paths": [
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/task_pair_nesting_audit.preregistered.json",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic-records.csv",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-operational-prompt-utility-diagnostic.json",
+      "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/reports/token_selector/2026-10-03-task-pair-nesting-audit-preregistration.json"
+    ],
+    "npz_opened": [],
+    "raw_images_opened": false,
+    "model_weights_opened": false,
+    "internal_test_access": false,
+    "gpu_used": false,
+    "network_used": false,
+    "training": false
+  },
+  "split_counts": {
+    "val_records": 76,
+    "val_images": 38,
+    "expected_val_records": 76,
+    "expected_val_images": 38,
+    "sample_ids_are_val_only": true
+  },
+  "limitations": [
+    "Explanatory diagnostic on already-used validation; not a final accuracy conclusion.",
+    "The prior OPERATIONAL_PROMPT_UTILITY_NOT_ESTABLISHED decision is unchanged.",
+    "No NPZ, raw image, model weight, GPU, network or internal test was touched.",
+    "point-inside is constant across the 38 val images, so the stratification cannot separate strata.",
+    "Per-image statistics treat the 38 images as independent units."
+  ],
+  "duration_seconds": 0.028
+}

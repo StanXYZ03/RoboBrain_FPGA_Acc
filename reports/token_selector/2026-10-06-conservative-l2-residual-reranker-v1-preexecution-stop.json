@@ -1,0 +1,98 @@
+{
+  "arm_output_exists": false,
+  "arm_output_path": "artifacts/token_selector/2026-10-05-conservative-l2-residual-reranker-full2638/conservative_l2_residual_rerank_v1_k96_full2638.jsonl",
+  "corrected_formula": {
+    "legal_gain": "semantic_gain - l2_loss = utility_added - utility_removed",
+    "legal_swap_requires": "legal_gain > 0",
+    "successor_mechanism": "conservative_l2_guarded_rerank_v2",
+    "utility_q16": "semantic_q15 + l2_q15"
+  },
+  "date": "2026-10-06",
+  "defect": {
+    "counterexample": {
+      "corrected_accepts": false,
+      "corrected_legal_gain": -29000,
+      "l2_i": 30000,
+      "l2_j": 1000,
+      "l2_loss": 29000,
+      "semantic_gain": 0,
+      "semantic_i": 10000,
+      "semantic_j": 10000,
+      "v1_accepts": true,
+      "v1_gain": 29000
+    },
+    "description": "对同区域候选 j 与被选 i，v1 的 gain 等于 semantic_gain + l2_loss，因此当候选 L2 明显更小（L2 损失大）时反而给出很大的正增益。",
+    "v1_ranking_quantity": "(semantic_q15[j] - l2_q15[j]) - (semantic_q15[i] - l2_q15[i])"
+  },
+  "development_only": true,
+  "executed": false,
+  "gpu_runs": 0,
+  "language": "zh-CN",
+  "limitations": [
+    "这是执行前设计 STOP，不构成对 v1 的任何精度/性能结论。",
+    "v1 full2638 输出从未生成，也不得生成；不得修补 v1 后重跑。",
+    "后续只能使用独立预注册的 v2 修正族。",
+    "full2638 是反复观测过的发展集，不是未触碰确认集。",
+    "Selector 路径是软件桥；不做 FPGA/板卡/时延/加速主张。"
+  ],
+  "mechanism": "conservative_l2_residual_rerank_v1",
+  "mechanism_family": "conservative_l2_residual_rerank",
+  "next_host_commands": [],
+  "paper_confirmation": false,
+  "preservation": {
+    "additive_v2_successor_only": true,
+    "v1_arm_output_not_generated": true,
+    "v1_never_executed": true,
+    "v1_not_patched_in_place": true,
+    "v1_source_config_report_bytes_unchanged": true
+  },
+  "schema_version": "1.0",
+  "status": "PREEXECUTION_DESIGN_STOP",
+  "stop_reason": "独立复核确认预注册 v1 的交换排序量符号错误：它奖励修正整数 L2 的损失，可能做出无语义增益且严重 L2 退化的替换。在任何 GPU 运行之前标记 PREEXECUTION_DESIGN_STOP；v1 源码/配置/报告保持字节不变，绝不修补、绝不运行。",
+  "v1_hashes": {
+    "integration": {
+      "path": "evaluation/hardware_regular_b1_residual_rerank.py",
+      "sha256": "fc9c130a11fc11605398b8177f2f2f2d13126aa270f95f5ae14ad7867a555026"
+    },
+    "mechanism_core": {
+      "path": "evaluation/conservative_l2_residual_reranker.py",
+      "sha256": "64b699757fa9ea04eb12438509b5679644a263eb4783139e50d945e196fb5bf4"
+    },
+    "prereg_report_json": {
+      "path": "reports/token_selector/2026-10-05-conservative-l2-residual-reranker-prereg.json",
+      "sha256": "1a936b8d8eaa1fbc960b60f401766ce608b620fd45df5524f6f8ae0db5de1c3c"
+    },
+    "prereg_report_md": {
+      "path": "reports/token_selector/2026-10-05-conservative-l2-residual-reranker-prereg.md",
+      "sha256": "67fdd0329ae79f0febb85dd2e9ca5fb66b1a66385660fe357fbc30c5a98356cf"
+    },
+    "preregistered_config": {
+      "path": "configs/2026-10-05-conservative-l2-residual-reranker-full2638-development.preregistered.json",
+      "sha256": "6b158d22d52f1df66eba75b1b7bb4c7c614793681152c1501c43079fecd97512"
+    },
+    "runner": {
+      "path": "evaluation/run_hf_conservative_l2_residual_rerank.py",
+      "sha256": "ffd41f46c776eabc441c7d90b957c3f664f3510f3d21ce797415fbd70c27cb1c"
+    },
+    "summarizer": {
+      "path": "evaluation/summarize_conservative_l2_residual_rerank_full2638.py",
+      "sha256": "b7f71603fbe006715d6a8ee662730f79efe6fd2fc95ab23cc5525b49ba0f1c79"
+    },
+    "test_integration": {
+      "path": "evaluation/tests/test_hardware_regular_b1_residual_rerank.py",
+      "sha256": "a116a132a626f6d9e0d2d5769f3620fe9e521e9411246b07082acd7c2370db04"
+    },
+    "test_mechanism": {
+      "path": "evaluation/tests/test_conservative_l2_residual_reranker.py",
+      "sha256": "5712c95c463525d0a0db6c03314099bb7a935782a254880c86dfc3f4ad8a1c8e"
+    },
+    "test_runner": {
+      "path": "evaluation/tests/test_run_hf_conservative_l2_residual_rerank.py",
+      "sha256": "7f8b018ddc1536c770f8e6649db5882ea2d1359475bccdb2173ff0e9845ca806"
+    },
+    "test_summarizer": {
+      "path": "evaluation/tests/test_summarize_conservative_l2_residual_rerank_full2638.py",
+      "sha256": "9f92dfca40b010a6dcdbe76e9648f0c27335a599703a501ed21cfb35d94e5545"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "FIRST_GPU_SMOKE_ATTEMPT_FAIL_CLOSED",
+  "date": "2026-10-07",
+  "round": "2026-10-07 edge576 CV-Bench r3 first dense smoke GPU attempt",
+  "scope": "The first real-model execution of the r3 preregistered edge576 smoke, arm dense_edge576, sample_id 1838. It loaded the model, ran the one real multimodal warmup and one real sample inference, and fail-closed inside normalize_record before writing any file.",
+  "subject": {
+    "config": "configs/2026-10-07-edge576-cvbench-three-arm-development-r3.preregistered.json",
+    "config_sha256": "e7ff56c98a39f764deb6cd6b099211f5da45025ce6958b44e8f72c641ae83eed",
+    "prereg_report_json": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r3.json",
+    "prereg_report_json_sha256": "42a4aabddd8895a2b502befff2052056ad757af80608a106f8f5ad76e3158c49",
+    "prereg_report_md": "reports/token_selector/2026-10-07-edge576-cvbench-prereg-r3.md",
+    "prereg_report_md_sha256": "ce3561e2635185375275e1cea22e1e6bd97ee233f5710ca206632f2bc79d9051",
+    "generator": "scripts/preregister_edge576_cvbench_r3_20261007.py",
+    "generator_sha256": "03ed9f42862f90b664e7a9f3fdc8732690831669de48e00e0c2ace26d38f3eaa",
+    "prereg_test": "evaluation/tests/test_edge576_cvbench_prereg_r3.py",
+    "prereg_test_sha256": "632f988a0f07f86ab697823e97d97f01e5791491ebb335541b8364440321713e"
+  },
+  "executed_bytes": {
+    "note": "The exact r3-pinned bytes that were executing when the attempt failed. These are the r3 config pin values, not the post-fix bytes.",
+    "smoke_entry": {
+      "path": "evaluation/run_edge576_cvbench_three_arm_smoke.py",
+      "sha256": "3c956d7ea9a64a52dc6affbec0c85ae032b44ce58197c8b166d89480dc2ec255"
+    },
+    "edge576_runner_contract": {
+      "path": "evaluation/edge576_cvbench_runner_contract.py",
+      "sha256": "fdea7df65556ef47c297a8082d9aa1238fcb645bdb1e5910d02f5453107590db"
+    },
+    "three_arm_runner": {
+      "path": "evaluation/run_edge576_cvbench_three_arm.py",
+      "sha256": "b1fb2ca1bc67af4355bfe6f0ce52725adf788f3339e77f5c6ea4188788e3eb85"
+    },
+    "three_arm_runner_test": {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm.py",
+      "sha256": "6d4f513568faccd005ded47e6b963d89b783194b84411b5c80d25fabf700fa55"
+    },
+    "smoke_test": {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm_smoke.py",
+      "sha256": "458a45101d8ca2a861b4a4d7f507e650402bee00e164e5991ea0ca1c508d1068"
+    },
+    "runner_adaptation_report_json": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-three-arm-runner-adaptation.json",
+      "sha256": "485947b8f44801d8c74488d8e446fed9ea6079149f8b9c2a98482df5fb783784"
+    },
+    "runner_adaptation_report_md": {
+      "path": "reports/token_selector/2026-10-07-edge576-cvbench-three-arm-runner-adaptation.md",
+      "sha256": "6e496348d9aef43ae89aaebfa8d20e83bb82bb95490a0effc5622b5fef7655fe"
+    }
+  },
+  "attempt": {
+    "arm": "dense_edge576",
+    "sample_id": "1838",
+    "smoke_sample_g": 576,
+    "smoke_sample_grid": [1, 36, 64],
+    "model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "device": "cuda:0",
+    "gpu_runs": 1,
+    "model_identity_verified": true,
+    "weights_loaded": true,
+    "model_loaded": true,
+    "warmup_runs": 1,
+    "warmup_max_new_tokens": 1,
+    "sample_inferences": 1,
+    "checkpoints_loaded": 0,
+    "fail_closed_stage": "evaluation.run_edge576_cvbench_three_arm.normalize_record",
+    "error_type": "Edge576ContractError",
+    "error_message": "frozen dense_edge576 record is missing 'output_token_ids' (fail closed)",
+    "records_written": 0,
+    "smoke_files_written": 0,
+    "full2638_outputs_touched": false,
+    "output_stream_opened": false
+  },
+  "filesystem_evidence": {
+    "smoke_output_dir": "artifacts/token_selector/2026-10-07-edge576-smoke",
+    "smoke_output_dir_exists": false,
+    "smoke_files": [],
+    "full2638_output_dir": "artifacts/token_selector/2026-10-07-edge576-cvbench",
+    "full2638_output_dir_exists": false,
+    "full2638_files": [],
+    "note": "Neither the smoke directory nor the full2638 directory exists after the attempt, matching the fail-closed-before-write behaviour."
+  },
+  "root_cause": {
+    "summary": "The r3 normalisation contract hard-required 'output_token_ids' for every arm, but the frozen dense producer evaluation/run_hf_shallow_block_pruning.py (run_one) never emits token ids. Its record (lines 358-403) carries 'output_text' and the real integer count 'output_tokens' (== len(generated)) plus 'selected_group_indices', but no 'output_token_ids'. Only the frozen L2 and v2 producers emit 'output_token_ids'.",
+    "dense_producer_record_fields_relevant": [
+      "output_text",
+      "output_tokens",
+      "selected_group_indices",
+      "image_grid_thw"
+    ],
+    "l2_producer_emits_output_token_ids": true,
+    "v2_producer_emits_output_token_ids": true,
+    "dense_producer_emits_output_token_ids": false,
+    "falsified_assumption": "r3 assumed all three frozen producers returned an identical record schema. They do not.",
+    "metrics_need_token_ids": false,
+    "metrics_source_of_truth": "evaluation/build_cv_bench_pruning_report.parse_choice over output_text + official answer; token ids are not consumed by any metric."
+  },
+  "fix": {
+    "decision": "Make output_token_ids optional and mandatory only to be truthful; keep a mandatory, always-present auditable output_token_count mapped from real frozen fields, and keep fail-closed behaviour for core fields.",
+    "token_ids_never_fabricated": true,
+    "new_required_core_fields": ["output_text", "selected_group_indices"],
+    "new_required_audit_fields": ["output_token_count", "output_token_ids_available"],
+    "mapping_rule": "token IDs, when present, are copied verbatim and must be a list of ints; output_token_count comes from the frozen real count output_tokens when present and/or the real token-id list length, and both must agree; if neither real field exists, normalisation fails closed.",
+    "superseded_by": "r4"
+  },
+  "scoping": "Recorded from the operator-reported first r3 GPU smoke attempt plus the on-disk state and the deterministic frozen code path. No GPU run, no model weight load and no network were performed while writing this evidence.",
+  "gpu_runs_this_evidence_task": 0,
+  "weights_loaded_this_evidence_task": false
+}

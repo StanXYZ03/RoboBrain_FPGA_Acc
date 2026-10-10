@@ -1,0 +1,1566 @@
+{
+  "status": "PASS",
+  "health": {
+    "status": "ok"
+  },
+  "image": "/home/zhaoxiangyu/RoboBrain2.5/datasets/coco2017/spatial_smoke_512/000000022371.jpg",
+  "prompt": "Locate the only laptop in the image. Return exactly one bounding box as [x1, y1, x2, y2], where all coordinates are integers normalized to 0-1000.",
+  "response": "[0",
+  "points": [],
+  "elapsed_seconds": 1695.01,
+  "usage": {
+    "completion_tokens": 2,
+    "prompt_tokens": 1133,
+    "total_tokens": 1135,
+    "prompt_tokens_details": {
+      "cached_tokens": 3
+    }
+  },
+  "timings": {
+    "cache_n": 3,
+    "request_prepare_ms": 203.826,
+    "queue_ms": 3.221,
+    "kv_cache_ms": 0.043,
+    "vision_encode_ms": 625424.972,
+    "vision_prefill_ms": 1003155.389,
+    "text_prefill_ms": 63731.678,
+    "sampling_ms": 4.236000000000001,
+    "decode_compute_ms": 1561.864,
+    "server_ttft_ms": 1693453.827,
+    "prompt_n": 1130,
+    "prompt_ms": 1693246.522,
+    "prompt_per_token_ms": 1498.4482495575223,
+    "prompt_per_second": 0.6673570477294032,
+    "predicted_n": 2,
+    "predicted_ms": 1563.873,
+    "predicted_per_token_ms": 781.9365,
+    "predicted_per_second": 1.2788762258827922
+  },
+  "observations": [
+    {
+      "elapsed_seconds": 30.0,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 28826.92,
+        "elapsed_ms": 29960.344,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=554.50",
+        "memtotal:=14310760 kB",
+        "memavailable:=7694272 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 60.114,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 58939.265,
+        "elapsed_ms": 60072.689,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=584.60",
+        "memtotal:=14310760 kB",
+        "memavailable:=7693772 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 90.21,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 89035.772,
+        "elapsed_ms": 90169.196,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=614.69",
+        "memtotal:=14310760 kB",
+        "memavailable:=7693772 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 120.302,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 119127.815,
+        "elapsed_ms": 120261.239,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=644.78",
+        "memtotal:=14310760 kB",
+        "memavailable:=7693772 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 150.387,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 149212.153,
+        "elapsed_ms": 150345.577,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=674.88",
+        "memtotal:=14310760 kB",
+        "memavailable:=7693276 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 180.483,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 179307.789,
+        "elapsed_ms": 180441.213,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=704.97",
+        "memtotal:=14310760 kB",
+        "memavailable:=7661020 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 210.575,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 209400.11,
+        "elapsed_ms": 210533.534,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=735.07",
+        "memtotal:=14310760 kB",
+        "memavailable:=7643628 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 240.679,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 239503.806,
+        "elapsed_ms": 240637.23,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=765.17",
+        "memtotal:=14310760 kB",
+        "memavailable:=7643628 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 270.772,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 269596.358,
+        "elapsed_ms": 270729.782,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=795.26",
+        "memtotal:=14310760 kB",
+        "memavailable:=7643628 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 300.884,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 299709.162,
+        "elapsed_ms": 300842.586,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=825.38",
+        "memtotal:=14310760 kB",
+        "memavailable:=7643628 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 330.995,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 329823.16,
+        "elapsed_ms": 330956.584,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=855.49",
+        "memtotal:=14310760 kB",
+        "memavailable:=7609860 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 361.108,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 359938.915,
+        "elapsed_ms": 361072.339,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=885.60",
+        "memtotal:=14310760 kB",
+        "memavailable:=7609608 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 391.218,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 390051.068,
+        "elapsed_ms": 391184.492,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=915.72",
+        "memtotal:=14310760 kB",
+        "memavailable:=7609356 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 421.323,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 420159.032,
+        "elapsed_ms": 421292.456,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=945.82",
+        "memtotal:=14310760 kB",
+        "memavailable:=7609108 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 451.429,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 450267.127,
+        "elapsed_ms": 451400.551,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=975.94",
+        "memtotal:=14310760 kB",
+        "memavailable:=7608856 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 481.547,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 480387.338,
+        "elapsed_ms": 481520.762,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1006.04",
+        "memtotal:=14310760 kB",
+        "memavailable:=7575088 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 511.648,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 510491.164,
+        "elapsed_ms": 511624.588,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1036.16",
+        "memtotal:=14310760 kB",
+        "memavailable:=7574584 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 541.755,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 540599.725,
+        "elapsed_ms": 541733.149,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1066.27",
+        "memtotal:=14310760 kB",
+        "memavailable:=7574332 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 571.856,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 570703.286,
+        "elapsed_ms": 571836.71,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1096.37",
+        "memtotal:=14310760 kB",
+        "memavailable:=7574080 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 601.967,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_encode",
+        "stage_elapsed_ms": 600815.435,
+        "elapsed_ms": 601948.859,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 0.0,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1126.48",
+        "memtotal:=14310760 kB",
+        "memavailable:=7570048 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 632.077,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 5502.173,
+        "elapsed_ms": 632060.598,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1156.60",
+        "memtotal:=14310760 kB",
+        "memavailable:=7477816 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 662.195,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 35622.247,
+        "elapsed_ms": 662180.672,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1186.71",
+        "memtotal:=14310760 kB",
+        "memavailable:=7432232 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 692.305,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 65733.768,
+        "elapsed_ms": 692292.193,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1216.82",
+        "memtotal:=14310760 kB",
+        "memavailable:=7414340 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 722.417,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 95847.022,
+        "elapsed_ms": 722405.447,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1246.94",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413840 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 752.519,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 125950.72,
+        "elapsed_ms": 752509.145,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1277.04",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413588 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 782.63,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 156063.164,
+        "elapsed_ms": 782621.589,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1307.15",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413592 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 812.749,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 186182.536,
+        "elapsed_ms": 812740.961,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1337.28",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413340 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 842.863,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 216298.691,
+        "elapsed_ms": 842857.116,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1367.38",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413080 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 872.962,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 246398.624,
+        "elapsed_ms": 872957.049,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1397.49",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413084 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 903.078,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 276515.059,
+        "elapsed_ms": 903073.484,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1427.61",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413084 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 933.2,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 306638.622,
+        "elapsed_ms": 933197.047,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1457.73",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413084 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 963.313,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 336752.478,
+        "elapsed_ms": 963310.903,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1487.84",
+        "memtotal:=14310760 kB",
+        "memavailable:=7413088 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 993.431,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 366871.371,
+        "elapsed_ms": 993429.796,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1517.95",
+        "memtotal:=14310760 kB",
+        "memavailable:=7412580 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1023.534,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 396975.657,
+        "elapsed_ms": 1023534.082,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1548.07",
+        "memtotal:=14310760 kB",
+        "memavailable:=7412580 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1053.637,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 427079.668,
+        "elapsed_ms": 1053638.093,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1578.17",
+        "memtotal:=14310760 kB",
+        "memavailable:=7412328 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1083.748,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 457191.104,
+        "elapsed_ms": 1083749.529,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1608.28",
+        "memtotal:=14310760 kB",
+        "memavailable:=7411572 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1113.852,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 487295.673,
+        "elapsed_ms": 1113854.098,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1638.38",
+        "memtotal:=14310760 kB",
+        "memavailable:=7411572 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1143.959,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 517404.151,
+        "elapsed_ms": 1143962.576,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1668.50",
+        "memtotal:=14310760 kB",
+        "memavailable:=7411572 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1174.067,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 547512.419,
+        "elapsed_ms": 1174070.844,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1698.60",
+        "memtotal:=14310760 kB",
+        "memavailable:=7411344 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1204.178,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 577622.31,
+        "elapsed_ms": 1204180.735,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1728.70",
+        "memtotal:=14310760 kB",
+        "memavailable:=7411092 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1234.288,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 607734.444,
+        "elapsed_ms": 1234292.869,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1758.83",
+        "memtotal:=14310760 kB",
+        "memavailable:=7411096 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1264.401,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 637847.681,
+        "elapsed_ms": 1264406.106,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1788.93",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410844 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1294.496,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 667944.317,
+        "elapsed_ms": 1294502.742,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1819.03",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410844 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1324.616,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 698064.131,
+        "elapsed_ms": 1324622.556,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1849.16",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410844 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1354.731,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 728180.064,
+        "elapsed_ms": 1354738.489,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1879.26",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410592 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1384.831,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 758280.347,
+        "elapsed_ms": 1384838.772,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1909.37",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410344 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1414.938,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 788388.291,
+        "elapsed_ms": 1414946.716,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1939.48",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410092 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1445.046,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 818496.737,
+        "elapsed_ms": 1445055.162,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1969.58",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410092 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1475.154,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 848604.601,
+        "elapsed_ms": 1475163.026,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=1999.69",
+        "memtotal:=14310760 kB",
+        "memavailable:=7410092 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1505.266,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 878717.03,
+        "elapsed_ms": 1505275.455,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=2029.80",
+        "memtotal:=14310760 kB",
+        "memavailable:=7409840 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1535.377,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 908828.857,
+        "elapsed_ms": 1535387.282,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=2059.92",
+        "memtotal:=14310760 kB",
+        "memavailable:=7409336 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1565.49,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 938942.161,
+        "elapsed_ms": 1565500.586,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=2090.03",
+        "memtotal:=14310760 kB",
+        "memavailable:=7409336 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1595.605,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 969057.54,
+        "elapsed_ms": 1595615.965,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=2120.14",
+        "memtotal:=14310760 kB",
+        "memavailable:=7408832 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1625.709,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "vision_prefill",
+        "stage_elapsed_ms": 999161.571,
+        "elapsed_ms": 1625719.996,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 0.0,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1,
+        "decoded_tokens": 2
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=2150.25",
+        "memtotal:=14310760 kB",
+        "memavailable:=7408580 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1655.83,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "text_prefill",
+        "stage_elapsed_ms": 26121.484,
+        "elapsed_ms": 1655841.206,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 1003155.389,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1130,
+        "decoded_tokens": 0
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=2180.38",
+        "memtotal:=14310760 kB",
+        "memavailable:=7408328 kB"
+      ]
+    },
+    {
+      "elapsed_seconds": 1685.947,
+      "health": "ok",
+      "inference_progress": {
+        "stage": "text_prefill",
+        "stage_elapsed_ms": 56238.854,
+        "elapsed_ms": 1685958.576,
+        "request_prepare_ms": 203.826,
+        "queue_ms": 3.221,
+        "kv_cache_ms": 0.043,
+        "vision_encode_ms": 625424.972,
+        "vision_prefill_ms": 1003155.389,
+        "text_prefill_ms": 0.0,
+        "sampling_ms": 0.0,
+        "decode_compute_ms": 0.0,
+        "server_ttft_ms": 0.0,
+        "prompt_tokens_processed": 1130,
+        "decoded_tokens": 0
+      },
+      "stages": [],
+      "runtime_status": [
+        "runtime_status=ok",
+        "uptime_seconds=2210.48",
+        "memtotal:=14310760 kB",
+        "memavailable:=7407848 kB"
+      ]
+    }
+  ],
+  "metrics": {
+    "llamacpp:prompt_tokens_total": 1145.0,
+    "llamacpp:prompt_seconds_total": 1706.19,
+    "llamacpp:tokens_predicted_total": 4.0,
+    "llamacpp:tokens_predicted_seconds_total": 2.608,
+    "llamacpp:n_decode_total": 5.0,
+    "llamacpp:n_tokens_max": 1134.0,
+    "llamacpp:prompt_tokens_seconds": 0.671086,
+    "llamacpp:predicted_tokens_seconds": 1.53374,
+    "llamacpp:requests_processing": 0.0,
+    "llamacpp:requests_deferred": 0.0,
+    "llamacpp:n_busy_slots_per_decode": 1.0
+  }
+}

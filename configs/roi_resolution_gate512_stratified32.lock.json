@@ -1,0 +1,53 @@
+{
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "locked_date": "2026-09-14",
+  "purpose": "Test whether ROI-internal visual sampling resolution, rather than ROI margin alone, explains the remaining fine-localization loss.",
+  "evidence_level": "revealed development screening; not calibration or test evidence",
+  "model": {
+    "path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "dtype": "bfloat16",
+    "backend": "Hugging Face Transformers",
+    "do_sample": false
+  },
+  "dataset": {
+    "manifest": "datasets/visual_refinement_20260912_development.jsonl",
+    "manifest_sha256": "647e963e3971d606a0ea95996a2d11f5d3b7ffa8fea1d9169811261572b180ae",
+    "original_image_dir": "datasets/coco2017/visual_refinement_original",
+    "tasks": [
+      "grounding",
+      "pointing"
+    ],
+    "limit_per_task": 32,
+    "sampling": "deterministic proportional stratification",
+    "sample_seed": 20260912
+  },
+  "candidate": {
+    "strategy": "roi_only",
+    "strategy_label": "roi_only_m0500_s512",
+    "oracle_margin": 0.5,
+    "roi_long_edge": 512,
+    "roi_upscale": true,
+    "warmup": 1,
+    "repeats": 3,
+    "only_changed_variable_vs_roi_only_m0500_s384": "roi_long_edge: 384 -> 512"
+  },
+  "baseline": {
+    "strategy": "dense",
+    "results": "evaluation/results/global_roi_bf16_representation_gate32_stratified_20260912.jsonl",
+    "results_sha256": "1e4388af3e84e61a52a32c3228e9081d6f16fe13a0f984f98d5da0b0af74a352"
+  },
+  "quality_screen": {
+    "grounding_mean_iou_noninferiority_margin": -0.02,
+    "pointing_pck_0_1_noninferiority_margin": -0.02,
+    "format_success_rate_noninferiority_margin": -0.01,
+    "interpretation": "A point estimate above a margin is not a pass when the paired 95% CI is too wide; insufficient evidence remains inconclusive."
+  },
+  "output": "evaluation/results/global_roi_bf16_roi_m0500_s512_stratified32_exactwarmup_20260914.jsonl",
+  "execution_constraints": [
+    "Check nvidia-smi and process ownership before execution.",
+    "Do not run while another user's process is actively loading the GPU.",
+    "Set HF_HUB_OFFLINE=1 and TRANSFORMERS_OFFLINE=1.",
+    "Synchronize CUDA before and after timed GPU regions.",
+    "Do not overwrite an existing non-empty output file."
+  ]
+}

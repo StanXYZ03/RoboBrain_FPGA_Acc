@@ -1,0 +1,278 @@
+{
+  "schema_version": "1.0",
+  "status": "PREREGISTERED_WITH_NON_ANALYTIC_AMENDMENT",
+  "date": "2026-10-04",
+  "amendments": [
+    {
+      "date": "2026-10-04",
+      "type": "NON_ANALYTIC_METADATA_CONTRACT_FIX",
+      "timing": "after raw arm generation, before the first successful summarization",
+      "issue": "The runner records the CLI dtype spelling 'bf16', while the initial summarizer required the semantic spelling 'bfloat16'.",
+      "change": "The frozen dtype metadata spelling is corrected to 'bf16', which the runner maps to torch.bfloat16.",
+      "unchanged": [
+        "raw control and forced JSONL files",
+        "model weights and numerical dtype",
+        "selected_group_indices",
+        "official CV-Bench primary metric",
+        "bootstrap seed, repeats and stratification",
+        "decision threshold and outcomes"
+      ]
+    }
+  ],
+  "report_stem": "2026-10-04-layer5-forced-index-ac-screening100",
+  "diagnostic_only": true,
+  "diagnostic_scope": "FIXED 100-SAMPLE CV-BENCH SCREENING (screening100) causal diagnostic. It holds the layer-5 cut point, region_grid=3, the unified implementation and the per-sample budget K_C fixed, and changes ONLY the resolved selected_group_indices (control rule vs the frozen historical shallow_r0250 indices). It is explicitly NOT a formal full2638 CV-Bench conclusion and is NOT an FPGA-deployable candidate: the relaxed K_C alignment is a diagnostic setting only.",
+  "round_scope": "CPU-only preregistration, summariser and tests. No GPU run, no board run, no training, no hyper-parameter tuning, no network, no dependency installation. The two arm JSONL files are produced later by the host GPU runner exactly as pinned below; they did not exist when this file was written (sha256=null / TO_BE_GENERATED).",
+  "experiment_question": "Holding the screening100 manifest, the one unified layer-5 forward (evaluation/hardware_regular_layer5_forced_index_ablation.py), the per-sample budget K_C=len(historical selected_group_indices), region_grid=3, BF16/SDPA/greedy decoding and the all-real/no-context emission fixed, does replacing the control selection (one anchor per non-empty 3x3 region + global L2 ranking) with the exact frozen historical shallow_r0250 index set change the official CV-Bench screening100 accuracy? The single experimental variable is selected_group_indices; K_C is identical in both arms by construction.",
+  "single_variable_contract": {
+    "baseline": "evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl (frozen historical shallow-block r=0.25 reference; supplies K_C and the forced indices only)",
+    "control": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl (arm=control, runner re-selects exactly K_C groups with the control rule)",
+    "forced": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/forced_r25_indices_screening100.jsonl (arm=forced, runner keeps exactly the frozen historical indices)",
+    "treatment": "evaluation/run_hf_layer5_forced_index_ablation.py",
+    "implementation": "evaluation/hardware_regular_layer5_forced_index_ablation.py",
+    "only_variable": "selected_group_indices",
+    "same_per_sample_budget": "K_C = len(reference.selected_group_indices) is used by BOTH arms and is re-verified per sample",
+    "identical": [
+      "screening100 manifest and sample order",
+      "one unified layer-5 forward shared by control and forced (cut=5)",
+      "per-sample budget K_C = len(historical selected_group_indices)",
+      "region_grid=3",
+      "all output slots are raw real 2x2 groups (no context pooling, no context slot reservation, no local candidate cap)",
+      "DeepStack index 5 called on the compact hidden",
+      "blocks 0..5 full then blocks 6..23 on the compact sequence",
+      "BF16 weight dtype",
+      "sdpa attention",
+      "greedy_argmax decoding",
+      "do_sample=false"
+    ],
+    "forbidden_changes": [
+      "no B1-trained Wv projection",
+      "no cut-point change",
+      "no region_grid change",
+      "no context pooling",
+      "no context slot reservation",
+      "no local_candidate_cap",
+      "no change to K_C between the two arms",
+      "no change to BF16 / SDPA / greedy decoding"
+    ],
+    "diagnostic_status": {
+      "hardware_alignment_relaxed_for_diagnostic": true,
+      "causal_diagnostic_only": true,
+      "fpga_deployable_candidate": false,
+      "note": "The relaxed K_C alignment is deliberate: this is a causal diagnostic, not a deployable configuration."
+    }
+  },
+  "fixed_configuration": {
+    "manifest": "datasets/cv_bench_screening100.jsonl",
+    "sample_count": 100,
+    "reference": "evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl",
+    "reference_selector": "shallow_r0250",
+    "cut_point": 5,
+    "region_grid": 3,
+    "score_mode": "l2",
+    "local_candidate_cap": null,
+    "dtype": "bf16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "b1_trained_wv_used": false,
+    "arms": {
+      "control": "layer-5 control arm: one anchor per non-empty 3x3 region + global L2 ranking, exactly K_C real groups",
+      "forced": "layer-5 forced arm: exactly the frozen shallow_r0250 historical indices, same K_C"
+    }
+  },
+  "primary_metric": {
+    "identifier": "score(...)[\"cv_bench_accuracy\"]",
+    "definition": "Official CV-Bench combined score returned by the frozen scorer evaluation.build_cv_bench_pruning_report.score: ((accuracy_ADE20K + accuracy_COCO)/2 + accuracy_Omni3D)/2.",
+    "rule": "This is the ONE and ONLY primary metric for both arms and for the single decision; it is never replaced by any other accuracy."
+  },
+  "unweighted_metric": {
+    "identifier": "unweighted_sample_accuracy",
+    "underlying_field": "score(...)[\"accuracy\"]",
+    "definition": "Plain unweighted mean over the 100 screening samples.",
+    "rule": "Secondary diagnostic only. It must never be called the CV-Bench primary score and must never drive the decision."
+  },
+  "forbidden_primary_metrics": ["pointing", "grounding", "ndcg", "retained_mass"],
+  "arms": {
+    "control": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED",
+      "rows": 100,
+      "role": "layer-5 control arm at the per-sample historical K_C",
+      "runner": "evaluation/run_hf_layer5_forced_index_ablation.py",
+      "integration": "evaluation/hardware_regular_layer5_forced_index_ablation.py",
+      "generation_command": "python evaluation/run_hf_layer5_forced_index_ablation.py --model <frozen BF16 RoboBrain2.5-4B> --model-label <label> --manifest datasets/cv_bench_screening100.jsonl --reference-jsonl evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl --output artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl --arm control --region-grid 3 --dtype bf16 --device cuda:0",
+      "required_record_fields": ["sample_id", "task", "arm", "mode", "selection_rule", "prune_after_layer", "region_grid", "output_text", "K_C", "reference_K_C", "reference_G", "reference_selected_group_indices", "reference_selected_group_indices_sha256", "reference_llm_visual_tokens", "reference_baseline_llm_visual_tokens", "reference_selector", "reference_jsonl_sha256", "manifest_sha256", "full_llm_visual_tokens", "baseline_llm_visual_tokens", "output_group_count", "context_group_count", "real_group_count", "source_types_all_real", "identity_bypass", "selected_group_indices", "selected_group_indices_sha256", "source_type", "region_id", "valid", "decoding", "do_sample", "run"],
+      "required_arm": "control",
+      "required_selection_rule": "control_global_l2_plus_3x3_anchor",
+      "required_score_mode": "l2",
+      "required_prune_after_layer": 5,
+      "required_region_grid": 3,
+      "required_all_real": true,
+      "required_context_group_count": 0,
+      "required_local_candidate_cap": null,
+      "required_dtype": "bf16",
+      "required_attention_implementation": "sdpa",
+      "required_decoding": "greedy_argmax",
+      "required_do_sample": false,
+      "forbids_b1_trained_wv": true
+    },
+    "forced": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/forced_r25_indices_screening100.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED",
+      "rows": 100,
+      "role": "layer-5 forced arm keeping exactly the frozen shallow_r0250 indices at the same K_C",
+      "runner": "evaluation/run_hf_layer5_forced_index_ablation.py",
+      "integration": "evaluation/hardware_regular_layer5_forced_index_ablation.py",
+      "generation_command": "python evaluation/run_hf_layer5_forced_index_ablation.py --model <frozen BF16 RoboBrain2.5-4B> --model-label <label> --manifest datasets/cv_bench_screening100.jsonl --reference-jsonl evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl --output artifacts/token_selector/2026-10-04-layer5-forced-index-ac/forced_r25_indices_screening100.jsonl --arm forced --region-grid 3 --dtype bf16 --device cuda:0",
+      "required_record_fields": ["sample_id", "task", "arm", "mode", "selection_rule", "prune_after_layer", "region_grid", "output_text", "K_C", "reference_K_C", "reference_G", "reference_selected_group_indices", "reference_selected_group_indices_sha256", "reference_llm_visual_tokens", "reference_baseline_llm_visual_tokens", "reference_selector", "reference_jsonl_sha256", "manifest_sha256", "full_llm_visual_tokens", "baseline_llm_visual_tokens", "output_group_count", "context_group_count", "real_group_count", "source_types_all_real", "identity_bypass", "selected_group_indices", "selected_group_indices_sha256", "source_type", "region_id", "valid", "decoding", "do_sample", "run"],
+      "required_arm": "forced",
+      "required_selection_rule": "forced_exact_historical_group_indices",
+      "required_score_mode": "l2",
+      "required_prune_after_layer": 5,
+      "required_region_grid": 3,
+      "required_all_real": true,
+      "required_context_group_count": 0,
+      "required_local_candidate_cap": null,
+      "required_dtype": "bf16",
+      "required_attention_implementation": "sdpa",
+      "required_decoding": "greedy_argmax",
+      "required_do_sample": false,
+      "required_forced_equals_reference": true,
+      "forbids_b1_trained_wv": true
+    }
+  },
+  "dataset_pins": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+      "records": 100,
+      "unique_sample_ids": 100
+    },
+    "reference_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl",
+      "sha256": "ce019edd1ee35d11c83a3ff7c11bd9db46539cf56745aadcf0780f15abdbf7d0",
+      "records": 100,
+      "unique_sample_ids": 100,
+      "role": "frozen historical shallow-block r=0.25 reference; supplies K_C and the forced indices only"
+    }
+  },
+  "validation_requirements": {
+    "sample_id_identity": "The screening manifest, the frozen reference, the control arm and the forced arm must all contain exactly the same 100 sample_id values.",
+    "no_duplicates": "Each of the four inputs must contain no duplicate sample_id.",
+    "record_arm_and_flags": "Every arm record must declare arm/mode == its own arm, selection_rule == control_global_l2_plus_3x3_anchor (control) or forced_exact_historical_group_indices (forced), only_variable == selected_group_indices, hardware_alignment_relaxed_for_diagnostic == true, causal_diagnostic_only == true and fpga_deployable_candidate == false.",
+    "record_hashes": "Every arm record's manifest_sha256 and reference_jsonl_sha256 must equal the actual input file digests; the embedded reference_selected_group_indices and their SHA-256 must reproduce the frozen reference file.",
+    "kc_and_g": "Every arm record's K_C / reference_K_C / reference_llm_visual_tokens / requested_K_C / llm_visual_tokens must agree with the reference K_C; full_llm_visual_tokens / baseline_llm_visual_tokens / reference_G / reference_baseline_llm_visual_tokens must agree with the reference G.",
+    "forced_equals_reference": "The forced arm's selected_group_indices must exactly equal the frozen reference indices for every sample.",
+    "same_K_control_forced": "For every sample the control and forced arms must emit the same number of real groups equal to K_C.",
+    "run_metadata": "Every record's run metadata and decoding must be BF16 / sdpa / greedy_argmax with do_sample=false; no B1-trained Wv, no projection, no context pooling / slot reservation / local candidate cap.",
+    "all_real_no_context": "Both arms must be all-real (source_type all 0), context_group_count == 0 and real_group_count == output_group_count.",
+    "input_sha256": "Every non-null inputs_sha256 pin in this file is re-verified before scoring; the two arm pins are null (TO_BE_GENERATED) and are generated after preregistration.",
+    "fail_closed": "If any required input file is missing, or any of the checks above fails, the summariser must raise and must NOT write a report."
+  },
+  "bootstrap": {
+    "method": "paired bootstrap, stratified by task::source_dataset",
+    "helper": "evaluation.build_cv_bench_pruning_report.paired_bootstrap_delta",
+    "seed": 20261004,
+    "repeats": 5000,
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "comparisons": ["forced_minus_control"],
+    "ci_level": 0.95
+  },
+  "decision_rule": {
+    "type": "forced_minus_control_ci",
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "comparison": "forced_minus_control",
+    "threshold": "delta_ci95_lower > 0",
+    "outcome_if_confirmed": "HISTORICAL_INDEX_SET_BETTER_CONFIRMED",
+    "outcome_otherwise": "NOT_CONFIRMED",
+    "uses_only_primary_metric": true,
+    "note": "The only decision is the forced-minus-control 95% paired stratified bootstrap CI lower bound on the official primary metric. This is a screening100 causal diagnostic; it makes no full-dataset (2638-sample) claim."
+  },
+  "inputs_sha256": {
+    "screening_manifest": {
+      "path": "datasets/cv_bench_screening100.jsonl",
+      "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c"
+    },
+    "reference_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl",
+      "sha256": "ce019edd1ee35d11c83a3ff7c11bd9db46539cf56745aadcf0780f15abdbf7d0"
+    },
+    "control_arm": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED"
+    },
+    "forced_arm": {
+      "path": "artifacts/token_selector/2026-10-04-layer5-forced-index-ac/forced_r25_indices_screening100.jsonl",
+      "sha256": null,
+      "status": "TO_BE_GENERATED"
+    },
+    "evaluation/build_cv_bench_pruning_report.py": {
+      "path": "evaluation/build_cv_bench_pruning_report.py",
+      "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+    },
+    "evaluation/metrics.py": {
+      "path": "evaluation/metrics.py",
+      "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+    },
+    "evaluation/hardware_regular_token_selector.py": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "evaluation/hardware_regular_layer5_forced_index_ablation.py": {
+      "path": "evaluation/hardware_regular_layer5_forced_index_ablation.py",
+      "sha256": "50e1adc8935488c320cdeab037cc4f5eb10612c9f3b31f3d9149daaff9615927"
+    },
+    "evaluation/run_hf_layer5_forced_index_ablation.py": {
+      "path": "evaluation/run_hf_layer5_forced_index_ablation.py",
+      "sha256": "0ee857726a7f0ea99bc25b0b15e37792137048aa8cf8ae7854af10e36e4bd151"
+    },
+    "evaluation/hardware_regular_layer5_unbounded_l2.py": {
+      "path": "evaluation/hardware_regular_layer5_unbounded_l2.py",
+      "sha256": "de05d3877848228937d00b566afad26d45f450ef145ede9175092a97dda0b78a"
+    },
+    "evaluation/shallow_block_pruning.py": {
+      "path": "evaluation/shallow_block_pruning.py",
+      "sha256": "a753972f9a98d2bbfc5ae0fff40df8c05da8935147be52d5afcd0d006bcff84a"
+    },
+    "evaluation/run_hf_shallow_block_pruning.py": {
+      "path": "evaluation/run_hf_shallow_block_pruning.py",
+      "sha256": "41a7e9c8a777dbf88dd39c6e713e201be75770b50ebc41a9936c42f9e09ed5b9"
+    },
+    "evaluation/run_hf_token_reduction.py": {
+      "path": "evaluation/run_hf_token_reduction.py",
+      "sha256": "28e9870d17c9f1b63389e55d09f92118291ad15adb3c3c33c99686a973df5c8e"
+    },
+    "evaluation/token_reduction.py": {
+      "path": "evaluation/token_reduction.py",
+      "sha256": "6af9b507fb4a612b4013937150d6a7a59c8cf76d7e310c427b7fdb918f9a77b8"
+    },
+    "evaluation/summarize_layer5_forced_index_ac_screening100.py": {
+      "path": "evaluation/summarize_layer5_forced_index_ac_screening100.py",
+      "sha256": "6356d3ac9571ded14f717a562a946af3f6aed2a437286bed7d2bb441b6528087"
+    },
+    "configs/evaluation_protocol.json": {
+      "path": "configs/evaluation_protocol.json",
+      "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643"
+    }
+  },
+  "report_paths": {
+    "report_json": "reports/cv_bench/2026-10-04-layer5-forced-index-ac-screening100.json",
+    "report_csv": "reports/cv_bench/2026-10-04-layer5-forced-index-ac-screening100.csv",
+    "report_md": "reports/cv_bench/2026-10-04-layer5-forced-index-ac-screening100.md"
+  },
+  "summariser_command": "python evaluation/summarize_layer5_forced_index_ac_screening100.py --preregistered configs/2026-10-04-layer5-forced-index-ac-screening100.preregistered.json --manifest datasets/cv_bench_screening100.jsonl --reference-jsonl evaluation/results/cv_bench_l2_budget64_pilot100_20260927/shallow_r0250.jsonl --control-jsonl artifacts/token_selector/2026-10-04-layer5-forced-index-ac/control_same_budget_screening100.jsonl --forced-jsonl artifacts/token_selector/2026-10-04-layer5-forced-index-ac/forced_r25_indices_screening100.jsonl --output-json reports/cv_bench/2026-10-04-layer5-forced-index-ac-screening100.json --output-csv reports/cv_bench/2026-10-04-layer5-forced-index-ac-screening100.csv --output-md reports/cv_bench/2026-10-04-layer5-forced-index-ac-screening100.md",
+  "explicit_non_formal_statement": "Fixed 100-sample screening causal diagnostic: the forced vs control signal is diagnostic only and is NOT a formal full2638 CV-Bench conclusion. It must not be quoted as the official CV-Bench accuracy of any approach.",
+  "limitations": [
+    "Screening100 is a fixed diagnostic subset, not the formal 2638-sample benchmark.",
+    "The relaxed K_C alignment is diagnostic only; this is explicitly not an FPGA-deployable candidate.",
+    "Both arms run the same unified forward; the only variable is selected_group_indices, and K_C is re-verified to be identical.",
+    "Only score(...)[\"cv_bench_accuracy\"] drives the decision.",
+    "Forbidden primary metrics (pointing/grounding/ndcg/retained_mass) are never reported.",
+    "Timings are descriptive only and never enter the decision.",
+    "Neither arm uses the B1-trained Wv projection."
+  ]
+}

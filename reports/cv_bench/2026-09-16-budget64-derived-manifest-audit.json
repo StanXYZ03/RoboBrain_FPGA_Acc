@@ -1,0 +1,12 @@
+{
+  "datasets/cv_bench_full2638_budget64_diagnostic.jsonl": {
+    "samples": 2638,
+    "sha256": "a82813547444a5ab89dd7c9d3a0d1483e01a937fcf1d90f7c06e7faf0221f8a6",
+    "only_field_changed": "max_new_tokens: 16 -> 64"
+  },
+  "datasets/cv_bench_screening100_budget64_diagnostic.jsonl": {
+    "samples": 100,
+    "sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668",
+    "only_field_changed": "max_new_tokens: 16 -> 64"
+  }
+}

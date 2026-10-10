@@ -1,0 +1,12 @@
+{
+  "status": "VSR_CAPTION_TOKEN_SPANS_COMPLETE",
+  "records": 3483,
+  "caption_token_min": 6,
+  "caption_token_max": 15,
+  "caption_token_mean": 8.454493252942866,
+  "output": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-10-vsr-b1-margin-teacher/caption_token_spans.json",
+  "output_sha256": "01ce0203d0c9d2c7ea2336b03f11e31145828b7838ad7643dff15f032d538151",
+  "uses_relation_annotation": false,
+  "uses_label": false,
+  "rule": "character offsets of the variable caption inside the fixed raw Prompt template"
+}

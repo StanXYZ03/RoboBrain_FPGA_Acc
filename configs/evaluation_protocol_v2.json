@@ -1,0 +1,181 @@
+{
+  "version": "2026-10-06-r1-lifecycle-safe-v2",
+  "date": "2026-10-06",
+  "schema_version": "2.0",
+  "status": "PROTOCOL_READY_FUTURE_ONLY",
+  "future_only": true,
+  "retroactive": false,
+  "purpose": "Future-only, lifecycle-safe evaluation protocol v2 that reuses the frozen CV-Bench parser but requires an explicit parsed-answer field, validates inputs and fails closed, pins the local model weight shards, and forbids missing-output tests from probing real default output paths.",
+  "not_retroactive_statement": "These protocol fixes are future-only. They do NOT retroactively change any frozen v1/v2 primary score, the frozen v2 raw JSONL, the frozen development report generated_at, or the frozen DEVELOPMENT_STOP decision. The frozen scorer and summariser stay byte-identical.",
+  "supersedes_for_new_experiments": [
+    "configs/evaluation_protocol_20261005.json",
+    "configs/evaluation_protocol.json"
+  ],
+  "preserve_old_files_for_reproducibility": true,
+  "does_not_supersede": {
+    "frozen_v2_preregistration": "configs/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.preregistered.json",
+    "frozen_v2_raw": "artifacts/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638/conservative_l2_guarded_rerank_v2_k96_full2638.jsonl",
+    "frozen_v2_development_report": "reports/cv_bench/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.json",
+    "frozen_v2_decision": "DEVELOPMENT_STOP",
+    "rule": "Existing frozen artifacts remain read-only and are never rewritten by protocol v2."
+  },
+  "pins": {
+    "cv_bench_metric_v2_source": {
+      "path": "evaluation/cv_bench_metric_v2.py",
+      "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1"
+    },
+    "model_identity_manifest": {
+      "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+    },
+    "model_identity_builder": {
+      "path": "scripts/build_model_identity_manifest.py",
+      "sha256": "33caea5818bf06a7d5655513ae23dd0fc17fcd9a5d8108ae600dd9c82fb8545f"
+    }
+  },
+  "scoring_contract": {
+    "primary_metric": "cv_bench_accuracy",
+    "weighting": "((accuracy_ADE20K + accuracy_COCO) / 2 + accuracy_Omni3D) / 2",
+    "frozen_weighting_reused": true,
+    "parser_reused": "evaluation.build_cv_bench_pruning_report.parse_choice and answer_letter",
+    "module": "evaluation/cv_bench_metric_v2.py",
+    "explicit_correct_key_required": true,
+    "explicit_parsed_answer_key_required": true,
+    "keys_must_be_distinct": true,
+    "never_infer_parsed_answer_key_from_correct_key": true,
+    "honest_parse_gate": {
+      "enabled": true,
+      "source_field": "explicit parsed_answer_key only",
+      "reported_fields": [
+        "parse_success_rate",
+        "parse_success_count",
+        "parse_failure_count"
+      ],
+      "forbidden": "deriving the parsed-answer key via correct_key.replace('_correct', '_answer') because correct_key == 'correct' aliases the boolean correctness field and makes the gate read 1.0"
+    },
+    "fail_closed": true,
+    "validated": [
+      "record count",
+      "required keys",
+      "field types (correct is bool, parsed answer is str or null)",
+      "allowed sources",
+      "non-empty tasks",
+      "unique sample_id"
+    ],
+    "secondary_diagnostics": [
+      "unweighted_sample_accuracy",
+      "per-source and per-task accuracy"
+    ]
+  },
+  "model_identity": {
+    "default_model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "manifest_path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+    "hash_algorithm": "sha256",
+    "streaming": true,
+    "weights_loaded_into_ram": false,
+    "includes": [
+      "every local safetensors shard",
+      "every safetensors index file",
+      "existing processor, tokenizer, vocab, merges and chat-template files",
+      "existing config and generation-config files"
+    ],
+    "missing_referenced_shard_policy": "fail closed",
+    "derived_from_frozen_v2_gap": "the frozen v2 preregistration pinned code/checkpoints/data but not the local model weight shards, and recorded only model_path/model_label metadata"
+  },
+  "lifecycle": {
+    "states": [
+      "PREREGISTERED_NOT_EXECUTED",
+      "EXECUTED_UNAUDITED",
+      "AUDITED_STOP",
+      "AUDITED_GO_EXTERNAL_VALIDATION"
+    ],
+    "initial_state": "PREREGISTERED_NOT_EXECUTED",
+    "terminal_states": [
+      "AUDITED_STOP",
+      "AUDITED_GO_EXTERNAL_VALIDATION"
+    ],
+    "transitions": {
+      "PREREGISTERED_NOT_EXECUTED": [
+        "EXECUTED_UNAUDITED"
+      ],
+      "EXECUTED_UNAUDITED": [
+        "AUDITED_STOP",
+        "AUDITED_GO_EXTERNAL_VALIDATION"
+      ],
+      "AUDITED_STOP": [],
+      "AUDITED_GO_EXTERNAL_VALIDATION": []
+    },
+    "meaning": {
+      "PREREGISTERED_NOT_EXECUTED": "Output does not exist and must not be assumed to stay absent after execution.",
+      "EXECUTED_UNAUDITED": "Output exists but has not passed the independent read-only audit.",
+      "AUDITED_STOP": "Audit completed and the pre-registered gate failed; no continuation.",
+      "AUDITED_GO_EXTERNAL_VALIDATION": "Audit completed and the gate passed; only one fresh untouched external benchmark is permitted."
+    },
+    "path_policy": {
+      "missing_output_tests_must_use_temporary_paths": true,
+      "never_probe_real_default_output": true,
+      "forbidden_probe_paths": [
+        "artifacts/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638/conservative_l2_guarded_rerank_v2_k96_full2638.jsonl",
+        "reports/cv_bench/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.json",
+        "reports/cv_bench/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-development.md",
+        "reports/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-audit.json",
+        "reports/token_selector/2026-10-06-conservative-l2-guarded-reranker-v2-full2638-postmortem.json"
+      ],
+      "rule": "A missing-output assertion must point at a fresh temporary/explicit scratch path. Pre-execution tests that assert the real default output is absent become state-stale once the arm exists."
+    }
+  },
+  "measurement_classes": {
+    "development": {
+      "description": "CV-Bench full2638 / development screens; repeatedly observed.",
+      "may_establish_publication_claim": false,
+      "may_permit_external_validation": true,
+      "example": "v2 conservative_l2_guarded_rerank development audited run"
+    },
+    "untouched_confirmation": {
+      "description": "Fresh external spatial-reasoning benchmark frozen before the candidate is selected and never used for tuning.",
+      "may_establish_publication_claim": true,
+      "may_permit_external_validation": false,
+      "requires": "pre-registered paired 95% CI lower bound > 0 against the same-budget corrected integer-L2 control"
+    },
+    "software_latency": {
+      "description": "Measured host software latency on the frozen local runtime.",
+      "is_measurement": true,
+      "requires": [
+        "CUDA synchronize on timed segments",
+        "model load excluded from steady timing",
+        "warmup",
+        "raw runs retained"
+      ],
+      "may_be_called_fpga_latency": false
+    },
+    "fpga_estimate": {
+      "description": "Analytic / HLS / OOC projection with explicit bandwidth and overlap assumptions.",
+      "is_measurement": false,
+      "may_be_promoted_to_measurement": false,
+      "label": "projection"
+    },
+    "board_measurement": {
+      "description": "Full-system measurement on the real board with the frozen deployment runtime and format.",
+      "is_measurement": true,
+      "requires": [
+        "measured end-to-end latency including transfers, packing and sync",
+        "measured board power / energy",
+        "recorded bitstream and post-route timing"
+      ]
+    }
+  },
+  "forbidden_claims": [
+    "a development or repeatedly observed set is an untouched confirmation",
+    "a software selector roundtrip is FPGA latency or acceleration",
+    "an analytic or HLS projection is a board measurement",
+    "a parse gate computed from a boolean correctness field is honest",
+    "protocol v2 retroactively changes any frozen v2 score or the DEVELOPMENT_STOP decision"
+  ],
+  "limitations": [
+    "Protocol v2 is future-only and does not rewrite any frozen artifact.",
+    "The model identity manifest records local file hashes; it is not a model-quality or accuracy claim.",
+    "This round is CPU-only: gpu_runs=0, no model weights loaded, no network, no training, no dependency installation.",
+    "The audit finding of the aliased parse gate does not change the frozen v2 primary scores or DEVELOPMENT_STOP."
+  ],
+  "next_allowed_action": "Create a new, independently pre-registered candidate under this protocol; execute it with the lifecycle-safe path rules and pin the model identity manifest; then run the read-only audit before any external validation or hardware claim."
+}

@@ -1,0 +1,55 @@
+{
+  "task": "2026-09-27 B1 真实模型 smoke test（dense / identity / L2 K=64）",
+  "status": "BLOCKED_GPU_AUDIT_NON_OWNER_COMPUTE_PROCESS",
+  "timestamp_utc": "2026-09-27T07:41:21Z",
+  "gpu_audit": {
+    "gpu_name": "NVIDIA RTX A6000",
+    "driver_version": "580.178.04",
+    "cuda_version": "13.0",
+    "memory_total_mib": 46068,
+    "memory_used_mib": 4886,
+    "memory_free_mib": 40600,
+    "memory_free_gib": 39.6484,
+    "power_draw_w": 298.95,
+    "power_limit_w": 300.0,
+    "utilization_gpu_pct": 100,
+    "temperature_c": 86,
+    "compute_processes": [
+      {"pid": 16507, "user": "seey6", "cmd": "python main.py --port 7860 --listen 0.0.0.0", "used_memory_mib": 382, "owner_is_zhaoxiangyu": false},
+      {"pid": 562557, "user": "ismy", "cmd": "/home/ismy/for_dac/.venv-woq/bin/python -m woq.run --model facebook/opt-1.3b --method awq --seed 0 --tag main", "used_memory_mib": 4410, "owner_is_zhaoxiangyu": false}
+    ],
+    "free_memory_gate_gib": 20,
+    "free_memory_ok": true,
+    "non_zhaoxiangyu_compute_process_present": true,
+    "process_ownership_gate_ok": false,
+    "processes_killed": false
+  },
+  "sample": {
+    "selected": false,
+    "reason": "GPU 审计未通过，未加载模型，因此未选取/保存 smoke manifest",
+    "intended_manifest": "datasets/cv_bench_screening100_budget64_diagnostic.jsonl",
+    "intended_manifest_sha256": "236e38a5f88ced36a8b77844f84c5d0c1c1b1401944ae8fd76632f351ec2e668",
+    "intended_manifest_first_sample_id": "21",
+    "smoke_manifest_path": null
+  },
+  "identity_check": {
+    "executed": false,
+    "reason": "model_not_loaded"
+  },
+  "k64_check": {
+    "executed": false,
+    "reason": "model_not_loaded"
+  },
+  "timings": {
+    "executed": false
+  },
+  "files_created": [
+    "reports/token_selector/smoke/2026-09-27-b1-real-model-smoke-gpu-audit.json",
+    "reports/token_selector/smoke/2026-09-27-b1-real-model-smoke-status.jsonl",
+    "reports/token_selector/2026-09-27-b1-real-model-smoke.json",
+    "reports/token_selector/2026-09-27-b1-real-model-smoke.md"
+  ],
+  "errors": [
+    "BLOCKED: GPU 上存在非 zhaoxiangyu 的计算进程（seey6 PID 16507：python main.py；ismy PID 562557：woq.run opt-1.3b awq）。按任务规则不加载模型，未 kill 任何进程。"
+  ]
+}

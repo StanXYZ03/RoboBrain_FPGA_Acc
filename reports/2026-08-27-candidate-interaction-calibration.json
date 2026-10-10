@@ -1,0 +1,89 @@
+{
+  "date": "2026-08-27",
+  "status": "REAL_OUTPUT_CALIBRATION_FAIL / UNIFIED_HEAD_STOP",
+  "manifest": "datasets/dac_spatial_selector_calibration.jsonl",
+  "manifest_sha256": "a1aa8c241c085dff9ec9e02762cfcd5b4993d57e4179d63c6d8c8efeb9b726e3",
+  "training_summary": "evaluation/results/candidate_interaction_selector_development_summary.json",
+  "training_summary_sha256": "6148bf49a9345bbc4b05bf7cb053ccffc2dc36004e676588fd9292c8592a6d02",
+  "predictions": {
+    "l2": "evaluation/results/shallow_block_expanded/shallow_r0875.jsonl",
+    "interaction": "evaluation/results/candidate_interaction_real_output/interaction_full_task_lambda_0p5_r0875.jsonl"
+  },
+  "prediction_sha256": {
+    "l2": "da1ea7309e3b10c9c1ff6e0a2c561fce3736160fe923f30b74e93e4938236465",
+    "interaction": "c42dc016f086dad4dfd796cba2a40a2bfcbb9a6c8a0a38d7eeec7482b7041681"
+  },
+  "metrics": {
+    "l2": {
+      "pck_0_1": 0.625,
+      "pck_0_2": 0.8125,
+      "point_nme_bbox_diag_mean": 0.24362410283784294,
+      "iou_mean": 0.7976135920848815,
+      "acc_0_5": 0.84375
+    },
+    "interaction": {
+      "pck_0_1": 0.5625,
+      "pck_0_2": 0.8125,
+      "point_nme_bbox_diag_mean": 0.23997886661968076,
+      "iou_mean": 0.8032355944413718,
+      "acc_0_5": 0.875
+    }
+  },
+  "delta_interaction_vs_l2": {
+    "pck_0_1": -0.0625,
+    "pck_0_2": 0.0,
+    "iou_mean": 0.005622002356490352,
+    "acc_0_5": 0.03125
+  },
+  "paired_bootstrap_interaction_vs_l2": {
+    "pointing": {
+      "pck_0_1": {
+        "mean_delta": -0.0625,
+        "ci95_low": -0.15625,
+        "ci95_high": 0.0,
+        "paired_samples": 32,
+        "iterations": 10000
+      },
+      "pck_0_2": {
+        "mean_delta": 0.0,
+        "ci95_low": -0.09375,
+        "ci95_high": 0.09375,
+        "paired_samples": 32,
+        "iterations": 10000
+      }
+    },
+    "grounding": {
+      "iou_mean": {
+        "mean_delta": 0.0056220023564903425,
+        "ci95_low": -0.02080311408662501,
+        "ci95_high": 0.041177673382749615,
+        "paired_samples": 32,
+        "iterations": 10000
+      },
+      "acc_0_5": {
+        "mean_delta": 0.03125,
+        "ci95_low": 0.0,
+        "ci95_high": 0.09375,
+        "paired_samples": 32,
+        "iterations": 10000
+      }
+    }
+  },
+  "candidate_counts": {
+    "baseline": 1,
+    "swap_001_00": 17,
+    "swap_001_01": 13,
+    "swap_002_00": 11,
+    "swap_002_01": 4,
+    "swap_004_00": 6,
+    "swap_004_01": 12
+  },
+  "gate": {
+    "per_primary_metric_max_drop": 0.02,
+    "requires_at_least_one_improvement": true,
+    "point_estimate_pass": false,
+    "decision": "STOP_UNIFIED_INTERACTION_HEAD / DESIGN_GROUNDING_ONLY_ROUTE / NEW_TEST_REQUIRED",
+    "reason": "Pointing PCK@0.1 dropped by 0.0625, exceeding the pre-registered 0.02 tolerance"
+  },
+  "latency_note": "L2 and interaction predictions were collected at different times; latency values are descriptive and not a speedup claim"
+}

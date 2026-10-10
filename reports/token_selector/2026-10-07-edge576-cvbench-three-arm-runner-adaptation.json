@@ -1,0 +1,588 @@
+{
+  "generated_at": "2026-10-07T15:39:11.368745+00:00",
+  "launch_commands": [
+    "python evaluation/run_edge576_cvbench_three_arm.py --arm dense_edge576 --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-07-cv-bench-edge576-full2638.jsonl --output artifacts/token_selector/2026-10-07-edge576-cvbench/dense_edge576_full2638.jsonl",
+    "python evaluation/run_edge576_cvbench_three_arm.py --arm corrected_l2_integer_b1_k96 --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-07-cv-bench-edge576-full2638.jsonl --output artifacts/token_selector/2026-10-07-edge576-cvbench/corrected_l2_integer_k96_full2638.jsonl",
+    "python evaluation/run_edge576_cvbench_three_arm.py --arm v2_edge576_b1_k96 --model /home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B --model-label RoboBrain2.5-4B-BF16 --manifest datasets/2026-10-07-cv-bench-edge576-full2638.jsonl --output artifacts/token_selector/2026-10-07-edge576-cvbench/v2_edge576_k96_full2638.jsonl"
+  ],
+  "mechanism_reuse": {
+    "corrected_l2_integer": "evaluation.run_hf_hardware_regular_b1_corrected_l2.run_one arm=corrected_l2_integer K=96",
+    "dense": "evaluation.run_hf_shallow_block_pruning.run_one retention=1.0 prune_after_layer=5 selector=l2_anchor",
+    "selection_algorithm_copied_or_rewritten": false,
+    "v2": "evaluation.run_hf_conservative_l2_guarded_rerank.run_one conservative_l2_guarded_rerank_v2 K=96 S=16"
+  },
+  "main_review_processor_wrapper_evidence": {
+    "attributed_to": "主审校 (main review)",
+    "method": "real local RoboBrain2.5-4B processor (HF_HUB_OFFLINE=1, TRANSFORMERS_OFFLINE=1, CPU-only, no weights) wrapped in Edge576Processor; frozen processor_inputs reproduces the manifest image_grid_thw",
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "samples": [
+      {
+        "sample_id": "0",
+        "G_manifest": 64,
+        "manifest_grid": [1, 16, 16],
+        "wrapper_grid": [1, 16, 16],
+        "wrapper_matches_manifest": true,
+        "raw_explicit_bounds_grid": [1, 16, 16],
+        "wrapper_matches_raw_explicit": true,
+        "image_sha256_manifest": "416ad33e74cb200a0f5084ae864fe007056b627faae63b4510f4394805b5a922"
+      },
+      {
+        "sample_id": "646",
+        "G_manifest": 240,
+        "manifest_grid": [1, 24, 40],
+        "wrapper_grid": [1, 24, 40],
+        "wrapper_matches_manifest": true,
+        "raw_explicit_bounds_grid": [1, 24, 40],
+        "wrapper_matches_raw_explicit": true,
+        "image_sha256_manifest": "fd991bcccf8342f3ab5c5228dce3873765964a545365ac3f31d69b32c8a9258d"
+      },
+      {
+        "sample_id": "1838",
+        "G_manifest": 576,
+        "manifest_grid": [1, 36, 64],
+        "wrapper_grid": [1, 36, 64],
+        "wrapper_matches_manifest": true,
+        "raw_explicit_bounds_grid": [1, 36, 64],
+        "wrapper_matches_raw_explicit": true,
+        "image_sha256_manifest": "5f16e394a6323fe909b894d726bc6143da369aa5c32daeb700dba0736a9bdd37"
+      }
+    ],
+    "all_wrapper_match": true,
+    "gpu_runs": 0,
+    "weights_loaded": false
+  },
+  "run_mode_preflight": {
+    "order": [
+      "17 frozen dependency SHA256 pins + mechanism identity (same as --validate-only, fail closed)",
+      "append-only resume check (full 2638 -> immediate success, no --model/CUDA/scorer/weights)",
+      "fail-closed --model identity (relative path + byte size + SHA256 incl. model.safetensors)",
+      "cuda requirement, frozen scorer checkpoint, local model/processor",
+      "exactly one real multimodal warmup per arm (max_new_tokens=1, record discarded, torch.cuda.synchronize)",
+      "append-only sample writes with warmup recorded in run metadata/final stats only"
+    ],
+    "complete_resume_short_circuit": "EDGE576_RUNNER_ARM_ALREADY_COMPLETE",
+    "model_identity_verifier": "evaluation.edge576_cvbench_runner_contract.verify_model_identity",
+    "model_identity_manifest": "artifacts/provenance/robobrain25-4b-model-identity.json",
+    "model_identity_manifest_sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+    "required_weight_shards": [
+      "model.safetensors"
+    ],
+    "warmup_recorded_but_never_mixed_into_samples": true
+  },
+  "new_files": [
+    {
+      "path": "evaluation/edge576_cvbench_runner_contract.py",
+      "role": "shared edge576 run contract + fail-closed model identity verifier",
+      "sha256": "fdea7df65556ef47c297a8082d9aa1238fcb645bdb1e5910d02f5453107590db"
+    },
+    {
+      "path": "evaluation/run_edge576_cvbench_three_arm.py",
+      "role": "three-arm runner adapter (run preflight + resume + warmup)",
+      "sha256": "b1fb2ca1bc67af4355bfe6f0ce52725adf788f3339e77f5c6ea4188788e3eb85"
+    },
+    {
+      "path": "evaluation/tests/test_run_edge576_cvbench_three_arm.py",
+      "role": "focused CPU tests",
+      "sha256": "6d4f513568faccd005ded47e6b963d89b783194b84411b5c80d25fabf700fa55"
+    }
+  ],
+  "report": "2026-10-07-edge576-cvbench-three-arm-runner-adaptation",
+  "risks": [
+    "arms not executed this round; the runner's GPU path is untested against a live model",
+    "the real fail-closed model identity check streams the 9.65 GB model.safetensors SHA256 before load, adding a one-time CPU/IO cost per run",
+    "the real multimodal warmup (max_new_tokens=1 + torch.cuda.synchronize) is wired and unit-tested with fakes but never executed on a GPU this round",
+    "each record is asserted against the manifest grid before the line is written; a mismatch aborts without writing that sample",
+    "resume validation is fail-closed, so mixing arms / manifests / pixel budgets in one output file aborts",
+    "parsed_answer may be null and counts as wrong; there is no 100% parse gate",
+    "edge576 full2638 is a development set, not an untouched confirmation set"
+  ],
+  "scope": {
+    "arms": [
+      "dense_edge576",
+      "corrected_l2_integer_b1_k96",
+      "v2_edge576_b1_k96"
+    ],
+    "frozen_files_modified": [],
+    "gpu_runs": 0,
+    "installed_dependencies": false,
+    "manifest": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+    "manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+    "model_loaded": false,
+    "network": false,
+    "processor": {
+      "max_pixels": 589824,
+      "min_pixels": 65536
+    },
+    "shared_decode": {
+      "attention_implementation": "sdpa",
+      "decoding": "greedy_argmax",
+      "do_sample": false,
+      "dtype": "bf16",
+      "max_new_tokens": 16
+    },
+    "task": "adapt the three arm runners to the frozen edge576 r2 development domain",
+    "training": false,
+    "weights_loaded": false
+  },
+  "status": "EDGE576_RUNNER_ADAPTATION_COMPLETE_NO_MODEL_RUN",
+  "tests": {
+    "combined_focused": 106,
+    "new_focused": 54,
+    "prior_edge576_focused": 52,
+    "py_compile_ok": true,
+    "new_test_coverage": [
+      "run preflight order (validation -> require_cuda -> model identity -> scorer -> weights -> warmup -> execute)",
+      "complete resume returns EDGE576_RUNNER_ARM_ALREADY_COMPLETE without model identity, CUDA, scorer or weights",
+      "model identity failure aborts before scorer/weight load",
+      "warmup is one real max_new_tokens=1 call, synchronises once, writes no record and never mutates the sample",
+      "model identity positive + missing file + byte-size mismatch + SHA256 mismatch + undeclared weight shard + wrong model_dir + wrong manifest pin + path escape"
+    ]
+  },
+  "validate_only": {
+    "corrected_l2_integer_b1_k96": {
+      "all_g_within_budget": true,
+      "arm": "corrected_l2_integer_b1_k96",
+      "cuda_required": false,
+      "dependency_pins": {
+        "all_match": true,
+        "pins": {
+          "corrected_l2_runner": {
+            "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+            "role": "corrected_l2_runner",
+            "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9"
+          },
+          "cv_bench_metric_v2": {
+            "path": "evaluation/cv_bench_metric_v2.py",
+            "role": "future_metric_v2",
+            "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1"
+          },
+          "edge576_manifest": {
+            "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+            "role": "edge576_manifest",
+            "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f"
+          },
+          "edge576_summary": {
+            "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+            "role": "edge576_summary",
+            "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b"
+          },
+          "evaluator": {
+            "path": "evaluation/build_cv_bench_pruning_report.py",
+            "role": "official_cv_bench_evaluator",
+            "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+          },
+          "integer_b1_integration_core": {
+            "path": "evaluation/hardware_regular_b1_integration.py",
+            "role": "integer_b1_integration_core",
+            "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa"
+          },
+          "integer_corrected_l2_core": {
+            "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+            "role": "integer_corrected_l2_core",
+            "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585"
+          },
+          "integer_current_selector_core": {
+            "path": "evaluation/current_selector_integer.py",
+            "role": "integer_current_selector_core",
+            "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7"
+          },
+          "integer_token_selector_core": {
+            "path": "evaluation/hardware_regular_token_selector.py",
+            "role": "integer_scoring_token_selector_core",
+            "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+          },
+          "metrics": {
+            "path": "evaluation/metrics.py",
+            "role": "metrics",
+            "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+          },
+          "model_identity_manifest": {
+            "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+            "role": "model_identity",
+            "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+          },
+          "source_full_manifest": {
+            "path": "datasets/cv_bench_full2638.jsonl",
+            "role": "frozen_full_manifest",
+            "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+          },
+          "v1_layout_rebuild_core": {
+            "path": "evaluation/conservative_l2_residual_reranker.py",
+            "role": "v1_layout_rebuild_core_reused_by_v2",
+            "sha256": "64b699757fa9ea04eb12438509b5679644a263eb4783139e50d945e196fb5bf4"
+          },
+          "v2_integration": {
+            "path": "evaluation/hardware_regular_b1_guarded_rerank.py",
+            "role": "frozen_v2_integration",
+            "sha256": "0eaab5edceaeccda95bfbeb43c6ed0c6e81f1f67cde072bb024b33bc93fc15d2"
+          },
+          "v2_mechanism_core": {
+            "path": "evaluation/conservative_l2_guarded_reranker.py",
+            "role": "frozen_v2_mechanism_core",
+            "sha256": "9486771f020b65661d9485702ba6d0d9d7901d7119aea8cb13090799792e357b"
+          },
+          "v2_runner": {
+            "path": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+            "role": "frozen_v2_runner",
+            "sha256": "834e5c8165e0cd52565c8a49c6a05bee17b2950afedfbe26a3ad6757c5bf2146"
+          },
+          "v2_summarizer": {
+            "path": "evaluation/summarize_conservative_l2_guarded_rerank_full2638.py",
+            "role": "frozen_v2_summarizer",
+            "sha256": "7da4e93da2ac76ded26ff94b319b9712d3887e8800bbd95107caa3b8b6ea14d7"
+          }
+        },
+        "requested_count": 17,
+        "verified_count": 17
+      },
+      "existing_done_count": 0,
+      "g_histogram": {
+        "g_257_512": 706,
+        "g_513_576": 1008,
+        "g_97_256": 781,
+        "g_le_96": 143
+      },
+      "g_max": 576,
+      "g_min": 64,
+      "gpu_runs": 0,
+      "is_new_mechanism": false,
+      "locked_parameters": {
+        "K": 96,
+        "attention_implementation": "sdpa",
+        "decoding": "greedy_argmax",
+        "do_sample": false,
+        "dtype": "bf16",
+        "identity_bypass_g_le": 96,
+        "local_candidate_cap": 16,
+        "max_new_tokens": 16,
+        "max_swaps": 16,
+        "region_grid": 3
+      },
+      "manifest": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+      "manifest_sha256_matches_pin": true,
+      "mechanism_id": "corrected_l2_integer",
+      "mechanism_identity": {
+        "allowed_mechanism_scope": null,
+        "arm": "corrected_l2_integer_b1_k96",
+        "config_output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/corrected_l2_integer_k96_full2638.jsonl",
+        "frozen_constant_mechanism_id": "corrected_l2_integer",
+        "is_new_mechanism": false,
+        "mechanism_id": "corrected_l2_integer",
+        "ok": true
+      },
+      "model_loaded": false,
+      "output_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-07-edge576-cvbench/corrected_l2_integer_k96_full2638.jsonl",
+      "output_path_matches_r2": true,
+      "pending_count": 2638,
+      "processor": {
+        "keep_aspect_ratio": true,
+        "max_pixels": 589824,
+        "merge_size": 2,
+        "min_pixels": 65536,
+        "patch_size": 16
+      },
+      "sample_count": 2638,
+      "status": "EDGE576_RUNNER_VALIDATE_ONLY_OK",
+      "unique_sample_id_count": 2638,
+      "weights_loaded": false
+    },
+    "dense_edge576": {
+      "all_g_within_budget": true,
+      "arm": "dense_edge576",
+      "cuda_required": false,
+      "dependency_pins": {
+        "all_match": true,
+        "pins": {
+          "corrected_l2_runner": {
+            "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+            "role": "corrected_l2_runner",
+            "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9"
+          },
+          "cv_bench_metric_v2": {
+            "path": "evaluation/cv_bench_metric_v2.py",
+            "role": "future_metric_v2",
+            "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1"
+          },
+          "edge576_manifest": {
+            "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+            "role": "edge576_manifest",
+            "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f"
+          },
+          "edge576_summary": {
+            "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+            "role": "edge576_summary",
+            "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b"
+          },
+          "evaluator": {
+            "path": "evaluation/build_cv_bench_pruning_report.py",
+            "role": "official_cv_bench_evaluator",
+            "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+          },
+          "integer_b1_integration_core": {
+            "path": "evaluation/hardware_regular_b1_integration.py",
+            "role": "integer_b1_integration_core",
+            "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa"
+          },
+          "integer_corrected_l2_core": {
+            "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+            "role": "integer_corrected_l2_core",
+            "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585"
+          },
+          "integer_current_selector_core": {
+            "path": "evaluation/current_selector_integer.py",
+            "role": "integer_current_selector_core",
+            "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7"
+          },
+          "integer_token_selector_core": {
+            "path": "evaluation/hardware_regular_token_selector.py",
+            "role": "integer_scoring_token_selector_core",
+            "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+          },
+          "metrics": {
+            "path": "evaluation/metrics.py",
+            "role": "metrics",
+            "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+          },
+          "model_identity_manifest": {
+            "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+            "role": "model_identity",
+            "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+          },
+          "source_full_manifest": {
+            "path": "datasets/cv_bench_full2638.jsonl",
+            "role": "frozen_full_manifest",
+            "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+          },
+          "v1_layout_rebuild_core": {
+            "path": "evaluation/conservative_l2_residual_reranker.py",
+            "role": "v1_layout_rebuild_core_reused_by_v2",
+            "sha256": "64b699757fa9ea04eb12438509b5679644a263eb4783139e50d945e196fb5bf4"
+          },
+          "v2_integration": {
+            "path": "evaluation/hardware_regular_b1_guarded_rerank.py",
+            "role": "frozen_v2_integration",
+            "sha256": "0eaab5edceaeccda95bfbeb43c6ed0c6e81f1f67cde072bb024b33bc93fc15d2"
+          },
+          "v2_mechanism_core": {
+            "path": "evaluation/conservative_l2_guarded_reranker.py",
+            "role": "frozen_v2_mechanism_core",
+            "sha256": "9486771f020b65661d9485702ba6d0d9d7901d7119aea8cb13090799792e357b"
+          },
+          "v2_runner": {
+            "path": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+            "role": "frozen_v2_runner",
+            "sha256": "834e5c8165e0cd52565c8a49c6a05bee17b2950afedfbe26a3ad6757c5bf2146"
+          },
+          "v2_summarizer": {
+            "path": "evaluation/summarize_conservative_l2_guarded_rerank_full2638.py",
+            "role": "frozen_v2_summarizer",
+            "sha256": "7da4e93da2ac76ded26ff94b319b9712d3887e8800bbd95107caa3b8b6ea14d7"
+          }
+        },
+        "requested_count": 17,
+        "verified_count": 17
+      },
+      "existing_done_count": 0,
+      "g_histogram": {
+        "g_257_512": 706,
+        "g_513_576": 1008,
+        "g_97_256": 781,
+        "g_le_96": 143
+      },
+      "g_max": 576,
+      "g_min": 64,
+      "gpu_runs": 0,
+      "is_new_mechanism": false,
+      "locked_parameters": {
+        "K": 96,
+        "attention_implementation": "sdpa",
+        "decoding": "greedy_argmax",
+        "do_sample": false,
+        "dtype": "bf16",
+        "identity_bypass_g_le": 96,
+        "local_candidate_cap": 16,
+        "max_new_tokens": 16,
+        "max_swaps": 16,
+        "region_grid": 3
+      },
+      "manifest": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+      "manifest_sha256_matches_pin": true,
+      "mechanism_id": "dense_edge576",
+      "mechanism_identity": {
+        "allowed_mechanism_scope": null,
+        "arm": "dense_edge576",
+        "config_output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/dense_edge576_full2638.jsonl",
+        "frozen_constant_mechanism_id": null,
+        "is_new_mechanism": false,
+        "mechanism_id": "dense_edge576",
+        "ok": true
+      },
+      "model_loaded": false,
+      "output_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-07-edge576-cvbench/dense_edge576_full2638.jsonl",
+      "output_path_matches_r2": true,
+      "pending_count": 2638,
+      "processor": {
+        "keep_aspect_ratio": true,
+        "max_pixels": 589824,
+        "merge_size": 2,
+        "min_pixels": 65536,
+        "patch_size": 16
+      },
+      "sample_count": 2638,
+      "status": "EDGE576_RUNNER_VALIDATE_ONLY_OK",
+      "unique_sample_id_count": 2638,
+      "weights_loaded": false
+    },
+    "v2_edge576_b1_k96": {
+      "all_g_within_budget": true,
+      "arm": "v2_edge576_b1_k96",
+      "cuda_required": false,
+      "dependency_pins": {
+        "all_match": true,
+        "pins": {
+          "corrected_l2_runner": {
+            "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+            "role": "corrected_l2_runner",
+            "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9"
+          },
+          "cv_bench_metric_v2": {
+            "path": "evaluation/cv_bench_metric_v2.py",
+            "role": "future_metric_v2",
+            "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1"
+          },
+          "edge576_manifest": {
+            "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+            "role": "edge576_manifest",
+            "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f"
+          },
+          "edge576_summary": {
+            "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+            "role": "edge576_summary",
+            "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b"
+          },
+          "evaluator": {
+            "path": "evaluation/build_cv_bench_pruning_report.py",
+            "role": "official_cv_bench_evaluator",
+            "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+          },
+          "integer_b1_integration_core": {
+            "path": "evaluation/hardware_regular_b1_integration.py",
+            "role": "integer_b1_integration_core",
+            "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa"
+          },
+          "integer_corrected_l2_core": {
+            "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+            "role": "integer_corrected_l2_core",
+            "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585"
+          },
+          "integer_current_selector_core": {
+            "path": "evaluation/current_selector_integer.py",
+            "role": "integer_current_selector_core",
+            "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7"
+          },
+          "integer_token_selector_core": {
+            "path": "evaluation/hardware_regular_token_selector.py",
+            "role": "integer_scoring_token_selector_core",
+            "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+          },
+          "metrics": {
+            "path": "evaluation/metrics.py",
+            "role": "metrics",
+            "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+          },
+          "model_identity_manifest": {
+            "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+            "role": "model_identity",
+            "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3"
+          },
+          "source_full_manifest": {
+            "path": "datasets/cv_bench_full2638.jsonl",
+            "role": "frozen_full_manifest",
+            "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91"
+          },
+          "v1_layout_rebuild_core": {
+            "path": "evaluation/conservative_l2_residual_reranker.py",
+            "role": "v1_layout_rebuild_core_reused_by_v2",
+            "sha256": "64b699757fa9ea04eb12438509b5679644a263eb4783139e50d945e196fb5bf4"
+          },
+          "v2_integration": {
+            "path": "evaluation/hardware_regular_b1_guarded_rerank.py",
+            "role": "frozen_v2_integration",
+            "sha256": "0eaab5edceaeccda95bfbeb43c6ed0c6e81f1f67cde072bb024b33bc93fc15d2"
+          },
+          "v2_mechanism_core": {
+            "path": "evaluation/conservative_l2_guarded_reranker.py",
+            "role": "frozen_v2_mechanism_core",
+            "sha256": "9486771f020b65661d9485702ba6d0d9d7901d7119aea8cb13090799792e357b"
+          },
+          "v2_runner": {
+            "path": "evaluation/run_hf_conservative_l2_guarded_rerank.py",
+            "role": "frozen_v2_runner",
+            "sha256": "834e5c8165e0cd52565c8a49c6a05bee17b2950afedfbe26a3ad6757c5bf2146"
+          },
+          "v2_summarizer": {
+            "path": "evaluation/summarize_conservative_l2_guarded_rerank_full2638.py",
+            "role": "frozen_v2_summarizer",
+            "sha256": "7da4e93da2ac76ded26ff94b319b9712d3887e8800bbd95107caa3b8b6ea14d7"
+          }
+        },
+        "requested_count": 17,
+        "verified_count": 17
+      },
+      "existing_done_count": 0,
+      "g_histogram": {
+        "g_257_512": 706,
+        "g_513_576": 1008,
+        "g_97_256": 781,
+        "g_le_96": 143
+      },
+      "g_max": 576,
+      "g_min": 64,
+      "gpu_runs": 0,
+      "is_new_mechanism": false,
+      "locked_parameters": {
+        "K": 96,
+        "attention_implementation": "sdpa",
+        "decoding": "greedy_argmax",
+        "do_sample": false,
+        "dtype": "bf16",
+        "identity_bypass_g_le": 96,
+        "local_candidate_cap": 16,
+        "max_new_tokens": 16,
+        "max_swaps": 16,
+        "region_grid": 3
+      },
+      "manifest": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+      "manifest_sha256_matches_pin": true,
+      "mechanism_id": "conservative_l2_guarded_rerank_v2",
+      "mechanism_identity": {
+        "allowed_mechanism_scope": "the frozen conservative_l2_guarded_rerank_v2 mechanism only; no new mechanism, no v2 re-tuning on edge576, no G/source/task routing, no label/answer leakage",
+        "arm": "v2_edge576_b1_k96",
+        "config_output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/v2_edge576_k96_full2638.jsonl",
+        "frozen_constant_mechanism_id": "conservative_l2_guarded_rerank_v2",
+        "is_new_mechanism": false,
+        "mechanism_id": "conservative_l2_guarded_rerank_v2",
+        "ok": true
+      },
+      "model_loaded": false,
+      "output_path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-07-edge576-cvbench/v2_edge576_k96_full2638.jsonl",
+      "output_path_matches_r2": true,
+      "pending_count": 2638,
+      "processor": {
+        "keep_aspect_ratio": true,
+        "max_pixels": 589824,
+        "merge_size": 2,
+        "min_pixels": 65536,
+        "patch_size": 16
+      },
+      "sample_count": 2638,
+      "status": "EDGE576_RUNNER_VALIDATE_ONLY_OK",
+      "unique_sample_id_count": 2638,
+      "weights_loaded": false
+    }
+  }
+}

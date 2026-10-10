@@ -1,0 +1,151 @@
+{
+  "report": "2026-09-28-prompt-feature-extraction",
+  "generated_at": "2026-09-28T01:34:22+08:00",
+  "status": "BLOCKED",
+  "decision": "GPU_GATE_BLOCKED / MODEL_LOAD_NOT_ACTIVATED / PROMPT_PROJECTION_EXTRACTION_NOT_RUN",
+  "gpu_gate": {
+    "decision": "BLOCKED",
+    "model_load_authorized": false,
+    "gpu": {
+      "name": "NVIDIA RTX A6000",
+      "driver": "580.178.04",
+      "cuda": "13.0",
+      "memory_total_mib": 46068,
+      "memory_used_mib": 3426,
+      "memory_free_mib": 42060,
+      "persistence_mode": "Off",
+      "temperature_c": 86,
+      "power_draw_w": 278.14,
+      "power_cap_w": 300.0,
+      "utilization_gpu_pct": 100
+    },
+    "checks": {
+      "no_non_zhaoxiangyu_compute_processes": false,
+      "free_memory_at_least_20480_mib": true,
+      "not_obviously_saturated": false
+    },
+    "observed": {
+      "audit_start": "2026-09-28T01:34:13+08:00",
+      "audit_end": "2026-09-28T01:34:22+08:00",
+      "zhaoxiangyu_uid": 1005,
+      "gpu_util_samples_pct": [99, 99, 99, 97, 99, 100],
+      "memory_free_samples_mib": [42060, 42060, 42060, 42060, 42060, 42060],
+      "temperature_samples_c": [86, 86, 85, 85, 85, 86],
+      "power_draw_samples_w": [292.56, 295.52, 296.56, 254.05, 294.58, 278.14],
+      "compute_process_count": 2,
+      "non_zhaoxiangyu_compute_process_count": 2
+    },
+    "compute_processes": [
+      {
+        "pid": 16507,
+        "owner_user": "seey6",
+        "owner_uid": 1001,
+        "is_zhaoxiangyu": false,
+        "gpu_memory_mib": 382,
+        "type": "C",
+        "command": "python main.py --port 7860 --listen 0.0.0.0",
+        "start": "Fri Sep 25 19:12:53 2026",
+        "state": "S (sleeping)"
+      },
+      {
+        "pid": 884366,
+        "owner_user": "zhaoshengtao",
+        "owner_uid": 1004,
+        "is_zhaoxiangyu": false,
+        "gpu_memory_mib": 2950,
+        "type": "C",
+        "command": "python sensitivity/weight_sensitivity.py --max-images 0 --max-layerwise-images 0 --max-layerwise-layers 0 --resume-layerwise --run-dir-name phase1_weight_sensitivity_kodak24",
+        "start": "Mon Sep 28 00:48:16 2026",
+        "state": "R (running)",
+        "cpu_pct": 100.0
+      }
+    ],
+    "display_processes": [
+      {"pid": 2346, "name": "/usr/lib/xorg/Xorg", "gpu_memory_mib": 35},
+      {"pid": 2513, "name": "/usr/bin/gnome-shell", "gpu_memory_mib": 9}
+    ],
+    "evidence_log": "reports/token_selector/logs/gpu_audit_20260928T013413.log"
+  },
+  "pinned_inputs": {
+    "script": {
+      "path": "evaluation/extract_prompt_projection_features.py",
+      "sha256": "cac52d49033263c0bc7c1afdc0ef3c58ffdda27e1e9a883ad1fcc205ddf2eb70"
+    },
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "0b03f8f56422f5efdc34561b0cbce40b98510ff0ede88942854849307108ef99"
+    },
+    "manifest": {
+      "path": "datasets/prompt_projection_clean_inductive_v1.jsonl",
+      "sha256": "acab1a322a93021138ce87bb048c1e25493ec19a3f56f70dc3a24c0686c79213"
+    },
+    "model_dir": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B"
+  },
+  "extraction": {
+    "status": "NOT_RUN",
+    "reason": "GPU gate BLOCKED; model loading path was never activated.",
+    "model_loaded": false,
+    "gpu_used": false,
+    "expected_out_dir": "artifacts/token_selector/prompt_projection_features",
+    "out_dir_existed_before": false,
+    "out_dir_created": false,
+    "expected_metrics_if_run": {
+      "index_records": 472,
+      "npz_files": 472,
+      "unique_source_image_sha256": 236,
+      "vision_forwards": 236,
+      "prompt_calls": 472,
+      "split_images": {"train": 159, "val": 38, "test": 39},
+      "split_records": {"train": 318, "val": 76, "test": 78}
+    }
+  },
+  "cache_validation": {
+    "status": "NOT_RUN",
+    "reason": "No extraction was performed; cache/index does not exist.",
+    "index_unique_sample_count": null,
+    "npz_count": null,
+    "unique_source_image_count": null,
+    "forbidden_keys_present": null,
+    "schema_dtype_shape_valid": null,
+    "source_config_manifest_hashes_consistent": null
+  },
+  "split_counts": {
+    "status": "NOT_RUN",
+    "replayed_by_image_hash": null,
+    "images": null,
+    "records": null
+  },
+  "timing": {
+    "audit_start": "2026-09-28T01:34:13+08:00",
+    "audit_end": "2026-09-28T01:34:22+08:00",
+    "extraction_wall_time_s": null,
+    "steady_state_inference": false,
+    "peak_gpu_memory_mib": null,
+    "note": "Extraction not started; wall time and peak memory not applicable. Audit peak observation is memory_used 3426 MiB (idle-resident processes), not an extraction peak."
+  },
+  "failures": [],
+  "constraints_respected": {
+    "killed_or_paused_other_processes": false,
+    "modified_model": false,
+    "network_used": false,
+    "cv_bench_manifest_used_for_extraction": false,
+    "training_run": false,
+    "accuracy_claimed": false,
+    "deleted_valid_cache": false
+  },
+  "warnings": [
+    "Gate G1 FAIL: 2 compute processes owned by non-zhaoxiangyu users (seey6 uid 1001, zhaoshengtao uid 1004).",
+    "Gate G3 FAIL: GPU utilization 97-100%, power 254-296 W vs 300 W cap, temperature 85-86 C; clearly saturated.",
+    "Gate G2 PASS: 42060 MiB free (>= 20480 MiB).",
+    "Extractor, transformers/PIL import, model load, and out-dir creation were NOT performed.",
+    "No NPZ/index existed and none was created or deleted."
+  ],
+  "files_changed": [
+    "reports/token_selector/2026-09-28-prompt-feature-extraction.md",
+    "reports/token_selector/2026-09-28-prompt-feature-extraction.json",
+    "reports/token_selector/logs/gpu_audit_20260928T013413.log",
+    "CURRENT_STATUS.md",
+    "/tmp/robobrain_harness_result.json"
+  ],
+  "next_gate": "Re-run the read-only GPU gate when there are zero non-zhaoxiangyu compute processes, free memory >= 20480 MiB, and the GPU is not saturated; only then may the pinned extractor and model loading path be activated under a separate authorization gate."
+}

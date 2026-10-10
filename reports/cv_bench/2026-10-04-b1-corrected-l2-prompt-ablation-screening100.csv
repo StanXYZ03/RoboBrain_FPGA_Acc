@@ -1,0 +1,101 @@
+sample_id,task,source,source_dataset,ground_truth,corrected_l2_float_answer,corrected_l2_float_correct,corrected_l2_integer_answer,corrected_l2_integer_correct,prompt_plus_corrected_l2_integer_answer,prompt_plus_corrected_l2_integer_correct,dense_answer,dense_correct,old_defective_l2_answer,old_defective_l2_correct,old_current_integer_answer,old_current_integer_correct
+21,Count,ADE20K,ADE20K Validation Set,B,A,False,A,False,B,True,B,True,B,True,B,True
+55,Count,ADE20K,ADE20K Validation Set,B,B,True,B,True,D,False,D,False,D,False,D,False
+81,Count,ADE20K,ADE20K Validation Set,B,D,False,D,False,A,False,D,False,D,False,A,False
+123,Count,ADE20K,ADE20K Validation Set,E,A,False,A,False,A,False,E,True,A,False,A,False
+189,Count,ADE20K,ADE20K Validation Set,E,D,False,D,False,D,False,E,True,D,False,B,False
+195,Count,ADE20K,ADE20K Validation Set,A,C,False,C,False,C,False,C,False,C,False,C,False
+258,Count,ADE20K,ADE20K Validation Set,A,B,False,B,False,A,True,A,True,B,False,A,True
+302,Count,ADE20K,ADE20K Validation Set,B,D,False,D,False,D,False,B,True,B,True,D,False
+329,Count,ADE20K,ADE20K Validation Set,D,D,True,D,True,D,True,D,True,D,True,D,True
+339,Count,ADE20K,ADE20K Validation Set,B,A,False,A,False,A,False,B,True,A,False,A,False
+346,Relation,ADE20K,ADE20K Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+371,Relation,ADE20K,ADE20K Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+402,Relation,ADE20K,ADE20K Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+426,Relation,ADE20K,ADE20K Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+427,Relation,ADE20K,ADE20K Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+523,Relation,ADE20K,ADE20K Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+531,Relation,ADE20K,ADE20K Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+535,Relation,ADE20K,ADE20K Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+539,Relation,ADE20K,ADE20K Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+587,Relation,ADE20K,ADE20K Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+757,Count,COCO,COCO 2017 Validation Set,C,C,True,C,True,C,True,C,True,C,True,C,True
+857,Count,COCO,COCO 2017 Validation Set,D,C,False,C,False,D,True,D,True,B,False,D,True
+889,Count,COCO,COCO 2017 Validation Set,C,B,False,B,False,C,True,D,False,B,False,C,True
+906,Count,COCO,COCO 2017 Validation Set,D,D,True,D,True,D,True,D,True,D,True,D,True
+920,Count,COCO,COCO 2017 Validation Set,D,D,True,D,True,D,True,D,True,C,False,D,True
+926,Count,COCO,COCO 2017 Validation Set,C,C,True,C,True,C,True,C,True,C,True,C,True
+941,Count,COCO,COCO 2017 Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+946,Count,COCO,COCO 2017 Validation Set,A,D,False,E,False,,False,E,False,D,False,,False
+971,Count,COCO,COCO 2017 Validation Set,A,C,False,C,False,C,False,A,True,C,False,C,False
+1009,Count,COCO,COCO 2017 Validation Set,C,C,True,C,True,C,True,C,True,C,True,C,True
+1155,Relation,COCO,COCO 2017 Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+1180,Relation,COCO,COCO 2017 Validation Set,A,B,False,B,False,A,True,B,False,B,False,A,True
+1275,Relation,COCO,COCO 2017 Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+1302,Relation,COCO,COCO 2017 Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+1303,Relation,COCO,COCO 2017 Validation Set,A,A,True,A,True,A,True,A,True,A,True,A,True
+1308,Relation,COCO,COCO 2017 Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+1314,Relation,COCO,COCO 2017 Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+1357,Relation,COCO,COCO 2017 Validation Set,A,B,False,B,False,A,True,A,True,A,True,A,True
+1401,Relation,COCO,COCO 2017 Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+1413,Relation,COCO,COCO 2017 Validation Set,B,B,True,B,True,B,True,B,True,B,True,B,True
+1482,Depth,Omni3D,Omni3D_Hypersim,A,B,False,B,False,B,False,A,True,A,True,B,False
+1501,Depth,Omni3D,Omni3D_Hypersim,B,A,False,A,False,A,False,A,False,A,False,A,False
+1506,Depth,Omni3D,Omni3D_Hypersim,B,B,True,B,True,B,True,B,True,A,False,B,True
+1543,Depth,Omni3D,Omni3D_Hypersim,B,B,True,B,True,B,True,B,True,B,True,B,True
+1544,Depth,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,B,False,A,True
+1549,Depth,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,A,True,A,True
+1554,Depth,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,A,True,A,True
+1573,Depth,Omni3D,Omni3D_Hypersim,B,B,True,B,True,B,True,B,True,B,True,B,True
+1576,Depth,Omni3D,Omni3D_Hypersim,B,B,True,B,True,B,True,B,True,B,True,B,True
+1601,Depth,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,A,True,A,True
+1649,Depth,Omni3D,Omni3D_SUNRGBD,A,A,True,A,True,A,True,A,True,A,True,A,True
+1670,Depth,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+1684,Depth,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+1714,Depth,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+1741,Depth,Omni3D,Omni3D_SUNRGBD,A,A,True,A,True,A,True,A,True,A,True,A,True
+1759,Depth,Omni3D,Omni3D_SUNRGBD,A,A,True,A,True,A,True,A,True,A,True,A,True
+1762,Depth,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,A,False,B,True
+1790,Depth,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+1812,Depth,Omni3D,Omni3D_SUNRGBD,B,A,False,A,False,B,True,B,True,A,False,B,True
+1829,Depth,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,A,False,B,True
+1844,Depth,Omni3D,Omni3D_nuScenes,A,A,True,A,True,A,True,A,True,A,True,A,True
+1845,Depth,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,B,True,B,True
+1850,Depth,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,A,False,B,True
+1857,Depth,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,A,False,A,False
+1886,Depth,Omni3D,Omni3D_nuScenes,A,A,True,A,True,A,True,A,True,B,False,A,True
+1921,Depth,Omni3D,Omni3D_nuScenes,A,A,True,A,True,A,True,A,True,A,True,A,True
+1931,Depth,Omni3D,Omni3D_nuScenes,B,A,False,A,False,B,True,B,True,A,False,B,True
+1960,Depth,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,A,False,B,True
+1973,Depth,Omni3D,Omni3D_nuScenes,A,A,True,A,True,A,True,A,True,A,True,A,True
+2020,Depth,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,B,True,B,True
+2050,Distance,Omni3D,Omni3D_Hypersim,B,B,True,B,True,B,True,B,True,B,True,B,True
+2104,Distance,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,A,True,A,True
+2115,Distance,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,A,True,A,True
+2142,Distance,Omni3D,Omni3D_Hypersim,A,B,False,B,False,A,True,A,True,B,False,A,True
+2152,Distance,Omni3D,Omni3D_Hypersim,B,B,True,B,True,A,False,B,True,A,False,A,False
+2160,Distance,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,B,False,A,True
+2174,Distance,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,A,True,A,True
+2188,Distance,Omni3D,Omni3D_Hypersim,A,B,False,B,False,B,False,A,True,B,False,A,True
+2193,Distance,Omni3D,Omni3D_Hypersim,A,A,True,A,True,A,True,A,True,A,True,A,True
+2217,Distance,Omni3D,Omni3D_Hypersim,A,B,False,B,False,B,False,A,True,B,False,B,False
+2251,Distance,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+2267,Distance,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+2269,Distance,Omni3D,Omni3D_SUNRGBD,A,A,True,A,True,A,True,A,True,A,True,A,True
+2293,Distance,Omni3D,Omni3D_SUNRGBD,A,A,True,A,True,A,True,A,True,A,True,A,True
+2309,Distance,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+2385,Distance,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+2386,Distance,Omni3D,Omni3D_SUNRGBD,A,A,True,A,True,A,True,A,True,A,True,A,True
+2394,Distance,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+2397,Distance,Omni3D,Omni3D_SUNRGBD,B,B,True,B,True,B,True,B,True,B,True,B,True
+2430,Distance,Omni3D,Omni3D_SUNRGBD,A,A,True,A,True,B,False,A,True,A,True,B,False
+2442,Distance,Omni3D,Omni3D_nuScenes,A,A,True,A,True,A,True,A,True,B,False,A,True
+2457,Distance,Omni3D,Omni3D_nuScenes,B,A,False,A,False,A,False,A,False,A,False,A,False
+2462,Distance,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,A,False,B,True
+2471,Distance,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,B,True,B,True
+2494,Distance,Omni3D,Omni3D_nuScenes,A,B,False,B,False,A,True,A,True,B,False,B,False
+2525,Distance,Omni3D,Omni3D_nuScenes,A,A,True,A,True,A,True,A,True,A,True,A,True
+2564,Distance,Omni3D,Omni3D_nuScenes,B,B,True,B,True,B,True,B,True,B,True,B,True
+2580,Distance,Omni3D,Omni3D_nuScenes,B,A,False,A,False,A,False,A,False,B,True,A,False
+2609,Distance,Omni3D,Omni3D_nuScenes,A,A,True,A,True,A,True,A,True,B,False,A,True
+2634,Distance,Omni3D,Omni3D_nuScenes,A,B,False,B,False,A,True,B,False,A,True,A,True

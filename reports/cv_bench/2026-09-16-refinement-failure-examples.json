@@ -1,0 +1,57 @@
+[
+  {
+    "sample_id": "1",
+    "output_text": "Based on the complete image, let's count the cushions on the bed:\n\n1",
+    "output_tokens": 16,
+    "effective_crop_1000": [
+      136.71875,
+      399.7071742313324,
+      737.3046875,
+      1000.0
+    ]
+  },
+  {
+    "sample_id": "6",
+    "output_text": "Based on the image, there are two walls visible.\n\n1.  **The",
+    "output_tokens": 16,
+    "effective_crop_1000": [
+      137.5,
+      282.29665071770336,
+      737.5,
+      882.7751196172248
+    ]
+  },
+  {
+    "sample_id": "9",
+    "output_text": "Based on the image, we can identify the following walls:\n\n1.  **",
+    "output_tokens": 16,
+    "effective_crop_1000": [
+      260.59322033898303,
+      397.72727272727275,
+      862.2881355932203,
+      1000.0
+    ]
+  },
+  {
+    "sample_id": "12",
+    "output_text": "Based on the provided images, here is the analysis:\n\n1.  **An",
+    "output_tokens": 16,
+    "effective_crop_1000": [
+      386.3636363636364,
+      113.63636363636364,
+      987.3737373737374,
+      717.5324675324675
+    ]
+  },
+  {
+    "sample_id": "13",
+    "output_text": "Based on the first image, there is one large, ornate pendant lamp hanging",
+    "output_tokens": 16,
+    "effective_crop_1000": [
+      116.66666666666667,
+      400.0,
+      716.6666666666666,
+      1000.0
+    ]
+  }
+]

@@ -1,0 +1,170 @@
+{
+  "status": "PREREGISTERED_TRAIN_VAL_ONLY",
+  "schema_version": "1.0-preregistered",
+  "date": "2026-10-03",
+  "title": "Lightweight prompt-conditioned token selector: three-arm pairwise-retrain falsifiable experiment",
+  "purpose": "Isolate whether explicit paired prompt-discrimination supervision can make the fixed prompt_mean_vector scorer non-collapsing and prompt-sensitive without changing the feature cache, teacher, split, projection dimensions, FPGA query shape, or token-budget contract. The only causal variable is the paired-supervision term and its pre-registered scale.",
+  "scope": {
+    "train_val_only": true,
+    "test_npz_must_not_be_opened": true,
+    "no_4b_model_load": true,
+    "no_feature_reextraction": true,
+    "no_cv_bench": true,
+    "no_network": true,
+    "no_hardware_speedup_claim": true,
+    "cpu_only_float32": true,
+    "no_gpu": true
+  },
+  "frozen_inputs": {
+    "draft": {
+      "path": "configs/prompt_mean_pairwise_retrain.draft.json",
+      "sha256": "787f8f401bcb10b5fe8007a6a0f5b415858d893cb2797b3c1797d5f1fa785772"
+    },
+    "config": {
+      "path": "configs/prompt_projection_distillation.json",
+      "sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b"
+    },
+    "index": {
+      "path": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+      "sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26"
+    },
+    "features_dir": "artifacts/token_selector/prompt_projection_features",
+    "train_npz_aggregate_sha256": "33997394c4e148e3cfcd45eb0eb37fc97616cece8db3da5c731171d4b53d3951",
+    "scale_audit": {
+      "path": "reports/token_selector/2026-10-02-pair-loss-scale-train-only.json",
+      "sha256": "0d7bffa9aea8ad7aeff4c7d20b1944ef9eef6ed6a59457e1ea01337df3e37ca5"
+    },
+    "concentration_audit": {
+      "path": "reports/token_selector/2026-10-03-pair-gradient-concentration-train-only.json",
+      "sha256": "abb11e5844095a73166137c2f002f18506a06cedac128a2e1eca8b02a856869e"
+    }
+  },
+  "split": {
+    "group_by": "source_image_sha256",
+    "seed": 20260927,
+    "salt": "prompt_projection_distillation_2026_09_27",
+    "ratios": {"train": 0.7, "val": 0.15, "test": 0.15},
+    "expected_train_records": 318,
+    "expected_train_images": 159,
+    "expected_val_records": 76,
+    "expected_val_images": 38,
+    "expected_test_records": 78,
+    "expected_test_images": 39,
+    "test_records_loaded": 0
+  },
+  "scorer": {
+    "name": "prompt_mean_vector",
+    "query": "normalize(mean_t(normalize(prompt_embeddings @ Wt.T)))",
+    "visual": "row_normalize(group_mean @ Wv.T)",
+    "score": "visual_unit @ query",
+    "Wt_shape": [128, 2560],
+    "Wv_shape": [128, 1024],
+    "runtime_query_shape": [1, 128],
+    "fpga_scorer": "Gx128 dot",
+    "token_axis_reduction": "none (prompt mean vector)",
+    "token_axis_max_softmax_exp": false
+  },
+  "arms": [
+    {
+      "name": "A_KL_ONLY_CONTROL",
+      "lambda_pair": 0.0,
+      "total_loss": "L_total = L_base",
+      "role": "control"
+    },
+    {
+      "name": "B_PAIR_LAMBDA_1_CONTROL",
+      "lambda_pair": 1.0,
+      "total_loss": "L_total = L_base + 1.0 * L_pair",
+      "role": "control"
+    },
+    {
+      "name": "C_PAIR_LAMBDA_0P25_PRIMARY",
+      "lambda_pair": 14.280209646136903,
+      "total_loss": "L_total = L_base + 14.280209646136903 * L_pair",
+      "role": "primary_promotion_arm"
+    }
+  ],
+  "loss_definitions": {
+    "L_base": "0.5 * (KL(y_g || p_g) + KL(y_p || p_p))",
+    "D_swap": "0.5 * (KL(y_g || p_p) + KL(y_p || p_g))",
+    "L_pair": "relu(JS_nats(y_g, y_p) + L_base - D_swap)",
+    "hinge_margin": "JS_nats(y_g, y_p) + L_base - D_swap",
+    "y_g": "cached teacher_soft_target of the grounding prompt",
+    "y_p": "cached teacher_soft_target of the pointing prompt",
+    "p_g": "softmax(student_score_g / 0.1)",
+    "p_p": "softmax(student_score_p / 0.1)",
+    "KL_units": "nats",
+    "JS_units": "nats",
+    "teacher_soft_frozen": true,
+    "lambda_frozen_from_scale_audit": 14.280209646136903
+  },
+  "optimization": {
+    "seeds": [20261002, 20261003, 20261004],
+    "optimizer": "AdamW",
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "batch_unit": "image_pair",
+    "batch_size_images": 4,
+    "grad_clip_norm": 1.0,
+    "init_std": 0.02,
+    "student_temperature": 0.1,
+    "device": "cpu",
+    "dtype": "float32",
+    "deterministic_cpu": true,
+    "torch_num_threads": 1,
+    "parameter_count": 458752,
+    "note": "about 458752 trainable parameters in a small Wt/Wv head; this is NOT 4B model training",
+    "epoch0_state_shared_across_arms_within_seed": true,
+    "epoch_batch_order_shared_across_arms_within_seed": true,
+    "model_selection": "val L_total only; no val hyperparameter search",
+    "best_epoch_tie_break": "earliest epoch",
+    "save_full_epoch_weights": false
+  },
+  "validation_statistics": {
+    "split": "val",
+    "independent_unit": "image",
+    "record_to_image_aggregation": "average grounding and pointing record deltas before resampling",
+    "correct_prompt_alignment": ["spearman", "ndcg_full"],
+    "controls": ["same_image_other_task", "cross_image_same_task_derangement"],
+    "donor_rule": "split-local fixed-seed image-level deterministic derangement; no self-pair; same task donor",
+    "donor_seed_val": 20261103,
+    "bootstrap_resamples": 2000,
+    "permutation_resamples": 10000,
+    "permutation_sided": "two-sided sign-flip",
+    "ci_level": 0.95,
+    "alpha": 0.05,
+    "effect_size_floor_cohens_dz": 0.2,
+    "primary_metrics": ["spearman", "ndcg_full"],
+    "seed_aggregation": "per-image median delta across the three seeds before bootstrap/permutation",
+    "seed_sign_requirement": "delta mean positive in at least 2 of 3 seeds",
+    "holm_family": "3 arms x 2 controls x 2 primary metrics = 12 tests",
+    "holm_family_size": 12,
+    "paired_effect_seed_base": 20261002
+  },
+  "teacher_alignment_gate_thresholds": {
+    "spearman_min": 0.0464749736,
+    "ndcg_full_min": 0.8399415696,
+    "frozen_baseline_spearman": 0.0564749736,
+    "frozen_baseline_ndcg_full": 0.8499415696,
+    "tolerance": 0.01,
+    "aggregation": "median over the three seeds of the best-checkpoint val correct-prompt metric"
+  },
+  "promotion_gates": {
+    "A_prompt_sensitivity": "same-image-other-task: both primary deltas > 0, 95% CI lower > 0, |dz| >= 0.2, Holm-adjusted p < 0.05, and positive sign in >= 2/3 seeds.",
+    "B_shuffled_discrimination": "cross-image-same-task derangement: both primary deltas > 0, 95% CI lower > 0, |dz| >= 0.2, Holm-adjusted p < 0.05, and positive sign in >= 2/3 seeds.",
+    "C_collapse_removed": "exact_prompt_invariance_fraction <= 0.05 in every seed.",
+    "D_teacher_alignment": "median-seed val correct Spearman >= 0.0464749736 and NDCG-full >= 0.8399415696.",
+    "E_generalization": ">= 2/3 seeds have best_epoch > 0 and best val L_total < epoch0 val L_total.",
+    "F_hardware_contract": "runtime query remains 1x128; FPGA scorer remains Gx128 dot; no token-axis max/softmax/exp."
+  },
+  "winner_rule": "Only arm C_PAIR_LAMBDA_0P25_PRIMARY may be promoted, and only if it passes all gates A-F. Arms A and B are controls and are reported but can never be the winner. If C does not pass A-F the decision is NO_PROMOTION.",
+  "prohibitions": [
+    "no fourth arm",
+    "no lambda/rank/temperature/learning-rate/epoch/margin search",
+    "no teacher replacement",
+    "no test NPZ open, evaluation, or metric",
+    "no post-hoc change of the winner rule",
+    "no post-hoc change of the concentration evidence"
+  ]
+}

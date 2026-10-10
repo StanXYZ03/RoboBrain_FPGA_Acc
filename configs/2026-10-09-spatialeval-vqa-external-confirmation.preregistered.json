@@ -1,0 +1,272 @@
+{
+  "version": "2026-10-09-spatialeval-vqa-external-confirmation",
+  "date": "2026-10-09",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "executed": false,
+  "gpu_runs": 0,
+  "weights_loaded": false,
+  "dataset_downloaded": false,
+  "must_not_run_until_pins_verified": false,
+  "is_successor_of": {
+    "draft_config": "configs/2026-10-09-spatialeval-vqa-external-confirmation.draft.json",
+    "draft_config_sha256": "20e7c8903e3bee776dff33d7916794014bc4cd724850cac28b342011628bcd3e",
+    "draft_preserved_unchanged": true,
+    "note": "This is a new successor file; the DRAFT_NOT_PREREGISTERED draft was not renamed, edited or promoted in place."
+  },
+  "purpose": "One-shot untouched external confirmation of the frozen edge576 Dense / corrected-integer-L2 / conservative_l2_guarded_rerank_v2 comparison on the SpatialEval VQA test split, which was never used to tune the Selector.",
+  "data_disclosure": {
+    "labels_observed": true,
+    "not_label_blind": true,
+    "not_label_blind_reason": "Oracle labels were programmatically materialized and aggregate-audited before execution; this split is therefore not a label-blind test.",
+    "not_used_for_selector_tuning": true,
+    "future_selector_tuning_on_this_split_forbidden": true
+  },
+  "dataset": {
+    "id": "MilaWang/SpatialEval",
+    "config": "vqa",
+    "split": "test",
+    "venue": "NeurIPS 2024",
+    "license_status": "NOT_EXPLICITLY_STATED_IN_THE_OFFICIAL_DATASET_CARD_OR_REPOSITORY_AS_CHECKED_2026-10-09",
+    "reference_manifest": {
+      "path": "datasets/external/2026-10-09-spatialeval-vqa-test4635.reference.jsonl",
+      "sha256": "03649b9c2bae7e43cc72555b744396eb8205785e7df80c5a73a6ae1e455f4050",
+      "bytes": 5282303,
+      "rows": 4635
+    },
+    "reference_parquets": [
+      {
+        "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00000-of-00002.parquet",
+        "sha256": "624aad413e7eb5dbd4e234ac2a36945b9be2280a9d1c8972c1f2fc886b27b897",
+        "bytes": 76143378,
+        "rows": 2318
+      },
+      {
+        "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00001-of-00002.parquet",
+        "sha256": "b9301e70fd79ec1f828ad04100bb6b546a76bcdf15bae71b9aded77b98d27add",
+        "bytes": 635994517,
+        "rows": 2317
+      }
+    ],
+    "handler_tasks": ["spatialmap", "mazenav", "spatialgrid"],
+    "handler_task_sample_count": 1500,
+    "handler_sample_count": 4500,
+    "image_cache": "/tmp/zhaoxiangyu-spatialeval-vqa/images",
+    "materialization": {
+      "row_index_source": "reference_manifest.source_parquet_path + source_parquet_row_index",
+      "deduplicate_by": "image_sha256",
+      "verify_parquet_sha256": true,
+      "verify_image_sha256": true,
+      "verify_image_width_height": true,
+      "run_manifest_image_paths": "absolute",
+      "run_manifest_contains_labels": false
+    },
+    "spatialreal135": {
+      "sample_count": 135,
+      "in_main_gate": false,
+      "status": "SEPARATE_EXPLORATORY_NOT_EXECUTED",
+      "reason": "The pinned official evaluation.py has no spatialreal handler and would silently reuse a stale parsed answer."
+    }
+  },
+  "official_evaluator": {
+    "commit": "d82ba382805265f205693cb83a30c4866ea6c35b",
+    "files": {
+      "evaluation.py": {
+        "path": "artifacts/provenance/spatialeval-official-d82ba382/evaluation.py",
+        "sha256": "88d2a1b35abe02d9c517a513e8b1a5f442b61837b6cd742b1ec1fa23c6ccd952"
+      },
+      "inference_vlm.py": {
+        "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_vlm.py",
+        "sha256": "0a69b4cd14707001c6975ab9ae9113a90df2ce2cd73119bceabe99cfddb39337"
+      },
+      "inference_configs.py": {
+        "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_configs.py",
+        "sha256": "79d9c59a8a45be78e18206bde8f6fc13c35827a208ffee99155b29efbbe44972"
+      }
+    },
+    "loaded_via": "importlib",
+    "fixed_model_name": "robobrain25",
+    "parsers": {
+      "spatialmap": "extract_answer_from_text_spatialmap",
+      "mazenav": "extract_answer_from_text_mazenav",
+      "spatialgrid": "extract_answer_from_text_spatialgrid"
+    },
+    "primary_comparison": "int(str(oracle_answer).lower() in str(parsed_answer).lower())",
+    "comparison_kind": "substring_inclusion_not_equality",
+    "none_or_exception_policy": "count_as_wrong",
+    "strict_equal_diagnostic": "project-side strip+lower normalization equality; diagnostic only, never labeled official",
+    "official_cross_task_total_exists": false
+  },
+  "project_aggregation_naming": {
+    "task_macro_field": "project_task_macro",
+    "micro_field": "project_micro",
+    "definition_macro": "arithmetic mean of the three per-task official accuracies",
+    "definition_micro": "pooled correct / 4500",
+    "is_official_total": false,
+    "required_disclosure": "macro/micro are project-side aggregations; the official artifact defines no cross-task total."
+  },
+  "prompt_contract": {
+    "prompt": "dataset text + official w_reason sentence",
+    "w_reason_suffix": "\nFirst, provide a concise answer in one sentence. Then, elaborate on the reasoning behind your answer in a detailed, step-by-step explanation.",
+    "w_reason_source": "artifacts/provenance/spatialeval-official-d82ba382/inference_vlm.py non-bunny w_reason branch"
+  },
+  "runtime_contract": {
+    "model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "dtype": "bf16",
+    "attention_implementation": "sdpa",
+    "do_sample": false,
+    "decoding": "greedy_argmax",
+    "max_new_tokens": 64,
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "image_domain": "edge576 (G<=576)",
+    "warmup_per_arm": 1,
+    "warmup_max_new_tokens": 1,
+    "cuda_synchronize_required": true,
+    "resume": "append-only by sample_id",
+    "raw_output": "JSONL per arm"
+  },
+  "selector_contract": {
+    "cutpoint": "B1_after_vision_block_0",
+    "K": 96,
+    "region_grid": 3,
+    "local_candidate_cap": 16,
+    "max_swaps": 16,
+    "identity_bypass_g_le": 96,
+    "uses_labels": false,
+    "uses_answer_tokens": false,
+    "uses_gradients": false,
+    "labels_forbidden_in_selector": true,
+    "producers_reused_from": "evaluation/run_edge576_cvbench_three_arm.py",
+    "selector_algorithm_copied": false
+  },
+  "arms": {
+    "dense_edge576": {
+      "role": "same-input dense reference",
+      "mechanism_id": "dense_edge576",
+      "is_new_mechanism": false,
+      "output_path": "artifacts/token_selector/2026-10-09-spatialeval-vqa/dense_edge576_spatialeval_vqa_raw.jsonl",
+      "status": "NOT_EXECUTED"
+    },
+    "corrected_l2_integer_b1_k96": {
+      "role": "hardware-regular corrected integer L2 control",
+      "mechanism_id": "corrected_l2_integer",
+      "is_new_mechanism": false,
+      "output_path": "artifacts/token_selector/2026-10-09-spatialeval-vqa/corrected_l2_integer_k96_spatialeval_vqa_raw.jsonl",
+      "status": "NOT_EXECUTED"
+    },
+    "v2_edge576_b1_k96": {
+      "role": "frozen candidate conservative_l2_guarded_rerank_v2",
+      "mechanism_id": "conservative_l2_guarded_rerank_v2",
+      "is_new_mechanism": false,
+      "output_path": "artifacts/token_selector/2026-10-09-spatialeval-vqa/v2_spatialeval_vqa_raw.jsonl",
+      "status": "NOT_EXECUTED"
+    }
+  },
+  "success_gates": {
+    "v2_relative_to_same_input_dense_task_macro_minimum": 0.9,
+    "v2_minus_l2_task_macro_paired_bootstrap_95pct_ci_lower_minimum": 0.0,
+    "bootstrap": {
+      "stratification": "task::question_id",
+      "seed": 20261009,
+      "repetitions": 5000,
+      "confidence": 0.95,
+      "paired": true,
+      "percentile_method": "linear interpolation over sorted bootstrap replicates"
+    },
+    "parse_failure": "count_as_wrong",
+    "per_task_gate": null,
+    "per_task_policy": "report_only",
+    "spatialreal_in_main_gate": false,
+    "all_must_pass": true
+  },
+  "output_paths": {
+    "run_manifest": "datasets/external/2026-10-09-spatialeval-vqa-test4500.run.jsonl",
+    "image_dir": "/tmp/zhaoxiangyu-spatialeval-vqa/images",
+    "summary_json": "reports/token_selector/2026-10-09-spatialeval-vqa-three-arm-summary.json",
+    "summary_markdown": "reports/token_selector/2026-10-09-spatialeval-vqa-three-arm-summary.md",
+    "qid_detail_csv": "reports/token_selector/2026-10-09-spatialeval-vqa-three-arm-qid-detail.csv"
+  },
+  "forbidden_claims": [
+    "Do not call project_task_macro or project_micro an official SpatialEval total score.",
+    "Do not call this evaluation label-blind.",
+    "Do not include SpatialReal135 in the primary gate.",
+    "Do not tune the Selector, K, thresholds or prompts after observing these outputs.",
+    "Do not claim FPGA, Jetson or board-level acceleration from any software timing."
+  ],
+  "pins": {
+    "reference_manifest": {
+      "path": "datasets/external/2026-10-09-spatialeval-vqa-test4635.reference.jsonl",
+      "sha256": "03649b9c2bae7e43cc72555b744396eb8205785e7df80c5a73a6ae1e455f4050",
+      "role": "frozen 4635-row reference manifest (labels + image SHA/size)"
+    },
+    "parquet_shard_0": {
+      "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00000-of-00002.parquet",
+      "sha256": "624aad413e7eb5dbd4e234ac2a36945b9be2280a9d1c8972c1f2fc886b27b897",
+      "bytes": 76143378,
+      "rows": 2318,
+      "role": "dataset shard 0"
+    },
+    "parquet_shard_1": {
+      "path": "/tmp/zhaoxiangyu-spatialeval-vqa/test-00001-of-00002.parquet",
+      "sha256": "b9301e70fd79ec1f828ad04100bb6b546a76bcdf15bae71b9aded77b98d27add",
+      "bytes": 635994517,
+      "rows": 2317,
+      "role": "dataset shard 1"
+    },
+    "official_evaluation_py": {
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/evaluation.py",
+      "sha256": "88d2a1b35abe02d9c517a513e8b1a5f442b61837b6cd742b1ec1fa23c6ccd952",
+      "role": "official evaluator commit d82ba382"
+    },
+    "official_inference_vlm_py": {
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_vlm.py",
+      "sha256": "0a69b4cd14707001c6975ab9ae9113a90df2ce2cd73119bceabe99cfddb39337",
+      "role": "official inference commit d82ba382"
+    },
+    "official_inference_configs_py": {
+      "path": "artifacts/provenance/spatialeval-official-d82ba382/inference_configs.py",
+      "sha256": "79d9c59a8a45be78e18206bde8f6fc13c35827a208ffee99155b29efbbe44972",
+      "role": "official inference configs commit d82ba382"
+    },
+    "model_identity_manifest": {
+      "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+      "role": "frozen RoboBrain2.5-4B identity manifest"
+    },
+    "spatialeval_contract": {
+      "path": "evaluation/spatialeval_vqa_contract.py",
+      "sha256": "f13c9219b3af1661e45f1c99ef03b5e1e5db7157e7b60e7ed26b4ad67c1f5a1a",
+      "role": "new SpatialEval data/runtime contract producer"
+    },
+    "spatialeval_runner": {
+      "path": "evaluation/run_spatialeval_vqa_three_arm.py",
+      "sha256": "1edbebef23e924e3c140cfe3ef32db435332b5e6dd9e8b8aa922e39bc88c22ee",
+      "role": "new SpatialEval three-arm runner"
+    },
+    "spatialeval_official_evaluator": {
+      "path": "evaluation/spatialeval_official_evaluator.py",
+      "sha256": "b16c7cb2138d2e921c2a2d96b5e0cbc9e8fbd3fd0152f043f35a6e71f30edfb0",
+      "role": "new official-compatible evaluator adapter"
+    },
+    "spatialeval_summarizer": {
+      "path": "evaluation/summarize_spatialeval_vqa_three_arm.py",
+      "sha256": "9589d40310c7e44e33e9d901d6036c3be174d73d73c81c526c85a1e07e494aad",
+      "role": "new fail-closed three-arm summarizer"
+    },
+    "spatialeval_producer_runner": {
+      "path": "evaluation/run_edge576_cvbench_three_arm.py",
+      "sha256": "5e6b408746c9f5410b3a893ff3269ecc596596b9a346ef1188b5a75dbb60a83a",
+      "role": "frozen Dense/L2/v2 producer runner reused unchanged"
+    },
+    "spatialeval_producer_contract": {
+      "path": "evaluation/edge576_cvbench_runner_contract.py",
+      "sha256": "36f7c2e44a974350ddb3863871788ea14de3b901eca2ee6817e1e5cde8a83813",
+      "role": "frozen edge576 runtime contract reused unchanged"
+    },
+    "spatialeval_draft_config": {
+      "path": "configs/2026-10-09-spatialeval-vqa-external-confirmation.draft.json",
+      "sha256": "20e7c8903e3bee776dff33d7916794014bc4cd724850cac28b342011628bcd3e",
+      "role": "predecessor draft preserved byte-for-byte"
+    }
+  }
+}

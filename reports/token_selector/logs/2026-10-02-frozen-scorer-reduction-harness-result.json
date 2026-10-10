@@ -1,0 +1,146 @@
+{
+  "artifacts": {
+    "candidates_csv": "reports/token_selector/2026-10-02-frozen-scorer-reduction-candidates.csv",
+    "focused_tests": "evaluation/tests/test_frozen_scorer_reduction_ablation.py",
+    "json": "reports/token_selector/2026-10-02-frozen-scorer-reduction.json",
+    "markdown": "reports/token_selector/2026-10-02-frozen-scorer-reduction.md",
+    "preregistration": "reports/token_selector/2026-10-02-frozen-scorer-reduction-preregistration.json",
+    "script": "evaluation/frozen_scorer_reduction_ablation.py",
+    "splits_csv": "reports/token_selector/2026-10-02-frozen-scorer-reduction-splits.csv",
+    "val_gate": "reports/token_selector/2026-10-02-frozen-scorer-reduction-val-gate.json"
+  },
+  "environment": {
+    "numpy": "2.2.6",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.10.20",
+    "seed": 20261002
+  },
+  "harness_result_sha256": "9e6eb1576541a496ca075c36a20203c23509363e0a4b1ae82f96ae74dca3f418",
+  "key_metrics": {
+    "best_val_correct_ndcg_full": {
+      "topk_mean_k4": 0.8513235320906668
+    },
+    "best_val_correct_spearman": {
+      "softmax_mean_tau010": 0.05929227286368716
+    },
+    "hard_max_test_diagnostic": {
+      "ndcg_full": 0.849306139881563,
+      "spearman": 0.0535578748611649
+    },
+    "hard_max_val_correct": {
+      "exact_prompt_invariance_fraction": 1.0,
+      "ndcg_full": 0.8499415696043525,
+      "spearman": 0.056474973611814555
+    },
+    "max_abs_cross_image_delta_spearman": 0.01193646564445468,
+    "max_abs_same_image_delta_spearman": 0.001456653226966134,
+    "prompt_mean_vector_hardware": {
+      "fpga_dot_per_group": 128,
+      "matrix_reducer_query_shape": [
+        40.63157894736842,
+        128
+      ],
+      "query_int8_bytes": 128,
+      "query_shape": [
+        1,
+        128
+      ]
+    },
+    "prompt_mean_vector_val_correct": {
+      "exact_prompt_invariance_fraction": 0.0,
+      "ndcg_full": 0.8342944690291352,
+      "spearman": 0.012921180815203388
+    },
+    "test": {
+      "n_img": 39,
+      "n_rec": 78
+    },
+    "val": {
+      "n_img": 38,
+      "n_rec": 76
+    }
+  },
+  "next_decision": "scorer-reduction ablation with frozen Wt/Wv yields NO_PROMOTION: every pre-registered reducer fails val gate A (same-image prompt sensitivity) and B (cross-image shuffled discrimination), so the hard-max collapse is not fixed by changing the reduction alone; a retraining / supervision change (with PI authorization, fixed reducer pre-registered before any test read) is the next decision; the single test evaluation is diagnostic only and must not be used to re-select a candidate.",
+  "preregistration_sha256": "b2686bc394833c4026ff8a2e69359fba0e8e6b94f57815be1b70e7768c96d508",
+  "status": "COMPUTED",
+  "test_once": {
+    "evaluated": true,
+    "evaluated_after_winner_written": true,
+    "used_for_selection": false
+  },
+  "tests": {
+    "focused": "36/36 OK",
+    "full_evaluation_tests": "382/382 OK"
+  },
+  "val_gate": {
+    "A_pass": {
+      "hard_max": false,
+      "mean_cos": false,
+      "norm_lse_tau003": false,
+      "norm_lse_tau010": false,
+      "norm_lse_tau030": false,
+      "prompt_mean_vector": false,
+      "softmax_mean_tau003": false,
+      "softmax_mean_tau010": false,
+      "softmax_mean_tau030": false,
+      "topk_mean_k2": false,
+      "topk_mean_k4": false
+    },
+    "B_pass": {
+      "hard_max": false,
+      "mean_cos": false,
+      "norm_lse_tau003": false,
+      "norm_lse_tau010": false,
+      "norm_lse_tau030": false,
+      "prompt_mean_vector": false,
+      "softmax_mean_tau003": false,
+      "softmax_mean_tau010": false,
+      "softmax_mean_tau030": false,
+      "topk_mean_k2": false,
+      "topk_mean_k4": false
+    },
+    "C_pass": {
+      "hard_max": false,
+      "mean_cos": true,
+      "norm_lse_tau003": true,
+      "norm_lse_tau010": true,
+      "norm_lse_tau030": true,
+      "prompt_mean_vector": true,
+      "softmax_mean_tau003": true,
+      "softmax_mean_tau010": true,
+      "softmax_mean_tau030": true,
+      "topk_mean_k2": false,
+      "topk_mean_k4": true
+    },
+    "D_pass": {
+      "hard_max": true,
+      "mean_cos": false,
+      "norm_lse_tau003": true,
+      "norm_lse_tau010": true,
+      "norm_lse_tau030": false,
+      "prompt_mean_vector": false,
+      "softmax_mean_tau003": true,
+      "softmax_mean_tau010": true,
+      "softmax_mean_tau030": false,
+      "topk_mean_k2": true,
+      "topk_mean_k4": true
+    },
+    "E_pass": {
+      "hard_max": true,
+      "mean_cos": true,
+      "norm_lse_tau003": true,
+      "norm_lse_tau010": true,
+      "norm_lse_tau030": true,
+      "prompt_mean_vector": true,
+      "softmax_mean_tau003": true,
+      "softmax_mean_tau010": true,
+      "softmax_mean_tau030": true,
+      "topk_mean_k2": true,
+      "topk_mean_k4": true
+    },
+    "holm_family_size": 40,
+    "passing_candidates": [],
+    "split": "val"
+  },
+  "winner": "NO_PROMOTION"
+}

@@ -1,0 +1,1290 @@
+{
+  "best_epoch": 0,
+  "best_val_listwise_kl": 0.025189324282109737,
+  "budgets": [
+    48,
+    64,
+    96
+  ],
+  "epoch_train_losses": [
+    0.025642754323780537,
+    0.024550503212958576,
+    0.024270523618906737,
+    0.024207196896895766,
+    0.023888073256239296,
+    0.02370159961283207,
+    0.02305707223713398,
+    0.022600943921133876,
+    0.02215945874340832,
+    0.021747097373008728,
+    0.022187061654403806,
+    0.02139155277982354,
+    0.02098687975667417,
+    0.020057693729177116,
+    0.019774939236231148,
+    0.019710874231532217,
+    0.018969132704660295,
+    0.018387019261717798,
+    0.01791491424664855,
+    0.017467103828676046,
+    0.01708732177503407,
+    0.016680739377625285,
+    0.016151334368623795,
+    0.015922725084237754,
+    0.015901109273545443,
+    0.0157191633945331,
+    0.015575817017816008,
+    0.014938440127298235,
+    0.014777173404581845,
+    0.01481892003212124
+  ],
+  "epoch_val_losses": [
+    0.025189324282109737,
+    0.025577612613376818,
+    0.025533612842034353,
+    0.025461612869740316,
+    0.025881774159834572,
+    0.026481043939527712,
+    0.026471565649109453,
+    0.025953101803009446,
+    0.02638333459923926,
+    0.02774993712572675,
+    0.027380120340048483,
+    0.027036674933410006,
+    0.026866821449642118,
+    0.027329936182420505,
+    0.026811315420720922,
+    0.026993223931640387,
+    0.027138963831882728,
+    0.027772573509106512,
+    0.027690215881815868,
+    0.02747084955243688,
+    0.026927595222859008,
+    0.0273250447046992,
+    0.02753637798473631,
+    0.027462604382124386,
+    0.027576327973388527,
+    0.02717254837778838,
+    0.027407659242223752,
+    0.027533993798945295,
+    0.027598998925991748,
+    0.027906667355349975
+  ],
+  "epochs_run": 30,
+  "index": "artifacts/token_selector/prompt_projection_features/index.jsonl",
+  "loss_decreased": true,
+  "metadata": {
+    "best_epoch": 0,
+    "best_val_listwise_kl": 0.025189324282109737,
+    "config_sha256": "44399c8e6fb8f333a150a6016faa00d6ae70524b5fcd030bcabf4e5fb07ab28b",
+    "epochs_configured": 30,
+    "index_sha256": "02a50868a84675418e9bd9e5fdd0bb55f522ec5ce0ce1d6da7c69f85d2aeee26",
+    "lambda_semantic": 0.5,
+    "loss": {
+      "listwise_kl_weight": 1.0,
+      "note": "main loss is listwise KL(teacher_soft || softmax(student/T)) scaled by T^2; score MSE is off unless score_mse_weight > 0",
+      "score_mse_weight": 0.0,
+      "temperature_squared_scaling": true
+    },
+    "optim": {
+      "batch_size": 8,
+      "epochs": 30,
+      "grad_clip_norm": 1.0,
+      "init": "deterministic_randn_seeded",
+      "init_std": 0.02,
+      "lr": 0.001,
+      "note": "model selection uses the val split only; the test split is evaluated once after the best epoch is frozen",
+      "optimizer": "adamw",
+      "weight_decay": 0.0
+    },
+    "seed": 20260927,
+    "split_counts": {
+      "test": 78,
+      "train": 318,
+      "val": 76
+    },
+    "split_group_by": "source_image_sha256",
+    "split_group_summary": {
+      "test": {
+        "image_count": 39,
+        "sample_count": 78
+      },
+      "train": {
+        "image_count": 159,
+        "sample_count": 318
+      },
+      "val": {
+        "image_count": 38,
+        "sample_count": 76
+      }
+    },
+    "split_ratios": {
+      "test": 0.15,
+      "train": 0.7,
+      "val": 0.15
+    },
+    "split_salt": "prompt_projection_distillation_2026_09_27",
+    "split_seed": 20260927,
+    "temperature": 0.1,
+    "trained": true,
+    "training_complete": true
+  },
+  "metrics": {
+    "test": {
+      "correct_minus_shuffled": {
+        "available": true,
+        "ndcg_full": 0.0005455299648804424,
+        "pearson": 0.002843373798047652,
+        "per_budget": {
+          "48": {
+            "jaccard": 0.0004742399505854866,
+            "ndcg": 0.0013723779860054242,
+            "saliency_mass_retained": 0.0012263475050118267,
+            "topk_recall": 0.0008012820512820762
+          },
+          "64": {
+            "jaccard": 0.00026166397847812717,
+            "ndcg": 0.0011167020740118216,
+            "saliency_mass_retained": 0.0012272193128702313,
+            "topk_recall": 0.0004006410256410242
+          },
+          "96": {
+            "jaccard": 0.0004873638402225211,
+            "ndcg": 0.0011111359838176238,
+            "saliency_mass_retained": -0.0006285311482186473,
+            "topk_recall": 0.0006677350427350959
+          }
+        },
+        "spearman": 0.0016789891732563525
+      },
+      "count": 78,
+      "l2_baseline": {
+        "count": 78,
+        "definition": "per-group L2 norm of group_mean; equals hardware_regular_token_selector.group_l2_saliency on the [G,4,1024] broadcast",
+        "rank": {
+          "count": 258.38461538461536,
+          "ndcg_full": 0.8425082246850633,
+          "pearson": 0.03433719635205067,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.11897286903432697,
+              "k": 48.0,
+              "ndcg": 0.517445080331969,
+              "saliency_mass_retained": 0.24506377289609896,
+              "topk_recall": 0.20913461538461534
+            },
+            "64": {
+              "jaccard": 0.15983192641242625,
+              "k": 64.0,
+              "ndcg": 0.5429990160845579,
+              "saliency_mass_retained": 0.3003764289755988,
+              "topk_recall": 0.27163461538461536
+            },
+            "96": {
+              "jaccard": 0.2607784616590222,
+              "k": 96.0,
+              "ndcg": 0.5965310451742274,
+              "saliency_mass_retained": 0.41455950813395775,
+              "topk_recall": 0.4078525641025641
+            }
+          },
+          "spearman": 0.012507829295061923
+        }
+      },
+      "student_correct": {
+        "count": 78,
+        "hardware_constrained": {
+          "48": {
+            "budget": 48.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.104247714658147,
+              "real_budget": 39.0,
+              "saliency_mass_retained": 0.25834722852101155,
+              "teacher_top_r_recall": 0.18441814595660744
+            },
+            "real_group_count": 39.0,
+            "total_budget_coverage": {
+              "budget": 48.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.11629041219617046,
+              "saliency_mass_retained": 0.25834722852101155,
+              "teacher_topk_recall": 0.18482905982905984,
+              "upper_bound_only": true
+            }
+          },
+          "64": {
+            "budget": 64.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.14630038139122845,
+              "real_budget": 55.0,
+              "saliency_mass_retained": 0.3179551948384747,
+              "teacher_top_r_recall": 0.2501165501165501
+            },
+            "real_group_count": 55.0,
+            "total_budget_coverage": {
+              "budget": 64.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.15838465734490342,
+              "saliency_mass_retained": 0.3179551948384747,
+              "teacher_topk_recall": 0.24919871794871795,
+              "upper_bound_only": true
+            }
+          },
+          "96": {
+            "budget": 96.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.2387153105341473,
+              "real_budget": 87.0,
+              "saliency_mass_retained": 0.4429890670976859,
+              "teacher_top_r_recall": 0.3775419982316534
+            },
+            "real_group_count": 87.0,
+            "total_budget_coverage": {
+              "budget": 96.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.2517115637705641,
+              "saliency_mass_retained": 0.4429890670976859,
+              "teacher_topk_recall": 0.375667735042735,
+              "upper_bound_only": true
+            }
+          }
+        },
+        "rank": {
+          "count": 258.38461538461536,
+          "ndcg_full": 0.849306139881563,
+          "pearson": 0.06728826033451991,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.13054420458985416,
+              "k": 48.0,
+              "ndcg": 0.5318845300111775,
+              "saliency_mass_retained": 0.28138346885725823,
+              "topk_recall": 0.22569444444444445
+            },
+            "64": {
+              "jaccard": 0.1754547716631232,
+              "k": 64.0,
+              "ndcg": 0.5614810284890059,
+              "saliency_mass_retained": 0.3537264626150232,
+              "topk_recall": 0.29286858974358976
+            },
+            "96": {
+              "jaccard": 0.27161633375669286,
+              "k": 96.0,
+              "ndcg": 0.6165294197095973,
+              "saliency_mass_retained": 0.49573899016836903,
+              "topk_recall": 0.4180021367521368
+            }
+          },
+          "spearman": 0.0535578748611649
+        }
+      },
+      "student_shuffled_prompt": {
+        "available": true,
+        "count": 78,
+        "definition": "within-split cyclic prompt mismatch sorted by sample_id; sample i receives the prompt embeddings of sample i+1 modulo n; same Wt/Wv",
+        "rank": {
+          "count": 258.38461538461536,
+          "ndcg_full": 0.8487606099166826,
+          "pearson": 0.06444488653647226,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.13006996463926868,
+              "k": 48.0,
+              "ndcg": 0.5305121520251721,
+              "saliency_mass_retained": 0.2801571213522464,
+              "topk_recall": 0.22489316239316237
+            },
+            "64": {
+              "jaccard": 0.17519310768464508,
+              "k": 64.0,
+              "ndcg": 0.5603643264149941,
+              "saliency_mass_retained": 0.352499243302153,
+              "topk_recall": 0.29246794871794873
+            },
+            "96": {
+              "jaccard": 0.27112896991647034,
+              "k": 96.0,
+              "ndcg": 0.6154182837257797,
+              "saliency_mass_retained": 0.4963675213165877,
+              "topk_recall": 0.4173344017094017
+            }
+          },
+          "spearman": 0.05187888568790855
+        }
+      }
+    },
+    "train": {
+      "correct_minus_shuffled": {
+        "available": true,
+        "ndcg_full": 0.0008096446698815374,
+        "pearson": 0.0036552236786940306,
+        "per_budget": {
+          "48": {
+            "jaccard": 0.0013343090569538085,
+            "ndcg": 0.0024201231121152578,
+            "saliency_mass_retained": 0.009095924504957942,
+            "topk_recall": 0.0017688679245282946
+          },
+          "64": {
+            "jaccard": -0.00032498885507090125,
+            "ndcg": 0.0014159899338418436,
+            "saliency_mass_retained": 0.007980755139643414,
+            "topk_recall": -0.0004913522012578442
+          },
+          "96": {
+            "jaccard": 0.00029602724760130483,
+            "ndcg": 0.0016381534628924221,
+            "saliency_mass_retained": 0.008064851145622276,
+            "topk_recall": 0.00042583857442346496
+          }
+        },
+        "spearman": 0.0030413476330423544
+      },
+      "count": 318,
+      "l2_baseline": {
+        "count": 318,
+        "definition": "per-group L2 norm of group_mean; equals hardware_regular_token_selector.group_l2_saliency on the [G,4,1024] broadcast",
+        "rank": {
+          "count": 272.45283018867923,
+          "ndcg_full": 0.8426512666293341,
+          "pearson": 0.031675353575614205,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.11131318983721816,
+              "k": 48.0,
+              "ndcg": 0.5049547878882036,
+              "saliency_mass_retained": 0.19005570871512506,
+              "topk_recall": 0.1945754716981132
+            },
+            "64": {
+              "jaccard": 0.15341964529599306,
+              "k": 64.0,
+              "ndcg": 0.5340429230442778,
+              "saliency_mass_retained": 0.24566779676714787,
+              "topk_recall": 0.2580581761006289
+            },
+            "96": {
+              "jaccard": 0.24583593720293337,
+              "k": 96.0,
+              "ndcg": 0.5864445618769298,
+              "saliency_mass_retained": 0.367861561027519,
+              "topk_recall": 0.3831564465408805
+            }
+          },
+          "spearman": 0.021230325300979954
+        }
+      },
+      "student_correct": {
+        "count": 318,
+        "hardware_constrained": {
+          "48": {
+            "budget": 48.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.11350567323893324,
+              "real_budget": 39.0,
+              "saliency_mass_retained": 0.2890327519399196,
+              "teacher_top_r_recall": 0.19746815029833897
+            },
+            "real_group_count": 39.0,
+            "total_budget_coverage": {
+              "budget": 48.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.12446734466313326,
+              "saliency_mass_retained": 0.2890327519399196,
+              "teacher_topk_recall": 0.19490303983228513,
+              "upper_bound_only": true
+            }
+          },
+          "64": {
+            "budget": 64.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.15523872018626722,
+              "real_budget": 55.0,
+              "saliency_mass_retained": 0.36940225633903045,
+              "teacher_top_r_recall": 0.2612921669525443
+            },
+            "real_group_count": 55.0,
+            "total_budget_coverage": {
+              "budget": 64.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.16412989891645693,
+              "saliency_mass_retained": 0.36940225633903045,
+              "teacher_topk_recall": 0.2550117924528302,
+              "upper_bound_only": true
+            }
+          },
+          "96": {
+            "budget": 96.0,
+            "bypass": false,
+            "context_group_count": 8.943396226415095,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.2359816738426426,
+              "real_budget": 86.95597484276729,
+              "saliency_mass_retained": 0.5076232027934421,
+              "teacher_top_r_recall": 0.3712860550856647
+            },
+            "real_group_count": 86.95597484276729,
+            "total_budget_coverage": {
+              "budget": 96.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.2470155317074448,
+              "saliency_mass_retained": 0.5076232027934421,
+              "teacher_topk_recall": 0.3675642033542977,
+              "upper_bound_only": true
+            }
+          }
+        },
+        "rank": {
+          "count": 272.45283018867923,
+          "ndcg_full": 0.854875583915213,
+          "pearson": 0.10789000610282883,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.14061162648991368,
+              "k": 48.0,
+              "ndcg": 0.5426118075178116,
+              "saliency_mass_retained": 0.3450243999679556,
+              "topk_recall": 0.23919025157232704
+            },
+            "64": {
+              "jaccard": 0.17779131320883815,
+              "k": 64.0,
+              "ndcg": 0.5709258644230579,
+              "saliency_mass_retained": 0.4261666682686075,
+              "topk_recall": 0.2933372641509434
+            },
+            "96": {
+              "jaccard": 0.2649919117143938,
+              "k": 96.0,
+              "ndcg": 0.6223823563651986,
+              "saliency_mass_retained": 0.5608692199680726,
+              "topk_recall": 0.40729821802935007
+            }
+          },
+          "spearman": 0.08314429919280206
+        }
+      },
+      "student_shuffled_prompt": {
+        "available": true,
+        "count": 318,
+        "definition": "within-split cyclic prompt mismatch sorted by sample_id; sample i receives the prompt embeddings of sample i+1 modulo n; same Wt/Wv",
+        "rank": {
+          "count": 272.45283018867923,
+          "ndcg_full": 0.8540659392453315,
+          "pearson": 0.1042347824241348,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.13927731743295987,
+              "k": 48.0,
+              "ndcg": 0.5401916844056963,
+              "saliency_mass_retained": 0.33592847546299764,
+              "topk_recall": 0.23742138364779874
+            },
+            "64": {
+              "jaccard": 0.17811630206390905,
+              "k": 64.0,
+              "ndcg": 0.5695098744892161,
+              "saliency_mass_retained": 0.4181859131289641,
+              "topk_recall": 0.29382861635220126
+            },
+            "96": {
+              "jaccard": 0.2646958844667925,
+              "k": 96.0,
+              "ndcg": 0.6207442029023061,
+              "saliency_mass_retained": 0.5528043688224503,
+              "topk_recall": 0.4068723794549266
+            }
+          },
+          "spearman": 0.0801029515597597
+        }
+      }
+    },
+    "val": {
+      "correct_minus_shuffled": {
+        "available": true,
+        "ndcg_full": -0.0010172351274270186,
+        "pearson": -0.0050837840405613816,
+        "per_budget": {
+          "48": {
+            "jaccard": -0.002313475997686526,
+            "ndcg": -0.002492207859449036,
+            "saliency_mass_retained": -0.005017540916370078,
+            "topk_recall": -0.003563596491228088
+          },
+          "64": {
+            "jaccard": -0.0021229048825684715,
+            "ndcg": -0.002511404550607499,
+            "saliency_mass_retained": -0.001594150219633994,
+            "topk_recall": -0.003083881578947345
+          },
+          "96": {
+            "jaccard": -0.002649090966981904,
+            "ndcg": -0.0028945154441319954,
+            "saliency_mass_retained": -0.0036152538931938927,
+            "topk_recall": -0.003563596491228116
+          }
+        },
+        "spearman": -0.0065048516449028315
+      },
+      "count": 76,
+      "l2_baseline": {
+        "count": 76,
+        "definition": "per-group L2 norm of group_mean; equals hardware_regular_token_selector.group_l2_saliency on the [G,4,1024] broadcast",
+        "rank": {
+          "count": 268.63157894736844,
+          "ndcg_full": 0.8412239487897955,
+          "pearson": 0.02514782697035317,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.1097925745154054,
+              "k": 48.0,
+              "ndcg": 0.5051516888017247,
+              "saliency_mass_retained": 0.20482646509099928,
+              "topk_recall": 0.19380482456140352
+            },
+            "64": {
+              "jaccard": 0.14792558808378403,
+              "k": 64.0,
+              "ndcg": 0.5307805086067389,
+              "saliency_mass_retained": 0.2580133961216643,
+              "topk_recall": 0.2534950657894737
+            },
+            "96": {
+              "jaccard": 0.23589192691083133,
+              "k": 96.0,
+              "ndcg": 0.5832997718140179,
+              "saliency_mass_retained": 0.3811019521090594,
+              "topk_recall": 0.3765076754385965
+            }
+          },
+          "spearman": 0.030036534051894336
+        }
+      },
+      "student_correct": {
+        "count": 76,
+        "hardware_constrained": {
+          "48": {
+            "budget": 48.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.0943988820945848,
+              "real_budget": 39.0,
+              "saliency_mass_retained": 0.19068290418444003,
+              "teacher_top_r_recall": 0.16835357624831304
+            },
+            "real_group_count": 39.0,
+            "total_budget_coverage": {
+              "budget": 48.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.10471184184777724,
+              "saliency_mass_retained": 0.19068290418444003,
+              "teacher_topk_recall": 0.16776315789473686,
+              "upper_bound_only": true
+            }
+          },
+          "64": {
+            "budget": 64.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.1459295288514506,
+              "real_budget": 55.0,
+              "saliency_mass_retained": 0.30535322319179864,
+              "teacher_top_r_recall": 0.24976076555023918
+            },
+            "real_group_count": 55.0,
+            "total_budget_coverage": {
+              "budget": 64.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.15520047908371395,
+              "saliency_mass_retained": 0.30535322319179864,
+              "teacher_topk_recall": 0.2450657894736842,
+              "upper_bound_only": true
+            }
+          },
+          "96": {
+            "budget": 96.0,
+            "bypass": false,
+            "context_group_count": 9.0,
+            "matched_real_budget": {
+              "definition": "R = real_group_count; selected real groups vs teacher top-R. Fair real-vs-real comparison.",
+              "jaccard": 0.2257923148713525,
+              "real_budget": 87.0,
+              "saliency_mass_retained": 0.4476105417006306,
+              "teacher_top_r_recall": 0.3623714458560194
+            },
+            "real_group_count": 87.0,
+            "total_budget_coverage": {
+              "budget": 96.0,
+              "definition": "selected real groups vs teacher top-K; context groups occupy part of K, so this is a coverage upper bound, not a full score.",
+              "jaccard": 0.2396417926296911,
+              "saliency_mass_retained": 0.4476105417006306,
+              "teacher_topk_recall": 0.3625274122807017,
+              "upper_bound_only": true
+            }
+          }
+        },
+        "rank": {
+          "count": 268.63157894736844,
+          "ndcg_full": 0.8499415696043525,
+          "pearson": 0.07306265930336879,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.12706530054438991,
+              "k": 48.0,
+              "ndcg": 0.526385006973897,
+              "saliency_mass_retained": 0.25336770509518763,
+              "topk_recall": 0.2198464912280702
+            },
+            "64": {
+              "jaccard": 0.16651140797970773,
+              "k": 64.0,
+              "ndcg": 0.5560726105296611,
+              "saliency_mass_retained": 0.33883609295702277,
+              "topk_recall": 0.2800164473684211
+            },
+            "96": {
+              "jaccard": 0.25480067128789247,
+              "k": 96.0,
+              "ndcg": 0.6084670530200118,
+              "saliency_mass_retained": 0.4955561930249869,
+              "topk_recall": 0.3984375
+            }
+          },
+          "spearman": 0.056474973611814555
+        }
+      },
+      "student_shuffled_prompt": {
+        "available": true,
+        "count": 76,
+        "definition": "within-split cyclic prompt mismatch sorted by sample_id; sample i receives the prompt embeddings of sample i+1 modulo n; same Wt/Wv",
+        "rank": {
+          "count": 268.63157894736844,
+          "ndcg_full": 0.8509588047317795,
+          "pearson": 0.07814644334393017,
+          "per_budget": {
+            "48": {
+              "jaccard": 0.12937877654207644,
+              "k": 48.0,
+              "ndcg": 0.528877214833346,
+              "saliency_mass_retained": 0.2583852460115577,
+              "topk_recall": 0.2234100877192983
+            },
+            "64": {
+              "jaccard": 0.1686343128622762,
+              "k": 64.0,
+              "ndcg": 0.5585840150802686,
+              "saliency_mass_retained": 0.34043024317665677,
+              "topk_recall": 0.2831003289473684
+            },
+            "96": {
+              "jaccard": 0.25744976225487437,
+              "k": 96.0,
+              "ndcg": 0.6113615684641438,
+              "saliency_mass_retained": 0.4991714469181808,
+              "topk_recall": 0.4020010964912281
+            }
+          },
+          "spearman": 0.06297982525671739
+        }
+      }
+    }
+  },
+  "output_npz": "artifacts/token_selector/prompt_projection_WtWv.npz",
+  "primary_promotion_metrics": [
+    "spearman",
+    "ndcg_full"
+  ],
+  "promotion_gate": {
+    "correct_beats_shuffled": false,
+    "criterion": "strictly positive paired delta on every primary metric; no arbitrary numeric threshold is fixed a priori",
+    "primary_metrics": [
+      "spearman",
+      "ndcg_full"
+    ],
+    "status": "EVALUATED",
+    "student_beats_l2": true,
+    "student_correct_minus_l2_baseline": {
+      "ndcg_full": 0.00871762081455707,
+      "pearson": 0.04791483233301562,
+      "per_budget": {
+        "48": {
+          "jaccard": 0.01727272602898451,
+          "ndcg": 0.021233318172172333,
+          "saliency_mass_retained": 0.04854124000418836,
+          "topk_recall": 0.026041666666666685
+        },
+        "64": {
+          "jaccard": 0.0185858198959237,
+          "ndcg": 0.025292101922922194,
+          "saliency_mass_retained": 0.08082269683535848,
+          "topk_recall": 0.0265213815789474
+        },
+        "96": {
+          "jaccard": 0.018908744377061137,
+          "ndcg": 0.025167281205993874,
+          "saliency_mass_retained": 0.11445424091592749,
+          "topk_recall": 0.02192982456140352
+        }
+      },
+      "spearman": 0.02643843955992022
+    },
+    "student_correct_minus_shuffled": {
+      "available": true,
+      "ndcg_full": -0.0010172351274270186,
+      "pearson": -0.0050837840405613816,
+      "per_budget": {
+        "48": {
+          "jaccard": -0.002313475997686526,
+          "ndcg": -0.002492207859449036,
+          "saliency_mass_retained": -0.005017540916370078,
+          "topk_recall": -0.003563596491228088
+        },
+        "64": {
+          "jaccard": -0.0021229048825684715,
+          "ndcg": -0.002511404550607499,
+          "saliency_mass_retained": -0.001594150219633994,
+          "topk_recall": -0.003083881578947345
+        },
+        "96": {
+          "jaccard": -0.002649090966981904,
+          "ndcg": -0.0028945154441319954,
+          "saliency_mass_retained": -0.0036152538931938927,
+          "topk_recall": -0.003563596491228116
+        }
+      },
+      "spearman": -0.0065048516449028315
+    },
+    "test_discipline": "test is evaluated once after the best epoch is frozen and never influences selection"
+  },
+  "sample_count": 472,
+  "split": {
+    "test": [
+      "ppclean-v1-000000002592-678926-grounding",
+      "ppclean-v1-000000002592-678926-pointing",
+      "ppclean-v1-000000025394-1506985-grounding",
+      "ppclean-v1-000000025394-1506985-pointing",
+      "ppclean-v1-000000057238-332209-grounding",
+      "ppclean-v1-000000057238-332209-pointing",
+      "ppclean-v1-000000060347-575500-grounding",
+      "ppclean-v1-000000060347-575500-pointing",
+      "ppclean-v1-000000060363-337109-grounding",
+      "ppclean-v1-000000060363-337109-pointing",
+      "ppclean-v1-000000078426-1091052-grounding",
+      "ppclean-v1-000000078426-1091052-pointing",
+      "ppclean-v1-000000107226-2034549-grounding",
+      "ppclean-v1-000000107226-2034549-pointing",
+      "ppclean-v1-000000109976-1120978-grounding",
+      "ppclean-v1-000000109976-1120978-pointing",
+      "ppclean-v1-000000135670-125639-grounding",
+      "ppclean-v1-000000135670-125639-pointing",
+      "ppclean-v1-000000136600-1101931-grounding",
+      "ppclean-v1-000000136600-1101931-pointing",
+      "ppclean-v1-000000156372-102277-grounding",
+      "ppclean-v1-000000156372-102277-pointing",
+      "ppclean-v1-000000170099-112811-grounding",
+      "ppclean-v1-000000170099-112811-pointing",
+      "ppclean-v1-000000223789-1130149-grounding",
+      "ppclean-v1-000000223789-1130149-pointing",
+      "ppclean-v1-000000227044-1133390-grounding",
+      "ppclean-v1-000000227044-1133390-pointing",
+      "ppclean-v1-000000262938-1141311-grounding",
+      "ppclean-v1-000000262938-1141311-pointing",
+      "ppclean-v1-000000284623-1134157-grounding",
+      "ppclean-v1-000000284623-1134157-pointing",
+      "ppclean-v1-000000284991-85862-grounding",
+      "ppclean-v1-000000284991-85862-pointing",
+      "ppclean-v1-000000290771-111439-grounding",
+      "ppclean-v1-000000290771-111439-pointing",
+      "ppclean-v1-000000301421-1103988-grounding",
+      "ppclean-v1-000000301421-1103988-pointing",
+      "ppclean-v1-000000301718-119483-grounding",
+      "ppclean-v1-000000301718-119483-pointing",
+      "ppclean-v1-000000359219-688533-grounding",
+      "ppclean-v1-000000359219-688533-pointing",
+      "ppclean-v1-000000368212-1096288-grounding",
+      "ppclean-v1-000000368212-1096288-pointing",
+      "ppclean-v1-000000379332-1579861-grounding",
+      "ppclean-v1-000000379332-1579861-pointing",
+      "ppclean-v1-000000385997-19199-grounding",
+      "ppclean-v1-000000385997-19199-pointing",
+      "ppclean-v1-000000415238-23028-grounding",
+      "ppclean-v1-000000415238-23028-pointing",
+      "ppclean-v1-000000415741-315201-grounding",
+      "ppclean-v1-000000415741-315201-pointing",
+      "ppclean-v1-000000428280-578099-grounding",
+      "ppclean-v1-000000428280-578099-pointing",
+      "ppclean-v1-000000430056-1117016-grounding",
+      "ppclean-v1-000000430056-1117016-pointing",
+      "ppclean-v1-000000437898-331875-grounding",
+      "ppclean-v1-000000437898-331875-pointing",
+      "ppclean-v1-000000452784-713581-grounding",
+      "ppclean-v1-000000452784-713581-pointing",
+      "ppclean-v1-000000456662-331567-grounding",
+      "ppclean-v1-000000456662-331567-pointing",
+      "ppclean-v1-000000486479-1957802-grounding",
+      "ppclean-v1-000000486479-1957802-pointing",
+      "ppclean-v1-000000499313-1621288-grounding",
+      "ppclean-v1-000000499313-1621288-pointing",
+      "ppclean-v1-000000501523-1130658-grounding",
+      "ppclean-v1-000000501523-1130658-pointing",
+      "ppclean-v1-000000542423-572224-grounding",
+      "ppclean-v1-000000542423-572224-pointing",
+      "ppclean-v1-000000546219-1090652-grounding",
+      "ppclean-v1-000000546219-1090652-pointing",
+      "ppclean-v1-000000565853-1824012-grounding",
+      "ppclean-v1-000000565853-1824012-pointing",
+      "ppclean-v1-000000565877-99808-grounding",
+      "ppclean-v1-000000565877-99808-pointing",
+      "ppclean-v1-000000568195-1616769-grounding",
+      "ppclean-v1-000000568195-1616769-pointing"
+    ],
+    "train": [
+      "ppclean-v1-000000000802-332341-grounding",
+      "ppclean-v1-000000000802-332341-pointing",
+      "ppclean-v1-000000001425-713032-grounding",
+      "ppclean-v1-000000001425-713032-pointing",
+      "ppclean-v1-000000003934-115058-grounding",
+      "ppclean-v1-000000003934-115058-pointing",
+      "ppclean-v1-000000011511-572604-grounding",
+      "ppclean-v1-000000011511-572604-pointing",
+      "ppclean-v1-000000019742-1151441-grounding",
+      "ppclean-v1-000000019742-1151441-pointing",
+      "ppclean-v1-000000019786-111323-grounding",
+      "ppclean-v1-000000019786-111323-pointing",
+      "ppclean-v1-000000025603-1144688-grounding",
+      "ppclean-v1-000000025603-1144688-pointing",
+      "ppclean-v1-000000032038-2130609-grounding",
+      "ppclean-v1-000000032038-2130609-pointing",
+      "ppclean-v1-000000035326-1641790-grounding",
+      "ppclean-v1-000000035326-1641790-pointing",
+      "ppclean-v1-000000038678-1883757-grounding",
+      "ppclean-v1-000000038678-1883757-pointing",
+      "ppclean-v1-000000040083-103807-grounding",
+      "ppclean-v1-000000040083-103807-pointing",
+      "ppclean-v1-000000041872-316433-grounding",
+      "ppclean-v1-000000041872-316433-pointing",
+      "ppclean-v1-000000050380-102188-grounding",
+      "ppclean-v1-000000050380-102188-pointing",
+      "ppclean-v1-000000052413-324905-grounding",
+      "ppclean-v1-000000052413-324905-pointing",
+      "ppclean-v1-000000056350-1094660-grounding",
+      "ppclean-v1-000000056350-1094660-pointing",
+      "ppclean-v1-000000066523-318060-grounding",
+      "ppclean-v1-000000066523-318060-pointing",
+      "ppclean-v1-000000066706-672470-grounding",
+      "ppclean-v1-000000066706-672470-pointing",
+      "ppclean-v1-000000067896-335955-grounding",
+      "ppclean-v1-000000067896-335955-pointing",
+      "ppclean-v1-000000068078-1097163-grounding",
+      "ppclean-v1-000000068078-1097163-pointing",
+      "ppclean-v1-000000071938-322025-grounding",
+      "ppclean-v1-000000071938-322025-pointing",
+      "ppclean-v1-000000073946-1612062-grounding",
+      "ppclean-v1-000000073946-1612062-pointing",
+      "ppclean-v1-000000077396-120016-grounding",
+      "ppclean-v1-000000077396-120016-pointing",
+      "ppclean-v1-000000078170-1589958-grounding",
+      "ppclean-v1-000000078170-1589958-pointing",
+      "ppclean-v1-000000080413-1159291-grounding",
+      "ppclean-v1-000000080413-1159291-pointing",
+      "ppclean-v1-000000094326-571324-grounding",
+      "ppclean-v1-000000094326-571324-pointing",
+      "ppclean-v1-000000097337-1965654-grounding",
+      "ppclean-v1-000000097337-1965654-pointing",
+      "ppclean-v1-000000112997-324511-grounding",
+      "ppclean-v1-000000112997-324511-pointing",
+      "ppclean-v1-000000113589-2108886-grounding",
+      "ppclean-v1-000000113589-2108886-pointing",
+      "ppclean-v1-000000115885-1611352-grounding",
+      "ppclean-v1-000000115885-1611352-pointing",
+      "ppclean-v1-000000122046-373435-grounding",
+      "ppclean-v1-000000122046-373435-pointing",
+      "ppclean-v1-000000127660-1184331-grounding",
+      "ppclean-v1-000000127660-1184331-pointing",
+      "ppclean-v1-000000135410-2035059-grounding",
+      "ppclean-v1-000000135410-2035059-pointing",
+      "ppclean-v1-000000137294-1125008-grounding",
+      "ppclean-v1-000000137294-1125008-pointing",
+      "ppclean-v1-000000150224-375181-grounding",
+      "ppclean-v1-000000150224-375181-pointing",
+      "ppclean-v1-000000155051-334659-grounding",
+      "ppclean-v1-000000155051-334659-pointing",
+      "ppclean-v1-000000156278-1647161-grounding",
+      "ppclean-v1-000000156278-1647161-pointing",
+      "ppclean-v1-000000157390-1621501-grounding",
+      "ppclean-v1-000000157390-1621501-pointing",
+      "ppclean-v1-000000157601-670357-grounding",
+      "ppclean-v1-000000157601-670357-pointing",
+      "ppclean-v1-000000157767-1959549-grounding",
+      "ppclean-v1-000000157767-1959549-pointing",
+      "ppclean-v1-000000159458-316096-grounding",
+      "ppclean-v1-000000159458-316096-pointing",
+      "ppclean-v1-000000161642-334971-grounding",
+      "ppclean-v1-000000161642-334971-pointing",
+      "ppclean-v1-000000164637-1136255-grounding",
+      "ppclean-v1-000000164637-1136255-pointing",
+      "ppclean-v1-000000166478-97919-grounding",
+      "ppclean-v1-000000166478-97919-pointing",
+      "ppclean-v1-000000166918-1965088-grounding",
+      "ppclean-v1-000000166918-1965088-pointing",
+      "ppclean-v1-000000167240-1155125-grounding",
+      "ppclean-v1-000000167240-1155125-pointing",
+      "ppclean-v1-000000167353-338004-grounding",
+      "ppclean-v1-000000167353-338004-pointing",
+      "ppclean-v1-000000168458-1156199-grounding",
+      "ppclean-v1-000000168458-1156199-pointing",
+      "ppclean-v1-000000168883-1433696-grounding",
+      "ppclean-v1-000000168883-1433696-pointing",
+      "ppclean-v1-000000168974-327720-grounding",
+      "ppclean-v1-000000168974-327720-pointing",
+      "ppclean-v1-000000170595-320735-grounding",
+      "ppclean-v1-000000170595-320735-pointing",
+      "ppclean-v1-000000171740-111862-grounding",
+      "ppclean-v1-000000171740-111862-pointing",
+      "ppclean-v1-000000171757-1604426-grounding",
+      "ppclean-v1-000000171757-1604426-pointing",
+      "ppclean-v1-000000174123-687551-grounding",
+      "ppclean-v1-000000174123-687551-pointing",
+      "ppclean-v1-000000180101-390041-grounding",
+      "ppclean-v1-000000180101-390041-pointing",
+      "ppclean-v1-000000180878-328285-grounding",
+      "ppclean-v1-000000180878-328285-pointing",
+      "ppclean-v1-000000181753-2132020-grounding",
+      "ppclean-v1-000000181753-2132020-pointing",
+      "ppclean-v1-000000181816-575961-grounding",
+      "ppclean-v1-000000181816-575961-pointing",
+      "ppclean-v1-000000182155-113135-grounding",
+      "ppclean-v1-000000182155-113135-pointing",
+      "ppclean-v1-000000186449-575383-grounding",
+      "ppclean-v1-000000186449-575383-pointing",
+      "ppclean-v1-000000189752-695017-grounding",
+      "ppclean-v1-000000189752-695017-pointing",
+      "ppclean-v1-000000192047-1132374-grounding",
+      "ppclean-v1-000000192047-1132374-pointing",
+      "ppclean-v1-000000192871-711703-grounding",
+      "ppclean-v1-000000192871-711703-pointing",
+      "ppclean-v1-000000193494-319666-grounding",
+      "ppclean-v1-000000193494-319666-pointing",
+      "ppclean-v1-000000197796-1133279-grounding",
+      "ppclean-v1-000000197796-1133279-pointing",
+      "ppclean-v1-000000201426-414419-grounding",
+      "ppclean-v1-000000201426-414419-pointing",
+      "ppclean-v1-000000203488-1396085-grounding",
+      "ppclean-v1-000000203488-1396085-pointing",
+      "ppclean-v1-000000206027-119587-grounding",
+      "ppclean-v1-000000206027-119587-pointing",
+      "ppclean-v1-000000206218-1098254-grounding",
+      "ppclean-v1-000000206218-1098254-pointing",
+      "ppclean-v1-000000215259-113243-grounding",
+      "ppclean-v1-000000215259-113243-pointing",
+      "ppclean-v1-000000224675-1175121-grounding",
+      "ppclean-v1-000000224675-1175121-pointing",
+      "ppclean-v1-000000229311-1130747-grounding",
+      "ppclean-v1-000000229311-1130747-pointing",
+      "ppclean-v1-000000231237-23210-grounding",
+      "ppclean-v1-000000231237-23210-pointing",
+      "ppclean-v1-000000233238-710399-grounding",
+      "ppclean-v1-000000233238-710399-pointing",
+      "ppclean-v1-000000234413-1093981-grounding",
+      "ppclean-v1-000000234413-1093981-pointing",
+      "ppclean-v1-000000237517-1952959-grounding",
+      "ppclean-v1-000000237517-1952959-pointing",
+      "ppclean-v1-000000238410-392357-grounding",
+      "ppclean-v1-000000238410-392357-pointing",
+      "ppclean-v1-000000242287-125686-grounding",
+      "ppclean-v1-000000242287-125686-pointing",
+      "ppclean-v1-000000243344-333341-grounding",
+      "ppclean-v1-000000243344-333341-pointing",
+      "ppclean-v1-000000246968-1119852-grounding",
+      "ppclean-v1-000000246968-1119852-pointing",
+      "ppclean-v1-000000249129-419724-grounding",
+      "ppclean-v1-000000249129-419724-pointing",
+      "ppclean-v1-000000251537-2194703-grounding",
+      "ppclean-v1-000000251537-2194703-pointing",
+      "ppclean-v1-000000252776-1811392-grounding",
+      "ppclean-v1-000000252776-1811392-pointing",
+      "ppclean-v1-000000262682-1123096-grounding",
+      "ppclean-v1-000000262682-1123096-pointing",
+      "ppclean-v1-000000263463-574930-grounding",
+      "ppclean-v1-000000263463-574930-pointing",
+      "ppclean-v1-000000265518-669880-grounding",
+      "ppclean-v1-000000265518-669880-pointing",
+      "ppclean-v1-000000268831-1132340-grounding",
+      "ppclean-v1-000000268831-1132340-pointing",
+      "ppclean-v1-000000276055-676364-grounding",
+      "ppclean-v1-000000276055-676364-pointing",
+      "ppclean-v1-000000277020-1621566-grounding",
+      "ppclean-v1-000000277020-1621566-pointing",
+      "ppclean-v1-000000282046-571983-grounding",
+      "ppclean-v1-000000282046-571983-pointing",
+      "ppclean-v1-000000286907-1095698-grounding",
+      "ppclean-v1-000000286907-1095698-pointing",
+      "ppclean-v1-000000289992-1135247-grounding",
+      "ppclean-v1-000000289992-1135247-pointing",
+      "ppclean-v1-000000291634-128292-grounding",
+      "ppclean-v1-000000291634-128292-pointing",
+      "ppclean-v1-000000292082-1937564-grounding",
+      "ppclean-v1-000000292082-1937564-pointing",
+      "ppclean-v1-000000296231-1941711-grounding",
+      "ppclean-v1-000000296231-1941711-pointing",
+      "ppclean-v1-000000297084-393711-grounding",
+      "ppclean-v1-000000297084-393711-pointing",
+      "ppclean-v1-000000306139-1167659-grounding",
+      "ppclean-v1-000000306139-1167659-pointing",
+      "ppclean-v1-000000306700-122984-grounding",
+      "ppclean-v1-000000306700-122984-pointing",
+      "ppclean-v1-000000310072-577281-grounding",
+      "ppclean-v1-000000310072-577281-pointing",
+      "ppclean-v1-000000310980-1114877-grounding",
+      "ppclean-v1-000000310980-1114877-pointing",
+      "ppclean-v1-000000316015-1115731-grounding",
+      "ppclean-v1-000000316015-1115731-pointing",
+      "ppclean-v1-000000316666-320401-grounding",
+      "ppclean-v1-000000316666-320401-pointing",
+      "ppclean-v1-000000319935-315558-grounding",
+      "ppclean-v1-000000319935-315558-pointing",
+      "ppclean-v1-000000321214-2121063-grounding",
+      "ppclean-v1-000000321214-2121063-pointing",
+      "ppclean-v1-000000322844-578924-grounding",
+      "ppclean-v1-000000322844-578924-pointing",
+      "ppclean-v1-000000334483-1834005-grounding",
+      "ppclean-v1-000000334483-1834005-pointing",
+      "ppclean-v1-000000336209-574640-grounding",
+      "ppclean-v1-000000336209-574640-pointing",
+      "ppclean-v1-000000340015-414901-grounding",
+      "ppclean-v1-000000340015-414901-pointing",
+      "ppclean-v1-000000345356-2130016-grounding",
+      "ppclean-v1-000000345356-2130016-pointing",
+      "ppclean-v1-000000353096-1116633-grounding",
+      "ppclean-v1-000000353096-1116633-pointing",
+      "ppclean-v1-000000355240-2193197-grounding",
+      "ppclean-v1-000000355240-2193197-pointing",
+      "ppclean-v1-000000357978-1950439-grounding",
+      "ppclean-v1-000000357978-1950439-pointing",
+      "ppclean-v1-000000361238-1169723-grounding",
+      "ppclean-v1-000000361238-1169723-pointing",
+      "ppclean-v1-000000362434-1137462-grounding",
+      "ppclean-v1-000000362434-1137462-pointing",
+      "ppclean-v1-000000363461-102528-grounding",
+      "ppclean-v1-000000363461-102528-pointing",
+      "ppclean-v1-000000363840-102560-grounding",
+      "ppclean-v1-000000363840-102560-pointing",
+      "ppclean-v1-000000370208-125303-grounding",
+      "ppclean-v1-000000370208-125303-pointing",
+      "ppclean-v1-000000371529-1955477-grounding",
+      "ppclean-v1-000000371529-1955477-pointing",
+      "ppclean-v1-000000375078-1153031-grounding",
+      "ppclean-v1-000000375078-1153031-pointing",
+      "ppclean-v1-000000383337-391085-grounding",
+      "ppclean-v1-000000383337-391085-pointing",
+      "ppclean-v1-000000403565-127813-grounding",
+      "ppclean-v1-000000403565-127813-pointing",
+      "ppclean-v1-000000405249-393619-grounding",
+      "ppclean-v1-000000405249-393619-pointing",
+      "ppclean-v1-000000405970-20600-grounding",
+      "ppclean-v1-000000405970-20600-pointing",
+      "ppclean-v1-000000411938-1160097-grounding",
+      "ppclean-v1-000000411938-1160097-pointing",
+      "ppclean-v1-000000416745-1094503-grounding",
+      "ppclean-v1-000000416745-1094503-pointing",
+      "ppclean-v1-000000419974-1880254-grounding",
+      "ppclean-v1-000000419974-1880254-pointing",
+      "ppclean-v1-000000425226-332772-grounding",
+      "ppclean-v1-000000425226-332772-pointing",
+      "ppclean-v1-000000437392-1093807-grounding",
+      "ppclean-v1-000000437392-1093807-pointing",
+      "ppclean-v1-000000450488-317141-grounding",
+      "ppclean-v1-000000450488-317141-pointing",
+      "ppclean-v1-000000451571-1941497-grounding",
+      "ppclean-v1-000000451571-1941497-pointing",
+      "ppclean-v1-000000456143-713654-grounding",
+      "ppclean-v1-000000456143-713654-pointing",
+      "ppclean-v1-000000463842-316796-grounding",
+      "ppclean-v1-000000463842-316796-pointing",
+      "ppclean-v1-000000467176-1951749-grounding",
+      "ppclean-v1-000000467176-1951749-pointing",
+      "ppclean-v1-000000468245-316948-grounding",
+      "ppclean-v1-000000468245-316948-pointing",
+      "ppclean-v1-000000471893-118700-grounding",
+      "ppclean-v1-000000471893-118700-pointing",
+      "ppclean-v1-000000473118-125429-grounding",
+      "ppclean-v1-000000473118-125429-pointing",
+      "ppclean-v1-000000474854-122353-grounding",
+      "ppclean-v1-000000474854-122353-pointing",
+      "ppclean-v1-000000478136-1622756-grounding",
+      "ppclean-v1-000000478136-1622756-pointing",
+      "ppclean-v1-000000480122-391893-grounding",
+      "ppclean-v1-000000480122-391893-pointing",
+      "ppclean-v1-000000482978-1942439-grounding",
+      "ppclean-v1-000000482978-1942439-pointing",
+      "ppclean-v1-000000483531-314389-grounding",
+      "ppclean-v1-000000483531-314389-pointing",
+      "ppclean-v1-000000488166-392757-grounding",
+      "ppclean-v1-000000488166-392757-pointing",
+      "ppclean-v1-000000492878-1131167-grounding",
+      "ppclean-v1-000000492878-1131167-pointing",
+      "ppclean-v1-000000497599-1100722-grounding",
+      "ppclean-v1-000000497599-1100722-pointing",
+      "ppclean-v1-000000500464-1131499-grounding",
+      "ppclean-v1-000000500464-1131499-pointing",
+      "ppclean-v1-000000505169-1094484-grounding",
+      "ppclean-v1-000000505169-1094484-pointing",
+      "ppclean-v1-000000517056-373476-grounding",
+      "ppclean-v1-000000517056-373476-pointing",
+      "ppclean-v1-000000526197-2227389-grounding",
+      "ppclean-v1-000000526197-2227389-pointing",
+      "ppclean-v1-000000530146-2095270-grounding",
+      "ppclean-v1-000000530146-2095270-pointing",
+      "ppclean-v1-000000530975-1519219-grounding",
+      "ppclean-v1-000000530975-1519219-pointing",
+      "ppclean-v1-000000532761-99358-grounding",
+      "ppclean-v1-000000532761-99358-pointing",
+      "ppclean-v1-000000536947-331522-grounding",
+      "ppclean-v1-000000536947-331522-pointing",
+      "ppclean-v1-000000547816-1094676-grounding",
+      "ppclean-v1-000000547816-1094676-pointing",
+      "ppclean-v1-000000551304-1623696-grounding",
+      "ppclean-v1-000000551304-1623696-pointing",
+      "ppclean-v1-000000555005-316327-grounding",
+      "ppclean-v1-000000555005-316327-pointing",
+      "ppclean-v1-000000559956-1180006-grounding",
+      "ppclean-v1-000000559956-1180006-pointing",
+      "ppclean-v1-000000560312-1951834-grounding",
+      "ppclean-v1-000000560312-1951834-pointing",
+      "ppclean-v1-000000561465-1617054-grounding",
+      "ppclean-v1-000000561465-1617054-pointing",
+      "ppclean-v1-000000569700-1152933-grounding",
+      "ppclean-v1-000000569700-1152933-pointing",
+      "ppclean-v1-000000578545-318662-grounding",
+      "ppclean-v1-000000578545-318662-pointing"
+    ],
+    "val": [
+      "ppclean-v1-000000023034-1826835-grounding",
+      "ppclean-v1-000000023034-1826835-pointing",
+      "ppclean-v1-000000029397-575411-grounding",
+      "ppclean-v1-000000029397-575411-pointing",
+      "ppclean-v1-000000031050-1153302-grounding",
+      "ppclean-v1-000000031050-1153302-pointing",
+      "ppclean-v1-000000034760-1135599-grounding",
+      "ppclean-v1-000000034760-1135599-pointing",
+      "ppclean-v1-000000051008-1098870-grounding",
+      "ppclean-v1-000000051008-1098870-pointing",
+      "ppclean-v1-000000052996-332281-grounding",
+      "ppclean-v1-000000052996-332281-pointing",
+      "ppclean-v1-000000056127-1646725-grounding",
+      "ppclean-v1-000000056127-1646725-pointing",
+      "ppclean-v1-000000080932-107131-grounding",
+      "ppclean-v1-000000080932-107131-pointing",
+      "ppclean-v1-000000082696-122374-grounding",
+      "ppclean-v1-000000082696-122374-pointing",
+      "ppclean-v1-000000124659-98013-grounding",
+      "ppclean-v1-000000124659-98013-pointing",
+      "ppclean-v1-000000141821-81028-grounding",
+      "ppclean-v1-000000141821-81028-pointing",
+      "ppclean-v1-000000167572-1533850-grounding",
+      "ppclean-v1-000000167572-1533850-pointing",
+      "ppclean-v1-000000170893-1094910-grounding",
+      "ppclean-v1-000000170893-1094910-pointing",
+      "ppclean-v1-000000196754-2124119-grounding",
+      "ppclean-v1-000000196754-2124119-pointing",
+      "ppclean-v1-000000202001-112639-grounding",
+      "ppclean-v1-000000202001-112639-pointing",
+      "ppclean-v1-000000231339-331345-grounding",
+      "ppclean-v1-000000231339-331345-pointing",
+      "ppclean-v1-000000237984-375949-grounding",
+      "ppclean-v1-000000237984-375949-pointing",
+      "ppclean-v1-000000263796-1092667-grounding",
+      "ppclean-v1-000000263796-1092667-pointing",
+      "ppclean-v1-000000268378-391967-grounding",
+      "ppclean-v1-000000268378-391967-pointing",
+      "ppclean-v1-000000272416-1096721-grounding",
+      "ppclean-v1-000000272416-1096721-pointing",
+      "ppclean-v1-000000283412-1507981-grounding",
+      "ppclean-v1-000000283412-1507981-pointing",
+      "ppclean-v1-000000288762-687503-grounding",
+      "ppclean-v1-000000288762-687503-pointing",
+      "ppclean-v1-000000289343-575188-grounding",
+      "ppclean-v1-000000289343-575188-pointing",
+      "ppclean-v1-000000302760-1129949-grounding",
+      "ppclean-v1-000000302760-1129949-pointing",
+      "ppclean-v1-000000349152-1620611-grounding",
+      "ppclean-v1-000000349152-1620611-pointing",
+      "ppclean-v1-000000349184-572536-grounding",
+      "ppclean-v1-000000349184-572536-pointing",
+      "ppclean-v1-000000351589-576367-grounding",
+      "ppclean-v1-000000351589-576367-pointing",
+      "ppclean-v1-000000357567-1094427-grounding",
+      "ppclean-v1-000000357567-1094427-pointing",
+      "ppclean-v1-000000366199-1612641-grounding",
+      "ppclean-v1-000000366199-1612641-pointing",
+      "ppclean-v1-000000371749-111588-grounding",
+      "ppclean-v1-000000371749-111588-pointing",
+      "ppclean-v1-000000407825-341578-grounding",
+      "ppclean-v1-000000407825-341578-pointing",
+      "ppclean-v1-000000441247-1828178-grounding",
+      "ppclean-v1-000000441247-1828178-pointing",
+      "ppclean-v1-000000465822-1606909-grounding",
+      "ppclean-v1-000000465822-1606909-pointing",
+      "ppclean-v1-000000508312-2227937-grounding",
+      "ppclean-v1-000000508312-2227937-pointing",
+      "ppclean-v1-000000532690-98156-grounding",
+      "ppclean-v1-000000532690-98156-pointing",
+      "ppclean-v1-000000537270-375501-grounding",
+      "ppclean-v1-000000537270-375501-pointing",
+      "ppclean-v1-000000559707-685829-grounding",
+      "ppclean-v1-000000559707-685829-pointing",
+      "ppclean-v1-000000569059-108194-grounding",
+      "ppclean-v1-000000569059-108194-pointing"
+    ]
+  },
+  "split_counts": {
+    "test": 78,
+    "train": 318,
+    "val": 76
+  },
+  "split_group_by": "source_image_sha256",
+  "split_group_summary": {
+    "test": {
+      "image_count": 39,
+      "sample_count": 78
+    },
+    "train": {
+      "image_count": 159,
+      "sample_count": 318
+    },
+    "val": {
+      "image_count": 38,
+      "sample_count": 76
+    }
+  },
+  "status": "TRAINED",
+  "temperature": 0.1,
+  "test_evaluated_once_after_freeze": true,
+  "test_used_for_selection": false,
+  "val_gate": {
+    "correct_beats_shuffled": false,
+    "student_beats_l2": true
+  },
+  "weights_sha256": "ece4a9162da653e50e9192677f61761b02b8ef3739430200c7fe15914c67cdb3"
+}

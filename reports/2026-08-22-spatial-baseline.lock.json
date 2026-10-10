@@ -1,0 +1,66 @@
+{
+  "date": "2026-08-22",
+  "purpose": "pre-acceleration labeled spatial smoke gate",
+  "dataset": {
+    "source": "COCO 2017 val instances",
+    "annotation_sha256": "e8c7f7908f1d7278341fae127d0da654f102f11bd7b21d8aeefa635b8c810b6f",
+    "manifest": "datasets/dac_spatial_eval_smoke.jsonl",
+    "manifest_sha256": "73ac09cd720e7adddfaf5203d4e18eb392e869fa57a59e75154b4ae5b42a494e",
+    "seed": 20260822,
+    "images": 32,
+    "samples": 64,
+    "tasks": {"grounding": 32, "pointing": 32},
+    "max_image_side": 512,
+    "coordinate_system": "normalized_0_1000",
+    "pointing_definition": "center of the selected COCO bounding box; not affordance pointing"
+  },
+  "models": [
+    {
+      "label": "Qwen3-VL-4B-Instruct-BF16",
+      "source": "ModelScope Qwen/Qwen3-VL-4B-Instruct",
+      "format": "safetensors BF16",
+      "sha256": {
+        "model-00001-of-00002.safetensors": "30a01a0556622645a3cce87b655bbbbbc1f170c196099f1b666c93202c3339a9",
+        "model-00002-of-00002.safetensors": "046296a2a387efb43b0c997d5833c789604d168834f6e0d3064bf7bb13d002a6",
+        "model.safetensors.index.json": "58a7841d7bff2548dd91577d216274a83cf1b500bc6a534b809d6c1b1707cf2b"
+      }
+    },
+    {
+      "label": "RoboBrain2.5-4B-BF16",
+      "source": "local BAAI RoboBrain2.5-4B checkpoint",
+      "format": "safetensors BF16",
+      "sha256": {
+        "model.safetensors": "e2f6e3c372f4ef76afb5e9e28ec56679944fcc3b4f2ce2ebda8b21264e96eb2f"
+      }
+    },
+    {
+      "label": "RoboBrain2.5-4B-Q8_0",
+      "source": "local deployed GGUF checkpoint and multimodal projector",
+      "format": "GGUF general.file_type=7 (Q8_0)",
+      "tensor_types": {
+        "language_model": {"Q8_0": 254, "F32": 145},
+        "multimodal_projector": {"Q8_0": 104, "F32": 212}
+      },
+      "sha256": {
+        "RoboBrain2.5-4B.Q8_0.gguf": "835b78ff8c298acc358d682d3bf44d620d084a4ccd4c90da07e4e1afba3349eb",
+        "RoboBrain2.5-4B.mmproj-Q8_0.gguf": "fcc278251252d38ecdd7288548767280f949a9aa5ae4cb48a9632cf3fa1dfde2"
+      }
+    }
+  ],
+  "runtime": {
+    "bf16": "RTX A6000; torch 2.5.1+cu124; transformers 4.57.0; SDPA; deterministic generation",
+    "q8_0": "Intel Core i7-12700; llama.cpp 10069 (178a6c44); 20 threads; CPU-only",
+    "q8_pointing_latency_note": "cache hit: the same 32 images were encoded during the preceding grounding pass"
+  },
+  "raw_prediction_sha256": {
+    "qwen3_vl_bf16.jsonl": "6c0cdfbfd960a405d4b73c064694a2d4efdbbd6ed9cfd6a57a13c9d97b6f3786",
+    "robobrain_bf16.jsonl": "d3359832b4eea91255d0a7ac8e588ae25ec204292f0666e298ce9db4be5e0149",
+    "robobrain_q8_0.jsonl": "4e2470c987f2280b3293abc561c507ddadeb48935ab1d210075c590e54b1d425"
+  },
+  "commands": {
+    "tests": "make eval-test",
+    "hf": "python evaluation/run_hf_spatial_baseline.py --model MODEL --model-label LABEL --manifest datasets/dac_spatial_eval_smoke.jsonl --output OUTPUT",
+    "q8_client": "python evaluation/run_openai_spatial_baseline.py --base-url http://127.0.0.1:8090 --model-label RoboBrain2.5-4B-Q8_0 --manifest datasets/dac_spatial_eval_smoke.jsonl --output evaluation/results/robobrain_q8_0.jsonl --timeout 300",
+    "metrics": "python evaluation/metrics.py --manifest datasets/dac_spatial_eval_smoke.jsonl --predictions PREDICTIONS --summary SUMMARY --scored SCORED"
+  }
+}

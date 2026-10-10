@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "run_id": "20260831T-board-rerun",
+  "decision": "BOARD_RERUN_PASS / KERNEL_ASSUMPTION_STABLE / END_TO_END_NOT_MEASURED",
+  "scope": "Re-run the frozen PE16 DATAFLOW board protocol from the existing RAM-Linux UART shell and update the first-order image-latency projection.",
+  "board_access": {
+    "uart_device": "/dev/ttyUSB1",
+    "board_reset": false,
+    "pl_programmed": false,
+    "sd_or_qspi_written": false,
+    "final_control_register": "0x00000004"
+  },
+  "correctness": {
+    "protocol_pass": true,
+    "pre_selftest_max_abs": 0,
+    "post_selftest_max_abs": 0,
+    "all_sampled_benchmarks_max_abs": 0,
+    "apm_overflow": 0
+  },
+  "measurements": {
+    "language_prefill_m512": {
+      "average_kernel_ms": 174.559333,
+      "effective_gops": 146.089973,
+      "latency_delta_vs_20260830_percent": 0.008212
+    },
+    "visual_prefill_m1080_auto": {
+      "average_kernel_ms": 368.878667,
+      "effective_gops": 145.825589,
+      "latency_delta_vs_20260830_percent": -0.002891
+    },
+    "vision_encoder_m4320_auto": {
+      "average_kernel_ms": 252.062667,
+      "effective_gops": 143.768957,
+      "latency_delta_vs_20260830_percent": -0.003306
+    },
+    "decoder_gemv_m1_auto": {
+      "average_kernel_ms": 14.66,
+      "effective_gops": 3.397501,
+      "latency_delta_vs_20260830_percent": -0.059085
+    }
+  },
+  "first_order_image_projection": {
+    "method": "Replace eligible CPU MUL_MAT time in the frozen full-image baseline by eligible FLOPs divided by the newly measured representative PL throughput; retain non-eligible CPU time and 8-token decode; add the previously measured fast-path bridge estimate.",
+    "vision_encoder_seconds": 322.199954,
+    "vision_llm_prefill_seconds": 164.840695,
+    "text_prefill_seconds": 40.936907,
+    "generate_8_tokens_seconds": 10.749,
+    "total_seconds": 538.726556,
+    "minutes_per_image": 8.978776,
+    "images_per_second": 0.00185623
+  },
+  "evidence": {
+    "raw_uart_log": "reports/20260831T-board-rerun-uart.log",
+    "raw_uart_sha256": "436a3947a509777c550dbb129bc406fd08b30a654e7ad44c217dde929d6756ef",
+    "previous_summary": "deployment/artifacts/20260830T113814Z-q8q8-pe16-dataflow-board-summary.json"
+  },
+  "limitations": [
+    "This is a board measurement of accelerator microbenchmarks, not an end-to-end RoboBrain image inference.",
+    "The complete GGML/llama.cpp Transformer backend is not connected to the PL kernel yet.",
+    "The 538.7 s projection remains optimistic for unmeasured small and transposed operator shapes and excludes complete backend scheduling effects.",
+    "Per-operator PS round trips are a bring-up path only and are rejected as the final architecture."
+  ]
+}

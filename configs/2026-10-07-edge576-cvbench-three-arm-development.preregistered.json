@@ -1,0 +1,240 @@
+{
+  "version": "2026-10-07-edge576-cvbench-three-arm-development-r1",
+  "date": "2026-10-07",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "executed": false,
+  "future_only": true,
+  "retroactive": false,
+  "gpu_runs": 0,
+  "purpose": "Future-only edge deployment study: re-preprocess the full CV-Bench 2638 development set under the G<=576 edge runtime domain and compare Dense@edge576, corrected-integer-L2@B1/K96 and the next pre-registered candidate on identical inputs.",
+  "measurement_class": "development",
+  "development_set_statement": "CV-Bench full2638 has been repeatedly observed and is a development set only; passing the gates permits one fresh untouched external benchmark confirmation, never a publication or deployment claim.",
+  "non_retroactive_statement": "The 2026-10-06 native-resolution conservative_l2_guarded_rerank_v2 DEVELOPMENT_STOP is frozen and is NOT modified, re-scored or re-adjudicated here; native-resolution results stay read-only.",
+  "edge_runtime_domain": {
+    "keep_aspect_ratio": true,
+    "min_pixels": 65536,
+    "max_pixels": 589824,
+    "budget_g": 576,
+    "patch_size": 16,
+    "merge_size": 2,
+    "merge_unit": 4,
+    "resize_factor": 32,
+    "g_definition": "full_llm_visual_tokens = (image_grid_thw[0]*image_grid_thw[1]*image_grid_thw[2]) // (spatial_merge_size**2)",
+    "identity_bypass_g_le": 96,
+    "compression_range": "96 < G <= 576",
+    "high_resolution_policy": "native dynamic resolution (up to G=3588) is retained only as a frozen stress test; it is not the edge promotion gate and its existing DEVELOPMENT_STOP is not rewritten."
+  },
+  "pins": {
+    "edge576_manifest": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+      "sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+      "role": "edge576_manifest"
+    },
+    "edge576_summary": {
+      "path": "datasets/2026-10-07-cv-bench-edge576-full2638.summary.json",
+      "sha256": "492c82958804bda54ec36c607bc9b8e2222ce2ef3d7deafc89b64517176b1a6b",
+      "role": "edge576_summary"
+    },
+    "source_full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "role": "frozen_full_manifest"
+    },
+    "builder": {
+      "path": "evaluation/build_edge576_cv_bench_manifest.py",
+      "sha256": "12258b15848e4a31ec96a5c80ff23ed80fe8a24cd536202ab93cffc28f72b48a",
+      "role": "edge576_builder"
+    },
+    "auditor": {
+      "path": "evaluation/audit_edge576_cv_bench_manifest.py",
+      "sha256": "45dcd04976e5c5c8acaf232989f219b1817b5a13fb87bfbe27dd4cbfe81ea683",
+      "role": "edge576_auditor"
+    },
+    "builder_test": {
+      "path": "evaluation/tests/test_build_edge576_cv_bench_manifest.py",
+      "sha256": "d7556f31054283b20a5d81e1f9c199566b35f91f4ae8b18a728b98323079e514",
+      "role": "edge576_builder_test"
+    },
+    "auditor_test": {
+      "path": "evaluation/tests/test_audit_edge576_cv_bench_manifest.py",
+      "sha256": "59ed16daebf5ec747acee841487cd32cdd731cdd9a1d1e39a7dee694c1000a26",
+      "role": "edge576_auditor_test"
+    },
+    "prereg_test": {
+      "path": "evaluation/tests/test_edge576_cvbench_prereg.py",
+      "sha256": "5eb3b8c4bc773c4bf1e1ef50a56281ea05c6c03128af17fd2b2fa40ae362ad40",
+      "role": "edge576_prereg_test"
+    },
+    "cv_bench_metric_v2": {
+      "path": "evaluation/cv_bench_metric_v2.py",
+      "sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+      "role": "future_metric_v2"
+    },
+    "model_identity_manifest": {
+      "path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+      "sha256": "bbfcda188605f54a9c7fea83e7fc2a46eca8ac635c086d23861b294c9950f8e3",
+      "role": "model_identity"
+    },
+    "corrected_l2_runner": {
+      "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+      "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9",
+      "role": "corrected_l2_runner"
+    },
+    "corrected_l2_integer_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+      "role": "frozen_corrected_l2_control"
+    },
+    "dense_full_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+      "role": "frozen_native_dense_reference"
+    }
+  },
+  "model_identity": {
+    "default_model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "manifest_path": "artifacts/provenance/robobrain25-4b-model-identity.json",
+    "weights_loaded_in_this_round": false
+  },
+  "manifest_contract": {
+    "sample_count": 2638,
+    "unique_sample_id_count": 2638,
+    "all_g_within_budget": true,
+    "g_min": 64,
+    "g_max": 576,
+    "g_histogram": {
+      "g_le_96": 143,
+      "g_97_256": 781,
+      "g_257_512": 706,
+      "g_513_576": 1008
+    },
+    "labels_must_match_frozen_full_manifest": true,
+    "no_sample_may_be_deleted_for_size": true
+  },
+  "shared_arm_contract": {
+    "manifest": "datasets/2026-10-07-cv-bench-edge576-full2638.jsonl",
+    "manifest_sha256": "b5355ba1636011b4af101ace16c170b061ecf44a69e5c75fe2a64f4288c7dd1f",
+    "prompt_source": "the edge576 manifest `prompt` field, byte-identical for all three arms",
+    "model": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "dtype": "bf16",
+    "attention_implementation": "sdpa",
+    "device": "cuda:0",
+    "do_sample": false,
+    "greedy": true,
+    "max_new_tokens": 16,
+    "processor": {
+      "min_pixels": 65536,
+      "max_pixels": 589824,
+      "keep_aspect_ratio": true,
+      "patch_size": 16,
+      "merge_size": 2
+    },
+    "grid_verification": "every arm must assert that its processor-produced image_grid_thw equals the value recorded in the edge576 manifest for that sample, otherwise it fails closed; native-resolution pixel budgets are forbidden for these arms"
+  },
+  "arms": {
+    "dense_edge576": {
+      "role": "quality denominator (Dense@edge576)",
+      "cutpoint": null,
+      "selector_budget": null,
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/dense_edge576_full2638.jsonl",
+      "output_sha256": null,
+      "status": "NOT_EXECUTED",
+      "edge576_processor_budget_required": true
+    },
+    "corrected_l2_integer_b1_k96": {
+      "role": "hardware-rule control (corrected integer L2 @ B1, K96)",
+      "cutpoint": "B1_after_vision_block_0",
+      "prune_after_layer": 0,
+      "selector_budget": {
+        "K": 96,
+        "region_grid": 3,
+        "local_candidate_cap": 16,
+        "identity_bypass_g_le": 96
+      },
+      "runner": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/corrected_l2_integer_k96_full2638.jsonl",
+      "output_sha256": null,
+      "status": "NOT_EXECUTED",
+      "edge576_processor_budget_required": true
+    },
+    "next_candidate_b1_k96": {
+      "role": "pre-registered candidate (mechanism pending policy review)",
+      "mechanism_id": null,
+      "status": "TO_BE_SELECTED_UNDER_INDEPENDENT_POLICY_REVIEW_20261005-001",
+      "cutpoint": "B1_after_vision_block_0",
+      "selector_budget": {
+        "K": 96,
+        "region_grid": 3,
+        "local_candidate_cap": 16,
+        "identity_bypass_g_le": 96
+      },
+      "output_path": "artifacts/token_selector/2026-10-07-edge576-cvbench/next_candidate_k96_full2638.jsonl",
+      "output_sha256": null,
+      "allowed_mechanism_scope": "single-variable change relative to corrected integer L2 at the same cutpoint and K; no G/source/task routing, no label/answer leakage, no post-hoc threshold tuning on full2638",
+      "edge576_processor_budget_required": true
+    }
+  },
+  "primary_metric": {
+    "name": "cv_bench_accuracy",
+    "module": "evaluation/cv_bench_metric_v2.py",
+    "module_sha256": "2a2f2004834803927f34114a916e0e867a6091ada0e66d05be6ee109183a73a1",
+    "weighting": "((accuracy_ADE20K + accuracy_COCO) / 2 + accuracy_Omni3D) / 2",
+    "correct_key": "correct",
+    "parsed_answer_key": "parsed_answer",
+    "keys_must_be_distinct": true,
+    "never_infer_parsed_answer_key_from_correct_key": true,
+    "parse_failures_count_as_wrong": true,
+    "secondary_diagnostics_only": [
+      "unweighted_sample_accuracy",
+      "per_source_accuracy",
+      "per_task_accuracy"
+    ]
+  },
+  "success_gates": {
+    "quality_retention": {
+      "definition": "selector_cv_bench_accuracy / dense_edge576_cv_bench_accuracy",
+      "threshold": 0.9,
+      "comparison": ">=",
+      "note": "must never compare an edge selector against a native-resolution dense score"
+    },
+    "relative_to_corrected_integer_l2": {
+      "paired_bootstrap": {
+        "strata": "task::source_dataset",
+        "repeats": 5000,
+        "seed": 20261007,
+        "confidence": 0.95,
+        "lower_bound": ">=0"
+      },
+      "point_estimate": ">=0"
+    },
+    "layout_contract": {
+      "K": 96,
+      "real_slots": 87,
+      "context_slots": 9,
+      "identity_bypass_g_le": 96,
+      "applicable_if_layout_is_reused": true
+    },
+    "honest_parse_gate": {
+      "source_field": "parsed_answer_key only",
+      "must_report": [
+        "parse_success_rate",
+        "parse_success_count",
+        "parse_failure_count"
+      ],
+      "aliasing_correct_key_forbidden": true
+    },
+    "no_label_leakage": true,
+    "record_completeness": "all 2638 unique samples present and parseable"
+  },
+  "forbidden_claims": [
+    "full2638 is an untouched confirmation set",
+    "a development gate pass is a publication or deployment claim",
+    "an edge score may be compared to the frozen native-resolution dense score",
+    "the 2026-10-06 native-resolution DEVELOPMENT_STOP is rewritten",
+    "any G/source/task routing may be used as the candidate mechanism"
+  ],
+  "next_allowed_action": "Adapt the three arm runners to consume the edge576 manifest with the pinned processor budgets and per-sample image_grid_thw assertions, then run Dense@edge576, corrected integer L2@B1/K96 and the frozen next candidate; score with cv_bench_metric_v2 and audit before any external validation or hardware claim.",
+  "generated_at": "2026-10-07T15:07:53.839613+00:00",
+  "generator": "scripts/preregister_edge576_cvbench_20261007.py",
+  "generator_sha256": "c01776756d37d45307fae9745c610d44ad2179d638d694a0f86372d343d06c57"
+}

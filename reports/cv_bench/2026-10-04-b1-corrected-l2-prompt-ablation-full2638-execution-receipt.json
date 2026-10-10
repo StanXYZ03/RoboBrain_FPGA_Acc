@@ -1,0 +1,273 @@
+{
+  "schema_version": "1.0",
+  "executed_at": "2026-10-04T21:58:57+08:00",
+  "status": "EXECUTED_AND_REPORTED",
+  "objective": "Formal full2638 CV-Bench execution record for the frozen corrected-L2 / Prompt three-arm ablation promoted unchanged from the screening100 pass.",
+  "formal_outcome": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638",
+  "formal_conclusion": true,
+  "diagnostic_only": false,
+  "report_stem": "2026-10-04-b1-corrected-l2-prompt-ablation-full2638",
+  "primary_metric": "score(...)[\"cv_bench_accuracy\"]",
+  "unweighted_metric": "score(...)[\"accuracy\"] (secondary diagnostic only; never the CV-Bench primary score)",
+  "preregistration": {
+    "path": "configs/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.preregistered.json",
+    "sha256_at_execution": "6251a31cdb1b0e2cd176a0076337d0d1dfa76ca49b3af57fa046438738d7c2d8",
+    "status": "PREREGISTERED_PENDING_CODEX_FINALIZATION",
+    "pending_fields_note": "The preregistration intentionally left the three full2638 arm sha256 fields null while it was written before any full2638 output existed. It is treated as a frozen, unmodified input here; the authoritative current arm hashes are recorded in this receipt and in the formal report."
+  },
+  "promotion_of": {
+    "experiment": "2026-10-04-b1-corrected-l2-prompt-ablation-screening100",
+    "outcome": "CORRECTED_PROMPT_SELECTOR_SCREENING_PASS",
+    "not_tuned": true,
+    "basis": "Manifest, arms, runner, boundary, K, grid, dtype/decoding and scoring unchanged; only the sample set is promoted from the fixed 100-sample screening manifest to the full 2638-sample CV-Bench manifest."
+  },
+  "inputs": {
+    "full_manifest": {
+      "path": "datasets/cv_bench_full2638.jsonl",
+      "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+      "records": 2638
+    },
+    "corrected_l2_float_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_float_k96_full2638.jsonl",
+      "sha256": "0dff41fb39dde4893c8a87a60b44309fa029fe85360b71438ee183ffd708ff76",
+      "records": 2638
+    },
+    "corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+      "records": 2638
+    },
+    "prompt_plus_corrected_l2_integer_arm": {
+      "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/prompt_plus_corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "6d3b97e8ce768066a99c9b9f517ddf602480fa75d57ce2e36b54e26baabc90fa",
+      "records": 2638
+    },
+    "dense_full_jsonl": {
+      "path": "evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+      "role": "descriptive_reference_only"
+    },
+    "old_current_integer_full_jsonl": {
+      "path": "artifacts/token_selector/2026-10-04-current-selector-cvbench/current_selector_k96.jsonl",
+      "sha256": "b8976a5befdde7ae84cae925d14e37b2f5dd4e4d60b30eb4bdd879b18b87241d",
+      "role": "descriptive_reference_only"
+    }
+  },
+  "source_scripts": {
+    "runner": {
+      "path": "evaluation/run_hf_hardware_regular_b1_corrected_l2.py",
+      "sha256": "ae636f5ede98cad10352f3acae7dc9d7eb58f23ac7c5536ee6ba57554bdbc8c9"
+    },
+    "core": {
+      "path": "evaluation/hardware_regular_b1_corrected_l2.py",
+      "sha256": "6c9bb24164da12c3dc5295b2e4a5d8dee1f4f46d05e421bb1788185e4fc3b585"
+    },
+    "full2638_summarizer": {
+      "path": "evaluation/summarize_b1_corrected_l2_prompt_ablation_full2638.py",
+      "sha256": "3893fc037d8e0646e7d27b3d0cef93e1d7fe54edb1ddc6f66e276d2247392719"
+    },
+    "screening100_summarizer": {
+      "path": "evaluation/summarize_b1_corrected_l2_prompt_ablation_screening100.py",
+      "sha256": "47100b742ee0b7758f9647e647a0eae42fa755b16bbcedb22e47843605a1788e"
+    },
+    "evaluator": {
+      "path": "evaluation/build_cv_bench_pruning_report.py",
+      "sha256": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+    },
+    "metrics": {
+      "path": "evaluation/metrics.py",
+      "sha256": "9c5c12428289374f827be1018c7e95a59d61b5d5aedb5934970f5e2fa4c5efe8"
+    },
+    "token_selector": {
+      "path": "evaluation/hardware_regular_token_selector.py",
+      "sha256": "c55cfdc39e798e7566cd609a77ac388dca85df463ec20f536448284e2f85932b"
+    },
+    "b1_integration": {
+      "path": "evaluation/hardware_regular_b1_integration.py",
+      "sha256": "c5fda60cf73618906fb2f313825745401a2c9c120f9438206845da5d1623cffa"
+    },
+    "current_selector_integer": {
+      "path": "evaluation/current_selector_integer.py",
+      "sha256": "34728308a0c5c59beab4615516d91fea5d79e3b75f34c8c119dff256217b8ed7"
+    },
+    "selector_int8_numerical_audit": {
+      "path": "evaluation/selector_int8_numerical_audit.py",
+      "sha256": "4329e11616d2790218670b6b2b7252cec847c75a56778fcba871044428ea05dc"
+    },
+    "selector_integer_scorer_audit": {
+      "path": "evaluation/selector_integer_scorer_audit.py",
+      "sha256": "3fcf91d28f670e7406a41028b02fcaaa4f7694abf8ba76210494cd05502b16a9"
+    },
+    "evaluation_protocol": {
+      "path": "configs/evaluation_protocol.json",
+      "sha256": "997ccf1a6707cd6b133d41f294ae14d28b8f03d781d6629d3d62bb16e015d643"
+    }
+  },
+  "reports": {
+    "json": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.json",
+      "sha256": "53ec2ee10fde7b31b08a840263bd26409e35781ed25b89b20166ea90e84af6ea"
+    },
+    "csv": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.csv",
+      "sha256": "c5473e6d92e78bed60d618141d36bbe0057e1f33ec5bdb731613e7ea6bb0471b"
+    },
+    "markdown": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-full2638.md",
+      "sha256": "136fcdad6f8a33da1d4bdab1e27722fe40055f34c6422f4616cc230df89d33b5"
+    }
+  },
+  "screening_promotion_evidence": {
+    "outcome": "CORRECTED_PROMPT_SELECTOR_SCREENING_PASS",
+    "config": {
+      "path": "configs/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.preregistered.json",
+      "sha256": "80f2db140cc1997ced73f939d40a0b5c172993a73a64ab75d10ea46d5a563319"
+    },
+    "report_json": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.json",
+      "sha256": "abe35625c8af4bebe68e60eadc9856ae92c8ae9b4075aace5f54850d7ea693a9"
+    },
+    "report_csv": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.csv",
+      "sha256": "fcc42a1c673f619b908e1cb6140f72b6b93c6a84a5828dfa1c9df7946c3add85"
+    },
+    "report_md": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100.md",
+      "sha256": "5661c957739ce291f0682537d2036b23bd7226d7f0d75eb2cf69cb29b4de7a89"
+    },
+    "execution_receipt": {
+      "path": "reports/cv_bench/2026-10-04-b1-corrected-l2-prompt-ablation-screening100-execution-receipt.json",
+      "sha256": "efdf3286c547796e9aa87957aeefd89c7a4d2d31a58e26ddd3c7deec41ab09f7"
+    },
+    "raw_arm_jsonl": {
+      "corrected_l2_float": {
+        "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation/corrected_l2_float_k96_screening100.jsonl",
+        "sha256": "c9b25550ebf579844779067289d7a63140afefbad7ed8f3d44b5ca518b002ba3"
+      },
+      "corrected_l2_integer": {
+        "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation/corrected_l2_integer_k96_screening100.jsonl",
+        "sha256": "313beb877ceeaf0cbbdf025ff36e306c52ccf8a174cce84fd0532f32c01e6a7d"
+      },
+      "prompt_plus_corrected_l2_integer": {
+        "path": "artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation/prompt_plus_corrected_l2_integer_k96_screening100.jsonl",
+        "sha256": "fbaf08e5ba69a5ff604ab56c28a2d1cf778f0d24e83561d017b836abf5667b70"
+      }
+    },
+    "screening_metrics": {
+      "corrected_l2_float_cv_bench_accuracy": 0.7333333333333334,
+      "corrected_l2_integer_cv_bench_accuracy": 0.7333333333333334,
+      "prompt_plus_corrected_l2_integer_cv_bench_accuracy": 0.8208333333333333,
+      "integer_minus_float_delta": 0.0,
+      "integer_minus_float_ci95": [0.0, 0.0],
+      "prompt_minus_integer_l2_delta": 0.0875,
+      "prompt_minus_integer_l2_ci95": [0.0166666666666666, 0.1625]
+    }
+  },
+  "commands": {
+    "raw_generation": "python evaluation/run_hf_hardware_regular_b1_corrected_l2.py --model <frozen local BF16 RoboBrain2.5-4B dir> --model-label <label> --manifest datasets/cv_bench_full2638.jsonl --output <arm output path> --arm <arm> --budget 96 --region-grid 3 --local-candidate-cap 16 --dtype bf16 --device cuda:0",
+    "one_arm_at_a_time": true,
+    "summariser": "python evaluation/summarize_b1_corrected_l2_prompt_ablation_full2638.py",
+    "tests_relevant": "python -m unittest evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_full2638 evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_screening100 evaluation.tests.test_cv_bench_report evaluation.tests.test_hardware_regular_b1_corrected_l2 evaluation.tests.test_run_hf_hardware_regular_b1_corrected_l2",
+    "tests_full": "python -m unittest discover -s evaluation/tests"
+  },
+  "tests": {
+    "relevant_existing": {
+      "modules": [
+        "evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_full2638",
+        "evaluation.tests.test_summarize_b1_corrected_l2_prompt_ablation_screening100",
+        "evaluation.tests.test_cv_bench_report",
+        "evaluation.tests.test_hardware_regular_b1_corrected_l2",
+        "evaluation.tests.test_run_hf_hardware_regular_b1_corrected_l2"
+      ],
+      "count": 102,
+      "result": "OK"
+    },
+    "full_evaluation_suite": {
+      "command": "python -m unittest discover -s evaluation/tests",
+      "count": 1412,
+      "result": "OK",
+      "note": "Current full-suite count measured while finalizing this receipt; it includes the 36 tests of the later out-of-fold G-gated Prompt diagnostic. The five full2638-relevant modules alone are 102 OK."
+    }
+  },
+  "hashes_verified": {
+    "all_authoritative_inputs_rehashed_and_match_pins": true,
+    "manifest": true,
+    "three_raw_arms": true,
+    "formal_json_csv_md": true,
+    "preregistration": true,
+    "screening_promotion_reports_and_receipt": true,
+    "source_scripts": true
+  },
+  "scores": {
+    "corrected_l2_float": 0.7661167368245464,
+    "corrected_l2_integer": 0.7668517264725796,
+    "prompt_plus_corrected_l2_integer": 0.7773617325561999,
+    "dense_descriptive": 0.8727298774444869,
+    "old_current_integer_descriptive": 0.7648694965313552
+  },
+  "paired_deltas": {
+    "integer_minus_float": {
+      "point": 0.0007349896480332019,
+      "ci95": [-0.00419208050003439, 0.005833333333333357],
+      "decision_relevant": true,
+      "quantization_gate_passed": true,
+      "threshold_ci_lower": -0.02
+    },
+    "prompt_minus_integer_l2": {
+      "point": 0.010510006083620294,
+      "ci95": [-0.005430244424165731, 0.025699187051700934],
+      "decision_relevant": true,
+      "prompt_gain_confirmed": false,
+      "threshold_ci_lower": 0.0
+    },
+    "dense_minus_corrected_float": {
+      "point": 0.10661314061994054,
+      "ci95": [0.09289393894792619, 0.12069911345951934],
+      "decision_relevant": false
+    },
+    "old_current_integer_minus_corrected_float": {
+      "point": -0.0012472402931912319,
+      "ci95": [-0.01750212190790168, 0.014129294103794487],
+      "decision_relevant": false
+    }
+  },
+  "decision": {
+    "outcome": "PROMPT_GAIN_NOT_CONFIRMED_FULL2638",
+    "reason": "quantization gate passes (CI lower -0.004192 >= -0.02) but prompt_minus_integer_l2 CI lower -0.005430 <= 0.0",
+    "metric": "score(...)[\"cv_bench_accuracy\"]",
+    "uses_only_primary_metric": true,
+    "descriptive_references_cannot_override": true,
+    "bootstrap": {
+      "method": "paired bootstrap, stratified by task::source_dataset",
+      "helper": "evaluation.build_cv_bench_pruning_report.paired_bootstrap_delta",
+      "seed": 20261004,
+      "repeats": 5000,
+      "ci_level": 0.95
+    }
+  },
+  "compute": {
+    "raw_runs_are_real_inference": true,
+    "gpu_model": "NVIDIA RTX A6000",
+    "device": "cuda:0",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "max_new_tokens": 16,
+    "model_label": "RoboBrain2.5-4B-BF16",
+    "model_path": "/home/zhaoxiangyu/RoboBrain2.5/RoboBrain2.5-4B",
+    "torch": "2.5.1+cu124",
+    "transformers": "4.57.0",
+    "python": "3.10.20",
+    "selector_software_timings_are_fpga_acceleration_claims": false,
+    "selector_note": "The raw A6000 BF16/SDPA inference is real model inference; the Selector path is a software bridge only and no FPGA, latency or acceleration claim is made."
+  },
+  "scope": "Formal full2638 CV-Bench execution record for the frozen corrected-L2 / Prompt three-arm ablation; the decision uses score(...)[\"cv_bench_accuracy\"] exclusively via paired stratified bootstrap CI lower bounds.",
+  "limitations": [
+    "Software Selector bridge only; no FPGA, latency or acceleration claim.",
+    "Dense and the old current-integer selector are descriptive references only and never drive the decision.",
+    "The decision uses score(...)[\"cv_bench_accuracy\"] exclusively, via paired stratified bootstrap CI lower bounds.",
+    "Forbidden primary metrics (pointing/grounding/ndcg/retained_mass) are never reported.",
+    "The preregistration's three full2638 arm sha256 fields remain null as originally written; this receipt and the formal report carry the authoritative current hashes."
+  ]
+}

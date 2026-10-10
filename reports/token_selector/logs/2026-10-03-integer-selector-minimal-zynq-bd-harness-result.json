@@ -1,0 +1,112 @@
+{
+ "ap_clk_mhz": 199.998,
+ "axi_masters_128": [
+  "m_axi_input_arena",
+  "m_axi_wv_q",
+  "m_axi_output_arena"
+ ],
+ "bitstream_files": "0",
+ "board_part": "xilinx.com:zcu102:part0:3.4",
+ "control_base_address": "0x00A0000000",
+ "control_slave": "/integer_selector_pipeline_compact_0/s_axi_control",
+ "critical_warning_count": 0,
+ "ddr_segments": {
+  "m_axi_input_arena": {
+   "offset": "0x0000000000000000",
+   "range": "0x0000000080000000",
+   "range_nonempty": true,
+   "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_input_arena/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+  },
+  "m_axi_output_arena": {
+   "offset": "0x0000000000000000",
+   "range": "0x0000000080000000",
+   "range_nonempty": true,
+   "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_output_arena/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+  },
+  "m_axi_wv_q": {
+   "offset": "0x0000000000000000",
+   "range": "0x0000000080000000",
+   "range_nonempty": true,
+   "segment": "/integer_selector_pipeline_compact_0/Data_m_axi_wv_q/SEG_zynq_ultra_ps_e_0_HP0_DDR_LOW"
+  }
+ },
+ "decision": "INTEGER_SELECTOR_MINIMAL_ZYNQ_BD_PASS",
+ "error_count": 0,
+ "gates": {
+  "clocks_resets_connected": true,
+  "exact_part_and_board_recorded": true,
+  "no_bitstream_no_board": true,
+  "output_products_and_wrapper": true,
+  "pl_clock_200mhz": true,
+  "protected_files_unchanged": true,
+  "ps_master_to_control_and_base": true,
+  "selector_interface_inventory_exact": true,
+  "selector_vlnv_instantiated": true,
+  "three_ddr_segments_nonempty": true,
+  "three_master_to_ps_ddr_path": true,
+  "validate_bd_design_no_error": true
+ },
+ "json_report": "reports/token_selector/2026-10-03-integer-selector-minimal-zynq-bd.json",
+ "md_report": "reports/token_selector/2026-10-03-integer-selector-minimal-zynq-bd.md",
+ "part": "xczu9eg-ffvb1156-2-e",
+ "protected_file_count": 2315,
+ "protected_files_unchanged": true,
+ "selector_vlnv": "robobrain.local:hls:integer_selector_pipeline_compact:1.0",
+ "synthesis_resources": {
+  "Block_RAM_Tile": {
+   "available": 912,
+   "fixed": 0,
+   "pct": 13.43,
+   "prohibited": 0,
+   "used": 122.5
+  },
+  "CLB_LUTs": {
+   "available": 274080,
+   "fixed": 0,
+   "pct": 11.86,
+   "prohibited": 0,
+   "used": 32514
+  },
+  "CLB_Registers": {
+   "available": 548160,
+   "fixed": 0,
+   "pct": 6.8,
+   "prohibited": 0,
+   "used": 37264
+  },
+  "DSPs": {
+   "available": 2520,
+   "fixed": 0,
+   "pct": 8.33,
+   "prohibited": 0,
+   "used": 210
+  },
+  "PS8": {
+   "available": 1,
+   "fixed": 0,
+   "pct": 100.0,
+   "prohibited": 0,
+   "used": 1
+  },
+  "URAM": null
+ },
+ "synthesis_seconds": "284",
+ "synthesis_status": "OK",
+ "synthesis_timing": {
+  "THS_failing": "57404",
+  "THS_ns": "-1958.720",
+  "THS_total": "145506",
+  "TNS_failing": "0",
+  "TNS_ns": "0.000",
+  "TNS_total": "145506",
+  "TPWS_failing": "0",
+  "TPWS_ns": "0.000",
+  "TPWS_total": "42319",
+  "WHS_ns": "-0.096",
+  "WNS_ns": "1.184",
+  "WPWS_ns": "1.000"
+ },
+ "task": "integer_selector_minimal_zynq_bd",
+ "validate_rc": "0",
+ "wrapper_files": "/tmp/robobrain_integer_selector_bd/vivado/project/integer_selector_minimal_zynq_bd.gen/sources_1/bd/integer_selector_minimal_zynq_bd/hdl/integer_selector_minimal_zynq_bd_wrapper.v"
+}

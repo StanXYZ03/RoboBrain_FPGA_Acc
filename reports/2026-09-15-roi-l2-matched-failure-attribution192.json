@@ -1,0 +1,529 @@
+{
+  "status": "ROI_L2_MATCHED_FAILURE_ATTRIBUTION_COMPLETE",
+  "evidence_level": "post-hoc descriptive attribution on revealed development data",
+  "records": 384,
+  "unique_images": 192,
+  "same_l2_selection_for_paired_tasks": true,
+  "task_selection_mismatch_image_ids": [],
+  "target_coverage_audit": {
+    "centers_retained": 150,
+    "samples": 384,
+    "all_target_cells_retained": 10,
+    "target_cells_retained": 9858,
+    "target_cells_total": 26828,
+    "target_cell_retention_rate": 0.36745191590875204
+  },
+  "by_task": {
+    "grounding": {
+      "overall": {
+        "n": 192,
+        "retention_mean": 0.3605681888133059,
+        "target_coverage_mean": 0.3916015779036133,
+        "target_center_retention_rate": 0.390625,
+        "dense_primary_mean": 0.8103294106263609,
+        "roi_primary_mean": 0.7889506730096683,
+        "l2_primary_mean": 0.5323635645493744,
+        "l2_minus_dense_mean": -0.27796584607698643,
+        "l2_minus_roi_mean": -0.2565871084602938
+      },
+      "groups": {
+        "retention_bin": {
+          "[0.00,0.20)": {
+            "n": 24,
+            "retention_mean": 0.1412192831678126,
+            "target_coverage_mean": 0.12336289482122816,
+            "target_center_retention_rate": 0.125,
+            "dense_primary_mean": 0.7057989671215465,
+            "roi_primary_mean": 0.6476739626587585,
+            "l2_primary_mean": 0.2511188496118641,
+            "l2_minus_dense_mean": -0.4546801175096824,
+            "l2_minus_roi_mean": -0.39655511304689434
+          },
+          "[0.20,0.35)": {
+            "n": 66,
+            "retention_mean": 0.26527377935587454,
+            "target_coverage_mean": 0.28065299104737607,
+            "target_center_retention_rate": 0.3181818181818182,
+            "dense_primary_mean": 0.8037998831077139,
+            "roi_primary_mean": 0.7790863115902481,
+            "l2_primary_mean": 0.43982845096642503,
+            "l2_minus_dense_mean": -0.36397143214128885,
+            "l2_minus_roi_mean": -0.339257860623823
+          },
+          "[0.35,0.50)": {
+            "n": 69,
+            "retention_mean": 0.39848918962007074,
+            "target_coverage_mean": 0.44198520874034253,
+            "target_center_retention_rate": 0.42028985507246375,
+            "dense_primary_mean": 0.8425341894860678,
+            "roi_primary_mean": 0.816042976538314,
+            "l2_primary_mean": 0.6299878036038123,
+            "l2_minus_dense_mean": -0.21254638588225547,
+            "l2_minus_roi_mean": -0.18605517293450172
+          },
+          "[0.50,1.00]": {
+            "n": 33,
+            "retention_mean": 0.6313941192380188,
+            "target_coverage_mean": 0.7032338384719337,
+            "target_center_retention_rate": 0.6666666666666666,
+            "dense_primary_mean": 0.8320733415059509,
+            "roi_primary_mean": 0.85477855054382,
+            "l2_primary_mean": 0.7178519936469107,
+            "l2_minus_dense_mean": -0.11422134785904026,
+            "l2_minus_roi_mean": -0.13692655689690936
+          }
+        },
+        "coverage_bin": {
+          "(0,0.5)": {
+            "n": 123,
+            "retention_mean": 0.29539591395713,
+            "target_coverage_mean": 0.2564098502650309,
+            "target_center_retention_rate": 0.2032520325203252,
+            "dense_primary_mean": 0.7962878594280502,
+            "roi_primary_mean": 0.7640575875063139,
+            "l2_primary_mean": 0.4383642464746641,
+            "l2_minus_dense_mean": -0.35792361295338615,
+            "l2_minus_roi_mean": -0.3256933410316498
+          },
+          "0": {
+            "n": 5,
+            "retention_mean": 0.17969230769230768,
+            "target_coverage_mean": 0.0,
+            "target_center_retention_rate": 0.0,
+            "dense_primary_mean": 0.8481091305630827,
+            "roi_primary_mean": 0.7264275684355966,
+            "l2_primary_mean": 0.0,
+            "l2_minus_dense_mean": -0.8481091305630827,
+            "l2_minus_roi_mean": -0.7264275684355966
+          },
+          "1": {
+            "n": 5,
+            "retention_mean": 0.6749825174825175,
+            "target_coverage_mean": 1.0,
+            "target_center_retention_rate": 1.0,
+            "dense_primary_mean": 0.7307348519510815,
+            "roi_primary_mean": 0.7264494878550896,
+            "l2_primary_mean": 0.6831930419453068,
+            "l2_minus_dense_mean": -0.04754181000577458,
+            "l2_minus_roi_mean": -0.043256445909782726
+          },
+          "[0.5,1)": {
+            "n": 59,
+            "retention_mean": 0.4851189950771797,
+            "target_coverage_mean": 0.6550693453372024,
+            "target_center_retention_rate": 0.7627118644067796,
+            "dense_primary_mean": 0.8431461053905136,
+            "roi_primary_mean": 0.8514417063241739,
+            "l2_primary_mean": 0.7606616418198251,
+            "l2_minus_dense_mean": -0.08248446357068848,
+            "l2_minus_roi_mean": -0.09078006450434892
+          }
+        },
+        "target_center_cell_retained": {
+          "False": {
+            "n": 117,
+            "retention_mean": 0.3156267186114518,
+            "target_coverage_mean": 0.27071579093404646,
+            "target_center_retention_rate": 0.0,
+            "dense_primary_mean": 0.7945571626660749,
+            "roi_primary_mean": 0.7696847879740899,
+            "l2_primary_mean": 0.44047262457008807,
+            "l2_minus_dense_mean": -0.35408453809598694,
+            "l2_minus_roi_mean": -0.32921216340400195
+          },
+          "True": {
+            "n": 75,
+            "retention_mean": 0.4306768823281981,
+            "target_coverage_mean": 0.5801834055761373,
+            "target_center_retention_rate": 1.0,
+            "dense_primary_mean": 0.8349341174444069,
+            "roi_primary_mean": 0.8190054536651704,
+            "l2_primary_mean": 0.6757134309170613,
+            "l2_minus_dense_mean": -0.1592206865273457,
+            "l2_minus_roi_mean": -0.1432920227481092
+          }
+        },
+        "target_area_bin": {
+          "large": {
+            "n": 54,
+            "retention_mean": 0.3859559254980471,
+            "target_coverage_mean": 0.3815722924219895,
+            "target_center_retention_rate": 0.3148148148148148,
+            "dense_primary_mean": 0.8583149046941662,
+            "roi_primary_mean": 0.8308574809213757,
+            "l2_primary_mean": 0.6539905600306706,
+            "l2_minus_dense_mean": -0.20432434466349556,
+            "l2_minus_roi_mean": -0.17686692089070497
+          },
+          "medium": {
+            "n": 70,
+            "retention_mean": 0.3625974686423588,
+            "target_coverage_mean": 0.39409879382711016,
+            "target_center_retention_rate": 0.4857142857142857,
+            "dense_primary_mean": 0.787202283161409,
+            "roi_primary_mean": 0.7689335979291153,
+            "l2_primary_mean": 0.5473393904858538,
+            "l2_minus_dense_mean": -0.23986289267555527,
+            "l2_minus_roi_mean": -0.22159420744326155
+          },
+          "small": {
+            "n": 68,
+            "retention_mean": 0.33831837456316266,
+            "target_coverage_mean": 0.3969953470413029,
+            "target_center_retention_rate": 0.35294117647058826,
+            "dense_primary_mean": 0.7960306200805543,
+            "roi_primary_mean": 0.7762775498979992,
+            "l2_primary_mean": 0.4203611296737341,
+            "l2_minus_dense_mean": -0.37566949040682013,
+            "l2_minus_roi_mean": -0.35591642022426523
+          }
+        },
+        "edge_bin": {
+          "edge": {
+            "n": 153,
+            "retention_mean": 0.36379719563846225,
+            "target_coverage_mean": 0.4025271949676109,
+            "target_center_retention_rate": 0.3790849673202614,
+            "dense_primary_mean": 0.8065469065096269,
+            "roi_primary_mean": 0.7927169332668017,
+            "l2_primary_mean": 0.5422202858745399,
+            "l2_minus_dense_mean": -0.26432662063508716,
+            "l2_minus_roi_mean": -0.2504966473922619
+          },
+          "interior": {
+            "n": 39,
+            "retention_mean": 0.347900546653077,
+            "target_coverage_mean": 0.34873954172946847,
+            "target_center_retention_rate": 0.4358974358974359,
+            "dense_primary_mean": 0.8251684652381636,
+            "roi_primary_mean": 0.7741753443086064,
+            "l2_primary_mean": 0.49369488858141825,
+            "l2_minus_dense_mean": -0.3314735766567454,
+            "l2_minus_roi_mean": -0.28048045572718816
+          }
+        },
+        "overlap_bin": {
+          "clear": {
+            "n": 86,
+            "retention_mean": 0.3597947536489112,
+            "target_coverage_mean": 0.38826969085641155,
+            "target_center_retention_rate": 0.45348837209302323,
+            "dense_primary_mean": 0.810595777794618,
+            "roi_primary_mean": 0.7887434588682934,
+            "l2_primary_mean": 0.5442978866818979,
+            "l2_minus_dense_mean": -0.2662978911127201,
+            "l2_minus_roi_mean": -0.24444557218639554
+          },
+          "overlap": {
+            "n": 106,
+            "retention_mean": 0.3611956928146071,
+            "target_coverage_mean": 0.39430480701738063,
+            "target_center_retention_rate": 0.33962264150943394,
+            "dense_primary_mean": 0.8101133014143788,
+            "roi_primary_mean": 0.7891187901432365,
+            "l2_primary_mean": 0.52268100130978,
+            "l2_minus_dense_mean": -0.28743230010459875,
+            "l2_minus_roi_mean": -0.2664377888334566
+          }
+        },
+        "scene_complexity_bin": {
+          "dense": {
+            "n": 37,
+            "retention_mean": 0.3174258084507392,
+            "target_coverage_mean": 0.3188999059628759,
+            "target_center_retention_rate": 0.2972972972972973,
+            "dense_primary_mean": 0.7462501873777956,
+            "roi_primary_mean": 0.7197651555741804,
+            "l2_primary_mean": 0.3550335001598695,
+            "l2_minus_dense_mean": -0.39121668721792613,
+            "l2_minus_roi_mean": -0.364731655414311
+          },
+          "medium": {
+            "n": 56,
+            "retention_mean": 0.3533702420685067,
+            "target_coverage_mean": 0.3433988385968866,
+            "target_center_retention_rate": 0.2857142857142857,
+            "dense_primary_mean": 0.8065318963844652,
+            "roi_primary_mean": 0.7752090828617576,
+            "l2_primary_mean": 0.46702404010748444,
+            "l2_minus_dense_mean": -0.3395078562769808,
+            "l2_minus_roi_mean": -0.3081850427542731
+          },
+          "sparse": {
+            "n": 99,
+            "retention_mean": 0.3807636745822323,
+            "target_coverage_mean": 0.4460391058125423,
+            "target_center_retention_rate": 0.48484848484848486,
+            "dense_primary_mean": 0.8364263000985132,
+            "roi_primary_mean": 0.822580907286396,
+            "l2_primary_mean": 0.6355981680964202,
+            "l2_minus_dense_mean": -0.20082813200209296,
+            "l2_minus_roi_mean": -0.18698273918997582
+          }
+        }
+      },
+      "correlation": {
+        "retention_vs_l2_minus_dense": 0.32154258672355046,
+        "target_coverage_vs_l2_minus_dense": 0.528896018579562
+      }
+    },
+    "pointing": {
+      "overall": {
+        "n": 192,
+        "retention_mean": 0.3605681888133059,
+        "target_coverage_mean": 0.3916015779036133,
+        "target_center_retention_rate": 0.390625,
+        "dense_primary_mean": 0.6458333333333334,
+        "roi_primary_mean": 0.5989583333333334,
+        "l2_primary_mean": 0.34375,
+        "l2_minus_dense_mean": -0.3020833333333333,
+        "l2_minus_roi_mean": -0.2552083333333333
+      },
+      "groups": {
+        "retention_bin": {
+          "[0.00,0.20)": {
+            "n": 24,
+            "retention_mean": 0.1412192831678126,
+            "target_coverage_mean": 0.12336289482122816,
+            "target_center_retention_rate": 0.125,
+            "dense_primary_mean": 0.6666666666666666,
+            "roi_primary_mean": 0.625,
+            "l2_primary_mean": 0.25,
+            "l2_minus_dense_mean": -0.4166666666666667,
+            "l2_minus_roi_mean": -0.375
+          },
+          "[0.20,0.35)": {
+            "n": 66,
+            "retention_mean": 0.26527377935587454,
+            "target_coverage_mean": 0.28065299104737607,
+            "target_center_retention_rate": 0.3181818181818182,
+            "dense_primary_mean": 0.696969696969697,
+            "roi_primary_mean": 0.5757575757575758,
+            "l2_primary_mean": 0.2878787878787879,
+            "l2_minus_dense_mean": -0.4090909090909091,
+            "l2_minus_roi_mean": -0.2878787878787879
+          },
+          "[0.35,0.50)": {
+            "n": 69,
+            "retention_mean": 0.39848918962007074,
+            "target_coverage_mean": 0.44198520874034253,
+            "target_center_retention_rate": 0.42028985507246375,
+            "dense_primary_mean": 0.5797101449275363,
+            "roi_primary_mean": 0.5362318840579711,
+            "l2_primary_mean": 0.3188405797101449,
+            "l2_minus_dense_mean": -0.2608695652173913,
+            "l2_minus_roi_mean": -0.21739130434782608
+          },
+          "[0.50,1.00]": {
+            "n": 33,
+            "retention_mean": 0.6313941192380188,
+            "target_coverage_mean": 0.7032338384719337,
+            "target_center_retention_rate": 0.6666666666666666,
+            "dense_primary_mean": 0.6666666666666666,
+            "roi_primary_mean": 0.7575757575757576,
+            "l2_primary_mean": 0.5757575757575758,
+            "l2_minus_dense_mean": -0.09090909090909091,
+            "l2_minus_roi_mean": -0.18181818181818182
+          }
+        },
+        "coverage_bin": {
+          "(0,0.5)": {
+            "n": 123,
+            "retention_mean": 0.29539591395713,
+            "target_coverage_mean": 0.2564098502650309,
+            "target_center_retention_rate": 0.2032520325203252,
+            "dense_primary_mean": 0.6260162601626016,
+            "roi_primary_mean": 0.5365853658536586,
+            "l2_primary_mean": 0.25203252032520324,
+            "l2_minus_dense_mean": -0.37398373983739835,
+            "l2_minus_roi_mean": -0.2845528455284553
+          },
+          "0": {
+            "n": 5,
+            "retention_mean": 0.17969230769230768,
+            "target_coverage_mean": 0.0,
+            "target_center_retention_rate": 0.0,
+            "dense_primary_mean": 0.6,
+            "roi_primary_mean": 0.8,
+            "l2_primary_mean": 0.0,
+            "l2_minus_dense_mean": -0.6,
+            "l2_minus_roi_mean": -0.8
+          },
+          "1": {
+            "n": 5,
+            "retention_mean": 0.6749825174825175,
+            "target_coverage_mean": 1.0,
+            "target_center_retention_rate": 1.0,
+            "dense_primary_mean": 0.6,
+            "roi_primary_mean": 0.6,
+            "l2_primary_mean": 0.6,
+            "l2_minus_dense_mean": 0.0,
+            "l2_minus_roi_mean": 0.0
+          },
+          "[0.5,1)": {
+            "n": 59,
+            "retention_mean": 0.4851189950771797,
+            "target_coverage_mean": 0.6550693453372024,
+            "target_center_retention_rate": 0.7627118644067796,
+            "dense_primary_mean": 0.6949152542372882,
+            "roi_primary_mean": 0.711864406779661,
+            "l2_primary_mean": 0.5423728813559322,
+            "l2_minus_dense_mean": -0.15254237288135594,
+            "l2_minus_roi_mean": -0.1694915254237288
+          }
+        },
+        "target_center_cell_retained": {
+          "False": {
+            "n": 117,
+            "retention_mean": 0.3156267186114518,
+            "target_coverage_mean": 0.27071579093404646,
+            "target_center_retention_rate": 0.0,
+            "dense_primary_mean": 0.5982905982905983,
+            "roi_primary_mean": 0.5384615384615384,
+            "l2_primary_mean": 0.23076923076923078,
+            "l2_minus_dense_mean": -0.36752136752136755,
+            "l2_minus_roi_mean": -0.3076923076923077
+          },
+          "True": {
+            "n": 75,
+            "retention_mean": 0.4306768823281981,
+            "target_coverage_mean": 0.5801834055761373,
+            "target_center_retention_rate": 1.0,
+            "dense_primary_mean": 0.72,
+            "roi_primary_mean": 0.6933333333333334,
+            "l2_primary_mean": 0.52,
+            "l2_minus_dense_mean": -0.2,
+            "l2_minus_roi_mean": -0.17333333333333334
+          }
+        },
+        "target_area_bin": {
+          "large": {
+            "n": 54,
+            "retention_mean": 0.3859559254980471,
+            "target_coverage_mean": 0.3815722924219895,
+            "target_center_retention_rate": 0.3148148148148148,
+            "dense_primary_mean": 0.5740740740740741,
+            "roi_primary_mean": 0.5185185185185185,
+            "l2_primary_mean": 0.35185185185185186,
+            "l2_minus_dense_mean": -0.2222222222222222,
+            "l2_minus_roi_mean": -0.16666666666666666
+          },
+          "medium": {
+            "n": 70,
+            "retention_mean": 0.3625974686423588,
+            "target_coverage_mean": 0.39409879382711016,
+            "target_center_retention_rate": 0.4857142857142857,
+            "dense_primary_mean": 0.6571428571428571,
+            "roi_primary_mean": 0.6142857142857143,
+            "l2_primary_mean": 0.4142857142857143,
+            "l2_minus_dense_mean": -0.24285714285714285,
+            "l2_minus_roi_mean": -0.2
+          },
+          "small": {
+            "n": 68,
+            "retention_mean": 0.33831837456316266,
+            "target_coverage_mean": 0.3969953470413029,
+            "target_center_retention_rate": 0.35294117647058826,
+            "dense_primary_mean": 0.6911764705882353,
+            "roi_primary_mean": 0.6470588235294118,
+            "l2_primary_mean": 0.2647058823529412,
+            "l2_minus_dense_mean": -0.4264705882352941,
+            "l2_minus_roi_mean": -0.38235294117647056
+          }
+        },
+        "edge_bin": {
+          "edge": {
+            "n": 153,
+            "retention_mean": 0.36379719563846225,
+            "target_coverage_mean": 0.4025271949676109,
+            "target_center_retention_rate": 0.3790849673202614,
+            "dense_primary_mean": 0.6209150326797386,
+            "roi_primary_mean": 0.5816993464052288,
+            "l2_primary_mean": 0.3333333333333333,
+            "l2_minus_dense_mean": -0.2875816993464052,
+            "l2_minus_roi_mean": -0.24836601307189543
+          },
+          "interior": {
+            "n": 39,
+            "retention_mean": 0.347900546653077,
+            "target_coverage_mean": 0.34873954172946847,
+            "target_center_retention_rate": 0.4358974358974359,
+            "dense_primary_mean": 0.7435897435897436,
+            "roi_primary_mean": 0.6666666666666666,
+            "l2_primary_mean": 0.38461538461538464,
+            "l2_minus_dense_mean": -0.358974358974359,
+            "l2_minus_roi_mean": -0.28205128205128205
+          }
+        },
+        "overlap_bin": {
+          "clear": {
+            "n": 86,
+            "retention_mean": 0.3597947536489112,
+            "target_coverage_mean": 0.38826969085641155,
+            "target_center_retention_rate": 0.45348837209302323,
+            "dense_primary_mean": 0.7558139534883721,
+            "roi_primary_mean": 0.6976744186046512,
+            "l2_primary_mean": 0.38372093023255816,
+            "l2_minus_dense_mean": -0.37209302325581395,
+            "l2_minus_roi_mean": -0.313953488372093
+          },
+          "overlap": {
+            "n": 106,
+            "retention_mean": 0.3611956928146071,
+            "target_coverage_mean": 0.39430480701738063,
+            "target_center_retention_rate": 0.33962264150943394,
+            "dense_primary_mean": 0.5566037735849056,
+            "roi_primary_mean": 0.5188679245283019,
+            "l2_primary_mean": 0.3113207547169811,
+            "l2_minus_dense_mean": -0.24528301886792453,
+            "l2_minus_roi_mean": -0.20754716981132076
+          }
+        },
+        "scene_complexity_bin": {
+          "dense": {
+            "n": 37,
+            "retention_mean": 0.3174258084507392,
+            "target_coverage_mean": 0.3188999059628759,
+            "target_center_retention_rate": 0.2972972972972973,
+            "dense_primary_mean": 0.4864864864864865,
+            "roi_primary_mean": 0.35135135135135137,
+            "l2_primary_mean": 0.16216216216216217,
+            "l2_minus_dense_mean": -0.32432432432432434,
+            "l2_minus_roi_mean": -0.1891891891891892
+          },
+          "medium": {
+            "n": 56,
+            "retention_mean": 0.3533702420685067,
+            "target_coverage_mean": 0.3433988385968866,
+            "target_center_retention_rate": 0.2857142857142857,
+            "dense_primary_mean": 0.6428571428571429,
+            "roi_primary_mean": 0.5535714285714286,
+            "l2_primary_mean": 0.3392857142857143,
+            "l2_minus_dense_mean": -0.30357142857142855,
+            "l2_minus_roi_mean": -0.21428571428571427
+          },
+          "sparse": {
+            "n": 99,
+            "retention_mean": 0.3807636745822323,
+            "target_coverage_mean": 0.4460391058125423,
+            "target_center_retention_rate": 0.48484848484848486,
+            "dense_primary_mean": 0.7070707070707071,
+            "roi_primary_mean": 0.7171717171717171,
+            "l2_primary_mean": 0.41414141414141414,
+            "l2_minus_dense_mean": -0.29292929292929293,
+            "l2_minus_roi_mean": -0.30303030303030304
+          }
+        }
+      },
+      "correlation": {
+        "retention_vs_l2_minus_dense": 0.24409545918230952,
+        "target_coverage_vs_l2_minus_dense": 0.36773516062072176
+      }
+    }
+  },
+  "limitations": [
+    "Subgroup and correlation results are post-hoc descriptive evidence, not confirmatory tests.",
+    "Target-box cell coverage does not measure semantic context, object parts, or feature distortion.",
+    "Association cannot prove that omitted target cells caused the output error."
+  ]
+}

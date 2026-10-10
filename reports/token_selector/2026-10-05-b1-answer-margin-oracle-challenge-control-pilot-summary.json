@@ -1,0 +1,730 @@
+{
+  "sample_count": 24,
+  "per_sample": [
+    {
+      "sample_id": "229",
+      "task": "Count",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Count",
+      "stratum": "challenge",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "D",
+      "control_correct": false,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 4.25,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "290",
+      "task": "Count",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Count",
+      "stratum": "challenge",
+      "ground_truth": "E",
+      "dense_answer": "E",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": false,
+      "oracle_answer": "E",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 0.375,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "305",
+      "task": "Count",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Count",
+      "stratum": "control",
+      "ground_truth": "C",
+      "dense_answer": "C",
+      "dense_correct": true,
+      "control_answer": "C",
+      "control_correct": true,
+      "oracle_answer": "C",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 2.25,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "334",
+      "task": "Count",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Count",
+      "stratum": "control",
+      "ground_truth": "C",
+      "dense_answer": "C",
+      "dense_correct": true,
+      "control_answer": "C",
+      "control_correct": true,
+      "oracle_answer": "E",
+      "oracle_correct": false,
+      "oracle_parse_ok": true,
+      "oracle_margin": 1.25,
+      "transition": "R->W"
+    },
+    {
+      "sample_id": "425",
+      "task": "Relation",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Relation",
+      "stratum": "challenge",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": false,
+      "oracle_answer": "B",
+      "oracle_correct": false,
+      "oracle_parse_ok": true,
+      "oracle_margin": 0.25,
+      "transition": "unchanged_wrong"
+    },
+    {
+      "sample_id": "519",
+      "task": "Relation",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Relation",
+      "stratum": "challenge",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": false,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 2.5,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "439",
+      "task": "Relation",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Relation",
+      "stratum": "control",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": true,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 2.125,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "471",
+      "task": "Relation",
+      "source": "ADE20K",
+      "source_dataset": "ADE20K Validation Set",
+      "cell": "ADE20K x Relation",
+      "stratum": "control",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": true,
+      "oracle_answer": "B",
+      "oracle_correct": false,
+      "oracle_parse_ok": true,
+      "oracle_margin": 0.5,
+      "transition": "R->W"
+    },
+    {
+      "sample_id": "748",
+      "task": "Count",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Count",
+      "stratum": "challenge",
+      "ground_truth": "B",
+      "dense_answer": "B",
+      "dense_correct": true,
+      "control_answer": "D",
+      "control_correct": false,
+      "oracle_answer": "B",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 0.5,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "969",
+      "task": "Count",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Count",
+      "stratum": "challenge",
+      "ground_truth": "C",
+      "dense_answer": "C",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": false,
+      "oracle_answer": "B",
+      "oracle_correct": false,
+      "oracle_parse_ok": true,
+      "oracle_margin": 7.5,
+      "transition": "unchanged_wrong"
+    },
+    {
+      "sample_id": "636",
+      "task": "Count",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Count",
+      "stratum": "control",
+      "ground_truth": "B",
+      "dense_answer": "B",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": true,
+      "oracle_answer": "B",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 5.875,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "719",
+      "task": "Count",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Count",
+      "stratum": "control",
+      "ground_truth": "C",
+      "dense_answer": "C",
+      "dense_correct": true,
+      "control_answer": "C",
+      "control_correct": true,
+      "oracle_answer": "C",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 6.5,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "1221",
+      "task": "Relation",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Relation",
+      "stratum": "challenge",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": false,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 0.25,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "1406",
+      "task": "Relation",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Relation",
+      "stratum": "challenge",
+      "ground_truth": "B",
+      "dense_answer": "B",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": false,
+      "oracle_answer": "B",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 3.5,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "1234",
+      "task": "Relation",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Relation",
+      "stratum": "control",
+      "ground_truth": "B",
+      "dense_answer": "B",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": true,
+      "oracle_answer": "B",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 5.625,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "1328",
+      "task": "Relation",
+      "source": "COCO",
+      "source_dataset": "COCO 2017 Validation Set",
+      "cell": "COCO x Relation",
+      "stratum": "control",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": true,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 3.75,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "1701",
+      "task": "Depth",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "cell": "Omni3D x Depth",
+      "stratum": "challenge",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": false,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 3.625,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "1814",
+      "task": "Depth",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_SUNRGBD",
+      "cell": "Omni3D x Depth",
+      "stratum": "challenge",
+      "ground_truth": "B",
+      "dense_answer": "B",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": false,
+      "oracle_answer": "B",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 5.375,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "1908",
+      "task": "Depth",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "cell": "Omni3D x Depth",
+      "stratum": "control",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": true,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 6.5,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "1932",
+      "task": "Depth",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "cell": "Omni3D x Depth",
+      "stratum": "control",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": true,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 3.5,
+      "transition": "unchanged_correct"
+    },
+    {
+      "sample_id": "2108",
+      "task": "Distance",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "cell": "Omni3D x Distance",
+      "stratum": "challenge",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "B",
+      "control_correct": false,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 3.25,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "2178",
+      "task": "Distance",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_Hypersim",
+      "cell": "Omni3D x Distance",
+      "stratum": "challenge",
+      "ground_truth": "B",
+      "dense_answer": "B",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": false,
+      "oracle_answer": "B",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 4.75,
+      "transition": "W->R"
+    },
+    {
+      "sample_id": "2518",
+      "task": "Distance",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "cell": "Omni3D x Distance",
+      "stratum": "control",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": true,
+      "oracle_answer": "B",
+      "oracle_correct": false,
+      "oracle_parse_ok": true,
+      "oracle_margin": 3.625,
+      "transition": "R->W"
+    },
+    {
+      "sample_id": "2566",
+      "task": "Distance",
+      "source": "Omni3D",
+      "source_dataset": "Omni3D_nuScenes",
+      "cell": "Omni3D x Distance",
+      "stratum": "control",
+      "ground_truth": "A",
+      "dense_answer": "A",
+      "dense_correct": true,
+      "control_answer": "A",
+      "control_correct": true,
+      "oracle_answer": "A",
+      "oracle_correct": true,
+      "oracle_parse_ok": true,
+      "oracle_margin": 4.5,
+      "transition": "unchanged_correct"
+    }
+  ],
+  "per_cell": {
+    "ADE20K x Count": {
+      "sample_count": 4,
+      "challenge_count": 2,
+      "control_count": 2,
+      "challenge_repairs": 2,
+      "control_regressions": 1,
+      "oracle_parse_ok": 4,
+      "transitions": {
+        "W->R": 2,
+        "R->W": 1,
+        "unchanged_correct": 1,
+        "unchanged_wrong": 0
+      }
+    },
+    "ADE20K x Relation": {
+      "sample_count": 4,
+      "challenge_count": 2,
+      "control_count": 2,
+      "challenge_repairs": 1,
+      "control_regressions": 1,
+      "oracle_parse_ok": 4,
+      "transitions": {
+        "W->R": 1,
+        "R->W": 1,
+        "unchanged_correct": 1,
+        "unchanged_wrong": 1
+      }
+    },
+    "COCO x Count": {
+      "sample_count": 4,
+      "challenge_count": 2,
+      "control_count": 2,
+      "challenge_repairs": 1,
+      "control_regressions": 0,
+      "oracle_parse_ok": 4,
+      "transitions": {
+        "W->R": 1,
+        "R->W": 0,
+        "unchanged_correct": 2,
+        "unchanged_wrong": 1
+      }
+    },
+    "COCO x Relation": {
+      "sample_count": 4,
+      "challenge_count": 2,
+      "control_count": 2,
+      "challenge_repairs": 2,
+      "control_regressions": 0,
+      "oracle_parse_ok": 4,
+      "transitions": {
+        "W->R": 2,
+        "R->W": 0,
+        "unchanged_correct": 2,
+        "unchanged_wrong": 0
+      }
+    },
+    "Omni3D x Depth": {
+      "sample_count": 4,
+      "challenge_count": 2,
+      "control_count": 2,
+      "challenge_repairs": 2,
+      "control_regressions": 0,
+      "oracle_parse_ok": 4,
+      "transitions": {
+        "W->R": 2,
+        "R->W": 0,
+        "unchanged_correct": 2,
+        "unchanged_wrong": 0
+      }
+    },
+    "Omni3D x Distance": {
+      "sample_count": 4,
+      "challenge_count": 2,
+      "control_count": 2,
+      "challenge_repairs": 2,
+      "control_regressions": 1,
+      "oracle_parse_ok": 4,
+      "transitions": {
+        "W->R": 2,
+        "R->W": 1,
+        "unchanged_correct": 1,
+        "unchanged_wrong": 0
+      }
+    }
+  },
+  "manifest_structure": {
+    "cell_counts": {
+      "ADE20K x Count": 4,
+      "ADE20K x Relation": 4,
+      "COCO x Count": 4,
+      "COCO x Relation": 4,
+      "Omni3D x Depth": 4,
+      "Omni3D x Distance": 4
+    },
+    "stratum_counts": {
+      "challenge": 12,
+      "control": 12
+    },
+    "omni3d_subdataset_counts": {
+      "Omni3D_Hypersim": 2,
+      "Omni3D_SUNRGBD": 2,
+      "Omni3D_nuScenes": 4
+    }
+  },
+  "decision": {
+    "challenge_repairs": 10,
+    "challenge_repair_min": 8,
+    "challenge_denominator": 12,
+    "control_regressions": 3,
+    "control_regression_max": 1,
+    "control_denominator": 12,
+    "oracle_parse_count": 24,
+    "oracle_parse_denominator": 24,
+    "layout_contract_pass_count": 24,
+    "layout_contract_denominator": 24,
+    "dense_correct_reference_count": 24,
+    "checks": {
+      "challenge_repairs_ge_min": true,
+      "control_regressions_le_max": false,
+      "oracle_parse_is_24": true,
+      "exact_k96_layout_is_24": true,
+      "manifest_structure_ok": true,
+      "challenge_control_labels_ok": true,
+      "dense_is_eligibility_reference": true,
+      "hashes_and_ids_ok": true
+    },
+    "status": "PILOT_STOP",
+    "uses_confidence_interval": false,
+    "is_official_cv_bench_accuracy": false,
+    "dense_is_only_eligibility_reference": true
+  },
+  "transitions": {
+    "W->R": 10,
+    "R->W": 3,
+    "unchanged_correct": 9,
+    "unchanged_wrong": 2
+  },
+  "manifest_sha256": "0bbe413d55750282a6d7f19650c13886d0e3355f0a82762afd7b5f968ba2a7ca",
+  "config_sha256": "a0e083b04e845d4bbd94051a3929ac301c2a6ee6b92e8ad72e4b09ec3f261de6",
+  "status": "PILOT_STOP",
+  "date": "2026-10-05",
+  "design": "2026-10-05-b1-answer-margin-oracle-challenge-control-pilot24",
+  "outcome_enriched_diagnostic": true,
+  "outcome_label_leakage": true,
+  "non_deployable": true,
+  "non_representative": true,
+  "forbidden_for_official_absolute_accuracy": true,
+  "is_label_aware_oracle": true,
+  "ground_truth_answer_leakage": true,
+  "deployable_selector": false,
+  "is_paper_accuracy_claim": false,
+  "accuracy_improvement_confirmed": false,
+  "uses_confidence_interval": false,
+  "pins": {
+    "pins_verified": true,
+    "checks": [
+      {
+        "name": "inputs_sha256.full_manifest",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_full2638.jsonl",
+        "sha256": "22399a767f4c4e9644073d3b2f6bfb6f88377795099012aecb2bfb336ece3d91",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.screening100_manifest",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/cv_bench_screening100.jsonl",
+        "sha256": "31bf313286c81fa50911ca3822118184ac03ca74df2cf2c260250cab2768b50c",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.counterfactual100_manifest",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-04-same-image-resolution-counterfactual-ade20k100.jsonl",
+        "sha256": "c53c7b7dd733b11f55edc85ba65745d72951d31f456c7403ec21e91b0031d4c5",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.random_v1_pilot24_manifest",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-05-b1-answer-margin-oracle-pilot24.jsonl",
+        "sha256": "9c8d15a65ef429eb1315ae1b73a80246de0ff2005373370fc184f0de1a2813c9",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.pilot_manifest",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-05-b1-answer-margin-oracle-challenge-control-pilot24.jsonl",
+        "sha256": "0bbe413d55750282a6d7f19650c13886d0e3355f0a82762afd7b5f968ba2a7ca",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.shared_helpers",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/b1_answer_margin_oracle.py",
+        "sha256": "58f2843ad329f723a15388f2a95422b4a55572b769ca62100df585a5bb28c752",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.challenge_control_helpers",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/b1_answer_margin_oracle_challenge_control.py",
+        "sha256": "3b45059a5e1090dd3c57f738ab838a100417b2660411167fde69c2d73c517fa9",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.selection_script",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/select_b1_answer_margin_oracle_challenge_control_pilot24.py",
+        "sha256": "5630dd5cf4278fe026a709da68e609e32b52b3d85125d195906ad14013f0b5ce",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.gpu_runner",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/run_b1_answer_margin_oracle_pilot.py",
+        "sha256": "972b504afa41027b1c07588e2cd5cd26f310e7d7ccc3e5d395c82dfb117fb6c2",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.summarizer",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/summarize_b1_answer_margin_oracle_challenge_control_pilot.py",
+        "sha256": "0c4b5c86b9330834de59ee95cd41455b833d65e9db33bd7434af7b70c84b96fd",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.helpers_test",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/tests/test_b1_answer_margin_oracle_challenge_control.py",
+        "sha256": "8099f924958730572b3e0835e64cc9678a0ad62a02db71c7f7a1e971a9c97216",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.selection_test",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/tests/test_select_b1_answer_margin_oracle_challenge_control_pilot24.py",
+        "sha256": "e6fd3ad001753dab820b6be292262d5acba91135e8944a88450e5e8ecb65ae45",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.runner_test",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/tests/test_run_b1_answer_margin_oracle_challenge_control_pilot.py",
+        "sha256": "5f6a1a0f428285ea015e7907f3a87ee6ead24fcd4e08f362bf54cc200ccc0592",
+        "matches": true
+      },
+      {
+        "name": "inputs_sha256.summarizer_test",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/tests/test_summarize_b1_answer_margin_oracle_challenge_control_pilot.py",
+        "sha256": "f9749857b3c0a5882f50ceaa05524f89a136f72e4ce76019d31160b88414a818",
+        "matches": true
+      },
+      {
+        "name": "summarizer_inputs.dense_full2638_jsonl",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+        "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63",
+        "matches": true
+      },
+      {
+        "name": "summarizer_inputs.control_corrected_l2_integer_jsonl",
+        "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+        "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f",
+        "matches": true
+      }
+    ]
+  },
+  "inputs_sha256": {
+    "config": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/configs/2026-10-05-b1-answer-margin-oracle-challenge-control-pilot24.preregistered.json",
+      "sha256": "a0e083b04e845d4bbd94051a3929ac301c2a6ee6b92e8ad72e4b09ec3f261de6"
+    },
+    "manifest": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/datasets/2026-10-05-b1-answer-margin-oracle-challenge-control-pilot24.jsonl",
+      "sha256": "0bbe413d55750282a6d7f19650c13886d0e3355f0a82762afd7b5f968ba2a7ca"
+    },
+    "dense": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/evaluation/results/cv_bench_l2_0875_full2638_20260916/shallow_r1000.jsonl",
+      "sha256": "3ff3b77ea4bddae96a8231c653bf08db1ce396a9c125fb414466417b1ea69f63"
+    },
+    "control": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-04-b1-corrected-l2-prompt-ablation-full2638/corrected_l2_integer_k96_full2638.jsonl",
+      "sha256": "d0e302f6b91279374ddd507db4d300ca0c29e16f522db57f47c8de059f103a5f"
+    },
+    "oracle": {
+      "path": "/home/zhaoxiangyu/Documents/Codex/2026-07-20-home-zhaoxiangyu-robobrain2-5-xilinx-zcu102/artifacts/token_selector/2026-10-05-b1-answer-margin-oracle-challenge-control-pilot24/oracle_answer_margin_b1_saliency_k96.jsonl",
+      "sha256": "13be51fa120b4f62ef665d3cdebef0b5af96b748a8b5596e76a98d98e1273862"
+    }
+  },
+  "required_statements": {
+    "outcome_label_leakage": "样本按 dense/control 正确性分层，属于 outcome/label leakage；非代表性、不可部署，禁止用于官方绝对精度主张。",
+    "label_aware_oracle": "这是 label-aware oracle 上界（ground-truth answer leakage），不是可部署 selector。",
+    "not_paper_accuracy": "24 样本只是泄漏 oracle 筛选，不是官方 CV-Bench 精度，不使用置信区间或『精度提升已确认』措辞。",
+    "decision_only": "本汇总器只输出 challenge 修复/control 回归与契约检查的 GO/STOP 决策，不报告 24 样本官方精度。"
+  },
+  "forbidden_claims": [
+    "deployable selector",
+    "paper accuracy",
+    "official CV-Bench accuracy from 24 enriched samples",
+    "CV-Bench accuracy improvement confirmed",
+    "FPGA speedup or latency",
+    "representative sampling",
+    "using the 24 enriched samples for training or threshold tuning"
+  ],
+  "generated_at": "2026-10-05T14:12:41.560469+08:00"
+}

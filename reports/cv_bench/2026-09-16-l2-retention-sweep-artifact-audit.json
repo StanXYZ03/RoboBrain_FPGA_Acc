@@ -1,0 +1,39 @@
+{
+  "lock_checks": {
+    "manifest": true,
+    "dense": true,
+    "selector": true,
+    "runner": true
+  },
+  "raw_record_counts": {
+    "evaluation/results/cv_bench_l2_sweep_full2638_20260916/shallow_r0750.jsonl": 2638,
+    "evaluation/results/cv_bench_l2_sweep_full2638_20260916/shallow_r0500.jsonl": 2638,
+    "evaluation/results/cv_bench_l2_sweep_full2638_20260916/shallow_r0250.jsonl": 2638,
+    "evaluation/results/cv_bench_l2_sweep_latency100_20260916.jsonl": 1500
+  },
+  "csv_row_counts": {
+    "reports/cv_bench/2026-09-16-l2-retention-quality-latency-curve.csv": 5,
+    "reports/cv_bench/2026-09-16-l2-retention-quality-latency-curve-accuracy-raw.csv": 13190
+  },
+  "hashes": {
+    "evaluation/results/cv_bench_l2_sweep_full2638_20260916/shallow_r0750.jsonl": "3a116733ff951f41fee7c479da4c8073530c819162cd729a921cb2dbc85cca7f",
+    "evaluation/results/cv_bench_l2_sweep_full2638_20260916/shallow_r0500.jsonl": "c3b0934c007ecd3b261b94494ed31ed2cf669b75ba10bcd76baa0c0eef9278e5",
+    "evaluation/results/cv_bench_l2_sweep_full2638_20260916/shallow_r0250.jsonl": "51ae5277a8061d83d64f83df1aec40baf048ee8b3afb2ac3b33fbef7d0a09a13",
+    "evaluation/results/cv_bench_l2_sweep_latency100_20260916.jsonl": "e6dde9adfd763e73efdde40080d057a48c76a782fa089b4924c35380482ad879",
+    "reports/cv_bench/2026-09-16-l2-retention-quality-latency-curve.json": "7a5e44cd2b658bb98b5324ef1a7a6b3c5a76e8a5c5f5a8745eda6b5f5a53a41f",
+    "reports/cv_bench/2026-09-16-l2-retention-quality-latency-curve.csv": "cd072d041e7dea401d6366016c5c33e1f65d1671201af6d3c5146be4dd492a77",
+    "reports/cv_bench/2026-09-16-l2-retention-quality-latency-curve.md": "9051dd011ad7de959af4e14521f50b7abf31833372083b70380cf8b407551b4c",
+    "reports/cv_bench/2026-09-16-l2-retention-quality-latency-curve.svg": "9982172ecc30562f20e673eb1b60eca0f30702d917e8608cf135cfa5d32cdcef",
+    "reports/cv_bench/2026-09-16-l2-retention-quality-latency-curve-accuracy-raw.csv": "dd04586f9f93e0d95359f366998d135e6485d2b6807cdbeb64bbcc3aa8db57e6",
+    "configs/cv_bench_l2_sweep_full2638.lock.json": "c6442be225f57eab1b7201a5ee09de1a782f280ae7068fd674bd241984b56f1c",
+    "evaluation/run_l2_interleaved_latency.py": "3e8b38cb83d3ca96850bc7c591ca7897adb735721cc535afb645522a32c9a3e5",
+    "evaluation/build_l2_retention_curve.py": "10d8bc45b355b2665b073393124bcb28387a8a1d494139ae6c397b71a2cd1209",
+    "evaluation/build_cv_bench_pruning_report.py": "58a6bc67399e32b6edac08acbc96babf7c4d5e83173b3cc8eb41a2db64d8a61b"
+  },
+  "unit_tests_passed": 83,
+  "svg_xml_valid": true,
+  "localization_status": "not started: outside-sandbox GPU inspection auto-review timed out twice",
+  "model_and_original_app_modified": false,
+  "sealed_data_access": false,
+  "board_access": false
+}

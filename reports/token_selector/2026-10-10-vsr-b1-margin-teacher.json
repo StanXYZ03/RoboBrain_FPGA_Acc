@@ -1,0 +1,95 @@
+{
+  "status": "VSR_B1_MARGIN_TEACHER_CACHE_AUDIT_PASS",
+  "scientific_scope": "训练教师数据完整性与工程可行性；不是可部署 Selector 精度结论。",
+  "records": 3483,
+  "unique_sample_ids": 3483,
+  "npz_schema_valid": 3483,
+  "cache_fingerprints_valid": 3483,
+  "all_record_hashes_valid": true,
+  "all_npz_file_hashes_valid": true,
+  "all_saliency_finite_and_every_group_nonzero": true,
+  "manifest_sha256": "08ae6b609d2f1a1431d7e5d6dec1bf1720859e17159b13bd173a8502dc6bf4f4",
+  "config_sha256": "abec00d67513186892df5d613f74f6c792d4b8dc08f22c32fa83f88dd84ccba9",
+  "index_sha256": "6e4662108eb756ada14b2d08c2a78a417583913a279d54164970db63e09530e1",
+  "npz_total_bytes": 2587465099,
+  "group_count": {
+    "mean": 280.9922480620155,
+    "median": 300.0,
+    "min": 80.0,
+    "max": 400.0,
+    "p95": 361.0,
+    "g_le_96": 4,
+    "g_gt_96": 3479
+  },
+  "prompt_token_count": {
+    "mean": 30.454493252942864,
+    "median": 30.0,
+    "min": 28.0,
+    "max": 37.0,
+    "p95": 33.0
+  },
+  "teacher_margin": {
+    "mean": 1.7126040769451623,
+    "median": 1.875,
+    "min": -5.5,
+    "max": 6.375,
+    "p95": 4.875,
+    "positive": 2728,
+    "zero": 46,
+    "negative": 709
+  },
+  "dense_next_branch_diagnostic": {
+    "correct": 2735,
+    "total": 3483,
+    "accuracy": 0.7852426069480333,
+    "label_counts": {
+      "True": 1798,
+      "False": 1685
+    },
+    "predicted_counts": {
+      "False": 2259,
+      "True": 1224
+    },
+    "not_generation_accuracy": true
+  },
+  "timing_seconds": {
+    "forward": {
+      "mean": 0.06896048116814821,
+      "median": 0.07032946008257568,
+      "min": 0.04111806000582874,
+      "max": 0.5336090410128236,
+      "p95": 0.07960802826564758
+    },
+    "backward": {
+      "mean": 0.08876808356308409,
+      "median": 0.09044324909336865,
+      "min": 0.03828031988814473,
+      "max": 1.2517928280867636,
+      "p95": 0.10799147756770253
+    },
+    "sample_total": {
+      "mean": 0.16542048265850276,
+      "median": 0.16831399919465184,
+      "min": 0.08344190195202827,
+      "max": 1.9509015139192343,
+      "p95": 0.19732929372694344
+    },
+    "model_load_excluded": true,
+    "gpu_boundaries_synchronized": true
+  },
+  "peak_cuda_gib": {
+    "mean": 10.25054352275948,
+    "median": 10.356340408325195,
+    "min": 8.951197624206543,
+    "max": 11.024107456207275,
+    "p95": 10.750654697418213
+  },
+  "leakage_contract": {
+    "train_label_used_only_for_teacher_branch": true,
+    "selector_inference_uses_label": false,
+    "selector_inference_uses_relation_subject_object_annotations": false,
+    "dev_images_removed_from_train": 5,
+    "test_opened_or_scored": false
+  },
+  "next_decision": "在固定 K96/87+9/3x3/cap16 下训练小型学生；先以 train 内按图像分组划分 train/validation，禁止使用 VSR dev 标签选超参数。"
+}
