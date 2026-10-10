@@ -1,5 +1,25 @@
 # 当前工作状态与接续入口
 
+- [x] 2026-10-10 **caption-only Prompt 关系学生完成，严格门失败，均值查询模型族停止**：
+  在 VSR zero-shot train 的按图内部划分上，冻结三种子、15 epoch、原损失/优化器/门槛，
+  唯一改动是把完整 Prompt 平均池化改为仅使用描述主体的 6--15 个 token（平均 8.45）。
+  胜出 seed 20261010 的 validation 正确 Prompt Spearman/NDCG/K96 教师质量保留量为
+  **0.207252/0.624834/0.681487**，相对 L2 为 **+0.147662/+0.038726/+0.297264**；
+  但正确减跨图错误 Prompt 点估计只有 **+0.000310/-0.000054/+0.014076**，按图聚类
+  bootstrap 95% CI 分别为 **[-0.001720,+0.005144] / [-0.002156,+0.002727] /
+  [-0.003601,+0.035271]**，三项均跨 0，状态
+  `CAPTION_RELATION_STUDENT_NOT_ESTABLISHED`。内部 test 三项 CI 也跨 0。相比完整 Prompt
+  均值模型，正确 Prompt 的三项指标全部下降，故不能把失败主要归因于固定指令 token
+  稀释；核心限制是单个均值查询丢失词序、实体对和空间关系。VSR dev 未使用，VSR test
+  未打开，不进入 K96 全模型评测。预注册、测试与报告：
+  `configs/2026-10-10-vsr-caption-relation-student.preregistered.json`、
+  `evaluation/tests/test_train_vsr_caption_relation_student.py`、
+  `reports/token_selector/2026-10-10-vsr-caption-relation-student.{json,md}`。**停止规则**：
+  不再调 caption span/学习率/门槛；下一步先独立审查显式关系/位置评分、受限 late
+  interaction 或后移切点，只选择一个可证伪且保持 K96/规则化硬件合同的方向。
+
+更新时间：2026-10-10（caption-only 三种子严格门失败；均值查询模型族停止；等待独立架构审查）
+
 - [x] 2026-10-10 **VSR zero-shot dev 短决策预算曲线完成，下一主线固定为 K96 关系保持与通信规避**：官方提交 `b27a0af0…a241a` 的 zero-shot dev 340 条、227 张 COCO 原图已全部物化并逐图校验；test 仅保持既有 hash/行数审计，未解析、未评分。预注册使用 edge576、BF16/SDPA、greedy、`max_new_tokens=4`、严格 True/False，完成 Dense、修正整数 L2 K96/K144/K192、v2 K96/K144 共 **2040** 条记录，解析成功率均 100%；v2 K192 因冻结整数 Prompt scorer 内部 cap16 审计选择只能提供 144 候选而需求 183，在任何 warmup/正式记录前 fail-closed，未修改已 HLS 审计核心。准确率：Dense **0.7912**；L2 K96/K144/K192 **0.6647/0.7176/0.7706**；v2 K96/K144 **0.6853/0.7382**。v2 K96/K144 相对 Dense **0.8662/0.9331**；同预算 v2−L2 都为 **+0.0206**，95% CI 分别 `[-0.0088,+0.0529]`、`[-0.0029,+0.0471]`，尚未证明稳定优于 L2。现有已接受 compact HLS 只支持 `K<=96`；K96 达到 0.88 宽松开发线还差 **4** 条正确。A6000 软件 v2 K96 CPU selector 往返均值 **43.05 ms**；按已接受 200 MHz HLS 周期公式和本轮真实 G 投影，FPGA compute **4.14 ms**、平均双向载荷 **1.835 MB**，1 GbE 串行模型段 **91.56 ms** 对 Dense model inference **88.98 ms** 为 **0.972x**，假设 10 GbE 为 **76.55 ms / 1.162x**，均非板端实测。**决策**：当前 K96 不晋级、不扩大 K；下一阶段固定 K96/3x3/整数接口，在 VSR zero-shot train 发展成对关系保持目标，先补 4 条质量缺口并使同预算 v2−L2 CI 不跨 0；同时优先 PCIe/共享内存或调整切点避免 1 GbE 全特征往返。报告：`reports/token_selector/2026-10-10-vsr-zeroshot-dev-budget-curve.{json,csv,md}` 与 `…-outcome-analysis.{json,md}`。
 
 更新时间：2026-10-10（VSR dev 340 条短决策曲线完成；K96 质量差4条且1GbE无净收益；转入固定K96关系保持训练与通信规避）
