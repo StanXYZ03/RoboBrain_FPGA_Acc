@@ -21,8 +21,9 @@
 - [x] 只下载并校验 zero-shot dev 缺失的 222 张 COCO 图；dev 现为 227/227，未下载完整 COCO。
 - [x] 用 zero-shot dev 全 340 条短 True/False 输出完成 Dense、L2 K96/K144/K192、v2 K96/K144；v2 K192 结构性 fail-closed 且 0 记录。
 - [x] 固化预算曲线与异构投影：K96 v2/Dense=0.8662、距0.88线4条；1GbE 投影0.972x，假设10GbE 1.162x，均非板测。
-- [ ] 只补齐 VSR zero-shot train 所需图像，并建立 train-only 的关系保持 K96 训练/验证特征清单；test 继续封存。
-- [ ] 固定 K96/3x3/整数布局，设计对象对与空间关系保持目标；禁止通过扩大 K 掩盖质量缺口。
+- [x] 只补齐 VSR zero-shot train 所需图像，并建立 train-only 的关系保持 K96 训练/验证特征清单；test 继续封存。→ 内部按图划分 train/val/test = **2800/317/366**；同图 donor 覆盖 train **1580 样本/564 图**、val **154 样本/62 图**；test 仍只登记未打开。
+- [x] 固定 K96/3x3/整数布局，设计对象对与空间关系保持目标；禁止通过扩大 K 掩盖质量缺口。→ 已按预注册执行有序三槽位有界配对候选 `ordered_three_slot_bounded_partner`（seed 20261012、K96/87+9、vision block 1）：教师排序点估计优于 L2（正确−L2 Spearman/NDCG/K96 = +0.071741542/+0.003151973/+0.084844562），但跨图与同图 Prompt 敏感性三项 95% CI 下界均未 >0，状态 `VSR_ORDERED_PAIR_STUDENT_NOT_ESTABLISHED`；按停止规则停止该候选，不事后调参、不进入量化/HLS/全模型 dev，test 未打开。
+- [ ] 回到研究决策：重新判断 B1 原始 embedding 是否提供可学习的关系信号，或更换切点/监督目标；重大方向需与用户讨论后再决定，不自行启动实验。
 - [ ] 新候选必须在 dev 同时满足相对 Dense >=0.88、同预算 L2 配对 CI 下界 >=0，以及可辩护的异构净收益后才允许冻结 test。
 - [ ] 评估 Jetson Xavier NX 与 ZCU102 的 PCIe/共享内存可行性；1 GbE 全 block0 特征往返不得作为主架构。
 - [ ] Jetson Xavier NX 接入后重测真实预处理、视觉、Prefill、Decode 与链路延迟。

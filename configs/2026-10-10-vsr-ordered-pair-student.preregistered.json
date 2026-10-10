@@ -1,0 +1,62 @@
+{
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "scope": "VSR zero-shot train internal image-grouped train/validation/internal-test only; no official VSR dev/test use before all internal gates pass.",
+  "hypothesis": "A prompt-order-aware three-slot subject/object/relation scorer with bounded spatial pair interactions can preserve the frozen B1 teacher ranking at K96 and distinguish authentic same-image prompt changes better than an order-invariant mean query.",
+  "single_change_from_failed_baseline": "Replace the failed caption-mean query with one ordered three-slot bounded-pair scorer; retain B1, K96, caption spans, split, optimizer family, teacher, three seeds and 15 epochs.",
+  "architecture": "ordered_three_slot_bounded_partner: T<=16 raw prompt rows -> 128-d asymmetric local text encoder -> latent subject/object/relation slots; B1 group features -> 128-d visual projection; global top-4 subject/object partners and six-term relative geometry; no GxG matrix",
+  "seeds": [20261010, 20261011, 20261012],
+  "epochs": 15,
+  "batch_size": 8,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0,
+  "grad_clip_norm": 1.0,
+  "init_std": 0.02,
+  "temperature": 0.1,
+  "contrastive_weight": 0.5,
+  "contrastive_margin_nats": 0.05,
+  "contrastive_softplus_scale": 0.1,
+  "partner_k": 4,
+  "max_prompt_tokens": 16,
+  "budget": 96,
+  "wrong_prompt": {
+    "training": "deterministic cyclic next prompt from the same multi-prompt image; samples from single-prompt images receive teacher KL only",
+    "diagnostic_cross": "deterministic next sample from a different source_image_sha256 inside the same split"
+  },
+  "split_seed": 20261010,
+  "split_salt": "vsr_b1_margin_student_2026_10_10",
+  "split_ratios": {"train": 0.8, "val": 0.1, "test": 0.1},
+  "device": "cuda:0",
+  "bootstrap_seed": 20261010,
+  "bootstrap_repetitions": 5000,
+  "winner_selection": "maximize the minimum of six image-equal validation 95% CI lower bounds: correct-minus-cross and correct-minus-same for Spearman, NDCG-full and K96 teacher mass; then correct-minus-L2 NDCG-full; then lower validation objective",
+  "promotion_gates": {
+    "teacher_alignment": "image-equal validation correct-minus-L2 Spearman and NDCG-full point estimates are both > 0",
+    "cross_prompt_sensitivity": "all three image-equal validation 95% CI lower bounds for correct-minus-cross are > 0",
+    "same_image_prompt_sensitivity": "all three image-equal validation 95% CI lower bounds for correct-minus-same are > 0",
+    "internal_test": "load and evaluate once only when every validation gate passes",
+    "official_dev": "not run by this trainer"
+  },
+  "stop_rule": "If any strict validation gate fails, keep internal_test null, do not open its NPZ files, do not run VSR dev, and stop this ordered-pair candidate without hyperparameter tuning.",
+  "hardware_contract": {
+    "cut_point": "vision block 1 output",
+    "fixed_budget": 96,
+    "fixed_layout": "87 real + 9 context, 3x3 anchors, local candidate cap 16",
+    "max_grid_groups": 576,
+    "partner_k": 4,
+    "prompt_tokens_max": 16,
+    "parameter_count": 511238,
+    "note": "float software development experiment; not quantized inference, HLS synthesis, routed timing or ZCU102 measurement"
+  },
+  "pins": {
+    "ordered_pair_core": {"path": "evaluation/ordered_pair_scorer.py", "sha256": "88ac2e0bdaabafb01152e2823055b097000226b1e13a217190466ed1c591f82a"},
+    "ordered_pair_core_tests": {"path": "evaluation/tests/test_ordered_pair_scorer.py", "sha256": "5dd5f0e2af9447944b60abc68190d2c16cc6e597544d5d5d88940d05e258f5cf"},
+    "ordered_pair_trainer": {"path": "evaluation/train_vsr_ordered_pair_student.py", "sha256": "d855883cf57dcedb9a5f355453e983f1d0cd953e66fc0a46a2a79843f4f9addf"},
+    "ordered_pair_trainer_tests": {"path": "evaluation/tests/test_train_vsr_ordered_pair_student.py", "sha256": "b2fcc8f3045b1aca19793ae8cd0879646b0a1364d538e704a3531692a1b0895e"},
+    "distillation_core": {"path": "evaluation/prompt_projection_distillation.py", "sha256": "cd2d4ccc3a4c5ba714f5e478f802b0cb9d64c6e279c15b6493661fb6fe0b0b98"},
+    "caption_spans": {"path": "artifacts/token_selector/2026-10-10-vsr-b1-margin-teacher/caption_token_spans.json", "sha256": "01ce0203d0c9d2c7ea2336b03f11e31145828b7838ad7643dff15f032d538151"},
+    "student_index": {"path": "artifacts/token_selector/2026-10-10-vsr-b1-margin-teacher/student_index.jsonl", "sha256": "dde212c600160a3ddfd77895955a27c9ca1f44d14cbf4342097b797ddaf38ae9"},
+    "teacher_audit": {"path": "reports/token_selector/2026-10-10-vsr-b1-margin-teacher.json", "sha256": "67752b1ab5f3f5accf78351adf3d9cb1572914d0d3b6d317e9e93737e15e59ce"},
+    "teacher_identifiability": {"path": "reports/token_selector/2026-10-10-vsr-margin-teacher-identifiability.json", "sha256": "865b9894bf9a2b748c6659f4ca065d7f5b42fada39538b005fe8a011793088f9"},
+    "failed_caption_mean_report": {"path": "reports/token_selector/2026-10-10-vsr-caption-relation-student.json", "sha256": "9ae8d0765fbc7b5ce5de4877fd39e4b31affcfbc53fd9b1cd6751bb7883e53d8"}
+  }
+}
